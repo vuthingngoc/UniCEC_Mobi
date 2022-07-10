@@ -1,4 +1,22 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:unicec_mobi/utils/log.dart';
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  Log.info("Handling a background message: ${message.messageId}");
+}
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+const AndroidNotificationChannel channel = AndroidNotificationChannel(
+  'high_importance_channel',// id 
+  'High Importance Notifications', // name
+  description: 'This channel is used for important notification',
+  importance: Importance.high
+);
 
 void main() {
   runApp(const MyApp());
