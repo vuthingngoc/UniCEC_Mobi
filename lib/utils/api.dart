@@ -1,4 +1,4 @@
-class Api{
+class Api {
   static String get uri => "https://unicec.ddns.net/index.html";
 
   static String get authentication => "/api/v1/firebase";
@@ -25,8 +25,7 @@ class Api{
   static String get universities => "/api/v1/universities";
   static String get users => "/api/v1/users";
 
-
-  static String GetUrl({required String apiPath}){
+  static String GetUrl({required String apiPath}) {
     return uri + apiPath;
   }
 }
