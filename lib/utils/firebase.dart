@@ -11,11 +11,9 @@ class FirebaseUtils {
     GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
 
-    if(googleAuth != null){
+    if (googleAuth != null) {
       final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken
-      );
+          accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
 
       return await FirebaseAuth.instance.signInWithCredential(credential);
     }
@@ -24,7 +22,7 @@ class FirebaseUtils {
   }
 
   static Future logout() async {
-    if((await GoogleSignIn().isSignedIn()) == true){
+    if ((await GoogleSignIn().isSignedIn()) == true) {
       GetIt.I.get<CurrentUser>().reset();
       SharedPreferences preferences = await SharedPreferences.getInstance();
       await preferences.clear();

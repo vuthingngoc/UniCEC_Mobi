@@ -4,19 +4,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:unicec_mobi/utils/log.dart';
 
+// screens
+import 'package:unicec_mobi/screens/onboarding.dart';
+import 'package:unicec_mobi/screens/pro.dart';
+import 'package:unicec_mobi/screens/home.dart';
+import 'package:unicec_mobi/screens/profile.dart';
+import 'package:unicec_mobi/screens/register.dart';
+import 'package:unicec_mobi/screens/articles.dart';
+import 'package:unicec_mobi/screens/elements.dart';
+
+import 'UI/login.dart';
+
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   Log.info("Handling a background message: ${message.messageId}");
 }
 
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
-  'high_importance_channel',// id 
-  'High Importance Notifications', // name
-  description: 'This channel is used for important notification',
-  importance: Importance.high
-);
+    'high_importance_channel', // id
+    'High Importance Notifications', // name
+    description: 'This channel is used for important notification',
+    importance: Importance.high);
 
 void main() {
   runApp(const MyApp());
@@ -42,9 +53,35 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      initialRoute: "/onboarding",
+      debugShowCheckedModeBanner: false,
+      routes: <String, WidgetBuilder>{
+        "/onboarding": (BuildContext context) => Onboarding(),
+        "/home": (BuildContext context) => Home(),
+        "/profile": (BuildContext context) => Profile(),
+        "/articles": (BuildContext context) => Articles(),
+        "/elements": (BuildContext context) => Elements(),
+        "/account": (BuildContext context) => Register(),
+        "/pro": (BuildContext context) => Pro(),
+      },
+      //home: Login(),
     );
   }
+
+  //MaterialApp(
+  //     title: 'Argon PRO Flutter',
+  //     theme: ThemeData(fontFamily: 'OpenSans'),
+  //     initialRoute: "/onboarding",
+  //     debugShowCheckedModeBanner: false,
+  //     routes: <String, WidgetBuilder>{
+  //       "/onboarding": (BuildContext context) => Onboarding(),
+  //       "/home": (BuildContext context) => Home(),
+  //       "/profile": (BuildContext context) => Profile(),
+  //       "/articles": (BuildContext context) => Articles(),
+  //       "/elements": (BuildContext context) => Elements(),
+  //       "/account": (BuildContext context) => Register(),
+  //       "/pro": (BuildContext context) => Pro(),
+  //     });
 }
 
 class MyHomePage extends StatefulWidget {
@@ -83,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
-    //
+
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
