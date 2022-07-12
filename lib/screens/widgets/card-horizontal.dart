@@ -10,7 +10,7 @@ class CardHorizontal extends StatelessWidget {
 
   final String cta;
   final String img;
-  final Function tap;
+  VoidCallback tap;
   final String title;
 
   static void defaultFunc() {
@@ -22,8 +22,8 @@ class CardHorizontal extends StatelessWidget {
     return Container(
         height: 130,
         child: GestureDetector(
-          //onTap: tap,
-          onTap: () {},
+          onTap: tap,
+          //onTap: () {},
           child: Card(
             elevation: 0.6,
             shape: RoundedRectangleBorder(

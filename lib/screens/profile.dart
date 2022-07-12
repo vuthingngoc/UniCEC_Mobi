@@ -11,10 +11,10 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
-        // appBar: Navbar(
-        //   title: "Profile",
-        //   transparent: true,
-        // ),
+        appBar: Navbar(
+          title: "Profile",
+          transparent: true,
+        ),
         backgroundColor: ArgonColors.bgColorScreen,
         drawer: ArgonDrawer(currentPage: "Profile"),
         body: Stack(children: <Widget>[

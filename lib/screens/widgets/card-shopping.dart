@@ -19,7 +19,7 @@ class CardShopping extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 135,
-      // margin: EdgeInsets.only(top: 64),
+      margin: EdgeInsets.only(top: 64),
       width: double.infinity,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),

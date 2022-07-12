@@ -8,7 +8,7 @@ class CardCategory extends StatelessWidget {
       this.tap = defaultFunc});
 
   final String img;
-  final Function tap;
+  VoidCallback tap;
   final String title;
 
   static void defaultFunc() {
@@ -21,7 +21,7 @@ class CardCategory extends StatelessWidget {
         height: 252,
         width: null,
         child: GestureDetector(
-          onTap: () {},
+          onTap: tap,
           child: Card(
               elevation: 0.4,
               shape: RoundedRectangleBorder(
