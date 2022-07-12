@@ -4,19 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:unicec_mobi/utils/log.dart';
 
+import 'UI/login.dart';
+
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   Log.info("Handling a background message: ${message.messageId}");
 }
 
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
-  'high_importance_channel',// id 
-  'High Importance Notifications', // name
-  description: 'This channel is used for important notification',
-  importance: Importance.high
-);
+    'high_importance_channel', // id
+    'High Importance Notifications', // name
+    description: 'This channel is used for important notification',
+    importance: Importance.high);
 
 void main() {
   runApp(const MyApp());
@@ -42,7 +44,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Login(),
     );
   }
 }
