@@ -1,5 +1,5 @@
-import 'package:unicec_mobi/models/entities/competition/clubs_in_competition_model.dart';
-import 'package:unicec_mobi/models/entities/competition/majors_in_competition_model.dart';
+import 'package:unicec_mobi/models/entities/competition/competition_in_clubs_model.dart';
+import 'package:unicec_mobi/models/entities/competition/competition_in_majors_model.dart';
 
 import '../../enums/competition_scope_status.dart';
 import '../../enums/competition_status.dart';
@@ -17,8 +17,8 @@ class CompetitionModel {
   CompetitionScopeStatus scope;
   CompetitionStatus status;
   int view;
-  List<ClubsInCompetitionModel> clubsInCompetition;
-  List<MajorsInCompetitionModel> majorsInCompetition;
+  List<CompetitionInClubsModel> clubsInCompetition;
+  List<CompetitionInMajorsModel> majorsInCompetition;
   List<CompetitionEntityModel> competitionEntities;
 
   CompetitionModel(
@@ -49,8 +49,8 @@ class CompetitionModel {
     CompetitionScopeStatus scope = json['scope'];
     CompetitionStatus status = CompetitionStatus.values[int.parse(json['status'].toString())];
     int view = json['view'];
-    List<ClubsInCompetitionModel> competitionInClub = json['clubs_in_competition'];
-    List<MajorsInCompetitionModel> competitionInDepartment = json['majors_in_competition'];
+    List<CompetitionInClubsModel> competitionInClub = json['clubs_in_competition'];
+    List<CompetitionInMajorsModel> competitionInDepartment = json['majors_in_competition'];
     List<CompetitionEntityModel> competitionEntities = json['competition_entities'];
 
     return CompetitionModel(
