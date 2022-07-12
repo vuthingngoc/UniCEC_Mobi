@@ -28,6 +28,14 @@ class CompetitionHistoryModel{
     String? description = json['description'];
     CompetitionStatus status = json['status'];
 
-    return CompetitionHistoryModel(id: id, competitionId: competitionId, changeDate: changeDate, status: status);
+    return CompetitionHistoryModel(
+      id: id, 
+      competitionId: competitionId,
+      changerId: changerId,
+      changerName: changerName, 
+      changeDate: changeDate,
+      description: description, 
+      status: status
+    );
   }
 }
