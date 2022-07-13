@@ -11,7 +11,7 @@ class Routes {
 
   //
   static String get splash => '/splash';
-  static String get onboarding => '/onboarding';
+  static String get home => '/home';
 
   static MaterialPageRoute getRoute(RouteSettings settings) {
     Widget widget;

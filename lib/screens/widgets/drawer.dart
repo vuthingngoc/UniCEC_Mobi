@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../utils/router.dart';
+
 import '../../constants/theme.dart';
+
 import 'drawer-tile.dart';
 
 class ArgonDrawer extends StatelessWidget {
@@ -56,7 +59,8 @@ class ArgonDrawer extends StatelessWidget {
                   icon: Icons.pie_chart,
                   onTap: () {
                     if (currentPage != "Profile") {
-                      Navigator.pushNamed(context, '/profile');
+                      //Navigator.pushNamed(context, '/profile');
+                      Navigator.of(context).pushReplacementNamed(Routes.login);
                     }
                   },
                   iconColor: ArgonColors.warning,

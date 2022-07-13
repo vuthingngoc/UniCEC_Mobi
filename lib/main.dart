@@ -3,18 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:unicec_mobi/utils/log.dart';
-
-// screens
-import 'package:unicec_mobi/screens/onboarding.dart';
-import 'package:unicec_mobi/screens/pro.dart';
-import 'package:unicec_mobi/screens/home.dart';
-import 'package:unicec_mobi/screens/profile.dart';
-import 'package:unicec_mobi/screens/register.dart';
-import 'package:unicec_mobi/screens/articles.dart';
-import 'package:unicec_mobi/screens/elements.dart';
 import 'package:unicec_mobi/utils/router.dart';
-
-import 'UI/login.dart';
 import 'dependencies/app_dependencies.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {

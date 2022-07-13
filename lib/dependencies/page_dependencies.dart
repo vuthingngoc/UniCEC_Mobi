@@ -5,7 +5,15 @@ import '../screens/pages.dart';
 
 class PageDependencies {
   static Future setup(GetIt injector) async {
+    //splash
     injector.registerFactory<Widget>(() => SplashPage(injector()),
         instanceName: Routes.splash);
+
+    //login
+    injector.registerFactory<Widget>(() => LoginPage(injector()),
+        instanceName: Routes.login);
+
+    //template
+    injector.registerFactory<Widget>(() => Home(), instanceName: Routes.home);
   }
 }
