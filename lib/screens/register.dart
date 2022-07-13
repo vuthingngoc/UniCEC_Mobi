@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '/constants/Theme.dart';
+import '../constants/theme.dart';
 
 //widgets
 import 'package:unicec_mobi/screens/widgets/navbar.dart';

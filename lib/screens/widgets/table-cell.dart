@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '/constants/Theme.dart';
+import '../../constants/theme.dart';
 
 class TableCellSettings extends StatelessWidget {
   final String? title;

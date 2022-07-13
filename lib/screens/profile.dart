@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import '/constants/Theme.dart';
+import '../constants/theme.dart';
 
 //widgets
 import 'widgets/navbar.dart';
