@@ -1,7 +1,7 @@
 class CurrentUser {
   int? id;
   int? universityId;
-  String? token;
+  String? idToken;
   String? email;
   String? fullname;
   String? avatar;
@@ -9,7 +9,7 @@ class CurrentUser {
   CurrentUser(
       {this.id,
       this.universityId,
-      this.token,
+      this.idToken,
       this.email,
       this.fullname,
       this.avatar});
@@ -17,7 +17,7 @@ class CurrentUser {
   CurrentUser get currentUser => CurrentUser(
       id: id,
       universityId: universityId,
-      token: token,
+      idToken: idToken,
       email: email,
       fullname: fullname,
       avatar: avatar);
@@ -25,10 +25,9 @@ class CurrentUser {
   void reset() {
     id = 0;
     universityId = 0;
-    token = "";
+    idToken = "";
     email = "";
     fullname = "";
     avatar = "";
   }
 }
-

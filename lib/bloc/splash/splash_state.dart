@@ -1,7 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-class SplashEvent {}
-
 class SplashState extends Equatable {
   final double opacity;
 

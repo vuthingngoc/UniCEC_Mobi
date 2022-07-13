@@ -2,6 +2,7 @@ import 'package:unicec_mobi/bloc/splash/splash_state.dart';
 
 import '../../services/splash_svc/i_splash_service.dart';
 import '../../utils/base_bloc.dart';
+import 'splash_event.dart';
 
 class SplashBloc extends BaseBloc<SplashEvent, SplashState> {
   final ISplashService service;

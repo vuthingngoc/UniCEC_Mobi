@@ -9,5 +9,8 @@ class ServiceDependencies {
 
     //import splash service
     injector.registerFactory<ISplashService>(() => SplashService());
+
+    //import login service
+    injector.registerFactory<ILoginService>(() => LoginService());
   }
 }

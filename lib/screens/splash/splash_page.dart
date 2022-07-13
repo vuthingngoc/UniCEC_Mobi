@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 //
 import '../../bloc/splash/splash_bloc.dart';
+import '../../bloc/splash/splash_event.dart';
 import '../../bloc/splash/splash_state.dart';
 import '../../utils/app_color.dart';
 import '../../utils/dimens.dart';
@@ -31,7 +31,7 @@ class _SplashPageState extends State<SplashPage> {
 
     Future.delayed(const Duration(seconds: 4), () async {
       await FirebaseUtils.logout();
-      Navigator.of(context).pushReplacementNamed(Routes.login);
+      Navigator.of(context).pushReplacementNamed(Routes.home);
     });
   }
 
