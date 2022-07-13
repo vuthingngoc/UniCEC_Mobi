@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 //widgets
-import '../constants/Theme.dart';
+import '../constants/theme.dart';
 import 'widgets/drawer.dart';
 import 'widgets/navbar.dart';
 import 'widgets/card-horizontal.dart';
