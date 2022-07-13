@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/constants/Theme.dart';
+import '../../constants/theme.dart';
 
 class Input extends StatelessWidget {
   final String placeholder;
