@@ -13,6 +13,10 @@ class PageDependencies {
     injector.registerFactory<Widget>(() => LoginPage(injector()),
         instanceName: Routes.login);
 
+    //university selection page
+    injector.registerFactory<Widget>(() => UniversitySelectionPage(injector()),
+        instanceName: Routes.universitySelection);
+
     //template
     injector.registerFactory<Widget>(() => Home(), instanceName: Routes.home);
   }

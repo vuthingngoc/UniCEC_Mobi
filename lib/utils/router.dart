@@ -9,6 +9,7 @@ class Routes {
   static String get competition => '/competition';
   static String get club => '/club';
 
+  static String get universitySelection => 'universitySelection';
   //
   static String get splash => '/splash';
   static String get home => '/home';

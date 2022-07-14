@@ -1,6 +1,6 @@
 class Api {
-  static String get uri => "https://unicec.ddns.net/index.html";
-
+  static String get uri => "https://unicec.ddns.net";
+  //static String get uri => "https://10.0.2.2:44361/index.html";
   static String get authentication => "/api/v1/firebase";
   static String get activitiesEntity => "/api/vi/activities-entity";
   static String get cities => "/api/v1/cities";
@@ -24,6 +24,7 @@ class Api {
   static String get teamsInRound => "/api/v1/teams-in-round";
   static String get universities => "/api/v1/universities";
   static String get users => "/api/v1/users";
+  static String get usersUpdateWithJWT => "/api/v1/users/token";
 
   static String GetUrl({required String apiPath}) {
     return uri + apiPath;

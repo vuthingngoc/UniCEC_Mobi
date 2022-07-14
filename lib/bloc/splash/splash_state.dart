@@ -6,7 +6,7 @@ class SplashState extends Equatable {
   SplashState({required this.opacity});
 
   SplashState copyWith({required double opacity}) {
-    return SplashState(opacity: opacity ?? this.opacity);
+    return SplashState(opacity: opacity);
   }
 
   @override

@@ -12,5 +12,9 @@ class ServiceDependencies {
 
     //import login service
     injector.registerFactory<ILoginService>(() => LoginService());
+
+    //import unversity_selection_service
+    injector.registerFactory<IUniversitySelectionService>(
+        () => UniversitySelectionService());
   }
 }

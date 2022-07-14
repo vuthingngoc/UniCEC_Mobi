@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unicec_mobi/models/common/current_user.dart';
 
+import '../../models/entities/temp/temp.dart';
 import '../../services/i_services.dart';
 import '../../utils/base_bloc.dart';
 import '../../utils/firebase.dart';
@@ -18,33 +19,42 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
       if (event is SignInGoogleEvent) {
         UserCredential? credential = await FirebaseUtils.signInWithGoogle();
         if (credential != null) {
-          bool check = await saveUserData(credential.user);
+          //xử lý logic ở chỗ này
+          //1.Nếu chưa đăng nhập thì sẽ trả ra model tạm gồm jwt và list
+          //2.Nếu đăng nhập rồi thì trả ra String idToken thôi
+          //3.Trường hợp lỗi
 
-          listener.add(NavigatorWelcomePageEvent());
+          Temp? temp = await saveUserData(credential.user);
+          if (temp!.listUniBelongToEmail.isEmpty) {
+            listener.add(NavigatorWelcomePageEvent());
+          } else {
+            listener.add(NavigatorUniversitySelectionPageEvent(
+                listUniBelongToEmail: temp.listUniBelongToEmail));
+          }
         }
       }
     });
   }
 
-  Future<bool> saveUserData(User? credentialUser) async {
+  Future<Temp?> saveUserData(User? credentialUser) async {
     String? idToken = await credentialUser?.getIdToken();
     String? imagePath = credentialUser?.photoURL;
 
-    String? authToken = await service.getJWTToken(idToken);
-    Map<String, dynamic> userMap = Utils.fromJWT(authToken!);
+    //chứa cả Token + List University
+    Temp? temp = await service.getTemp(idToken);
 
+    //decode JWT
+    Map<String, dynamic> userMap = Utils.fromJWT(temp?.token);
     CurrentUser user = GetIt.I.get<CurrentUser>();
-    user.id = int.parse(userMap['id']);
+    user.id = int.parse(userMap['Id']);
     user.idToken = idToken;
-    user.universityId = userMap['university_id'];
-    user.email = userMap['email'];
-    user.fullname = userMap['fullname'];
+    user.universityId = userMap['UniversityId'];
+    user.email = userMap['Email'];
+    user.fullname = userMap['Fullname'];
     user.avatar = imagePath;
-    if (user.universityId == 0) {
-      return false;
-    } else {
-      return true;
-    }
+
+    return temp;
+
     // SharedPreferences preferences = await SharedPreferences.getInstance();
     // List<String> userInfo = [
     //   "${user.id}",
