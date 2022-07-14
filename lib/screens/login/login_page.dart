@@ -30,9 +30,14 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.of(context).pushReplacementNamed(
           Routes.main, /*arguments: event.residentIdList*/
         );
-      } else if (event is ShowingSnackBarEvent) {
+      } //
+      else if (event is ShowingSnackBarEvent) {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(event.message)));
+      } //
+      else if (event is NavigatorUniversitySelectionPageEvent) {
+        Navigator.of(context).pushReplacementNamed(Routes.universitySelection,
+            arguments: event.listUniBelongToEmail);
       }
     });
   }

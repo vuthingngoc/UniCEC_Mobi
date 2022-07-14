@@ -59,8 +59,8 @@ class ArgonDrawer extends StatelessWidget {
                   icon: Icons.pie_chart,
                   onTap: () {
                     if (currentPage != "Profile") {
-                      //Navigator.pushNamed(context, '/profile');
-                      Navigator.of(context).pushReplacementNamed(Routes.login);
+                      Navigator.pushNamed(context, '/profile');
+                      //Navigator.of(context).pushReplacementNamed(Routes.login);
                     }
                   },
                   iconColor: ArgonColors.warning,

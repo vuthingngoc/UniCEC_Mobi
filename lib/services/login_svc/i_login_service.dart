@@ -1,4 +1,6 @@
+import '../../models/entities/temp/temp.dart';
+
 abstract class ILoginService {
   //get jwt token authentication
-  Future<String?> getJWTToken(String? idToken);
+  Future<Temp?> getTemp(String? idToken);
 }

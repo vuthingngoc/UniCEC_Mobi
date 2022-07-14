@@ -7,14 +7,10 @@ class LoginState extends Equatable {
     required this.errorEmail,
   });
 
-  LoginState copyWith(
-      {bool? isValidEmail,
-      bool? isValidPassword,
-      String? errorEmail,
-      String? errorPassword}) {
-    return LoginState(
-      errorEmail: errorEmail ?? this.errorEmail,
-    );
+  LoginState copyWith({
+    required String errorEmail,
+  }) {
+    return LoginState(errorEmail: errorEmail);
   }
 
   @override
