@@ -25,7 +25,6 @@ class UniversitySelectionBloc
     on((event, emit) async {
       //Recieve data
       if (event is RecieveData) {
-        // TODO: implement
         //set state emit ra ngoài
         emit(state.copyWith(
             listUniBelongToEmail: event.listUniBelongToEmail, // -> change

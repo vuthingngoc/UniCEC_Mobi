@@ -21,7 +21,7 @@ class DropdownUniversity extends StatelessWidget {
       child: BlocBuilder<UniversitySelectionBloc, UniversitySelectionState>(
           bloc: bloc,
           builder: (context, state) {
-            int dropdownValue = state.dropdownNewValue;
+            int dropdownValue = state.dropdownNewValueUni;
             return DropdownButtonHideUnderline(
               child: DropdownButton<int>(
                 value: dropdownValue,
@@ -31,7 +31,7 @@ class DropdownUniversity extends StatelessWidget {
                 style: const TextStyle(
                     color: Colors.deepPurple, fontWeight: FontWeight.bold),
                 onChanged: (int? newValue) {
-                  bloc.add(ChangeDropdownValue(newValue: newValue!));
+                  bloc.add(ChangeDropdownValueUni(newValue: newValue!));
                 },
                 items: state.listUniBelongToEmail
                     .map<DropdownMenuItem<int>>((UniBelongToEmail value) {

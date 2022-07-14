@@ -9,6 +9,7 @@ class RecieveData extends UniversitySelectionEvent {
   RecieveData({required this.listUniBelongToEmail});
 }
 
+//bỏ hàm này
 class SelectUniversity extends UniversitySelectionEvent {
   final UniBelongToEmail uniSelection;
   SelectUniversity({required this.uniSelection});
@@ -19,9 +20,14 @@ class CompeletelyProfile extends UniversitySelectionEvent {
   CompeletelyProfile({required this.completeProfileModel});
 }
 
-class ChangeDropdownValue extends UniversitySelectionEvent {
+class ChangeDropdownValueUni extends UniversitySelectionEvent {
   final int newValue;
-  ChangeDropdownValue({required this.newValue});
+  ChangeDropdownValueUni({required this.newValue});
+}
+
+class ChangeDropdownValueDep extends UniversitySelectionEvent {
+  final int newValue;
+  ChangeDropdownValueDep({required this.newValue});
 }
 
 //navigate - xử lý ngoài giao diện
