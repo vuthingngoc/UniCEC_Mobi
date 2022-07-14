@@ -48,7 +48,7 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
     CurrentUser user = GetIt.I.get<CurrentUser>();
     user.id = int.parse(userMap['Id']);
     user.idToken = idToken;
-    user.universityId = userMap['UniversityId'];
+    user.universityId = int.parse(userMap['UniversityId']);
     user.email = userMap['Email'];
     user.fullname = userMap['Fullname'];
     user.avatar = imagePath;
