@@ -4,13 +4,14 @@ import 'package:unicec_mobi/dependencies/bloc_dependencies.dart';
 import 'package:unicec_mobi/dependencies/current_user_dependencies.dart';
 import 'package:unicec_mobi/dependencies/page_dependencies.dart';
 import 'package:unicec_mobi/dependencies/service_dependencies.dart';
-import 'package:unicec_mobi/models/common/current_user.dart';
+
+import '../firebase_options.dart';
 
 class AppDependencies{
   static GetIt get _injector => GetIt.I;
 
   static Future<void> setup() async {
-    await Firebase.initializeApp();
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
     await ServiceDependencies.setup(_injector);
     await CurrentUserDependencies.setup(_injector);
     await PageDependencies.setup(_injector);
