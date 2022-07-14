@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1000685570084-suntjfc671rnil6i9vepihsa4kccberm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.unicec_mobi",
+            "certificate_hash": "41530b5d5d4717ef27ff9c5a24394074b961a15c"
+          }
+        },
+        {
           "client_id": "1000685570084-ndoo46mb3muu5phm7sf6furh53uk619o.apps.googleusercontent.com",
           "client_type": 3
         }
