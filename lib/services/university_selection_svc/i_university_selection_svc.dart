@@ -1,3 +1,5 @@
+import '../../models/entities/user/complete_profile.dart';
+
 abstract class IUniversitySelectionService {
-  Future<bool> selectionUniversity(int universityId);
+  Future<bool> completeProfile(CompleteProfile model);
 }
