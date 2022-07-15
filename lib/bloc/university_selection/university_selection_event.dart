@@ -9,12 +9,6 @@ class RecieveData extends UniversitySelectionEvent {
   RecieveData({required this.listUniBelongToEmail});
 }
 
-//bỏ hàm này
-class SelectUniversity extends UniversitySelectionEvent {
-  final UniBelongToEmail uniSelection;
-  SelectUniversity({required this.uniSelection});
-}
-
 class CompeletelyProfile extends UniversitySelectionEvent {
   final CompleteProfile completeProfileModel;
   CompeletelyProfile({required this.completeProfileModel});
@@ -28,6 +22,36 @@ class ChangeDropdownValueUni extends UniversitySelectionEvent {
 class ChangeDropdownValueDep extends UniversitySelectionEvent {
   final int newValue;
   ChangeDropdownValueDep({required this.newValue});
+}
+
+//get phone
+class ChangePhoneValue extends UniversitySelectionEvent {
+  final String newPhoneValue;
+  ChangePhoneValue({required this.newPhoneValue});
+}
+
+//get description
+class ChangeDescriptionValue extends UniversitySelectionEvent {
+  final String newDescriptionValue;
+  ChangeDescriptionValue({required this.newDescriptionValue});
+}
+
+//get Student Code
+class ChangeStudentCodeValue extends UniversitySelectionEvent {
+  final String newStudentCodeValue;
+  ChangeStudentCodeValue({required this.newStudentCodeValue});
+}
+
+//get Gender
+class ChangeGenderValue extends UniversitySelectionEvent {
+  final String newGenderValue;
+  ChangeGenderValue({required this.newGenderValue});
+}
+
+//get DOB
+class ChangeDOBValue extends UniversitySelectionEvent {
+  final String newDOBValue;
+  ChangeDOBValue({required this.newDOBValue});
 }
 
 //navigate - xử lý ngoài giao diện

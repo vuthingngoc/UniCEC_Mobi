@@ -47,8 +47,13 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
     Map<String, dynamic> userMap = Utils.fromJWT(temp?.token);
     CurrentUser user = GetIt.I.get<CurrentUser>();
     user.id = int.parse(userMap['Id']);
-    user.idToken = idToken;
-    user.universityId = int.parse(userMap['UniversityId']);
+    user.idToken = temp?.token;
+
+    //if new student kh trả ra UniversityID -> sẽ được cập nhật bên trang UniSelection
+    if (temp!.listUniBelongToEmail.isEmpty) {
+      user.universityId = int.parse(userMap['UniversityId']);
+    }
+
     user.email = userMap['Email'];
     user.fullname = userMap['Fullname'];
     user.avatar = imagePath;

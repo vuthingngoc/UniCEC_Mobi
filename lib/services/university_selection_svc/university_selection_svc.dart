@@ -26,7 +26,7 @@ class UniversitySelectionService implements IUniversitySelectionService {
     int? userId = GetIt.I.get<CurrentUser>().id;
 
     try {
-      var response = await client.post(Uri.parse(url),
+      var response = await client.put(Uri.parse(url),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             'Authorization': "Bearer $idToken"
@@ -35,6 +35,12 @@ class UniversitySelectionService implements IUniversitySelectionService {
           body: jsonEncode(<String, dynamic>{
             "id": userId,
             "university_id": model.universityId,
+            "department_id": model.departmentId,
+            "user_code": model.studentCode,
+            "phone": model.phone,
+            "gender": model.gender,
+            "dob": model.dob,
+            "description": model.description
           }));
       // if (response.statusCode == 400) {
       // }
@@ -58,7 +64,7 @@ class UniversitySelectionService implements IUniversitySelectionService {
 
     PagingResult<DepartmentModel> pagingResult;
 
-    url += "?universityId=" + UniversityId.toString() + "&pageSize=40";
+    url += "/search?universityId=" + UniversityId.toString() + "&pageSize=40";
 
     try {
       //get_it lấy IdToken

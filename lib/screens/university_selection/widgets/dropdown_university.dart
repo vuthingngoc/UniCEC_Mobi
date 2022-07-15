@@ -6,7 +6,12 @@ import 'package:unicec_mobi/models/entities/temp/temp.dart';
 import '../../../bloc/university_selection/university_selection_event.dart';
 import '../../../bloc/university_selection/university_selection_state.dart';
 
-class DropdownUniversity extends StatelessWidget {
+class DropdownUniversity extends StatefulWidget {
+  @override
+  State<DropdownUniversity> createState() => _DropdownUniversityState();
+}
+
+class _DropdownUniversityState extends State<DropdownUniversity> {
   @override
   Widget build(BuildContext context) {
     UniversitySelectionBloc bloc =

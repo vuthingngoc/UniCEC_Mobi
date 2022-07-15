@@ -13,10 +13,10 @@ class UniversitySelectionBloc
       : super(UniversitySelectionState(
             listUniBelongToEmail: [],
             listDepartment: [],
-            dropdownNewValueDep: -1,
-            dropdownNewValueUni: -1,
-            universityId: -1,
-            departmentId: -1,
+            dropdownNewValueDep: 1,
+            dropdownNewValueUni: 1,
+            universityId: 0,
+            departmentId: 0,
             description: '',
             gender: '',
             phone: '',
@@ -25,16 +25,20 @@ class UniversitySelectionBloc
     on((event, emit) async {
       //Recieve data
       if (event is RecieveData) {
+        //auto get Department theo event.newValue
+        List<DepartmentModel>? GetListDepartmentByUni =
+            await service.getDepartmentByUni(event.listUniBelongToEmail[0].id);
+
         //set state emit ra ngoài
         emit(state.copyWith(
             listUniBelongToEmail: event.listUniBelongToEmail, // -> change
-            listDepartment: state.listDepartment,
+            listDepartment: GetListDepartmentByUni!,
             dropdownNewValueDep: state.dropdownNewValueDep,
             dropdownNewValueUni: state.dropdownNewValueUni,
-            universityId: state.universityId,
-            departmentId: state.departmentId,
+            universityId: event.listUniBelongToEmail[0].id, //-> change
+            departmentId: GetListDepartmentByUni[0].id, //-> change
             description: state.description,
-            gender: state.gender,
+            gender: "Male", //-> change
             phone: state.phone,
             studentCode: state.studentCode,
             dob: state.dob));
@@ -76,6 +80,85 @@ class UniversitySelectionBloc
             dob: state.dob));
       }
 
+      //Change phone value
+      if (event is ChangePhoneValue) {
+        emit(state.copyWith(
+            listUniBelongToEmail: state.listUniBelongToEmail,
+            listDepartment: state.listDepartment,
+            dropdownNewValueDep: state.dropdownNewValueDep,
+            dropdownNewValueUni: state.dropdownNewValueUni,
+            universityId: state.universityId,
+            departmentId: state.departmentId,
+            description: state.description,
+            gender: state.gender,
+            phone: event.newPhoneValue, //-> change
+            studentCode: state.studentCode,
+            dob: state.dob));
+      }
+
+      //Change description value
+      if (event is ChangeDescriptionValue) {
+        emit(state.copyWith(
+            listUniBelongToEmail: state.listUniBelongToEmail,
+            listDepartment: state.listDepartment,
+            dropdownNewValueDep: state.dropdownNewValueDep,
+            dropdownNewValueUni: state.dropdownNewValueUni,
+            universityId: state.universityId,
+            departmentId: state.departmentId,
+            description: event.newDescriptionValue, //-> change
+            gender: state.gender,
+            phone: state.phone,
+            studentCode: state.studentCode,
+            dob: state.dob));
+      }
+
+      //Chang Student Code value
+      if (event is ChangeStudentCodeValue) {
+        emit(state.copyWith(
+            listUniBelongToEmail: state.listUniBelongToEmail,
+            listDepartment: state.listDepartment,
+            dropdownNewValueDep: state.dropdownNewValueDep,
+            dropdownNewValueUni: state.dropdownNewValueUni,
+            universityId: state.universityId,
+            departmentId: state.departmentId,
+            description: state.description,
+            gender: state.gender,
+            phone: state.phone,
+            studentCode: event.newStudentCodeValue, //-> change
+            dob: state.dob));
+      }
+
+      if (event is ChangeGenderValue) {
+        emit(state.copyWith(
+            listUniBelongToEmail: state.listUniBelongToEmail,
+            listDepartment: state.listDepartment,
+            dropdownNewValueDep: state.dropdownNewValueDep,
+            dropdownNewValueUni: state.dropdownNewValueUni,
+            universityId: state.universityId,
+            departmentId: state.departmentId,
+            description: state.description,
+            gender: event.newGenderValue, //-> change
+            phone: state.phone,
+            studentCode: state.studentCode,
+            dob: state.dob));
+      }
+
+      if (event is ChangeDOBValue) {
+        emit(state.copyWith(
+          listUniBelongToEmail: state.listUniBelongToEmail,
+          listDepartment: state.listDepartment,
+          dropdownNewValueDep: state.dropdownNewValueDep,
+          dropdownNewValueUni: state.dropdownNewValueUni,
+          universityId: state.universityId,
+          departmentId: state.departmentId,
+          description: state.description,
+          gender: state.gender,
+          phone: state.phone,
+          studentCode: state.studentCode,
+          dob: event.newDOBValue, //-> change
+        ));
+      }
+
       //hàm update
       //Select University
       if (event is CompeletelyProfile) {
@@ -83,7 +166,7 @@ class UniversitySelectionBloc
         if (check) {
           listener.add(NavigatorWelcomePageEvent());
         } else {
-          listener.add(ShowingSnackBarEvent(message: "Lỗi Chọn Trường"));
+          listener.add(ShowingSnackBarEvent(message: "Lỗi"));
         }
       }
     });
