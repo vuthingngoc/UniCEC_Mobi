@@ -45,6 +45,7 @@ dependencies:
   rxdart: ^0.27.4
   shared_preferences: ^2.0.15
   simple_animations: ^4.2.0
+  gender_picker: ^1.1.0
 
   # template
   
