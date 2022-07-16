@@ -19,7 +19,6 @@ class _TextfieldInputPhoneState extends State<TextfieldInputPhone> {
         BlocProvider.of<UniversitySelectionBloc>(context);
     var size = MediaQuery.of(context).size;
     return Container(
-      padding: EdgeInsets.only(left: 10, right: 10, top: 10),
       child: Column(
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,

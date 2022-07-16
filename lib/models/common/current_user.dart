@@ -5,6 +5,8 @@ class CurrentUser {
   String? email;
   String? fullname;
   String? avatar;
+  //
+  int? clubId;
 
   CurrentUser(
       {this.id,
@@ -12,7 +14,8 @@ class CurrentUser {
       this.idToken,
       this.email,
       this.fullname,
-      this.avatar});
+      this.avatar,
+      this.clubId});
 
   CurrentUser get currentUser => CurrentUser(
       id: id,
@@ -20,7 +23,8 @@ class CurrentUser {
       idToken: idToken,
       email: email,
       fullname: fullname,
-      avatar: avatar);
+      avatar: avatar,
+      clubId: clubId);
 
   void reset() {
     id = 0;
@@ -29,5 +33,6 @@ class CurrentUser {
     email = "";
     fullname = "";
     avatar = "";
+    clubId = 0;
   }
 }

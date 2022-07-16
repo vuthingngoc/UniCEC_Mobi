@@ -1,18 +1,18 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import '../constants/theme.dart';
+import '../../constants/theme.dart';
 
 //widgets
-import 'widgets/navbar.dart';
-import 'widgets/drawer.dart';
+import 'widgets/navbar_profile.dart';
+import '../widgets/drawer.dart';
 
 class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: Navbar(
-          title: "Profile",
+        appBar: NavbarProfile(
+          title: "Thông Tin Sinh Viên",
           transparent: true,
         ),
         backgroundColor: ArgonColors.bgColorScreen,

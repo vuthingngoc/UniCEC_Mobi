@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:unicec_mobi/screens/home/widgets/navbar_home.dart';
 
-import '../constants/theme.dart';
+import '../../constants/theme.dart';
 
 //widgets
-import 'widgets/navbar.dart';
-import 'widgets/card-horizontal.dart';
-import 'widgets/card-small.dart';
-import 'widgets/card-square.dart';
-import 'widgets/drawer.dart';
+import '../widgets/card-horizontal.dart';
+import '../widgets/card-small.dart';
+import '../widgets/card-square.dart';
+import '../widgets/drawer.dart';
 
 final Map<String, Map<String, dynamic>> homeCards = {
   "Ice Cream": {
@@ -38,18 +38,18 @@ final Map<String, Map<String, dynamic>> homeCards = {
 };
 
 class Home extends StatelessWidget {
-  final GlobalKey _scaffoldKey = GlobalKey();
+  //final GlobalKey _scaffoldKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: Navbar(
-          title: "Home",
+        appBar: NavbarHome(
+          title: "Cuộc Thi và Sự Kiện",
           searchBar: true,
-          categoryOne: "Beauty",
-          categoryTwo: "Fashion",
+          categoryOne: "Liên Trường",
+          categoryTwo: "Trong Trường",
         ),
         backgroundColor: ArgonColors.bgColorScreen,
-        key: _scaffoldKey,
+        //key: _scaffoldKey,
         drawer: ArgonDrawer(currentPage: "Home"),
         body: Container(
           padding: EdgeInsets.only(left: 24.0, right: 24.0),

@@ -62,7 +62,10 @@ class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Mời bạn chọn trường Đại Học")),
+        appBar: AppBar(
+          title: Text("Mời bạn chọn trường Đại Học"),
+          backgroundColor: Colors.orange[600],
+        ),
         body: BlocProvider.value(
             value: bloc,
             child:
@@ -71,56 +74,72 @@ class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
                     builder: (context, state) {
                       return SingleChildScrollView(
                         scrollDirection: Axis.vertical,
-                        child: Column(
-                          children: [
-                            DropdownUniversity(),
-                            DropdownDepartment(),
-                            TextfieldInputPhone(),
-                            TextfieldInputStudentCode(),
-                            DateOfBirth(),
-                            SelectGender(
-                                showOtherGender: false, alignVertical: true),
-                            TextfieldInputDescription(),
-                            InkWell(
-                              onTap: () {
-                                bloc.add(CompeletelyProfile(
-                                    completeProfileModel: CompleteProfile(
-                                  universityId: state.universityId,
-                                  departmentId: state.departmentId,
-                                  dob: state.dob,
-                                  gender: state.gender,
-                                  phone: state.phone,
-                                  studentCode: state.studentCode,
-                                  description: state.description,
-                                )));
-                              },
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(3)),
-                                    color: Color.fromRGBO(240, 103, 103, 1),
-                                  ),
-                                  margin: EdgeInsets.symmetric(
-                                      horizontal: 50.0,
-                                      vertical: Dimens.size30),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        SizedBox(width: 5),
-                                        Text(
-                                          "Xác Nhận",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20),
-                                        )
-                                      ],
+                        child: Container(
+                          padding: EdgeInsets.only(
+                              left: 10, right: 10, top: 10, bottom: 10),
+                          child: Column(
+                            children: [
+                              DropdownUniversity(),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              DropdownDepartment(),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              TextfieldInputPhone(),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              TextfieldInputStudentCode(),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              DateOfBirth(),
+                              SelectGender(
+                                  showOtherGender: false, alignVertical: true),
+                              TextfieldInputDescription(),
+                              InkWell(
+                                onTap: () {
+                                  bloc.add(CompeletelyProfile(
+                                      completeProfileModel: CompleteProfile(
+                                    universityId: state.universityId,
+                                    departmentId: state.departmentId,
+                                    dob: state.dob,
+                                    gender: state.gender,
+                                    phone: state.phone,
+                                    studentCode: state.studentCode,
+                                    description: state.description,
+                                  )));
+                                },
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(3)),
+                                      color: Colors.orange[600],
                                     ),
-                                  )),
-                            )
-                          ],
+                                    margin: EdgeInsets.symmetric(
+                                        horizontal: 50.0,
+                                        vertical: Dimens.size30),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          SizedBox(width: 5),
+                                          Text(
+                                            "Xác Nhận",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          )
+                                        ],
+                                      ),
+                                    )),
+                              )
+                            ],
+                          ),
                         ),
                       );
                     }))

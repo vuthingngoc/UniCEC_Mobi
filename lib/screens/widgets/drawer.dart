@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../utils/firebase.dart';
 import '../../utils/router.dart';
 
 import '../../constants/theme.dart';
@@ -45,6 +46,7 @@ class ArgonDrawer extends StatelessWidget {
           child: ListView(
             padding: const EdgeInsets.only(top: 24, left: 16, right: 16),
             children: [
+              //Cuộc Thi và Sự Kiện
               DrawerTile(
                   icon: Icons.home,
                   onTap: () {
@@ -53,49 +55,60 @@ class ArgonDrawer extends StatelessWidget {
                     }
                   },
                   iconColor: ArgonColors.primary,
-                  title: "Home",
+                  title: "Cuộc Thi và Sự Kiện (not yet)",
                   isSelected: currentPage == "Home" ? true : false),
+
+              //Câu lạc bộ
               DrawerTile(
                   icon: Icons.pie_chart,
                   onTap: () {
-                    if (currentPage != "Profile") {
-                      Navigator.pushNamed(context, '/profile');
-                      //Navigator.of(context).pushReplacementNamed(Routes.login);
+                    if (currentPage != "Club") {
+                      //Navigator.pushNamed(context, '/profile');
+                      Navigator.of(context).pushReplacementNamed(Routes.club);
                     }
                   },
                   iconColor: ArgonColors.warning,
-                  title: "Profile",
-                  isSelected: currentPage == "Profile" ? true : false),
-              DrawerTile(
-                  icon: Icons.account_circle,
-                  onTap: () {
-                    if (currentPage != "Account") {
-                      Navigator.pushNamed(context, '/account');
-                    }
-                  },
-                  iconColor: ArgonColors.info,
-                  title: "Account",
-                  isSelected: currentPage == "Account" ? true : false),
-              DrawerTile(
-                  icon: Icons.settings_input_component,
-                  onTap: () {
-                    if (currentPage != "Elements") {
-                      Navigator.pushNamed(context, '/elements');
-                    }
-                  },
-                  iconColor: ArgonColors.error,
-                  title: "Elements",
-                  isSelected: currentPage == "Elements" ? true : false),
+                  title: "Câu Lạc Bộ (not yet)",
+                  isSelected: currentPage == "Club" ? true : false),
+
+              //Competition Activity
               DrawerTile(
                   icon: Icons.apps,
                   onTap: () {
-                    if (currentPage != "Articles") {
-                      Navigator.pushNamed(context, '/articles');
+                    if (currentPage != "CompetitionActivity") {
+                      Navigator.of(context).pushReplacementNamed(Routes.task);
                     }
                   },
                   iconColor: ArgonColors.primary,
-                  title: "Articles",
-                  isSelected: currentPage == "Articles" ? true : false),
+                  title: "Tasks Của Bạn (not yet)",
+                  isSelected:
+                      currentPage == "CompetitionActivity" ? true : false),
+
+              //Profile
+              DrawerTile(
+                  icon: Icons.account_circle,
+                  onTap: () {
+                    if (currentPage != "Profile") {
+                      Navigator.of(context)
+                          .pushReplacementNamed(Routes.profile);
+                    }
+                  },
+                  iconColor: ArgonColors.info,
+                  title: "Thông Tin Sinh Viên (doing)",
+                  isSelected: currentPage == "Profile" ? true : false),
+
+              //Chức năng Logout
+              DrawerTile(
+                icon: Icons.settings_input_component,
+                onTap: () async {
+                  //event logout
+                  await FirebaseUtils.logout();
+                  Navigator.of(context).pushReplacementNamed(Routes.splash);
+                },
+                iconColor: ArgonColors.error,
+                title: "Logout (done)",
+                //isSelected: currentPage == "Elements" ? true : false),
+              ),
             ],
           ),
         ),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 //import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import '../../constants/theme.dart';
-import 'input.dart';
+import '../../../constants/theme.dart';
+import '../../widgets/input.dart';
 
-class Navbar extends StatefulWidget implements PreferredSizeWidget {
+class NavbarHome extends StatefulWidget implements PreferredSizeWidget {
   final String title;
   final String categoryOne;
   final String categoryTwo;
@@ -20,7 +20,7 @@ class Navbar extends StatefulWidget implements PreferredSizeWidget {
   final bool noShadow;
   final Color bgColor;
 
-  Navbar(
+  NavbarHome(
       {this.title = "Home",
       this.categoryOne = "",
       this.categoryTwo = "",
@@ -40,16 +40,14 @@ class Navbar extends StatefulWidget implements PreferredSizeWidget {
   final double _prefferedHeight = 180.0;
 
   @override
-  _NavbarState createState() => _NavbarState();
+  _NavbarHomeState createState() => _NavbarHomeState();
 
   @override
   Size get preferredSize => Size.fromHeight(_prefferedHeight);
 }
 
-class _NavbarState extends State<Navbar> {
+class _NavbarHomeState extends State<NavbarHome> {
   late String activeTag;
-
-  //ItemScrollController _scrollController = ItemScrollController();
 
   void initState() {
     if (widget.tags != null && widget.tags?.length != 0) {
@@ -123,40 +121,40 @@ class _NavbarState extends State<Navbar> {
                                 fontSize: 18.0)),
                       ],
                     ),
-                    if (widget.rightOptions)
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, '/pro');
-                            },
-                            child: IconButton(
-                                icon: Icon(Icons.notifications_active,
-                                    color: !widget.transparent
-                                        ? (widget.bgColor == ArgonColors.white
-                                            ? ArgonColors.initial
-                                            : ArgonColors.white)
-                                        : ArgonColors.white,
-                                    size: 22.0),
-                                onPressed: null),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, '/pro');
-                            },
-                            child: IconButton(
-                                icon: Icon(Icons.shopping_basket,
-                                    color: !widget.transparent
-                                        ? (widget.bgColor == ArgonColors.white
-                                            ? ArgonColors.initial
-                                            : ArgonColors.white)
-                                        : ArgonColors.white,
-                                    size: 22.0),
-                                onPressed: null),
-                          ),
-                        ],
-                      )
+                    // if (widget.rightOptions)
+                    //   Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //     children: [
+                    //       GestureDetector(
+                    //         onTap: () {
+                    //           Navigator.pushNamed(context, '/pro');
+                    //         },
+                    //         child: IconButton(
+                    //             icon: Icon(Icons.notifications_active,
+                    //                 color: !widget.transparent
+                    //                     ? (widget.bgColor == ArgonColors.white
+                    //                         ? ArgonColors.initial
+                    //                         : ArgonColors.white)
+                    //                     : ArgonColors.white,
+                    //                 size: 22.0),
+                    //             onPressed: null),
+                    //       ),
+                    //       GestureDetector(
+                    //         onTap: () {
+                    //           Navigator.pushNamed(context, '/pro');
+                    //         },
+                    //         child: IconButton(
+                    //             icon: Icon(Icons.shopping_basket,
+                    //                 color: !widget.transparent
+                    //                     ? (widget.bgColor == ArgonColors.white
+                    //                         ? ArgonColors.initial
+                    //                         : ArgonColors.white)
+                    //                     : ArgonColors.white,
+                    //                 size: 22.0),
+                    //             onPressed: null),
+                    //       ),
+                    //],
+                    //)
                   ],
                 ),
                 if (widget.searchBar)
@@ -164,7 +162,7 @@ class _NavbarState extends State<Navbar> {
                     padding: const EdgeInsets.only(
                         top: 8, bottom: 4, left: 15, right: 15),
                     child: Input(
-                        placeholder: "What are you looking for?",
+                        placeholder: "Tìm Kiếm Cuộc Thi và Sự Kiện",
                         controller: widget.searchController,
                         onChanged: widget.searchOnChanged,
                         autofocus: widget.searchAutofocus,
@@ -173,7 +171,8 @@ class _NavbarState extends State<Navbar> {
                         onTap: () {
                           Navigator.pushNamed(context, '/pro');
                         },
-                        prefixIcon: Icon(Icons.abc)),
+                        prefixIcon: Icon(Icons
+                            .design_services_sharp)), // để icon của app mình
                   ),
                 SizedBox(
                   height: 10.0,
@@ -185,7 +184,7 @@ class _NavbarState extends State<Navbar> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/pro');
+                          //Navigator.pushNamed(context, '/pro');
                         },
                         child: Row(
                           children: [
@@ -208,7 +207,7 @@ class _NavbarState extends State<Navbar> {
                       SizedBox(width: 30),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/pro');
+                          //Navigator.pushNamed(context, '/pro');
                         },
                         child: Row(
                           children: [

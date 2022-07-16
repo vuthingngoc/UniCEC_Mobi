@@ -17,7 +17,19 @@ class PageDependencies {
     injector.registerFactory<Widget>(() => UniversitySelectionPage(injector()),
         instanceName: Routes.universitySelection);
 
-    //template
+    //HomePage -> show Cuộc Thi và Sự Kiện
     injector.registerFactory<Widget>(() => Home(), instanceName: Routes.home);
+
+    //Profile Page -> show thông tin Student
+    injector.registerFactory<Widget>(() => Profile(),
+        instanceName: Routes.profile);
+
+    //Club Page -> show Club
+    injector.registerFactory<Widget>(() => ClubPage(),
+        instanceName: Routes.club);
+
+    //Task Page -> show Tasks
+    injector.registerFactory<Widget>(() => TaskPage(),
+        instanceName: Routes.task);
   }
 }
