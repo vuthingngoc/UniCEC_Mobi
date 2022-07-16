@@ -19,41 +19,64 @@ class _DropdownDepartmentState extends State<DropdownDepartment> {
     UniversitySelectionBloc bloc =
         BlocProvider.of<UniversitySelectionBloc>(context);
     return Container(
-      width: size.width * 0.6,
-      height: 30,
-      padding: EdgeInsets.symmetric(horizontal: 15),
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.black),
-          borderRadius: BorderRadius.circular(15)),
-      child: BlocBuilder<UniversitySelectionBloc, UniversitySelectionState>(
-          bloc: bloc,
-          builder: (context, state) {
-            int dropdownValue = state.dropdownNewValueDep;
-            return DropdownButton<int>(
-              isExpanded: true,
-              value: dropdownValue,
-              icon: const Icon(Icons.arrow_drop_down),
-              iconSize: 24,
-              elevation: 16,
-              style: const TextStyle(
-                  color: Colors.deepPurple, fontWeight: FontWeight.bold),
-              onChanged: (int? newValue) {
-                bloc.add(ChangeDropdownValueDep(newValue: newValue!));
-              },
-              items: state.listDepartment
-                  .map<DropdownMenuItem<int>>((DepartmentModel value) {
-                return DropdownMenuItem<int>(
-                  value: value.id,
-                  child: Center(
-                    child: Container(
-                        width: size.width * 0.55,
-                        height: size.height * 0.15,
-                        child: Text(value.name + " - " + value.departmentCode)),
-                  ),
-                );
-              }).toList(),
-            );
-          }),
+      width: size.width,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Trường Ngành Học:",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Center(
+            child: Container(
+              width: size.width * 0.6,
+              height: 50,
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10)),
+              child: BlocBuilder<UniversitySelectionBloc,
+                      UniversitySelectionState>(
+                  bloc: bloc,
+                  builder: (context, state) {
+                    int dropdownValue = state.dropdownNewValueDep;
+                    return DropdownButtonHideUnderline(
+                      child: DropdownButton<int>(
+                        alignment: Alignment.centerLeft,
+                        isExpanded: true,
+                        value: dropdownValue,
+                        icon: const Icon(Icons.arrow_drop_down),
+                        iconSize: 24,
+                        elevation: 16,
+                        style: const TextStyle(
+                            color: Colors.deepPurple,
+                            fontWeight: FontWeight.bold),
+                        onChanged: (int? newValue) {
+                          bloc.add(ChangeDropdownValueDep(newValue: newValue!));
+                        },
+                        items: state.listDepartment.map<DropdownMenuItem<int>>(
+                            (DepartmentModel value) {
+                          return DropdownMenuItem<int>(
+                            value: value.id,
+                            child: Center(
+                              child: Container(
+                                  width: size.width * 0.55,
+                                  height: size.height * 0.15,
+                                  child: Text(value.name +
+                                      " - " +
+                                      value.departmentCode)),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    );
+                  }),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

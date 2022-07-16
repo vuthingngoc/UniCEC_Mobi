@@ -3,16 +3,17 @@ import 'package:get_it/get_it.dart';
 
 class Routes {
   static String get defaultRoute => '/';
-  static String get login => '/login';
   static String get main => '/main';
-  static String get profile => '/profile';
   static String get competition => '/competition';
-  static String get club => '/club';
 
-  static String get universitySelection => 'universitySelection';
   //
   static String get splash => '/splash';
   static String get home => '/home';
+  static String get club => '/club';
+  static String get profile => '/profile';
+  static String get universitySelection => 'universitySelection';
+  static String get login => '/login';
+  static String get task => '/task';
 
   static MaterialPageRoute getRoute(RouteSettings settings) {
     Widget widget;

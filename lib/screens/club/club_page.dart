@@ -2,19 +2,21 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../constants/theme.dart';
+import '../../constants/theme.dart';
 
 //widgets
-import 'package:unicec_mobi/screens/widgets/navbar.dart';
 import 'package:unicec_mobi/screens/widgets/input.dart';
 import 'package:unicec_mobi/screens/widgets/drawer.dart';
 
-class Register extends StatefulWidget {
+import '../task/widgets/navbar_task.dart';
+import 'widgets/navbar_club.dart';
+
+class ClubPage extends StatefulWidget {
   @override
-  _RegisterState createState() => _RegisterState();
+  _ClubPageState createState() => _ClubPageState();
 }
 
-class _RegisterState extends State<Register> {
+class _ClubPageState extends State<ClubPage> {
   bool? _checkboxValue = false;
 
   final double height = window.physicalSize.height;
@@ -22,9 +24,9 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: Navbar(transparent: true, title: ""),
+        appBar: NavbarClub(transparent: true, title: "Câu Lạc Bộ"),
         extendBodyBehindAppBar: true,
-        drawer: ArgonDrawer(currentPage: "Account"),
+        drawer: ArgonDrawer(currentPage: "Club"),
         body: Stack(
           children: [
             Container(

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 //widgets
-import '../constants/theme.dart';
-import 'widgets/drawer.dart';
-import 'widgets/navbar.dart';
-import 'widgets/card-horizontal.dart';
-import 'widgets/card-small.dart';
-import 'widgets/card-square.dart';
-import 'widgets/card-category.dart';
-import 'widgets/slider-product.dart';
+import '../../constants/theme.dart';
+import '../widgets/drawer.dart';
+import '../profile/widgets/navbar_profile.dart';
+import '../widgets/card-horizontal.dart';
+import '../widgets/card-small.dart';
+import '../widgets/card-square.dart';
+import '../widgets/card-category.dart';
+import '../widgets/slider-product.dart';
+import 'widgets/navbar_task.dart';
 
 final Map<String, Map<String, dynamic>> articlesCards = {
   "Ice Cream": {
@@ -81,16 +82,18 @@ final Map<String, Map<String, dynamic>> articlesCards = {
   }
 };
 
-class Articles extends StatelessWidget {
+class TaskPage extends StatefulWidget {
+  @override
+  State<TaskPage> createState() => _TaskPageState();
+}
+
+class _TaskPageState extends State<TaskPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: Navbar(
-        //   title: "Articles",
-        //   rightOptions: false,
-        // ),
+        appBar: NavbarTask(title: "Tasks Của Bạn", transparent: true),
         backgroundColor: ArgonColors.bgColorScreen,
-        drawer: ArgonDrawer(currentPage: "Articles"),
+        drawer: ArgonDrawer(currentPage: "CompetitionActivity"),
         body: Container(
             padding: EdgeInsets.only(right: 24, left: 24, bottom: 36),
             child: SingleChildScrollView(
