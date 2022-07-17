@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:unicec_mobi/models/entities/club/club_model.dart';
 
 import '../../models/common/current_user.dart';
-import '../../models/entities/authenicator_user/authenicator_user_model.dart';
+import '../../models/entities/uni_selector/uni_selector_model.dart';
 import '../../utils/adapter.dart';
 import '../../utils/api.dart';
 import '../../utils/log.dart';
@@ -14,7 +14,7 @@ class LoginService implements ILoginService {
   Adapter adapter = Adapter();
 
   @override
-  Future<AuthenicatorUserModel?> getTemp(String? idToken) async {
+  Future<UniSelectorModel?> getUniSelector(String? idToken) async {
     var client = http.Client();
     String url = Api.GetUrl(apiPath: Api.authentication);
     try {
@@ -31,7 +31,7 @@ class LoginService implements ILoginService {
         //
         Map<String, dynamic> result = adapter.parseToMap(response);
         //
-        AuthenicatorUserModel userInfo = AuthenicatorUserModel.fromJson(result);
+        UniSelectorModel userInfo = UniSelectorModel.fromJson(result);
 
         return userInfo;
       }

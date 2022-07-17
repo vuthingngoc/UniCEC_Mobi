@@ -5,8 +5,8 @@ import 'package:unicec_mobi/screens/university_selection/widgets/dropdown_depart
 import '../../bloc/university_selection/university_selection_bloc.dart';
 import '../../bloc/university_selection/university_selection_event.dart';
 import '../../bloc/university_selection/university_selection_state.dart';
-import '../../models/entities/authenicator_user/authenicator_user_model.dart';
 
+import '../../models/entities/uni_selector/uni_selector_model.dart';
 import '../../models/entities/user/complete_profile.dart';
 import '../../utils/dimens.dart';
 import '../../utils/router.dart';

@@ -1,4 +1,4 @@
-import '../../models/entities/authenicator_user/authenicator_user_model.dart';
+import '../../models/entities/uni_selector/uni_selector_model.dart';
 
 class LoginEvent {}
 

@@ -1,11 +1,11 @@
-class AuthenicatorUserModel {
+class UniSelectorModel {
   final String token;
   final List<UniBelongToEmail> listUniBelongToEmail;
 
-  AuthenicatorUserModel(
+  UniSelectorModel(
       {required this.token, required this.listUniBelongToEmail});
 
-  factory AuthenicatorUserModel.fromJson(Map<String, dynamic> json) {
+  factory UniSelectorModel.fromJson(Map<String, dynamic> json) {
     String token = json['token'];
     List<UniBelongToEmail> listUniBelongToEmail = [];
     if (json['listUniBelongToEmail'] != null) {
@@ -15,7 +15,7 @@ class AuthenicatorUserModel {
       });
     }
 
-    return AuthenicatorUserModel(
+    return UniSelectorModel(
         token: token, listUniBelongToEmail: listUniBelongToEmail);
   }
 }

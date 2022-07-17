@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
-
 import 'package:unicec_mobi/models/common/current_user.dart';
-
-import '../../models/entities/authenicator_user/authenicator_user_model.dart';
+import '../../models/entities/uni_selector/uni_selector_model.dart';
 import '../../services/i_services.dart';
 import '../../utils/base_bloc.dart';
 import '../../utils/firebase.dart';
@@ -24,45 +22,44 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
           //2.Nếu đăng nhập rồi thì trả ra String idToken thôi
           //3.Trường hợp lỗi
 
-          AuthenicatorUserModel? temp = await saveUserData(credential.user);
-          if (temp!.listUniBelongToEmail.isEmpty) {
+          UniSelectorModel? uniSelector = await saveUserData(credential.user);
+          if (uniSelector!.listUniBelongToEmail.isEmpty) {
             listener.add(NavigatorWelcomePageEvent());
           } else {
             listener.add(NavigatorUniversitySelectionPageEvent(
-                listUniBelongToEmail: temp.listUniBelongToEmail));
+                listUniBelongToEmail: uniSelector.listUniBelongToEmail));
           }
         }
       }
     });
   }
 
-  Future<AuthenicatorUserModel?> saveUserData(User? credentialUser) async {
+  Future<UniSelectorModel?> saveUserData(User? credentialUser) async {
     String? idToken = await credentialUser?.getIdToken();
     String? imagePath = credentialUser?.photoURL;
 
     //chứa cả Token + List University
-    AuthenicatorUserModel? temp = await service.getTemp(idToken);
+    UniSelectorModel? uniSelector = await service.getUniSelector(idToken);
 
     //decode JWT
-    Map<String, dynamic> userMap = Utils.fromJWT(temp?.token);
+    Map<String, dynamic> userMap = Utils.fromJWT(uniSelector?.token);
     CurrentUser user = GetIt.I.get<CurrentUser>();
     user.id = int.parse(userMap['Id']);
-    user.idToken = temp?.token;
+    user.idToken = (uniSelector?.token)!;
 
     //if new student kh trả ra UniversityID -> sẽ được cập nhật bên trang UniSelection
-    if (temp!.listUniBelongToEmail.isEmpty) {
+    if (uniSelector!.listUniBelongToEmail.isEmpty) {
       //
       user.universityId = int.parse(userMap['UniversityId']);
       //load list club belong to student
       user.clubsBelongToStudent =
           await service.getListClubsBelongToStudent(user.id);
     }
-
-    user.email = userMap['Email'];
+    user.email = (credentialUser?.email)!;
     user.fullname = userMap['Fullname'];
-    user.avatar = imagePath;
+    user.avatar = imagePath!;
 
-    return temp;
+    return uniSelector;
 
     // SharedPreferences preferences = await SharedPreferences.getInstance();
     // List<String> userInfo = [
