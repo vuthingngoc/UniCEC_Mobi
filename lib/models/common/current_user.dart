@@ -1,3 +1,5 @@
+import '../entities/club/club_model.dart';
+
 class CurrentUser {
   int? id;
   int? universityId;
@@ -6,7 +8,8 @@ class CurrentUser {
   String? fullname;
   String? avatar;
   //
-  int? clubId;
+  List<ClubModel>? clubsBelongToStudent;
+  int? clubIdSelected;
 
   CurrentUser(
       {this.id,
@@ -15,7 +18,8 @@ class CurrentUser {
       this.email,
       this.fullname,
       this.avatar,
-      this.clubId});
+      this.clubsBelongToStudent,
+      this.clubIdSelected});
 
   CurrentUser get currentUser => CurrentUser(
       id: id,
@@ -24,7 +28,8 @@ class CurrentUser {
       email: email,
       fullname: fullname,
       avatar: avatar,
-      clubId: clubId);
+      clubsBelongToStudent: clubsBelongToStudent,
+      clubIdSelected: clubIdSelected);
 
   void reset() {
     id = 0;
@@ -33,6 +38,7 @@ class CurrentUser {
     email = "";
     fullname = "";
     avatar = "";
-    clubId = 0;
+    clubsBelongToStudent = [];
+    clubIdSelected = 0;
   }
 }

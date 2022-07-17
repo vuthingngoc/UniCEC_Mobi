@@ -1,10 +1,11 @@
-class Temp {
+class AuthenicatorUserModel {
   final String token;
   final List<UniBelongToEmail> listUniBelongToEmail;
 
-  Temp({required this.token, required this.listUniBelongToEmail});
+  AuthenicatorUserModel(
+      {required this.token, required this.listUniBelongToEmail});
 
-  factory Temp.fromJson(Map<String, dynamic> json) {
+  factory AuthenicatorUserModel.fromJson(Map<String, dynamic> json) {
     String token = json['token'];
     List<UniBelongToEmail> listUniBelongToEmail = [];
     if (json['listUniBelongToEmail'] != null) {
@@ -14,7 +15,8 @@ class Temp {
       });
     }
 
-    return Temp(token: token, listUniBelongToEmail: listUniBelongToEmail);
+    return AuthenicatorUserModel(
+        token: token, listUniBelongToEmail: listUniBelongToEmail);
   }
 }
 

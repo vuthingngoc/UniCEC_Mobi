@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unicec_mobi/bloc/university_selection/university_selection_bloc.dart';
-import 'package:unicec_mobi/models/entities/temp/temp.dart';
 
 import '../../../bloc/university_selection/university_selection_event.dart';
 import '../../../bloc/university_selection/university_selection_state.dart';
+import '../../../models/entities/authenicator_user/authenicator_user_model.dart';
 
 class DropdownUniversity extends StatefulWidget {
   @override

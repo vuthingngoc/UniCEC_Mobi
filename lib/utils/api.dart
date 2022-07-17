@@ -5,6 +5,7 @@ class Api {
   static String get activitiesEntity => "/api/vi/activities-entity";
   static String get cities => "/api/v1/cities";
   static String get clubs => "/api/v1/clubs";
+  static String get clubsBelongToStudent => "/api/v1/clubs/user";
   static String get clubRoles => "/api/v1/club-roles";
   static String get competitions => "/api/v1/competitions";
   static String get competitionActivities => "/api/v1/competition-activities";

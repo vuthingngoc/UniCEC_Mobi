@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import '../../models/entities/authenicator_user/authenicator_user_model.dart';
 import '../../models/entities/department/department_model.dart';
-import '../../models/entities/temp/temp.dart';
 
 class UniversitySelectionState extends Equatable {
   final List<UniBelongToEmail> listUniBelongToEmail;
