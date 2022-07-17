@@ -1,3 +1,5 @@
+import 'package:http/http.dart' as http;
+
 class Api {
   static String get uri => "https://unicec.ddns.net";
   //static String get uri => "https://10.0.2.2:44361/index.html";
@@ -29,5 +31,16 @@ class Api {
 
   static String GetUrl({required String apiPath}) {
     return uri + apiPath;
+  }
+
+  static Map<String, String> GetHeader(String? token){
+    // base header => If you want to add more things in header, you can build new method
+    Map<String, String> header = {
+      'Content-Type': 'application/json; charset=UTF-8'
+    };
+
+    if(token != null) header['Authorization'] = "Bearer $token";
+
+    return header;
   }
 }
