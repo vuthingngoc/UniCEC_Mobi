@@ -9,7 +9,7 @@ class UniversitySelectionBloc
     extends BaseBloc<UniversitySelectionEvent, UniversitySelectionState> {
   final IUniversitySelectionService service;
 
-  UniversitySelectionBloc(this.service)
+  UniversitySelectionBloc({required this.service})
       : super(UniversitySelectionState(
             listUniBelongToEmail: [],
             listDepartment: [],

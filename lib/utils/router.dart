@@ -10,8 +10,9 @@ class Routes {
   static String get splash => '/splash';
   static String get home => '/home';
   static String get club => '/club';
+  static String get clubSelection => '/clubSelection';
   static String get profile => '/profile';
-  static String get universitySelection => 'universitySelection';
+  static String get universitySelection => '/universitySelection';
   static String get login => '/login';
   static String get task => '/task';
 

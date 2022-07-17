@@ -5,7 +5,8 @@ import 'package:unicec_mobi/screens/university_selection/widgets/dropdown_depart
 import '../../bloc/university_selection/university_selection_bloc.dart';
 import '../../bloc/university_selection/university_selection_event.dart';
 import '../../bloc/university_selection/university_selection_state.dart';
-import '../../models/entities/temp/temp.dart';
+import '../../models/entities/authenicator_user/authenicator_user_model.dart';
+
 import '../../models/entities/user/complete_profile.dart';
 import '../../utils/dimens.dart';
 import '../../utils/router.dart';
@@ -19,7 +20,7 @@ import 'widgets/select_gender.dart';
 class UniversitySelectionPage extends StatefulWidget {
   final UniversitySelectionBloc bloc;
 
-  UniversitySelectionPage(this.bloc);
+  UniversitySelectionPage({required this.bloc});
 
   @override
   State<UniversitySelectionPage> createState() =>

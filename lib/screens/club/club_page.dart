@@ -1,25 +1,42 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import '../../bloc/club/club_bloc.dart';
+import '../../bloc/club/club_event.dart';
 import '../../constants/theme.dart';
-
 //widgets
 import 'package:unicec_mobi/screens/widgets/input.dart';
 import 'package:unicec_mobi/screens/widgets/drawer.dart';
-
-import '../task/widgets/navbar_task.dart';
+import '../../utils/router.dart';
 import 'widgets/navbar_club.dart';
 
 class ClubPage extends StatefulWidget {
+  //bloc
+  final ClubBloc bloc;
+  ClubPage({required this.bloc});
+
   @override
   _ClubPageState createState() => _ClubPageState();
 }
 
 class _ClubPageState extends State<ClubPage> {
   bool? _checkboxValue = false;
-
   final double height = window.physicalSize.height;
+
+//
+  ClubBloc get _bloc => widget.bloc;
+  @override
+  void initState() {
+    super.initState();
+
+    _bloc.add(ClubEvent());
+
+    _bloc.listenerStream.listen((event) {
+      if (event is NavigatorClubSelectionPage) {
+        Navigator.of(context).pushReplacementNamed(Routes.clubSelection);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

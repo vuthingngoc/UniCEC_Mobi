@@ -12,7 +12,7 @@ import 'widgets/login_header.dart';
 class LoginPage extends StatefulWidget {
   final LoginBloc bloc;
 
-  LoginPage(this.bloc);
+  LoginPage({required this.bloc});
 
   @override
   _LoginPageState createState() => _LoginPageState();

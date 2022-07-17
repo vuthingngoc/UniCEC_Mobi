@@ -12,7 +12,7 @@ import '../../utils/router.dart';
 class SplashPage extends StatefulWidget {
   final SplashBloc bloc;
 
-  SplashPage(this.bloc);
+  SplashPage({required this.bloc});
 
   @override
   _SplashPageState createState() => _SplashPageState();

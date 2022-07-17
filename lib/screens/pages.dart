@@ -3,6 +3,7 @@ export 'splash/splash_page.dart';
 export 'login/login_page.dart';
 
 export 'university_selection/university_selection_page.dart';
+export 'club_selection/club_selection_page.dart';
 
 //template
 export 'home/home_page.dart'; //->show trang cuộc thi và sự kiện
