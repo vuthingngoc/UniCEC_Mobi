@@ -1,22 +1,22 @@
 import '../entities/club/club_model.dart';
 
 class CurrentUser {
-  int? id;
+  int id;
   int? universityId;
-  String? idToken;
-  String? email;
-  String? fullname;
+  String idToken;
+  String email;
+  String fullname;
   String? avatar;
   //
   List<ClubModel>? clubsBelongToStudent;
   int? clubIdSelected;
 
   CurrentUser(
-      {this.id,
+      {required this.id,
       this.universityId,
-      this.idToken,
-      this.email,
-      this.fullname,
+      required this.idToken,
+      required this.email,
+      required this.fullname,
       this.avatar,
       this.clubsBelongToStudent,
       this.clubIdSelected});

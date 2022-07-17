@@ -4,7 +4,7 @@ import 'package:unicec_mobi/bloc/university_selection/university_selection_bloc.
 
 import '../../../bloc/university_selection/university_selection_event.dart';
 import '../../../bloc/university_selection/university_selection_state.dart';
-import '../../../models/entities/authenicator_user/authenicator_user_model.dart';
+import '../../../models/entities/uni_selector/uni_selector_model.dart';
 
 class DropdownUniversity extends StatefulWidget {
   @override

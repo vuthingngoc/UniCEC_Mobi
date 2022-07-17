@@ -7,7 +7,7 @@ class UserModel {
   String fullname;
   String avatar;
   String gender;
-  int? majorId;
+  int? departmentId;
   String studentCode;
   String phoneNumber;
   UserStatus status;
@@ -22,7 +22,7 @@ class UserModel {
       required this.fullname,
       required this.avatar,
       required this.gender,
-      this.majorId,
+      this.departmentId,
       required this.studentCode,
       required this.phoneNumber,
       required this.status,
@@ -37,7 +37,7 @@ class UserModel {
     String fullname = json['fullname'];
     String avatar = json['avatar'];
     String gender = json['gender'];
-    int? majorId = json['major_id'];
+    int? departmentId = json['department_id'];
     String studentCode = json['student_code'];
     String phoneNumber = json['phone_number'];
     UserStatus status = json['status'];
@@ -47,10 +47,12 @@ class UserModel {
 
     return UserModel(
       id: id, 
-      roleId: roleId, 
+      roleId: roleId,
+      universityId: universityId,
       fullname: fullname, 
       avatar: avatar, 
-      gender: gender, 
+      gender: gender,
+      departmentId: departmentId,
       studentCode: studentCode, 
       phoneNumber: phoneNumber, 
       status: status, 
