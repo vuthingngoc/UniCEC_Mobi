@@ -19,10 +19,11 @@ class LoginService implements ILoginService {
     String url = Api.GetUrl(apiPath: Api.authentication);
     try {
       var response =
-          await client.post(Uri.parse(url), headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': "Bearer $idToken"
-      });
+          await client.post(Uri.parse(url), headers: Api.GetHeader(idToken));
+      //     <String, String>{
+      //   'Content-Type': 'application/json; charset=UTF-8',
+      //   'Authorization': "Bearer $idToken"
+      // });
 
       if (response.statusCode == 400) {
         Log.error(response.body.toString());
