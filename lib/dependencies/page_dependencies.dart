@@ -19,7 +19,7 @@ class PageDependencies {
         instanceName: Routes.universitySelection);
 
     //club selection page
-    injector.registerFactory<Widget>(() => ClubSelectionPage(),
+    injector.registerFactory<Widget>(() => ClubSelectionPage(bloc: injector()),
         instanceName: Routes.clubSelection);
 
     //HomePage -> show Cuộc Thi và Sự Kiện

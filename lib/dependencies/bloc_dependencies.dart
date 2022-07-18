@@ -5,6 +5,7 @@ import 'package:unicec_mobi/bloc/login/login_bloc.dart';
 import 'package:unicec_mobi/bloc/splash/splash_bloc.dart';
 import 'package:unicec_mobi/bloc/university_selection/university_selection_bloc.dart';
 
+import '../bloc/club_selection/club_selection_bloc.dart';
 import '../bloc/profile/profile_bloc.dart';
 
 class BlocDependencies {
@@ -19,11 +20,15 @@ class BlocDependencies {
     injector.registerFactory<UniversitySelectionBloc>(
         () => UniversitySelectionBloc(service: injector()));
 
-    injector.registerFactory<ProfileBloc>(() => ProfileBloc(service: injector()));
+    //import ClubSelectionBloc
+    injector.registerFactory<ClubSelectionBloc>(() => ClubSelectionBloc());
+    injector
+        .registerFactory<ProfileBloc>(() => ProfileBloc(service: injector()));
 
     //import ClubBloc
     injector.registerFactory<ClubBloc>(() => ClubBloc(service: injector()));
 
-    injector.registerFactory<CompetitionBloc>(() => CompetitionBloc(service: injector()));
+    injector.registerFactory<CompetitionBloc>(
+        () => CompetitionBloc(service: injector()));
   }
 }
