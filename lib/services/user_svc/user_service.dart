@@ -25,6 +25,8 @@ class UserService implements IUserService{
 
     }catch(e){
       Log.error(e.toString());
+    }finally{
+      client.close();
     }
 
     return null;
