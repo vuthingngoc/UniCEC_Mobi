@@ -23,5 +23,9 @@ class ServiceDependencies {
     injector.registerFactory<IClubService>(() => ClubService());
 
     injector.registerFactory<ICompetitionService>(() => CompetitionService());
+
+    injector.registerFactory<ITeamService>(() => TeamService());
+
+    injector.registerFactory<ISeedsWalletService>(() => SeedsWalletService());
   }
 }

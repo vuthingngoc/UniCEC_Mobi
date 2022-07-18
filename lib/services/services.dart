@@ -5,3 +5,5 @@ export 'package:unicec_mobi/services/university_selection_svc/university_selecti
 export 'package:unicec_mobi/services/club_svc/club_service.dart';
 export 'package:unicec_mobi/services/user_svc/user_service.dart';
 export 'package:unicec_mobi/services/competition_svc/competition_service.dart';
+export 'package:unicec_mobi/services/team_svc/team_service.dart';
+export 'package:unicec_mobi/services/seeds_wallet_svc/seeds_wallet_service.dart';
