@@ -21,5 +21,7 @@ class ServiceDependencies {
 
     //import club_service
     injector.registerFactory<IClubService>(() => ClubService());
+
+    injector.registerFactory<ICompetitionService>(() => CompetitionService());
   }
 }
