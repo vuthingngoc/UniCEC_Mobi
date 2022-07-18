@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:http/http.dart' as http;
 
 class Api {
@@ -36,10 +38,10 @@ class Api {
   static Map<String, String> GetHeader(String? token){
     // base header => If you want to add more things in header, you can build new method
     Map<String, String> header = {
-      'Content-Type': 'application/json; charset=UTF-8'
+      HttpHeaders.contentTypeHeader: 'application/json; charset=UTF-8'
     };
 
-    if(token != null) header['Authorization'] = "Bearer $token";
+    if(token != null)  header[HttpHeaders.authorizationHeader] = "Bearer $token";
 
     return header;
   }
