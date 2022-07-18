@@ -66,7 +66,7 @@ class _NavbarClubState extends State<NavbarClub> {
                                     ? (widget.bgColor == ArgonColors.white
                                         ? ArgonColors.initial
                                         : ArgonColors.white)
-                                    : ArgonColors.white,
+                                    : ArgonColors.black,
                                 size: 24.0),
                             onPressed: () {
                               if (!widget.backButton)
@@ -80,11 +80,12 @@ class _NavbarClubState extends State<NavbarClub> {
                                     ? (widget.bgColor == ArgonColors.white
                                         ? ArgonColors.initial
                                         : ArgonColors.white)
-                                    : ArgonColors.white,
+                                    : ArgonColors.black,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 18.0)),
                       ],
                     ),
+
                     // if (widget.rightOptions)
                     //   Row(
                     //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

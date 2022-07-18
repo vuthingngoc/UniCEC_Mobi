@@ -3,15 +3,14 @@ import 'package:equatable/equatable.dart';
 import '../../models/entities/club/club_model.dart';
 
 class ClubState extends Equatable {
-  // final List<ClubModel>
-  //     listClubModel; // -> load list club ở trường của Current User
+  final ClubModel? ClubSelected; // -> load club của Current User chọn
 
-  // ClubState({required this.listClubModel});
+  ClubState({required this.ClubSelected});
 
-  // ClubState copyWith({required List<ClubModel> listClubModel}) {
-  //   return ClubState(listClubModel: listClubModel);
-  // }
+  ClubState copyWith({required ClubModel ClubSelected}) {
+    return ClubState(ClubSelected: ClubSelected);
+  }
 
   @override
-  List<Object?> get props => []; //listClubModel];
+  List<Object?> get props => [ClubSelected];
 }

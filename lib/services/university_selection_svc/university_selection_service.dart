@@ -10,7 +10,7 @@ import '../../models/entities/user/complete_profile.dart';
 import '../../utils/adapter.dart';
 import '../../utils/api.dart';
 import '../../utils/log.dart';
-import 'i_university_selection_svc.dart';
+import 'i_university_selection_service.dart';
 import 'package:http/http.dart' as http;
 
 class UniversitySelectionService implements IUniversitySelectionService {
