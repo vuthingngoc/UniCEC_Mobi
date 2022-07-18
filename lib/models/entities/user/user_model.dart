@@ -4,6 +4,7 @@ class UserModel {
   int id;
   int roleId;
   int? universityId;
+  String email;
   String fullname;
   String avatar;
   String gender;
@@ -19,6 +20,7 @@ class UserModel {
       {required this.id,
       required this.roleId,
       this.universityId,
+      required this.email,
       required this.fullname,
       required this.avatar,
       required this.gender,
@@ -31,24 +33,26 @@ class UserModel {
       required this.isOnline});
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
-    int id = json['id'];
-    int roleId = json['role_id'];
+    int id = json['id'] ?? 0;
+    int roleId = json['role_id'] ?? 0;
     int? universityId = json['university_id'];
-    String fullname = json['fullname'];
-    String avatar = json['avatar'];
-    String gender = json['gender'];
+    String email = json['email'] ?? '';
+    String fullname = json['fullname'] ?? '';
+    String avatar = json['avatar'] ?? '';
+    String gender = json['gender'] ?? '';
     int? departmentId = json['department_id'];
-    String studentCode = json['student_code'];
-    String phoneNumber = json['phone_number'];
-    UserStatus status = json['status'];
-    String dob = json['dob'];
-    String description = json['description'];
-    bool isOnline = json['is_online'];
+    String studentCode = json['student_code'] ?? '';
+    String phoneNumber = json['phone_number'] ?? '';
+    UserStatus status = UserStatus.values[json['status']];
+    String dob = json['dob'] ?? '';
+    String description = json['description'] ?? '';
+    bool isOnline = json['is_online'] ?? false;
 
     return UserModel(
       id: id, 
       roleId: roleId,
       universityId: universityId,
+      email: email,
       fullname: fullname, 
       avatar: avatar, 
       gender: gender,

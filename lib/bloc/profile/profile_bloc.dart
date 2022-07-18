@@ -18,6 +18,7 @@ class ProfileBloc extends BaseBloc<ProfileEvent, ProfileState> {
                 id: 0,
                 roleId: 0,
                 fullname: '',
+                email: '',
                 avatar: '',
                 gender: '',
                 studentCode: '',
