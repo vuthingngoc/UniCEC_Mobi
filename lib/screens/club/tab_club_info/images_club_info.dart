@@ -30,7 +30,8 @@ class _ClubImagesState extends State<ClubImages> {
             child: Hero(
               tag: (widget.club?.id == null) ? -1 : widget.club!.id,
               child: (widget.club?.image == null)
-                  ? Image.asset("assets/img/logo-argon.png")
+                  ? Image.network(
+                      "https://docs.flutter.dev/assets/images/dash/dash-fainting.gif")
                   : Image.network(widget.club!.image.toString()),
             ),
           ),
@@ -39,14 +40,15 @@ class _ClubImagesState extends State<ClubImages> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ...List.generate(5, (index) => buildSmallProductPreview(index)),
+            ...List.generate(5, (index) => buildSmallImagePreview(index)),
           ],
         )
       ],
     );
   }
 
-  GestureDetector buildSmallProductPreview(int index) {
+// hàm này chưa build xong thành hàm của mình
+  GestureDetector buildSmallImagePreview(int index) {
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -66,7 +68,8 @@ class _ClubImagesState extends State<ClubImages> {
               color: kPrimaryColor.withOpacity(selectedImage == index ? 1 : 0)),
         ),
         child: (widget.club?.image == null)
-            ? Image.asset("assets/img/logo-argon.png")
+            ? Image.network(
+                "https://docs.flutter.dev/assets/images/dash/dash-fainting.gif")
             : Image.network(widget.club!.image
                 .toString()), //Image.asset(widget.product.images[index]),
       ),

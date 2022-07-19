@@ -13,10 +13,12 @@ class ClubBloc extends BaseBloc<ClubEvent, ClubState> {
     on((event, emit) async {
       if (event is ClubEvent) {
         CurrentUser user = GetIt.I.get<CurrentUser>();
-        //print(user.clubsBelongToStudent!.length.toString());
+        //
+        print('vừa vào trang club nếu có club phải qua trang chọn club cho t');
+        print(user.clubsBelongToStudent!.length.toString());
         //chuyển trang chọn clubs
         if (user.clubsBelongToStudent != null) {
-          if (user.clubIdSelected != 0) {
+          if (user.clubIdSelected != null) {
             //load info club selected
             ClubModel? result =
                 await service.getClubSelected(user.clubIdSelected);
@@ -30,7 +32,7 @@ class ClubBloc extends BaseBloc<ClubEvent, ClubState> {
           } else {
             listener.add(NavigatorClubSelectionPage());
           }
-        }
+        } else {}
         //
       }
     });
