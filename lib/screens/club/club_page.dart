@@ -65,15 +65,13 @@ class _ClubPageState extends State<ClubPage> {
                 ],
               ),
               bottomNavigationBar: const TabBar(
-                labelColor: Colors.blue,
+                labelColor: Colors.redAccent,
                 tabs: <Widget>[
                   Tab(
-                    icon: Icon(Icons.cloud_outlined),
                     text: "Thông Tin Câu Lạc Bộ",
                   ),
                   Tab(
-                    icon: Icon(Icons.beach_access_sharp),
-                    text: "Cuộc Thi và Sự Kiện",
+                    text: "Cuộc Thi và Sự Kiện Của Câu Lạc Bộ",
                   )
                 ],
               ),
