@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 import '../../../bloc/club_selection/club_selection_bloc.dart';
 import '../../../bloc/club_selection/club_selection_event.dart';
 import '../../../bloc/club_selection/club_selection_state.dart';
@@ -32,18 +34,18 @@ class _ClubCardState extends State<ClubCard> {
       bloc: bloc,
       builder: (context, state) {
         return Container(
-           height: size.height * 0.2,
+           height: size.height * 0.15,
           width:size.width,
             decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
-              color: Colors.orange[200],
+              color: Colors.white.withOpacity(0.5),
 
         ),
            child: Row(
              children: <Widget>[
                Container(
-                   height: size.height * 0.05,
-                   width: size.width * 0.1,
+                   height: size.height * 0.1,
+                   width: size.width * 0.2,
                    decoration:BoxDecoration(
                      image: DecorationImage(
                         image: NetworkImage('https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/FPT_logo_2010.svg/800px-FPT_logo_2010.svg.png'),
@@ -52,12 +54,12 @@ class _ClubCardState extends State<ClubCard> {
                SizedBox(width:15.0,),
                Container(
                  child: Column(
+                   mainAxisAlignment: MainAxisAlignment.center,
+                   crossAxisAlignment: CrossAxisAlignment.start,
                    children: <Widget>[
                      Text('Name'),
                      SizedBox(height: 10.0,),
-                     Text('Fanpage'),
-                     SizedBox(height: 5.0,),
-                     Text('https//asdasdasdas.ccom'),
+                     Text('Fanpage:'+'https//asdasdasdas.ccom'),
                    ],
                  ),
                ),

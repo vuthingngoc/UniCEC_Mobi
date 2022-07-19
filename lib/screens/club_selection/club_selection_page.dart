@@ -58,6 +58,12 @@ class _ClubSelectionPageState extends State<ClubSelectionPage> {
             ),
           ),
         ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: (){},
+          label: Text("Tham gia clb khác"),
+          icon: Icon(Icons.add),
+
+        ),
       ),
     );
   }
