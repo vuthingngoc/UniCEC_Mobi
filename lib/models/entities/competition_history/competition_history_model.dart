@@ -20,13 +20,13 @@ class CompetitionHistoryModel{
   });
 
   factory CompetitionHistoryModel.fromJson(Map<String, dynamic> json){
-    int id = json['id'];
-    int competitionId = json['competition_id'];
+    int id = json['id'] ?? 0;
+    int competitionId = json['competition_id'] ?? 0;
     int? changerId = json['changer_id'];
     String? changerName = json['changer_name'];
-    DateTime changeDate = json['change_date'];
+    DateTime changeDate = DateTime.parse(json['change_date']);
     String? description = json['description'];
-    CompetitionStatus status = json['status'];
+    CompetitionStatus status = CompetitionStatus.values[json['status']];
 
     return CompetitionHistoryModel(
       id: id, 

@@ -14,10 +14,10 @@ class ParticipantModel{
   });
 
   factory ParticipantModel.fromJson(Map<String, dynamic> json){
-    int id = json['id'];
-    int competitionId = json['competition_id'];
-    int studentId = json['student_id'];
-    String avatar = json['avatar'];
+    int id = json['id'] ?? 0;
+    int competitionId = json['competition_id'] ?? 0;
+    int studentId = json['student_id'] ?? 0;
+    String avatar = json['avatar'] ?? '';
     DateTime registerTime = DateTime.parse(json['register_time']);
 
     return ParticipantModel(
