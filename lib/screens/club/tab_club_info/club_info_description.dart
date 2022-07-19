@@ -94,6 +94,38 @@ class _ClubDescriptionState extends State<ClubDescription> {
               ],
             ),
           ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: getProportionateScreenWidth(20),
+            vertical: 10,
+          ),
+          child: Column(children: [
+            Text(
+              'Liên Hệ và Hợp Tác với Chúng Tôi',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            SizedBox(height: 10),
+            Row(
+              children: [
+                Icon(Icons.web),
+                SizedBox(width: 10),
+                Text(
+                  widget.club?.clubFanpage ?? 'Không có dữ liệu clubFanpage',
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            Row(
+              children: [
+                Icon(Icons.phone),
+                SizedBox(width: 10),
+                Text(
+                  widget.club?.clubContact ?? 'Không có dữ liệu clubContact',
+                ),
+              ],
+            )
+          ]),
         )
       ],
     );
