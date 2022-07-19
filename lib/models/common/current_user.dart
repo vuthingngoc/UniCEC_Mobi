@@ -42,6 +42,6 @@ class CurrentUser {
     fullname = "";
     avatar = "";
     clubsBelongToStudent = [];
-    clubIdSelected = 0;
+    clubIdSelected = null;
   }
 }
