@@ -5,6 +5,8 @@ class CardHorizontal extends StatelessWidget {
   CardHorizontal(
       {this.title = "Placeholder Title",
       this.cta = "",
+        this.date = "",
+        this.type = "",
       this.img = "https://via.placeholder.com/200",
       this.tap = defaultFunc});
 
@@ -12,6 +14,8 @@ class CardHorizontal extends StatelessWidget {
   final String img;
   VoidCallback tap;
   final String title;
+  final String date;
+  final String type;
 
   static void defaultFunc() {
     print("the function works!");
@@ -50,6 +54,17 @@ class CardHorizontal extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Row(
+                            children: [
+                              Text(type,
+                                  style: TextStyle(
+                                      color: ArgonColors.label, fontSize: 13)),
+
+                              Text(date,
+                                  style: TextStyle(
+                                      color: ArgonColors.secondary, fontSize: 13, backgroundColor: Colors.red)),
+                            ],
+                          ),
                           Text(title,
                               style: TextStyle(
                                   color: ArgonColors.header, fontSize: 13)),
@@ -57,7 +72,7 @@ class CardHorizontal extends StatelessWidget {
                               style: TextStyle(
                                   color: ArgonColors.primary,
                                   fontSize: 11,
-                                  fontWeight: FontWeight.w600))
+                                  fontWeight: FontWeight.w600)),
                         ],
                       ),
                     ))

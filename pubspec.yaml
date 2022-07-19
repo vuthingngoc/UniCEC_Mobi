@@ -46,6 +46,7 @@ dependencies:
   shared_preferences: ^2.0.15
   simple_animations: ^4.2.0
   gender_picker: ^1.1.0
+  flutter_svg: ^0.22.0
 
   # template
   
@@ -110,6 +111,8 @@ flutter:
    - assets/img/chat-avatar.jpeg
    - assets/img/argon-logo.png
    - assets/img/argon-logo-onboarding.png
+   - assets/image/Image Banner 2.png
+   - assets/image/Image Banner 3.png
 
   fonts:
     - family: OpenSans
