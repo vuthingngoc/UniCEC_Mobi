@@ -12,7 +12,7 @@ class WelcomeText extends StatelessWidget {
       padding: EdgeInsets.all(Dimens.size10),
       child: Column(
         children: [
-          Text('Welcome,\n${GetIt.I.get<CurrentUser>().fullname}',
+          Text('Xin chào, ${GetIt.I.get<CurrentUser>().fullname}',
               style: TextStyle(
                   fontSize: Dimens.size25,
                   color: Colors.black.withOpacity(Dimens.size0p7),
