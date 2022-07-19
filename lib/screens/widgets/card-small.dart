@@ -62,7 +62,7 @@ class CardSmall extends StatelessWidget {
                                   style: TextStyle(
                                       color: ArgonColors.warning,
                                       fontSize: 13)),
-                              SizedBox(width: getProportionateScreenWidth(20)),
+                              SizedBox(width: getProportionateScreenWidth(30)),
                               Text(date,
                                   style: TextStyle(
                                       color: ArgonColors.secondary,
