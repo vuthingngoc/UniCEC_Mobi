@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import '../../constants/theme.dart';
+import '../size_config.dart';
 
 class CardSmall extends StatelessWidget {
   CardSmall(
       {this.title = "Placeholder Title",
       this.cta = "",
+      this.date = "",
+      this.type = "",
       this.img = "https://via.placeholder.com/200",
       this.tap = defaultFunc});
 
@@ -12,6 +15,8 @@ class CardSmall extends StatelessWidget {
   final String img;
   VoidCallback tap;
   final String title;
+  final String date;
+  final String type;
 
   static void defaultFunc() {
     print("the function works!");
@@ -21,7 +26,7 @@ class CardSmall extends StatelessWidget {
   Widget build(BuildContext context) {
     return Flexible(
         child: Container(
-      height: 235,
+      height: 270,
       child: GestureDetector(
         onTap: tap,
         child: Card(
@@ -51,6 +56,20 @@ class CardSmall extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Row(
+                            children: [
+                              Text("@" + type,
+                                  style: TextStyle(
+                                      color: ArgonColors.warning,
+                                      fontSize: 13)),
+                              SizedBox(width: getProportionateScreenWidth(30)),
+                              Text(date,
+                                  style: TextStyle(
+                                      color: ArgonColors.secondary,
+                                      fontSize: 13,
+                                      backgroundColor: Colors.red)),
+                            ],
+                          ),
                           Text(title,
                               style: TextStyle(
                                   color: ArgonColors.header, fontSize: 13)),
