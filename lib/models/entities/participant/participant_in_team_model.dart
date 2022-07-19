@@ -12,10 +12,10 @@ class ParticipantInTeamModel{
   });
 
   factory ParticipantInTeamModel.fromJson(Map<String, dynamic> json){
-    int id = json['id'];
-    int teamId = json['team_id'];
-    int participantId = json['participant_id'];
-    int competitionId = json['competition_id'];
+    int id = json['id'] ?? 0;
+    int teamId = json['team_id'] ?? 0;
+    int participantId = json['participant_id'] ?? 0;
+    int competitionId = json['competition_id'] ?? 0;
 
     return ParticipantInTeamModel(
       id: id, 
