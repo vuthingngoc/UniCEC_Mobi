@@ -25,16 +25,16 @@ class MemberModel {
       required this.isOnline});
 
   factory MemberModel.fromJson(Map<String, dynamic> json) {
-    int id = json['id'];
-    String name = json['name'];
-    String studentCode = json['student_code'];
-    int clubRoleId = json['club_role_id'];
-    String clubRoleName = json['club_role_name'];
-    String avatar = json['avatar'];
+    int id = json['id'] ?? '' ;
+    String name = json['name'] ?? '';
+    String studentCode = json['student_code'] ?? '';
+    int clubRoleId = json['club_role_id'] ?? '';
+    String clubRoleName = json['club_role_name'] ?? '';
+    String avatar = json['avatar'] ?? '';
     DateTime startTime = DateTime.parse(json['start_time']);
     DateTime? endTime = DateTime.parse(json['end_time']);
-    MemberStatus status = json['status'];
-    bool isOnline = json['is_online'];
+    MemberStatus status = MemberStatus.values[json['status']];
+    bool isOnline = json['is_online'] ?? false;
 
     return MemberModel(
       id: id, 

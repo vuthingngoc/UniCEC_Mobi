@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:simple_animations/multi_tween/multi_tween.dart';
 import 'package:simple_animations/simple_animations.dart';
 
 import '../models/enums/enums.dart';

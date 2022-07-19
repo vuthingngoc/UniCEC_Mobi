@@ -17,6 +17,8 @@ class CompetitionDetailModel {
   double seedsDeposited;
   int numberOfParticipation;
   int? numberOfTeam;
+  int maxNumber;
+  int minNumber;
   DateTime createTime;
   DateTime startTimeRegister;
   DateTime endTimeRegister;
@@ -45,6 +47,8 @@ class CompetitionDetailModel {
       required this.seedsDeposited,
       required this.numberOfParticipation,
       this.numberOfTeam,
+      required this.maxNumber,
+      required this.minNumber,
       required this.createTime,
       required this.startTimeRegister,
       required this.endTimeRegister,
@@ -73,6 +77,8 @@ class CompetitionDetailModel {
     double seedsDeposited = json['seeds_deposited'];
     int numberOfParticipation = json['number_of_participations'];
     int? numberOfTeam = json['number_of_team'];
+    int maxNumber = json['max_number'];
+    int minNumber = json['min_number'];
     DateTime createTime = DateTime.parse(json['create_time']);
     DateTime startTimeRegister = DateTime.parse(json['start_time_register']);
     DateTime endTimeRegister = DateTime.parse(json['end_time_register']);
@@ -105,6 +111,8 @@ class CompetitionDetailModel {
         seedsDeposited: seedsDeposited,
         numberOfParticipation: numberOfParticipation,
         numberOfTeam: numberOfTeam,
+        maxNumber: maxNumber,
+        minNumber: minNumber,
         createTime: createTime,
         startTimeRegister: startTimeRegister,
         endTimeRegister: endTimeRegister,
@@ -112,14 +120,13 @@ class CompetitionDetailModel {
         endTime: endTime,
         addressName: addressName,
         content: content,
-        address: address,        
+        address: address,
         isSponsor: isSponsor,
         scope: scope,
         status: status,
         view: view,
         clubsInCompetition: competitionInClub,
         majorsInCompetition: competitionInDepartment,
-        competitionEntities: competitionEntities
-    );
+        competitionEntities: competitionEntities);
   }
 }

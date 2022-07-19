@@ -33,17 +33,16 @@ class _ProfilePageState extends State<ProfilePage>
   void initState() {
     // TODO: implement initState
     super.initState();
-    _bloc.listenerStream.listen((event) {
-      _bloc.add(LoadProfileEvent());
-    });
+    _bloc.listenerStream.listen((event) {});
+    _bloc.add(LoadProfileEvent());
   }
 
   @override
   Widget build(BuildContext context) {
-    CurrentUser user = GetIt.I.get<CurrentUser>();
     return BlocBuilder<ProfileBloc, ProfileState>(
         bloc: _bloc,
         builder: (context, state) {
+          print('user: ${state.user.avatar}');
           return Scaffold(
               extendBodyBehindAppBar: true,
               appBar: NavbarProfile(
@@ -96,164 +95,8 @@ class _ProfilePageState extends State<ProfilePage>
                                         Expanded(
                                           child: Column(
                                             children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      color: ArgonColors.info,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              3.0),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.grey
-                                                              .withOpacity(0.3),
-                                                          spreadRadius: 1,
-                                                          blurRadius: 7,
-                                                          offset: Offset(0,
-                                                              3), // changes position of shadow
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    child: Text(
-                                                      "CONNECT",
-                                                      style: TextStyle(
-                                                          color:
-                                                              ArgonColors.white,
-                                                          fontSize: 12.0,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 8.0,
-                                                            vertical: 8.0),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 30.0,
-                                                  ),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      color:
-                                                          ArgonColors.initial,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              3.0),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.grey
-                                                              .withOpacity(0.3),
-                                                          spreadRadius: 1,
-                                                          blurRadius: 7,
-                                                          offset: Offset(0,
-                                                              3), // changes position of shadow
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    child: Text(
-                                                      "MESSAGE",
-                                                      style: TextStyle(
-                                                          color:
-                                                              ArgonColors.white,
-                                                          fontSize: 12.0,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 8.0,
-                                                            vertical: 8.0),
-                                                  )
-                                                ],
-                                              ),
-                                              SizedBox(height: 40.0),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                children: [
-                                                  Column(
-                                                    children: [
-                                                      Text("2K",
-                                                          style: TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      82,
-                                                                      95,
-                                                                      127,
-                                                                      1),
-                                                              fontSize: 20.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold)),
-                                                      Text("Orders",
-                                                          style: TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      50,
-                                                                      50,
-                                                                      93,
-                                                                      1),
-                                                              fontSize: 12.0))
-                                                    ],
-                                                  ),
-                                                  Column(
-                                                    children: [
-                                                      Text("10",
-                                                          style: TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      82,
-                                                                      95,
-                                                                      127,
-                                                                      1),
-                                                              fontSize: 20.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold)),
-                                                      Text("Photos",
-                                                          style: TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      50,
-                                                                      50,
-                                                                      93,
-                                                                      1),
-                                                              fontSize: 12.0))
-                                                    ],
-                                                  ),
-                                                  Column(
-                                                    children: [
-                                                      Text("89",
-                                                          style: TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      82,
-                                                                      95,
-                                                                      127,
-                                                                      1),
-                                                              fontSize: 20.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold)),
-                                                      Text("Comments",
-                                                          style: TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      50,
-                                                                      50,
-                                                                      93,
-                                                                      1),
-                                                              fontSize: 12.0))
-                                                    ],
-                                                  )
-                                                ],
-                                              ),
-                                              SizedBox(height: 40.0),
                                               Align(
-                                                child: Text("${user.fullname} Jessica Jones, 27",
+                                                child: Text("${state.user.fullname}",
                                                     style: TextStyle(
                                                         color: Color.fromRGBO(
                                                             50, 50, 93, 1),
@@ -262,7 +105,7 @@ class _ProfilePageState extends State<ProfilePage>
                                               SizedBox(height: 10.0),
                                               Align(
                                                 child: Text(
-                                                    "San Francisco, USA",
+                                                    "${state.user.studentCode}",
                                                     style: TextStyle(
                                                         color: Color.fromRGBO(
                                                             50, 50, 93, 1),
@@ -281,7 +124,8 @@ class _ProfilePageState extends State<ProfilePage>
                                                     left: 32.0, right: 32.0),
                                                 child: Align(
                                                   child: Text(
-                                                      "An artist of considerable range, Jessica name taken by Melbourne...",
+                                                      "${state.user.description}",
+                                                      // "An artist of considerable range, Jessica name taken by Melbourne...",
                                                       textAlign:
                                                           TextAlign.center,
                                                       style: TextStyle(
@@ -431,8 +275,8 @@ class _ProfilePageState extends State<ProfilePage>
                                 translation: Offset(0.0, -0.5),
                                 child: Align(
                                   child: CircleAvatar(
-                                    backgroundImage: AssetImage(
-                                        "assets/img/profile-screen-avatar.jpg"),
+                                    backgroundImage: NetworkImage(//AssetImage(
+                                        "${state.user.avatar}"),//"assets/img/profile-screen-avatar.jpg"),
                                     radius: 65.0,
                                     // maxRadius: 200.0,
                                   ),

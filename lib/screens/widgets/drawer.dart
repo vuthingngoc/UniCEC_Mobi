@@ -68,7 +68,7 @@ class ArgonDrawer extends StatelessWidget {
                     }
                   },
                   iconColor: ArgonColors.warning,
-                  title: "Câu Lạc Bộ (not yet)",
+                  title: "Câu Lạc Bộ (doing)",
                   isSelected: currentPage == "Club" ? true : false),
 
               //Competition Activity

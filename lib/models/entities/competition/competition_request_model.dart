@@ -6,8 +6,9 @@ import '../../enums/competition_status.dart';
 class CompetitionRequestModel extends PagingRequest{
   int? clubId;
   bool? event;
+  String? name;
   CompetitionScopeStatus? scope;
   List<CompetitionStatus>? statuses;
 
-  CompetitionRequestModel({this.clubId, this.event, this.scope, this.statuses});
+  CompetitionRequestModel({this.clubId, this.event, this.name, this.scope, this.statuses});
 }

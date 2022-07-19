@@ -16,12 +16,12 @@ class MemberTakesActivityModel{
   });
 
   factory MemberTakesActivityModel.fromJson(Map<String, dynamic> json){
-    int id = json['id'];
-    int competitionActivityId = json['competition_activity_id'];
-    int memberId = json['member_id'];
-    String memberName = json['member_name'];
-    int bookerId = json['booker_id'];
-    String bookerName = json['booker_name'];
+    int id = json['id'] ?? 0;
+    int competitionActivityId = json['competition_activity_id'] ?? 0;
+    int memberId = json['member_id'] ?? 0;
+    String memberName = json['member_name'] ?? '';
+    int bookerId = json['booker_id'] ?? 0;
+    String bookerName = json['booker_name'] ?? '';
 
     return MemberTakesActivityModel(
       id: id, 

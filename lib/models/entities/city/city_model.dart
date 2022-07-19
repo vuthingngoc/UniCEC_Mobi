@@ -7,10 +7,10 @@ class CityModel {
   CityModel({required this.id, required this.name, required this.description, required this.status});
 
   factory CityModel.fromJson(Map<String, dynamic> json){
-    int id = json['id'];
-    String name = json['name'];
-    String description = json['description'];
-    bool  status = json['status'];
+    int id = json['id'] ?? 0;
+    String name = json['name'] ?? '';
+    String description = json['description'] ?? '';
+    bool  status = json['status'] ?? false;
 
     return CityModel(
       id: id,

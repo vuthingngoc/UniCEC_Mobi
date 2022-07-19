@@ -17,13 +17,13 @@ class DepartmentModel {
       required this.status});
 
   factory DepartmentModel.fromJson(Map<String, dynamic> json) {
-    int id = json['id'];
-    int universityId = json['university_id'];
-    int majorId = json['major_id'];
-    String departmentCode = json['department_code'];
-    String name = json['name'];
-    String description = json['description'];
-    bool status = json['status'];
+    int id = json['id'] ?? 0;
+    int universityId = json['university_id'] ?? 0;
+    int majorId = json['major_id'] ?? 0;
+    String departmentCode = json['department_code'] ?? '';
+    String name = json['name'] ?? '';
+    String description = json['description'] ?? '';
+    bool status = json['status'] ?? false;
 
     return DepartmentModel(
         id: id,

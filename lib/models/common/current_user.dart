@@ -1,3 +1,5 @@
+import 'package:unicec_mobi/screens/size_config.dart';
+
 import '../entities/club/club_model.dart';
 
 class CurrentUser {
@@ -11,15 +13,16 @@ class CurrentUser {
   List<ClubModel>? clubsBelongToStudent;
   int? clubIdSelected;
 
-  CurrentUser(
-      {required this.id,
-      this.universityId,
-      required this.idToken,
-      required this.email,
-      required this.fullname,
-      this.avatar,
-      this.clubsBelongToStudent,
-      this.clubIdSelected});
+  CurrentUser({
+    required this.id,
+    this.universityId,
+    required this.idToken,
+    required this.email,
+    required this.fullname,
+    this.avatar,
+    this.clubsBelongToStudent,
+    this.clubIdSelected,
+  });
 
   CurrentUser get currentUser => CurrentUser(
       id: id,
@@ -39,6 +42,6 @@ class CurrentUser {
     fullname = "";
     avatar = "";
     clubsBelongToStudent = [];
-    clubIdSelected = 0;
+    clubIdSelected = null;
   }
 }

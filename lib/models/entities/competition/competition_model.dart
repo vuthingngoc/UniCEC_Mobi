@@ -38,36 +38,45 @@ class CompetitionModel {
       required this.competitionEntities});
 
   factory CompetitionModel.fromJson(Map<String, dynamic> json) {
-    int id = json['id'];
-    int universityId = json['university_id'];
-    String name = json['name'];
-    int competitionTypeId = json['competition_type_id'];
-    String competitionTypeName = json['competition_type_name'];
-    DateTime createTime = json['create_time'];
+    int id = json['id'] ?? 0;
+    int universityId = json['university_id'] ?? 0;
+    String name = json['name'] ?? '';
+    int competitionTypeId = json['competition_type_id'] ?? 0;
+    String competitionTypeName = json['competition_type_name'] ?? '';
+    DateTime createTime = DateTime.parse(json['create_time']);
     DateTime startTime = DateTime.parse(json['start_time']);
-    bool isSponsor = json['is_sponsor'];
-    CompetitionScopeStatus scope = json['scope'];
-    CompetitionStatus status = CompetitionStatus.values[int.parse(json['status'].toString())];
-    int view = json['view'];
-    List<CompetitionInClubsModel> competitionInClub = json['clubs_in_competition'];
-    List<CompetitionInMajorsModel> competitionInDepartment = json['majors_in_competition'];
-    List<CompetitionEntityModel> competitionEntities = json['competition_entities'];
+    bool isSponsor = json['is_sponsor'] ?? false;
+    CompetitionScopeStatus scope = CompetitionScopeStatus.values[json['scope']];
+    CompetitionStatus status =
+        CompetitionStatus.values[int.parse(json['status'].toString())];
+    int view = json['view'] ?? 0;
+    List<CompetitionInClubsModel> competitionInClub = [];
+    json['clubs_in_competition']?.forEach((v) {
+      competitionInClub.add(CompetitionInClubsModel.fromJson(v));
+    });
 
+    List<CompetitionInMajorsModel> competitionInDepartment = [];
+    json['majors_in_competition']?.forEach((v) {
+      competitionInDepartment.add(CompetitionInMajorsModel.fromJson(v));
+    });
+    List<CompetitionEntityModel> competitionEntities = [];
+    json['competition_entities']?.forEach((v) {
+      competitionEntities.add(CompetitionEntityModel.fromJson(v));
+    });
     return CompetitionModel(
-      id: id, 
-      universityId: universityId, 
-      name: name, 
-      competitionTypeId: competitionTypeId,
-      competitionTypeName: competitionTypeName,
-      createTime: createTime, 
-      startTime: startTime, 
-      isSponsor: isSponsor, 
-      scope: scope, 
-      status: status, 
-      view: view, 
-      clubsInCompetition: competitionInClub, 
-      majorsInCompetition: competitionInDepartment, 
-      competitionEntities: competitionEntities
-    );
+        id: id,
+        universityId: universityId,
+        name: name,
+        competitionTypeId: competitionTypeId,
+        competitionTypeName: competitionTypeName,
+        createTime: createTime,
+        startTime: startTime,
+        isSponsor: isSponsor,
+        scope: scope,
+        status: status,
+        view: view,
+        clubsInCompetition: competitionInClub,
+        majorsInCompetition: competitionInDepartment,
+        competitionEntities: competitionEntities);
   }
 }
