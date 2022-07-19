@@ -107,7 +107,7 @@ class Home extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 5.0),
                   child: CardHorizontal(
-                      cta: "View article",
+                      cta: "Xem thêm",
                       title: homeCards["Ice Cream"]!['title'],
                       img: homeCards["Ice Cream"]!['image'],
                       type: homeCards["Ice Cream"]!['type'],
@@ -121,16 +121,20 @@ class Home extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CardSmall(
-                        cta: "View article",
+                        cta: "Xem thêm",
                         title: homeCards["Makeup"]!['title'],
                         img: homeCards["Makeup"]!['image'],
+                        type: homeCards["Makeup"]!['type'],
+                        date: homeCards["Makeup"]!['date'],
                         tap: () {
                           Navigator.pushNamed(context, '/pro');
                         }),
                     CardSmall(
-                        cta: "View article",
+                        cta: "Xem thêm",
                         title: homeCards["Coffee"]!['title'],
                         img: homeCards["Coffee"]!['image'],
+                        type: homeCards["Coffee"]!['type'],
+                        date: homeCards["Coffee"]!['date'],
                         tap: () {
                           Navigator.pushNamed(context, '/pro');
                         })
@@ -138,7 +142,7 @@ class Home extends StatelessWidget {
                 ),
                 SizedBox(height: 8.0),
                 CardHorizontal(
-                    cta: "View article",
+                    cta: "Xem thêm",
                     title: homeCards["Fashion"]!['title'],
                     img: homeCards["Fashion"]!['image'],
                     type: homeCards["Fashion"]!['type'],
@@ -150,7 +154,7 @@ class Home extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 32.0),
                   child: CardSquare(
-                      cta: "View article",
+                      cta: "Xem thêm",
                       title: homeCards["Argon"]!['title'],
                       img: homeCards["Argon"]!['image'],
                       tap: () {

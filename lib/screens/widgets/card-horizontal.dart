@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../constants/theme.dart';
+import '../size_config.dart';
 
 class CardHorizontal extends StatelessWidget {
   CardHorizontal(
@@ -49,17 +50,17 @@ class CardHorizontal extends StatelessWidget {
                 Flexible(
                     flex: 1,
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             children: [
-                              Text(type,
+                              Text("@" + type,
                                   style: TextStyle(
-                                      color: ArgonColors.label, fontSize: 13)),
-
+                                      color: ArgonColors.warning, fontSize: 13)),
+                              SizedBox(width: getProportionateScreenWidth(20)),
                               Text(date,
                                   style: TextStyle(
                                       color: ArgonColors.secondary, fontSize: 13, backgroundColor: Colors.red)),
