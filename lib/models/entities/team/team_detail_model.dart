@@ -21,13 +21,18 @@ class TeamDetailModel{
   });
 
   factory TeamDetailModel.fromJson(Map<String, dynamic> json){
-    int id = json['team_id'];
-    int competitionId = json['competition_id'];
-    String name = json['name'];
-    String description = json['description'];
-    String invitedCode = json['invited_code'];
-    TeamStatus status = json['status'];
-    List<ParticipantModel> participants = json['list_participant'];
+    int id = json['team_id'] ?? 0;
+    int competitionId = json['competition_id'] ?? 0;
+    String name = json['name'] ?? '';
+    String description = json['description'] ?? '';
+    String invitedCode = json['invited_code'] ?? '';
+    TeamStatus status = TeamStatus.values[json['status']];
+    List<ParticipantModel> participants = [];
+    if(json['list_participant']){
+      json['list_participant']?.forEach((v) {
+        participants.add(ParticipantModel.fromJson(v));
+      });
+    }
 
     return TeamDetailModel(
       id: id, 
