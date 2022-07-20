@@ -57,7 +57,8 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-        appBar: NavbarHome(
+        appBar:
+        NavbarHome(
           title: "Cuộc Thi và Sự Kiện",
           searchBar: true,
           categoryOne: "Liên Trường",
