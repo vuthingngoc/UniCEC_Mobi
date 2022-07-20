@@ -5,6 +5,7 @@ import '../entities/club/club_model.dart';
 class CurrentUser {
   int id;
   int? universityId;
+  String? universityName;
   String idToken;
   String email;
   String fullname;
@@ -16,6 +17,7 @@ class CurrentUser {
   CurrentUser({
     required this.id,
     this.universityId,
+    this.universityName,
     required this.idToken,
     required this.email,
     required this.fullname,
@@ -27,6 +29,7 @@ class CurrentUser {
   CurrentUser get currentUser => CurrentUser(
       id: id,
       universityId: universityId,
+      universityName: universityName,
       idToken: idToken,
       email: email,
       fullname: fullname,
@@ -37,6 +40,7 @@ class CurrentUser {
   void reset() {
     id = 0;
     universityId = 0;
+    universityName = '';
     idToken = "";
     email = "";
     fullname = "";

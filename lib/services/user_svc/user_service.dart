@@ -1,5 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/models/common/current_user.dart';
+import 'package:unicec_mobi/models/entities/department/department_model.dart';
+import 'package:unicec_mobi/models/entities/university/university_model.dart';
 import 'package:unicec_mobi/models/entities/user/user_model.dart';
 import 'package:unicec_mobi/services/user_svc/i_user_service.dart';
 import 'package:http/http.dart' as http;
@@ -32,4 +34,41 @@ class UserService implements IUserService{
     return null;
   }
 
+  @override
+  Future<UniversityModel?> GetUniById(int universityId) async {
+    var client = http.Client();
+    String url = Api.GetUrl(apiPath: '${Api.universities}/$universityId');
+    String token = GetIt.I.get<CurrentUser>().idToken;
+
+    try{
+      var response = await client.get(Uri.parse(url), headers: Api.GetHeader(token));
+      if(response.statusCode == 200){
+        Map<String, dynamic> json = adapter.parseToMap(response);
+        return UniversityModel.fromJson(json);
+      }
+    }catch(e){
+      Log.error(e.toString());
+    }
+    
+    return null;
+  }
+
+  @override
+  Future<DepartmentModel?> GetDepartmentById(int departmentId) async {
+    var client = http.Client();
+    String url = Api.GetUrl(apiPath: '${Api.departments}/$departmentId');
+    String token = GetIt.I.get<CurrentUser>().idToken;
+
+    try{
+      var response = await client.get(Uri.parse(url), headers: Api.GetHeader(token));
+      if(response.statusCode == 200){
+        Map<String, dynamic> json = adapter.parseToMap(response);
+        return DepartmentModel.fromJson(json);
+      }
+    }catch(e){
+      Log.error(e.toString());
+    }
+    
+    return null;
+  }
 }

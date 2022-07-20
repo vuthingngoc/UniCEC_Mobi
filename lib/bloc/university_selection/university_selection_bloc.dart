@@ -24,7 +24,7 @@ class UniversitySelectionBloc
             dob: '')) {
     on((event, emit) async {
       //Recieve data
-      if (event is RecieveData) {
+      if (event is ReceiveData) {
         //auto get Department theo event.newValue
         List<DepartmentModel>? GetListDepartmentByUni =
             await service.getDepartmentByUni(event.listUniBelongToEmail[0].id);
@@ -161,7 +161,7 @@ class UniversitySelectionBloc
 
       //hàm update
       //Select University
-      if (event is CompeletelyProfile) {
+      if (event is CompletelyProfile) {
         bool check = await service.completeProfile(event.completeProfileModel);
         if (check) {
           listener.add(NavigatorWelcomePageEvent());
