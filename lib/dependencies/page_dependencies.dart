@@ -33,6 +33,10 @@ class PageDependencies {
     injector.registerFactory<Widget>(() => ClubPage(bloc: injector()),
         instanceName: Routes.club);
 
+    //Clubs View
+    injector.registerFactory<Widget>(() => ClubsViewPage(bloc: injector()),
+        instanceName: Routes.clubsView);
+
     //Task Page -> show Tasks
     injector.registerFactory<Widget>(() => TaskPage(),
         instanceName: Routes.task);

@@ -7,11 +7,11 @@ class ClubDescription extends StatefulWidget {
   const ClubDescription({
     Key? key,
     required this.club,
-    this.pressOnSeeMore,
+    //this.pressOnSeeMore,
   }) : super(key: key);
 
   final ClubModel? club;
-  final GestureTapCallback? pressOnSeeMore;
+  //final GestureTapCallback? pressOnSeeMore;
 
   @override
   State<ClubDescription> createState() => _ClubDescriptionState();
@@ -24,6 +24,26 @@ class _ClubDescriptionState extends State<ClubDescription> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: getProportionateScreenWidth(20),
+            vertical: 10,
+          ),
+          child: GestureDetector(
+            onTap: () {},
+            child: Row(
+              children: [
+                Text(
+                  "Thông Tin Câu Lạc Bộ",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: kPrimaryColor,
+                      fontSize: 20),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: getProportionateScreenWidth(20)),
             child: (widget.club?.name == null)
@@ -33,7 +53,7 @@ class _ClubDescriptionState extends State<ClubDescription> {
                   )
                 : Text(
                     widget.club!.name,
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.headline5,
                   )),
         // Align(
         //   alignment: Alignment.centerRight,
@@ -71,30 +91,30 @@ class _ClubDescriptionState extends State<ClubDescription> {
                   maxLines: 10,
                 ),
         ),
-        Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(20),
-            vertical: 10,
-          ),
-          child: GestureDetector(
-            onTap: () {},
-            child: Row(
-              children: [
-                Text(
-                  "See More Detail",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600, color: kPrimaryColor),
-                ),
-                SizedBox(width: 5),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  size: 12,
-                  color: kPrimaryColor,
-                ),
-              ],
-            ),
-          ),
-        ),
+        // Padding(
+        //   padding: EdgeInsets.symmetric(
+        //     horizontal: getProportionateScreenWidth(20),
+        //     vertical: 10,
+        //   ),
+        //   child: GestureDetector(
+        //     onTap: () {},
+        //     child: Row(
+        //       children: [
+        //         Text(
+        //           "See More Detail",
+        //           style: TextStyle(
+        //               fontWeight: FontWeight.w600, color: kPrimaryColor),
+        //         ),
+        //         SizedBox(width: 5),
+        //         Icon(
+        //           Icons.arrow_forward_ios,
+        //           size: 12,
+        //           color: kPrimaryColor,
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
         Padding(
           padding: EdgeInsets.symmetric(
             horizontal: getProportionateScreenWidth(20),
@@ -103,7 +123,10 @@ class _ClubDescriptionState extends State<ClubDescription> {
           child: Column(children: [
             Text(
               'Liên Hệ và Hợp Tác với Chúng Tôi',
-              style: Theme.of(context).textTheme.headline6,
+              style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: kPrimaryColor,
+                  fontSize: 20),
             ),
             SizedBox(height: 10),
             Row(

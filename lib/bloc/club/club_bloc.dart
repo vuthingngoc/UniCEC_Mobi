@@ -11,7 +11,7 @@ class ClubBloc extends BaseBloc<ClubEvent, ClubState> {
 
   ClubBloc({required this.service}) : super(ClubState(ClubSelected: null)) {
     on((event, emit) async {
-      if (event is ClubEvent) {
+      if (event is ClubInitEvent) {
         CurrentUser user = GetIt.I.get<CurrentUser>();
         //
         //print('vừa vào trang club nếu có club phải qua trang chọn club cho t');
@@ -24,18 +24,30 @@ class ClubBloc extends BaseBloc<ClubEvent, ClubState> {
                 await service.getClubSelected(user.clubIdSelected);
             //load cuộc thi của club selected
             if (result == null) {
-              listener.add(
-                  ShowingSnackBarEvent(message: "Load Club Selected Failed"));
+              listener.add(ShowingSnackBarEvent(
+                  message: "Chưa Load được club do User chưa chọn"));
             } else {
               emit(state.copyWith(ClubSelected: result));
             }
           } else {
-            listener.add(NavigatorClubSelectionPage());
+            listener.add(NavigatorClubSelectionPageEvent());
           }
-        } else {
-          listener.add(NavigatorClubsViewPage());
         }
-        //
+        // } else {
+        //   listener.add(NavigatorClubsViewPageEvent());
+        // }
+      }
+      //
+      if (event is ChooseAnotherClubEvent) {
+        listener.add(NavigatorClubSelectionPageEvent());
+      }
+      //
+      if (event is ClubSelectionEvent) {
+        listener.add(NavigatorClubSelectionPageEvent());
+      }
+      //
+      if (event is ClubsViewEvent) {
+        listener.add(NavigatorClubsViewPageEvent());
       }
     });
   }

@@ -24,7 +24,7 @@ class _ClubImagesState extends State<ClubImages> {
     return Column(
       children: [
         SizedBox(
-          width: getProportionateScreenWidth(238),
+          width: getProportionateScreenWidth(150), //238
           child: AspectRatio(
             aspectRatio: 1,
             child: Hero(
@@ -37,12 +37,12 @@ class _ClubImagesState extends State<ClubImages> {
           ),
         ),
         // SizedBox(height: getProportionateScreenWidth(20)),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ...List.generate(5, (index) => buildSmallImagePreview(index)),
-          ],
-        )
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: [
+        //     ...List.generate(5, (index) => buildSmallImagePreview(index)),
+        //   ],
+        // )
       ],
     );
   }

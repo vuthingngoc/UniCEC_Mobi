@@ -15,6 +15,8 @@ class ClubModel {
   int memberIncreaseThisMonth;
   DateTime founding;
   bool status;
+  //đánh dấu show UI
+  bool isMember;
 
   ClubModel(
       {required this.id,
@@ -30,7 +32,8 @@ class ClubModel {
       required this.totalMember,
       required this.memberIncreaseThisMonth,
       required this.founding,
-      required this.status});
+      required this.status,
+      required this.isMember});
 
   factory ClubModel.fromJson(Map<String, dynamic> json) {
     int id = json['id'];
@@ -67,6 +70,7 @@ class ClubModel {
         totalMember: totalMember,
         memberIncreaseThisMonth: memberIncreaseThisMonth,
         founding: founding,
-        status: status);
+        status: status,
+        isMember: false);
   }
 }

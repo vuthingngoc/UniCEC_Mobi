@@ -1,7 +1,18 @@
 class ClubEvent {}
 
+class ClubInitEvent extends ClubEvent {}
+
+class ChooseAnotherClubEvent extends ClubEvent {}
+
+class ClubSelectionEvent extends ClubEvent {}
+
+class ClubsViewEvent extends ClubEvent {}
+
 //Navigator to Club Selection page
-class NavigatorClubSelectionPage extends ClubEvent {}
+class NavigatorClubSelectionPageEvent extends ClubEvent {}
+
+//Navigator to Clubs View page
+class NavigatorClubsViewPageEvent extends ClubEvent {}
 
 class ShowingSnackBarEvent extends ClubEvent {
   final String message;

@@ -5,4 +5,8 @@ class ChooseClubSelectionEvent extends ClubSelectionEvent {
   ChooseClubSelectionEvent({required this.clubIdSelected});
 }
 
+class ClubsViewPageEvent extends ClubSelectionEvent {}
+
 class NavigatorClubPageEvent extends ClubSelectionEvent {}
+
+class NavigatorClubsViewPageEvent extends ClubSelectionEvent {}
