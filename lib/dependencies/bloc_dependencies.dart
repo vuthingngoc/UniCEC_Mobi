@@ -41,13 +41,10 @@ class BlocDependencies {
 
     injector.registerFactory<SeedsWalletBloc>(
         () => SeedsWalletBloc(service: injector()));
-<<<<<<< Updated upstream
     //import Club View Bloc
     injector.registerFactory<ClubsViewBloc>(
         () => ClubsViewBloc(service: injector()));
-=======
 
     injector.registerFactory<HomeBloc>(() => HomeBloc(service: injector()));
->>>>>>> Stashed changes
   }
 }
