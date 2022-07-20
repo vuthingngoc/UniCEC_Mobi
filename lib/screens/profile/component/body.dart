@@ -19,22 +19,22 @@ class Body extends StatelessWidget {
           ),
           ProfileMenu(
             text: "Notifications",
-            icon: "assets/icons/icon-user.svg",
+            icon: "assets/icons/Bell.svg",
             press: () {},
           ),
           ProfileMenu(
             text: "Settings",
-            icon: "assets/icons/icon-user.svg",
+            icon: "assets/icons/Settings.svg",
             press: () {},
           ),
           ProfileMenu(
             text: "Help Center",
-            icon: "assets/icons/icon-user.svg",
+            icon: "assets/icons/Question mark.svg",
             press: () {},
           ),
           ProfileMenu(
             text: "Log Out",
-            icon: "assets/icons/icon-user.svg",
+            icon: "assets/icons/Log out.svg",
             press: () {},
           ),
         ],
