@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../constants/theme.dart';
 
 //widgets
-import 'profile/widgets/navbar_profile.dart';
 import 'widgets/drawer.dart';
 import 'widgets/input.dart';
 import 'widgets/table-cell.dart';

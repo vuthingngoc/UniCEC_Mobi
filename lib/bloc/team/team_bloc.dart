@@ -17,6 +17,10 @@ class TeamBloc extends BaseBloc<TeamEvent, TeamState> {
                 description: '',
                 invitedCode: '',
                 status: TeamStatus.Available))){
-                  
+                  on((event, emit) => {
+                    if(event is LoadTeamEvent){
+                      
+                    }
+                  });
                 }
 }
