@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 //widgets
 import '../../constants/theme.dart';
 import '../widgets/drawer.dart';
-import '../profile/widgets/navbar_profile.dart';
 import '../widgets/card-horizontal.dart';
 import '../widgets/card-small.dart';
 import '../widgets/card-square.dart';

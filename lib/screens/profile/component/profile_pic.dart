@@ -16,14 +16,14 @@ class ProfilePic extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           CircleAvatar(
-            backgroundImage: AssetImage("assets/images/Profile Image.png"),
+            backgroundImage: AssetImage("assets/img/profile-screen-bg.png"),
           ),
           Positioned(
-            right: -16,
+            // right: -16,
             bottom: 0,
             child: SizedBox(
-              height: 46,
-              width: 46,
+              height: 26,
+              width: 26,
               child: TextButton(
                 style: TextButton.styleFrom(
                   shape: RoundedRectangleBorder(
@@ -34,7 +34,7 @@ class ProfilePic extends StatelessWidget {
                   backgroundColor: Color(0xFFF5F6F9),
                 ),
                 onPressed: () {},
-                child: SvgPicture.asset("assets/icons/Camera Icon.svg"),
+                child: SvgPicture.asset("assets/icons/icon-user.svg"),
               ),
             ),
           )
