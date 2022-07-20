@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ProfilePic extends StatelessWidget {
-  const ProfilePic({
+  String avatar;
+  ProfilePic({
+    required this.avatar,
     Key? key,
   }) : super(key: key);
 
@@ -16,27 +18,7 @@ class ProfilePic extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           CircleAvatar(
-            backgroundImage: AssetImage("assets/img/profile-screen-bg.png"),
-          ),
-          Positioned(
-            // right: -16,
-            bottom: 0,
-            child: SizedBox(
-              height: 26,
-              width: 26,
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50),
-                    side: BorderSide(color: Colors.white),
-                  ),
-                  primary: Colors.white,
-                  backgroundColor: Color(0xFFF5F6F9),
-                ),
-                onPressed: () {},
-                child: SvgPicture.asset("assets/icons/icon-user.svg"),
-              ),
-            ),
+            backgroundImage: NetworkImage(avatar),//"assets/img/profile-screen-bg.png"),
           )
         ],
       ),

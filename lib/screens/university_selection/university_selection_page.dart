@@ -55,7 +55,7 @@ class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
 
       if (listUniBelongToEmail != null) {
         //thêm sự kiện để cập nhật state
-        bloc.add(RecieveData(listUniBelongToEmail: listUniBelongToEmail));
+        bloc.add(ReceiveData(listUniBelongToEmail: listUniBelongToEmail));
       }
     }
   }
@@ -102,7 +102,7 @@ class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
                               TextfieldInputDescription(),
                               InkWell(
                                 onTap: () {
-                                  bloc.add(CompeletelyProfile(
+                                  bloc.add(CompletelyProfile(
                                       completeProfileModel: CompleteProfile(
                                     universityId: state.universityId,
                                     departmentId: state.departmentId,

@@ -1,21 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:unicec_mobi/utils/firebase.dart';
+import 'package:unicec_mobi/utils/router.dart';
 
+import '../../../bloc/profile/profile_bloc.dart';
+import '../../../bloc/profile/profile_state.dart';
 import 'profile_menu.dart';
 import 'profile_pic.dart';
 
 class Body extends StatelessWidget {
+  ProfileBloc bloc;
+  ProfileState state;
+  Body({Key? key, required this.bloc, required this.state}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(vertical: 20),
       child: Column(
         children: [
-          ProfilePic(),
+          ProfilePic(avatar: state.user.avatar,),
           SizedBox(height: 20),
           ProfileMenu(
             text: "My Account",
             icon: "assets/icons/icon-user.svg",
-            press: () => {},
+            press: () => {Navigator.pushNamed(context, Routes.myAccount)},
           ),
           ProfileMenu(
             text: "Notifications",
@@ -35,7 +43,10 @@ class Body extends StatelessWidget {
           ProfileMenu(
             text: "Log Out",
             icon: "assets/icons/Log out.svg",
-            press: () {},
+            press: () {
+              FirebaseUtils.logout();
+              Navigator.pushReplacementNamed(context, Routes.login);
+            },
           ),
         ],
       ),

@@ -40,9 +40,9 @@ class _ProfilePageState extends State<ProfilePage>
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              title: Text("Profile"),
+              title: Text("Trang cá nhân"),
             ),
-            body: Body(),
+            body: Body(bloc: _bloc, state: state,),
             //bottomNavigationBar: CustomBottomNavBar(selectedMenu: MenuState.profile),
           );
         });
