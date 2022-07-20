@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import '../../bloc/club/club_bloc.dart';
 import '../../bloc/club/club_event.dart';
 import '../../bloc/club/club_state.dart';
 //widgets
 import 'package:unicec_mobi/screens/widgets/drawer.dart';
+import '../../models/common/current_user.dart';
 import '../../utils/router.dart';
 import '../size_config.dart';
 import 'tab_club_info/body_club_info.dart';
+import 'tab_club_info/default_button.dart';
 import 'widgets/navbar_club.dart';
 
 class ClubPage extends StatefulWidget {
@@ -30,11 +33,18 @@ class _ClubPageState extends State<ClubPage> {
   void initState() {
     super.initState();
 
-    _bloc.add(ClubEvent());
+    _bloc.add(ClubInitEvent());
 
     _bloc.listenerStream.listen((event) {
-      if (event is NavigatorClubSelectionPage) {
-        Navigator.of(context).pushReplacementNamed(Routes.clubSelection);
+      if (event is NavigatorClubSelectionPageEvent) {
+        Navigator.of(context).pushNamed(Routes.clubSelection);
+      }
+      if (event is NavigatorClubsViewPageEvent) {
+        Navigator.of(context).pushNamed(Routes.clubsView);
+      }
+      if (event is ShowingSnackBarEvent) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(event.message)));
       }
     });
   }
@@ -47,36 +57,69 @@ class _ClubPageState extends State<ClubPage> {
       child: BlocBuilder<ClubBloc, ClubState>(
         bloc: _bloc,
         builder: (context, state) {
-          return DefaultTabController(
-            initialIndex: 0,
-            length: 2,
-            child: Scaffold(
-              appBar: NavbarClub(transparent: true, title: "Câu Lạc Bộ"),
-              extendBodyBehindAppBar: true,
-              drawer: ArgonDrawer(currentPage: "Club"),
-              body: TabBarView(
-                children: <Widget>[
-                  //tab1
-                  BodyClubInfo(Club: state.ClubSelected),
-                  //tab2
-                  Center(
-                    child: Text("Cuộc Thi và Sự Kiện"),
+          return (GetIt.I.get<CurrentUser>().clubIdSelected != null)
+              ? DefaultTabController(
+                  initialIndex: 0,
+                  length: 2,
+                  child: Scaffold(
+                    appBar: NavbarClub(transparent: true, title: "Câu Lạc Bộ"),
+                    extendBodyBehindAppBar: false,
+                    drawer: ArgonDrawer(currentPage: "Club"),
+                    body: TabBarView(
+                      children: <Widget>[
+                        //tab1
+                        BodyClubInfo(Club: state.ClubSelected),
+                        //tab2
+                        Center(
+                          child: Text("Cuộc Thi và Sự Kiện"),
+                        ),
+                      ],
+                    ),
+                    bottomNavigationBar: const TabBar(
+                      labelColor: Colors.redAccent,
+                      tabs: <Widget>[
+                        Tab(
+                          text: "Thông Tin Câu Lạc Bộ",
+                        ),
+                        Tab(
+                          text: "Cuộc Thi và Sự Kiện Của Câu Lạc Bộ",
+                        )
+                      ],
+                    ),
                   ),
-                ],
-              ),
-              bottomNavigationBar: const TabBar(
-                labelColor: Colors.redAccent,
-                tabs: <Widget>[
-                  Tab(
-                    text: "Thông Tin Câu Lạc Bộ",
-                  ),
-                  Tab(
-                    text: "Cuộc Thi và Sự Kiện Của Câu Lạc Bộ",
-                  )
-                ],
-              ),
-            ),
-          );
+                )
+              : Scaffold(
+                  appBar: NavbarClub(transparent: true, title: "Câu Lạc Bộ"),
+                  extendBodyBehindAppBar: false,
+                  drawer: ArgonDrawer(currentPage: "Club"),
+                  body:
+                      (GetIt.I.get<CurrentUser>().clubsBelongToStudent != null)
+                          ? Center(
+                              child: Column(
+                                children: [
+                                  Text('Bạn chưa chọn Câu Lạc Bộ'),
+                                  DefaultButton(
+                                    text: "Chọn Câu Lạc Bộ ",
+                                    press: () {
+                                      _bloc.add(ClubSelectionEvent());
+                                    },
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Center(
+                              child: Column(
+                                children: [
+                                  Text('Bạn chưa có Câu Lạc Bộ'),
+                                  DefaultButton(
+                                    text: "Tham Gia Câu Lạc Bộ ",
+                                    press: () {
+                                      _bloc.add(ClubsViewEvent());
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ));
         },
       ),
     );

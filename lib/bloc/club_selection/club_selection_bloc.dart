@@ -20,6 +20,9 @@ class ClubSelectionBloc
         user.clubIdSelected = event.clubIdSelected;
         listener.add(NavigatorClubPageEvent());
       }
+      if (event is ClubsViewPageEvent) {
+        listener.add(NavigatorClubsViewPageEvent());
+      }
     });
   }
 }
