@@ -25,9 +25,12 @@ class PageDependencies {
     //HomePage -> show Cuộc Thi và Sự Kiện
     injector.registerFactory<Widget>(() => Home(), instanceName: Routes.home);
 
-    //Profile Page -> show thông tin Student
+    //Profile Page -> show general info Student
     injector.registerFactory<Widget>(() => ProfilePage(bloc: injector()),
         instanceName: Routes.profile);
+
+    injector.registerFactory<Widget>(() => MyAccountPage(bloc: injector()),
+        instanceName: Routes.myAccount);    
 
     //Club Page -> show Club
     injector.registerFactory<Widget>(() => ClubPage(bloc: injector()),

@@ -9,7 +9,7 @@ import 'package:unicec_mobi/utils/base_bloc.dart';
 import 'package:unicec_mobi/utils/firebase.dart';
 import 'package:unicec_mobi/utils/log.dart';
 
-class ProfileBloc extends BaseBloc<ProfileEvent, ProfileState> {
+class ProfileBloc extends BaseBloc<ProfileEvent, ProfileState> { // this function is no use anymore now
   final IUserService service;
 
   ProfileBloc({required this.service})

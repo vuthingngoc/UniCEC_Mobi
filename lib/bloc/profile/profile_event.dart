@@ -1,3 +1,4 @@
+// this function is no use anymore now
 class ProfileEvent{}
 
 class LoadProfileEvent extends ProfileEvent{}

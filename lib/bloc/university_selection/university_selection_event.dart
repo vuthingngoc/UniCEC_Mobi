@@ -3,14 +3,14 @@ import '../../models/entities/uni_selector/uni_selector_model.dart';
 
 class UniversitySelectionEvent {}
 
-class RecieveData extends UniversitySelectionEvent {
+class ReceiveData extends UniversitySelectionEvent {
   final List<UniBelongToEmail> listUniBelongToEmail;
-  RecieveData({required this.listUniBelongToEmail});
+  ReceiveData({required this.listUniBelongToEmail});
 }
 
-class CompeletelyProfile extends UniversitySelectionEvent {
+class CompletelyProfile extends UniversitySelectionEvent {
   final CompleteProfile completeProfileModel;
-  CompeletelyProfile({required this.completeProfileModel});
+  CompletelyProfile({required this.completeProfileModel});
 }
 
 class ChangeDropdownValueUni extends UniversitySelectionEvent {
