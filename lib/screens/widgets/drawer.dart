@@ -90,7 +90,7 @@ class ArgonDrawer extends StatelessWidget {
                   onTap: () {
                     if (currentPage != "Profile") {
                       Navigator.of(context)
-                          .pushReplacementNamed(Routes.profile);
+                          .pushNamed(Routes.profile);
                     }
                   },
                   iconColor: ArgonColors.info,
@@ -98,17 +98,17 @@ class ArgonDrawer extends StatelessWidget {
                   isSelected: currentPage == "Profile" ? true : false),
 
               //Chức năng Logout
-              DrawerTile(
-                icon: Icons.settings_input_component,
-                onTap: () async {
-                  //event logout
-                  await FirebaseUtils.logout();
-                  Navigator.of(context).pushReplacementNamed(Routes.splash);
-                },
-                iconColor: ArgonColors.error,
-                title: "Logout (done)",
-                //isSelected: currentPage == "Elements" ? true : false),
-              ),
+              // DrawerTile(
+              //   icon: Icons.settings_input_component,
+              //   onTap: () async {
+              //     //event logout
+              //     await FirebaseUtils.logout();
+              //     Navigator.of(context).pushReplacementNamed(Routes.splash);
+              //   },
+              //   iconColor: ArgonColors.error,
+              //   title: "Logout (done)",
+              //   //isSelected: currentPage == "Elements" ? true : false),
+              // ),
             ],
           ),
         ),
