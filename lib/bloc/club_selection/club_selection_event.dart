@@ -10,3 +10,5 @@ class ClubsViewPageEvent extends ClubSelectionEvent {}
 class NavigatorClubPageEvent extends ClubSelectionEvent {}
 
 class NavigatorClubsViewPageEvent extends ClubSelectionEvent {}
+
+class RefreshEvent extends ClubSelectionEvent {}

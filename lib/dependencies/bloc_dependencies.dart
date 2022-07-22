@@ -8,6 +8,7 @@ import 'package:unicec_mobi/bloc/my_account/my_account_bloc.dart';
 import 'package:unicec_mobi/bloc/splash/splash_bloc.dart';
 import 'package:unicec_mobi/bloc/university_selection/university_selection_bloc.dart';
 import '../bloc/club_selection/club_selection_bloc.dart';
+import '../bloc/club_view_detail/club_view_detail_bloc.dart';
 import '../bloc/profile/profile_bloc.dart';
 import '../bloc/seeds_wallet/seeds_wallet_bloc.dart';
 import '../bloc/team/team_bloc.dart';
@@ -25,11 +26,14 @@ class BlocDependencies {
         () => UniversitySelectionBloc(service: injector()));
 
     //import ClubSelectionBloc
-    injector.registerFactory<ClubSelectionBloc>(() => ClubSelectionBloc());
-    
-    injector.registerFactory<ProfileBloc>(() => ProfileBloc(service: injector()));
+    injector.registerFactory<ClubSelectionBloc>(
+        () => ClubSelectionBloc(service: injector()));
 
-    injector.registerFactory<MyAccountBloc>(() => MyAccountBloc(service: injector()));
+    injector
+        .registerFactory<ProfileBloc>(() => ProfileBloc(service: injector()));
+
+    injector.registerFactory<MyAccountBloc>(
+        () => MyAccountBloc(service: injector()));
 
     //import ClubBloc
     injector.registerFactory<ClubBloc>(() => ClubBloc(service: injector()));
@@ -46,5 +50,8 @@ class BlocDependencies {
         () => ClubsViewBloc(service: injector()));
 
     injector.registerFactory<HomeBloc>(() => HomeBloc(service: injector()));
+
+    injector.registerFactory<ClubViewDetailBloc>(
+        () => ClubViewDetailBloc(service: injector()));
   }
 }

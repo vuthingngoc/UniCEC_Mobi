@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/models/common/current_user.dart';
+import 'package:unicec_mobi/models/entities/member/member_detail_model.dart';
 import '../../models/entities/uni_selector/uni_selector_model.dart';
 import '../../services/i_services.dart';
 import '../../utils/base_bloc.dart';
@@ -52,8 +53,17 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
       //
       user.universityId = int.parse(userMap['UniversityId']);
       //load list club belong to student
-      user.clubsBelongToStudent =
-          await service.getListClubsBelongToStudent(user.id);
+      user.clubsBelongToStudent = await service
+          .getListClubsBelongToStudent(user.id); //-. lấy những member active
+      //load list member belong to club -> active
+      if (user.clubsBelongToStudent != null) {
+        for (var club in user.clubsBelongToStudent) {
+          MemberDetailModel? member =
+              await service.getMemberBelongToClub(club.id);
+
+          user.membersBelongToClubs.add(member);
+        }
+      }
     }
     user.email = (credentialUser?.email)!;
     user.fullname = userMap['Fullname'];

@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:unicec_mobi/models/entities/member/member_detail_model.dart';
 import '../../../constants/Constants.dart';
 import '../../../models/entities/club/club_model.dart';
 import '../../size_config.dart';
 
-class ClubDescription extends StatefulWidget {
-  const ClubDescription({
+class ClubViewDetailDescription extends StatefulWidget {
+  const ClubViewDetailDescription({
     Key? key,
     required this.club,
-    required this.member,
+    //this.pressOnSeeMore,
   }) : super(key: key);
 
   final ClubModel? club;
-  final MemberDetailModel? member;
+  //final GestureTapCallback? pressOnSeeMore;
 
   @override
-  State<ClubDescription> createState() => _ClubDescriptionState();
+  State<ClubViewDetailDescription> createState() =>
+      _ClubViewDetailDescriptionState();
 }
 
-class _ClubDescriptionState extends State<ClubDescription> {
+class _ClubViewDetailDescriptionState extends State<ClubViewDetailDescription> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -149,58 +149,6 @@ class _ClubDescriptionState extends State<ClubDescription> {
                 ),
               ],
             )
-          ]),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(20),
-            vertical: 10,
-          ),
-          child: Column(children: [
-            Text(
-              'Thông tin của thành viên',
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  color: kPrimaryColor,
-                  fontSize: 20),
-            ),
-            SizedBox(height: 10),
-            Row(
-              children: [
-                Icon(Icons.person),
-                SizedBox(width: 10),
-                Text(
-                  widget.member?.name ?? 'Không có dữ liệu tên của thành viên',
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            Row(
-              children: [
-                Icon(Icons.phone),
-                SizedBox(width: 10),
-                Text(
-                  widget.member?.phone ?? 'Không có phone của thành viên',
-                ),
-              ],
-            ),
-            Row(children: [
-              Text('Vai trò:'),
-              SizedBox(width: 10),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  color: Colors.green[300],
-                ),
-                height: 20,
-                child: Text(
-                  widget.member?.clubRoleName ?? 'Không có Role Name',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ]),
           ]),
         )
       ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unicec_mobi/bloc/clubs_view/clubs_view_bloc.dart';
+import 'package:unicec_mobi/utils/router.dart';
 
 import '../../bloc/clubs_view/clubs_view_event.dart';
 import '../../utils/app_color.dart';
@@ -21,11 +22,12 @@ class _ClubsViewPageState extends State<ClubsViewPage> {
 
   @override
   void initState() {
-    // bloc.listenerStream.listen((event) {
-    //   if(event is )
-    //   {
-    //   }
-    // });
+    bloc.listenerStream.listen((event) {
+      if (event is NavigatorClubViewDetailPageEvent) {
+        Navigator.pushNamed(context, Routes.clubViewDetail,
+            arguments: event.clubSelect);
+      }
+    });
     bloc.add(ClubsViewInitEvent());
     super.initState();
   }

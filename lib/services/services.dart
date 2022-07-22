@@ -8,3 +8,4 @@ export 'package:unicec_mobi/services/user_svc/user_service.dart';
 export 'package:unicec_mobi/services/competition_svc/competition_service.dart';
 export 'package:unicec_mobi/services/team_svc/team_service.dart';
 export 'package:unicec_mobi/services/seeds_wallet_svc/seeds_wallet_service.dart';
+export 'package:unicec_mobi/services/member_svc/member_service.dart';

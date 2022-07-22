@@ -68,7 +68,9 @@ class _ClubPageState extends State<ClubPage> {
                     body: TabBarView(
                       children: <Widget>[
                         //tab1
-                        BodyClubInfo(Club: state.ClubSelected),
+                        BodyClubInfo(
+                            Club: state.ClubSelected,
+                            Member: state.MemberSelected),
                         //tab2
                         Center(
                           child: Text("Cuộc Thi và Sự Kiện"),

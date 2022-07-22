@@ -27,5 +27,7 @@ class ServiceDependencies {
     injector.registerFactory<ITeamService>(() => TeamService());
 
     injector.registerFactory<ISeedsWalletService>(() => SeedsWalletService());
+
+    injector.registerFactory<IMemberService>(() => MemberService());
   }
 }

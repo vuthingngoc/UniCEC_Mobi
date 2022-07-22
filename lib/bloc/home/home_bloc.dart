@@ -18,11 +18,12 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
                 avatar: '',
                 clubIdSelected: 0,
                 clubsBelongToStudent: [],
+                membersBelongToClubs: [],
                 universityId: 0))) {
-                  on(((event, emit) async {
-                    if(event is LoadDataEvent){
-                      // implement later
-                    }
-                  }));
-                }
+    on(((event, emit) async {
+      if (event is LoadDataEvent) {
+        // implement later
+      }
+    }));
+  }
 }
