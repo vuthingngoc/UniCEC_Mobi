@@ -1,7 +1,7 @@
 export 'splash/splash_page.dart';
 //export 'package:unicec_mobi/screens/onboarding.dart';
 export 'login/login_page.dart';
-
+export 'main_page/main_page.dart';
 export 'university_selection/university_selection_page.dart';
 export 'club_selection/club_selection_page.dart';
 

@@ -8,12 +8,16 @@ import 'package:unicec_mobi/bloc/my_account/my_account_bloc.dart';
 import 'package:unicec_mobi/bloc/splash/splash_bloc.dart';
 import 'package:unicec_mobi/bloc/university_selection/university_selection_bloc.dart';
 import '../bloc/club_selection/club_selection_bloc.dart';
+import '../bloc/main/main_bloc.dart';
 import '../bloc/profile/profile_bloc.dart';
 import '../bloc/seeds_wallet/seeds_wallet_bloc.dart';
 import '../bloc/team/team_bloc.dart';
 
 class BlocDependencies {
   static Future setup(GetIt injector) async {
+    //mainBloc
+    injector.registerFactory<MainBloc>(() => MainBloc());
+
     //spalsh bloc
     injector.registerFactory<SplashBloc>(() => SplashBloc(service: injector()));
 
