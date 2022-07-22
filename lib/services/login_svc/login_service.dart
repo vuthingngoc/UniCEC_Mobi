@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:unicec_mobi/models/entities/club/club_model.dart';
+import 'package:unicec_mobi/models/entities/member/member_detail_model.dart';
 
 import '../../models/common/current_user.dart';
 import '../../models/entities/uni_selector/uni_selector_model.dart';
@@ -20,10 +21,6 @@ class LoginService implements ILoginService {
     try {
       var response =
           await client.post(Uri.parse(url), headers: Api.GetHeader(idToken));
-      //     <String, String>{
-      //   'Content-Type': 'application/json; charset=UTF-8',
-      //   'Authorization': "Bearer $idToken"
-      // });
 
       if (response.statusCode == 400) {
         Log.error(response.body.toString());
@@ -45,7 +42,7 @@ class LoginService implements ILoginService {
   }
 
   @override
-  Future<List<ClubModel>?> getListClubsBelongToStudent(int? userId) async {
+  Future<List<ClubModel>> getListClubsBelongToStudent(int? userId) async {
     var client = http.Client();
     String url = Api.GetUrl(apiPath: Api.clubsBelongToStudent);
 
@@ -63,7 +60,7 @@ class LoginService implements ILoginService {
         List<dynamic> resultList = adapter.parseToList(response);
 
         if (resultList.isEmpty) {
-          return null;
+          return [];
         }
         //
         List<ClubModel> clubsBelongToStudent = [];
@@ -74,6 +71,44 @@ class LoginService implements ILoginService {
         }
 
         return clubsBelongToStudent;
+      }
+    } catch (e) {
+      Log.error(e.toString());
+    } finally {
+      client.close();
+    }
+    return [];
+  }
+
+  @override
+  Future<MemberDetailModel?> getMemberBelongToClub(int? clubId) async {
+    var client = http.Client();
+    String url = Api.GetUrl(apiPath: Api.members);
+    url += "/info?clubId=" + clubId.toString();
+    String? idToken = GetIt.I.get<CurrentUser>().idToken;
+    try {
+      var response =
+          await client.get(Uri.parse(url), headers: Api.GetHeader(idToken));
+
+      if (response.statusCode == 400) {
+        Log.error(response.body.toString());
+      }
+      if (response.statusCode == 200) {
+        List<dynamic> result = adapter.parseToList(response);
+
+        if (result.isEmpty) {
+          return null;
+        }
+
+        //
+        List<MemberDetailModel> membersBelongToClubs = [];
+        //
+        for (var element in result) {
+          MemberDetailModel model = MemberDetailModel.fromJson(element);
+          membersBelongToClubs.add(model);
+        }
+
+        return membersBelongToClubs[0];
       }
     } catch (e) {
       Log.error(e.toString());

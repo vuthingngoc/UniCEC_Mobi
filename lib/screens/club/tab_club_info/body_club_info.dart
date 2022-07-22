@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unicec_mobi/bloc/club/club_event.dart';
+import 'package:unicec_mobi/models/entities/member/member_detail_model.dart';
 import '../../../bloc/club/club_bloc.dart';
 import '../../../models/entities/club/club_model.dart';
 import '../../size_config.dart';
@@ -11,8 +12,10 @@ import 'top_rounded_container.dart';
 
 class BodyClubInfo extends StatefulWidget {
   final ClubModel? Club;
+  final MemberDetailModel? Member;
 
-  BodyClubInfo({Key? key, required this.Club}) : super(key: key);
+  BodyClubInfo({Key? key, required this.Club, required this.Member})
+      : super(key: key);
 
   @override
   State<BodyClubInfo> createState() => _BodyClubInfoState();
@@ -34,7 +37,7 @@ class _BodyClubInfoState extends State<BodyClubInfo> {
                 children: [
                   ClubDescription(
                     club: widget.Club,
-                    //pressOnSeeMore: () {},
+                    member: widget.Member,
                   ),
                   //
                   TopRoundedContainer(

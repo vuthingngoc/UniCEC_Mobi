@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:unicec_mobi/models/enums/member_status.dart';
 
 class ClubModel {
   int id;
@@ -16,7 +17,7 @@ class ClubModel {
   DateTime founding;
   bool status;
   //đánh dấu show UI
-  bool isMember;
+  MemberStatus isMemberStatus;
 
   ClubModel(
       {required this.id,
@@ -33,7 +34,7 @@ class ClubModel {
       required this.memberIncreaseThisMonth,
       required this.founding,
       required this.status,
-      required this.isMember});
+      required this.isMemberStatus});
 
   factory ClubModel.fromJson(Map<String, dynamic> json) {
     int id = json['id'];
@@ -71,6 +72,6 @@ class ClubModel {
         memberIncreaseThisMonth: memberIncreaseThisMonth,
         founding: founding,
         status: status,
-        isMember: false);
+        isMemberStatus: MemberStatus.Student);
   }
 }

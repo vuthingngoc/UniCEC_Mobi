@@ -1,6 +1,8 @@
+import 'package:unicec_mobi/models/entities/member/member_detail_model.dart';
 import 'package:unicec_mobi/screens/size_config.dart';
 
 import '../entities/club/club_model.dart';
+import '../entities/member/member_model.dart';
 
 class CurrentUser {
   int id;
@@ -11,8 +13,10 @@ class CurrentUser {
   String fullname;
   String? avatar;
   //
-  List<ClubModel>? clubsBelongToStudent;
+  List<ClubModel> clubsBelongToStudent;
   int? clubIdSelected;
+  List<MemberDetailModel?> membersBelongToClubs;
+  MemberDetailModel? memberSelected;
 
   CurrentUser({
     required this.id,
@@ -22,7 +26,8 @@ class CurrentUser {
     required this.email,
     required this.fullname,
     this.avatar,
-    this.clubsBelongToStudent,
+    required this.clubsBelongToStudent,
+    required this.membersBelongToClubs,
     this.clubIdSelected,
   });
 
@@ -35,6 +40,7 @@ class CurrentUser {
       fullname: fullname,
       avatar: avatar,
       clubsBelongToStudent: clubsBelongToStudent,
+      membersBelongToClubs: membersBelongToClubs,
       clubIdSelected: clubIdSelected);
 
   void reset() {
@@ -47,5 +53,7 @@ class CurrentUser {
     avatar = "";
     clubsBelongToStudent = [];
     clubIdSelected = null;
+    membersBelongToClubs = [];
+    memberSelected = null;
   }
 }

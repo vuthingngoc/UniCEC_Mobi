@@ -1,5 +1,7 @@
-enum MemberStatus{
+enum MemberStatus {
   Pending,
   Active,
-  InActive
+  InActive,
+  //add to check
+  Student,
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:unicec_mobi/screens/club_view_detail/club_view_detail_page.dart';
 import 'package:unicec_mobi/screens/detail_competition/detail_competition.dart';
 import 'package:unicec_mobi/utils/router.dart';
 import '../screens/main_page/main_page.dart';
@@ -7,8 +8,8 @@ import '../screens/pages.dart';
 
 class PageDependencies {
   static Future setup(GetIt injector) async {
-
-    injector.registerFactory<Widget>(() => MainPage(injector()), instanceName: Routes.main);
+    injector.registerFactory<Widget>(() => MainPage(injector()),
+        instanceName: Routes.main);
 
     //splash
     injector.registerFactory<Widget>(() => SplashPage(bloc: injector()),
@@ -30,9 +31,9 @@ class PageDependencies {
     //HomePage -> show Cuộc Thi và Sự Kiện
     injector.registerFactory<Widget>(() => Home(), instanceName: Routes.home);
 
-
     //Profile Page -> show general info Student
-    injector.registerFactory<Widget>(() => DetailCompetition(), instanceName: Routes.detailCompetition);
+    injector.registerFactory<Widget>(() => DetailCompetition(),
+        instanceName: Routes.detailCompetition);
 
     //Profile Page -> show thông tin Student
 
@@ -40,7 +41,7 @@ class PageDependencies {
         instanceName: Routes.profile);
 
     injector.registerFactory<Widget>(() => MyAccountPage(bloc: injector()),
-        instanceName: Routes.myAccount);    
+        instanceName: Routes.myAccount);
 
     //Club Page -> show Club
     injector.registerFactory<Widget>(() => ClubPage(bloc: injector()),
@@ -53,5 +54,8 @@ class PageDependencies {
     //Task Page -> show Tasks
     injector.registerFactory<Widget>(() => TaskPage(),
         instanceName: Routes.task);
+
+    injector.registerFactory<Widget>(() => ClubViewDetailPage(bloc: injector()),
+        instanceName: Routes.clubViewDetail);
   }
 }

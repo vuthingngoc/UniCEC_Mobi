@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loadmore/loadmore.dart';
+import 'package:unicec_mobi/models/enums/member_status.dart';
 
 import '../../../bloc/clubs_view/clubs_view_bloc.dart';
 import '../../../bloc/clubs_view/clubs_view_event.dart';
@@ -51,7 +52,9 @@ class _ListViewClubsState extends State<ListViewClubs> {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                          //storeBloc.add(NavigatorToStoreDetail(state.currentListStore[index].storeId));
+                          bloc.add(ChooseClubEvent(
+                              clubSelect:
+                                  state.listClubsBelongToUniversity[index]));
                         },
                         child: Card(
                           child: Row(
@@ -71,13 +74,6 @@ class _ListViewClubsState extends State<ListViewClubs> {
                                   ),
                                 ),
                               ),
-                              // GestureDetector(
-                              //   onTap: () {
-                              //     //nhấn vào đây sẽ di chuyển sang store detail
-                              //     storeBloc.add(NavigatorToStoreDetail(state.currentListStore[index].storeId));
-                              //   },
-                              //   child:
-                              // ),
                               SizedBox(
                                 width: Dimens.size8,
                               ),
@@ -92,39 +88,44 @@ class _ListViewClubsState extends State<ListViewClubs> {
                                           fontSize: Dimens.size20,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: Dimens.size10),
-                                      child: Text(
-                                          state
-                                                  .listClubsBelongToUniversity[
-                                                      index]
-                                                  .isMember
-                                              ? "Đã là thành viên"
-                                              : "Chưa là thành viên",
-                                          style: TextStyle(
-                                              fontSize: Dimens.size16)),
-                                    ),
-                                    // Row(
-                                    //     mainAxisAlignment: MainAxisAlignment.start,
-                                    //     children: [
-                                    //       // Image.asset(
-                                    //       //   'assets/images/vnd.png',
-                                    //       //   width: Dimens.size18,
-                                    //       //   height: Dimens.size25,
-                                    //       //   color: Colors.red,
-                                    //       // ),
-                                    //       SizedBox(width: Dimens.size5,),
-                                    //       Text(
-                                    //           state.currentListStore[index].phone,
-                                    //           style: TextStyle(
-                                    //               fontSize: Dimens.size20,
-                                    //               color: Colors.red,
-                                    //               fontWeight: FontWeight.bold
-                                    //           )
-                                    //       ),
-                                    //     ]
-                                    // ),
+                                    (state.listClubsBelongToUniversity[index]
+                                                .isMemberStatus ==
+                                            MemberStatus.Active)
+                                        ? Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: Dimens.size10),
+                                            child: Text('Đã là thành viên'),
+                                          )
+                                        : (state
+                                                    .listClubsBelongToUniversity[
+                                                        index]
+                                                    .isMemberStatus ==
+                                                MemberStatus.Pending)
+                                            ? Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: Dimens.size10),
+                                                child:
+                                                    Text('Đang đợi xét duyệt'),
+                                              )
+                                            : (state
+                                                        .listClubsBelongToUniversity[
+                                                            index]
+                                                        .isMemberStatus ==
+                                                    MemberStatus.Student)
+                                                ? Padding(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical:
+                                                                Dimens.size10),
+                                                    child: Text(
+                                                        'Chưa là thành viên'),
+                                                  )
+                                                : Padding(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical:
+                                                                Dimens.size10),
+                                                    child: Text('lỗi'))
                                   ])
                             ],
                           ),

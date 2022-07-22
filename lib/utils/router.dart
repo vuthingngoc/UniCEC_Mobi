@@ -19,6 +19,7 @@ class Routes {
   static String get universitySelection => '/universitySelection';
   static String get login => '/login';
   static String get task => '/task';
+  static String get clubViewDetail => '/clubViewDetail';
 
   static MaterialPageRoute getRoute(RouteSettings settings) {
     Widget widget;
