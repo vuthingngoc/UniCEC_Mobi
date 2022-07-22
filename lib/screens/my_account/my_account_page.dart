@@ -163,7 +163,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                           width: Dimens.size20,
                                                         ),
                                                         Text(
-                                                          state.universityName ??
+                                                          state.user.universityName ??
                                                               '',
                                                           style: TextStyle(
                                                               fontSize: Dimens
@@ -226,7 +226,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                           width: Dimens.size20,
                                                         ),
                                                         Text(
-                                                          state.departmentName ??
+                                                          state.user.departmentName ??
                                                               '',
                                                           style: TextStyle(
                                                               fontSize: 16),
