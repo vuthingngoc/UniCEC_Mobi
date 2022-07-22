@@ -1,4 +1,6 @@
 import 'package:get_it/get_it.dart';
+import 'package:unicec_mobi/services/detail_competition_svc/detail_competition.dart';
+import 'package:unicec_mobi/services/detail_competition_svc/i_detail_competition.dart';
 
 import '../services/i_services.dart';
 import '../services/services.dart';
@@ -23,6 +25,7 @@ class ServiceDependencies {
     injector.registerFactory<IClubService>(() => ClubService());
 
     injector.registerFactory<ICompetitionService>(() => CompetitionService());
+    injector.registerFactory<IDetailCompetitionService>(() => DetailCompetitionService());
 
     injector.registerFactory<ITeamService>(() => TeamService());
 

@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:unicec_mobi/screens/detail_competition/detail_competition.dart';
 import 'package:unicec_mobi/utils/router.dart';
+import '../screens/main_page/main_page.dart';
 import '../screens/pages.dart';
 
 class PageDependencies {
   static Future setup(GetIt injector) async {
+
+    injector.registerFactory<Widget>(() => MainPage(injector()), instanceName: Routes.main);
+
     //splash
     injector.registerFactory<Widget>(() => SplashPage(bloc: injector()),
         instanceName: Routes.splash);
@@ -25,7 +30,12 @@ class PageDependencies {
     //HomePage -> show Cuộc Thi và Sự Kiện
     injector.registerFactory<Widget>(() => Home(), instanceName: Routes.home);
 
+
     //Profile Page -> show general info Student
+    injector.registerFactory<Widget>(() => DetailCompetition(), instanceName: Routes.detailCompetition);
+
+    //Profile Page -> show thông tin Student
+
     injector.registerFactory<Widget>(() => ProfilePage(bloc: injector()),
         instanceName: Routes.profile);
 

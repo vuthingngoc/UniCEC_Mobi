@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
     _bloc.listenerStream.listen((event) {
       if (event is NavigatorWelcomePageEvent) {
         Navigator.of(context).pushReplacementNamed(
-          Routes.home, /*arguments: event.residentIdList*/
+          Routes.main, /*arguments: event.residentIdList*/
         );
       } //
       else if (event is ShowingSnackBarEvent) {
