@@ -63,11 +63,30 @@ class CardSmall extends StatelessWidget {
                                       color: ArgonColors.warning,
                                       fontSize: 13)),
                               SizedBox(width: getProportionateScreenWidth(30)),
-                              Text(date,
-                                  style: TextStyle(
-                                      color: ArgonColors.secondary,
+                              // Text(date,
+                              //     style: TextStyle(
+                              //         color: ArgonColors.secondary,
+                              //         fontSize: 13,
+                              //         backgroundColor: Colors.red)),
+                              Container(
+                                // margin:
+                                // const EdgeInsets.all(15.0),
+                                // padding:
+                                // const EdgeInsets.all(3.0),
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.red),
+                                    color: Colors.red,
+                                    borderRadius:
+                                    BorderRadius.all(
+                                        Radius.circular(5))),
+                                child: Text(date,
+                                    style: TextStyle(
+                                      color: Colors.white,
                                       fontSize: 13,
-                                      backgroundColor: Colors.red)),
+                                    )),
+                              ),
+
                             ],
                           ),
                           Text(title,

@@ -1,8 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/bloc/my_account/my_account_event.dart';
 import 'package:unicec_mobi/bloc/my_account/my_account_state.dart';
-import 'package:unicec_mobi/models/entities/department/department_model.dart';
-import 'package:unicec_mobi/models/entities/university/university_model.dart';
 import 'package:unicec_mobi/models/enums/user_status.dart';
 import 'package:unicec_mobi/services/i_services.dart';
 import 'package:unicec_mobi/utils/base_bloc.dart';
@@ -35,11 +33,9 @@ class MyAccountBloc extends BaseBloc<MyAccountEvent, MyAccountState> {
       if (event is LoadInfoAccountEvent) {
         print('LoadProfileEvent is running ...');
         CurrentUser currentUser = GetIt.I.get<CurrentUser>().currentUser;
-        UserModel? user = await service.getById(currentUser.id);
-        UniversityModel? university = await service.GetUniById(currentUser.universityId!);
-        DepartmentModel? department = await service.GetDepartmentById((user?.departmentId)!);
+        UserModel? user = await service.getById(currentUser.id);       
         if (user != null) {
-          emit(state.copyWith(user, university?.name, department?.name));
+          emit(state.copyWith(user));
         } else {
           Log.error('ProfileBloc: user null');
         }

@@ -5,6 +5,7 @@ import 'package:unicec_mobi/screens/home/widgets/navbar_home.dart';
 import '../../constants/theme.dart';
 
 //widgets
+import '../../utils/router.dart';
 import '../size_config.dart';
 import '../widgets/card-horizontal.dart';
 import '../widgets/card-small.dart';
@@ -84,39 +85,6 @@ class Home extends StatelessWidget {
                     press: () {},
                   ),
                 ),
-                //SizedBox(height: getProportionateScreenWidth(10)),
-                // Padding(
-                //   padding: EdgeInsets.symmetric(
-                //     horizontal: getProportionateScreenWidth(15.0),
-                //     vertical: getProportionateScreenWidth(10),
-                //   ),
-                //   child: Text.rich(
-                //     TextSpan(
-                //       style: TextStyle(color: Colors.black),
-                //       children: [
-                //         TextSpan(
-                //           text: "AAAAAAAAAAA",
-                //           style: TextStyle(
-                //             fontSize: getProportionateScreenWidth(12),
-                //
-                //           ),
-                //         )
-                //       ],
-                //     ),
-                //   ),
-                // ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 5.0),
-                  child: CardHorizontal(
-                      cta: "Xem thêm",
-                      title: homeCards["Ice Cream"]!['title'],
-                      img: homeCards["Ice Cream"]!['image'],
-                      type: homeCards["Ice Cream"]!['type'],
-                      date: homeCards["Ice Cream"]!['date'],
-                      tap: () {
-                        Navigator.pushNamed(context, '/pro');
-                      }),
-                ),
                 SizedBox(height: 8.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -128,7 +96,7 @@ class Home extends StatelessWidget {
                         type: homeCards["Makeup"]!['type'],
                         date: homeCards["Makeup"]!['date'],
                         tap: () {
-                          Navigator.pushNamed(context, '/pro');
+                          Navigator.of(context).pushNamed(Routes.detailCompetition);
                         }),
                     CardSmall(
                         cta: "Xem thêm",
@@ -142,26 +110,30 @@ class Home extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 8.0),
-                CardHorizontal(
-                    cta: "Xem thêm",
-                    title: homeCards["Fashion"]!['title'],
-                    img: homeCards["Fashion"]!['image'],
-                    type: homeCards["Fashion"]!['type'],
-                    date: homeCards["Fashion"]!['date'],
-                    tap: () {
-                      Navigator.pushNamed(context, '/pro');
-                    }),
-                SizedBox(height: 8.0),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 32.0),
-                  child: CardSquare(
-                      cta: "Xem thêm",
-                      title: homeCards["Argon"]!['title'],
-                      img: homeCards["Argon"]!['image'],
-                      tap: () {
-                        Navigator.pushNamed(context, '/pro');
-                      }),
-                )
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CardSmall(
+                        cta: "Xem thêm",
+                        title: homeCards["Argon"]!['title'],
+                        img: homeCards["Argon"]!['image'],
+                        type: homeCards["Argon"]!['type'],
+                        date: homeCards["Argon"]!['date'],
+                        tap: () {
+                          Navigator.of(context).pushNamed(Routes.detailCompetition);
+                        }),
+                    CardSmall(
+                        cta: "Xem thêm",
+                        title: homeCards["Fashion"]!['title'],
+                        img: homeCards["Fashion"]!['image'],
+                        type: homeCards["Fashion"]!['type'],
+                        date: homeCards["Fashion"]!['date'],
+                        tap: () {
+                          Navigator.pushNamed(context, '/pro');
+                        })
+                  ],
+                ),
+                SizedBox(height: 20.0),
               ],
             ),
           ),

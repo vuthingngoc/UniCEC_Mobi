@@ -157,56 +157,65 @@ class _NavbarHomeState extends State<NavbarHome> {
                     //)
                   ],
                 ),
+                
                 if (widget.searchBar)
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 8, bottom: 4, left: 15, right: 15),
-                      child: Input(
-                          placeholder: "Tìm Kiếm Cuộc Thi và Sự Kiện",
-                          controller: widget.searchController,
-                          onChanged: widget.searchOnChanged,
-                          autofocus: widget.searchAutofocus,
-                          suffixIcon:
-                          Icon(Icons.zoom_in, color: ArgonColors.muted),
-                          onTap: () {
-                            Navigator.pushNamed(context, '/pro');
-                          },
-                          prefixIcon: Icon(Icons
-                              .design_services_sharp)), // để icon của app mình
-                    ),
-                PopupMenuButton<int>(
-                  itemBuilder: (context) {
-                    return [
-                      PopupMenuItem(
-                        onTap: () {
-                        },
-                        value: 1,
-                        child: Row(
-                          children: <Widget>[
-                            Icon(Icons.edit, size: 18),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Text('Chỉnh sửa bài viết'),
-                            ),
-                          ],
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 8, bottom: 4, left: 15, right: 15),
+                          child: Input(
+                              placeholder: "Tìm Kiếm Cuộc Thi và Sự Kiện",
+                              controller: widget.searchController,
+                              onChanged: widget.searchOnChanged,
+                              autofocus: widget.searchAutofocus,
+                              suffixIcon:
+                              Icon(Icons.zoom_in, color: ArgonColors.muted),
+                              onTap: () {
+                                Navigator.pushNamed(context, '/pro');
+                              },
+                              prefixIcon: Icon(Icons
+                                  .design_services_sharp)), // để icon của app mình
                         ),
                       ),
-                      PopupMenuItem(
-                        onTap: () {
-                        },
-                        value: 2,
-                        child: Row(
-                          children: <Widget>[
-                            Icon(Icons.delete, size: 18),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Text('Xoá bài viết'),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ];
-                  }),
+                      PopupMenuButton<int>(
+                        icon: Icon(Icons.filter_alt_outlined),
+                          itemBuilder: (context) {
+                            return [
+                              PopupMenuItem(
+                                onTap: () {
+                                },
+                                value: 1,
+                                child: Row(
+                                  children: <Widget>[
+                                    Icon(Icons.access_time_sharp, size: 18),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Text('Ngày gần nhất'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              PopupMenuItem(
+                                onTap: () {
+                                },
+                                value: 2,
+                                child: Row(
+                                  children: <Widget>[
+                                    Icon(Icons.delete, size: 18),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Text('Mới nhất'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ];
+                          }),
+                    ],
+                  ),
+
                 SizedBox(
                   height: 10.0,
                 ),
