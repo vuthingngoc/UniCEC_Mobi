@@ -4,16 +4,20 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 //import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_it/get_it.dart';
+import 'package:unicec_mobi/bloc/profile/profile_bloc.dart';
 import 'package:unicec_mobi/screens/detail_competition/detail_competition.dart';
 import '../../bloc/main/main_bloc.dart';
 import '../../bloc/main/main_event.dart';
 import '../../bloc/main/main_state.dart';
+import '../../bloc/my_account/my_account_bloc.dart';
 import '../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../utils/app_color.dart';
 import '../../utils/router.dart';
 import '../home/home_page.dart';
+import '../my_account/my_account_page.dart';
+import '../profile/profile_page.dart';
 import 'widget/component_button.dart';
 
 class MainPage extends StatefulWidget {
@@ -160,8 +164,9 @@ class _MainPageState extends State<MainPage> {
                 // NewsPage(GetIt.I.get<NewsBloc>()),
                 // StorePage(GetIt.I.get<StoreMainBloc>()),
                 // POIPage(GetIt.I.get<POIBloc>()),
-                // ProfilePage(
-                //     GetIt.I.get<ProfileBloc>())
+                ProfilePage(bloc: GetIt.I.get<ProfileBloc>())
+                // MyAccountPage(
+                //      GetIt.I.get<MyAccountBloc>(), bloc: MyAccountBloc,),
               ],
             ),
             bottomNavigationBar: BottomAppBar(
