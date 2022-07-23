@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/bloc/my_account/my_account_event.dart';
 import 'package:unicec_mobi/bloc/my_account/my_account_state.dart';
+import 'package:unicec_mobi/models/entities/seedswallet/seeds_wallet_model.dart';
 import 'package:unicec_mobi/models/enums/user_status.dart';
 import 'package:unicec_mobi/services/i_services.dart';
 import 'package:unicec_mobi/utils/base_bloc.dart';
@@ -28,16 +29,20 @@ class MyAccountBloc extends BaseBloc<MyAccountEvent, MyAccountState> {
                 status: UserStatus.InActive,
                 studentCode: '',
                 departmentId: 0,
-                universityId: 0))) {
+                universityId: 0),
+            seedsWallet: SeedsWalletModel(
+                id: 0, amount: 0, status: false, studentId: 0))) {
     on((event, emit) async {
       if (event is LoadInfoAccountEvent) {
         print('LoadProfileEvent is running ...');
         CurrentUser currentUser = GetIt.I.get<CurrentUser>().currentUser;
-        UserModel? user = await service.getById(currentUser.id);       
-        if (user != null) {
-          emit(state.copyWith(user));
+        UserModel? user = await service.getById(currentUser.id);
+        SeedsWalletModel? seedsWallet = await service.getSeedsWalletByUser(currentUser.id);
+        if (user != null && seedsWallet != null) {
+          print('aloooooooo');
+          emit(state.copyWith(user, seedsWallet));
         } else {
-          Log.error('ProfileBloc: user null');
+          Log.error('ProfileBloc: user and seedsWallet null');
         }
       }
     });

@@ -57,12 +57,12 @@ class CardSmall extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text("@" + type,
                                   style: TextStyle(
                                       color: ArgonColors.warning,
                                       fontSize: 13)),
-                              SizedBox(width: getProportionateScreenWidth(30)),
                               // Text(date,
                               //     style: TextStyle(
                               //         color: ArgonColors.secondary,

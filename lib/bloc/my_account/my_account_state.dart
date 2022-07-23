@@ -1,13 +1,15 @@
 import 'package:equatable/equatable.dart';
+import 'package:unicec_mobi/models/entities/seedswallet/seeds_wallet_model.dart';
 import 'package:unicec_mobi/models/entities/user/user_model.dart';
 
 class MyAccountState extends Equatable{
   UserModel user;
+  SeedsWalletModel seedsWallet;
 
-  MyAccountState({required this.user});
+  MyAccountState({required this.user, required this.seedsWallet});
 
-  MyAccountState copyWith(UserModel user){
-    return MyAccountState(user: user);
+  MyAccountState copyWith(UserModel user, SeedsWalletModel seedsWallet){
+    return MyAccountState(user: user, seedsWallet: seedsWallet);
   }
   
   @override

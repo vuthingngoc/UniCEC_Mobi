@@ -47,7 +47,7 @@ class _MyAccountPageState extends State<MyAccountPage>
     return BlocBuilder<MyAccountBloc, MyAccountState>(
         bloc: _bloc,
         builder: (context, state) {
-          print('user: ${state.user.avatar}');
+          // print('user: ${currentUser.avatar}');
           return Scaffold(
               extendBodyBehindAppBar: true,
               appBar: NavbarProfile(
@@ -55,7 +55,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                 transparent: true,
               ),
               backgroundColor: ArgonColors.bgColorScreen,
-              drawer: ArgonDrawer(currentPage: "Profile"),
+              drawer: ArgonDrawer(currentPage: "My account"),
               body: Stack(children: <Widget>[
                 Container(
                     decoration: BoxDecoration(
@@ -102,7 +102,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                                             children: [
                                               Align(
                                                 child: Text(
-                                                    "${state.user.fullname}",
+                                                    "${currentUser.fullname}",
                                                     style: TextStyle(
                                                         color: Color.fromRGBO(
                                                             50, 50, 93, 1),
@@ -180,6 +180,47 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                           Dimens.size10),
                                                       child: Row(children: [
                                                         Icon(Icons
+                                                            .business_center),
+                                                        SizedBox(
+                                                          width: Dimens.size20,
+                                                        ),
+                                                        Text(
+                                                          state.user.departmentName ??
+                                                              '',
+                                                          style: TextStyle(
+                                                              fontSize: 16),
+                                                        )
+                                                      ]),
+                                                    ),
+                                                    Divider(
+                                                      height: 0.6,
+                                                      color: Colors.black,
+                                                    ),
+                                                    Padding(
+                                                      padding: EdgeInsets.all(
+                                                          Dimens.size10),
+                                                      child: Row(children: [
+                                                        Icon(Icons
+                                                            .control_point),
+                                                        SizedBox(
+                                                          width: Dimens.size20,
+                                                        ),
+                                                        Text(
+                                                          'SeedsPoint: ${state.seedsWallet.amount}',
+                                                          style: TextStyle(
+                                                              fontSize: 16),
+                                                        )
+                                                      ]),
+                                                    ),
+                                                    Divider(
+                                                      height: 0.6,
+                                                      color: Colors.black,
+                                                    ),
+                                                    Padding(
+                                                      padding: EdgeInsets.all(
+                                                          Dimens.size10),
+                                                      child: Row(children: [
+                                                        Icon(Icons
                                                             .alternate_email),
                                                         SizedBox(
                                                           width: Dimens.size20,
@@ -220,14 +261,12 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                       padding: EdgeInsets.all(
                                                           Dimens.size10),
                                                       child: Row(children: [
-                                                        Icon(Icons
-                                                            .business_center),
+                                                        Icon(Icons.cake),
                                                         SizedBox(
                                                           width: Dimens.size20,
                                                         ),
                                                         Text(
-                                                          state.user.departmentName ??
-                                                              '',
+                                                          state.user.dob,
                                                           style: TextStyle(
                                                               fontSize: 16),
                                                         )
@@ -241,12 +280,12 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                       padding: EdgeInsets.all(
                                                           Dimens.size10),
                                                       child: Row(children: [
-                                                        Icon(Icons.cake),
+                                                        Icon(Icons.transgender),
                                                         SizedBox(
                                                           width: Dimens.size20,
                                                         ),
                                                         Text(
-                                                          state.user.dob,
+                                                          state.user.gender,
                                                           style: TextStyle(
                                                               fontSize: 16),
                                                         )
@@ -271,7 +310,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                                 child: Align(
                                   child: CircleAvatar(
                                     backgroundImage: NetworkImage(//AssetImage(
-                                        "${state.user.avatar}"),
+                                        "${currentUser.avatar}"),
                                     radius: 65.0,
                                     // maxRadius: 200.0,
                                   ),

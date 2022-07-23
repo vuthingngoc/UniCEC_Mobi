@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class ProfilePic extends StatelessWidget {
   String avatar;
@@ -18,7 +17,7 @@ class ProfilePic extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           CircleAvatar(
-            backgroundImage: NetworkImage(avatar),//"assets/img/profile-screen-bg.png"),
+            backgroundImage: NetworkImage(avatar),
           )
         ],
       ),

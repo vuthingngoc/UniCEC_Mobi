@@ -67,7 +67,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1000685570084',
     projectId: 'unics-e46a4',
     storageBucket: 'unics-e46a4.appspot.com',
-    androidClientId: '1000685570084-suntjfc671rnil6i9vepihsa4kccberm.apps.googleusercontent.com',
+    androidClientId: '1000685570084-45ufkleqbrhmpfj9jcriqrgdidvvcvep.apps.googleusercontent.com',
     iosClientId: '1000685570084-p00rn9tpdigj6nsknn0n6rb785u7dr0b.apps.googleusercontent.com',
     iosBundleId: 'com.example.unicecMobi',
   );
@@ -78,7 +78,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1000685570084',
     projectId: 'unics-e46a4',
     storageBucket: 'unics-e46a4.appspot.com',
-    androidClientId: '1000685570084-suntjfc671rnil6i9vepihsa4kccberm.apps.googleusercontent.com',
+    androidClientId: '1000685570084-45ufkleqbrhmpfj9jcriqrgdidvvcvep.apps.googleusercontent.com',
     iosClientId: '1000685570084-p00rn9tpdigj6nsknn0n6rb785u7dr0b.apps.googleusercontent.com',
     iosBundleId: 'com.example.unicecMobi',
   );

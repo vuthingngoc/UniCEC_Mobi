@@ -12,10 +12,10 @@ class SeedsWalletModel{
   });
 
   factory SeedsWalletModel.fromJson(Map<String, dynamic> json){
-    int id = json['id'];
-    int studentId = json['student_id'];
-    double amount = json['amount'];
-    bool status = json['status'];
+    int id = json['id'] ?? 0;
+    int studentId = json['student_id'] ?? 0;
+    double amount = json['amount'].toDouble();
+    bool status = json['status'] ?? false;
 
     return SeedsWalletModel(
       id: id, 
