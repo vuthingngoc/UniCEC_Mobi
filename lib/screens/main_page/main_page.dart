@@ -12,6 +12,7 @@ import '../../main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../utils/app_color.dart';
+import '../../utils/router.dart';
 import '../home/home_page.dart';
 import 'widget/component_button.dart';
 
@@ -222,7 +223,8 @@ class _MainPageState extends State<MainPage> {
                         index: 4,
                         label: "Cá nhân",
                         onPressed: () {
-                          _pageController.jumpToPage(4);
+                          Navigator.of(context).pushNamed(Routes.profile);
+                          // _pageController.jumpToPage(4);
                         },
                       ),
                     )

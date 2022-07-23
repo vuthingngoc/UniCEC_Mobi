@@ -3,7 +3,6 @@ import 'package:unicec_mobi/bloc/club_view_detail/club_view_detail_state.dart';
 import 'package:unicec_mobi/models/enums/member_status.dart';
 import 'package:unicec_mobi/utils/base_bloc.dart';
 
-import '../../models/entities/member/member_detail_model.dart';
 import '../../models/entities/member/member_model.dart';
 import '../../services/i_services.dart';
 

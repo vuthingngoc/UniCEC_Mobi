@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/models/common/current_user.dart';
 import 'package:unicec_mobi/models/entities/department/department_model.dart';
+import 'package:unicec_mobi/models/entities/seedswallet/seeds_wallet_model.dart';
 import 'package:unicec_mobi/models/entities/university/university_model.dart';
 import 'package:unicec_mobi/models/entities/user/user_model.dart';
 import 'package:unicec_mobi/services/user_svc/i_user_service.dart';
@@ -35,7 +36,7 @@ class UserService implements IUserService{
   }
 
   @override
-  Future<UniversityModel?> GetUniById(int universityId) async {
+  Future<UniversityModel?> getUniById(int universityId) async {
     var client = http.Client();
     String url = Api.GetUrl(apiPath: '${Api.universities}/$universityId');
     String token = GetIt.I.get<CurrentUser>().idToken;
@@ -54,7 +55,7 @@ class UserService implements IUserService{
   }
 
   @override
-  Future<DepartmentModel?> GetDepartmentById(int departmentId) async {
+  Future<DepartmentModel?> getDepartmentById(int departmentId) async {
     var client = http.Client();
     String url = Api.GetUrl(apiPath: '${Api.departments}/$departmentId');
     String token = GetIt.I.get<CurrentUser>().idToken;
@@ -69,6 +70,29 @@ class UserService implements IUserService{
       Log.error(e.toString());
     }
     
+    return null;
+  }
+
+  @override
+  Future<SeedsWalletModel?> getSeedsWalletByUser(int userId) async {
+    var client = http.Client();
+    String params = '?studentId=$userId';
+
+    String url = Api.GetUrl(apiPath: '${Api.seedsWallets}/search$params');
+    String token = GetIt.I.get<CurrentUser>().idToken;
+
+    try{
+      var response = await client.get(Uri.parse(url), headers: Api.GetHeader(token));
+      if(response.statusCode == 200){
+        Map<String, dynamic> json = adapter.parseToMap(response);
+        var items = json['items'][0];
+        print('getSeedsWalletByUser: $items');
+        return SeedsWalletModel.fromJson(items);
+      }
+    }catch(e){
+      Log.error(e.toString());
+    }
+
     return null;
   }
 }
