@@ -2,8 +2,7 @@ class UniSelectorModel {
   final String token;
   final List<UniBelongToEmail> listUniBelongToEmail;
 
-  UniSelectorModel(
-      {required this.token, required this.listUniBelongToEmail});
+  UniSelectorModel({required this.token, required this.listUniBelongToEmail});
 
   factory UniSelectorModel.fromJson(Map<String, dynamic> json) {
     String token = json['token'];
@@ -28,6 +27,7 @@ class UniBelongToEmail {
   final String email;
   final String description;
   final String phone;
+  final String? imgUrl;
   final String founding;
   final String opening;
   final String closing;
@@ -41,6 +41,7 @@ class UniBelongToEmail {
       required this.email,
       required this.description,
       required this.phone,
+      this.imgUrl,
       required this.founding,
       required this.opening,
       required this.closing,
@@ -54,6 +55,7 @@ class UniBelongToEmail {
     String email = json['email'];
     String description = json['description'];
     String phone = json['phone'];
+    String? imgUrl = json['imgURL'];
     String founding = json['founding'];
     String opening = json['opening'];
     String closing = json['closing'];
@@ -67,6 +69,7 @@ class UniBelongToEmail {
         email: email,
         description: description,
         phone: phone,
+        imgUrl: imgUrl,
         founding: founding,
         opening: opening,
         closing: closing,
