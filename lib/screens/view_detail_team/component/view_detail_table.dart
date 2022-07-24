@@ -23,42 +23,37 @@ class ViewDetailTableMenu extends StatelessWidget {
       //   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
       // )),
       Row(
+        children: [
+          Container(
+            margin: const EdgeInsets.only(left: 15.0, right: 15, bottom: 10),
+            padding: const EdgeInsets.all(3.0),
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.green),
+                color: Colors.green,
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            child: Text("Mã: DWD16GH",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                )),
+          ),
+        ],
+      ),
+      Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Container(
-                margin: const EdgeInsets.all(15.0),
-                padding: const EdgeInsets.all(3.0),
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.green),
-                    color: Colors.green,
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                child: Text("Mã: DWD16GH",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                    )),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(
-                margin: const EdgeInsets.all(15.0),
-                padding: const EdgeInsets.all(3.0),
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.green),
-                    color: Colors.green,
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                child: Text("Mã giới thiệu: 123456E",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                    )),
-              ),
-            ],
+          Container(
+            margin: const EdgeInsets.only(left: 15.0, right: 15, bottom: 10),
+            padding: const EdgeInsets.all(3.0),
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.green),
+                color: Colors.green,
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            child: Text("Mã giới thiệu: 123456E",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                )),
           ),
         ],
       ),

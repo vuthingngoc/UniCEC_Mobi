@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../constants/Theme.dart';
 import 'list_team_menu.dart';
 
 class Body extends StatelessWidget {
@@ -10,6 +11,39 @@ class Body extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 20),
       child: Column(
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Center(
+                  child: FlatButton(
+                    textColor: ArgonColors.white,
+                    color: ArgonColors.primary,
+                    onPressed: () {
+                      // Respond to button press
+                      Navigator.pushNamed(context, '/');
+                    },
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                      BorderRadius.circular(4.0),
+                    ),
+                    child: Padding(
+                        padding: EdgeInsets.only(
+                            left: 16.0,
+                            right: 16.0,
+                            top: 12,
+                            bottom: 12),
+                        child: Text("Nhập mã tham gia",
+                            style: TextStyle(
+                                fontWeight:
+                                FontWeight.w600,
+                                fontSize: 15.0))),
+                  ),
+                ),
+              ),
+            ],
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
