@@ -5,6 +5,7 @@ import 'package:unicec_mobi/screens/detail_competition/detail_competition.dart';
 import 'package:unicec_mobi/utils/router.dart';
 import '../screens/main_page/main_page.dart';
 import '../screens/pages.dart';
+import '../screens/view_detail_team/view_detail_team_page.dart';
 
 class PageDependencies {
   static Future setup(GetIt injector) async {
@@ -34,6 +35,12 @@ class PageDependencies {
     //Profile Page -> show general info Student
     injector.registerFactory<Widget>(() => DetailCompetition(),
         instanceName: Routes.detailCompetition);
+
+    injector.registerFactory<Widget>(() => ViewListTeamPage(),
+        instanceName: Routes.viewListTeam);
+
+    injector.registerFactory<Widget>(() => ViewDetailTeamPage(),
+        instanceName: Routes.viewDetailTeam);
 
     //Profile Page -> show thông tin Student
 

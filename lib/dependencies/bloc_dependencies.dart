@@ -7,6 +7,7 @@ import 'package:unicec_mobi/bloc/login/login_bloc.dart';
 import 'package:unicec_mobi/bloc/my_account/my_account_bloc.dart';
 import 'package:unicec_mobi/bloc/splash/splash_bloc.dart';
 import 'package:unicec_mobi/bloc/university_selection/university_selection_bloc.dart';
+import 'package:unicec_mobi/services/services.dart';
 import '../bloc/club_selection/club_selection_bloc.dart';
 import '../bloc/club_view_detail/club_view_detail_bloc.dart';
 import '../bloc/main/main_bloc.dart';
@@ -57,5 +58,6 @@ class BlocDependencies {
 
     injector.registerFactory<ClubViewDetailBloc>(
         () => ClubViewDetailBloc(service: injector()));
+
   }
 }

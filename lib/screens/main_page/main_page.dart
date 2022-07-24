@@ -18,6 +18,8 @@ import '../../utils/router.dart';
 import '../home/home_page.dart';
 import '../my_account/my_account_page.dart';
 import '../profile/profile_page.dart';
+import '../view_detail_team/view_detail_team_page.dart';
+import '../view_list_teams/view_list_team_page.dart';
 import 'widget/component_button.dart';
 
 class MainPage extends StatefulWidget {
@@ -160,10 +162,8 @@ class _MainPageState extends State<MainPage> {
               children: <Widget>[
                 Home(),
                 DetailCompetition(),
-                // PostPage(GetIt.I.get<PostBloc>()),
-                // NewsPage(GetIt.I.get<NewsBloc>()),
-                // StorePage(GetIt.I.get<StoreMainBloc>()),
-                // POIPage(GetIt.I.get<POIBloc>()),
+                ViewListTeamPage(),
+                ViewDetailTeamPage(),
                 ProfilePage(bloc: GetIt.I.get<ProfileBloc>())
                 // MyAccountPage(
                 //      GetIt.I.get<MyAccountBloc>(), bloc: MyAccountBloc,),

@@ -478,21 +478,63 @@ class DetailCompetition extends StatelessWidget {
                                             ],
                                           ),
                                         ),
-                                        Container(
-                                          alignment: Alignment.center,
-                                          child: ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                primary: AppColors.primaryColor,
-                                                textStyle: const TextStyle(
-                                                    fontSize: 20)),
-                                            onPressed: () {},
-                                            child: const Text(
-                                              'Tham gia ngay',
-                                              style: TextStyle(
-                                                  color: Colors.black),
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 16),
+                                          child: Center(
+                                            child: FlatButton(
+                                              textColor: ArgonColors.white,
+                                              color: ArgonColors.primary,
+                                              onPressed: () {
+                                                // Respond to button press
+                                                Navigator.pushNamed(
+                                                    context, '/home');
+                                              },
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(4.0),
+                                              ),
+                                              child: Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 16.0,
+                                                      right: 16.0,
+                                                      top: 12,
+                                                      bottom: 12),
+                                                  child: Text("Tham gia ngay",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                          FontWeight.w600,
+                                                          fontSize: 18.0))),
                                             ),
                                           ),
                                         ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 16),
+                                          child: Center(
+                                            child: FlatButton(
+                                              textColor: ArgonColors.white,
+                                              color: ArgonColors.primary,
+                                              onPressed: () {
+                                                // Respond to button press
+                                                Navigator.pushNamed(context, '/viewListTeam');
+                                              },
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(4.0),
+                                              ),
+                                              child: Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 16.0,
+                                                      right: 16.0,
+                                                      top: 12,
+                                                      bottom: 12),
+                                                  child: Text("Danh sách các đội tham gia",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                          FontWeight.w600,
+                                                          fontSize: 18.0))),
+                                            ),
+                                          ),
+                                        )
 
                                         // Padding(
                                         //   padding: const EdgeInsets.only(
