@@ -15,11 +15,11 @@ class Body extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Padding(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.only(right: 20, bottom: 20),
                 child: Center(
                   child: FlatButton(
                     textColor: ArgonColors.white,
-                    color: ArgonColors.primary,
+                    color: ArgonColors.warning,
                     onPressed: () {
                       // Respond to button press
                       Navigator.pushNamed(context, '/');
