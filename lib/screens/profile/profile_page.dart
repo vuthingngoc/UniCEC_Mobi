@@ -41,6 +41,8 @@ class _ProfilePageState extends State<ProfilePage>
           return Scaffold(
             appBar: AppBar(
               title: Text("Trang cá nhân"),
+              automaticallyImplyLeading: false,
+              centerTitle: true,
             ),
             body: Body(bloc: _bloc, state: state,),
             //bottomNavigationBar: CustomBottomNavBar(selectedMenu: MenuState.profile),
