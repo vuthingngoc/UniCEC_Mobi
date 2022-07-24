@@ -23,7 +23,7 @@ class ViewDetailTableMenu extends StatelessWidget {
       //   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
       // )),
       Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
@@ -42,8 +42,8 @@ class ViewDetailTableMenu extends StatelessWidget {
               ),
             ],
           ),
+          Expanded(child: SizedBox(width: 10,)),
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
                 margin: const EdgeInsets.all(15.0),
@@ -52,7 +52,7 @@ class ViewDetailTableMenu extends StatelessWidget {
                     border: Border.all(color: Colors.green),
                     color: Colors.green,
                     borderRadius: BorderRadius.all(Radius.circular(10))),
-                child: Text("Mã giới thiệu: 123456E",
+                child: Text("Mã tham gia: PASS",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
