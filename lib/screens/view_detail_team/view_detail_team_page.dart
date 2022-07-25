@@ -51,13 +51,75 @@ class _ViewDetailTeamPageState extends State<ViewDetailTeamPage>
     // ];
     return Scaffold(
         floatingActionButton: Padding(
-          padding: const EdgeInsets.only(bottom: 55),
+          padding: const EdgeInsets.only(bottom: 20),
           child: FloatingActionButton(
             heroTag: "Thêm thành viên",
             backgroundColor: AppColors.primaryColor,
-            onPressed: () async {},
+            onPressed: () async {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      scrollable: true,
+                      title: Container(child: Text('Chỉnh sửa', style: TextStyle( fontSize: 20), textAlign: TextAlign.center,)),
+                      content: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Form(
+                          child: Column(
+                            children: <Widget>[
+                              TextFormField(
+                                decoration: InputDecoration(
+                                  labelText: 'Tên',
+                                  icon: Icon(Icons.account_box),
+                                ),
+                              ),
+                              TextFormField(
+                                decoration: InputDecoration(
+                                  labelText: 'Miêu tả',
+                                  icon: Icon(Icons.account_box),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      actions: [
+                        Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: Center(
+                            child: FlatButton(
+                              textColor: ArgonColors.white,
+                              color: ArgonColors.warning,
+                              onPressed: () {},
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                BorderRadius.circular(4.0),
+                              ),
+                              child: Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 16.0,
+                                      right: 16.0,
+                                      top: 12,
+                                      bottom: 12),
+                                  child: Text("Xác nhận",
+                                      style: TextStyle(
+                                          fontWeight:
+                                          FontWeight.w600,
+                                          fontSize: 15.0))),
+                            ),
+                          ),
+                        ),
+                        // RaisedButton(
+                        //     child: Text("Tạo"),
+                        //     onPressed: () {
+                        //       // your code
+                        //     })
+                      ],
+                    );
+                  });
+            },
             tooltip: 'Increment',
-            child: const Icon(Icons.add),
+            child: const Icon(Icons.edit),
           ),
         ),
         appBar: AppBar(
