@@ -11,8 +11,44 @@ class ViewDetailTableMenu extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
+
+    Future<void> _showDeleteDialog() async {
+      return showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Cảnh báo'),
+            content: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  Text('Bạn có chắc chắn muốn xóa?'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text('Đồng ý'),
+                onPressed: () {
+                  print('Confirmed');
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: Text('Hủy'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return ListView(children: <Widget>[
       SizedBox(
         height: 20,
@@ -84,38 +120,7 @@ class ViewDetailTableMenu extends StatelessWidget {
         rows: [
           DataRow(
               onLongPress: () {
-                PopupMenuButton<int>(
-                    icon: Icon(Icons.filter_alt_outlined),
-                    itemBuilder: (context) {
-                      return [
-                        PopupMenuItem(
-                          onTap: () {},
-                          value: 1,
-                          child: Row(
-                            children: <Widget>[
-                              Icon(Icons.access_time_sharp, size: 18),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
-                                child: Text('Ngày gần nhất'),
-                              ),
-                            ],
-                          ),
-                        ),
-                        PopupMenuItem(
-                          onTap: () {},
-                          value: 2,
-                          child: Row(
-                            children: <Widget>[
-                              Icon(Icons.delete, size: 18),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
-                                child: Text('Mới nhất'),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ];
-                    });
+                _showDeleteDialog();
               },
               cells: [
                 DataCell(
@@ -136,7 +141,7 @@ class ViewDetailTableMenu extends StatelessWidget {
         ],
       ),
       Padding(
-        padding: const EdgeInsets.only(top: 16),  
+        padding: const EdgeInsets.only(top: 16),
         child: Center(
           child: FlatButton(
             textColor: ArgonColors.white,
