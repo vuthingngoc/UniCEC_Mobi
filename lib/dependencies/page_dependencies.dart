@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/screens/club_view_detail/club_view_detail_page.dart';
-import 'package:unicec_mobi/screens/detail_competition/detail_competition.dart';
+import 'package:unicec_mobi/screens/detail_competition/detail_competition_page.dart';
 import 'package:unicec_mobi/utils/router.dart';
 import '../screens/main_page/main_page.dart';
 import '../screens/pages.dart';
@@ -30,10 +30,10 @@ class PageDependencies {
         instanceName: Routes.clubSelection);
 
     //HomePage -> show Cuộc Thi và Sự Kiện
-    injector.registerFactory<Widget>(() => Home(), instanceName: Routes.home);
+    injector.registerFactory<Widget>(() => HomePage(bloc: injector()), instanceName: Routes.home);
 
     //Profile Page -> show general info Student
-    injector.registerFactory<Widget>(() => DetailCompetition(),
+    injector.registerFactory<Widget>(() => DetailCompetitionPage(),
         instanceName: Routes.detailCompetition);
 
     injector.registerFactory<Widget>(() => ViewListTeamPage(),

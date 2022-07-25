@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/models/common/current_user.dart';
+import 'package:unicec_mobi/models/common/paging_result.dart';
 import 'package:unicec_mobi/models/entities/competition/competition_model.dart';
 import 'package:unicec_mobi/models/entities/competition/competition_request_model.dart';
 import 'package:unicec_mobi/models/entities/team/team_model.dart';
@@ -14,7 +15,7 @@ class CompetitionService implements ICompetitionService{
   Adapter adapter = Adapter();
 
   @override
-  Future<CompetitionModel?> loadCompetition(CompetitionRequestModel request) async {
+  Future<PagingResult<CompetitionModel>?> loadCompetition(CompetitionRequestModel request) async {
     var client = http.Client();    
     String params = '?';
     if(request.clubId != null){
@@ -23,6 +24,10 @@ class CompetitionService implements ICompetitionService{
 
     if(request.scope != null){
       params += '&scope=${request.scope}';
+    }
+
+    if(request.viewMost != null){
+      params += '&viewMost=${request.viewMost}';
     }
 
     if(request.name != null){
@@ -35,13 +40,15 @@ class CompetitionService implements ICompetitionService{
       });
     }
 
+    print('params: $params');
     String url = Api.GetUrl(apiPath: '${Api.competitions}$params');
     String? token = GetIt.I.get<CurrentUser>().idToken;
     try{
       var response = await client.get(Uri.parse(url), headers: Api.GetHeader(token));
       if(response.statusCode == 200){
+        print('response: ${response.body}');
         Map<String, dynamic> json = adapter.parseToMap(response);
-        return CompetitionModel.fromJson(json);
+        return PagingResult.fromJson(json, CompetitionModel.fromJson);
       }
 
     }catch(e){

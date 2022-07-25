@@ -21,15 +21,15 @@ class CompetitionEntityModel {
       required this.description});
 
   factory CompetitionEntityModel.fromJson(Map<String, dynamic> json) {
-    int id = json['id'];
-    int competitionId = json['competition_id'];
-    int entityTypeId = json['entity_type_id'];
-    String entityTypeName = json['entity_type_name'];
-    String name = json['name'];
-    String imageUrl = json['image_url'];
-    String website = json['website'];
-    String email = json['email'];
-    String description = json['description'];
+    int id = json['id'] ?? 0;
+    int competitionId = json['competition_id'] ?? 0;
+    int entityTypeId = json['entity_type_id'] ?? 0;
+    String entityTypeName = json['entity_type_name'] ?? '';
+    String name = json['name'] ?? '';
+    String imageUrl = json['image_url'] ?? '';
+    String website = json['website'] ?? '';
+    String email = json['email'] ?? '';
+    String description = json['description'] ?? '';
 
     return CompetitionEntityModel(
         id: id,

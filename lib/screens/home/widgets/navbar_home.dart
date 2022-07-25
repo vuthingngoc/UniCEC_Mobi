@@ -157,35 +157,29 @@ class _NavbarHomeState extends State<NavbarHome> {
                     //)
                   ],
                 ),
-                
+
                 if (widget.searchBar)
                   Row(
                     children: [
                       Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 8, bottom: 4, left: 15, right: 15),
-                          child: Input(
-                              placeholder: "Tìm Kiếm Cuộc Thi và Sự Kiện",
-                              controller: widget.searchController,
-                              onChanged: widget.searchOnChanged,
-                              autofocus: widget.searchAutofocus,
-                              suffixIcon:
-                              Icon(Icons.zoom_in, color: ArgonColors.muted),
-                              onTap: () {
-                                Navigator.pushNamed(context, '/pro');
-                              },
-                              prefixIcon: Icon(Icons
-                                  .design_services_sharp)), // để icon của app mình
-                        ),
+                        child: Input(
+                            placeholder: "Tìm Kiếm Cuộc Thi và Sự Kiện",
+                            controller: widget.searchController,
+                            onChanged: widget.searchOnChanged,
+                            // autofocus: widget.searchAutofocus,
+                            suffixIcon:
+                                Icon(Icons.zoom_in, color: ArgonColors.muted),
+                            onTap: () {
+                              Navigator.pushNamed(context, '/pro');
+                            },
+                            prefixIcon: Icon(Icons.design_services_sharp)),
                       ),
                       PopupMenuButton<int>(
-                        icon: Icon(Icons.filter_alt_outlined),
+                          icon: Icon(Icons.filter_alt_outlined),
                           itemBuilder: (context) {
                             return [
                               PopupMenuItem(
-                                onTap: () {
-                                },
+                                onTap: () {},
                                 value: 1,
                                 child: Row(
                                   children: <Widget>[
@@ -198,8 +192,7 @@ class _NavbarHomeState extends State<NavbarHome> {
                                 ),
                               ),
                               PopupMenuItem(
-                                onTap: () {
-                                },
+                                onTap: () {},
                                 value: 2,
                                 child: Row(
                                   children: <Widget>[
@@ -217,12 +210,12 @@ class _NavbarHomeState extends State<NavbarHome> {
                   ),
 
                 SizedBox(
-                  height: 10.0,
+                  height: 22.0,
                 ),
 
                 if (categories)
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       GestureDetector(
@@ -241,20 +234,18 @@ class _NavbarHomeState extends State<NavbarHome> {
                           ],
                         ),
                       ),
-                      SizedBox(width: 30),
                       Container(
                         color: ArgonColors.initial,
                         height: 25,
                         width: 1,
                       ),
-                      SizedBox(width: 30),
                       GestureDetector(
                         onTap: () {
                           //Navigator.pushNamed(context, '/pro');
                         },
                         child: Row(
                           children: [
-                            Icon(Icons.shopping_cart,
+                            Icon(Icons.school,
                                 color: ArgonColors.initial, size: 22.0),
                             SizedBox(width: 10),
                             Text(widget.categoryTwo,
