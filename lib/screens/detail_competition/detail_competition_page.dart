@@ -1,13 +1,11 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 
 import '../../constants/Theme.dart';
 import '../../utils/app_color.dart';
-import '../home/widgets/navbar_home.dart';
 import '../size_config.dart';
 import '../widgets/drawer.dart';
 
-class DetailCompetition extends StatelessWidget {
+class DetailCompetitionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

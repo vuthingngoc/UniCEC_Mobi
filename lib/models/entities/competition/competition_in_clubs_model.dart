@@ -13,11 +13,11 @@ class CompetitionInClubsModel {
       required this.isOwner});
 
   factory CompetitionInClubsModel.fromJson(Map<String, dynamic> json) {
-    int id = json['id'];
-    String name = json['name'];
-    String image = json['image'];
-    String fanpage = json['fanpage'];
-    bool isOwner = json['is_owner'];
+    int id = json['id'] ?? 0;
+    String name = json['name'] ?? '';
+    String image = json['image'] ?? '';
+    String fanpage = json['fanpage'] ?? '';
+    bool isOwner = json['is_owner'] ?? false;
 
     return CompetitionInClubsModel(
         id: id, name: name, image: image, fanpage: fanpage, isOwner: isOwner);

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-
-import '../../../models/common/current_user.dart';
+import '../../../models/entities/competition/competition_model.dart';
 import '../../size_config.dart';
 import 'section_title.dart';
 
 class SpecialOffers extends StatelessWidget {
+  final List<CompetitionModel> outStandingCompetitions;
+
   const SpecialOffers({
     Key? key,
+    required this.outStandingCompetitions
   }) : super(key: key);
 
   @override
@@ -26,31 +27,35 @@ class SpecialOffers extends StatelessWidget {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
            child: Row(
-            children:
-            [
-              // ListView.builder(itemBuilder: (context, index) {
-              //   return SpecialOfferCard(name: name, image: image, description: description, press: () {},)
-              // })
-              SpecialOfferCard(
-                image: "assets/image/Image Banner 2.png",
-                name: "Smartphone",
-                description: "Data check",
-                press: () {},
-              ),
-              SpecialOfferCard(
-                image: "assets/image/Image Banner 3.png",
-                name: "Fashion",
-                description: "Data Cehcl",
-                press: () {},
-              ),
-              SpecialOfferCard(
-                image: "assets/image/Image Banner 3.png",
-                name: "Fashion",
-                description: "Data Cehcl",
-                press: () {},
-              ),
-              //SizedBox(width: getProportionateScreenWidth(10)),
-            ],
+            children: List.generate(outStandingCompetitions.length, (index){
+              return  SpecialOfferCard(image: outStandingCompetitions[index].competitionEntities[0].imageUrl,description: '',name: outStandingCompetitions[index].name, press: (){},);
+            })
+
+            // [
+              
+            //   // ListView.builder(itemBuilder: (context, index) {
+            //   //   return SpecialOfferCard(name: name, image: image, description: description, press: () {},)
+            //   // })
+            //   SpecialOfferCard(
+            //     image: "assets/image/Image Banner 2.png",
+            //     name: "Smartphone",
+            //     description: "Data check",
+            //     press: () {},
+            //   ),
+            //   SpecialOfferCard(
+            //     image: "assets/image/Image Banner 3.png",
+            //     name: "Fashion",
+            //     description: "Data Cehcl",
+            //     press: () {},
+            //   ),
+            //   SpecialOfferCard(
+            //     image: "assets/image/Image Banner 3.png",
+            //     name: "Fashion",
+            //     description: "Data Cehcl",
+            //     press: () {},
+            //   ),
+            //   //SizedBox(width: getProportionateScreenWidth(10)),
+            // ],
           ),
         ),
       ],

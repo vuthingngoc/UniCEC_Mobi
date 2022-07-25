@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unicec_mobi/bloc/competition/competition_bloc.dart';
+import 'package:unicec_mobi/bloc/competition/competition_state.dart';
 import 'package:unicec_mobi/screens/home/widgets/navbar_home.dart';
 
+import '../../bloc/competition/competition_event.dart';
 import '../../constants/theme.dart';
 
 //widgets
@@ -52,91 +56,113 @@ final Map<String, Map<String, dynamic>> homeCards = {
   }
 };
 
-class Home extends StatelessWidget {
-  //final GlobalKey _scaffoldKey = GlobalKey();
+class HomePage extends StatefulWidget {
+  final CompetitionBloc bloc;
+
+  HomePage({required this.bloc});
+
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  CompetitionBloc get _bloc => widget.bloc;
+
+  void initState() {
+    _bloc.listenerStream.listen((event) {});
+    _bloc.add(LoadOutStandingCompetitionEvent());
+    _bloc.add(LoadCompetitionEvent());
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return Scaffold(
-        appBar:
-        NavbarHome(
-          title: "Cuộc Thi và Sự Kiện",
-          searchBar: true,
-          categoryOne: "Liên Trường",
-          categoryTwo: "Trong Trường",
-        ),
-        backgroundColor: ArgonColors.bgColorScreen,
-        //key: _scaffoldKey,
-        drawer: ArgonDrawer(currentPage: "Home"),
-        body: Container(
-          padding: EdgeInsets.only(left: 24.0, right: 24.0),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(padding: const EdgeInsets.only(top: 16.0),
-                  child: SpecialOffers(),
-                ),
-                SizedBox(height: getProportionateScreenWidth(15)),
-                Padding(
-                  padding:
-                  EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(5)),
-                  child: SectionTitle(
-                    title: "Đang diễn ra",
-                    press: () {},
+
+    return BlocBuilder<CompetitionBloc, CompetitionState>(
+        bloc: _bloc,
+        builder: (context, state) {
+          return Scaffold(
+              appBar: NavbarHome(
+                title: "Cuộc Thi và Sự Kiện",
+                searchBar: true,
+                categoryOne: "Liên Trường",
+                categoryTwo: "Trong Trường",
+              ),
+              backgroundColor: ArgonColors.bgColorScreen,
+              //key: _scaffoldKey,
+              drawer: ArgonDrawer(currentPage: "Home"),
+              body: Container(
+                padding: EdgeInsets.only(left: 24.0, right: 24.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16.0),
+                        child: SpecialOffers(outStandingCompetitions: state.outStandingCompetitions,),
+                      ),
+                      SizedBox(height: getProportionateScreenWidth(15)),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: getProportionateScreenWidth(5)),
+                        child: SectionTitle(
+                          title: "Đang diễn ra",
+                          press: () {},
+                        ),
+                      ),
+                      SizedBox(height: 8.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CardSmall(
+                              cta: "Xem thêm",
+                              title: homeCards["Makeup"]!['title'],
+                              img: homeCards["Makeup"]!['image'],
+                              type: homeCards["Makeup"]!['type'],
+                              date: homeCards["Makeup"]!['date'],
+                              tap: () {
+                                Navigator.of(context)
+                                    .pushNamed(Routes.detailCompetition);
+                              }),
+                          CardSmall(
+                              cta: "Xem thêm",
+                              title: homeCards["Coffee"]!['title'],
+                              img: homeCards["Coffee"]!['image'],
+                              type: homeCards["Coffee"]!['type'],
+                              date: homeCards["Coffee"]!['date'],
+                              tap: () {
+                                Navigator.pushNamed(context, '/pro');
+                              })
+                        ],
+                      ),
+                      SizedBox(height: 8.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CardSmall(
+                              cta: "Xem thêm",
+                              title: homeCards["Argon"]!['title'],
+                              img: homeCards["Argon"]!['image'],
+                              type: homeCards["Argon"]!['type'],
+                              date: homeCards["Argon"]!['date'],
+                              tap: () {
+                                Navigator.of(context)
+                                    .pushNamed(Routes.detailCompetition);
+                              }),
+                          CardSmall(
+                              cta: "Xem thêm",
+                              title: homeCards["Fashion"]!['title'],
+                              img: homeCards["Fashion"]!['image'],
+                              type: homeCards["Fashion"]!['type'],
+                              date: homeCards["Fashion"]!['date'],
+                              tap: () {
+                                Navigator.pushNamed(context, '/pro');
+                              })
+                        ],
+                      ),
+                      SizedBox(height: 20.0),
+                    ],
                   ),
                 ),
-                SizedBox(height: 8.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CardSmall(
-                        cta: "Xem thêm",
-                        title: homeCards["Makeup"]!['title'],
-                        img: homeCards["Makeup"]!['image'],
-                        type: homeCards["Makeup"]!['type'],
-                        date: homeCards["Makeup"]!['date'],
-                        tap: () {
-                          Navigator.of(context).pushNamed(Routes.detailCompetition);
-                        }),
-                    CardSmall(
-                        cta: "Xem thêm",
-                        title: homeCards["Coffee"]!['title'],
-                        img: homeCards["Coffee"]!['image'],
-                        type: homeCards["Coffee"]!['type'],
-                        date: homeCards["Coffee"]!['date'],
-                        tap: () {
-                          Navigator.pushNamed(context, '/pro');
-                        })
-                  ],
-                ),
-                SizedBox(height: 8.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CardSmall(
-                        cta: "Xem thêm",
-                        title: homeCards["Argon"]!['title'],
-                        img: homeCards["Argon"]!['image'],
-                        type: homeCards["Argon"]!['type'],
-                        date: homeCards["Argon"]!['date'],
-                        tap: () {
-                          Navigator.of(context).pushNamed(Routes.detailCompetition);
-                        }),
-                    CardSmall(
-                        cta: "Xem thêm",
-                        title: homeCards["Fashion"]!['title'],
-                        img: homeCards["Fashion"]!['image'],
-                        type: homeCards["Fashion"]!['type'],
-                        date: homeCards["Fashion"]!['date'],
-                        tap: () {
-                          Navigator.pushNamed(context, '/pro');
-                        })
-                  ],
-                ),
-                SizedBox(height: 20.0),
-              ],
-            ),
-          ),
-        ));
+              ));
+        });
   }
 }
