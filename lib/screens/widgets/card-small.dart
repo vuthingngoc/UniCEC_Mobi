@@ -61,20 +61,12 @@ class CardSmall extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("@" + type,
+                              Text("#" + type,
                                   style: TextStyle(
                                       color: ArgonColors.warning,
                                       fontSize: 13)),
-                              // Text(date,
-                              //     style: TextStyle(
-                              //         color: ArgonColors.secondary,
-                              //         fontSize: 13,
-                              //         backgroundColor: Colors.red)),
                               Container(
-                                // margin:
-                                // const EdgeInsets.all(15.0),
-                                // padding:
-                                // const EdgeInsets.all(3.0),
+                                margin: const EdgeInsets.only(right: 20),
                                 decoration: BoxDecoration(
                                     border: Border.all(
                                         color: Colors.red),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../constants/Theme.dart';
 
 import '../../utils/app_color.dart';
+import '../widgets/input.dart';
 import 'component/body.dart';
 
 class ViewListTeamPage extends StatefulWidget {
@@ -37,7 +38,7 @@ class _ViewListTeamPageState extends State<ViewListTeamPage>
     //     });
           return Scaffold(
             floatingActionButton: Padding(
-              padding: const EdgeInsets.only(bottom: 10),
+              padding: const EdgeInsets.only(bottom: 60),
               child: FloatingActionButton(
                 heroTag: "Tạo đội thi",
                 backgroundColor: AppColors.primaryColor,
@@ -46,56 +47,56 @@ class _ViewListTeamPageState extends State<ViewListTeamPage>
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0))),
                           scrollable: true,
                           title: Container(child: Text('Tạo đội', style: TextStyle( fontSize: 20), textAlign: TextAlign.center,)),
                           content: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.only(top: 8,),
                             child: Form(
                               child: Column(
                                 children: <Widget>[
-                                  TextFormField(
-                                    decoration: InputDecoration(
-                                      labelText: 'Tên',
-                                      icon: Icon(Icons.account_box),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 8, bottom: 8),
+                                    child: Input(
+                                      placeholder: "Tên",
+                                      prefixIcon: Icon(Icons.label),
                                     ),
                                   ),
-                                  TextFormField(
-                                    decoration: InputDecoration(
-                                      labelText: 'Miêu tả',
-                                      icon: Icon(Icons.description),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 8),
+                                    child: Input(
+                                      placeholder: "Chi tiết",
+                                      prefixIcon: Icon(Icons.description),
                                     ),
-                                    validator: (String? value) {
-                                      return (value != null) ? 'Vui lòng nhập thông tin' : null;
-                                    },
                                   ),
                                 ],
                               ),
                             ),
                           ),
                           actions: [
-                            Padding(
-                              padding: const EdgeInsets.all(20),
-                              child: Center(
-                                child: FlatButton(
-                                  textColor: ArgonColors.white,
-                                  color: ArgonColors.warning,
-                                  onPressed: () {},
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(4.0),
-                                  ),
-                                  child: Padding(
-                                      padding: EdgeInsets.only(
-                                          left: 16.0,
-                                          right: 16.0,
-                                          top: 12,
-                                          bottom: 12),
-                                      child: Text("Tạo",
-                                          style: TextStyle(
-                                              fontWeight:
-                                              FontWeight.w600,
-                                              fontSize: 15.0))),
+                            Container(
+                              width: double.infinity,
+                              margin: new EdgeInsets.only(right: 15, left: 15, bottom: 15),
+                              child: FlatButton(
+                                textColor: ArgonColors.white,
+                                color: ArgonColors.warning,
+                                onPressed: () {},
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(4.0),
                                 ),
+                                child: Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 16.0,
+                                        right: 16.0,
+                                        top: 12,
+                                        bottom: 12),
+                                    child: Text("Tạo",
+                                        style: TextStyle(
+                                            fontWeight:
+                                            FontWeight.w600,
+                                            fontSize: 15.0))),
                               ),
                             ),
                             // RaisedButton(
