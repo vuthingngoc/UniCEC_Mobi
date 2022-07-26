@@ -5,8 +5,10 @@ class CompetitionRoundModel{
   int competitionId;
   String title;
   String description;
-  DateTime startTime;
-  DateTime endTime;
+  // DateTime startTime;
+  // DateTime endTime;
+  String startTime;
+  String endTime;
   int numberOfTeam;
   int seedsPoint;
   CompetitionRoundStatus status;
@@ -28,8 +30,10 @@ class CompetitionRoundModel{
     int competitionId = json['competition_id'];
     String title = json['title'];
     String description = json['description'];
-    DateTime startTime = DateTime.parse(json['start_time']);
-    DateTime endTime = DateTime.parse(json['end_time']);
+    // DateTime startTime = DateTime.parse(json['start_time']);
+    // DateTime endTime = DateTime.parse(json['end_time']);
+    String startTime = json['start_time'];
+    String endTime = json['end_time'];
     int numberOfTeam = json['number_of_team'];
     int seedsPoint = json['seeds_point'];
     CompetitionRoundStatus status = json['status'];

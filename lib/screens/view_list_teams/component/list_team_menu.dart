@@ -78,7 +78,7 @@ class ViewListTeamMenu extends StatelessWidget {
                       Expanded(child: Text("Mở", style: TextStyle(fontSize: 15)))
                     else
                       Expanded(child: Text("Đóng", style: TextStyle(fontSize: 15))),
-                     Icon(Icons.arrow_forward_ios),
+                     Icon(Icons.arrow_forward_ios,),
                     //Icon(Icons.remove_red_eye),
                     // Row(
                     //   children: [

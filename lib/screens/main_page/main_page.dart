@@ -19,6 +19,7 @@ import '../../utils/app_color.dart';
 import '../../utils/router.dart';
 import '../home/home_page.dart';
 import '../profile/profile_page.dart';
+import '../view_competition_round/view_competition_round.dart';
 import '../view_detail_team/view_detail_team_page.dart';
 import '../view_list_teams/view_list_team_page.dart';
 import 'widget/component_button.dart';
@@ -195,8 +196,8 @@ class _MainPageState extends State<MainPage> {
                         ClubBloc>()), // cố định tại vị trí là page 0, nếu chuyển sẻ phải implement lại
                 DetailCompetitionPage(),
                 HomePage(bloc: GetIt.I.get<CompetitionBloc>()),
-                ViewListTeamPage(),
-                //ViewDetailTeamPage(),
+                ViewCompetitionRoundPage(),
+                //ViewListTeamPage(),
                 ProfilePage(bloc: GetIt.I.get<ProfileBloc>())
                 // MyAccountPage(
                 //      GetIt.I.get<MyAccountBloc>(), bloc: MyAccountBloc,),
@@ -322,8 +323,8 @@ class _MainPageState extends State<MainPage> {
                         index: 4,
                         label: "Cá nhân",
                         onPressed: () {
-                          Navigator.of(context).pushNamed(Routes.profile);
-                          // _pageController.jumpToPage(4);
+                          // Navigator.of(context).pushNamed(Routes.profile);
+                           _pageController.jumpToPage(4);
                         },
                       ),
                     )
