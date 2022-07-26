@@ -9,6 +9,7 @@ class CurrentUserDependencies {
         fullname: '',
         avatar: '',
         idToken: '',
+        clubIdSelected: 0,
         clubsBelongToStudent: [],
         membersBelongToClubs: []));
   }

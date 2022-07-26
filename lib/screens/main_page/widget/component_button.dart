@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 import '../../../bloc/main/main_bloc.dart';
+import '../../../models/common/current_user.dart';
 import '../../../utils/app_color.dart';
 
 class ComponentButton extends StatelessWidget {
   final int index;
   final Function() onPressed;
   final String label;
+  int? clubIdSelected;
 
-  const ComponentButton(
-      {Key? key, required this.index, required this.onPressed, required this.label})
+  ComponentButton(
+      {Key? key,
+      required this.index,
+      required this.onPressed,
+      required this.label,
+      this.clubIdSelected})
       : super(key: key);
 
   IconData getIconData(String label) {
@@ -46,8 +53,7 @@ class ComponentButton extends StatelessWidget {
                 color: bloc.state.currentPageIndex == index
                     ? AppColors.primaryColor
                     : Colors.grey,
-                fontSize: 13
-            ),
+                fontSize: 13),
           )
         ],
       ),

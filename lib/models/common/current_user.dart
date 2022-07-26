@@ -14,7 +14,7 @@ class CurrentUser {
   String? avatar;
   //
   List<ClubModel> clubsBelongToStudent;
-  int? clubIdSelected;
+  int clubIdSelected;
   List<MemberDetailModel?> membersBelongToClubs;
   MemberDetailModel? memberSelected;
 
@@ -28,7 +28,7 @@ class CurrentUser {
     this.avatar,
     required this.clubsBelongToStudent,
     required this.membersBelongToClubs,
-    this.clubIdSelected,
+    required this.clubIdSelected,
   });
 
   CurrentUser get currentUser => CurrentUser(
@@ -52,7 +52,7 @@ class CurrentUser {
     fullname = "";
     avatar = "";
     clubsBelongToStudent = [];
-    clubIdSelected = null;
+    clubIdSelected = 0;
     membersBelongToClubs = [];
     memberSelected = null;
   }
