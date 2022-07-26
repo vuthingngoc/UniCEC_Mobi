@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     _bloc.listenerStream.listen((event) {});
     _bloc.add(LoadOutStandingCompetitionEvent());
-    _bloc.add(LoadCompetitionEvent());
+    // _bloc.add(LoadCompetitionEvent());
   }
 
   @override
@@ -95,10 +95,15 @@ class _HomePageState extends State<HomePage> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 16.0),
-                        child: SpecialOffers(outStandingCompetitions: state.outStandingCompetitions,),
-                      ),
+                      (state.outStandingCompetitions != null)
+                          ? Padding(
+                              padding: const EdgeInsets.only(top: 16.0),
+                              child: SpecialOffers(
+                                outStandingCompetitions:
+                                    (state.outStandingCompetitions)!,
+                              ),
+                            )
+                          : SizedBox.shrink(),
                       SizedBox(height: getProportionateScreenWidth(15)),
                       Padding(
                         padding: EdgeInsets.symmetric(
@@ -109,56 +114,37 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       SizedBox(height: 8.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CardSmall(
-                              cta: "Xem thêm",
-                              title: homeCards["Makeup"]!['title'],
-                              img: homeCards["Makeup"]!['image'],
-                              type: homeCards["Makeup"]!['type'],
-                              date: homeCards["Makeup"]!['date'],
-                              tap: () {
-                                Navigator.of(context)
-                                    .pushNamed(Routes.detailCompetition);
-                              }),
-                          CardSmall(
-                              cta: "Xem thêm",
-                              title: homeCards["Coffee"]!['title'],
-                              img: homeCards["Coffee"]!['image'],
-                              type: homeCards["Coffee"]!['type'],
-                              date: homeCards["Coffee"]!['date'],
-                              tap: () {
-                                Navigator.pushNamed(context, '/pro');
-                              })
-                        ],
-                      ),
-                      SizedBox(height: 8.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CardSmall(
-                              cta: "Xem thêm",
-                              title: homeCards["Argon"]!['title'],
-                              img: homeCards["Argon"]!['image'],
-                              type: homeCards["Argon"]!['type'],
-                              date: homeCards["Argon"]!['date'],
-                              tap: () {
-                                Navigator.of(context)
-                                    .pushNamed(Routes.detailCompetition);
-                              }),
-                          CardSmall(
-                              cta: "Xem thêm",
-                              title: homeCards["Fashion"]!['title'],
-                              img: homeCards["Fashion"]!['image'],
-                              type: homeCards["Fashion"]!['type'],
-                              date: homeCards["Fashion"]!['date'],
-                              tap: () {
-                                Navigator.pushNamed(context, '/pro');
-                              })
-                        ],
-                      ),
-                      SizedBox(height: 20.0),
+                      (state.outStandingCompetitions != null)
+                          ? Column(
+                              children: [
+                                Wrap(
+                                  children: List.generate(
+                                      (state.outStandingCompetitions?.length)!,
+                                      (index) {
+                                    return CardSmall(
+                                        cta: "Xem thêm",
+                                        title: (state.outStandingCompetitions?[
+                                                index])!
+                                            .name, // homeCards["Makeup"]!['title'],
+                                        img: (state.outStandingCompetitions?[
+                                                index])!
+                                            .competitionEntities[0]
+                                            .imageUrl, //homeCards["Makeup"]!['image'],
+                                        type: (state.outStandingCompetitions?[
+                                                index])!
+                                            .competitionTypeName, //homeCards["Makeup"]!['type'],
+                                        date:
+                                            '${(state.outStandingCompetitions?[index])!.startTime}', //homeCards["Makeup"]!['date'],
+                                        tap: () {
+                                          Navigator.of(context).pushNamed(
+                                              Routes.detailCompetition);
+                                        });
+                                  }),
+                                )
+                              ],
+                            )
+                          : Text('Không có cuộc thi nào đang diễn ra'),
+                      SizedBox(height: 8.0),                     
                     ],
                   ),
                 ),

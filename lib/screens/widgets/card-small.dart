@@ -24,8 +24,10 @@ class CardSmall extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     return Flexible(
-        child: Container(
+        child: SizedBox(
+      // width: screenWidth / 3,
       height: 270,
       child: GestureDetector(
         onTap: tap,
