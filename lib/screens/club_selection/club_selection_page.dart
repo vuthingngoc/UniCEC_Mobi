@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/bloc/club_selection/club_selection_bloc.dart';
 
 import '../../bloc/club_selection/club_selection_event.dart';
 import '../../bloc/club_selection/club_selection_state.dart';
+import '../../models/common/current_user.dart';
 import '../../utils/dimens.dart';
 import '../../utils/router.dart';
 import 'widgets/show_clubs.dart';
@@ -23,7 +25,8 @@ class _ClubSelectionPageState extends State<ClubSelectionPage> {
     //
     _bloc.listenerStream.listen((event) {
       if (event is NavigatorClubPageEvent) {
-        Navigator.of(context).pushReplacementNamed(Routes.club);
+        Navigator.of(context).pushReplacementNamed(Routes.main);
+        //.pop(context);
       }
       //PushName để có trang back về
       if (event is NavigatorClubsViewPageEvent) {

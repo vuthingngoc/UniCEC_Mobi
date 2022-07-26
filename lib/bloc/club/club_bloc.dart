@@ -20,7 +20,7 @@ class ClubBloc extends BaseBloc<ClubEvent, ClubState> {
         //print(user.clubsBelongToStudent!.length.toString());
         //chuyển trang chọn clubs
         if (user.clubsBelongToStudent != null) {
-          if (user.clubIdSelected != null) {
+          if (user.clubIdSelected != 0) {
             //load info club selected
             ClubModel? clubSelected =
                 await service.getClubSelected(user.clubIdSelected);

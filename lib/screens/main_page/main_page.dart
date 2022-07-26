@@ -1,16 +1,20 @@
 import 'dart:async';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 //import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 // import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/bloc/competition/competition_bloc.dart';
+import 'package:unicec_mobi/screens/club/club_page.dart';
 import 'package:unicec_mobi/screens/detail_competition/detail_competition_page.dart';
+import '../../bloc/club/club_bloc.dart';
 import '../../bloc/main/main_bloc.dart';
 import '../../bloc/main/main_event.dart';
 import '../../bloc/main/main_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/profile/profile_bloc.dart';
+import '../../models/common/current_user.dart';
 import '../../utils/app_color.dart';
 import '../../utils/router.dart';
 import '../home/home_page.dart';
@@ -30,7 +34,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   late PageController _pageController;
-   late StreamSubscription _listener;
+  late StreamSubscription _listener;
   // StreamSubscription keyboardSubscription;
   // KeyboardVisibilityController keyboardVisibilityController =
   // KeyboardVisibilityController();
@@ -41,9 +45,25 @@ class _MainPageState extends State<MainPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _pageController = PageController(initialPage: bloc.state.currentPageIndex);
+    int? clubIdSelected = GetIt.I.get<CurrentUser>().clubIdSelected;
+    // if (GetIt.I.get<CurrentUser>().clubIdSelected != 0) {
+    if (bloc.state.clubSelected != clubIdSelected) {
+      _pageController = PageController(initialPage: 0);
+    } else {
+      _pageController =
+          PageController(initialPage: bloc.state.currentPageIndex);
+    }
+
+    // bloc.listenerStream.listen((event) {
+    //   if (event is CreateInitialPageView) {
+    //     _pageController = PageController(initialPage: 0);
+    //   }
+    //   if (event is InitialPageView) {
+    //     _pageController =
+    //         PageController(initialPage: bloc.state.currentPageIndex);
+    //   }
+    // });
 
     // bloc.listenerStream.listen((event) {
     //   if (event is SwitchingPageEvent) {
@@ -141,6 +161,11 @@ class _MainPageState extends State<MainPage> {
     // }).then((value) => print("finish")).catchError((error) => print("error: $error"));
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
   ///Don't use BlocListener, bloc is disposed when navigator to other page,
   ///so that, user stream instead
   @override
@@ -154,13 +179,24 @@ class _MainPageState extends State<MainPage> {
             body: PageView(
               controller: _pageController,
               onPageChanged: (index) {
-                bloc.add(SwitchingPageEvent(pageIndex: index));
+                if (bloc.state.clubSelected !=
+                    GetIt.I.get<CurrentUser>().clubIdSelected) {
+                  bloc.add(SwitchingPageEvent(pageIndex: index));
+                  // update điều kiện
+                  bloc.add(UpdateClubSelected());
+                } else {
+                  //normal flow
+                  bloc.add(SwitchingPageEvent(pageIndex: index));
+                }
               },
               children: <Widget>[
-                HomePage(bloc: GetIt.I.get<CompetitionBloc>()),
+                ClubPage(
+                    bloc: GetIt.I.get<
+                        ClubBloc>()), // cố định tại vị trí là page 0, nếu chuyển sẻ phải implement lại
                 DetailCompetitionPage(),
+                HomePage(bloc: GetIt.I.get<CompetitionBloc>()),
                 ViewListTeamPage(),
-                ViewDetailTeamPage(),
+                //ViewDetailTeamPage(),
                 ProfilePage(bloc: GetIt.I.get<ProfileBloc>())
                 // MyAccountPage(
                 //      GetIt.I.get<MyAccountBloc>(), bloc: MyAccountBloc,),
@@ -174,16 +210,58 @@ class _MainPageState extends State<MainPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    //CLB
                     Flexible(
-                      fit: FlexFit.tight,
-                      child: ComponentButton(
-                        index: 0,
-                        label: "Cuộc thi",
-                        onPressed: () {
-                          _pageController.jumpToPage(0);
-                        },
-                      ),
-                    ),
+                        fit: FlexFit.tight,
+                        child: MaterialButton(
+                          padding: const EdgeInsets.symmetric(vertical: 5),
+                          onPressed: () {
+                            _pageController.jumpToPage(0);
+                          },
+                          child: Column(
+                            children: [
+                              Icon(
+                                Icons.warning,
+                                color:
+                                    //ss1 từ clubSelection -> MainPage
+                                    ((state.clubSelected !=
+                                                GetIt.I
+                                                    .get<CurrentUser>()
+                                                    .clubIdSelected) &&
+                                            state.currentPageIndex != 1)
+                                        ? AppColors.primaryColor
+                                        : bloc.state.currentPageIndex == 0
+                                            ? AppColors.primaryColor
+                                            : Colors.grey,
+                              ),
+                              Text(
+                                'Câu Lạc Bộ',
+                                style: TextStyle(
+                                    color:
+                                        //ss1 từ clubSelection -> MainPage
+                                        ((state.clubSelected !=
+                                                    GetIt.I
+                                                        .get<CurrentUser>()
+                                                        .clubIdSelected) &&
+                                                state.currentPageIndex != 1)
+                                            ? AppColors.primaryColor
+                                            : bloc.state.currentPageIndex == 0
+                                                ? AppColors.primaryColor
+                                                : Colors.grey,
+                                    fontSize: 13),
+                              )
+                            ],
+                          ),
+                        )
+                        //ComponentButton(
+                        //   index: 0,
+                        //   label: "Câu Lạc Bộ",
+                        //   onPressed: () {
+                        //     _pageController.jumpToPage(0);
+                        //   },
+                        //   clubIdSelected: state.clubSelected,
+                        // ),
+                        ),
                     Flexible(
                       fit: FlexFit.tight,
                       child: ComponentButton(
@@ -192,6 +270,7 @@ class _MainPageState extends State<MainPage> {
                         onPressed: () {
                           _pageController.jumpToPage(1);
                         },
+                        clubIdSelected: state.clubSelected,
                       ),
                     ),
                     Container(
@@ -200,11 +279,28 @@ class _MainPageState extends State<MainPage> {
                       child: Align(
                           alignment: Alignment.bottomCenter,
                           child: Text(
-                            "Cửa hàng",
+                            "Cuộc Thi và Sự Kiện",
                             style: TextStyle(
-                                color: state.currentPageIndex == 2
-                                    ? AppColors.primaryColor
-                                    : Colors.grey,
+                                color:
+                                    //ss1 chắc chắn là trang 2
+                                    ((state.clubSelected ==
+                                                GetIt.I
+                                                    .get<CurrentUser>()
+                                                    .clubIdSelected) &&
+                                            state.currentPageIndex == 2)
+                                        ? AppColors.primaryColor
+                                        //ss2 dùng để ẩn cho nó qua clb
+                                        : ((state.clubSelected !=
+                                                    GetIt.I
+                                                        .get<CurrentUser>()
+                                                        .clubIdSelected) &&
+                                                state.currentPageIndex == 2)
+                                            ? Colors.grey
+                                            :
+                                            //ss3 là bth
+                                            state.currentPageIndex == 2
+                                                ? AppColors.primaryColor
+                                                : Colors.grey,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 13),
                           )),
@@ -217,6 +313,7 @@ class _MainPageState extends State<MainPage> {
                         onPressed: () {
                           _pageController.jumpToPage(3);
                         },
+                        clubIdSelected: state.clubSelected,
                       ),
                     ),
                     Flexible(
@@ -237,15 +334,15 @@ class _MainPageState extends State<MainPage> {
             floatingActionButton: state.isHiddenFAB
                 ? const SizedBox()
                 : FloatingActionButton(
-              child: const Icon(Icons.storefront),
-              onPressed: () {
-                _pageController.jumpToPage(2);
-              },
-              backgroundColor: AppColors.primaryColor,
-              heroTag: "main_page",
-            ),
+                    child: const Icon(Icons.storefront),
+                    onPressed: () {
+                      _pageController.jumpToPage(2);
+                    },
+                    backgroundColor: AppColors.primaryColor,
+                    heroTag: "main_page",
+                  ),
             floatingActionButtonLocation:
-            FloatingActionButtonLocation.centerDocked,
+                FloatingActionButtonLocation.centerDocked,
             extendBody: true,
             resizeToAvoidBottomInset: true,
           );
