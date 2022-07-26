@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import '../../../models/entities/competition/competition_model.dart';
+// import '../../../models/entities/competition/competition_model.dart';
+import '../../../models/entities/competition/competition_show_model.dart';
 import '../../size_config.dart';
 import 'section_title.dart';
 
 class SpecialOffers extends StatelessWidget {
-  final List<CompetitionModel> outStandingCompetitions;
+  final List<CompetitionShowModel> outStandingCompetitions;
 
-  const SpecialOffers({
-    Key? key,
-    required this.outStandingCompetitions
-  }) : super(key: key);
+  const SpecialOffers({Key? key, required this.outStandingCompetitions})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,7 @@ class SpecialOffers extends StatelessWidget {
       children: [
         Padding(
           padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(5)),
+              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(5)),
           child: SectionTitle(
             title: "Nổi bật",
             press: () {},
@@ -26,37 +25,44 @@ class SpecialOffers extends StatelessWidget {
         SizedBox(height: getProportionateScreenWidth(10)),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-           child: Row(
-            children: List.generate(outStandingCompetitions.length, (index){
-              return  SpecialOfferCard(image: outStandingCompetitions[index].competitionEntities[0].imageUrl,description: '',name: outStandingCompetitions[index].name, press: (){},);
-            })
+          child: Row(
+              children: List.generate(outStandingCompetitions.length, (index) {
+            return SpecialOfferCard(
+              image: (outStandingCompetitions[index])
+                  .competitionEntities[0]
+                  .imageUrl,
+              description: '',
+              name: (outStandingCompetitions[index]).name,
+              press: () {},
+            );
+          })
 
-            // [
-              
-            //   // ListView.builder(itemBuilder: (context, index) {
-            //   //   return SpecialOfferCard(name: name, image: image, description: description, press: () {},)
-            //   // })
-            //   SpecialOfferCard(
-            //     image: "assets/image/Image Banner 2.png",
-            //     name: "Smartphone",
-            //     description: "Data check",
-            //     press: () {},
-            //   ),
-            //   SpecialOfferCard(
-            //     image: "assets/image/Image Banner 3.png",
-            //     name: "Fashion",
-            //     description: "Data Cehcl",
-            //     press: () {},
-            //   ),
-            //   SpecialOfferCard(
-            //     image: "assets/image/Image Banner 3.png",
-            //     name: "Fashion",
-            //     description: "Data Cehcl",
-            //     press: () {},
-            //   ),
-            //   //SizedBox(width: getProportionateScreenWidth(10)),
-            // ],
-          ),
+              // [
+
+              //   // ListView.builder(itemBuilder: (context, index) {
+              //   //   return SpecialOfferCard(name: name, image: image, description: description, press: () {},)
+              //   // })
+              //   SpecialOfferCard(
+              //     image: "assets/image/Image Banner 2.png",
+              //     name: "Smartphone",
+              //     description: "Data check",
+              //     press: () {},
+              //   ),
+              //   SpecialOfferCard(
+              //     image: "assets/image/Image Banner 3.png",
+              //     name: "Fashion",
+              //     description: "Data Cehcl",
+              //     press: () {},
+              //   ),
+              //   SpecialOfferCard(
+              //     image: "assets/image/Image Banner 3.png",
+              //     name: "Fashion",
+              //     description: "Data Cehcl",
+              //     press: () {},
+              //   ),
+              //   //SizedBox(width: getProportionateScreenWidth(10)),
+              // ],
+              ),
         ),
       ],
     );
@@ -78,21 +84,28 @@ class SpecialOfferCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Padding(
-      padding: EdgeInsets.only(right: getProportionateScreenWidth(20), left: getProportionateScreenWidth(5)),
+      padding: EdgeInsets.only(
+          right: getProportionateScreenWidth(20),
+          left: getProportionateScreenWidth(5)),
       child: GestureDetector(
         onTap: press,
         child: SizedBox(
-          width: getProportionateScreenWidth(242),
+          width: getProportionateScreenWidth(screenWidth / 2),
           height: getProportionateScreenWidth(100),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(5),
             child: Stack(
               children: [
-                Image.asset(
-                  image,
-                  fit: BoxFit.cover,
-                ),
+                (image.isNotEmpty)
+                    ? Image.network(
+                        image,
+                        fit: BoxFit.cover,
+                        width: getProportionateScreenWidth(screenWidth / 2),
+                      )
+                    : SizedBox.shrink(),
                 Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(

@@ -64,13 +64,13 @@ class _NavbarHomeState extends State<NavbarHome> {
         widget.tags == null ? false : (widget.tags?.length == 0 ? false : true);
 
     return Container(
-        height: widget.searchBar
-            ? (!categories
-                ? (tagsExist ? 211.0 : 178.0)
-                : (tagsExist ? 262.0 : 210.0))
-            : (!categories
-                ? (tagsExist ? 162.0 : 102.0)
-                : (tagsExist ? 200.0 : 150.0)),
+        // height: widget.searchBar
+        //     ? (!categories
+        //         ? (tagsExist ? 211.0 : 178.0)
+        //         : (tagsExist ? 262.0 : 210.0))
+        //     : (!categories
+        //         ? (tagsExist ? 162.0 : 102.0)
+        //         : (tagsExist ? 200.0 : 150.0)),
         decoration: BoxDecoration(
             color: !widget.transparent ? widget.bgColor : Colors.transparent,
             boxShadow: [
@@ -88,87 +88,49 @@ class _NavbarHomeState extends State<NavbarHome> {
             child: Column(
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Row(
-                      children: [
-                        IconButton(
-                            icon: Icon(
-                                !widget.backButton
-                                    ? Icons.menu
-                                    : Icons.arrow_back_ios,
-                                color: !widget.transparent
-                                    ? (widget.bgColor == ArgonColors.white
-                                        ? ArgonColors.initial
-                                        : ArgonColors.white)
-                                    : ArgonColors.white,
-                                size: 24.0),
-                            onPressed: () {
-                              if (!widget.backButton)
-                                Scaffold.of(context).openDrawer();
-                              else
-                                Navigator.pop(context);
-                            }),
-                        Text(widget.title,
-                            style: TextStyle(
-                                color: !widget.transparent
-                                    ? (widget.bgColor == ArgonColors.white
-                                        ? ArgonColors.initial
-                                        : ArgonColors.white)
-                                    : ArgonColors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 18.0)),
-                      ],
-                    ),
-                    // if (widget.rightOptions)
-                    //   Row(
-                    //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //     children: [
-                    //       GestureDetector(
-                    //         onTap: () {
-                    //           Navigator.pushNamed(context, '/pro');
-                    //         },
-                    //         child: IconButton(
-                    //             icon: Icon(Icons.notifications_active,
-                    //                 color: !widget.transparent
-                    //                     ? (widget.bgColor == ArgonColors.white
-                    //                         ? ArgonColors.initial
-                    //                         : ArgonColors.white)
-                    //                     : ArgonColors.white,
-                    //                 size: 22.0),
-                    //             onPressed: null),
-                    //       ),
-                    //       GestureDetector(
-                    //         onTap: () {
-                    //           Navigator.pushNamed(context, '/pro');
-                    //         },
-                    //         child: IconButton(
-                    //             icon: Icon(Icons.shopping_basket,
-                    //                 color: !widget.transparent
-                    //                     ? (widget.bgColor == ArgonColors.white
-                    //                         ? ArgonColors.initial
-                    //                         : ArgonColors.white)
-                    //                     : ArgonColors.white,
-                    //                 size: 22.0),
-                    //             onPressed: null),
-                    //       ),
-                    //],
-                    //)
+                    IconButton(
+                        icon: Icon(
+                            !widget.backButton
+                                ? Icons.menu
+                                : Icons.arrow_back_ios,
+                            color: !widget.transparent
+                                ? (widget.bgColor == ArgonColors.white
+                                    ? ArgonColors.initial
+                                    : ArgonColors.white)
+                                : ArgonColors.white,
+                            size: 24.0),
+                        onPressed: () {
+                          if (!widget.backButton)
+                            Scaffold.of(context).openDrawer();
+                          else
+                            Navigator.pop(context);
+                        }),
+                    Text(widget.title,
+                        style: TextStyle(
+                            color: !widget.transparent
+                                ? (widget.bgColor == ArgonColors.white
+                                    ? ArgonColors.initial
+                                    : ArgonColors.white)
+                                : ArgonColors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18.0)),
                   ],
                 ),
 
                 if (widget.searchBar)
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Expanded(
-                        child: Input(
+                      Expanded(                    
+                        child: Input(                          
                             placeholder: "Tìm Kiếm Cuộc Thi và Sự Kiện",
                             controller: widget.searchController,
                             onChanged: widget.searchOnChanged,
                             // autofocus: widget.searchAutofocus,
-                            suffixIcon:
-                                Icon(Icons.zoom_in, color: ArgonColors.muted),
+                            // suffixIcon:                            
+                            //     Icon(Icons.zoom_in, color: ArgonColors.muted, size: 10),
                             onTap: () {
                               Navigator.pushNamed(context, '/pro');
                             },
