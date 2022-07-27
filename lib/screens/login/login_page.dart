@@ -43,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    
     return BlocProvider.value(
       value: _bloc,
       child: Scaffold(
@@ -77,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(height: Dimens.size20),
                           Flexible(
                             fit: FlexFit.tight,
-                            child: LoginBody(),
+                            child: LoginBody(bloc: _bloc),
                           )
                         ],
                       ),

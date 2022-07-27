@@ -1,3 +1,5 @@
+import 'package:unicec_mobi/utils/app_color.dart';
+
 import '../../../animation/fade_animation.dart';
 import '../../../bloc/login/login_bloc.dart';
 import '../../../bloc/login/login_event.dart';
@@ -6,11 +8,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../bloc/login/login_state.dart';
 import '../../../utils/dimens.dart';
+import '../../../utils/loading.dart';
 
 class LoginBody extends StatelessWidget {
+  LoginBloc bloc;
+
+  LoginBody({required this.bloc});
+
   @override
   Widget build(BuildContext context) {
-    LoginBloc _bloc = BlocProvider.of<LoginBloc>(context);
+    // LoginBloc _bloc = BlocProvider.of<LoginBloc>(context);
     return Container(
       decoration: BoxDecoration(
           color: Colors.white,
@@ -19,7 +26,7 @@ class LoginBody extends StatelessWidget {
               topRight: Radius.circular(Dimens.size60))),
       padding: EdgeInsets.all(Dimens.size30),
       child: BlocBuilder<LoginBloc, LoginState>(
-        bloc: _bloc,
+        bloc: bloc,
         builder: (context, state) {
           return Column(
             children: <Widget>[
@@ -32,7 +39,7 @@ class LoginBody extends StatelessWidget {
                     delay: Dimens.size1p7,
                     child: const Text(
                       "Đăng nhập với",
-                      style: TextStyle(color: Colors.grey),
+                      style: TextStyle(color: Colors.grey),                      
                     )),
               ),
               // SizedBox(
@@ -45,7 +52,7 @@ class LoginBody extends StatelessWidget {
                       delay: Dimens.size1p8,
                       child: InkWell(
                         onTap: () {
-                          _bloc.add(SignInGoogleEvent());
+                          bloc.add(SignInGoogleEvent());
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -56,6 +63,25 @@ class LoginBody extends StatelessWidget {
                           ),
                         ),
                       )),
+                ],
+              ),
+              SizedBox(
+                height: Dimens.size80,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  FadeAnimation(
+                      delay: Dimens.size1p8,
+                      child: Container(
+                          width: 195.0,
+                          height: 50.0,
+                          decoration: BoxDecoration(
+                              color: AppColors.mainColor,
+                              image: DecorationImage(
+                                  image: AssetImage(
+                                      "assets/img/logo-name-app.jpg"),
+                                  fit: BoxFit.contain)))),
                 ],
               ),
             ],

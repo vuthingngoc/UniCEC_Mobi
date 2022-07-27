@@ -4,8 +4,6 @@ import 'package:equatable/equatable.dart';
 import '../../models/entities/competition/competition_show_model.dart';
 
 class CompetitionState extends Equatable {
-  // List<CompetitionModel>? competitions;
-  // List<CompetitionModel>? outStandingCompetitions;
   List<CompetitionShowModel>? outStandingCompetitions;
   List<CompetitionShowModel>? competitions;
 

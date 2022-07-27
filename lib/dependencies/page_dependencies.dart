@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/screens/club_view_detail/club_view_detail_page.dart';
 import 'package:unicec_mobi/screens/detail_competition/detail_competition_page.dart';
 import 'package:unicec_mobi/utils/router.dart';
+import '../screens/event/event_page.dart';
 import '../screens/main_page/main_page.dart';
 import '../screens/pages.dart';
 import '../screens/view_detail_team/view_detail_team_page.dart';
@@ -29,8 +30,11 @@ class PageDependencies {
     injector.registerFactory<Widget>(() => ClubSelectionPage(bloc: injector()),
         instanceName: Routes.clubSelection);
 
-    //HomePage -> show Cuộc Thi và Sự Kiện
-    injector.registerFactory<Widget>(() => HomePage(bloc: injector()), instanceName: Routes.home);
+    //CompetitionPage -> show Cuộc Thi
+    injector.registerFactory<Widget>(() => CompetitionPage(bloc: injector()), instanceName: Routes.competition);
+
+    //EventPage -> show Sự Kiện
+    injector.registerFactory<Widget>(() => EventPage(bloc: injector()), instanceName: Routes.event);
 
     //Profile Page -> show general info Student
     injector.registerFactory<Widget>(() => DetailCompetitionPage(),
