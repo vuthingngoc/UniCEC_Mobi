@@ -1,7 +1,8 @@
 import 'package:unicec_mobi/bloc/university_selection/university_selection_event.dart';
 import 'package:unicec_mobi/bloc/university_selection/university_selection_state.dart';
 import 'package:unicec_mobi/services/i_services.dart';
-
+import 'package:get_it/get_it.dart';
+import '../../models/common/current_user.dart';
 import '../../models/entities/department/department_model.dart';
 import '../../utils/base_bloc.dart';
 

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/models/entities/department/department_model.dart';
 
@@ -36,7 +37,7 @@ class UniversitySelectionService implements IUniversitySelectionService {
             "id": userId,
             "university_id": model.universityId,
             "department_id": model.departmentId,
-            "user_code": model.studentCode,
+            "student_code": model.studentCode,
             "phone": model.phone,
             "gender": model.gender,
             "dob": model.dob,
@@ -45,6 +46,9 @@ class UniversitySelectionService implements IUniversitySelectionService {
       // if (response.statusCode == 400) {
       // }
       if (response.statusCode == 200) {
+        String token = adapter.parseToString(response);
+        GetIt.I.get<CurrentUser>().idToken = token;
+        GetIt.I.get<CurrentUser>().universityId = model.universityId;
         return true;
       }
     } catch (e) {
@@ -56,7 +60,7 @@ class UniversitySelectionService implements IUniversitySelectionService {
   }
 
   @override
-  Future<List<DepartmentModel>?> getDepartmentByUni(int UniversityId) async {
+  Future<List<DepartmentModel>?> getDepartmentByUni(int universityId) async {
     Adapter adapter = Adapter();
 
     var client = http.Client();
@@ -64,7 +68,7 @@ class UniversitySelectionService implements IUniversitySelectionService {
 
     PagingResult<DepartmentModel> pagingResult;
 
-    url += "/search?universityId=" + UniversityId.toString() + "&pageSize=40";
+    url += "/search?universityId=" + universityId.toString() + "&pageSize=40";
 
     try {
       //get_it lấy IdToken

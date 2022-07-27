@@ -37,7 +37,7 @@ class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
 
     bloc.listenerStream.listen((event) {
       if (event is NavigatorWelcomePageEvent) {
-        Navigator.of(context).pushReplacementNamed(Routes.home);
+        Navigator.of(context).pushReplacementNamed(Routes.main);
       } else if (event is ShowingSnackBarEvent) {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(event.message)));
