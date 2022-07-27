@@ -19,20 +19,21 @@ class MemberService implements IMemberService {
     var client = http.Client();
     String url = Api.GetUrl(apiPath: Api.members);
     //
-    url += "/apply";
+    url += "/apply/club/" + clubId.toString();
 
     //get_it lấy IdToken
     String? idToken = GetIt.I.get<CurrentUser>().idToken;
     int? userId = GetIt.I.get<CurrentUser>().id;
     try {
-      var response = await client.post(Uri.parse(url),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-            'Authorization': "Bearer $idToken"
-          },
-          //truyền vào body
-          body: jsonEncode(
-              <String, dynamic>{"club_id": clubId, "user_id": userId}));
+      var response = await client.post(
+        Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': "Bearer $idToken"
+        },
+        // //truyền vào body
+        // body: jsonEncode(<String, dynamic>{"id": clubId})
+      );
 
       if (response.statusCode == 200) {
         Map<String, dynamic> result = adapter.parseToMap(response);

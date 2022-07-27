@@ -57,7 +57,6 @@ class ClubService implements IClubService {
         Map<String, dynamic> result = adapter.parseToMap(response);
         PagingResult<ClubModel> pagingResult =
             PagingResult.fromJson(result, ClubModel.fromJson);
-
         return pagingResult;
       }
     } catch (e) {
