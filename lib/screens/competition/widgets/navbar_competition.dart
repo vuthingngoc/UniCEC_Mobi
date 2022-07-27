@@ -123,7 +123,7 @@ class _NavbarHomeState extends State<NavbarHome> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Expanded(                    
+                      Expanded(                                        
                         child: Input(                          
                             placeholder: "Tìm Kiếm Cuộc Thi và Sự Kiện",
                             controller: widget.searchController,

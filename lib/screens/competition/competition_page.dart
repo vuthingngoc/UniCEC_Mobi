@@ -1,21 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unicec_mobi/bloc/competition/competition_bloc.dart';
 import 'package:unicec_mobi/bloc/competition/competition_state.dart';
-import 'package:unicec_mobi/screens/home/widgets/navbar_home.dart';
 
 import '../../bloc/competition/competition_event.dart';
 import '../../constants/theme.dart';
 
 //widgets
+import '../../utils/loading.dart';
 import '../../utils/router.dart';
 import '../size_config.dart';
-import '../widgets/card-horizontal.dart';
 import '../widgets/card-small.dart';
-import '../widgets/card-square.dart';
 import '../widgets/drawer.dart';
-import 'widgets/SuggestCompetion.dart';
+import 'widgets/navbar_competition.dart';
+import 'widgets/suggest_competition.dart';
 import 'widgets/section_title.dart';
 
 final Map<String, Map<String, dynamic>> homeCards = {
@@ -56,15 +54,16 @@ final Map<String, Map<String, dynamic>> homeCards = {
   }
 };
 
-class HomePage extends StatefulWidget {
+class CompetitionPage extends StatefulWidget {
   final CompetitionBloc bloc;
 
-  HomePage({required this.bloc});
+  CompetitionPage({required this.bloc});
 
-  _HomePageState createState() => _HomePageState();
+  @override
+  _CompetitionPageState createState() => _CompetitionPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _CompetitionPageState extends State<CompetitionPage> {
   CompetitionBloc get _bloc => widget.bloc;
 
   void initState() {
@@ -80,16 +79,16 @@ class _HomePageState extends State<HomePage> {
     return BlocBuilder<CompetitionBloc, CompetitionState>(
         bloc: _bloc,
         builder: (context, state) {
-          return Scaffold(
+          return _bloc.isLoading ? Loading() : Scaffold(
               appBar: NavbarHome(
-                title: "Cuộc Thi và Sự Kiện",
+                title: "Cuộc Thi",
                 searchBar: true,
                 categoryOne: "Liên Trường",
                 categoryTwo: "Trong Trường",
               ),
               backgroundColor: ArgonColors.bgColorScreen,
               //key: _scaffoldKey,
-              drawer: ArgonDrawer(currentPage: "Home"),
+              drawer: ArgonDrawer(currentPage: "Competition"),
               body: Container(
                 padding: EdgeInsets.only(left: 24.0, right: 24.0),
                 child: SingleChildScrollView(
@@ -99,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                           ? Padding(
                               padding: const EdgeInsets.only(top: 16.0),
                               child: SpecialOffers(
-                                outStandingCompetitions:
+                                outStandingEvents:
                                     (state.outStandingCompetitions)!,
                               ),
                             )
@@ -144,9 +143,9 @@ class _HomePageState extends State<HomePage> {
                               ],
                             )
                           : Text('Không có cuộc thi nào đang diễn ra'),
-                      SizedBox(height: 8.0),                     
+                      SizedBox(height: 8.0),                    
                     ],
-                  ),
+                  ),                  
                 ),
               ));
         });

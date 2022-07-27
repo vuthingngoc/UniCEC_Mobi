@@ -6,6 +6,7 @@ class Routes {
   static String get main => '/main';
   static String get test => '/test';
   static String get competition => '/competition';
+  static String get event => '/event';
   static String get detailCompetition => '/detailCompetition';
   static String get viewListTeam => '/viewListTeam';
   static String get viewDetailTeam => '/viewDetailTeam';
@@ -13,7 +14,6 @@ class Routes {
 
   //
   static String get splash => '/splash';
-  static String get home => '/home';
   static String get club => '/club';
   static String get clubSelection => '/clubSelection';
   static String get clubsView => '/clubsView';

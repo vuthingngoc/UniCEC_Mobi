@@ -10,6 +10,7 @@ import 'package:unicec_mobi/bloc/university_selection/university_selection_bloc.
 import 'package:unicec_mobi/services/services.dart';
 import '../bloc/club_selection/club_selection_bloc.dart';
 import '../bloc/club_view_detail/club_view_detail_bloc.dart';
+import '../bloc/event/event_bloc.dart';
 import '../bloc/main/main_bloc.dart';
 import '../bloc/profile/profile_bloc.dart';
 import '../bloc/seeds_wallet/seeds_wallet_bloc.dart';
@@ -45,6 +46,9 @@ class BlocDependencies {
 
     injector.registerFactory<CompetitionBloc>(
         () => CompetitionBloc(service: injector()));
+
+    injector.registerFactory<EventBloc>(
+        () => EventBloc(service: injector()));    
 
     injector.registerFactory<TeamBloc>(() => TeamBloc(service: injector()));
 

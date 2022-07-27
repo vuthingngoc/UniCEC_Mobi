@@ -7,7 +7,9 @@ import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/bloc/competition/competition_bloc.dart';
 import 'package:unicec_mobi/screens/club/club_page.dart';
 import 'package:unicec_mobi/screens/detail_competition/detail_competition_page.dart';
+import 'package:unicec_mobi/screens/event/event_page.dart';
 import '../../bloc/club/club_bloc.dart';
+import '../../bloc/event/event_bloc.dart';
 import '../../bloc/main/main_bloc.dart';
 import '../../bloc/main/main_event.dart';
 import '../../bloc/main/main_state.dart';
@@ -17,8 +19,9 @@ import '../../bloc/profile/profile_bloc.dart';
 import '../../models/common/current_user.dart';
 import '../../utils/app_color.dart';
 import '../../utils/router.dart';
-import '../home/home_page.dart';
+import '../competition/competition_page.dart';
 import '../profile/profile_page.dart';
+import '../size_config.dart';
 import '../view_competition_round/view_competition_round.dart';
 import '../view_detail_team/view_detail_team_page.dart';
 import '../view_list_teams/view_list_team_page.dart';
@@ -171,6 +174,7 @@ class _MainPageState extends State<MainPage> {
   ///so that, user stream instead
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return BlocProvider.value(
       value: bloc,
       child: BlocBuilder<MainBloc, MainState>(
@@ -194,13 +198,12 @@ class _MainPageState extends State<MainPage> {
                 ClubPage(
                     bloc: GetIt.I.get<
                         ClubBloc>()), // cố định tại vị trí là page 0, nếu chuyển sẻ phải implement lại
-                DetailCompetitionPage(),
-                HomePage(bloc: GetIt.I.get<CompetitionBloc>()),
+                EventPage(bloc: GetIt.I.get<EventBloc>()),
+                CompetitionPage(bloc: GetIt.I.get<CompetitionBloc>()),                
+                // DetailCompetitionPage(),
                 ViewCompetitionRoundPage(),
                 //ViewListTeamPage(),
                 ProfilePage(bloc: GetIt.I.get<ProfileBloc>())
-                // MyAccountPage(
-                //      GetIt.I.get<MyAccountBloc>(), bloc: MyAccountBloc,),
               ],
             ),
             bottomNavigationBar: BottomAppBar(
@@ -222,7 +225,7 @@ class _MainPageState extends State<MainPage> {
                           child: Column(
                             children: [
                               Icon(
-                                Icons.warning,
+                                Icons.groups,
                                 color:
                                     //ss1 từ clubSelection -> MainPage
                                     ((state.clubSelected !=
@@ -267,7 +270,7 @@ class _MainPageState extends State<MainPage> {
                       fit: FlexFit.tight,
                       child: ComponentButton(
                         index: 1,
-                        label: "Tin Tức",
+                        label: "Sự kiện",
                         onPressed: () {
                           _pageController.jumpToPage(1);
                         },
@@ -280,7 +283,7 @@ class _MainPageState extends State<MainPage> {
                       child: Align(
                           alignment: Alignment.bottomCenter,
                           child: Text(
-                            "Cuộc Thi và Sự Kiện",
+                            "Cuộc thi",
                             style: TextStyle(
                                 color:
                                     //ss1 chắc chắn là trang 2
@@ -310,7 +313,7 @@ class _MainPageState extends State<MainPage> {
                       fit: FlexFit.tight,
                       child: ComponentButton(
                         index: 3,
-                        label: "Điểm đến",
+                        label: "Thông báo",
                         onPressed: () {
                           _pageController.jumpToPage(3);
                         },
@@ -335,17 +338,17 @@ class _MainPageState extends State<MainPage> {
             floatingActionButton: state.isHiddenFAB
                 ? const SizedBox()
                 : FloatingActionButton(
-                    child: const Icon(Icons.storefront),
+                    child: const Icon(Icons.emoji_events, size: 30.0),
                     onPressed: () {
                       _pageController.jumpToPage(2);
                     },
-                    backgroundColor: AppColors.primaryColor,
+                    backgroundColor: AppColors.mainColor,
                     heroTag: "main_page",
                   ),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             extendBody: true,
-            resizeToAvoidBottomInset: true,
+            resizeToAvoidBottomInset: false,
           );
         },
       ),

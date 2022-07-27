@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
-
 import '../../../bloc/main/main_bloc.dart';
-import '../../../models/common/current_user.dart';
 import '../../../utils/app_color.dart';
 
 class ComponentButton extends StatelessWidget {
@@ -20,12 +17,10 @@ class ComponentButton extends StatelessWidget {
       this.clubIdSelected})
       : super(key: key);
 
-  IconData getIconData(String label) {
-    IconData iconData = Icons.warning;
-    if (index == 1) {
-      iconData = Icons.article;
-    } else if (index == 3) {
-      iconData = Icons.tag_faces;
+  IconData getIconData() {
+    IconData iconData = Icons.emoji_events;
+    if (index == 3) {
+      iconData = Icons.notifications_active;
     } else if (index == 4) {
       iconData = Icons.person;
     }
@@ -34,7 +29,7 @@ class ComponentButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    IconData iconData = getIconData(label);
+    IconData iconData = getIconData();
     MainBloc bloc = BlocProvider.of<MainBloc>(context);
     return MaterialButton(
       padding: const EdgeInsets.symmetric(vertical: 5),
@@ -44,14 +39,14 @@ class ComponentButton extends StatelessWidget {
           Icon(
             iconData,
             color: bloc.state.currentPageIndex == index
-                ? AppColors.primaryColor
+                ? AppColors.mainColor
                 : Colors.grey,
           ),
           Text(
             label,
             style: TextStyle(
                 color: bloc.state.currentPageIndex == index
-                    ? AppColors.primaryColor
+                    ? AppColors.mainColor
                     : Colors.grey,
                 fontSize: 13),
           )
