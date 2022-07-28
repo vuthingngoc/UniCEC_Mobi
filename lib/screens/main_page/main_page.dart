@@ -8,6 +8,8 @@ import 'package:unicec_mobi/bloc/competition/competition_bloc.dart';
 import 'package:unicec_mobi/screens/club/club_page.dart';
 import 'package:unicec_mobi/screens/detail_competition/detail_competition_page.dart';
 import 'package:unicec_mobi/screens/event/event_page.dart';
+import 'package:unicec_mobi/screens/pages.dart';
+import 'package:unicec_mobi/screens/view_competition_participate/view_competition_participate.dart';
 import '../../bloc/club/club_bloc.dart';
 import '../../bloc/event/event_bloc.dart';
 import '../../bloc/main/main_bloc.dart';
@@ -201,7 +203,7 @@ class _MainPageState extends State<MainPage> {
                 EventPage(bloc: GetIt.I.get<EventBloc>()),
                 CompetitionPage(bloc: GetIt.I.get<CompetitionBloc>()),                
                 // DetailCompetitionPage(),
-                ViewCompetitionRoundPage(),
+                ViewCompetitionParticipatePage(),
                 //ViewListTeamPage(),
                 ProfilePage(bloc: GetIt.I.get<ProfileBloc>())
               ],
