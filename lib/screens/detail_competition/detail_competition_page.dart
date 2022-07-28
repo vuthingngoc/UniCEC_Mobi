@@ -501,7 +501,7 @@ class DetailCompetitionPage extends StatelessWidget {
                                                         .secondary,
                                                     onPressed: () {
                                                       Navigator.pushNamed(
-                                                          context, '/viewCompetitionRound');
+                                                          context, '/viewListActivity');
                                                     },
                                                     shape:
                                                     RoundedRectangleBorder(

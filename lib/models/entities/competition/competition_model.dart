@@ -11,8 +11,10 @@ class CompetitionModel {
   String name;
   int competitionTypeId;
   String competitionTypeName;
-  DateTime createTime;
-  DateTime startTime;
+  // DateTime createTime;
+  // DateTime startTime;
+  String createTime;
+  String startTime;
   bool isSponsor;
   CompetitionScopeStatus scope;
   CompetitionStatus status;
@@ -43,8 +45,10 @@ class CompetitionModel {
     String name = json['name'] ?? '';
     int competitionTypeId = json['competition_type_id'] ?? 0;
     String competitionTypeName = json['competition_type_name'] ?? '';
-    DateTime createTime = DateTime.parse(json['create_time']);
-    DateTime startTime = DateTime.parse(json['start_time']);
+    // DateTime createTime = DateTime.parse(json['create_time']);
+    // DateTime startTime = DateTime.parse(json['start_time']);
+    String startTime = json['create_time'] ?? '';
+    String createTime = json['createTime'] ?? '';
     bool isSponsor = json['is_sponsor'] ?? false;
     CompetitionScopeStatus scope = CompetitionScopeStatus.values[json['scope']];
     CompetitionStatus status =

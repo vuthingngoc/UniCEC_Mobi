@@ -117,7 +117,7 @@ class ViewListActivityMenu extends StatelessWidget {
                               style: TextStyle(fontSize: 18,  color: Colors.blueGrey)),
                         ),
                         Text(fakeData[index].assigner,
-                            style: TextStyle(fontSize: 18)),
+                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal)),
                         Padding(
                           padding: const EdgeInsets.only(left: 16.0,right: 8),
                           child: Text("|",
