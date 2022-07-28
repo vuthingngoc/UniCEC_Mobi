@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unicec_mobi/utils/loading.dart';
 
 import '../../bloc/login/login_bloc.dart';
 import '../../bloc/login/login_event.dart';
@@ -51,9 +52,11 @@ class _LoginPageState extends State<LoginPage> {
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
+                print('snapshot.connectionState is waiting');
                 return const Center(child: CircularProgressIndicator());
               }
-              return SingleChildScrollView(
+              print('login bloc isLoading: ${_bloc.isLoading}');
+              return (_bloc.isLoading) ? Loading() : SingleChildScrollView(
                 child: Stack(
                   children: [
                     Container(

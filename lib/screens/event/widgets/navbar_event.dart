@@ -125,12 +125,12 @@ class _NavbarHomeState extends State<NavbarHome> {
                     children: [
                       Expanded(                                        
                         child: Input(                          
-                            placeholder: "Tìm Kiếm Cuộc Thi và Sự Kiện",
+                            placeholder: "Tìm Kiếm Sự Kiện",
                             controller: widget.searchController,
                             onChanged: widget.searchOnChanged,
                             // autofocus: widget.searchAutofocus,
                             // suffixIcon:                            
-                            //     Icon(Icons.zoom_in, color: ArgonColors.muted, size: 10),
+                            //     const Icon(Icons.zoom_in, color: ArgonColors.muted, size: 50.0,),
                             onTap: () {
                               Navigator.pushNamed(context, '/pro');
                             },

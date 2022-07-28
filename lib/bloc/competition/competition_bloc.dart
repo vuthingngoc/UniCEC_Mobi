@@ -15,9 +15,13 @@ import '../../models/entities/competition/competition_show_model.dart';
 
 class CompetitionBloc extends BaseBloc<CompetitionEvent, CompetitionState> {
   final ICompetitionService service;
-  bool _isLoading = true;
+  bool _isLoading = false;
 
   bool get isLoading => _isLoading;
+
+  set isLoading(bool isLoading){
+    _isLoading = isLoading;
+  }
 
   CompetitionBloc({required this.service})
       : super(CompetitionState(

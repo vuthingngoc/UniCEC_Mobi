@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../bloc/login/login_state.dart';
 import '../../../utils/dimens.dart';
-import '../../../utils/loading.dart';
 
 class LoginBody extends StatelessWidget {
   LoginBloc bloc;
