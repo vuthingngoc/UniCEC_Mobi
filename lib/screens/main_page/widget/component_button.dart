@@ -17,8 +17,8 @@ class ComponentButton extends StatelessWidget {
       this.clubIdSelected})
       : super(key: key);
 
-  IconData getIconData() {
-    IconData iconData = Icons.emoji_events;
+  IconData getIconData() { // index == 2 set icon in main_page
+    IconData iconData = Icons.event_available;
     if (index == 3) {
       iconData = Icons.notifications_active;
     } else if (index == 4) {

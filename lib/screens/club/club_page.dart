@@ -66,6 +66,7 @@ class _ClubPageState extends State<ClubPage> {
                         //NavbarClub(transparent: true, title: "Câu Lạc Bộ"),
                         AppBar(
                       title: Text('Câu Lạc Bộ'),
+                      automaticallyImplyLeading: false,                  
                       bottom: TabBar(
                         labelColor: Colors.redAccent,
                         tabs: <Widget>[
@@ -76,7 +77,7 @@ class _ClubPageState extends State<ClubPage> {
                             text: "Cuộc Thi và Sự Kiện Của Câu Lạc Bộ",
                           )
                         ],
-                      ),
+                      ),                      
                     ),
                     //extendBodyBehindAppBar: false,
                     //drawer: ArgonDrawer(currentPage: "Club"),

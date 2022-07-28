@@ -53,6 +53,7 @@ class _MyAccountPageState extends State<MyAccountPage>
               appBar: NavbarProfile(
                 title: "Thông Tin Sinh Viên",
                 transparent: true,
+                backButton: true,
               ),
               backgroundColor: ArgonColors.bgColorScreen,
               drawer: ArgonDrawer(currentPage: "My account"),
