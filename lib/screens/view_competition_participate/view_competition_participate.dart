@@ -31,12 +31,12 @@ class _ViewCompetitionParticipatePageState extends State<ViewCompetitionParticip
           },
           icon: Icon(Icons.arrow_back, color: Colors.black),
         ),
-        title: Text("Công việc", style: TextStyle(color: Colors.black),),
+        title: Text("Cuộc thi & sự kiện tham gia", style: TextStyle(color: Colors.black),),
         automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: AppColors.backgroundPageColor,
       ),
-      body: Body(),
+      body: BodyCompetitionParticipate(),
       //bottomNavigationBar: CustomBottomNavBar(selectedMenu: MenuState.profile),
     );
   }

@@ -1,77 +1,84 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:unicec_mobi/models/entities/competition/competition_model.dart';
+import 'package:unicec_mobi/models/enums/competition_scope_status.dart';
 import 'package:unicec_mobi/models/enums/priority_status.dart';
 import '../../../constants/Theme.dart';
 import '../../../models/entities/competition_activity/competition_activity_model.dart';
 import '../../../models/enums/competition_activity_status.dart';
+import '../../../models/enums/competition_status.dart';
 
-class ViewListActivityMenu extends StatelessWidget {
-  const ViewListActivityMenu({
+class ViewCompetitionParticipateMenu extends StatelessWidget {
+  const ViewCompetitionParticipateMenu({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<CompetitionActivityModel> fakeData = [
-      CompetitionActivityModel(
+    List<CompetitionModel> fakeData = [
+      CompetitionModel(
+        view: 26,
+        name: 'Competition này được dùng để test thôi, không có gì cả',
+        clubsInCompetition: [],
+        scope: CompetitionScopeStatus.Club,
+        competitionTypeId: 2,
+        competitionEntities: [],
+        universityId: 1,
+        competitionTypeName: ' check check',
+        status: CompetitionStatus.OnGoing,
+        startTime: "29/07/2022 5:300",
+        createTime: '29/07/2022 5:30:00',
+        majorsInCompetition: [],
+        isSponsor: true,
         id: 1,
-        competitionId: 1,
-        createTime: "createTime",
-        ending: "ending",
-        name: "Task này dùng để test thôi Task này dùng để test thôi Task này dùng để test thôi Task này dùng để test thôi",
-        assigner: "Lam Minh An",
-        priority: PriorityStatus.High,
-        status: CompetitionActivityStatus.Open,
       ),
-      CompetitionActivityModel(
-        id: 2,
-        competitionId: 1,
-        createTime: "createTime",
-        ending: "ending",
-        name: "Task này dùng để test thôi",
-        assigner: "Lam Minh An",
-        priority: PriorityStatus.Medium,
-        status: CompetitionActivityStatus.OnGoing,
+      CompetitionModel(
+        view: 26,
+        name: 'Competition này được dùng để test thôi, không có gì cả',
+        clubsInCompetition: [],
+        scope: CompetitionScopeStatus.Club,
+        competitionTypeId: 2,
+        competitionEntities: [],
+        universityId: 1,
+        competitionTypeName: ' check check',
+        status: CompetitionStatus.Pending,
+        startTime: "29/07/2022 5:300",
+        createTime: '29/07/2022 5:30:00',
+        majorsInCompetition: [],
+        isSponsor: true,
+        id: 1,
       ),
-      CompetitionActivityModel(
-        id: 3,
-        competitionId: 1,
-        createTime: "createTime",
-        ending: "ending",
-        name: "Task này dùng để test thôi",
-        assigner: "Lam Minh An",
-        priority: PriorityStatus.Low,
-        status: CompetitionActivityStatus.Pending,
+      CompetitionModel(
+        view: 26,
+        name: 'Competition này ',
+        clubsInCompetition: [],
+        scope: CompetitionScopeStatus.Club,
+        competitionTypeId: 2,
+        competitionEntities: [],
+        universityId: 1,
+        competitionTypeName: ' check check',
+        status: CompetitionStatus.OnGoing,
+        startTime: "29/07/2022 5:300",
+        createTime: '29/07/2022 5:30:00',
+        majorsInCompetition: [],
+        isSponsor: true,
+        id: 1,
       ),
-      CompetitionActivityModel(
-        id: 3,
-        competitionId: 1,
-        createTime: "createTime",
-        ending: "ending",
-        name: "Task này dùng để test thôi",
-        assigner: "Lam Minh An",
-        priority: PriorityStatus.Low,
-        status: CompetitionActivityStatus.Finished,
-      ),
-      CompetitionActivityModel(
-        id: 3,
-        competitionId: 1,
-        createTime: "createTime",
-        ending: "ending",
-        name: "Task này dùng để test thôi",
-        assigner: "Lam Minh An",
-        priority: PriorityStatus.Low,
-        status: CompetitionActivityStatus.Completed,
-      ),
-      CompetitionActivityModel(
-        id: 3,
-        competitionId: 1,
-        createTime: "createTime",
-        ending: "ending",
-        name: "Task này dùng để test thôi",
-        assigner: "Lam Minh An",
-        priority: PriorityStatus.Low,
-        status: CompetitionActivityStatus.Cancelling,
+      CompetitionModel(
+        view: 26,
+        name: 'Competition này được dùn',
+        clubsInCompetition: [],
+        scope: CompetitionScopeStatus.Club,
+        competitionTypeId: 2,
+        competitionEntities: [],
+        universityId: 1,
+        competitionTypeName: ' check check',
+        status: CompetitionStatus.Finish,
+        startTime: "29/07/2022 5:300",
+        createTime: '29/07/2022 5:30:00',
+        majorsInCompetition: [],
+        isSponsor: true,
+        id: 1,
       ),
     ];
     return Column(
@@ -90,7 +97,10 @@ class ViewListActivityMenu extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15)),
                   backgroundColor: Color.fromARGB(255, 235, 237, 241),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(
+                      context, '/viewListActivity');
+                },
                 child: Column(
                   children: [
                     Padding(
@@ -100,7 +110,8 @@ class ViewListActivityMenu extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(right: 8.0),
                             child: Text(fakeData[index].id.toString(),
-                                style: TextStyle(fontSize: 18, color: Colors.grey)),
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.grey)),
                           ),
                           Expanded(
                             child: Text(fakeData[index].name,
@@ -112,40 +123,57 @@ class ViewListActivityMenu extends StatelessWidget {
                     Row(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 16.0,right: 8),
+                          padding: const EdgeInsets.only(left: 16.0, right: 8),
                           child: Text("|",
-                              style: TextStyle(fontSize: 18,  color: Colors.blueGrey)),
+                              style: TextStyle(
+                                  fontSize: 18, color: Colors.blueGrey)),
                         ),
-                        Text(fakeData[index].assigner,
-                            style: TextStyle(fontSize: 18)),
+                        Text(fakeData[index].createTime,
+                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal, color: Colors.grey)),
                         Padding(
-                          padding: const EdgeInsets.only(left: 16.0,right: 8),
+                          padding: const EdgeInsets.only(left: 16.0, right: 8),
                           child: Text("|",
-                              style: TextStyle(fontSize: 18,  color: Colors.blueGrey)),
+                              style: TextStyle(
+                                  fontSize: 18, color: Colors.blueGrey)),
                         ),
-                        if (fakeData[index].status.toString() == "CompetitionActivityStatus.OnGoing")
-                          Text("Đang diễn ra", style: TextStyle(fontSize: 18, color: Colors.amber),),
-                        if (fakeData[index].status.toString() == "CompetitionActivityStatus.Open")
-                          Text("Mở", style: TextStyle(fontSize: 18, color: Colors.purple),),
-                        if (fakeData[index].status.toString() == "CompetitionActivityStatus.Pending")
-                          Text("Chờ", style: TextStyle(fontSize: 18, color: Colors.deepOrangeAccent),),
-                        if (fakeData[index].status.toString() == "CompetitionActivityStatus.Finished")
-                          Text("Hoàn thành", style: TextStyle(fontSize: 18, color: Colors.green),),
-                        if (fakeData[index].status.toString() == "CompetitionActivityStatus.Completed")
-                          Text("Kết thúc", style: TextStyle(fontSize: 18, color: Colors.grey),),
-                        if (fakeData[index].status.toString() == "CompetitionActivityStatus.Cancelling")
-                          Text("Hủy", style: TextStyle(fontSize: 18, color: Colors.red),),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 16.0,right: 8),
-                          child: Text("|",
-                              style: TextStyle(fontSize: 18,  color: Colors.blueGrey)),
-                        ),
-                        if (fakeData[index].priority.toString() == "PriorityStatus.High")
-                          Icon(Icons.warning,color: Colors.red,),
-                        if (fakeData[index].priority.toString() == "PriorityStatus.Medium")
-                          Icon(Icons.warning,color: Colors.amber,),
-                        if (fakeData[index].priority.toString() == "PriorityStatus.Low")
-                          Icon(Icons.warning,color: Colors.green,)
+                        if (fakeData[index].status.toString() ==
+                            "CompetitionStatus.OnGoing")
+                          Text(
+                            "Đang diễn ra",
+                            style: TextStyle(fontSize: 18, color: Colors.amber),
+                          ),
+                        if (fakeData[index].status.toString() ==
+                            "CompetitionStatus.Open")
+                          Text(
+                            "Mở",
+                            style:
+                                TextStyle(fontSize: 18, color: Colors.purple),
+                          ),
+                        if (fakeData[index].status.toString() ==
+                            "CompetitionStatus.Pending")
+                          Text(
+                            "Chờ",
+                            style: TextStyle(
+                                fontSize: 18, color: Colors.deepOrangeAccent),
+                          ),
+                        if (fakeData[index].status.toString() ==
+                            "CompetitionStatus.Finish")
+                          Text(
+                            "Hoàn thành",
+                            style: TextStyle(fontSize: 18, color: Colors.green),
+                          ),
+                        if (fakeData[index].status.toString() ==
+                            "CompetitionStatus.Complete")
+                          Text(
+                            "Kết thúc",
+                            style: TextStyle(fontSize: 18, color: Colors.grey),
+                          ),
+                        if (fakeData[index].status.toString() ==
+                            "CompetitionStatus.Cancel")
+                          Text(
+                            "Hủy",
+                            style: TextStyle(fontSize: 18, color: Colors.red),
+                          ),
                       ],
                     ),
                   ],

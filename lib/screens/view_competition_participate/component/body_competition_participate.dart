@@ -3,8 +3,8 @@ import '../../../constants/Theme.dart';
 import '../../widgets/input.dart';
 import 'list_competition_participate_menu.dart';
 
-class Body extends StatelessWidget {
-  Body({Key? key}) : super(key: key);
+class BodyCompetitionParticipate extends StatelessWidget {
+  BodyCompetitionParticipate({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class Body extends StatelessWidget {
       child: Column(
         children: [
 
-          ViewListActivityMenu(),
+          ViewCompetitionParticipateMenu(),
         ],
       ),
     );

@@ -20,6 +20,7 @@ export 'detail_competition/detail_competition_page.dart';
 
 export 'view_competition_round/view_competition_round.dart';
 
+export 'view_competition_participate/view_competition_participate.dart';
 export 'view_list_activity/view_list_activity.dart';
 
 

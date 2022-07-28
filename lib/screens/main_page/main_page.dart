@@ -200,7 +200,8 @@ class _MainPageState extends State<MainPage> {
                 ClubPage(
                     bloc: GetIt.I.get<
                         ClubBloc>()), // cố định tại vị trí là page 0, nếu chuyển sẻ phải implement lại
-                EventPage(bloc: GetIt.I.get<EventBloc>()),
+                // EventPage(bloc: GetIt.I.get<EventBloc>()),
+                ViewCompetitionParticipatePage(),
                 CompetitionPage(bloc: GetIt.I.get<CompetitionBloc>()),                
                 // DetailCompetitionPage(),
                 ViewCompetitionParticipatePage(),
@@ -272,7 +273,7 @@ class _MainPageState extends State<MainPage> {
                       fit: FlexFit.tight,
                       child: ComponentButton(
                         index: 1,
-                        label: "Sự kiện",
+                        label: "Hoạt động",
                         onPressed: () {
                           _pageController.jumpToPage(1);
                         },

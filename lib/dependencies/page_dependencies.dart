@@ -49,6 +49,12 @@ class PageDependencies {
     //round
     injector.registerFactory<Widget>(() => ViewCompetitionRoundPage(),
         instanceName: Routes.viewCompetitionRound);
+    //competition participate
+    injector.registerFactory<Widget>(() => ViewCompetitionParticipatePage(),
+        instanceName: Routes.viewComptitionParticipate);
+    //list actitvity of competition participate
+    injector.registerFactory<Widget>(() => ViewListActivityPage(),
+        instanceName: Routes.viewListActivity);
 
     //Profile Page -> show thông tin Student
 
