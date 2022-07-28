@@ -12,10 +12,12 @@ import 'login_state.dart';
 
 class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
   final ILoginService service;
+  bool isLoading = false;
 
   LoginBloc({required this.service}) : super(LoginState(errorEmail: '')) {
     on((event, emit) async {
       if (event is SignInGoogleEvent) {
+        isLoading = true;
         UserCredential? credential = await FirebaseUtils.signInWithGoogle();
         if (credential != null) {
           //xử lý logic ở chỗ này
@@ -31,6 +33,7 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
                 listUniBelongToEmail: uniSelector.listUniBelongToEmail));
           }
         }
+        isLoading = false;
       }
     });
   }

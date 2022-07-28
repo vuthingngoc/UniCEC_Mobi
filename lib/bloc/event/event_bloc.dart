@@ -14,7 +14,7 @@ import 'event_state.dart';
 
 class EventBloc extends BaseBloc<EventEvent, EventState> {
   final ICompetitionService service;
-  bool _isLoading = true;
+  bool _isLoading = false;
 
   bool get isLoading => _isLoading;
 

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:unicec_mobi/utils/log.dart';
 //import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import '../../../constants/theme.dart';
 import '../../widgets/input.dart';
 
-class NavbarHome extends StatefulWidget implements PreferredSizeWidget {
+class NavbarCompetition extends StatefulWidget implements PreferredSizeWidget {
   final String title;
   final String categoryOne;
   final String categoryTwo;
@@ -20,8 +21,8 @@ class NavbarHome extends StatefulWidget implements PreferredSizeWidget {
   final bool noShadow;
   final Color bgColor;
 
-  NavbarHome(
-      {this.title = "Home",
+  NavbarCompetition(
+      {this.title = "Competition",
       this.categoryOne = "",
       this.categoryTwo = "",
       this.tags,
@@ -40,13 +41,13 @@ class NavbarHome extends StatefulWidget implements PreferredSizeWidget {
   final double _prefferedHeight = 180.0;
 
   @override
-  _NavbarHomeState createState() => _NavbarHomeState();
+  _NavbarCompetitionState createState() => _NavbarCompetitionState();
 
   @override
   Size get preferredSize => Size.fromHeight(_prefferedHeight);
 }
 
-class _NavbarHomeState extends State<NavbarHome> {
+class _NavbarCompetitionState extends State<NavbarCompetition> {
   late String activeTag;
 
   void initState() {
@@ -125,14 +126,15 @@ class _NavbarHomeState extends State<NavbarHome> {
                     children: [
                       Expanded(                                        
                         child: Input(                          
-                            placeholder: "Tìm Kiếm Cuộc Thi và Sự Kiện",
+                            placeholder: "Tìm Kiếm Cuộc Thi",
                             controller: widget.searchController,
                             onChanged: widget.searchOnChanged,
                             // autofocus: widget.searchAutofocus,
                             // suffixIcon:                            
                             //     Icon(Icons.zoom_in, color: ArgonColors.muted, size: 10),
                             onTap: () {
-                              Navigator.pushNamed(context, '/pro');
+                              Log.info('OnTap search bar: ');
+                              // Navigator.pushNamed(context, '/pro');
                             },
                             prefixIcon: Icon(Icons.design_services_sharp)),
                       ),

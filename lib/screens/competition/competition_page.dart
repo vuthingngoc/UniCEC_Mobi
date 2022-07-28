@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unicec_mobi/bloc/competition/competition_bloc.dart';
 import 'package:unicec_mobi/bloc/competition/competition_state.dart';
+import 'package:unicec_mobi/utils/log.dart';
 
 import '../../bloc/competition/competition_event.dart';
 import '../../constants/theme.dart';
@@ -69,18 +70,19 @@ class _CompetitionPageState extends State<CompetitionPage> {
   void initState() {
     _bloc.listenerStream.listen((event) {});
     _bloc.add(LoadOutStandingCompetitionEvent());
+    _bloc.isLoading = true;
     // _bloc.add(LoadCompetitionEvent());
   }
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
-
+    Log.info('Build competition page');
+    // SizeConfig().init(context);
     return BlocBuilder<CompetitionBloc, CompetitionState>(
         bloc: _bloc,
         builder: (context, state) {
           return _bloc.isLoading ? Loading() : Scaffold(
-              appBar: NavbarHome(
+              appBar: NavbarCompetition(
                 title: "Cuộc Thi",
                 searchBar: true,
                 categoryOne: "Liên Trường",

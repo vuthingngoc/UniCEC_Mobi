@@ -38,7 +38,7 @@ class _EventPageState extends State<EventPage> {
         bloc: _bloc,
         builder: (context, state) {
           return _bloc.isLoading ? Loading() : Scaffold(
-              appBar: NavbarHome(
+              appBar: NavbarCompetition(
                 title: "Sự Kiện",
                 searchBar: true,
                 categoryOne: "Liên Trường",
