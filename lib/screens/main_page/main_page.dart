@@ -5,11 +5,11 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 // import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/bloc/competition/competition_bloc.dart';
+import 'package:unicec_mobi/bloc/view_competition_member_task/view_competition_member_task_bloc.dart';
 import 'package:unicec_mobi/screens/club/club_page.dart';
 import 'package:unicec_mobi/screens/detail_competition/detail_competition_page.dart';
 import 'package:unicec_mobi/screens/event/event_page.dart';
 import 'package:unicec_mobi/screens/pages.dart';
-import 'package:unicec_mobi/screens/view_competition_participate/view_competition_participate.dart';
 import '../../bloc/club/club_bloc.dart';
 import '../../bloc/event/event_bloc.dart';
 import '../../bloc/main/main_bloc.dart';
@@ -24,6 +24,7 @@ import '../../utils/router.dart';
 import '../competition/competition_page.dart';
 import '../profile/profile_page.dart';
 import '../size_config.dart';
+import '../view_competition_member_task/view_competition_member_task_page.dart';
 import '../view_competition_round/view_competition_round.dart';
 import '../view_detail_team/view_detail_team_page.dart';
 import '../view_list_teams/view_list_team_page.dart';
@@ -200,13 +201,17 @@ class _MainPageState extends State<MainPage> {
                 ClubPage(
                     bloc: GetIt.I.get<
                         ClubBloc>()), // cố định tại vị trí là page 0, nếu chuyển sẻ phải implement lại
-                // EventPage(bloc: GetIt.I.get<EventBloc>()),
-                ViewCompetitionParticipatePage(),
-                CompetitionPage(bloc: GetIt.I.get<CompetitionBloc>()),                
-                // DetailCompetitionPage(),
-                ViewCompetitionParticipatePage(),
-                //ViewListTeamPage(),
+                ViewCompetitionMemberTaskPage(
+                    bloc: GetIt.I.get<
+                        ViewCompetitionMemberTaskBloc>()), // trang show Competition mà Member này có task ở trỏng
+                CompetitionPage(bloc: GetIt.I.get<CompetitionBloc>()),
+                DetailCompetitionPage(),
+                // ViewCompetitionMemberTaskPage(
+                //     bloc: GetIt.I.get<ViewCompetitionMemberTaskBloc>()),
                 ProfilePage(bloc: GetIt.I.get<ProfileBloc>())
+
+                // EventPage(bloc: GetIt.I.get<EventBloc>()),
+                //ViewListTeamPage(),
               ],
             ),
             bottomNavigationBar: BottomAppBar(
@@ -330,7 +335,7 @@ class _MainPageState extends State<MainPage> {
                         label: "Cá nhân",
                         onPressed: () {
                           // Navigator.of(context).pushNamed(Routes.profile);
-                           _pageController.jumpToPage(4);
+                          _pageController.jumpToPage(4);
                         },
                       ),
                     )
