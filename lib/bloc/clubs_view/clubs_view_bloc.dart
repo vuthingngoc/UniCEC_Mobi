@@ -16,10 +16,10 @@ class ClubsViewBloc extends BaseBloc<ClubsViewEvent, ClubsViewState> {
             listClubsBelongToUniversity: [], hasNext: false, currentPage: 1)) {
     on((event, emit) async {
       if (event is ClubsViewInitEvent) {
-        PagingResult<ClubModel> result =
+        PagingResult<ClubModel>? result =
             await service.getClubsBelongToUniversity(state.currentPage);
 
-        List<ClubModel> listClubsUni = result.items;
+        List<ClubModel> listClubsUni = result?.items ?? [];
 
         if (listClubsUni.isNotEmpty) {
           //load list member thuộc club đó có cả Status Pending, Active
@@ -38,8 +38,8 @@ class ClubsViewBloc extends BaseBloc<ClubsViewEvent, ClubsViewState> {
 
           emit(state.copyWith(
               listClubsBelongToUniversity: listClubsUni,
-              hasNext: result.hasNext,
-              currentPage: result.currentPage));
+              hasNext: result?.hasNext ?? state.hasNext,
+              currentPage: result?.currentPage ?? state.currentPage));
         } else {
           //thông báo lỗi load clubs
         }
@@ -61,10 +61,10 @@ class ClubsViewBloc extends BaseBloc<ClubsViewEvent, ClubsViewState> {
 
       // tự chạy hàm loading
       if (event is LoadAddMoreEvent) {
-        PagingResult<ClubModel> result =
+        PagingResult<ClubModel>? result =
             await service.getClubsBelongToUniversity(state.currentPage);
         //
-        List<ClubModel> listContinute = result.items;
+        List<ClubModel> listContinute = result?.items ?? [];
         //
         if (listContinute.isNotEmpty) {
           //load list member thuộc club đó có cả Status Pending, Active
@@ -88,8 +88,8 @@ class ClubsViewBloc extends BaseBloc<ClubsViewEvent, ClubsViewState> {
         //
         emit(state.copyWith(
             listClubsBelongToUniversity: state.listClubsBelongToUniversity,
-            hasNext: result.hasNext,
-            currentPage: result.currentPage));
+            hasNext: result?.hasNext ?? state.hasNext,
+            currentPage: result?.currentPage ?? state.currentPage));
       }
 
       if (event is ChooseClubEvent) {

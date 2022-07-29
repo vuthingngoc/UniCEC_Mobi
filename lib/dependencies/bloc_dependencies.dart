@@ -15,6 +15,7 @@ import '../bloc/main/main_bloc.dart';
 import '../bloc/profile/profile_bloc.dart';
 import '../bloc/seeds_wallet/seeds_wallet_bloc.dart';
 import '../bloc/team/team_bloc.dart';
+import '../bloc/view_competition_member_task/view_competition_member_task_bloc.dart';
 
 class BlocDependencies {
   static Future setup(GetIt injector) async {
@@ -47,8 +48,7 @@ class BlocDependencies {
     injector.registerFactory<CompetitionBloc>(
         () => CompetitionBloc(service: injector()));
 
-    injector.registerFactory<EventBloc>(
-        () => EventBloc(service: injector()));    
+    injector.registerFactory<EventBloc>(() => EventBloc(service: injector()));
 
     injector.registerFactory<TeamBloc>(() => TeamBloc(service: injector()));
 
@@ -63,5 +63,8 @@ class BlocDependencies {
     injector.registerFactory<ClubViewDetailBloc>(
         () => ClubViewDetailBloc(service: injector()));
 
+    // improt view competition member task
+    injector.registerFactory<ViewCompetitionMemberTaskBloc>(
+        () => ViewCompetitionMemberTaskBloc(service: injector()));
   }
 }

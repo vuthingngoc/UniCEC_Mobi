@@ -36,7 +36,7 @@ class ClubService implements IClubService {
   }
 
   @override
-  Future<PagingResult<ClubModel>> getClubsBelongToUniversity(
+  Future<PagingResult<ClubModel>?> getClubsBelongToUniversity(
       int currentPage) async {
     String? idToken = GetIt.I.get<CurrentUser>().idToken;
     int? universityId = GetIt.I.get<CurrentUser>().universityId;
@@ -54,10 +54,20 @@ class ClubService implements IClubService {
       var response =
           await client.get(Uri.parse(url), headers: Api.GetHeader(idToken));
       if (response.statusCode == 200) {
-        Map<String, dynamic> result = adapter.parseToMap(response);
-        PagingResult<ClubModel> pagingResult =
-            PagingResult.fromJson(result, ClubModel.fromJson);
-        return pagingResult;
+        String isList = "[]";
+        if (response.statusCode == 200) {
+          if (response.body.toString().compareTo(isList) == 0) {
+            //TH1
+            List<dynamic> list = adapter.parseToList(response);
+            return null;
+          } else {
+            //TH2
+            Map<String, dynamic> result = adapter.parseToMap(response);
+            PagingResult<ClubModel> pagingResult =
+                PagingResult.fromJson(result, ClubModel.fromJson);
+            return pagingResult;
+          }
+        }
       }
     } catch (e) {
       Log.error(e.toString());

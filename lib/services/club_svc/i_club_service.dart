@@ -7,7 +7,7 @@ abstract class IClubService {
 
   Future<MemberDetailModel?> getMemberSelected(int? clubId);
 
-  Future<PagingResult<ClubModel>> getClubsBelongToUniversity(int currentPage);
+  Future<PagingResult<ClubModel>?> getClubsBelongToUniversity(int currentPage);
 
   Future<List<MemberDetailModel>?> getMembersBelongToClubs();
 }
