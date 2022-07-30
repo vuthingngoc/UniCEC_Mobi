@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../constants/theme.dart';
 import '../../widgets/input.dart';
 
-class NavbarHome extends StatefulWidget implements PreferredSizeWidget {
+class NavbarEvent extends StatefulWidget implements PreferredSizeWidget {
   final String title;
   final String categoryOne;
   final String categoryTwo;
@@ -20,7 +20,7 @@ class NavbarHome extends StatefulWidget implements PreferredSizeWidget {
   final bool noShadow;
   final Color bgColor;
 
-  NavbarHome(
+  NavbarEvent(
       {this.title = "Home",
       this.categoryOne = "",
       this.categoryTwo = "",
@@ -40,13 +40,13 @@ class NavbarHome extends StatefulWidget implements PreferredSizeWidget {
   final double _prefferedHeight = 180.0;
 
   @override
-  _NavbarHomeState createState() => _NavbarHomeState();
+  _NavbarEventState createState() => _NavbarEventState();
 
   @override
   Size get preferredSize => Size.fromHeight(_prefferedHeight);
 }
 
-class _NavbarHomeState extends State<NavbarHome> {
+class _NavbarEventState extends State<NavbarEvent> {
   late String activeTag;
 
   void initState() {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:unicec_mobi/utils/log.dart';
 //import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import '../../../bloc/competition/competition_bloc.dart';
+import '../../../bloc/competition/competition_state.dart';
 import '../../../constants/theme.dart';
 import '../../widgets/input.dart';
 
@@ -20,6 +22,8 @@ class NavbarCompetition extends StatefulWidget implements PreferredSizeWidget {
   final bool searchAutofocus;
   final bool noShadow;
   final Color bgColor;
+  final CompetitionBloc bloc;
+  final CompetitionState state;
 
   NavbarCompetition(
       {this.title = "Competition",
@@ -36,7 +40,9 @@ class NavbarCompetition extends StatefulWidget implements PreferredSizeWidget {
       this.backButton = false,
       this.noShadow = false,
       this.bgColor = ArgonColors.white,
-      this.searchBar = false});
+      this.searchBar = false,
+      required this.bloc,
+      required this.state});
 
   final double _prefferedHeight = 180.0;
 
@@ -49,6 +55,9 @@ class NavbarCompetition extends StatefulWidget implements PreferredSizeWidget {
 
 class _NavbarCompetitionState extends State<NavbarCompetition> {
   late String activeTag;
+  CompetitionBloc get _bloc => widget.bloc;
+  CompetitionState get _state => widget.state;
+  var _controller = TextEditingController();
 
   void initState() {
     if (widget.tags != null && widget.tags?.length != 0) {
@@ -61,8 +70,12 @@ class _NavbarCompetitionState extends State<NavbarCompetition> {
   Widget build(BuildContext context) {
     final bool categories =
         widget.categoryOne.isNotEmpty && widget.categoryTwo.isNotEmpty;
-    final bool tagsExist =
-        widget.tags == null ? false : (widget.tags?.length == 0 ? false : true);
+    // final bool tagsExist =
+    //     widget.tags == null ? false : (widget.tags?.length == 0 ? false : true);
+    String searchString = _state.requestModel?.name ?? '';
+    if (searchString != '') {
+      _controller = TextEditingController(text: searchString);
+    }
 
     return Container(
         // height: widget.searchBar
@@ -124,19 +137,40 @@ class _NavbarCompetitionState extends State<NavbarCompetition> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Expanded(                                        
-                        child: Input(                          
-                            placeholder: "Tìm Kiếm Cuộc Thi",
-                            controller: widget.searchController,
-                            onChanged: widget.searchOnChanged,
-                            // autofocus: widget.searchAutofocus,
-                            // suffixIcon:                            
-                            //     Icon(Icons.zoom_in, color: ArgonColors.muted, size: 10),
-                            onTap: () {
-                              Log.info('OnTap search bar: ');
-                              // Navigator.pushNamed(context, '/pro');
+                      Expanded(
+                        // child: Input(
+                        //     placeholder: "Tìm Kiếm Cuộc Thi",
+                        //     controller: widget.searchController,
+                        //     onChanged: widget.searchOnChanged,
+                        //     // autofocus: widget.searchAutofocus,
+                        //     // suffixIcon:
+                        //     //     Icon(Icons.zoom_in, color: ArgonColors.muted, size: 10),
+                        //     onTap: () {
+                        //       Log.info('OnTap search bar: ');
+                        //       // Navigator.pushNamed(context, '/pro');
+                        //     },
+                        //     prefixIcon: Icon(Icons.design_services_sharp)),
+                        child: TextFormField(
+                            controller: _controller,
+                            onFieldSubmitted: (value) {
+                              print('hello onFieldSubmitted');
                             },
-                            prefixIcon: Icon(Icons.design_services_sharp)),
+                            autofocus: false,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                  onPressed: _controller.clear,
+                                  icon: const Icon(Icons.clear)),
+                              labelText: 'Tìm Kiếm Cuộc Thi',
+                              focusedBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.grey,
+                                ),                                
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.grey, width: 1.0),
+                              ),
+                            )),
                       ),
                       PopupMenuButton<int>(
                           icon: Icon(Icons.filter_alt_outlined),
