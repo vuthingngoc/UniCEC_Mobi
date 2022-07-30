@@ -46,13 +46,16 @@ class _SplashPageState extends State<SplashPage> {
             return AnimatedOpacity(
               duration: const Duration(seconds: 3),
               opacity: state.opacity,
-              child: Text(
-                "UniCEC",
-                style: TextStyle(
-                    color: AppColors.primaryColor,
-                    fontSize: Dimens.size25,
-                    fontWeight: FontWeight.bold),
-              ),
+              child: Container(
+                width: MediaQuery.of(context).size.width * 2/3,
+                height: MediaQuery.of(context).size.width * 2/3,
+                  decoration: BoxDecoration(
+                      // shape: BoxShape.circle,                      
+                      image: DecorationImage(                          
+                          image: AssetImage("assets/img/logo-app-splash.jpg"),
+                          alignment: Alignment.center,
+                          fit: BoxFit.contain))
+                  ),
             );
           },
         ),

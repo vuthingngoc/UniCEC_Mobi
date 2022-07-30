@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unicec_mobi/bloc/competition/competition_bloc.dart';
 import 'package:unicec_mobi/bloc/competition/competition_state.dart';
+import 'package:unicec_mobi/utils/app_color.dart';
 import 'package:unicec_mobi/utils/log.dart';
 
 import '../../bloc/competition/competition_event.dart';
@@ -87,6 +88,8 @@ class _CompetitionPageState extends State<CompetitionPage> {
                 searchBar: true,
                 categoryOne: "Liên Trường",
                 categoryTwo: "Trong Trường",
+                bloc: _bloc,
+                state: state,
               ),
               backgroundColor: ArgonColors.bgColorScreen,
               //key: _scaffoldKey,

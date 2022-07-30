@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unicec_mobi/screens/event/widgets/navbar_event.dart';
 import '../../bloc/event/event_bloc.dart';
 import '../../bloc/event/event_event.dart';
 import '../../bloc/event/event_state.dart';
 import '../../constants/theme.dart';
 import '../../utils/loading.dart';
 import '../../utils/router.dart';
-import '../competition/widgets/navbar_competition.dart';
 import '../competition/widgets/section_title.dart';
 import '../competition/widgets/suggest_competition.dart';
 import '../size_config.dart';
@@ -38,7 +38,7 @@ class _EventPageState extends State<EventPage> {
         bloc: _bloc,
         builder: (context, state) {
           return _bloc.isLoading ? Loading() : Scaffold(
-              appBar: NavbarCompetition(
+              appBar: NavbarEvent(
                 title: "Sự Kiện",
                 searchBar: true,
                 categoryOne: "Liên Trường",
