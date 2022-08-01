@@ -18,25 +18,25 @@ class ViewCompetitionActivityBloc extends BaseBloc<ViewCompetitionActivityEvent,
             currentPage: 1)) {
     on((event, emit) async {
       //Init Event
-      // if (event is ViewCompetitionActivityInitEvent) {
-      //   //------------Request
-      //   CompetitionActivityRequestModel request =
-      //       CompetitionActivityRequestModel();
-      //   request.competitionId = state.competitionId;
-      //   request.currentPage = state.currentPage;
+      if (event is ViewCompetitionActivityInitEvent) {
+        //------------Request
+        CompetitionActivityRequestModel request =
+            CompetitionActivityRequestModel();
+        request.competitionId = state.competitionId;
+        request.currentPage = state.currentPage;
 
-      //   PagingResult<CompetitionActivityModel>? result =
-      //       await service.getListCompetititonActivity(request);
+        PagingResult<CompetitionActivityModel>? result =
+            await service.getListCompetititonActivity(request);
 
-      //   if (request != null) {
-      //     emit(state.copyWith(
-      //         newListCompetitionActivity:
-      //             result?.items ?? state.listCompetitionActivity,
-      //         newCompetitionId: state.competitionId,
-      //         newHasNext: result?.hasNext ?? state.hasNext,
-      //         newCurrentPage: result?.currentPage ?? state.currentPage));
-      //   }
-      // }
+        if (request != null) {
+          emit(state.copyWith(
+              newListCompetitionActivity:
+                  result?.items ?? state.listCompetitionActivity,
+              newCompetitionId: state.competitionId,
+              newHasNext: result?.hasNext ?? state.hasNext,
+              newCurrentPage: result?.currentPage ?? state.currentPage));
+        }
+      }
 
       //Recieve Data Event
       if (event is RecieveDataEvent) {

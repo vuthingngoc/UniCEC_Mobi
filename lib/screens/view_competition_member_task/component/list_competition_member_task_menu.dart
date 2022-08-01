@@ -36,72 +36,72 @@ class _ViewCompetitionMemberTaskMenuState
 
   @override
   Widget build(BuildContext context) {
-    List<CompetitionModel> fakeData = [
-      CompetitionModel(
-        view: 26,
-        name: 'Competition này được dùng để test thôi, không có gì cả',
-        clubsInCompetition: [],
-        scope: CompetitionScopeStatus.Club,
-        competitionTypeId: 2,
-        competitionEntities: [],
-        universityId: 1,
-        competitionTypeName: ' check check',
-        status: CompetitionStatus.OnGoing,
-        startTime: "29/07/2022 5:300",
-        createTime: '29/07/2022 5:30:00',
-        majorsInCompetition: [],
-        isSponsor: true,
-        id: 1,
-      ),
-      CompetitionModel(
-        view: 26,
-        name: 'Competition này được dùng để test thôi, không có gì cả',
-        clubsInCompetition: [],
-        scope: CompetitionScopeStatus.Club,
-        competitionTypeId: 2,
-        competitionEntities: [],
-        universityId: 1,
-        competitionTypeName: ' check check',
-        status: CompetitionStatus.Pending,
-        startTime: "29/07/2022 5:300",
-        createTime: '29/07/2022 5:30:00',
-        majorsInCompetition: [],
-        isSponsor: true,
-        id: 1,
-      ),
-      CompetitionModel(
-        view: 26,
-        name: 'Competition này ',
-        clubsInCompetition: [],
-        scope: CompetitionScopeStatus.Club,
-        competitionTypeId: 2,
-        competitionEntities: [],
-        universityId: 1,
-        competitionTypeName: ' check check',
-        status: CompetitionStatus.OnGoing,
-        startTime: "29/07/2022 5:300",
-        createTime: '29/07/2022 5:30:00',
-        majorsInCompetition: [],
-        isSponsor: true,
-        id: 1,
-      ),
-      CompetitionModel(
-        view: 26,
-        name: 'Competition này được dùn',
-        clubsInCompetition: [],
-        scope: CompetitionScopeStatus.Club,
-        competitionTypeId: 2,
-        competitionEntities: [],
-        universityId: 1,
-        competitionTypeName: ' check check',
-        status: CompetitionStatus.Finish,
-        startTime: "29/07/2022 5:300",
-        createTime: '29/07/2022 5:30:00',
-        majorsInCompetition: [],
-        isSponsor: true,
-        id: 1,
-      ),
-    ];
+    // List<CompetitionModel> fakeData = [
+    //   CompetitionModel(
+    //     view: 26,
+    //     name: 'Competition này được dùng để test thôi, không có gì cả',
+    //     clubsInCompetition: [],
+    //     scope: CompetitionScopeStatus.Club,
+    //     competitionTypeId: 2,
+    //     competitionEntities: [],
+    //     universityId: 1,
+    //     competitionTypeName: ' check check',
+    //     status: CompetitionStatus.OnGoing,
+    //     startTime: "29/07/2022 5:300",
+    //     createTime: '29/07/2022 5:30:00',
+    //     majorsInCompetition: [],
+    //     isSponsor: true,
+    //     id: 1,
+    //   ),
+    //   CompetitionModel(
+    //     view: 26,
+    //     name: 'Competition này được dùng để test thôi, không có gì cả',
+    //     clubsInCompetition: [],
+    //     scope: CompetitionScopeStatus.Club,
+    //     competitionTypeId: 2,
+    //     competitionEntities: [],
+    //     universityId: 1,
+    //     competitionTypeName: ' check check',
+    //     status: CompetitionStatus.Pending,
+    //     startTime: "29/07/2022 5:300",
+    //     createTime: '29/07/2022 5:30:00',
+    //     majorsInCompetition: [],
+    //     isSponsor: true,
+    //     id: 1,
+    //   ),
+    //   CompetitionModel(
+    //     view: 26,
+    //     name: 'Competition này ',
+    //     clubsInCompetition: [],
+    //     scope: CompetitionScopeStatus.Club,
+    //     competitionTypeId: 2,
+    //     competitionEntities: [],
+    //     universityId: 1,
+    //     competitionTypeName: ' check check',
+    //     status: CompetitionStatus.OnGoing,
+    //     startTime: "29/07/2022 5:300",
+    //     createTime: '29/07/2022 5:30:00',
+    //     majorsInCompetition: [],
+    //     isSponsor: true,
+    //     id: 1,
+    //   ),
+    //   CompetitionModel(
+    //     view: 26,
+    //     name: 'Competition này được dùn',
+    //     clubsInCompetition: [],
+    //     scope: CompetitionScopeStatus.Club,
+    //     competitionTypeId: 2,
+    //     competitionEntities: [],
+    //     universityId: 1,
+    //     competitionTypeName: ' check check',
+    //     status: CompetitionStatus.Finish,
+    //     startTime: "29/07/2022 5:300",
+    //     createTime: '29/07/2022 5:30:00',
+    //     majorsInCompetition: [],
+    //     isSponsor: true,
+    //     id: 1,
+    //   ),
+    // ];
     //bloc
     ViewCompetitionMemberTaskBloc bloc =
         BlocProvider.of<ViewCompetitionMemberTaskBloc>(context);
@@ -182,8 +182,9 @@ class _ViewCompetitionMemberTaskMenuState
                                                 color: Colors.blueGrey)),
                                       ),
                                       Text(
-                                          state.listCompetition[index]
-                                              .createTime,
+                                          state
+                                              .listCompetition[index].createTime
+                                              .toString(),
                                           style: TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.normal,
@@ -196,47 +197,55 @@ class _ViewCompetitionMemberTaskMenuState
                                                 fontSize: 18,
                                                 color: Colors.blueGrey)),
                                       ),
-                                      if (fakeData[index].status.toString() ==
-                                          "CompetitionStatus.OnGoing")
+                                      if (state.listCompetition[index].status ==
+                                          CompetitionStatus.Register)
+                                        Text(
+                                          "Mở đăng ký",
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: Colors.green),
+                                        ),
+                                      if (state.listCompetition[index].status ==
+                                          CompetitionStatus.OnGoing)
                                         Text(
                                           "Đang diễn ra",
                                           style: TextStyle(
                                               fontSize: 18,
                                               color: Colors.amber),
                                         ),
-                                      if (fakeData[index].status.toString() ==
-                                          "CompetitionStatus.Open")
+                                      if (state.listCompetition[index].status ==
+                                          CompetitionStatus.Publish)
                                         Text(
                                           "Mở",
                                           style: TextStyle(
                                               fontSize: 18,
                                               color: Colors.purple),
                                         ),
-                                      if (fakeData[index].status.toString() ==
-                                          "CompetitionStatus.Pending")
+                                      if (state.listCompetition[index].status ==
+                                          CompetitionStatus.Pending)
                                         Text(
                                           "Chờ",
                                           style: TextStyle(
                                               fontSize: 18,
                                               color: Colors.deepOrangeAccent),
                                         ),
-                                      if (fakeData[index].status.toString() ==
-                                          "CompetitionStatus.Finish")
+                                      if (state.listCompetition[index].status ==
+                                          CompetitionStatus.Finish)
                                         Text(
                                           "Hoàn thành",
                                           style: TextStyle(
                                               fontSize: 18,
                                               color: Colors.green),
                                         ),
-                                      if (fakeData[index].status.toString() ==
-                                          "CompetitionStatus.Complete")
+                                      if (state.listCompetition[index].status ==
+                                          CompetitionStatus.Complete)
                                         Text(
                                           "Kết thúc",
                                           style: TextStyle(
                                               fontSize: 18, color: Colors.grey),
                                         ),
-                                      if (fakeData[index].status.toString() ==
-                                          "CompetitionStatus.Cancel")
+                                      if (state.listCompetition[index].status ==
+                                          CompetitionStatus.Cancel)
                                         Text(
                                           "Hủy",
                                           style: TextStyle(
