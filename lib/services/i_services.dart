@@ -10,3 +10,4 @@ export 'package:unicec_mobi/services/team_svc/i_team_service.dart';
 export 'package:unicec_mobi/services/seeds_wallet_svc/i_seeds_wallet_service.dart';
 export 'package:unicec_mobi/services/member_svc/i_member_service.dart';
 export 'package:unicec_mobi/services/view_list_team_svc/i_view_list_team.dart';
+export 'package:unicec_mobi/services/view_competition_activity_svc/i_view_competition_activity_service.dart';

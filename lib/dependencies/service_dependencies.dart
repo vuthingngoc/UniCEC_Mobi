@@ -29,18 +29,23 @@ class ServiceDependencies {
 
     //competition
     injector.registerFactory<ICompetitionService>(() => CompetitionService());
-    injector.registerFactory<IDetailCompetitionService>(() => DetailCompetitionService());
+    injector.registerFactory<IDetailCompetitionService>(
+        () => DetailCompetitionService());
 
     //service
     injector.registerFactory<IViewListTeamService>(() => ViewListTeamService());
     injector.registerFactory<ITeamService>(() => TeamService());
 
     //round
-    injector.registerFactory<IViewCompetitionRoundService>(() => ViewCompetitionRoundService());
+    injector.registerFactory<IViewCompetitionRoundService>(
+        () => ViewCompetitionRoundService());
 
     injector.registerFactory<ISeedsWalletService>(() => SeedsWalletService());
 
     injector.registerFactory<IMemberService>(() => MemberService());
 
+    //competition activity
+    injector.registerFactory<ICompetitionActivityService>(
+        () => CompetitionActivityService());
   }
 }

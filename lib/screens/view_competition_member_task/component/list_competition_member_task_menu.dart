@@ -9,6 +9,7 @@ import 'package:unicec_mobi/models/enums/competition_scope_status.dart';
 import '../../../bloc/view_competition_member_task/view_competition_member_task_bloc.dart';
 import '../../../bloc/view_competition_member_task/view_competition_member_task_state.dart';
 import '../../../models/enums/competition_status.dart';
+import '../../../utils/router.dart';
 
 class ViewCompetitionMemberTaskMenu extends StatefulWidget {
   const ViewCompetitionMemberTaskMenu({
@@ -117,7 +118,7 @@ class _ViewCompetitionMemberTaskMenuState
                       return _refresh(context);
                     },
                     child: LoadMore(
-                      isFinish: state.hasNext == false,
+                      isFinish: !state.hasNext,
                       onLoadMore: () {
                         return _loadMore(context);
                       },
@@ -142,6 +143,9 @@ class _ViewCompetitionMemberTaskMenuState
                               ),
                               onPressed: () {
                                 //chuyển sang trang detail
+                                Navigator.of(context).pushNamed(
+                                    Routes.viewListActivity,
+                                    arguments: state.listCompetition[index].id);
                               },
                               child: Column(
                                 children: [
@@ -177,7 +181,9 @@ class _ViewCompetitionMemberTaskMenuState
                                                 fontSize: 18,
                                                 color: Colors.blueGrey)),
                                       ),
-                                      Text(fakeData[index].createTime,
+                                      Text(
+                                          state.listCompetition[index]
+                                              .createTime,
                                           style: TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.normal,
@@ -252,7 +258,7 @@ class _ViewCompetitionMemberTaskMenuState
 
   Future<bool> _loadMore(BuildContext context) async {
     print("onLoadMore");
-    await Future.delayed(Duration(seconds: 0, milliseconds: 2000));
+    await Future.delayed(Duration(seconds: 0, milliseconds: 5000));
     BlocProvider.of<ViewCompetitionMemberTaskBloc>(context)
         .add(IncrementalEvent());
     //lúc này stateModel cũng có r nhưng mà chưa có hàm render lại cái view
@@ -264,7 +270,7 @@ class _ViewCompetitionMemberTaskMenuState
   Future<bool> _refresh(BuildContext context) async {
     print("onRefresh");
     BlocProvider.of<ViewCompetitionMemberTaskBloc>(context).add(RefreshEvent());
-    await Future.delayed(Duration(seconds: 0, milliseconds: 2000));
+    await Future.delayed(Duration(seconds: 0, milliseconds: 5000));
     refresh(context);
     return true;
   }

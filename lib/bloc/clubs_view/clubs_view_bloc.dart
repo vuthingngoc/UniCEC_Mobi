@@ -88,7 +88,8 @@ class ClubsViewBloc extends BaseBloc<ClubsViewEvent, ClubsViewState> {
         //
         emit(state.copyWith(
             listClubsBelongToUniversity: state.listClubsBelongToUniversity,
-            hasNext: result?.hasNext ?? state.hasNext,
+            hasNext: result?.hasNext ??
+                false, // result trả ra null thì đồng nghĩa với việc hasNext = false
             currentPage: result?.currentPage ?? state.currentPage));
       }
 
