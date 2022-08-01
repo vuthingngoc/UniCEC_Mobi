@@ -22,3 +22,4 @@ export 'view_competition_round/view_competition_round.dart';
 
 export 'view_competition_member_task/view_competition_member_task_page.dart';
 export 'view_list_activity/view_list_activity.dart';
+export 'detail_activity/detail_activity_page.dart';
