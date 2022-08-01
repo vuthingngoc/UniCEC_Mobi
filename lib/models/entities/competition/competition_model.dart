@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:unicec_mobi/models/entities/competition/competition_in_clubs_model.dart';
 import 'package:unicec_mobi/models/entities/competition/competition_in_majors_model.dart';
 
@@ -11,10 +12,10 @@ class CompetitionModel {
   String name;
   int competitionTypeId;
   String competitionTypeName;
-  // DateTime createTime;
-  // DateTime startTime;
-  String createTime;
-  String startTime;
+  DateTime createTime;
+  DateTime startTime;
+  //String createTime;
+  //String startTime;
   bool isSponsor;
   CompetitionScopeStatus scope;
   CompetitionStatus status;
@@ -47,8 +48,22 @@ class CompetitionModel {
     String competitionTypeName = json['competition_type_name'] ?? '';
     // DateTime createTime = DateTime.parse(json['create_time']);
     // DateTime startTime = DateTime.parse(json['start_time']);
-    String startTime = json['create_time'] ?? '';
-    String createTime = json['createTime'] ?? '';
+    //String startTime = json['create_time'] ?? '';
+    //String createTime = json['createTime'] ?? '';
+
+    //
+    String createTimeString = json['create_time'];
+    createTimeString = createTimeString.replaceAll("T", " ");
+    createTimeString = createTimeString.replaceAll("Z", "");
+    DateTime createTime =
+        DateFormat("yyyy-MM-dd HH:mm:ss").parse(createTimeString);
+    //
+    String startTimeString = json['start_time'];
+    startTimeString = startTimeString.replaceAll("T", " ");
+    startTimeString = startTimeString.replaceAll("Z", "");
+    DateTime startTime =
+        DateFormat("yyyy-MM-dd HH:mm:ss").parse(startTimeString);
+
     bool isSponsor = json['is_sponsor'] ?? false;
     CompetitionScopeStatus scope = CompetitionScopeStatus.values[json['scope']];
     CompetitionStatus status =
