@@ -3,16 +3,16 @@ import 'package:unicec_mobi/models/enums/competition_activity_status.dart';
 
 import '../../enums/priority_status.dart';
 
-class CompetitionActivityRequestModel extends PagingRequest{
+class CompetitionActivityRequestModel extends PagingRequest {
   int? competitionId;
   PriorityStatus? priority;
   List<CompetitionActivityStatus>? statuses;
-  int? clubId;
+  //int? clubId;
 
   CompetitionActivityRequestModel({
     this.competitionId,
     this.priority,
     this.statuses,
-    this.clubId
+    //this.clubId
   });
 }

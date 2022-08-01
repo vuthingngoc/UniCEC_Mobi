@@ -58,8 +58,9 @@ class PageDependencies {
         () => ViewCompetitionMemberTaskPage(bloc: injector()),
         instanceName: Routes.viewComptitionMemberTask);
 
-    //list actitvity of competition member task
-    injector.registerFactory<Widget>(() => ViewListActivityPage(),
+    //list actitvity of competition member task // view competition activity
+    injector.registerFactory<Widget>(
+        () => ViewListActivityPage(bloc: injector()),
         instanceName: Routes.viewListActivity);
 
     //Profile Page -> show thông tin Student

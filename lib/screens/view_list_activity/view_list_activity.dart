@@ -1,43 +1,66 @@
 import 'package:flutter/material.dart';
-import '../../constants/Theme.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../bloc/view_competition_activity/view_competition_activity_bloc.dart';
+import '../../bloc/view_competition_activity/view_competition_activity_event.dart';
 import '../../utils/app_color.dart';
-import '../widgets/input.dart';
-import 'component/body_activity.dart';
+import 'component/list_activity_menu.dart';
 
 class ViewListActivityPage extends StatefulWidget {
+  final ViewCompetitionActivityBloc bloc;
+
+  ViewListActivityPage({required this.bloc});
+
   @override
   State<StatefulWidget> createState() => _ViewListActivityPageState();
 }
 
 class _ViewListActivityPageState extends State<ViewListActivityPage>
     with AutomaticKeepAliveClientMixin {
+  //bloc
+  ViewCompetitionActivityBloc get bloc => widget.bloc;
+
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 
   @override
   void initState() {
-    super.initState();
+    //add init event
+    //bloc.add(ViewCompetitionActivityInitEvent());
+  }
+
+  //nhận competition Id
+  void didChangeDependencies() {
+    RouteSettings settings = ModalRoute.of(context)!.settings;
+    if (settings.arguments != null) {
+      int competitionId = settings.arguments as int;
+      if (competitionId != 0) {
+        bloc.add(RecieveDataEvent(competitionId: competitionId));
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+    return BlocProvider.value(
+      value: bloc,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_back, color: Colors.black),
+          ),
+          title: Text(
+            "Công việc",
+            style: TextStyle(color: Colors.black),
+          ),
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          backgroundColor: AppColors.backgroundPageColor,
         ),
-        title: Text("Công việc", style: TextStyle(color: Colors.black),),
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        backgroundColor: AppColors.backgroundPageColor,
+        body: ViewListActivityMenu(),
       ),
-      body: Body(),
-      //bottomNavigationBar: CustomBottomNavBar(selectedMenu: MenuState.profile),
     );
   }
 }

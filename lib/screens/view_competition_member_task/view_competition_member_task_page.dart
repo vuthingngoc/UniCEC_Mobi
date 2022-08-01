@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:unicec_mobi/bloc/view_competition_member_task/view_competition_member_task_event.dart';
+import '/bloc/view_competition_member_task/view_competition_member_task_event.dart';
 import '../../bloc/view_competition_member_task/view_competition_member_task_bloc.dart';
 import '../../utils/app_color.dart';
 import 'component/list_competition_member_task_menu.dart';
@@ -26,7 +26,6 @@ class _ViewCompetitionMemberTaskPagePageState
   @override
   void initState() {
     bloc.add(InitEvent());
-    super.initState();
   }
 
   @override
