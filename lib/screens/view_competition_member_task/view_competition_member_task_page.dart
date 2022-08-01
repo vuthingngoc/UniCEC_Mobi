@@ -7,6 +7,7 @@ import 'component/list_competition_member_task_menu.dart';
 
 class ViewCompetitionMemberTaskPage extends StatefulWidget {
   final ViewCompetitionMemberTaskBloc bloc;
+
   ViewCompetitionMemberTaskPage({required this.bloc});
 
   @override
@@ -34,12 +35,6 @@ class _ViewCompetitionMemberTaskPagePageState
         value: bloc,
         child: Scaffold(
           appBar: AppBar(
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.arrow_back, color: Colors.black),
-            ),
             title: Text(
               "Cuộc thi & Sự kiện tham gia",
               style: TextStyle(color: Colors.black),

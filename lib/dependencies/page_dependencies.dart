@@ -63,6 +63,10 @@ class PageDependencies {
         () => ViewListActivityPage(bloc: injector()),
         instanceName: Routes.viewListActivity);
 
+    injector.registerFactory<Widget>(
+            () => ViewDetailActivityPage(),
+        instanceName: Routes.viewDetailActivity);
+
     //Profile Page -> show thông tin Student
     injector.registerFactory<Widget>(() => ProfilePage(bloc: injector()),
         instanceName: Routes.profile);

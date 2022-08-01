@@ -14,6 +14,7 @@ class Routes {
 
   static String get viewComptitionMemberTask => '/viewCompetitionMemberTask';
   static String get viewListActivity => '/viewListActivity';
+  static String get viewDetailActivity => '/viewDetailActivity';
 
   //
   static String get splash => '/splash';
