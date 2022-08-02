@@ -20,7 +20,7 @@ class ViewDetailActivityMenu extends StatefulWidget {
 }
 
 class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
-  int selectedImage = 0;
+  //int selectedImage = 0;
 
   List<DropdownMenuItem<CompetitionActivityStatus>> get dropdownStatus {
     List<DropdownMenuItem<CompetitionActivityStatus>> menuItems = [
@@ -372,10 +372,25 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                                                   child: AspectRatio(
                                                     aspectRatio: 1,
                                                     child: Hero(
-                                                      tag: 1,
-                                                      child: Image.network(
-                                                          "https://img.freepik.com/premium-photo/astronaut-outer-open-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-16829.jpg?w=2000"),
-                                                    ),
+                                                        tag: 1,
+                                                        child: Image.network(state
+                                                                .competitionActivityDetail!
+                                                                .activitiesEntities[
+                                                                    state
+                                                                        .selectedImageIndex]
+                                                                .imageUrl
+                                                                .contains(
+                                                                    'http')
+                                                            ? state
+                                                                .competitionActivityDetail!
+                                                                .activitiesEntities[
+                                                                    state
+                                                                        .selectedImageIndex]
+                                                                .imageUrl
+                                                            : "https://picsum.photos/seed/513/600")
+                                                        //Image.network(
+                                                        //     "https://img.freepik.com/premium-photo/astronaut-outer-open-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-16829.jpg?w=2000"),
+                                                        ),
                                                   ),
                                                 ),
                                                 SizedBox(
@@ -387,7 +402,11 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                                                       MainAxisAlignment.center,
                                                   children: [
                                                     ...List.generate(
-                                                        5,
+                                                        state
+                                                                .competitionActivityDetail
+                                                                ?.activitiesEntities
+                                                                .length ??
+                                                            0,
                                                         (index) =>
                                                             buildSmallImagePreview(
                                                                 index)),
@@ -468,7 +487,6 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                                                 SizedBox(
                                                   height: 10,
                                                 ),
-
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.only(
@@ -858,32 +876,39 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
 
   //chọn ảnh
   GestureDetector buildSmallImagePreview(int index) {
+    ViewDetailActivityBloc bloc =
+        BlocProvider.of<ViewDetailActivityBloc>(context);
     return GestureDetector(
       onTap: () {
-        setState(() {
-          selectedImage = index;
-        });
+        // setState(() {
+        //   selectedImage = index;
+        // });
+        //chuyển ảnh
+        bloc.add(ChangeImageIndex(imageIndex: index));
       },
-      child: AnimatedContainer(
-          duration: defaultDuration,
-          margin: EdgeInsets.only(right: 15),
-          padding: EdgeInsets.all(8),
-          height: getProportionateScreenWidth(48),
-          width: getProportionateScreenWidth(48),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(
-                color:
-                    kPrimaryColor.withOpacity(selectedImage == index ? 1 : 0)),
-          ),
-          child: //(widget.club?.image == null)
-              //?
-              Image.network(
-                  "https://docs.flutter.dev/assets/images/dash/dash-fainting.gif")
-          //: Image.network(widget.club!.image
-          //.toString()), //Image.asset(widget.product.images[index]),
-          ),
+      child: BlocBuilder<ViewDetailActivityBloc, ViewDetailActivityState>(
+          bloc: bloc,
+          builder: (context, state) {
+            return AnimatedContainer(
+                duration: defaultDuration,
+                margin: EdgeInsets.only(right: 15),
+                padding: EdgeInsets.all(8),
+                height: getProportionateScreenWidth(48),
+                width: getProportionateScreenWidth(48),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                      color: kPrimaryColor.withOpacity(
+                          state.selectedImageIndex == index ? 1 : 0)),
+                ),
+                child: Image.network(state.competitionActivityDetail!
+                        .activitiesEntities[index].imageUrl
+                        .contains('http')
+                    ? state.competitionActivityDetail!.activitiesEntities[index]
+                        .imageUrl
+                    : "https://picsum.photos/seed/513/600"));
+          }),
     );
   }
 }

@@ -12,7 +12,8 @@ class ViewDetailActivityBloc
   ViewDetailActivityBloc({required this.service})
       : super(ViewDetailActivityState(
             competitionActivityDetail: null,
-            status: CompetitionActivityStatus.Open)) {
+            status: CompetitionActivityStatus.Open,
+            selectedImageIndex: 0)) {
     (on(
       (event, emit) async {
         //recieve data
@@ -22,14 +23,16 @@ class ViewDetailActivityBloc
           if (result != null) {
             emit(state.copyWith(
                 newCompetitionActivityDetail: result,
-                newStatus: result.status));
+                newStatus: result.status,
+                newSelectedImageIndex: state.selectedImageIndex));
           }
         }
         //change status
         if (event is ChangeStatusEvent) {
           emit(state.copyWith(
               newCompetitionActivityDetail: state.competitionActivityDetail!,
-              newStatus: event.newStatus));
+              newStatus: event.newStatus, // change
+              newSelectedImageIndex: state.selectedImageIndex));
         }
         //update status competition activity
         if (event is UpdateStatusEvent) {
@@ -45,11 +48,21 @@ class ViewDetailActivityBloc
               //
               emit(state.copyWith(
                   newCompetitionActivityDetail: result,
-                  newStatus: result.status));
+                  newStatus: result.status,
+                  newSelectedImageIndex: state.selectedImageIndex));
             }
           } else {
             listener.add(ShowingSnackBarEvent(message: "Update Lỗi"));
           }
+        }
+        //change image index
+        if (event is ChangeImageIndex) {
+          emit(state.copyWith(
+                  newCompetitionActivityDetail:
+                      state.competitionActivityDetail!,
+                  newStatus: state.status,
+                  newSelectedImageIndex: event.imageIndex) // change
+              );
         }
       },
     ));

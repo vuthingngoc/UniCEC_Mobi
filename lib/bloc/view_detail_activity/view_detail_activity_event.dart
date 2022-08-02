@@ -15,6 +15,11 @@ class ChangeStatusEvent extends ViewDetailActivityEvent {
 
 class UpdateStatusEvent extends ViewDetailActivityEvent {}
 
+class ChangeImageIndex extends ViewDetailActivityEvent {
+  final int imageIndex;
+  ChangeImageIndex({required this.imageIndex});
+}
+
 class ShowingSnackBarEvent extends ViewDetailActivityEvent {
   final String message;
 
