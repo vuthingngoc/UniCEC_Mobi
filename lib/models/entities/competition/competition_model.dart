@@ -14,9 +14,8 @@ class CompetitionModel {
   String competitionTypeName;
   DateTime createTime;
   DateTime startTime;
-  //String createTime;
-  //String startTime;
   bool isSponsor;
+  bool isEvent;
   CompetitionScopeStatus scope;
   CompetitionStatus status;
   int view;
@@ -34,6 +33,7 @@ class CompetitionModel {
       required this.startTime,
       required this.isSponsor,
       required this.scope,
+      required this.isEvent,
       required this.status,
       required this.view,
       required this.clubsInCompetition,
@@ -64,7 +64,9 @@ class CompetitionModel {
     DateTime startTime =
         DateFormat("yyyy-MM-dd HH:mm:ss").parse(startTimeString);
 
-    bool isSponsor = json['is_sponsor'] ?? false;
+    bool isSponsor = json['is_sponsor'];
+    bool isEvent = json['is_event'];
+
     CompetitionScopeStatus scope = CompetitionScopeStatus.values[json['scope']];
     CompetitionStatus status =
         CompetitionStatus.values[int.parse(json['status'].toString())];
@@ -91,6 +93,7 @@ class CompetitionModel {
         createTime: createTime,
         startTime: startTime,
         isSponsor: isSponsor,
+        isEvent: isEvent,
         scope: scope,
         status: status,
         view: view,
