@@ -4,6 +4,7 @@ import 'package:loadmore/loadmore.dart';
 import '../../../bloc/view_competition_activity/view_competition_activity_bloc.dart';
 import '../../../bloc/view_competition_activity/view_competition_activity_event.dart';
 import '../../../bloc/view_competition_activity/view_competition_activity_state.dart';
+import '../../../utils/router.dart';
 import '/models/enums/priority_status.dart';
 import '../../../models/entities/competition_activity/competition_activity_model.dart';
 import '../../../models/enums/competition_activity_status.dart';
@@ -134,7 +135,13 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                                 backgroundColor:
                                     Color.fromARGB(255, 235, 237, 241),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                //chuyển sang trang detail competition activity
+                                Navigator.of(context).pushNamed(
+                                    Routes.viewDetailActivity,
+                                    arguments: state
+                                        .listCompetitionActivity[index].id);
+                              },
                               child: Column(
                                 children: [
                                   Padding(

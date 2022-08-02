@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:get_it/get_it.dart';
+import 'package:unicec_mobi/models/entities/competition_activity/competition_activity_detail_model.dart';
+import 'package:unicec_mobi/models/enums/competition_activity_status.dart';
 import '../../models/common/current_user.dart';
 import '../../models/common/paging_result.dart';
 import '../../utils/api.dart';
@@ -63,5 +67,62 @@ class CompetitionActivityService implements ICompetitionActivityService {
       Log.error(e.toString());
     }
     return null;
+  }
+
+  @override
+  Future<CompetitionActivityDetailModel?> getCompetititonActivityDetail(
+      int competitionActivityId) async {
+    var client = http.Client();
+
+    String? token = GetIt.I.get<CurrentUser>().idToken;
+    int clubIdSelected = GetIt.I.get<CurrentUser>().clubIdSelected;
+
+    String url = Api.GetUrl(
+        apiPath:
+            '${Api.competitionActivities}/${competitionActivityId}?clubId=${clubIdSelected}');
+
+    try {
+      var response =
+          await client.get(Uri.parse(url), headers: Api.GetHeader(token));
+      if (response.statusCode == 200) {
+        String isModel = "{}";
+        if (response.body.toString().compareTo(isModel) == 0) {
+          return null;
+        } else {
+          //TH2
+          Map<String, dynamic> json = adapter.parseToMap(response);
+          return CompetitionActivityDetailModel.fromJson(json);
+        }
+      }
+    } catch (e) {
+      Log.error(e.toString());
+    }
+    return null;
+  }
+
+  @override
+  Future<bool> updateStatusCompetitionActivity(
+      CompetitionActivityStatus status, int competitionActivityId) async {
+    var client = http.Client();
+
+    String? token = GetIt.I.get<CurrentUser>().idToken;
+    int clubIdSelected = GetIt.I.get<CurrentUser>().clubIdSelected;
+    String url =
+        Api.GetUrl(apiPath: '${Api.competitionActivities}/member-task-status');
+    try {
+      var response = await client.put(Uri.parse(url),
+          headers: Api.GetHeader(token),
+          body: jsonEncode(<String, dynamic>{
+            "competition_activity_id": competitionActivityId,
+            "status": status.index,
+            "club_id": clubIdSelected
+          }));
+      if (response.statusCode == 200) {
+        return true;
+      }
+    } catch (e) {
+      Log.error(e.toString());
+    }
+    return false;
   }
 }

@@ -58,65 +58,20 @@ class _ClubPageState extends State<ClubPage> {
         bloc: _bloc,
         builder: (context, state) {
           return (GetIt.I.get<CurrentUser>().clubIdSelected != 0)
-              ? DefaultTabController(
-                  initialIndex: 0,
-                  length: 2,
-                  child: Scaffold(
-                    appBar:
-                        //NavbarClub(transparent: true, title: "Câu Lạc Bộ"),
-                        AppBar(
-                      title: Text('Câu Lạc Bộ'),
-                      automaticallyImplyLeading: false,                  
-                      bottom: TabBar(
-                        labelColor: Colors.redAccent,
-                        tabs: <Widget>[
-                          Tab(
-                            text: "Thông Tin Câu Lạc Bộ",
-                          ),
-                          Tab(
-                            text: "Cuộc Thi và Sự Kiện Của Câu Lạc Bộ",
-                          )
-                        ],
-                      ),                      
-                    ),
-                    //extendBodyBehindAppBar: false,
-                    //drawer: ArgonDrawer(currentPage: "Club"),
-                    body: TabBarView(
-                      children: <Widget>[
-                        //tab1
-                        BodyClubInfo(
-                            Club: state.ClubSelected,
-                            Member: state.MemberSelected),
-                        //tab2
-                        Center(
-                          child: Text("Cuộc Thi và Sự Kiện"),
-                        ),
-                      ],
-                    ),
+              ? Scaffold(
+                  appBar: AppBar(
+                    title: Text('Câu Lạc Bộ'),
+                    automaticallyImplyLeading: false,
                   ),
+                  body: BodyClubInfo(
+                      Club: state.ClubSelected, Member: state.MemberSelected),
                 )
-              : DefaultTabController(
-                  initialIndex: 0,
-                  length: 2,
-                  child: Scaffold(
-                      appBar: AppBar(
-                        title: Text('Câu Lạc Bộ'),
-                        bottom: TabBar(
-                          labelColor: Colors.redAccent,
-                          tabs: <Widget>[
-                            Tab(
-                              text: "Thông Tin Câu Lạc Bộ",
-                            ),
-                            Tab(
-                              text: "Cuộc Thi và Sự Kiện Của Câu Lạc Bộ",
-                            )
-                          ],
-                        ),
-                      ),
-                      //extendBodyBehindAppBar: false,
-                      //drawer: ArgonDrawer(currentPage: "Club"),
-                      body: (GetIt.I.get<CurrentUser>().clubsBelongToStudent !=
-                              null)
+              : Scaffold(
+                  appBar: AppBar(
+                    title: Text('Câu Lạc Bộ'),
+                  ),
+                  body:
+                      (GetIt.I.get<CurrentUser>().clubsBelongToStudent != null)
                           ? Center(
                               child: Column(
                                 children: [
@@ -142,8 +97,7 @@ class _ClubPageState extends State<ClubPage> {
                                   ),
                                 ],
                               ),
-                            )),
-                );
+                            ));
         },
       ),
     );

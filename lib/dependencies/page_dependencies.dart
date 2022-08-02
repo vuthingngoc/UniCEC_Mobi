@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:unicec_mobi/screens/club_view_detail/club_view_detail_page.dart';
-import 'package:unicec_mobi/screens/detail_competition/detail_competition_page.dart';
-import 'package:unicec_mobi/utils/router.dart';
+import '/screens/club_view_detail/club_view_detail_page.dart';
+import '/utils/router.dart';
 import '../screens/event/event_page.dart';
-import '../screens/main_page/main_page.dart';
 import '../screens/pages.dart';
-import '../screens/view_detail_team/view_detail_team_page.dart';
 
 class PageDependencies {
   static Future setup(GetIt injector) async {
@@ -63,8 +60,9 @@ class PageDependencies {
         () => ViewListActivityPage(bloc: injector()),
         instanceName: Routes.viewListActivity);
 
+    //
     injector.registerFactory<Widget>(
-            () => ViewDetailActivityPage(),
+        () => ViewDetailActivityPage(bloc: injector()),
         instanceName: Routes.viewDetailActivity);
 
     //Profile Page -> show thông tin Student
