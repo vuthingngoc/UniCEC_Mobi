@@ -18,6 +18,7 @@ import '../../bloc/main/main_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/profile/profile_bloc.dart';
+import '../../bloc/view_list_team/view_list_team_bloc.dart';
 import '../../models/common/current_user.dart';
 import '../../utils/app_color.dart';
 import '../../utils/router.dart';
@@ -205,13 +206,12 @@ class _MainPageState extends State<MainPage> {
                     bloc: GetIt.I.get<
                         ViewCompetitionMemberTaskBloc>()), // trang show Competition mà Member này có task ở trỏng
                 CompetitionPage(bloc: GetIt.I.get<CompetitionBloc>()),
+                ViewListTeamPage(bloc: GetIt.I.get<ViewListTeamBloc>()),
+                ProfilePage(bloc: GetIt.I.get<ProfileBloc>())
                 //ViewDetailActivityPage(),
-                ViewListTeamPage(),
+                // EventPage(bloc: GetIt.I.get<EventBloc>()),
                 // ViewCompetitionMemberTaskPage(
                 //     bloc: GetIt.I.get<ViewCompetitionMemberTaskBloc>()),
-                ProfilePage(bloc: GetIt.I.get<ProfileBloc>())
-
-                // EventPage(bloc: GetIt.I.get<EventBloc>()),
               ],
             ),
             bottomNavigationBar: BottomAppBar(

@@ -1,13 +1,13 @@
 import 'package:get_it/get_it.dart';
-import 'package:unicec_mobi/bloc/club/club_bloc.dart';
-import 'package:unicec_mobi/bloc/clubs_view/clubs_view_bloc.dart';
-import 'package:unicec_mobi/bloc/competition/competition_bloc.dart';
-import 'package:unicec_mobi/bloc/home/home_bloc.dart';
-import 'package:unicec_mobi/bloc/login/login_bloc.dart';
-import 'package:unicec_mobi/bloc/my_account/my_account_bloc.dart';
-import 'package:unicec_mobi/bloc/splash/splash_bloc.dart';
-import 'package:unicec_mobi/bloc/university_selection/university_selection_bloc.dart';
-import 'package:unicec_mobi/services/services.dart';
+import '/bloc/club/club_bloc.dart';
+import '/bloc/clubs_view/clubs_view_bloc.dart';
+import '/bloc/competition/competition_bloc.dart';
+import '/bloc/home/home_bloc.dart';
+import '/bloc/login/login_bloc.dart';
+import '/bloc/my_account/my_account_bloc.dart';
+import '/bloc/splash/splash_bloc.dart';
+import '/bloc/university_selection/university_selection_bloc.dart';
+import '/services/services.dart';
 import '../bloc/club_selection/club_selection_bloc.dart';
 import '../bloc/club_view_detail/club_view_detail_bloc.dart';
 import '../bloc/event/event_bloc.dart';
@@ -18,6 +18,7 @@ import '../bloc/team/team_bloc.dart';
 import '../bloc/view_competition_activity/view_competition_activity_bloc.dart';
 import '../bloc/view_competition_member_task/view_competition_member_task_bloc.dart';
 import '../bloc/view_detail_activity/view_detail_activity_bloc.dart';
+import '../bloc/view_list_team/view_list_team_bloc.dart';
 
 class BlocDependencies {
   static Future setup(GetIt injector) async {
@@ -76,5 +77,9 @@ class BlocDependencies {
     // import view detail competition activity
     injector.registerFactory<ViewDetailActivityBloc>(
         () => ViewDetailActivityBloc(service: injector()));
+
+    // import view list teams
+    injector.registerFactory<ViewListTeamBloc>(
+        () => ViewListTeamBloc(service: injector()));
   }
 }
