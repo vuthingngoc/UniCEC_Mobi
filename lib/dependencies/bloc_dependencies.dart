@@ -17,6 +17,7 @@ import '../bloc/seeds_wallet/seeds_wallet_bloc.dart';
 import '../bloc/team/team_bloc.dart';
 import '../bloc/view_competition_activity/view_competition_activity_bloc.dart';
 import '../bloc/view_competition_member_task/view_competition_member_task_bloc.dart';
+import '../bloc/view_detail_activity/view_detail_activity_bloc.dart';
 
 class BlocDependencies {
   static Future setup(GetIt injector) async {
@@ -71,5 +72,9 @@ class BlocDependencies {
     // import view competition activity
     injector.registerFactory<ViewCompetitionActivityBloc>(
         () => ViewCompetitionActivityBloc(service: injector()));
+
+    // import view detail competition activity
+    injector.registerFactory<ViewDetailActivityBloc>(
+        () => ViewDetailActivityBloc(service: injector()));
   }
 }
