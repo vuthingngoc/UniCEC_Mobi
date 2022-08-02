@@ -1,4 +1,4 @@
-import 'package:unicec_mobi/models/enums/team_status.dart';
+import '/models/enums/team_status.dart';
 
 class TeamModel {
   int id;

@@ -365,53 +365,67 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                                                 SizedBox(height: 10.0),
 
                                                 //image
-                                                SizedBox(
-                                                  width:
-                                                      getProportionateScreenWidth(
-                                                          238), //238
-                                                  child: AspectRatio(
-                                                    aspectRatio: 1,
-                                                    child: Hero(
-                                                        tag: 1,
-                                                        child: Image.network(state
-                                                                .competitionActivityDetail!
-                                                                .activitiesEntities[
-                                                                    state
-                                                                        .selectedImageIndex]
-                                                                .imageUrl
-                                                                .contains(
-                                                                    'http')
-                                                            ? state
-                                                                .competitionActivityDetail!
-                                                                .activitiesEntities[
-                                                                    state
-                                                                        .selectedImageIndex]
-                                                                .imageUrl
-                                                            : "https://picsum.photos/seed/513/600")
-                                                        //Image.network(
-                                                        //     "https://img.freepik.com/premium-photo/astronaut-outer-open-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-16829.jpg?w=2000"),
-                                                        ),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                    height:
+                                                if (state
+                                                    .competitionActivityDetail!
+                                                    .activitiesEntities
+                                                    .isNotEmpty)
+                                                  SizedBox(
+                                                    width:
                                                         getProportionateScreenWidth(
-                                                            20)),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    ...List.generate(
-                                                        state
-                                                                .competitionActivityDetail
-                                                                ?.activitiesEntities
-                                                                .length ??
-                                                            0,
-                                                        (index) =>
-                                                            buildSmallImagePreview(
-                                                                index)),
-                                                  ],
-                                                ),
+                                                            238), //238
+                                                    child: AspectRatio(
+                                                      aspectRatio: 1,
+                                                      child: Hero(
+                                                          tag: 1,
+                                                          child: Image.network(state
+                                                                  .competitionActivityDetail!
+                                                                  .activitiesEntities[
+                                                                      state
+                                                                          .selectedImageIndex]
+                                                                  .imageUrl
+                                                                  .contains(
+                                                                      'http')
+                                                              ? state
+                                                                  .competitionActivityDetail!
+                                                                  .activitiesEntities[
+                                                                      state
+                                                                          .selectedImageIndex]
+                                                                  .imageUrl
+                                                              : "https://picsum.photos/seed/513/600")
+                                                          //Image.network(
+                                                          //     "https://img.freepik.com/premium-photo/astronaut-outer-open-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-16829.jpg?w=2000"),
+                                                          ),
+                                                    ),
+                                                  ),
+                                                if (state
+                                                    .competitionActivityDetail!
+                                                    .activitiesEntities
+                                                    .isNotEmpty)
+                                                  SizedBox(
+                                                      height:
+                                                          getProportionateScreenWidth(
+                                                              20)),
+                                                if (state
+                                                    .competitionActivityDetail!
+                                                    .activitiesEntities
+                                                    .isNotEmpty)
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      ...List.generate(
+                                                          state
+                                                                  .competitionActivityDetail
+                                                                  ?.activitiesEntities
+                                                                  .length ??
+                                                              1,
+                                                          (index) =>
+                                                              buildSmallImagePreview(
+                                                                  index)),
+                                                    ],
+                                                  ),
+
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.only(
@@ -433,6 +447,7 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                                                     ],
                                                   ),
                                                 ),
+
                                                 //Description
                                                 Padding(
                                                   padding:
