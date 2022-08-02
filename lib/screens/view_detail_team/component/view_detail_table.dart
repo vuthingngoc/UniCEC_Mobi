@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:unicec_mobi/models/entities/team/team_model.dart';
-
 import '../../../constants/Theme.dart';
-import '../../../models/enums/team_status.dart';
-import '../../constants.dart';
 
 class ViewDetailTableMenu extends StatelessWidget {
   const ViewDetailTableMenu({
     Key? key,
   }) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
-
     Future<void> _showDeleteDialog() async {
       return showDialog<void>(
         context: context,
@@ -78,7 +71,10 @@ class ViewDetailTableMenu extends StatelessWidget {
               ),
             ],
           ),
-          Expanded(child: SizedBox(width: 10,)),
+          Expanded(
+              child: SizedBox(
+            width: 10,
+          )),
           Row(
             children: [
               Container(
@@ -102,20 +98,16 @@ class ViewDetailTableMenu extends StatelessWidget {
         columns: [
           DataColumn(
               label: Text('',
-                  style: TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold))),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
           DataColumn(
               label: Text('Tên',
-                  style: TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold))),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
           DataColumn(
               label: Text('MSSV',
-                  style: TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold))),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
           DataColumn(
               label: Text('Trường',
-                  style: TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold))),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
         ],
         rows: [
           DataRow(
