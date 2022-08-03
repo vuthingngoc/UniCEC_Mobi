@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/view_list_team/view_list_team_bloc.dart';
+import '../../bloc/view_list_team/view_list_team_event.dart';
+import '../../bloc/view_list_team/view_list_team_state.dart';
 import '../../constants/Theme.dart';
 
 import '../../utils/app_color.dart';
+import '../../utils/router.dart';
 import '../widgets/input.dart';
 import 'component/body.dart';
 
@@ -18,19 +21,54 @@ class _ViewListTeamPageState extends State<ViewListTeamPage>
     with AutomaticKeepAliveClientMixin {
   //bloc
   ViewListTeamBloc get bloc => widget.bloc;
+  //
+  final _formKeyTeamName = GlobalKey<FormState>();
+  final _formKeyTeamDescription = GlobalKey<FormState>();
+
   @override
   bool get wantKeepAlive => true;
 
   @override
   void initState() {
     super.initState();
+    //mặc định competition id 2
+    bloc.add(RecieveDataEvent(competitionId: 2));
+    //
+    bloc.listenerStream.listen((event) {
+      if (event is ShowingSnackBarEvent) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(event.message)));
+      }
+      if (event is NavigatorTeamDetailPageEvent) {
+        Navigator.of(context)
+            .pushNamed(Routes.viewDetailTeam, arguments: event.teamId);
+      }
+      if (event is ViewListTeamInitEvent) {
+        bloc.add(ViewListTeamInitEvent());
+      }
+    });
+  }
+
+  //nhận competition Id
+  void didChangeDependencies() {
+    // RouteSettings settings = ModalRoute.of(context)!.settings;
+    // if (settings.arguments != null) {
+    //   int competitionId = settings.arguments as int;
+    //   if (competitionId != 0) {
+    //     bloc.add(RecieveDataEvent(competitionId: competitionId));
+    //   }
+    // }
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: bloc,
-      child: Scaffold(
+    //return
+    //BlocProvider.value(
+    //     value: bloc,
+    //     child: BlocBuilder<ViewListTeamBloc, ViewListTeamState>(
+    //         bloc: bloc,
+    //         builder: (context, state) {
+    return Scaffold(
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(bottom: 60),
           child: FloatingActionButton(
@@ -39,7 +77,7 @@ class _ViewListTeamPageState extends State<ViewListTeamPage>
             onPressed: () async {
               showDialog(
                   context: context,
-                  builder: (BuildContext context) {
+                  builder: (context) {
                     return AlertDialog(
                       shape: RoundedRectangleBorder(
                           borderRadius:
@@ -55,27 +93,60 @@ class _ViewListTeamPageState extends State<ViewListTeamPage>
                         padding: const EdgeInsets.only(
                           top: 8,
                         ),
-                        child: Form(
-                          child: Column(
-                            children: <Widget>[
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 8, bottom: 8),
-                                child: Input(
-                                  placeholder: "Tên",
-                                  prefixIcon: Icon(Icons.label),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 8),
-                                child: Input(
-                                  placeholder: "Chi tiết",
+                        child: Column(children: [
+                          Text('Tên đội'),
+                          Form(
+                            key: _formKeyTeamName,
+                            child: TextFormField(
+                                decoration: InputDecoration(
                                   prefixIcon: Icon(Icons.description),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)),
                                 ),
-                              ),
-                            ],
+                                maxLength: 50,
+                                minLines: 1,
+                                maxLines: 3,
+                                validator: (value) {
+                                  if (value!.length < 10) {
+                                    return 'Nhập ít nhất 10 ký tự';
+                                  }
+                                  return null;
+                                },
+                                onChanged: (value) {
+                                  if (_formKeyTeamName.currentState!
+                                      .validate()) {
+                                    bloc.add(ChangeTeamNameValueEvent(
+                                        newNameValue: value));
+                                  }
+                                }),
                           ),
-                        ),
+                          Text('Chi tiết'),
+                          Form(
+                            key: _formKeyTeamDescription,
+                            child: TextFormField(
+                                decoration: InputDecoration(
+                                  prefixIcon: Icon(Icons.description),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                ),
+                                maxLength: 100,
+                                minLines: 1,
+                                maxLines: 5,
+                                validator: (value) {
+                                  if (value!.length < 10) {
+                                    return 'Nhập ít nhất 10 ký tự';
+                                  }
+                                  return null;
+                                },
+                                onChanged: (value) {
+                                  if (_formKeyTeamDescription.currentState!
+                                      .validate()) {
+                                    bloc.add(ChangeTeamDescriptionValueEvent(
+                                        newDescriptionValue: value));
+                                  }
+                                }),
+                          )
+                        ]),
                       ),
                       actions: [
                         Container(
@@ -85,7 +156,16 @@ class _ViewListTeamPageState extends State<ViewListTeamPage>
                           child: FlatButton(
                             textColor: ArgonColors.white,
                             color: ArgonColors.warning,
-                            onPressed: () {},
+                            onPressed: () {
+                              if (_formKeyTeamDescription.currentState!
+                                  .validate()) {
+                                if (_formKeyTeamName.currentState!.validate()) {
+                                  bloc.add(CreateTeamEvent());
+                                  //
+                                  Navigator.of(context).pop();
+                                }
+                              }
+                            },
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4.0),
                             ),
@@ -101,11 +181,6 @@ class _ViewListTeamPageState extends State<ViewListTeamPage>
                                         fontSize: 15.0))),
                           ),
                         ),
-                        // RaisedButton(
-                        //     child: Text("Tạo"),
-                        //     onPressed: () {
-                        //       // your code
-                        //     })
                       ],
                     );
                   });
@@ -129,8 +204,13 @@ class _ViewListTeamPageState extends State<ViewListTeamPage>
           centerTitle: true,
           backgroundColor: AppColors.backgroundPageColor,
         ),
-        body: Body(),
-      ),
-    );
+        body: BlocProvider.value(
+          value: bloc,
+          child: BlocBuilder<ViewListTeamBloc, ViewListTeamState>(
+              bloc: bloc,
+              builder: (context, state) {
+                return Body();
+              }),
+        ));
   }
 }

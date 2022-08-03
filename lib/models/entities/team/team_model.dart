@@ -24,7 +24,7 @@ class TeamModel {
     String name = json['name'];
     String description = json['description'];
     String invitedCode = json['invited_code'];
-    TeamStatus status = json['status'];
+    TeamStatus status = TeamStatus.values[json['status']];
     int numberOfMemberInTeam = json['number_of_member_in_team'];
 
     return TeamModel(
