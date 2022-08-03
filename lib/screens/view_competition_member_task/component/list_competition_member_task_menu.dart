@@ -110,27 +110,52 @@ class _ViewCompetitionMemberTaskMenuState
       bloc: bloc,
       builder: (context, state) {
         return (GetIt.I.get<CurrentUser>().clubIdSelected == 0)
-            ? Text('Bạn chưa chọn CLB xin mời Chọn CLB')
+            ? Padding(
+                padding: const EdgeInsets.only(top: 180.0),
+                child: Column(
+                  children: [
+                    Container(
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                alignment: Alignment.topCenter,
+                                image: AssetImage(
+                                    "assets/img/not-found-icon-24.jpg"),
+                                fit: BoxFit.fitWidth))),
+                    Image.asset("assets/img/not-found-icon-24.jpg"),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 25.0),
+                      child: Text(
+                        'Mời bạn chọn CLB để hiển thị danh sách công việc',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+
+                  ],
+                ),
+              )
             : (state.listCompetition.isEmpty)
                 ? Padding(
-                  padding: const EdgeInsets.only(top: 180.0),
-                  child: Column(
-                    children: [
-                      Container(
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  alignment: Alignment.topCenter,
-                                  image:
-                                  AssetImage("assets/img/not-found-icon-24.jpg"),
-                                  fit: BoxFit.fitWidth))),
-                      Image.asset("assets/img/not-found-icon-24.jpg"),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 25.0),
-                        child: Text('Hiện tại bạn không có hoạt động nào!', style: TextStyle(fontSize: 20),),
-                      ),
-                    ],
-                  ),
-                )
+                    padding: const EdgeInsets.only(top: 180.0),
+                    child: Column(
+                      children: [
+                        Container(
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    alignment: Alignment.topCenter,
+                                    image: AssetImage(
+                                        "assets/img/not-found-icon-24.jpg"),
+                                    fit: BoxFit.fitWidth))),
+                        Image.asset("assets/img/not-found-icon-24.jpg"),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 25.0),
+                          child: Text(
+                            'Hiện tại bạn không có hoạt động nào!',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
                 : RefreshIndicator(
                     onRefresh: () {
                       return _refresh(context);

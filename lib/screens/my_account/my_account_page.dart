@@ -11,8 +11,8 @@ import '../../constants/theme.dart';
 
 //widgets
 import '../../models/common/current_user.dart';
+import '../../utils/app_color.dart';
 import '../../utils/dimens.dart';
-import 'widgets/navbar_profile.dart';
 import '../widgets/drawer.dart';
 
 class MyAccountPage extends StatefulWidget {
@@ -50,258 +50,243 @@ class _MyAccountPageState extends State<MyAccountPage>
           // print('user: ${currentUser.avatar}');
           return Scaffold(
               extendBodyBehindAppBar: true,
-              appBar: NavbarProfile(
-                title: "Thông Tin Sinh Viên",
-                transparent: true,
-                backButton: true,
+              // appBar: NavbarProfile(
+              //   title: "Thông Tin Sinh Viên",
+              //   transparent: true,
+              //   backButton: true,
+              // ),
+              appBar: AppBar(
+                leading: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.arrow_back, color: Colors.black),
+                ),
+                title: Text("Thông tin tài khoản",
+                    style: TextStyle(color: Colors.black)),
+                centerTitle: true,
+                backgroundColor: AppColors.backgroundPageColor,
               ),
-              backgroundColor: ArgonColors.bgColorScreen,
+               backgroundColor: AppColors.backgroundPageColor,
               drawer: ArgonDrawer(currentPage: "My account"),
               body: Stack(children: <Widget>[
-                Container(
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            alignment: Alignment.topCenter,
-                            image:
-                                AssetImage("assets/img/profile-screen-bg.png"),
-                            fit: BoxFit.fitWidth))),
                 SafeArea(
                   child: ListView(children: [
                     Padding(
                       padding: const EdgeInsets.only(
-                          left: 16.0, right: 16.0, top: 74.0),
+                          left: 16.0, right: 16.0, top: 90.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Stack(children: <Widget>[
                             Container(
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.1),
-                                    spreadRadius: 1,
-                                    blurRadius: 7,
-                                    offset: Offset(
-                                        0, 3), // changes position of shadow
-                                  ),
-                                ],
-                              ),
-                              child: Card(
-                                  semanticContainer: true,
-                                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                                  elevation: .0,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(5.0))),
+                              // decoration: BoxDecoration(
+                              //   boxShadow: [
+                              //     BoxShadow(
+                              //       color: Colors.grey.withOpacity(0.1),
+                              //       spreadRadius: 1,
+                              //       blurRadius: 7,
+                              //       offset: Offset(
+                              //           0, 3), // changes position of shadow
+                              //     ),
+                              //   ],
+                              // ),
+                              child: Container(
                                   child: Padding(
                                     padding: const EdgeInsets.only(
                                         top: 85.0, bottom: 20.0),
-                                    child: Row(
+                                    child: Column(
                                       children: [
-                                        Expanded(
-                                          child: Column(
-                                            children: [
-                                              Align(
-                                                child: Text(
-                                                    "${currentUser.fullname}",
-                                                    style: TextStyle(
-                                                        color: Color.fromRGBO(
-                                                            50, 50, 93, 1),
-                                                        fontSize: 28.0,
-                                                        fontWeight:
-                                                            FontWeight.w800)),
-                                              ),
-                                              SizedBox(height: 10.0),
-                                              Align(
-                                                child: Text(
-                                                    "${state.user.studentCode}",
-                                                    style: TextStyle(
-                                                        color: Color.fromRGBO(
-                                                            50, 50, 93, 1),
-                                                        fontSize: 18.0,
-                                                        fontWeight:
-                                                            FontWeight.w300)),
-                                              ),
-                                              Divider(
-                                                height: 40.0,
-                                                thickness: 1.5,
-                                                indent: 32.0,
-                                                endIndent: 32.0,
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 32.0, right: 32.0),
-                                                child: Align(
-                                                  child: Text(
-                                                      "${state.user.description}",
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              188,
-                                                              189,
-                                                              190),
-                                                          fontSize: 17.0,
-                                                          fontWeight:
-                                                              FontWeight.w400)),
-                                                ),
-                                              ),
-                                              SizedBox(height: Dimens.size20),
-                                              Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: Dimens.size20),
-                                                child: Card(
-                                                  elevation: 4,
-                                                  child: Column(children: [
-                                                    Padding(
-                                                      padding: EdgeInsets.all(
-                                                          Dimens.size10),
-                                                      child: Row(children: [
-                                                        Icon(Icons.school),
-                                                        //account_circle_outlined
-                                                        SizedBox(
-                                                          width: Dimens.size20,
-                                                        ),
-                                                        Text(
-                                                          state.user.universityName ??
-                                                              '',
-                                                          style: TextStyle(
-                                                              fontSize: Dimens
-                                                                  .size16),
-                                                        )
-                                                      ]),
-                                                    ),
-                                                    Divider(
-                                                      height: 0.6,
-                                                      color: Colors.black,
-                                                    ),
-                                                    Padding(
-                                                      padding: EdgeInsets.all(
-                                                          Dimens.size10),
-                                                      child: Row(children: [
-                                                        Icon(Icons
-                                                            .business_center),
-                                                        SizedBox(
-                                                          width: Dimens.size20,
-                                                        ),
-                                                        Text(
-                                                          state.user.departmentName ??
-                                                              '',
-                                                          style: TextStyle(
-                                                              fontSize: 16),
-                                                        )
-                                                      ]),
-                                                    ),
-                                                    Divider(
-                                                      height: 0.6,
-                                                      color: Colors.black,
-                                                    ),
-                                                    Padding(
-                                                      padding: EdgeInsets.all(
-                                                          Dimens.size10),
-                                                      child: Row(children: [
-                                                        Icon(Icons
-                                                            .control_point),
-                                                        SizedBox(
-                                                          width: Dimens.size20,
-                                                        ),
-                                                        Text(
-                                                          'SeedsPoint: ${state.seedsWallet.amount}',
-                                                          style: TextStyle(
-                                                              fontSize: 16),
-                                                        )
-                                                      ]),
-                                                    ),
-                                                    Divider(
-                                                      height: 0.6,
-                                                      color: Colors.black,
-                                                    ),
-                                                    Padding(
-                                                      padding: EdgeInsets.all(
-                                                          Dimens.size10),
-                                                      child: Row(children: [
-                                                        Icon(Icons
-                                                            .alternate_email),
-                                                        SizedBox(
-                                                          width: Dimens.size20,
-                                                        ),
-                                                        Text(
-                                                          state.user.email,
-                                                          style: TextStyle(
-                                                              fontSize: Dimens
-                                                                  .size16),
-                                                        )
-                                                      ]),
-                                                    ),
-                                                    Divider(
-                                                      height: 0.6,
-                                                      color: Colors.black,
-                                                    ),
-                                                    Padding(
-                                                      padding: EdgeInsets.all(
-                                                          Dimens.size10),
-                                                      child: Row(children: [
-                                                        Icon(Icons.phone),
-                                                        SizedBox(
-                                                          width: Dimens.size20,
-                                                        ),
-                                                        Text(
-                                                          state
-                                                              .user.phoneNumber,
-                                                          style: TextStyle(
-                                                              fontSize: 16),
-                                                        )
-                                                      ]),
-                                                    ),
-                                                    Divider(
-                                                      height: 0.6,
-                                                      color: Colors.black,
-                                                    ),
-                                                    Padding(
-                                                      padding: EdgeInsets.all(
-                                                          Dimens.size10),
-                                                      child: Row(children: [
-                                                        Icon(Icons.cake),
-                                                        SizedBox(
-                                                          width: Dimens.size20,
-                                                        ),
-                                                        Text(
-                                                          state.user.dob,
-                                                          style: TextStyle(
-                                                              fontSize: 16),
-                                                        )
-                                                      ]),
-                                                    ),
-                                                    Divider(
-                                                      height: 0.6,
-                                                      color: Colors.black,
-                                                    ),
-                                                    Padding(
-                                                      padding: EdgeInsets.all(
-                                                          Dimens.size10),
-                                                      child: Row(children: [
-                                                        Icon(Icons.transgender),
-                                                        SizedBox(
-                                                          width: Dimens.size20,
-                                                        ),
-                                                        Text(
-                                                          state.user.gender,
-                                                          style: TextStyle(
-                                                              fontSize: 16),
-                                                        )
-                                                      ]),
-                                                    ),
-                                                    Divider(
-                                                      height: 0.6,
-                                                      color: Colors.black,
-                                                    ),
-                                                  ]),
-                                                ),
-                                              )
-                                            ],
+                                        Align(
+                                          child: Text(
+                                              "${currentUser.fullname}",
+                                              style: TextStyle(
+                                                  color: Color.fromRGBO(
+                                                      50, 50, 93, 1),
+                                                  fontSize: 28.0,
+                                                  fontWeight:
+                                                      FontWeight.w800)),
+                                        ),
+                                        SizedBox(height: 10.0),
+                                        Align(
+                                          child: Text(
+                                              "${state.user.studentCode}",
+                                              style: TextStyle(
+                                                  color: Color.fromRGBO(
+                                                      50, 50, 93, 1),
+                                                  fontSize: 18.0,
+                                                  fontWeight:
+                                                      FontWeight.w300)),
+                                        ),
+                                        Divider(
+                                          height: 40.0,
+                                          thickness: 1.5,
+                                          indent: 32.0,
+                                          endIndent: 32.0,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 32.0, right: 32.0),
+                                          child: Align(
+                                            child: Text(
+                                                "${state.user.description}",
+                                                textAlign:
+                                                    TextAlign.center,
+                                                style: TextStyle(
+                                                    fontSize: 17.0,
+                                                    fontWeight:
+                                                        FontWeight.w400)),
                                           ),
                                         ),
+                                        SizedBox(height: Dimens.size20),
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: Dimens.size20),
+                                          child: Container(
+                                            child: Column(children: [
+                                              Padding(
+                                                padding: EdgeInsets.all(
+                                                    Dimens.size10),
+                                                child: Row(children: [
+                                                  Icon(Icons.school),
+                                                  //account_circle_outlined
+                                                  SizedBox(
+                                                    width: Dimens.size20,
+                                                  ),
+                                                  Text(
+                                                    state.user.universityName ??
+                                                        '',
+                                                    style: TextStyle(
+                                                        fontSize: 18  ),
+                                                  )
+                                                ]),
+                                              ),
+                                              // Divider(
+                                              //   height: 0.6,
+                                              //   color: Colors.black,
+                                              // ),
+                                              Padding(
+                                                padding: EdgeInsets.all(
+                                                    Dimens.size10),
+                                                child: Row(children: [
+                                                  Icon(Icons
+                                                      .business_center),
+                                                  SizedBox(
+                                                    width: Dimens.size20,
+                                                  ),
+                                                  Text(
+                                                    state.user.departmentName ??
+                                                        '',
+                                                    style: TextStyle(
+                                                        fontSize: 18),
+                                                  )
+                                                ]),
+                                              ),
+                                              // Divider(
+                                              //   height: 0.6,
+                                              //   color: Colors.black,
+                                              // ),
+                                              Padding(
+                                                padding: EdgeInsets.all(
+                                                    Dimens.size10),
+                                                child: Row(children: [
+                                                  Icon(Icons
+                                                      .control_point),
+                                                  SizedBox(
+                                                    width: Dimens.size20,
+                                                  ),
+                                                  Text(
+                                                    'SeedsPoint: ${state.seedsWallet.amount}',
+                                                    style: TextStyle(
+                                                        fontSize: 17),
+                                                  )
+                                                ]),
+                                              ),
+                                              // Divider(
+                                              //   height: 0.6,
+                                              //   color: Colors.black,
+                                              // ),
+                                              Padding(
+                                                padding: EdgeInsets.all(
+                                                    Dimens.size10),
+                                                child: Row(children: [
+                                                  Icon(Icons
+                                                      .alternate_email),
+                                                  SizedBox(
+                                                    width: Dimens.size20,
+                                                  ),
+                                                  Text(
+                                                    state.user.email,
+                                                    style: TextStyle(
+                                                        fontSize: 17),
+                                                  )
+                                                ]),
+                                              ),
+                                              // Divider(
+                                              //   height: 0.6,
+                                              //   color: Colors.black,
+                                              // ),
+                                              Padding(
+                                                padding: EdgeInsets.all(
+                                                    Dimens.size10),
+                                                child: Row(children: [
+                                                  Icon(Icons.phone),
+                                                  SizedBox(
+                                                    width: Dimens.size20,
+                                                  ),
+                                                  Text(
+                                                    state
+                                                        .user.phoneNumber,
+                                                    style: TextStyle(
+                                                        fontSize: 17),
+                                                  )
+                                                ]),
+                                              ),
+                                              // Divider(
+                                              //   height: 0.6,
+                                              //   color: Colors.black,
+                                              // ),
+                                              Padding(
+                                                padding: EdgeInsets.all(
+                                                    Dimens.size10),
+                                                child: Row(children: [
+                                                  Icon(Icons.cake),
+                                                  SizedBox(
+                                                    width: Dimens.size20,
+                                                  ),
+                                                  Text(
+                                                    state.user.dob,
+                                                    style: TextStyle(
+                                                        fontSize: 17),
+                                                  )
+                                                ]),
+                                              ),
+                                              // Divider(
+                                              //   height: 0.6,
+                                              //   color: Colors.black,
+                                              // ),
+                                              Padding(
+                                                padding: EdgeInsets.all(
+                                                    Dimens.size10),
+                                                child: Row(children: [
+                                                  Icon(Icons.transgender),
+                                                  SizedBox(
+                                                    width: Dimens.size20,
+                                                  ),
+                                                  Text(
+                                                    state.user.gender,
+                                                    style: TextStyle(
+                                                        fontSize: 17),
+                                                  )
+                                                ]),
+                                              ),
+                                              // Divider(
+                                              //   height: 0.6,
+                                              //   color: Colors.black,
+                                              // ),
+                                            ]),
+                                          ),
+                                        )
                                       ],
                                     ),
                                   )),
@@ -318,6 +303,39 @@ class _MyAccountPageState extends State<MyAccountPage>
                                   alignment: FractionalOffset(0.5, 0.0),
                                 ))
                           ]),
+                          Padding(
+                            padding:
+                            const EdgeInsets.only(top: 16),
+                            child: Container(
+                              width: double.infinity,
+                              margin:
+                              new EdgeInsets.only(right: 15, left: 15, bottom: 15),
+                              child: FlatButton(
+                                textColor: ArgonColors.white,
+                                color: ArgonColors.warning,
+                                onPressed: () {
+                                  // Respond to button press
+                                  Navigator.pushNamed(
+                                      context, '/editMyAccount');
+                                },
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(4.0),
+                                ),
+                                child: Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 16.0,
+                                        right: 16.0,
+                                        top: 12,
+                                        bottom: 12),
+                                    child: Text("Chỉnh sửa thông tin",
+                                        style: TextStyle(
+                                            fontWeight:
+                                            FontWeight.w600,
+                                            fontSize: 18.0))),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),

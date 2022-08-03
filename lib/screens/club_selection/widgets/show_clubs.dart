@@ -23,14 +23,14 @@ class _ShowClubsBelongToStudentState extends State<ShowClubsBelongToStudent> {
     ClubSelectionBloc bloc = BlocProvider.of<ClubSelectionBloc>(context);
     return Column(
       children: [
-        SizedBox(height: Dimens.size10),
-        Text(
-          'Chọn câu lạc bộ của bạn',
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 20.0,
-          ),
-        ),
+        // SizedBox(height: Dimens.size10),
+        // Text(
+        //   'Chọn câu lạc bộ của bạn',
+        //   style: TextStyle(
+        //     fontWeight: FontWeight.w500,
+        //     fontSize: 20.0,
+        //   ),
+        // ),
         SizedBox(
           height: Dimens.size10,
         ),

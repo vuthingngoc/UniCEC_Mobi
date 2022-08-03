@@ -8,6 +8,7 @@ export 'club_selection/club_selection_page.dart';
 export 'competition/competition_page.dart'; //->show trang cuộc thi và sự kiện
 export 'profile/profile_page.dart'; //->show thông tin sinh viên
 export 'my_account/my_account_page.dart';
+export 'edit_my_account/edit_my_account_page.dart';
 export 'club/club_page.dart'; //-> show thông tin club
 export 'task/task_page.dart'; //-> show task của member
 
