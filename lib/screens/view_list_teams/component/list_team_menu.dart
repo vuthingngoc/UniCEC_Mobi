@@ -1,11 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loadmore/loadmore.dart';
+import '../../../bloc/view_list_team/view_list_team_bloc.dart';
+import '../../../bloc/view_list_team/view_list_team_event.dart';
+import '../../../bloc/view_list_team/view_list_team_state.dart';
 import '/models/entities/team/team_model.dart';
 import '../../../models/enums/team_status.dart';
 
-class ViewListTeamMenu extends StatelessWidget {
+class ViewListTeamMenu extends StatefulWidget {
   const ViewListTeamMenu({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<ViewListTeamMenu> createState() => _ViewListTeamMenuState();
+}
+
+class _ViewListTeamMenuState extends State<ViewListTeamMenu> {
+//load
+  void load(BuildContext context) {
+    BlocProvider.of<ViewListTeamBloc>(context).add(LoadAddMoreEvent());
+  }
+
+  //refresh
+  void refresh(BuildContext context) {
+    BlocProvider.of<ViewListTeamBloc>(context).add(ViewListTeamInitEvent());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,77 +55,122 @@ class ViewListTeamMenu extends StatelessWidget {
           status: TeamStatus.IsLocked,
           numberOfMemberInTeam: 3),
     ];
-    return Column(
-      children: [
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: fakeData.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  primary: Colors.black87,
-                  padding: EdgeInsets.all(20),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15)),
-                  backgroundColor: Color.fromARGB(255, 235, 237, 241),
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/viewDetailTeam');
-                },
-                child: Row(
+    ViewListTeamBloc bloc = BlocProvider.of<ViewListTeamBloc>(context);
+    return BlocBuilder<ViewListTeamBloc, ViewListTeamState>(
+      bloc: bloc,
+      builder: (context, state) {
+        return (state.listTeam.isEmpty)
+            ? Padding(
+                padding: const EdgeInsets.only(top: 180.0),
+                child: Column(
                   children: [
-                    Expanded(child: Text(fakeData[index].name, style: TextStyle(fontSize: 15))),
-                    SizedBox(width: 10,),
-                    Expanded(child: Text(fakeData[index].invitedCode, style: TextStyle(fontSize: 15))),
-                    SizedBox(width: 30,),
-                    // if (fakeData[index].status.toString() == "TeamStatus.Available")
-                    //   Image.network(
-                    //       "https://uxwing.com/wp-content/themes/uxwing/download/36-arts-graphic-shapes/circle.png",
-                    //       scale: 50,
-                    //       color: Colors.green)
-                    // else
-                    //   Image.network(
-                    //       "https://uxwing.com/wp-content/themes/uxwing/download/36-arts-graphic-shapes/circle.png",
-                    //       scale: 50,
-                    //       color: Colors.red),
-                    SizedBox(
-                      width: 10,
+                    Container(
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                alignment: Alignment.topCenter,
+                                image: AssetImage(
+                                    "assets/img/not-found-icon-24.jpg"),
+                                fit: BoxFit.fitWidth))),
+                    Image.asset("assets/img/not-found-icon-24.jpg"),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 25.0),
+                      child: Text(
+                        'Hiện tại cuộc thi chưa có team nào!',
+                        style: TextStyle(fontSize: 20),
+                      ),
                     ),
-                    if (fakeData[index].status.toString() == "TeamStatus.Available")
-                      Expanded(child: Text("Mở", style: TextStyle(fontSize: 15, color: Colors.green)))
-                    else
-                      Expanded(child: Text("Đóng", style: TextStyle(fontSize: 15, color: Colors.red))),
-                     Icon(Icons.arrow_forward_ios,),
-                    //Icon(Icons.remove_red_eye),
-                    // Row(
-                    //   children: [
-                    //     Image.network(
-                    //         "https://uxwing.com/wp-content/themes/uxwing/download/36-arts-graphic-shapes/circle.png",
-                    //         scale: 50,
-                    //         color: Colors.green),
-                    //     SizedBox(
-                    //       width: 10,
-                    //     ),
-                    //     Expanded(child: Text("Mở")),
-                    //     Icon(Icons.arrow_forward_ios),
-                    //   ],
-                    // ),
                   ],
                 ),
-              ),
-            );
-          },
-        )
-      ],
+              )
+            : RefreshIndicator(
+                onRefresh: () {
+                  return _refresh(context);
+                },
+                child: LoadMore(
+                  isFinish: !state.hasNext,
+                  onLoadMore: () {
+                    return _loadMore(context);
+                  },
+                  whenEmptyLoad: false,
+                  delegate: DefaultLoadMoreDelegate(),
+                  textBuilder: DefaultLoadMoreTextBuilder.english,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: state.listTeam.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            primary: Colors.black87,
+                            padding: EdgeInsets.all(20),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15)),
+                            backgroundColor: Color.fromARGB(255, 235, 237, 241),
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/viewDetailTeam');
+                          },
+                          child: Row(
+                            children: [
+                              Expanded(
+                                  child: Text(state.listTeam[index].name,
+                                      style: TextStyle(fontSize: 15))),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Expanded(
+                                  child: Text(
+                                      state.listTeam[index].numberOfMemberInTeam
+                                          .toString(),
+                                      style: TextStyle(fontSize: 15))),
+                              SizedBox(
+                                width: 30,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              if (state.listTeam[index].status.toString() ==
+                                  "TeamStatus.Available")
+                                Expanded(
+                                    child: Text("Mở",
+                                        style: TextStyle(
+                                            fontSize: 15, color: Colors.green)))
+                              else
+                                Expanded(
+                                    child: Text("Đóng",
+                                        style: TextStyle(
+                                            fontSize: 15, color: Colors.red))),
+                              Icon(
+                                Icons.arrow_forward_ios,
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ));
+      },
     );
-    // return ListView.builder(
-    //   return Padding(
-    //     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-    //
-    //     ),
-    // ),
-    // );
+  }
+
+  Future<bool> _loadMore(BuildContext context) async {
+    print("onLoadMore");
+    await Future.delayed(Duration(seconds: 0, milliseconds: 5000));
+    BlocProvider.of<ViewListTeamBloc>(context).add(IncrementalEvent());
+    //lúc này stateModel cũng có r nhưng mà chưa có hàm render lại cái view
+    //phải đưa cái hàm này vào trong để add event và có state
+    load(context);
+    return true;
+  }
+
+  Future<bool> _refresh(BuildContext context) async {
+    print("onRefresh");
+    BlocProvider.of<ViewListTeamBloc>(context).add(RefreshEvent());
+    await Future.delayed(Duration(seconds: 0, milliseconds: 5000));
+    refresh(context);
+    return true;
   }
 }

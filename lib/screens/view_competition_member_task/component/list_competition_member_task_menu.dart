@@ -129,7 +129,6 @@ class _ViewCompetitionMemberTaskMenuState
                         style: TextStyle(fontSize: 20),
                       ),
                     ),
-
                   ],
                 ),
               )
