@@ -15,8 +15,6 @@ class ViewListTeamBloc extends BaseBloc<ViewListTeamEvent, ViewListTeamState> {
             competitionId: -1,
             hasNext: false,
             currentPage: 1,
-            valueTeamDescription: '',
-            valueTeamName: '',
             valueInvitedCode: '')) {
     on((event, emit) async {
       //InitEvent
@@ -34,8 +32,6 @@ class ViewListTeamBloc extends BaseBloc<ViewListTeamEvent, ViewListTeamState> {
               newCompetitionId: state.competitionId,
               newHasNext: result.hasNext,
               newCurrentPage: result.currentPage,
-              valueTeamDescription: state.valueTeamDescription,
-              valueTeamName: state.valueTeamName,
               valueInvitedCode: state.valueInvitedCode));
         }
       }
@@ -54,8 +50,6 @@ class ViewListTeamBloc extends BaseBloc<ViewListTeamEvent, ViewListTeamState> {
               newCompetitionId: event.competitionId, //change
               newHasNext: result.hasNext,
               newCurrentPage: result.currentPage,
-              valueTeamDescription: state.valueTeamDescription,
-              valueTeamName: state.valueTeamName,
               valueInvitedCode: state.valueInvitedCode));
         }
       }
@@ -66,8 +60,6 @@ class ViewListTeamBloc extends BaseBloc<ViewListTeamEvent, ViewListTeamState> {
             newCompetitionId: state.competitionId,
             newHasNext: false,
             newCurrentPage: 1,
-            valueTeamDescription: '',
-            valueTeamName: '',
             valueInvitedCode: ''));
       }
       //Increase Event
@@ -78,8 +70,6 @@ class ViewListTeamBloc extends BaseBloc<ViewListTeamEvent, ViewListTeamState> {
             newCompetitionId: state.competitionId,
             newHasNext: state.hasNext,
             newCurrentPage: increase,
-            valueTeamDescription: state.valueTeamDescription,
-            valueTeamName: state.valueTeamName,
             valueInvitedCode: state.valueInvitedCode));
       }
       //LoadMore
@@ -105,31 +95,6 @@ class ViewListTeamBloc extends BaseBloc<ViewListTeamEvent, ViewListTeamState> {
             newHasNext: result?.hasNext ??
                 false, // result trả ra null thì đồng nghĩa với việc hasNext = false
             newCurrentPage: result?.currentPage ?? state.currentPage,
-            valueTeamDescription: state.valueTeamDescription,
-            valueTeamName: state.valueTeamName,
-            valueInvitedCode: state.valueInvitedCode));
-      }
-
-      //get Description
-      if (event is ChangeTeamDescriptionValueEvent) {
-        emit(state.copyWith(
-            newListTeam: state.listTeam,
-            newCompetitionId: state.competitionId,
-            newHasNext: state.hasNext,
-            newCurrentPage: state.currentPage,
-            valueTeamDescription: event.newDescriptionValue, // change
-            valueTeamName: state.valueTeamName,
-            valueInvitedCode: state.valueInvitedCode));
-      }
-      //get Name
-      if (event is ChangeTeamNameValueEvent) {
-        emit(state.copyWith(
-            newListTeam: state.listTeam,
-            newCompetitionId: state.competitionId,
-            newHasNext: state.hasNext,
-            newCurrentPage: state.currentPage,
-            valueTeamDescription: state.valueTeamDescription,
-            valueTeamName: event.newNameValue, // change
             valueInvitedCode: state.valueInvitedCode));
       }
 
@@ -140,18 +105,17 @@ class ViewListTeamBloc extends BaseBloc<ViewListTeamEvent, ViewListTeamState> {
                 newCompetitionId: state.competitionId,
                 newHasNext: state.hasNext,
                 newCurrentPage: state.currentPage,
-                valueTeamDescription: state.valueTeamDescription,
-                valueTeamName: state.valueTeamName,
                 valueInvitedCode: event.newInvitedCodeValue) // change
             );
       }
 
       //create team
       if (event is CreateTeamEvent) {
-        bool check = await service.CreateTeam(state.competitionId,
-            state.valueTeamName, state.valueTeamDescription);
+        bool check = await service.CreateTeam(
+            state.competitionId, event.teamName, event.teamDescription);
         if (check) {
-          listener.add(ViewListTeamInitEvent());
+          //listener.add(ViewListTeamInitEvent());
+          listener.add(ShowingSnackBarEvent(message: "Tạo team thành công"));
         } else {
           listener.add(ShowingSnackBarEvent(message: "Lỗi"));
         }

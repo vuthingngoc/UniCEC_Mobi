@@ -15,17 +15,17 @@ class RefreshEvent extends ViewListTeamEvent {}
 
 class LoadAddMoreEvent extends ViewListTeamEvent {}
 
-//get description
-class ChangeTeamDescriptionValueEvent extends ViewListTeamEvent {
-  final String newDescriptionValue;
-  ChangeTeamDescriptionValueEvent({required this.newDescriptionValue});
-}
+// //get description
+// class ChangeTeamDescriptionValueEvent extends ViewListTeamEvent {
+//   final String newDescriptionValue;
+//   ChangeTeamDescriptionValueEvent({required this.newDescriptionValue});
+// }
 
-//get team name
-class ChangeTeamNameValueEvent extends ViewListTeamEvent {
-  final String newNameValue;
-  ChangeTeamNameValueEvent({required this.newNameValue});
-}
+// //get team name
+// class ChangeTeamNameValueEvent extends ViewListTeamEvent {
+//   final String newNameValue;
+//   ChangeTeamNameValueEvent({required this.newNameValue});
+// }
 
 //get value invited code
 class ChangeInvitedCodeValueEvent extends ViewListTeamEvent {
@@ -35,8 +35,9 @@ class ChangeInvitedCodeValueEvent extends ViewListTeamEvent {
 
 //create team
 class CreateTeamEvent extends ViewListTeamEvent {
-  // final int competitionId;
-  // CreateTeamEvent({required this.competitionId});
+  final String teamName;
+  final String teamDescription;
+  CreateTeamEvent({required this.teamName, required this.teamDescription});
 }
 
 //join team
