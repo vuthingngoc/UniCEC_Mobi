@@ -50,7 +50,7 @@ class _ViewDetailTeamPageState extends State<ViewDetailTeamPage>
         padding: const EdgeInsets.only(bottom: 20),
         child: FloatingActionButton(
           heroTag: "Thêm thành viên",
-          backgroundColor: AppColors.primaryColor,
+          backgroundColor: ArgonColors.warning,
           onPressed: () async {
             showDialog(
                 context: context,
