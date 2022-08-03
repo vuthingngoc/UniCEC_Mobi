@@ -106,7 +106,7 @@ class ViewDetailTableMenu extends StatelessWidget {
               label: Text('MSSV',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
           DataColumn(
-              label: Text('Trường',
+              label: Text('Chi tiết',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
         ],
         rows: [
@@ -128,7 +128,54 @@ class ViewDetailTableMenu extends StatelessWidget {
                 ),
                 DataCell(Text('Captain America')),
                 DataCell(Text('SE140164')),
-                DataCell(Text('Social University')),
+                DataCell(PopupMenuButton<int>(
+                    itemBuilder: (context) {
+                      return [
+                        PopupMenuItem(
+                          onTap: () {},
+                          value: 1,
+                          child: Row(
+                            children: <Widget>[
+                              Icon(Icons.access_time_sharp, size: 18),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Text('Chọn làm đội trưởng'),
+                              ),
+                            ],
+                          ),
+                        ),
+                        PopupMenuItem(
+                          onTap: () {
+                            _showDeleteDialog();
+                          },
+                          value: 2,
+                          child: Row(
+                            children: <Widget>[
+                              Icon(Icons.remove_red_eye, size: 18),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Text('Xem thông tin'),
+                              ),
+                            ],
+                          ),
+                        ),
+                        PopupMenuItem(
+                          onTap: () {
+                            _showDeleteDialog();
+                          },
+                          value: 3,
+                          child: Row(
+                            children: <Widget>[
+                              Icon(Icons.delete, size: 18),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Text('Xóa thành viên'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ];
+                    }),),
               ]),
         ],
       ),
@@ -146,6 +193,25 @@ class ViewDetailTableMenu extends StatelessWidget {
                 padding: EdgeInsets.only(
                     left: 16.0, right: 16.0, top: 12, bottom: 12),
                 child: Text("Khóa nhóm",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600, fontSize: 18.0))),
+          ),
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(top: 16),
+        child: Center(
+          child: FlatButton(
+            textColor: ArgonColors.white,
+            color: ArgonColors.muted,
+            onPressed: () {},
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4.0),
+            ),
+            child: Padding(
+                padding: EdgeInsets.only(
+                    left: 16.0, right: 16.0, top: 12, bottom: 12),
+                child: Text("Thoát khỏi nhóm",
                     style: TextStyle(
                         fontWeight: FontWeight.w600, fontSize: 18.0))),
           ),
