@@ -61,7 +61,7 @@ class _ViewDetailActivityPageState extends State<ViewDetailActivityPage>
               icon: Icon(Icons.arrow_back, color: Colors.black),
             ),
             title: Text("Chi tiết",
-                style: TextStyle(color: Colors.black, fontSize: 23)),
+                style: TextStyle(color: Colors.black)),
             centerTitle: true,
             backgroundColor: AppColors.backgroundPageColor,
           ),

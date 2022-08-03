@@ -5,7 +5,9 @@ import 'package:unicec_mobi/bloc/club_selection/club_selection_bloc.dart';
 
 import '../../bloc/club_selection/club_selection_event.dart';
 import '../../bloc/club_selection/club_selection_state.dart';
+import '../../constants/Theme.dart';
 import '../../models/common/current_user.dart';
+import '../../utils/app_color.dart';
 import '../../utils/dimens.dart';
 import '../../utils/router.dart';
 import 'widgets/show_clubs.dart';
@@ -47,19 +49,27 @@ class _ClubSelectionPageState extends State<ClubSelectionPage> {
           bloc: _bloc,
           builder: (context, state) {
             return Scaffold(
-              appBar: AppBar(),
+              appBar: AppBar(
+                title: Text(
+                  "Chọn Câu lạc bộ đã tham gia",
+                  style: TextStyle(color: Colors.black),
+                ),
+                // automaticallyImplyLeading: false,
+                centerTitle: true,
+                backgroundColor: AppColors.backgroundPageColor,
+              ),
               body: Container(
                 constraints: const BoxConstraints.expand(),
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    colorFilter: ColorFilter.mode(
-                        Colors.black.withOpacity(Dimens.size0p6),
-                        BlendMode.dstATop),
-                    image:
-                        const AssetImage("assets/img/onboard-background.png"),
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                // decoration: BoxDecoration(
+                //   image: DecorationImage(
+                //     colorFilter: ColorFilter.mode(
+                //         Colors.black.withOpacity(Dimens.size0p6),
+                //         BlendMode.dstATop),
+                //     image:
+                //         const AssetImage("assets/img/onboard-background.png"),
+                //     fit: BoxFit.cover,
+                //   ),
+                // ),
                 child: Padding(
                   padding: EdgeInsets.all(Dimens.size10),
                   child: SingleChildScrollView(
@@ -77,6 +87,7 @@ class _ClubSelectionPageState extends State<ClubSelectionPage> {
                     //thêm event qua trang list club
                     _bloc.add(ClubsViewPageEvent());
                   },
+                  backgroundColor: ArgonColors.warning,
                   label: Text("Tham gia clb khác"),
                   icon: Icon(Icons.add)),
             );

@@ -24,27 +24,27 @@ class Body extends StatelessWidget {
           ProfilePic(avatar: avatar),
           SizedBox(height: 20),
           ProfileMenu(
-            text: "My Account",
+            text: "Thông tin chi tiết",
             icon: "assets/icons/icon-user.svg",
             press: () => {Navigator.pushNamed(context, Routes.myAccount)},
           ),
           ProfileMenu(
-            text: "Notifications",
+            text: "Các cuộc thi & sự kiện đang tham gia",
             icon: "assets/icons/Bell.svg",
             press: () {},
           ),
           ProfileMenu(
-            text: "Settings",
+            text: "Cài đặt",
             icon: "assets/icons/Settings.svg",
             press: () {},
           ),
           ProfileMenu(
-            text: "Help Center",
+            text: "Trung tâm trợ giúp",
             icon: "assets/icons/Question mark.svg",
             press: () {},
           ),
           ProfileMenu(
-            text: "Log Out",
+            text: "Đăng xuất",
             icon: "assets/icons/Log out.svg",
             press: () {
               FirebaseUtils.logout();

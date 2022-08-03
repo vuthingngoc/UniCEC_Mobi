@@ -23,6 +23,7 @@ class Routes {
   static String get clubsView => '/clubsView';
   static String get profile => '/profile';
   static String get myAccount => '/profile/my-account';
+  static String get editMyAccount => '/editMyAccount';
   static String get universitySelection => '/universitySelection';
   static String get login => '/login';
   static String get task => '/task';

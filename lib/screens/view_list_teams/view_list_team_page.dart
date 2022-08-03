@@ -35,7 +35,7 @@ class _ViewListTeamPageState extends State<ViewListTeamPage>
           padding: const EdgeInsets.only(bottom: 60),
           child: FloatingActionButton(
             heroTag: "Tạo đội thi",
-            backgroundColor: AppColors.primaryColor,
+            backgroundColor: ArgonColors.warning,
             onPressed: () async {
               showDialog(
                   context: context,

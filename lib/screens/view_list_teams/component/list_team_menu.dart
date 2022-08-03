@@ -56,42 +56,28 @@ class ViewListTeamMenu extends StatelessWidget {
                 },
                 child: Row(
                   children: [
-                    Expanded(
-                        child: Text(fakeData[index].name,
-                            style: TextStyle(fontSize: 15))),
+                    Expanded(child: Text(fakeData[index].name, style: TextStyle(fontSize: 15))),
+                    SizedBox(width: 10,),
+                    Expanded(child: Text(fakeData[index].invitedCode, style: TextStyle(fontSize: 15))),
+                    SizedBox(width: 30,),
+                    // if (fakeData[index].status.toString() == "TeamStatus.Available")
+                    //   Image.network(
+                    //       "https://uxwing.com/wp-content/themes/uxwing/download/36-arts-graphic-shapes/circle.png",
+                    //       scale: 50,
+                    //       color: Colors.green)
+                    // else
+                    //   Image.network(
+                    //       "https://uxwing.com/wp-content/themes/uxwing/download/36-arts-graphic-shapes/circle.png",
+                    //       scale: 50,
+                    //       color: Colors.red),
                     SizedBox(
                       width: 10,
                     ),
-                    Expanded(
-                        child: Text(fakeData[index].invitedCode,
-                            style: TextStyle(fontSize: 15))),
-                    SizedBox(
-                      width: 30,
-                    ),
-                    if (fakeData[index].status.toString() ==
-                        "TeamStatus.Available")
-                      Image.network(
-                          "https://uxwing.com/wp-content/themes/uxwing/download/36-arts-graphic-shapes/circle.png",
-                          scale: 50,
-                          color: Colors.green)
+                    if (fakeData[index].status.toString() == "TeamStatus.Available")
+                      Expanded(child: Text("Mở", style: TextStyle(fontSize: 15, color: Colors.green)))
                     else
-                      Image.network(
-                          "https://uxwing.com/wp-content/themes/uxwing/download/36-arts-graphic-shapes/circle.png",
-                          scale: 50,
-                          color: Colors.red),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    if (fakeData[index].status.toString() ==
-                        "TeamStatus.Available")
-                      Expanded(
-                          child: Text("Mở", style: TextStyle(fontSize: 15)))
-                    else
-                      Expanded(
-                          child: Text("Đóng", style: TextStyle(fontSize: 15))),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                    ),
+                      Expanded(child: Text("Đóng", style: TextStyle(fontSize: 15, color: Colors.red))),
+                     Icon(Icons.arrow_forward_ios,),
                     //Icon(Icons.remove_red_eye),
                     // Row(
                     //   children: [
