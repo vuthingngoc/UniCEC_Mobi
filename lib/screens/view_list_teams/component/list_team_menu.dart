@@ -7,16 +7,16 @@ import '../../../bloc/view_list_team/view_list_team_state.dart';
 import '/models/entities/team/team_model.dart';
 import '../../../models/enums/team_status.dart';
 
-class ViewListTeamMenu extends StatefulWidget {
+class ViewListTeamMenu extends StatelessWidget {
   const ViewListTeamMenu({
     Key? key,
   }) : super(key: key);
 
-  @override
-  State<ViewListTeamMenu> createState() => _ViewListTeamMenuState();
-}
+//   @override
+//   State<ViewListTeamMenu> createState() => _ViewListTeamMenuState();
+// }
 
-class _ViewListTeamMenuState extends State<ViewListTeamMenu> {
+// class _ViewListTeamMenuState extends State<ViewListTeamMenu> {
 //load
   void load(BuildContext context) {
     BlocProvider.of<ViewListTeamBloc>(context).add(LoadAddMoreEvent());

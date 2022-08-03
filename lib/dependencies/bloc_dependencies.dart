@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:unicec_mobi/bloc/add_team_dialog/add_team_dialog_bloc.dart';
 import '/bloc/club/club_bloc.dart';
 import '/bloc/clubs_view/clubs_view_bloc.dart';
 import '/bloc/competition/competition_bloc.dart';
@@ -48,8 +49,8 @@ class BlocDependencies {
     //import ClubBloc
     injector.registerFactory<ClubBloc>(() => ClubBloc(service: injector()));
 
-    injector.registerFactory<CompetitionBloc>(
-        () => CompetitionBloc(service: injector()));
+    injector.registerSingleton<CompetitionBloc>(
+        CompetitionBloc(service: injector()));
 
     injector.registerFactory<EventBloc>(() => EventBloc(service: injector()));
 
@@ -79,7 +80,10 @@ class BlocDependencies {
         () => ViewDetailActivityBloc(service: injector()));
 
     // import view list teams
-    injector.registerFactory<ViewListTeamBloc>(
-        () => ViewListTeamBloc(service: injector()));
+    injector.registerSingleton<ViewListTeamBloc>(
+        ViewListTeamBloc(service: injector()));
+
+    //import add team dialog
+    injector.registerFactory<AddTeamDialogBloc>(() => AddTeamDialogBloc());
   }
 }

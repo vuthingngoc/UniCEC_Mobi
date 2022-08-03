@@ -6,8 +6,6 @@ class ViewListTeamState extends Equatable {
   int competitionId;
   bool hasNext;
   int currentPage;
-  String valueTeamName;
-  String valueTeamDescription;
   String valueInvitedCode;
 
   ViewListTeamState(
@@ -15,8 +13,6 @@ class ViewListTeamState extends Equatable {
       required this.competitionId,
       required this.currentPage,
       required this.hasNext,
-      required this.valueTeamName,
-      required this.valueTeamDescription,
       required this.valueInvitedCode});
 
   ViewListTeamState copyWith(
@@ -24,27 +20,16 @@ class ViewListTeamState extends Equatable {
       required int newCompetitionId,
       required bool newHasNext,
       required int newCurrentPage,
-      required String valueTeamName,
-      required String valueTeamDescription,
       required String valueInvitedCode}) {
     return ViewListTeamState(
         listTeam: newListTeam,
         competitionId: newCompetitionId,
         hasNext: newHasNext,
         currentPage: newCurrentPage,
-        valueTeamName: valueTeamName,
-        valueTeamDescription: valueTeamDescription,
         valueInvitedCode: valueInvitedCode);
   }
 
   @override
-  List<Object?> get props => [
-        listTeam,
-        competitionId,
-        hasNext,
-        currentPage,
-        valueTeamName,
-        valueTeamDescription,
-        valueInvitedCode
-      ];
+  List<Object?> get props =>
+      [listTeam, competitionId, hasNext, currentPage, valueInvitedCode];
 }
