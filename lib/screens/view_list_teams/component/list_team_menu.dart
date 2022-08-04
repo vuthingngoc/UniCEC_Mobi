@@ -4,6 +4,8 @@ import 'package:loadmore/loadmore.dart';
 import '../../../bloc/view_list_team/view_list_team_bloc.dart';
 import '../../../bloc/view_list_team/view_list_team_event.dart';
 import '../../../bloc/view_list_team/view_list_team_state.dart';
+import '../../../models/entities/team/sending_data_model.dart';
+import '../../../utils/router.dart';
 import '/models/entities/team/team_model.dart';
 import '../../../models/enums/team_status.dart';
 
@@ -110,7 +112,13 @@ class ViewListTeamMenu extends StatelessWidget {
                             backgroundColor: Color.fromARGB(255, 235, 237, 241),
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/viewDetailTeam');
+                            //chuyển sang trang detail
+                            SendingDataModel data = SendingDataModel(
+                                competitionId: state.competitionId,
+                                teamId: state.listTeam[index].id);
+                            Navigator.of(context).pushNamed(
+                                Routes.viewDetailTeam,
+                                arguments: data);
                           },
                           child: Row(
                             children: [

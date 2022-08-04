@@ -42,7 +42,7 @@ class PageDependencies {
     injector.registerFactory<Widget>(() => ViewListTeamPage(bloc: injector()),
         instanceName: Routes.viewListTeam);
 
-    injector.registerFactory<Widget>(() => ViewDetailTeamPage(),
+    injector.registerFactory<Widget>(() => ViewDetailTeamPage(bloc: injector()),
         instanceName: Routes.viewDetailTeam);
 
     //round

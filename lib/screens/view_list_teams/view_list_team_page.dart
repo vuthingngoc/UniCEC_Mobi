@@ -44,9 +44,9 @@ class _ViewListTeamPageState extends State<ViewListTeamPage>
         Navigator.of(context)
             .pushNamed(Routes.viewDetailTeam, arguments: event.teamId);
       }
-      // if (event is ViewListTeamInitEvent) {
-      //   bloc.add(ViewListTeamInitEvent());
-      // }
+      if (event is ViewListTeamInitEvent) {
+        bloc.add(ViewListTeamInitEvent());
+      }
     });
   }
 
