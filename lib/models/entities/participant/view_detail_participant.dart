@@ -6,6 +6,7 @@ class ViewDetailParticipantModel {
   int participantId;
   int competitionId;
   int studentId;
+  String studentName;
   String studentAvatar;
   String studentCode;
   String universityName;
@@ -19,6 +20,7 @@ class ViewDetailParticipantModel {
       {required this.participantId,
       required this.competitionId,
       required this.studentId,
+      required this.studentName,
       required this.studentAvatar,
       required this.studentCode,
       required this.universityName,
@@ -32,6 +34,7 @@ class ViewDetailParticipantModel {
     int participantId = json['participant_id'] ?? 0;
     int competitionId = json['competition_id'] ?? 0;
     int studentId = json['student_id'] ?? 0;
+    String studentName = json['student_name'] ?? '';
     String studentAvatar = json['student_avatar'] ?? '';
     String studentCode = json['student_code'] ?? '';
     String universityName = json['university_name'] ?? '';
@@ -52,6 +55,7 @@ class ViewDetailParticipantModel {
         participantId: participantId,
         competitionId: competitionId,
         studentId: studentId,
+        studentName: studentName,
         studentAvatar: studentAvatar,
         studentCode: studentCode,
         universityName: universityName,

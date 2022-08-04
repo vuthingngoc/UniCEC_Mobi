@@ -260,18 +260,23 @@ class _ViewDetailTeamPageState extends State<ViewDetailTeamPage>
                     ],
                   ),
                   (state.teamDetail?.participants != null)
-                      ? ListView.builder(
-                          itemBuilder: (BuildContext, index) {
-                            return ViewDetailTableMenu(
-                              model: state.teamDetail!.participants[index],
-                            );
-                          },
-                          itemCount: state.teamDetail!.participants.length,
-                          shrinkWrap: true,
-                          padding: EdgeInsets.all(5),
-                          scrollDirection: Axis.vertical,
-                        )
+                      ? ViewDetailTableMenu(
+                          listModel: state.teamDetail!.participants)
                       : Text("Chưa có load danh sách Team"),
+                  // (state.teamDetail?.participants != null)
+                  //     ? ListView.builder(
+                  //         itemBuilder: (BuildContext, index) {
+                  //           return ViewDetailTableMenu(
+                  //             model: state.teamDetail!.participants[index],
+                  //           );
+                  //         },
+                  //         itemCount: state.teamDetail!.participants.length,
+                  //         shrinkWrap: true,
+                  //         padding: EdgeInsets.all(5),
+                  //         scrollDirection: Axis.vertical,
+                  //       )
+                  //     : Text("Chưa có load danh sách Team"),
+
                   Padding(
                     padding: const EdgeInsets.only(top: 16),
                     child: Center(
