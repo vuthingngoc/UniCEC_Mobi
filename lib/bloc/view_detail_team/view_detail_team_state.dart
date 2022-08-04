@@ -8,6 +8,7 @@ class ViewDetailTeamState extends Equatable {
   TeamDetailModel? teamDetail;
   int competitionId;
   int teamId;
+  int userIdIsLeaderTeam;
   String valueTeamName;
   String valueTeamDescription;
   TeamStatus status;
@@ -16,6 +17,7 @@ class ViewDetailTeamState extends Equatable {
       {required this.teamDetail,
       required this.competitionId,
       required this.teamId,
+      required this.userIdIsLeaderTeam,
       required this.valueTeamName,
       required this.valueTeamDescription,
       required this.status});
@@ -24,6 +26,7 @@ class ViewDetailTeamState extends Equatable {
       {required TeamDetailModel? newTeamDetail,
       required int newCompetitionId,
       required int newTeamId,
+      required int newUserIdLeaderTeam,
       required String newValueTeamName,
       required String newValueTeamDescription,
       required TeamStatus newStatus}) {
@@ -31,6 +34,7 @@ class ViewDetailTeamState extends Equatable {
         teamDetail: newTeamDetail,
         competitionId: newCompetitionId,
         teamId: newTeamId,
+        userIdIsLeaderTeam: newUserIdLeaderTeam,
         valueTeamName: newValueTeamName,
         valueTeamDescription: newValueTeamDescription,
         status: newStatus);
@@ -41,6 +45,7 @@ class ViewDetailTeamState extends Equatable {
         teamDetail,
         competitionId,
         teamId,
+        userIdIsLeaderTeam,
         valueTeamName,
         valueTeamDescription,
         status

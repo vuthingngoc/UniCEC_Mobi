@@ -1,3 +1,4 @@
+import '../../models/entities/participant/view_detail_participant.dart';
 import '../../models/entities/team/team_detail_model.dart';
 import '../../models/enums/team_status.dart';
 import '../../services/team_svc/i_team_service.dart';
@@ -13,6 +14,7 @@ class ViewDetailTeamBloc
             teamDetail: null,
             competitionId: -1,
             teamId: -1,
+            userIdIsLeaderTeam: -1,
             valueTeamName: '',
             valueTeamDescription: '',
             status: TeamStatus.Available)) {
@@ -22,10 +24,20 @@ class ViewDetailTeamBloc
           TeamDetailModel? result = await service.GetDetailTeamModel(
               event.competitionId, event.teamId);
           if (result != null) {
+            //
+            int userIdIsLeaderTeam = -2;
+            //Tìm User Id Leader Team
+            for (ViewDetailParticipantModel participant
+                in result.participants) {
+              if (participant.teamRoleName.compareTo("Leader") == 0) {
+                userIdIsLeaderTeam = participant.studentId;
+              }
+            }
             emit(state.copyWith(
                 newTeamDetail: result,
                 newCompetitionId: event.competitionId,
                 newTeamId: event.teamId,
+                newUserIdLeaderTeam: userIdIsLeaderTeam,
                 newValueTeamName: result.name,
                 newValueTeamDescription: result.description,
                 newStatus: result.status));
@@ -36,6 +48,7 @@ class ViewDetailTeamBloc
               newTeamDetail: state.teamDetail,
               newTeamId: state.teamId,
               newCompetitionId: state.competitionId,
+              newUserIdLeaderTeam: state.userIdIsLeaderTeam,
               newValueTeamName: event.newNameValue, // change
               newValueTeamDescription: state.valueTeamDescription,
               newStatus: state.status));
@@ -45,6 +58,7 @@ class ViewDetailTeamBloc
               newTeamDetail: state.teamDetail,
               newTeamId: state.teamId,
               newCompetitionId: state.competitionId,
+              newUserIdLeaderTeam: state.userIdIsLeaderTeam,
               newValueTeamName: state.valueTeamName,
               newValueTeamDescription: event.newDescriptionValue, // change
               newStatus: state.status));
@@ -60,6 +74,7 @@ class ViewDetailTeamBloc
                   newTeamDetail: result,
                   newCompetitionId: state.competitionId,
                   newTeamId: state.teamId,
+                  newUserIdLeaderTeam: state.userIdIsLeaderTeam,
                   newValueTeamName: result.name,
                   newValueTeamDescription: result.description,
                   newStatus: result.status));
@@ -79,6 +94,7 @@ class ViewDetailTeamBloc
                   newTeamDetail: result,
                   newCompetitionId: state.competitionId,
                   newTeamId: state.teamId,
+                  newUserIdLeaderTeam: state.userIdIsLeaderTeam,
                   newValueTeamName: result.name,
                   newValueTeamDescription: result.description,
                   newStatus: result.status));

@@ -5,6 +5,7 @@ import '../../bloc/view_detail_team/view_detail_team_event.dart';
 import '../../bloc/view_detail_team/view_detail_team_state.dart';
 import '../../constants/Theme.dart';
 import '../../models/entities/team/sending_data_model.dart';
+import '../../models/enums/team_status.dart';
 import '../../utils/app_color.dart';
 import '../widgets/input.dart';
 import 'component/view_detail_table.dart';
@@ -47,6 +48,25 @@ class _ViewDetailTeamPageState extends State<ViewDetailTeamPage>
 
   @override
   Widget build(BuildContext context) {
+    // List<ParticipantModel> Participant = [
+    //   ParticipantModel(
+    //       id: 1,
+    //       competitionId: 1,
+    //       studentId: "SE140164",
+    //       avatar:
+    //           "https://scontent.fsgn2-4.fna.fbcdn.net/v/t39.30808-6/287957074_162713692987402_2717491022687766526_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=44d72TWHWDoAX8p9CMC&_nc_ht=scontent.fsgn2-4.fna&oh=00_AT_3BfUd0u2aVZMiB8ZxH-IS7o2KC_iOAF7WtqcaBEx0tA&oe=62E20F60",
+    //       registerTime: 25.3)
+    // ];
+    // List<TeamDetailModel> fakeData = [
+    //   TeamDetailModel(
+    //       id: 1,
+    //       competitionId: 1,
+    //       name: "Vũ Tiến Anh",
+    //       description: "description",
+    //       invitedCode: "1",
+    //       status: TeamStatus.Available,
+    //       participants: ParticipantModel.fromJson())
+    // ];
     return BlocProvider.value(
       value: bloc,
       child: BlocBuilder<ViewDetailTeamBloc, ViewDetailTeamState>(
@@ -205,9 +225,7 @@ class _ViewDetailTeamPageState extends State<ViewDetailTeamPage>
                 backgroundColor: AppColors.backgroundPageColor,
               ),
               body: SingleChildScrollView(
-                child: Column(
-                  // crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                child: Column(children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -221,7 +239,10 @@ class _ViewDetailTeamPageState extends State<ViewDetailTeamPage>
                                 color: Colors.green,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10))),
-                            child: Text("Mã: DWD16GH",
+                            child: Text(
+                                (state.teamDetail != null)
+                                    ? "Mã: T-${state.teamDetail!.id}"
+                                    : "Chưa có load mã team id",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
@@ -243,7 +264,10 @@ class _ViewDetailTeamPageState extends State<ViewDetailTeamPage>
                                 color: Colors.green,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10))),
-                            child: Text("Mã tham gia: PASS",
+                            child: Text(
+                                (state.teamDetail != null)
+                                    ? "Mã Tham Gia: ${state.teamDetail!.invitedCode}"
+                                    : "Mã Tham Gia: Chưa có load mã",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
@@ -257,26 +281,53 @@ class _ViewDetailTeamPageState extends State<ViewDetailTeamPage>
                       ? ViewDetailTableMenu(
                           listModel: state.teamDetail!.participants)
                       : Text("Chưa có load danh sách Team"),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: Center(
-                      child: FlatButton(
-                        textColor: ArgonColors.white,
-                        color: ArgonColors.error,
-                        onPressed: () {},
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0),
+                  (state.status == TeamStatus.Available)
+                      ? Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: Center(
+                            child: FlatButton(
+                              textColor: ArgonColors.white,
+                              color: ArgonColors.error,
+                              onPressed: () {},
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4.0),
+                              ),
+                              child: Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 16.0,
+                                      right: 16.0,
+                                      top: 12,
+                                      bottom: 12),
+                                  child: Text("Khóa nhóm",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 18.0))),
+                            ),
+                          ),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: Center(
+                            child: FlatButton(
+                              textColor: ArgonColors.white,
+                              color: ArgonColors.error,
+                              onPressed: () {},
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4.0),
+                              ),
+                              child: Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 16.0,
+                                      right: 16.0,
+                                      top: 12,
+                                      bottom: 12),
+                                  child: Text("Mở nhóm",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 18.0))),
+                            ),
+                          ),
                         ),
-                        child: Padding(
-                            padding: EdgeInsets.only(
-                                left: 16.0, right: 16.0, top: 12, bottom: 12),
-                            child: Text("Khóa nhóm",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 18.0))),
-                      ),
-                    ),
-                  ),
                   Padding(
                     padding: const EdgeInsets.only(top: 16),
                     child: Center(

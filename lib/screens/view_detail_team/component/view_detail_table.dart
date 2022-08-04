@@ -17,25 +17,23 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    return DataTable(
-        columns: [
-    DataColumn(
-        label: Text('',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
-    DataColumn(
-        label: Container(
-          width: width * 0.2,
-          child: Text('Tên',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-        )),
-    DataColumn(
-        label: Text('MSSV',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
-    DataColumn(
-        label: Text('Chi tiết',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
-      ], rows:
-      getRows(listModel).cast());
+    return DataTable(columns: [
+      DataColumn(
+          label: Text('',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
+      DataColumn(
+          label: Container(
+        width: width * 0.2,
+        child: Text('Tên',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+      )),
+      DataColumn(
+          label: Text('MSSV',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
+      DataColumn(
+          label: Text('Chi tiết',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
+    ], rows: getRows(listModel).cast());
   }
 
   Future<void> _showDeleteDialog() async {
@@ -83,11 +81,16 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
           } else if (e == 2) {
             return DataCell(Container(
                 width: MediaQuery.of(context).size.width * 0.2,
-                child: Text(member.studentName, style: TextStyle(fontSize: 15),)));
+                child: Text(
+                  member.studentName,
+                  style: TextStyle(fontSize: 15),
+                )));
           } else if (e == 3) {
-            return DataCell(Text(member.studentCode, style: TextStyle(fontSize: 15),));
-          }
-          else {
+            return DataCell(Text(
+              member.studentCode,
+              style: TextStyle(fontSize: 15),
+            ));
+          } else {
             return DataCell(SizedBox(
               child: PopupMenuButton<int>(itemBuilder: (context) {
                 return [
@@ -139,6 +142,6 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
             ));
           }
         });
-        return DataRow(cells: getListData.toList()) ;
+        return DataRow(cells: getListData.toList());
       }).toList();
 }
