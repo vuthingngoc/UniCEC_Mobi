@@ -27,7 +27,7 @@ class TeamDetailModel {
     String invitedCode = json['invited_code'] ?? '';
     TeamStatus status = TeamStatus.values[json['status']];
     List<ViewDetailParticipantModel> participants = [];
-    if (json['list_participant']) {
+    if (json['list_participant'] != null) {
       json['list_participant']?.forEach((v) {
         participants.add(ViewDetailParticipantModel.fromJson(v));
       });

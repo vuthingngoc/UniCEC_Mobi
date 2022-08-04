@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:get_it/get_it.dart';
+import 'package:unicec_mobi/models/enums/team_status.dart';
+import '../../models/entities/participant/participant_in_team_model.dart';
 import '/models/entities/team/team_request_model.dart';
 import '/models/entities/team/team_model.dart';
 import '/services/team_svc/i_team_service.dart';
@@ -72,5 +76,94 @@ class TeamService extends ITeamService {
       Log.error(e.toString());
     }
     return null;
+  }
+
+  @override
+  Future<bool> CreateTeam(
+      int competitionId, String teamName, String teamDescription) async {
+    var client = http.Client();
+    String url = Api.GetUrl(apiPath: '${Api.teams}');
+    String? token = GetIt.I.get<CurrentUser>().idToken;
+    try {
+      var response = await client.post(Uri.parse(url),
+          headers: Api.GetHeader(token),
+          body: jsonEncode(<String, dynamic>{
+            "competition_id": competitionId,
+            "name": teamName,
+            "description": teamDescription
+          }));
+      if (response.statusCode == 200) {
+        return true;
+      }
+    } catch (e) {
+      Log.error(e.toString());
+    }
+    return false;
+  }
+
+  @override
+  Future<int> JoinTeam(String InvitedCode) async {
+    var client = http.Client();
+    String url = Api.GetUrl(apiPath: '${Api.teams}/add-participant');
+    String? token = GetIt.I.get<CurrentUser>().idToken;
+    try {
+      var response = await client.post(Uri.parse(url),
+          headers: Api.GetHeader(token),
+          body: jsonEncode(<String, dynamic>{"invited_code": InvitedCode}));
+      if (response.statusCode == 200) {
+        Map<String, dynamic> result = adapter.parseToMap(response);
+        ParticipantInTeamModel pit = ParticipantInTeamModel.fromJson(result);
+        return pit.teamId;
+      }
+    } catch (e) {
+      Log.error(e.toString());
+    }
+    return -1;
+  }
+
+  @override
+  Future<TeamDetailModel?> GetDetailTeamModel(
+      int competitionId, int teamId) async {
+    var client = http.Client();
+    String url = Api.GetUrl(
+        apiPath:
+            '${Api.teams}/detail?teamId=${teamId}&competitionId=${competitionId}');
+    String? token = GetIt.I.get<CurrentUser>().idToken;
+    try {
+      var response =
+          await client.get(Uri.parse(url), headers: Api.GetHeader(token));
+      if (response.statusCode == 200) {
+        Map<String, dynamic> result = adapter.parseToMap(response);
+        TeamDetailModel teamDetail = TeamDetailModel.fromJson(result);
+        return teamDetail;
+      }
+    } catch (e) {
+      Log.error(e.toString());
+    }
+    return null;
+  }
+
+  @override
+  Future<bool> UpdateTeam(int teamId, String teamName, String teamDescription,
+      TeamStatus status) async {
+    var client = http.Client();
+    String url = Api.GetUrl(apiPath: '${Api.teams}');
+    String? token = GetIt.I.get<CurrentUser>().idToken;
+    try {
+      var response = await client.put(Uri.parse(url),
+          headers: Api.GetHeader(token),
+          body: jsonEncode(<String, dynamic>{
+            "team_id": teamId,
+            "name": teamName,
+            "description": teamDescription,
+            "status": status.index
+          }));
+      if (response.statusCode == 200) {
+        return true;
+      }
+    } catch (e) {
+      Log.error(e.toString());
+    }
+    return false;
   }
 }

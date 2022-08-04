@@ -28,7 +28,7 @@ class CardSmall extends StatelessWidget {
     return Flexible(
         child: SizedBox(
       // width: screenWidth / 3,
-      height: 270,
+      height: 350,
       child: GestureDetector(
         onTap: tap,
         child: Card(
@@ -46,7 +46,7 @@ class CardSmall extends StatelessWidget {
                                 topLeft: Radius.circular(6.0),
                                 topRight: Radius.circular(6.0)),
                             image: DecorationImage(
-                              image: NetworkImage(img),
+                              image: NetworkImage(img, scale: 80),
                               fit: BoxFit.cover,
                             )))),
                 Flexible(
@@ -64,7 +64,7 @@ class CardSmall extends StatelessWidget {
                               Text("#" + type,
                                   style: TextStyle(
                                       color: ArgonColors.warning,
-                                      fontSize: 15)),
+                                      fontSize: 16)),
                               Container(
                                 margin: const EdgeInsets.only(right: 20),
                                 decoration: BoxDecoration(
@@ -77,7 +77,7 @@ class CardSmall extends StatelessWidget {
                                 child: Text(date,
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 15,
+                                      fontSize: 16,
                                     )),
                               ),
 
@@ -85,13 +85,13 @@ class CardSmall extends StatelessWidget {
                           ),
                           Text(title,
                               style: TextStyle(
-                                  color: ArgonColors.header, fontSize: 17)),
+                                  color: ArgonColors.header, fontSize: 18)),
                           Padding(
-                            padding: const EdgeInsets.only(top: 8.0),
+                            padding: const EdgeInsets.only(top: 5.0),
                             child: Text(cta,
                                 style: TextStyle(
                                     color: ArgonColors.primary,
-                                    fontSize: 13,
+                                    fontSize: 15,
                                     fontWeight: FontWeight.w600)),
                           )
                         ],
