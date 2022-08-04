@@ -1,48 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:unicec_mobi/models/entities/participant/participant_model.dart';
-import '../../../constants/Theme.dart';
 import '../../../models/entities/participant/view_detail_participant.dart';
+import '../../../utils/utils.dart';
 
-class ViewDetailTableMenu extends StatelessWidget {
+class ViewDetailTableMenu extends StatefulWidget {
   final List<ViewDetailParticipantModel> listModel;
 
   ViewDetailTableMenu({required this.listModel});
+
+  @override
+  State<ViewDetailTableMenu> createState() => _ViewDetailTableMenuState();
+}
+
+class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
+  List<ViewDetailParticipantModel> get listModel => widget.listModel;
+
   @override
   Widget build(BuildContext context) {
-    Future<void> _showDeleteDialog() async {
-      return showDialog<void>(
-        context: context,
-        barrierDismissible: false, // user must tap button!
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Cảnh báo'),
-            content: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  Text('Bạn có chắc chắn muốn xóa?'),
-                ],
-              ),
-            ),
-            actions: <Widget>[
-              TextButton(
-                child: Text('Đồng ý'),
-                onPressed: () {
-                  print('Confirmed');
-                  Navigator.of(context).pop();
-                },
-              ),
-              TextButton(
-                child: Text('Hủy'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
-
     return Column(children: <Widget>[
       SizedBox(
         height: 20,
@@ -90,95 +63,91 @@ class ViewDetailTableMenu extends StatelessWidget {
       //     ),
       //   ],
       // ),
-      DataTable(
-        columns: [
-          DataColumn(
-              label: Text('',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
-          DataColumn(
-              label: Text('Tên',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
-          DataColumn(
-              label: Text('MSSV',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
-          DataColumn(
-              label: Text('Chi tiết',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),      
-        ],
-        rows: [
-
-          listModel.forEach(ViewDetailParticipantModel model){
-            return DataRow(
-              onLongPress: () {
-                _showDeleteDialog();
-              },
-              cells: [
-                DataCell(
-                  Padding(
-                    //padding: const EdgeInsets.fromLTRB(6.0, 2.0, 10.0, 2.0),
-                    padding: const EdgeInsets.all(0),
-                    child: Container(
-                        child: CircleAvatar(
-                            backgroundImage: NetworkImage(
-                                scale: 50,
-                                "https://i.guim.co.uk/img/media/8f3a8ada36ac29ebe3ea48c5a15b1011367a4b88/0_1347_2848_1707/master/2848.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=85c6ae7f192ba52424045118356548ab"))),
-                  ),
-                ),
-                DataCell(Text('Captain America')),
-                DataCell(Text('SE140164')),
-                DataCell(
-                  PopupMenuButton<int>(itemBuilder: (context) {
-                    return [
-                      PopupMenuItem(
-                        onTap: () {},
-                        value: 1,
-                        child: Row(
-                          children: <Widget>[
-                            Icon(Icons.access_time_sharp, size: 18),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Text('Chọn làm đội trưởng'),
-                            ),
-                          ],
-                        ),
-                      ),
-                      PopupMenuItem(
-                        onTap: () {
-                          _showDeleteDialog();
-                        },
-                        value: 2,
-                        child: Row(
-                          children: <Widget>[
-                            Icon(Icons.remove_red_eye, size: 18),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Text('Xem thông tin'),
-                            ),
-                          ],
-                        ),
-                      ),
-                      PopupMenuItem(
-                        onTap: () {
-                          _showDeleteDialog();
-                        },
-                        value: 3,
-                        child: Row(
-                          children: <Widget>[
-                            Icon(Icons.delete, size: 18),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Text('Xóa thành viên'),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ];
-                  }),
-                ),
-              ]);
-          }     
-        ],
-      ),
+      DataTable(columns: [
+        DataColumn(
+            label: Text('',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
+        DataColumn(
+            label: Text('Tên',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
+        DataColumn(
+            label: Text('MSSV',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
+        DataColumn(
+            label: Text('Chi tiết',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
+      ], rows: getRows(listModel)
+          //[
+          //   DataRow(
+          //       onLongPress: () {
+          //         _showDeleteDialog();
+          //       },
+          //       cells: [
+          //         DataCell(
+          //           Padding(
+          //             //padding: const EdgeInsets.fromLTRB(6.0, 2.0, 10.0, 2.0),
+          //             padding: const EdgeInsets.all(0),
+          //             child: Container(
+          //                 child: CircleAvatar(
+          //                     backgroundImage: NetworkImage(
+          //                         scale: 50,
+          //                         "https://i.guim.co.uk/img/media/8f3a8ada36ac29ebe3ea48c5a15b1011367a4b88/0_1347_2848_1707/master/2848.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=85c6ae7f192ba52424045118356548ab"))),
+          //           ),
+          //         ),
+          //         DataCell(Text('Captain America')),
+          //         DataCell(Text('SE140164')),
+          //         DataCell(
+          //           PopupMenuButton<int>(itemBuilder: (context) {
+          //             return [
+          //               PopupMenuItem(
+          //                 onTap: () {},
+          //                 value: 1,
+          //                 child: Row(
+          //                   children: <Widget>[
+          //                     Icon(Icons.access_time_sharp, size: 18),
+          //                     Padding(
+          //                       padding: const EdgeInsets.only(left: 8.0),
+          //                       child: Text('Chọn làm đội trưởng'),
+          //                     ),
+          //                   ],
+          //                 ),
+          //               ),
+          //               PopupMenuItem(
+          //                 onTap: () {
+          //                   _showDeleteDialog();
+          //                 },
+          //                 value: 2,
+          //                 child: Row(
+          //                   children: <Widget>[
+          //                     Icon(Icons.remove_red_eye, size: 18),
+          //                     Padding(
+          //                       padding: const EdgeInsets.only(left: 8.0),
+          //                       child: Text('Xem thông tin'),
+          //                     ),
+          //                   ],
+          //                 ),
+          //               ),
+          //               PopupMenuItem(
+          //                 onTap: () {
+          //                   _showDeleteDialog();
+          //                 },
+          //                 value: 3,
+          //                 child: Row(
+          //                   children: <Widget>[
+          //                     Icon(Icons.delete, size: 18),
+          //                     Padding(
+          //                       padding: const EdgeInsets.only(left: 8.0),
+          //                       child: Text('Xóa thành viên'),
+          //                     ),
+          //                   ],
+          //                 ),
+          //               ),
+          //             ];
+          //           }),
+          //         ),
+          //       ]),
+          // ],
+          ),
       // Padding(
       //   padding: const EdgeInsets.only(top: 16),
       //   child: Center(
@@ -219,4 +188,112 @@ class ViewDetailTableMenu extends StatelessWidget {
       // ),
     ]);
   }
+
+  Future<void> _showDeleteDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Cảnh báo'),
+          content: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Text('Bạn có chắc chắn muốn xóa?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Đồng ý'),
+              onPressed: () {
+                print('Confirmed');
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Hủy'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  List<DataRow> getRows(List<ViewDetailParticipantModel> member) =>
+      listModel.map((ViewDetailParticipantModel member) {
+        final cells = [
+          member.studentAvatar,
+          member.studentName,
+          member.studentCode,
+          member.competitionId
+        ];
+        return DataRow(
+            cells: Utils.modelBuilder(cells, (index, cell) {
+          return DataCell(
+            (index == 0)
+                ? Padding(
+                    //padding: const EdgeInsets.fromLTRB(6.0, 2.0, 10.0, 2.0),
+                    padding: const EdgeInsets.all(0),
+                    child: Container(
+                        child: CircleAvatar(
+                            backgroundImage: NetworkImage(
+                                scale: 50,
+                                "https://i.guim.co.uk/img/media/8f3a8ada36ac29ebe3ea48c5a15b1011367a4b88/0_1347_2848_1707/master/2848.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=85c6ae7f192ba52424045118356548ab"))),
+                  )
+                : (index == 3)
+                    ? PopupMenuButton<int>(itemBuilder: (context) {
+                        return [
+                          PopupMenuItem(
+                            onTap: () {},
+                            value: 1,
+                            child: Row(
+                              children: <Widget>[
+                                Icon(Icons.access_time_sharp, size: 18),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: Text('Chọn làm đội trưởng'),
+                                ),
+                              ],
+                            ),
+                          ),
+                          PopupMenuItem(
+                            onTap: () {
+                              _showDeleteDialog();
+                            },
+                            value: 2,
+                            child: Row(
+                              children: <Widget>[
+                                Icon(Icons.remove_red_eye, size: 18),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: Text('Xem thông tin'),
+                                ),
+                              ],
+                            ),
+                          ),
+                          PopupMenuItem(
+                            onTap: () {
+                              _showDeleteDialog();
+                            },
+                            value: 3,
+                            child: Row(
+                              children: <Widget>[
+                                Icon(Icons.delete, size: 18),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: Text('Xóa thành viên'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ];
+                      })
+                    : Text('$cell'),
+          );
+        }));
+      }).toList();
 }
