@@ -29,7 +29,7 @@ class _ViewCompetitionRoundPageState extends State<ViewCompetitionRoundPage>
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back_ios, color: Colors.black),
         ),
         title: Text("Các vòng thi", style: TextStyle(color: Colors.black),),
         automaticallyImplyLeading: false,

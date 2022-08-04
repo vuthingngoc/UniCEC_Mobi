@@ -49,7 +49,7 @@ class _ViewListActivityPageState extends State<ViewListActivityPage>
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(Icons.arrow_back, color: Colors.black),
+            icon: Icon(Icons.arrow_back_ios, color: Colors.black),
           ),
           title: Text(
             "Công việc",

@@ -50,12 +50,19 @@ class _AddTeamDialogState extends State<AddTeamDialog> {
                 top: 8,
               ),
               child: Column(children: [
-                Text('Tên đội'),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0),
+                  child: Row(
+                    children: [
+                      Text('Tên đội'),
+                    ],
+                  ),
+                ),
                 Form(
                   key: _formKeyTeamName,
                   child: TextFormField(
                       decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.description),
+                        prefixIcon: Icon(Icons.label),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10)),
                       ),
@@ -75,7 +82,14 @@ class _AddTeamDialogState extends State<AddTeamDialog> {
                         }
                       }),
                 ),
-                Text('Chi tiết'),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0),
+                  child: Row(
+                    children: [
+                      Text('Chi tiết'),
+                    ],
+                  ),
+                ),
                 Form(
                   key: _formKeyTeamDescription,
                   child: TextFormField(

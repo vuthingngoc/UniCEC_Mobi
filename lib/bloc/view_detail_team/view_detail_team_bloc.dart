@@ -29,7 +29,7 @@ class ViewDetailTeamBloc
             //Tìm User Id Leader Team
             for (ViewDetailParticipantModel participant
                 in result.participants) {
-              if (participant.teamRoleName.compareTo("Leader") == true) {
+              if (participant.teamRoleName.compareTo("Leader") == 0) {
                 userIdIsLeaderTeam = participant.studentId;
               }
             }

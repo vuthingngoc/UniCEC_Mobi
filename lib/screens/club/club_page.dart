@@ -4,8 +4,10 @@ import 'package:get_it/get_it.dart';
 import '../../bloc/club/club_bloc.dart';
 import '../../bloc/club/club_event.dart';
 import '../../bloc/club/club_state.dart';
+
 //widgets
 import 'package:unicec_mobi/screens/widgets/drawer.dart';
+import '../../constants/Theme.dart';
 import '../../models/common/current_user.dart';
 import '../../utils/router.dart';
 import '../size_config.dart';
@@ -29,6 +31,7 @@ class _ClubPageState extends State<ClubPage> {
 
 //
   ClubBloc get _bloc => widget.bloc;
+
   @override
   void initState() {
     super.initState();
@@ -60,15 +63,22 @@ class _ClubPageState extends State<ClubPage> {
           return (GetIt.I.get<CurrentUser>().clubIdSelected != 0)
               ? Scaffold(
                   appBar: AppBar(
-                    title: Text('Câu Lạc Bộ'),
+                    title: Text("Câu lạc bộ",
+                        style: TextStyle(color: Colors.black)),
                     automaticallyImplyLeading: false,
+                    backgroundColor: ArgonColors.bgColorScreen,
+                    centerTitle: true,
                   ),
                   body: BodyClubInfo(
                       Club: state.ClubSelected, Member: state.MemberSelected),
                 )
               : Scaffold(
                   appBar: AppBar(
-                    title: Text('Câu Lạc Bộ'),
+                    title: Text("Câu lạc bộ",
+                        style: TextStyle(color: Colors.black)),
+                    automaticallyImplyLeading: false,
+                    backgroundColor: ArgonColors.bgColorScreen,
+                    centerTitle: true,
                   ),
                   body:
                       (GetIt.I.get<CurrentUser>().clubsBelongToStudent != null)
@@ -375,7 +385,7 @@ class _ClubPageState extends State<ClubPage> {
     //                   )),
     //             ),
     //           ]),
-    //         )
+    //
     //       ],
     //     ));
   }

@@ -4,10 +4,10 @@ import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/bloc/my_account/my_account_bloc.dart';
 import 'package:unicec_mobi/bloc/profile/profile_bloc.dart';
 import 'package:unicec_mobi/bloc/profile/profile_state.dart';
+import 'package:unicec_mobi/constants/Theme.dart';
 import '../../bloc/my_account/my_account_event.dart';
 import '../../bloc/my_account/my_account_state.dart';
 import '../../bloc/profile/profile_event.dart';
-import '../../constants/theme.dart';
 
 //widgets
 import '../../models/common/current_user.dart';
@@ -60,7 +60,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: Icon(Icons.arrow_back, color: Colors.black),
+                  icon: Icon(Icons.arrow_back_ios, color: Colors.black),
                 ),
                 title: Text("Thông tin tài khoản",
                     style: TextStyle(color: Colors.black)),
@@ -109,14 +109,22 @@ class _MyAccountPageState extends State<MyAccountPage>
                                         ),
                                         SizedBox(height: 10.0),
                                         Align(
-                                          child: Text(
-                                              "${state.user.studentCode}",
-                                              style: TextStyle(
-                                                  color: Color.fromRGBO(
-                                                      50, 50, 93, 1),
-                                                  fontSize: 18.0,
-                                                  fontWeight:
-                                                      FontWeight.w300)),
+                                          child: Container(
+                                            margin: const EdgeInsets.only(right: 20),
+                                            padding: const EdgeInsets.all(5),
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: Colors.grey.withOpacity(0.15)),
+                                                color: Colors.grey.withOpacity(0.15),
+                                                borderRadius:
+                                                BorderRadius.all(
+                                                    Radius.circular(10))),
+                                            child: Text("${state.user.studentCode} | ${state.seedsWallet.amount} seeds",
+                                                style: TextStyle(
+                                                  // color: Colors.bl,
+                                                  fontSize: 18,
+                                                )),
+                                          ),
                                         ),
                                         Divider(
                                           height: 40.0,
@@ -186,22 +194,22 @@ class _MyAccountPageState extends State<MyAccountPage>
                                               //   height: 0.6,
                                               //   color: Colors.black,
                                               // ),
-                                              Padding(
-                                                padding: EdgeInsets.all(
-                                                    Dimens.size10),
-                                                child: Row(children: [
-                                                  Icon(Icons
-                                                      .control_point),
-                                                  SizedBox(
-                                                    width: Dimens.size20,
-                                                  ),
-                                                  Text(
-                                                    'SeedsPoint: ${state.seedsWallet.amount}',
-                                                    style: TextStyle(
-                                                        fontSize: 17),
-                                                  )
-                                                ]),
-                                              ),
+                                              // Padding(
+                                              //   padding: EdgeInsets.all(
+                                              //       Dimens.size10),
+                                              //   child: Row(children: [
+                                              //     Icon(Icons
+                                              //         .control_point),
+                                              //     SizedBox(
+                                              //       width: Dimens.size20,
+                                              //     ),
+                                              //     Text(
+                                              //       'SeedsPoint: ${state.seedsWallet.amount}',
+                                              //       style: TextStyle(
+                                              //           fontSize: 17),
+                                              //     )
+                                              //   ]),
+                                              // ),
                                               // Divider(
                                               //   height: 0.6,
                                               //   color: Colors.black,
