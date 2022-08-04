@@ -127,7 +127,8 @@ class ViewListTeamBloc extends BaseBloc<ViewListTeamEvent, ViewListTeamState> {
         if (teamId > 0) {
           listener.add(NavigatorTeamDetailPageEvent(teamId: teamId));
         } else {
-          listener.add(ShowingSnackBarEvent(message: "Lỗi"));
+          listener.add(ShowingSnackBarEvent(
+              message: "Bạn đã có Team rồi không thể tạo thêm Team mới !"));
         }
       }
     });

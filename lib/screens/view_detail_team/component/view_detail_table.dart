@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:unicec_mobi/models/entities/participant/participant_model.dart';
 import '../../../constants/Theme.dart';
+import '../../../models/entities/participant/view_detail_participant.dart';
 
 class ViewDetailTableMenu extends StatelessWidget {
-  const ViewDetailTableMenu({
-    Key? key,
-  }) : super(key: key);
+  final List<ViewDetailParticipantModel> listModel;
 
+  ViewDetailTableMenu({required this.listModel});
   @override
   Widget build(BuildContext context) {
     Future<void> _showDeleteDialog() async {
@@ -42,58 +43,53 @@ class ViewDetailTableMenu extends StatelessWidget {
       );
     }
 
-    return ListView(children: <Widget>[
+    return Column(children: <Widget>[
       SizedBox(
         height: 20,
       ),
-      // Center(
-      //     child: Text(
-      //   'Danh sách thành viên',
-      //   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-      // )),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Container(
-                margin: const EdgeInsets.all(15.0),
-                padding: const EdgeInsets.all(3.0),
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.green),
-                    color: Colors.green,
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                child: Text("Mã: DWD16GH",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                    )),
-              ),
-            ],
-          ),
-          Expanded(
-              child: SizedBox(
-            width: 10,
-          )),
-          Row(
-            children: [
-              Container(
-                margin: const EdgeInsets.all(15.0),
-                padding: const EdgeInsets.all(3.0),
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.green),
-                    color: Colors.green,
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                child: Text("Mã tham gia: PASS",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                    )),
-              ),
-            ],
-          ),
-        ],
-      ),
+      // Row(
+      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //   children: [
+      //     Row(
+      //       children: [
+      //         Container(
+      //           margin: const EdgeInsets.all(15.0),
+      //           padding: const EdgeInsets.all(3.0),
+      //           decoration: BoxDecoration(
+      //               border: Border.all(color: Colors.green),
+      //               color: Colors.green,
+      //               borderRadius: BorderRadius.all(Radius.circular(10))),
+      //           child: Text("Mã: DWD16GH",
+      //               style: TextStyle(
+      //                 color: Colors.white,
+      //                 fontSize: 18,
+      //               )),
+      //         ),
+      //       ],
+      //     ),
+      //     Expanded(
+      //         child: SizedBox(
+      //       width: 10,
+      //     )),
+      //     Row(
+      //       children: [
+      //         Container(
+      //           margin: const EdgeInsets.all(15.0),
+      //           padding: const EdgeInsets.all(3.0),
+      //           decoration: BoxDecoration(
+      //               border: Border.all(color: Colors.green),
+      //               color: Colors.green,
+      //               borderRadius: BorderRadius.all(Radius.circular(10))),
+      //           child: Text("Mã tham gia: PASS",
+      //               style: TextStyle(
+      //                 color: Colors.white,
+      //                 fontSize: 18,
+      //               )),
+      //         ),
+      //       ],
+      //     ),
+      //   ],
+      // ),
       DataTable(
         columns: [
           DataColumn(
@@ -107,10 +103,12 @@ class ViewDetailTableMenu extends StatelessWidget {
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
           DataColumn(
               label: Text('Chi tiết',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),      
         ],
         rows: [
-          DataRow(
+
+          listModel.forEach(ViewDetailParticipantModel model){
+            return DataRow(
               onLongPress: () {
                 _showDeleteDialog();
               },
@@ -128,95 +126,97 @@ class ViewDetailTableMenu extends StatelessWidget {
                 ),
                 DataCell(Text('Captain America')),
                 DataCell(Text('SE140164')),
-                DataCell(PopupMenuButton<int>(
-                    itemBuilder: (context) {
-                      return [
-                        PopupMenuItem(
-                          onTap: () {},
-                          value: 1,
-                          child: Row(
-                            children: <Widget>[
-                              Icon(Icons.access_time_sharp, size: 18),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
-                                child: Text('Chọn làm đội trưởng'),
-                              ),
-                            ],
-                          ),
+                DataCell(
+                  PopupMenuButton<int>(itemBuilder: (context) {
+                    return [
+                      PopupMenuItem(
+                        onTap: () {},
+                        value: 1,
+                        child: Row(
+                          children: <Widget>[
+                            Icon(Icons.access_time_sharp, size: 18),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Text('Chọn làm đội trưởng'),
+                            ),
+                          ],
                         ),
-                        PopupMenuItem(
-                          onTap: () {
-                            _showDeleteDialog();
-                          },
-                          value: 2,
-                          child: Row(
-                            children: <Widget>[
-                              Icon(Icons.remove_red_eye, size: 18),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
-                                child: Text('Xem thông tin'),
-                              ),
-                            ],
-                          ),
+                      ),
+                      PopupMenuItem(
+                        onTap: () {
+                          _showDeleteDialog();
+                        },
+                        value: 2,
+                        child: Row(
+                          children: <Widget>[
+                            Icon(Icons.remove_red_eye, size: 18),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Text('Xem thông tin'),
+                            ),
+                          ],
                         ),
-                        PopupMenuItem(
-                          onTap: () {
-                            _showDeleteDialog();
-                          },
-                          value: 3,
-                          child: Row(
-                            children: <Widget>[
-                              Icon(Icons.delete, size: 18),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
-                                child: Text('Xóa thành viên'),
-                              ),
-                            ],
-                          ),
+                      ),
+                      PopupMenuItem(
+                        onTap: () {
+                          _showDeleteDialog();
+                        },
+                        value: 3,
+                        child: Row(
+                          children: <Widget>[
+                            Icon(Icons.delete, size: 18),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Text('Xóa thành viên'),
+                            ),
+                          ],
                         ),
-                      ];
-                    }),),
-              ]),
+                      ),
+                    ];
+                  }),
+                ),
+              ]);
+          }     
         ],
       ),
-      Padding(
-        padding: const EdgeInsets.only(top: 16),
-        child: Center(
-          child: FlatButton(
-            textColor: ArgonColors.white,
-            color: ArgonColors.error,
-            onPressed: () {},
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(4.0),
-            ),
-            child: Padding(
-                padding: EdgeInsets.only(
-                    left: 16.0, right: 16.0, top: 12, bottom: 12),
-                child: Text("Khóa nhóm",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600, fontSize: 18.0))),
-          ),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.only(top: 16),
-        child: Center(
-          child: FlatButton(
-            textColor: ArgonColors.white,
-            color: ArgonColors.muted,
-            onPressed: () {},
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(4.0),
-            ),
-            child: Padding(
-                padding: EdgeInsets.only(
-                    left: 16.0, right: 16.0, top: 12, bottom: 12),
-                child: Text("Thoát khỏi nhóm",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600, fontSize: 18.0))),
-          ),
-        ),
-      ),
+      // Padding(
+      //   padding: const EdgeInsets.only(top: 16),
+      //   child: Center(
+      //     child: FlatButton(
+      //       textColor: ArgonColors.white,
+      //       color: ArgonColors.error,
+      //       onPressed: () {},
+      //       shape: RoundedRectangleBorder(
+      //         borderRadius: BorderRadius.circular(4.0),
+      //       ),
+      //       child: Padding(
+      //           padding: EdgeInsets.only(
+      //               left: 16.0, right: 16.0, top: 12, bottom: 12),
+      //           child: Text("Khóa nhóm",
+      //               style: TextStyle(
+      //                   fontWeight: FontWeight.w600, fontSize: 18.0))),
+      //     ),
+      //   ),
+      // ),
+      // Padding(
+      //   padding: const EdgeInsets.only(top: 16),
+      //   child: Center(
+      //     child: FlatButton(
+      //       textColor: ArgonColors.white,
+      //       color: ArgonColors.muted,
+      //       onPressed: () {},
+      //       shape: RoundedRectangleBorder(
+      //         borderRadius: BorderRadius.circular(4.0),
+      //       ),
+      //       child: Padding(
+      //           padding: EdgeInsets.only(
+      //               left: 16.0, right: 16.0, top: 12, bottom: 12),
+      //           child: Text("Thoát khỏi nhóm",
+      //               style: TextStyle(
+      //                   fontWeight: FontWeight.w600, fontSize: 18.0))),
+      //     ),
+      //   ),
+      // ),
     ]);
   }
 }
