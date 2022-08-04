@@ -74,7 +74,7 @@ class _ViewListTeamPageState extends State<ViewListTeamPage>
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: Icon(Icons.arrow_back, color: Colors.black),
+                    icon: Icon(Icons.arrow_back_ios, color: Colors.black),
                   ),
                   title: Text(
                     "Danh sách các đội tham gia",

@@ -11,22 +11,25 @@ import '../../../constants/Theme.dart';
 class AddTeamButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-      heroTag: "Tạo đội thi",
-      backgroundColor: ArgonColors.warning,
-      onPressed: () async {
-        SendingDataEvent? data = await showDialog(
-            context: context,
-            builder: (context) {
-              return AddTeamDialog(bloc: GetIt.I.get<AddTeamDialogBloc>());
-            });
-        if (data != null) {
-          BlocProvider.of<ViewListTeamBloc>(context).add(CreateTeamEvent(
-              teamName: data.teamName, teamDescription: data.teamDescription));
-        }
-      },
-      tooltip: 'Increment',
-      child: const Icon(Icons.add),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 80.0),
+      child: FloatingActionButton(
+        heroTag: "Tạo đội thi",
+        backgroundColor: ArgonColors.warning,
+        onPressed: () async {
+          SendingDataEvent? data = await showDialog(
+              context: context,
+              builder: (context) {
+                return AddTeamDialog(bloc: GetIt.I.get<AddTeamDialogBloc>());
+              });
+          if (data != null) {
+            BlocProvider.of<ViewListTeamBloc>(context).add(CreateTeamEvent(
+                teamName: data.teamName, teamDescription: data.teamDescription));
+          }
+        },
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:unicec_mobi/constants/Theme.dart';
 import 'package:unicec_mobi/models/common/current_user.dart';
 import 'package:unicec_mobi/utils/firebase.dart';
 import 'package:unicec_mobi/utils/router.dart';
@@ -21,7 +22,49 @@ class Body extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 20),
       child: Column(
         children: [
-          ProfilePic(avatar: avatar),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 25.0),
+                child: ProfilePic(avatar: avatar),
+              ),
+               Padding(
+                 padding: const EdgeInsets.only(left: 20.0),
+                 child: Column(
+                   children: [
+                     Text(
+                        "Gan ten vo day ne",
+                        style: TextStyle(
+                            color: Color.fromRGBO(
+                                50, 50, 93, 1),
+                            fontSize: 23.0,
+                        )),
+                     Padding(
+                       padding: const EdgeInsets.only(top: 20.0),
+                       child: Container(
+                         margin: const EdgeInsets.only(right: 20),
+                         padding: const EdgeInsets.all(5),
+                         decoration: BoxDecoration(
+                             border: Border.all(
+                                 color: ArgonColors.warning),
+                             color: ArgonColors.warning,
+                             borderRadius:
+                             BorderRadius.all(
+                                 Radius.circular(10))),
+                         child: Text("gan them điểm seeds",
+                             style: TextStyle(
+                               // color: Colors.bl,
+                               fontSize: 18,
+                               color: ArgonColors.white
+                             )),
+                       ),
+                     ),
+                   ],
+                 ),
+               ),
+
+            ],
+          ),
           SizedBox(height: 20),
           ProfileMenu(
             text: "Thông tin chi tiết",

@@ -6,6 +6,7 @@ import '../../bloc/view_detail_team/view_detail_team_state.dart';
 import '../../constants/Theme.dart';
 import '../../models/entities/team/sending_data_model.dart';
 import '../../utils/app_color.dart';
+import '../widgets/input.dart';
 import 'component/view_detail_table.dart';
 
 class ViewDetailTeamPage extends StatefulWidget {
@@ -18,8 +19,6 @@ class ViewDetailTeamPage extends StatefulWidget {
 
 class _ViewDetailTeamPageState extends State<ViewDetailTeamPage>
     with AutomaticKeepAliveClientMixin {
-  // late bool switchValueOne;
-  // late bool switchValueTwo;
   //bloc
   ViewDetailTeamBloc get bloc => widget.bloc;
   //
@@ -32,8 +31,6 @@ class _ViewDetailTeamPageState extends State<ViewDetailTeamPage>
   @override
   void initState() {
     super.initState();
-    // switchValueOne = true;
-    // switchValueTwo = false;
   }
 
   //nhận competition Id
@@ -50,25 +47,6 @@ class _ViewDetailTeamPageState extends State<ViewDetailTeamPage>
 
   @override
   Widget build(BuildContext context) {
-    // List<ParticipantModel> Participant = [
-    //   ParticipantModel(
-    //       id: 1,
-    //       competitionId: 1,
-    //       studentId: "SE140164",
-    //       avatar:
-    //           "https://scontent.fsgn2-4.fna.fbcdn.net/v/t39.30808-6/287957074_162713692987402_2717491022687766526_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=44d72TWHWDoAX8p9CMC&_nc_ht=scontent.fsgn2-4.fna&oh=00_AT_3BfUd0u2aVZMiB8ZxH-IS7o2KC_iOAF7WtqcaBEx0tA&oe=62E20F60",
-    //       registerTime: 25.3)
-    // ];
-    // List<TeamDetailModel> fakeData = [
-    //   TeamDetailModel(
-    //       id: 1,
-    //       competitionId: 1,
-    //       name: "Vũ Tiến Anh",
-    //       description: "description",
-    //       invitedCode: "1",
-    //       status: TeamStatus.Available,
-    //       participants: ParticipantModel.fromJson())
-    // ];
     return BlocProvider.value(
       value: bloc,
       child: BlocBuilder<ViewDetailTeamBloc, ViewDetailTeamState>(
@@ -97,12 +75,19 @@ class _ViewDetailTeamPageState extends State<ViewDetailTeamPage>
                                 top: 8,
                               ),
                               child: Column(children: [
-                                Text('Tên đội'),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 10.0),
+                                  child: Row(
+                                    children: [
+                                      Text('Tên đội'),
+                                    ],
+                                  ),
+                                ),
                                 Form(
                                   key: _formKeyTeamDetailName,
                                   child: TextFormField(
                                       decoration: InputDecoration(
-                                        prefixIcon: Icon(Icons.description),
+                                        prefixIcon: Icon(Icons.label),
                                         border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10)),
@@ -124,7 +109,14 @@ class _ViewDetailTeamPageState extends State<ViewDetailTeamPage>
                                         }
                                       }),
                                 ),
-                                Text('Miêu tả'),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 10.0),
+                                  child: Row(
+                                    children: [
+                                      Text('Miêu tả'),
+                                    ],
+                                  ),
+                                ),
                                 Form(
                                   key: _formKeyTeamDetailDescription,
                                   child: TextFormField(
@@ -202,7 +194,7 @@ class _ViewDetailTeamPageState extends State<ViewDetailTeamPage>
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: Icon(Icons.arrow_back, color: Colors.black),
+                  icon: Icon(Icons.arrow_back_ios, color: Colors.black),
                 ),
                 title: Text(
                   state.teamDetail?.name ?? "Chưa Load Team Name",
@@ -213,15 +205,17 @@ class _ViewDetailTeamPageState extends State<ViewDetailTeamPage>
                 backgroundColor: AppColors.backgroundPageColor,
               ),
               body: SingleChildScrollView(
-                child: Column(children: [
+                child: Column(
+                  // crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
                         children: [
                           Container(
-                            margin: const EdgeInsets.all(15.0),
-                            padding: const EdgeInsets.all(3.0),
+                            margin: const EdgeInsets.only(left: 15, top: 20),
+                            padding: const EdgeInsets.all(5.0),
                             decoration: BoxDecoration(
                                 border: Border.all(color: Colors.green),
                                 color: Colors.green,
@@ -242,8 +236,8 @@ class _ViewDetailTeamPageState extends State<ViewDetailTeamPage>
                       Row(
                         children: [
                           Container(
-                            margin: const EdgeInsets.all(15.0),
-                            padding: const EdgeInsets.all(3.0),
+                            margin: const EdgeInsets.only(left: 15, top: 20),
+                            padding: const EdgeInsets.all(5.0),
                             decoration: BoxDecoration(
                                 border: Border.all(color: Colors.green),
                                 color: Colors.green,
@@ -263,20 +257,6 @@ class _ViewDetailTeamPageState extends State<ViewDetailTeamPage>
                       ? ViewDetailTableMenu(
                           listModel: state.teamDetail!.participants)
                       : Text("Chưa có load danh sách Team"),
-                  // (state.teamDetail?.participants != null)
-                  //     ? ListView.builder(
-                  //         itemBuilder: (BuildContext, index) {
-                  //           return ViewDetailTableMenu(
-                  //             model: state.teamDetail!.participants[index],
-                  //           );
-                  //         },
-                  //         itemCount: state.teamDetail!.participants.length,
-                  //         shrinkWrap: true,
-                  //         padding: EdgeInsets.all(5),
-                  //         scrollDirection: Axis.vertical,
-                  //       )
-                  //     : Text("Chưa có load danh sách Team"),
-
                   Padding(
                     padding: const EdgeInsets.only(top: 16),
                     child: Center(
