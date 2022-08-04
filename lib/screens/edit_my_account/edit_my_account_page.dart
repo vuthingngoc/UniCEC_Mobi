@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unicec_mobi/bloc/profile/profile_bloc.dart';
+import 'package:unicec_mobi/screens/widgets/input.dart';
 
 import '../../constants/Theme.dart';
 import '../../utils/app_color.dart';
@@ -30,7 +31,7 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(Icons.arrow_back, color: Colors.black),
+            icon: Icon(Icons.arrow_back_ios, color: Colors.black),
           ),
           title: Text("Chỉnh sửa thông tin",
               style: TextStyle(color: Colors.black)),
@@ -49,229 +50,169 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
                   children: [
                     Stack(children: <Widget>[
                       Container(
-                        // decoration: BoxDecoration(
-                        //   boxShadow: [
-                        //     BoxShadow(
-                        //       color: Colors.grey.withOpacity(0.1),
-                        //       spreadRadius: 1,
-                        //       blurRadius: 7,
-                        //       offset: Offset(
-                        //           0, 3), // changes position of shadow
-                        //     ),
-                        //   ],
-                        // ),
                         child: Container(
                             child: Padding(
                               padding: const EdgeInsets.only(
                                   top: 85.0, bottom: 20.0),
                               child: Column(
                                 children: [
-                                  Align(
-                                    child: Text(
-                                        "tên nè",
-                                        style: TextStyle(
-                                            color: Color.fromRGBO(
-                                                50, 50, 93, 1),
-                                            fontSize: 28.0,
-                                            fontWeight:
-                                            FontWeight.w800)),
-                                  ),
-                                  SizedBox(height: 10.0),
-                                  Align(
-                                    child: Text(
-                                        "Code nè",
-                                        style: TextStyle(
-                                            color: Color.fromRGBO(
-                                                50, 50, 93, 1),
-                                            fontSize: 18.0,
-                                            fontWeight:
-                                            FontWeight.w300)),
-                                  ),
-                                  Divider(
-                                    height: 40.0,
-                                    thickness: 1.5,
-                                    indent: 32.0,
-                                    endIndent: 32.0,
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8.0, top: 8),
+                                        child: Text("Họ và tên", style: TextStyle(fontSize: 16),),
+                                      ),
+                                    ],
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 32.0, right: 32.0),
-                                    child: Align(
-                                      child: Text(
-                                          "mô tả bản thân",
-                                          textAlign:
-                                          TextAlign.center,
-                                          style: TextStyle(
-                                              fontSize: 17.0,
-                                              fontWeight:
-                                              FontWeight.w400)),
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Input(
+                                      placeholder: "",
+                                      prefixIcon: Icon(Icons.drive_file_rename_outline),
                                     ),
                                   ),
-                                  SizedBox(height: Dimens.size20),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8.0, top: 8),
+                                        child: Text("MSSV", style: TextStyle(fontSize: 16),),
+                                      ),
+                                    ],
+                                  ),
                                   Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: Dimens.size20),
-                                    child: Container(
-                                      child: Column(children: [
-                                        Padding(
-                                          padding: EdgeInsets.all(
-                                              Dimens.size10),
-                                          child: Row(children: [
-                                            Icon(Icons.school),
-                                            //account_circle_outlined
-                                            SizedBox(
-                                              width: Dimens.size20,
-                                            ),
-                                            Text(
-                                                  'Trường đh',
-                                              style: TextStyle(
-                                                  fontSize: 18  ),
-                                            )
-                                          ]),
-                                        ),
-                                        // Divider(
-                                        //   height: 0.6,
-                                        //   color: Colors.black,
-                                        // ),
-                                        Padding(
-                                          padding: EdgeInsets.all(
-                                              Dimens.size10),
-                                          child: Row(children: [
-                                            Icon(Icons
-                                                .business_center),
-                                            SizedBox(
-                                              width: Dimens.size20,
-                                            ),
-                                            Text(
-                                                  'Ngành học',
-                                              style: TextStyle(
-                                                  fontSize: 18),
-                                            )
-                                          ]),
-                                        ),
-                                        // Divider(
-                                        //   height: 0.6,
-                                        //   color: Colors.black,
-                                        // ),
-                                        Padding(
-                                          padding: EdgeInsets.all(
-                                              Dimens.size10),
-                                          child: Row(children: [
-                                            Icon(Icons
-                                                .control_point),
-                                            SizedBox(
-                                              width: Dimens.size20,
-                                            ),
-                                            Text(
-                                              'SeedsPoint: 100',
-                                              style: TextStyle(
-                                                  fontSize: 17),
-                                            )
-                                          ]),
-                                        ),
-                                        // Divider(
-                                        //   height: 0.6,
-                                        //   color: Colors.black,
-                                        // ),
-                                        Padding(
-                                          padding: EdgeInsets.all(
-                                              Dimens.size10),
-                                          child: Row(children: [
-                                            Icon(Icons
-                                                .alternate_email),
-                                            SizedBox(
-                                              width: Dimens.size20,
-                                            ),
-                                            Text(
-                                              'email',
-                                              style: TextStyle(
-                                                  fontSize: 17),
-                                            )
-                                          ]),
-                                        ),
-                                        // Divider(
-                                        //   height: 0.6,
-                                        //   color: Colors.black,
-                                        // ),
-                                        Padding(
-                                          padding: EdgeInsets.all(
-                                              Dimens.size10),
-                                          child: Row(children: [
-                                            Icon(Icons.phone),
-                                            SizedBox(
-                                              width: Dimens.size20,
-                                            ),
-                                            Text(
-                                              'Phone number',
-                                              style: TextStyle(
-                                                  fontSize: 17),
-                                            )
-                                          ]),
-                                        ),
-                                        // Divider(
-                                        //   height: 0.6,
-                                        //   color: Colors.black,
-                                        // ),
-                                        Padding(
-                                          padding: EdgeInsets.all(
-                                              Dimens.size10),
-                                          child: Row(children: [
-                                            Icon(Icons.cake),
-                                            SizedBox(
-                                              width: Dimens.size20,
-                                            ),
-                                            Text(
-                                              "30-03-1111",
-                                              style: TextStyle(
-                                                  fontSize: 17),
-                                            )
-                                          ]),
-                                        ),
-                                        // Divider(
-                                        //   height: 0.6,
-                                        //   color: Colors.black,
-                                        // ),
-                                        Padding(
-                                          padding: EdgeInsets.all(
-                                              Dimens.size10),
-                                          child: Row(children: [
-                                            Icon(Icons.transgender),
-                                            SizedBox(
-                                              width: Dimens.size20,
-                                            ),
-                                            Text(
-                                              'Nam',
-                                              style: TextStyle(
-                                                  fontSize: 17),
-                                            )
-                                          ]),
-                                        ),
-                                        // Divider(
-                                        //   height: 0.6,
-                                        //   color: Colors.black,
-                                        // ),
-                                      ]),
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Input(
+                                      placeholder: "",
+                                      prefixIcon: Icon(Icons.label),
                                     ),
-                                  )
+                                  ),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8.0, top: 8),
+                                        child: Text("Miêu tả bản thân", style: TextStyle(fontSize: 16),),
+                                      ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Input(
+                                      placeholder: "",
+                                      prefixIcon: Icon(Icons.description),
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8.0, top: 8),
+                                        child: Text("Trường", style: TextStyle(fontSize: 16),),
+                                      ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Input(
+                                      placeholder: "",
+                                      prefixIcon: Icon(Icons.school),
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8.0, top: 8),
+                                        child: Text("Ngành học", style: TextStyle(fontSize: 16),),
+                                      ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Input(
+                                      placeholder: "",
+                                      prefixIcon: Icon(Icons.business_center),
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8.0, top: 8),
+                                        child: Text("Email", style: TextStyle(fontSize: 16),),
+                                      ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Input(
+                                      placeholder: "",
+                                      prefixIcon: Icon(Icons.email),
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8.0, top: 8),
+                                        child: Text("Số điện thoại", style: TextStyle(fontSize: 16),),
+                                      ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Input(
+                                      placeholder: "",
+                                      prefixIcon: Icon(Icons.phone),
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8.0, top: 8),
+                                        child: Text("Ngày sinh", style: TextStyle(fontSize: 16),),
+                                      ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Input(
+                                      placeholder: "",
+                                      prefixIcon: Icon(Icons.cake),
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8.0, top: 8),
+                                        child: Text("Giới tính", style: TextStyle(fontSize: 16),),
+                                      ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Input(
+                                      placeholder: "",
+                                      prefixIcon: Icon(Icons.transgender),
+                                    ),
+                                  ),
                                 ],
                               ),
                             )),
                       ),
-                      FractionalTranslation(
-                          translation: Offset(0.0, -0.5),
-                          child: Align(
-                            child: CircleAvatar(
-                              backgroundImage: NetworkImage(//AssetImage(
-                                  ""),
-                              radius: 65.0,
-                              // maxRadius: 200.0,
-                            ),
-                            alignment: FractionalOffset(0.5, 0.0),
-                          ))
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: FractionalTranslation(
+                            translation: Offset(0.0, -0.5),
+                            child: Align(
+                              child: CircleAvatar(
+                                backgroundImage: NetworkImage(//AssetImage(
+                                    ""),
+                                radius: 65.0,
+                                // maxRadius: 200.0,
+                              ),
+                              alignment: FractionalOffset(0.5, 0.0),
+                            )),
+                      )
                     ]),
                     Padding(
                       padding:
-                      const EdgeInsets.only(top: 16),
+                      const EdgeInsets.only(bottom: 10),
                       child: Container(
                         width: double.infinity,
                         margin:
@@ -294,7 +235,7 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
                                   right: 16.0,
                                   top: 12,
                                   bottom: 12),
-                              child: Text("Chỉnh sửa thông tin",
+                              child: Text("Lưu chỉnh sửa",
                                   style: TextStyle(
                                       fontWeight:
                                       FontWeight.w600,

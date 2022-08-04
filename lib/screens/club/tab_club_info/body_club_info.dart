@@ -30,59 +30,53 @@ class _BodyClubInfoState extends State<BodyClubInfo> {
       builder: (context, state) {
         return ListView(
           children: [
-            ClubImages(club: widget.Club),
-            TopRoundedContainer(
-              color: Colors.white,
-              child: Column(
-                children: [
-                  ClubDescription(
-                    club: widget.Club,
-                    member: widget.Member,
+            // ClubImages(club: widget.Club),
+            Column(
+              children: [
+                ClubDescription(
+                  club: widget.Club,
+                  member: widget.Member,
+                ),
+                //
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: SizeConfig.screenWidth * 0.15,
+                    right: SizeConfig.screenWidth * 0.15,
+                    bottom: getProportionateScreenWidth(40),
+                    top: getProportionateScreenWidth(15),
                   ),
-                  //
-                  TopRoundedContainer(
-                    color: Colors.white,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        left: SizeConfig.screenWidth * 0.15,
-                        right: SizeConfig.screenWidth * 0.15,
-                        bottom: getProportionateScreenWidth(40),
-                        top: getProportionateScreenWidth(15),
-                      ),
-                      child: DefaultButton(
-                        text: "Chọn Câu Lạc Bộ Khác",
-                        press: () {
-                          bloc.add(ChooseAnotherClubEvent());
-                        },
-                      ),
-                    ),
+                  child: DefaultButton(
+                    text: "Chọn Câu Lạc Bộ Khác",
+                    press: () {
+                      bloc.add(ChooseAnotherClubEvent());
+                    },
                   ),
-                  //Club Contact
-                  // TopRoundedContainer(
-                  //   color: Color(0xFFF6F7F9),
-                  //   child: Column(
-                  //     children: [
-                  //       ColorDots(product: widget.product),
-                  //       TopRoundedContainer(
-                  //         color: Colors.white,
-                  //         child: Padding(
-                  //           padding: EdgeInsets.only(
-                  //             left: SizeConfig.screenWidth * 0.15,
-                  //             right: SizeConfig.screenWidth * 0.15,
-                  //             bottom: getProportionateScreenWidth(40),
-                  //             top: getProportionateScreenWidth(15),
-                  //           ),
-                  //           // child: DefaultButton(
-                  //           //   text: "Add To Cart",
-                  //           //   press: () {},
-                  //           // ),
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
-                ],
-              ),
+                ),
+                //Club Contact
+                // TopRoundedContainer(
+                //   color: Color(0xFFF6F7F9),
+                //   child: Column(
+                //     children: [
+                //       ColorDots(product: widget.product),
+                //       TopRoundedContainer(
+                //         color: Colors.white,
+                //         child: Padding(
+                //           padding: EdgeInsets.only(
+                //             left: SizeConfig.screenWidth * 0.15,
+                //             right: SizeConfig.screenWidth * 0.15,
+                //             bottom: getProportionateScreenWidth(40),
+                //             top: getProportionateScreenWidth(15),
+                //           ),
+                //           // child: DefaultButton(
+                //           //   text: "Add To Cart",
+                //           //   press: () {},
+                //           // ),
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+              ],
             ),
           ],
         );

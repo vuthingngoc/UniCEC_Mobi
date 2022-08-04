@@ -64,7 +64,7 @@ class CardSmall extends StatelessWidget {
                               Text("#" + type,
                                   style: TextStyle(
                                       color: ArgonColors.warning,
-                                      fontSize: 13)),
+                                      fontSize: 15)),
                               Container(
                                 margin: const EdgeInsets.only(right: 20),
                                 decoration: BoxDecoration(
@@ -77,7 +77,7 @@ class CardSmall extends StatelessWidget {
                                 child: Text(date,
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 13,
+                                      fontSize: 15,
                                     )),
                               ),
 
@@ -85,13 +85,13 @@ class CardSmall extends StatelessWidget {
                           ),
                           Text(title,
                               style: TextStyle(
-                                  color: ArgonColors.header, fontSize: 13)),
+                                  color: ArgonColors.header, fontSize: 17)),
                           Padding(
                             padding: const EdgeInsets.only(top: 8.0),
                             child: Text(cta,
                                 style: TextStyle(
                                     color: ArgonColors.primary,
-                                    fontSize: 11,
+                                    fontSize: 13,
                                     fontWeight: FontWeight.w600)),
                           )
                         ],

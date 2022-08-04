@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../constants/Theme.dart';
 import '../../utils/app_color.dart';
+import '../widgets/input.dart';
 import 'component/view_detail_table.dart';
 
 class ViewDetailTeamPage extends StatefulWidget {
@@ -64,20 +65,25 @@ class _ViewDetailTeamPageState extends State<ViewDetailTeamPage>
                       textAlign: TextAlign.center,
                     )),
                     content: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.only(
+                        top: 8,
+                      ),
                       child: Form(
                         child: Column(
                           children: <Widget>[
-                            TextFormField(
-                              decoration: InputDecoration(
-                                labelText: 'Tên',
-                                icon: Icon(Icons.account_box),
+                            Padding(
+                              padding:
+                              const EdgeInsets.only(top: 8, bottom: 8),
+                              child: Input(
+                                placeholder: "Tên",
+                                prefixIcon: Icon(Icons.label),
                               ),
                             ),
-                            TextFormField(
-                              decoration: InputDecoration(
-                                labelText: 'Miêu tả',
-                                icon: Icon(Icons.account_box),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8),
+                              child: Input(
+                                placeholder: "Chi tiết",
+                                prefixIcon: Icon(Icons.description),
                               ),
                             ),
                           ],
@@ -85,27 +91,27 @@ class _ViewDetailTeamPageState extends State<ViewDetailTeamPage>
                       ),
                     ),
                     actions: [
-                      Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Center(
-                          child: FlatButton(
-                            textColor: ArgonColors.white,
-                            color: ArgonColors.warning,
-                            onPressed: () {},
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4.0),
-                            ),
-                            child: Padding(
-                                padding: EdgeInsets.only(
-                                    left: 16.0,
-                                    right: 16.0,
-                                    top: 12,
-                                    bottom: 12),
-                                child: Text("Xác nhận",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 15.0))),
+                      Container(
+                        width: double.infinity,
+                        margin: new EdgeInsets.only(
+                            right: 15, left: 15, bottom: 15),
+                        child: FlatButton(
+                          textColor: ArgonColors.white,
+                          color: ArgonColors.warning,
+                          onPressed: () {},
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4.0),
                           ),
+                          child: Padding(
+                              padding: EdgeInsets.only(
+                                  left: 16.0,
+                                  right: 16.0,
+                                  top: 12,
+                                  bottom: 12),
+                              child: Text("Lưu chỉnh sửa",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 15.0))),
                         ),
                       ),
                       // RaisedButton(
@@ -126,7 +132,7 @@ class _ViewDetailTeamPageState extends State<ViewDetailTeamPage>
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back_ios, color: Colors.black),
         ),
         title: Text(
           "Team 1",
