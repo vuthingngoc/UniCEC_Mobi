@@ -7,15 +7,17 @@ import '../../../constants/Theme.dart';
 import '../../widgets/input.dart';
 import 'list_team_menu.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   Body({Key? key}) : super(key: key);
 
-//   @override
-//   State<Body> createState() => _BodyState();
-// }
+  @override
+  State<Body> createState() => _BodyState();
+}
 
-// class _BodyState extends State<Body> {
+class _BodyState extends State<Body> {
+//   @override
   final _formKeyInvitedCode = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     ViewListTeamBloc bloc = BlocProvider.of<ViewListTeamBloc>(context);

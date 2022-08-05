@@ -9,17 +9,17 @@ import '../../../utils/router.dart';
 import '/models/entities/team/team_model.dart';
 import '../../../models/enums/team_status.dart';
 
-class ViewListTeamMenu extends StatelessWidget {
+class ViewListTeamMenu extends StatefulWidget {
   const ViewListTeamMenu({
     Key? key,
   }) : super(key: key);
 
-//   @override
-//   State<ViewListTeamMenu> createState() => _ViewListTeamMenuState();
-// }
+  @override
+  State<ViewListTeamMenu> createState() => _ViewListTeamMenuState();
+}
 
-// class _ViewListTeamMenuState extends State<ViewListTeamMenu> {
-//load
+class _ViewListTeamMenuState extends State<ViewListTeamMenu> {
+//   @override
   void load(BuildContext context) {
     BlocProvider.of<ViewListTeamBloc>(context).add(LoadAddMoreEvent());
   }
@@ -115,7 +115,11 @@ class ViewListTeamMenu extends StatelessWidget {
                             //chuyển sang trang detail
                             SendingDataModel data = SendingDataModel(
                                 competitionId: state.competitionId,
-                                teamId: state.listTeam[index].id);
+                                teamId: state.listTeam[index].id,
+                                teamName: state.listTeam[index].name,
+                                teamDescription:
+                                    state.listTeam[index].description,
+                                status: state.listTeam[index].status);
                             Navigator.of(context).pushNamed(
                                 Routes.viewDetailTeam,
                                 arguments: data);

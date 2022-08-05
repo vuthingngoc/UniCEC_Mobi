@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/models/enums/team_status.dart';
+import '../../models/common/resultCRUD.dart';
 import '../../models/entities/participant/participant_in_team_model.dart';
 import '/models/entities/team/team_request_model.dart';
 import '/models/entities/team/team_model.dart';
@@ -144,8 +145,8 @@ class TeamService extends ITeamService {
   }
 
   @override
-  Future<bool> UpdateTeam(int teamId, String teamName, String teamDescription,
-      TeamStatus status) async {
+  Future<ResultCRUD> UpdateTeam(int teamId, String teamName,
+      String teamDescription, TeamStatus status) async {
     var client = http.Client();
     String url = Api.GetUrl(apiPath: '${Api.teams}');
     String? token = GetIt.I.get<CurrentUser>().idToken;
@@ -159,11 +160,102 @@ class TeamService extends ITeamService {
             "status": status.index
           }));
       if (response.statusCode == 200) {
+        ResultCRUD result = ResultCRUD(check: true, errorMessage: '');
+        return result;
+      }
+      if (response.statusCode == 400) {
+        ResultCRUD result =
+            ResultCRUD(check: false, errorMessage: response.body);
+        return result;
+      }
+    } catch (e) {
+      Log.error(e.toString());
+    }
+    return ResultCRUD(check: false, errorMessage: 'Lỗi rồi!');
+  }
+
+  @override
+  Future<bool> MemberOutTeam(int teamId) async {
+    var client = http.Client();
+    String url =
+        Api.GetUrl(apiPath: '${Api.teams}/member-out-team?teamId=${teamId}');
+    String? token = GetIt.I.get<CurrentUser>().idToken;
+    try {
+      var response = await client.delete(
+        Uri.parse(url),
+        headers: Api.GetHeader(token),
+      );
+      if (response.statusCode == 200) {
         return true;
       }
     } catch (e) {
       Log.error(e.toString());
     }
     return false;
+  }
+
+  @override
+  Future<bool> DeleteTeam(int teamId) async {
+    var client = http.Client();
+    String url = Api.GetUrl(apiPath: '${Api.teams}/team?teamId=${teamId}');
+    String? token = GetIt.I.get<CurrentUser>().idToken;
+    try {
+      var response = await client.delete(
+        Uri.parse(url),
+        headers: Api.GetHeader(token),
+      );
+      if (response.statusCode == 200) {
+        return true;
+      }
+    } catch (e) {
+      Log.error(e.toString());
+    }
+    return false;
+  }
+
+  @override
+  Future<bool> DeleteMemberByTeamLeader(int teamId, int participantId) async {
+    var client = http.Client();
+    String url = Api.GetUrl(
+        apiPath:
+            '${Api.teams}/team/member?teamId=${teamId}&participantId=${participantId}');
+    String? token = GetIt.I.get<CurrentUser>().idToken;
+    try {
+      var response = await client.delete(
+        Uri.parse(url),
+        headers: Api.GetHeader(token),
+      );
+      if (response.statusCode == 200) {
+        return true;
+      }
+    } catch (e) {
+      Log.error(e.toString());
+    }
+    return false;
+  }
+
+  @override
+  Future<ResultCRUD> UpdateRoleToLeader(int participanInTeamId) async {
+    var client = http.Client();
+    String url = Api.GetUrl(apiPath: '${Api.teams}/team-role');
+    String? token = GetIt.I.get<CurrentUser>().idToken;
+    try {
+      var response = await client.put(Uri.parse(url),
+          headers: Api.GetHeader(token),
+          body: jsonEncode(
+              <String, dynamic>{"participant_in_team_id": participanInTeamId}));
+      if (response.statusCode == 200) {
+        ResultCRUD result = ResultCRUD(check: true, errorMessage: '');
+        return result;
+      }
+      if (response.statusCode == 400) {
+        ResultCRUD result =
+            ResultCRUD(check: false, errorMessage: response.body);
+        return result;
+      }
+    } catch (e) {
+      Log.error(e.toString());
+    }
+    return ResultCRUD(check: false, errorMessage: 'Lỗi rồi!');
   }
 }
