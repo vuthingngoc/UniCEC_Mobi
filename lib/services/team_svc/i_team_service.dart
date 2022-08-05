@@ -1,3 +1,4 @@
+import '../../models/common/resultCRUD.dart';
 import '../../models/enums/team_status.dart';
 import '/models/entities/team/team_detail_model.dart';
 import '../../models/common/paging_result.dart';
@@ -12,10 +13,18 @@ abstract class ITeamService {
   Future<bool> CreateTeam(
       int competitionId, String teamName, String teamDescription);
   //
-  Future<bool> UpdateTeam(
+  Future<ResultCRUD> UpdateTeam(
       int teamId, String teamName, String teamDescription, TeamStatus status);
   //
-  Future<int> JoinTeam(String InvitedCode);
+  Future<ResultCRUD> UpdateRoleToLeader(int participanInTeamId);
+  //
+  Future<int> JoinTeam(String invitedCode);
   //
   Future<TeamDetailModel?> GetDetailTeamModel(int competitionId, int teamId);
+  //
+  Future<bool> MemberOutTeam(int teamId);
+  //
+  Future<bool> DeleteTeam(int teamId);
+  //
+  Future<bool> DeleteMemberByTeamLeader(int teamId, int participantId);
 }

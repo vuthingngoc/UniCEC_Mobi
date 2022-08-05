@@ -27,9 +27,30 @@ class UpdateStatusTeam extends ViewDetailTeamEvent {
   UpdateStatusTeam({required this.status});
 }
 
+//update team role
+class UpdateMemberRoleEvent extends ViewDetailTeamEvent {
+  final int participantInTeamId;
+  UpdateMemberRoleEvent({required this.participantInTeamId});
+}
+
+//Delete Member by Team Leader
+class DeleteMemberByTeamLeaderEvent extends ViewDetailTeamEvent {
+  final participantId;
+  DeleteMemberByTeamLeaderEvent({required this.participantId});
+}
+
+//Member Out Team
+class MemberOutTeamEvent extends ViewDetailTeamEvent {}
+
+//Delete Team
+class DeleteTeamByLeaderEvent extends ViewDetailTeamEvent {}
+
 //show lỗi
 class ShowingSnackBarEvent extends ViewDetailTeamEvent {
   final String message;
 
   ShowingSnackBarEvent({required this.message});
 }
+
+//back lại trang trước
+class BackPreviousPageEvent extends ViewDetailTeamEvent {}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unicec_mobi/models/entities/team/sending_data_model.dart';
 import '../../bloc/view_list_team/view_list_team_bloc.dart';
 import '../../bloc/view_list_team/view_list_team_event.dart';
 import '../../bloc/view_list_team/view_list_team_state.dart';
@@ -41,11 +42,18 @@ class _ViewListTeamPageState extends State<ViewListTeamPage>
             .showSnackBar(SnackBar(content: Text(event.message)));
       }
       if (event is NavigatorTeamDetailPageEvent) {
-        Navigator.of(context)
-            .pushNamed(Routes.viewDetailTeam, arguments: event.teamId);
+        SendingDataModel data = SendingDataModel(
+            competitionId: event.competitionId,
+            teamId: event.teamId,
+            teamName: event.teamName,
+            teamDescription: event.teamDescription,
+            status: event.status);
+        Navigator.of(context).pushNamed(Routes.viewDetailTeam, arguments: data);
       }
-      if (event is ViewListTeamInitEvent) {
+      if (event is RebuildListViewTeamEvent) {
         bloc.add(ViewListTeamInitEvent());
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Tạo Team Thành Công !")));
       }
     });
   }

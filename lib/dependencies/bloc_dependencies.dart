@@ -85,8 +85,8 @@ class BlocDependencies {
         ViewListTeamBloc(service: injector()));
 
     //import view detail team
-    injector.registerSingleton<ViewDetailTeamBloc>(
-        ViewDetailTeamBloc(service: injector()));
+    injector.registerFactory<ViewDetailTeamBloc>(
+        () => ViewDetailTeamBloc(service: injector()));
 
     //import add team dialog
     injector.registerFactory<AddTeamDialogBloc>(() => AddTeamDialogBloc());

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import '../../../bloc/view_detail_team/view_detail_team_bloc.dart';
+import '../../../bloc/view_detail_team/view_detail_team_event.dart';
+import '../../../models/common/current_user.dart';
 import '../../../models/entities/participant/view_detail_participant.dart';
-import '../../../utils/utils.dart';
 
 class ViewDetailTableMenu extends StatefulWidget {
   final List<ViewDetailParticipantModel> listModel;
@@ -17,23 +21,35 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    return DataTable(columns: [
-      DataColumn(
-          label: Text('',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
-      DataColumn(
-          label: Container(
-        width: width * 0.2,
-        child: Text('Tên',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-      )),
-      DataColumn(
-          label: Text('MSSV',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
-      DataColumn(
-          label: Text('Chi tiết',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
-    ], rows: getRows(listModel).cast());
+    ViewDetailTeamBloc bloc = BlocProvider.of<ViewDetailTeamBloc>(context);
+    return BlocBuilder(
+      bloc: bloc,
+      builder: (context, state) {
+        return DataTable(columns: [
+          DataColumn(
+              label: Container(
+            width: width * 0.1,
+            child: Text('',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          )),
+          DataColumn(
+              label: Container(
+            width: width * 0.2,
+            child: Text('Tên',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          )),
+          DataColumn(
+              label: Text('MSSV',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
+          DataColumn(
+              label: Container(
+            width: width * 0.15,
+            child: Text('Chi tiết',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          )),
+        ], rows: getRows(listModel).cast());
+      },
+    );
   }
 
   Future<void> _showDeleteDialog() async {
@@ -75,9 +91,18 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
         final cells = [1, 2, 3, 4];
         Iterable<DataCell> getListData = cells.map<DataCell>((e) {
           if (e == 1) {
-            return DataCell(CircleAvatar(
-                backgroundImage:
-                    NetworkImage(scale: 50, member.studentAvatar)));
+            return DataCell(Row(children: [
+              CircleAvatar(
+                  backgroundImage: (member.studentAvatar.isNotEmpty)
+                      ? NetworkImage(scale: 50, member.studentAvatar)
+                      : NetworkImage(
+                          scale: 50, "https://picsum.photos/seed/513/600")),
+              if (member.teamRoleName.compareTo("Leader") == 0)
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                )
+            ]));
           } else if (e == 2) {
             return DataCell(Container(
                 width: MediaQuery.of(context).size.width * 0.2,
@@ -91,55 +116,112 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
               style: TextStyle(fontSize: 15),
             ));
           } else {
-            return DataCell(SizedBox(
-              child: PopupMenuButton<int>(itemBuilder: (context) {
-                return [
-                  PopupMenuItem(
-                    onTap: () {},
-                    value: 1,
-                    child: Row(
-                      children: <Widget>[
-                        Icon(Icons.access_time_sharp, size: 18),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: Text('Chọn làm đội trưởng'),
+            return (member.teamRoleName.compareTo("Leader") == 0 &&
+                    GetIt.I.get<CurrentUser>().id == member.studentId)
+                ? DataCell(SizedBox(
+                    child: PopupMenuButton<int>(itemBuilder: (context) {
+                    return [
+                      // PopupMenuItem(
+                      //   onTap: () {},
+                      //   value: 1,
+                      //   child: Row(
+                      //     children: <Widget>[
+                      //       Icon(Icons.access_time_sharp, size: 18),
+                      //       Padding(
+                      //         padding: const EdgeInsets.only(left: 8.0),
+                      //         child: Text('Chọn làm đội trưởng'),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+                      PopupMenuItem(
+                        onTap: () {
+                          //_showDeleteDialog();
+                        },
+                        value: 2,
+                        child: Row(
+                          children: <Widget>[
+                            Icon(Icons.remove_red_eye, size: 18),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Text('Xem thông tin'),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-                  PopupMenuItem(
-                    onTap: () {
-                      _showDeleteDialog();
-                    },
-                    value: 2,
-                    child: Row(
-                      children: <Widget>[
-                        Icon(Icons.remove_red_eye, size: 18),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: Text('Xem thông tin'),
+                      ),
+
+                      // PopupMenuItem(
+                      //   onTap: () {
+                      //     _showDeleteDialog();
+                      //   },
+                      //   value: 3,
+                      //   child: Row(
+                      //     children: <Widget>[
+                      //       Icon(Icons.delete, size: 18),
+                      //       Padding(
+                      //         padding: const EdgeInsets.only(left: 8.0),
+                      //         child: Text('Xóa thành viên'),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+                    ];
+                  })))
+                : DataCell(SizedBox(
+                    child: PopupMenuButton<int>(itemBuilder: (context) {
+                    return [
+                      PopupMenuItem(
+                        onTap: () {
+                          BlocProvider.of<ViewDetailTeamBloc>(context).add(
+                              UpdateMemberRoleEvent(
+                                  participantInTeamId:
+                                      member.participantInTeamId));
+                        },
+                        value: 1,
+                        child: Row(
+                          children: <Widget>[
+                            Icon(Icons.access_time_sharp, size: 18),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Text('Chọn làm đội trưởng'),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-                  PopupMenuItem(
-                    onTap: () {
-                      _showDeleteDialog();
-                    },
-                    value: 3,
-                    child: Row(
-                      children: <Widget>[
-                        Icon(Icons.delete, size: 18),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: Text('Xóa thành viên'),
+                      ),
+                      PopupMenuItem(
+                        onTap: () {
+                          //_showDeleteDialog();
+                        },
+                        value: 2,
+                        child: Row(
+                          children: <Widget>[
+                            Icon(Icons.remove_red_eye, size: 18),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Text('Xem thông tin'),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-                ];
-              }),
-            ));
+                      ),
+                      PopupMenuItem(
+                        onTap: () {
+                          BlocProvider.of<ViewDetailTeamBloc>(context).add(
+                              DeleteMemberByTeamLeaderEvent(
+                                  participantId: member.participantId));
+                        },
+                        value: 3,
+                        child: Row(
+                          children: <Widget>[
+                            Icon(Icons.delete, size: 18),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Text('Xóa thành viên'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ];
+                  })));
           }
         });
         return DataRow(cells: getListData.toList());

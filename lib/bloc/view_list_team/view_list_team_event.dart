@@ -1,3 +1,5 @@
+import '../../models/enums/team_status.dart';
+
 class ViewListTeamEvent {}
 
 class ViewListTeamInitEvent extends ViewListTeamEvent {}
@@ -14,18 +16,6 @@ class IncrementalEvent extends ViewListTeamEvent {}
 class RefreshEvent extends ViewListTeamEvent {}
 
 class LoadAddMoreEvent extends ViewListTeamEvent {}
-
-// //get description
-// class ChangeTeamDescriptionValueEvent extends ViewListTeamEvent {
-//   final String newDescriptionValue;
-//   ChangeTeamDescriptionValueEvent({required this.newDescriptionValue});
-// }
-
-// //get team name
-// class ChangeTeamNameValueEvent extends ViewListTeamEvent {
-//   final String newNameValue;
-//   ChangeTeamNameValueEvent({required this.newNameValue});
-// }
 
 //get value invited code
 class ChangeInvitedCodeValueEvent extends ViewListTeamEvent {
@@ -46,7 +36,16 @@ class JoinTeamEvent extends ViewListTeamEvent {}
 //Navigate to team detail
 class NavigatorTeamDetailPageEvent extends ViewListTeamEvent {
   int teamId;
-  NavigatorTeamDetailPageEvent({required this.teamId});
+  int competitionId;
+  String teamName;
+  String teamDescription;
+  TeamStatus status;
+  NavigatorTeamDetailPageEvent(
+      {required this.teamId,
+      required this.competitionId,
+      required this.teamName,
+      required this.teamDescription,
+      required this.status});
 }
 
 //show lỗi
@@ -55,3 +54,5 @@ class ShowingSnackBarEvent extends ViewListTeamEvent {
 
   ShowingSnackBarEvent({required this.message});
 }
+
+class RebuildListViewTeamEvent extends ViewListTeamEvent {}
