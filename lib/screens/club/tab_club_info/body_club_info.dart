@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unicec_mobi/bloc/club/club_event.dart';
 import 'package:unicec_mobi/models/entities/member/member_detail_model.dart';
 import '../../../bloc/club/club_bloc.dart';
+import '../../../constants/Theme.dart';
 import '../../../models/entities/club/club_model.dart';
 import '../../size_config.dart';
 import 'club_info_description.dart';
@@ -39,17 +40,34 @@ class _BodyClubInfoState extends State<BodyClubInfo> {
                 ),
                 //
                 Padding(
-                  padding: EdgeInsets.only(
-                    left: SizeConfig.screenWidth * 0.15,
-                    right: SizeConfig.screenWidth * 0.15,
-                    bottom: getProportionateScreenWidth(40),
-                    top: getProportionateScreenWidth(15),
-                  ),
-                  child: DefaultButton(
-                    text: "Chọn Câu Lạc Bộ Khác",
-                    press: () {
-                      bloc.add(ChooseAnotherClubEvent());
-                    },
+                  padding:
+                  const EdgeInsets.only(top: 16),
+                  child: Container(
+                    width: double.infinity,
+                    margin:
+                    new EdgeInsets.only(right: 15, left: 15, bottom: 15),
+                    child: FlatButton(
+                      textColor: ArgonColors.white,
+                      color: ArgonColors.warning,
+                      onPressed: () {
+                        bloc.add(ChooseAnotherClubEvent());
+                      },
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                        BorderRadius.circular(4.0),
+                      ),
+                      child: Padding(
+                          padding: EdgeInsets.only(
+                              left: 16.0,
+                              right: 16.0,
+                              top: 12,
+                              bottom: 12),
+                          child: Text("Chọn câu lạc bộ khác",
+                              style: TextStyle(
+                                  fontWeight:
+                                  FontWeight.w600,
+                                  fontSize: 18.0))),
+                    ),
                   ),
                 ),
                 //Club Contact

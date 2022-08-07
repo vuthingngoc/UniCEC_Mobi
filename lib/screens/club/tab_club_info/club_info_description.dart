@@ -82,7 +82,6 @@ class _ClubDescriptionState extends State<ClubDescription> {
                 ),
               ],
             ),
-
           ],
         ),
         Padding(
@@ -106,11 +105,10 @@ class _ClubDescriptionState extends State<ClubDescription> {
             vertical: 10,
           ),
           child: Column(children: [
-            if (widget.club?.clubFanpage != null || widget.club?.clubContact != null)
             Row(
               children: [
                 Text(
-                  'Thông tin liên hệ',
+                  'Thông tin cá nhân',
                   style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 18),
@@ -118,21 +116,40 @@ class _ClubDescriptionState extends State<ClubDescription> {
               ],
             ),
             SizedBox(height: 10),
-            if (widget.club?.clubFanpage != null)
+            if (widget.member?.name != null)
             Padding(
               padding: const EdgeInsets.only(left: 30.0),
               child: Row(
                 children: [
-                  Icon(Icons.web),
+                  Icon(Icons.account_circle),
                   SizedBox(width: 10),
                   Text(
-                    widget.club?.clubFanpage ?? '', style: TextStyle(fontSize: 16),
+                      widget.member?.name ?? '', style: TextStyle(fontSize: 16)
+                  ),
+                  Container(
+                    margin:
+                    const EdgeInsets.all(10.0),
+                    padding:
+                    const EdgeInsets.all(3.0),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color:
+                            Colors.orangeAccent),
+                        color: Colors.orangeAccent,
+                        borderRadius:
+                        BorderRadius.all(
+                            Radius.circular(10))),
+                    child: Text( widget.member?.clubRoleName ?? 'Thành viên',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                        )),
                   ),
                 ],
               ),
             ),
             SizedBox(height: 10),
-            if (widget.club?.clubContact != null)
+            if (widget.member?.phone != null)
             Padding(
               padding: const EdgeInsets.only(left: 30.0),
               child: Row(
@@ -140,11 +157,12 @@ class _ClubDescriptionState extends State<ClubDescription> {
                   Icon(Icons.phone),
                   SizedBox(width: 10),
                   Text(
-                    widget.club?.clubContact ?? '', style: TextStyle(fontSize: 16)
+                      widget.member?.phone ?? '', style: TextStyle(fontSize: 16)
                   ),
                 ],
               ),
-            )
+            ),
+            // SizedBox(height: 10),
           ]),
         ),
         Padding(
@@ -153,52 +171,183 @@ class _ClubDescriptionState extends State<ClubDescription> {
             vertical: 10,
           ),
           child: Column(children: [
-            Text(
-              'Thông tin của thành viên',
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  color: kPrimaryColor,
-                  fontSize: 20),
-            ),
-            SizedBox(height: 10),
-            Row(
-              children: [
-                Icon(Icons.person),
-                SizedBox(width: 10),
-                Text(
-                  widget.member?.name ?? 'Không có dữ liệu tên của thành viên',
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            Row(
-              children: [
-                Icon(Icons.phone),
-                SizedBox(width: 10),
-                Text(
-                  widget.member?.phone ?? 'Không có phone của thành viên',
-                ),
-              ],
-            ),
-            Row(children: [
-              Text('Vai trò:'),
-              SizedBox(width: 10),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  color: Colors.green[300],
-                ),
-                height: 20,
-                child: Text(
-                  widget.member?.clubRoleName ?? 'Không có Role Name',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+              Row(
+                children: [
+                  Text(
+                    'Xem danh sách thành viên của CLB',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18),
                   ),
+                ],
+              ),
+            SizedBox(height: 10),
+            Container(
+              width: double.infinity,
+              height: 36,
+              margin:
+              new EdgeInsets.only(right: 90, left: 30, bottom: 15),
+              child: RaisedButton(
+                  textColor: ArgonColors
+                      .primary,
+                  color: ArgonColors
+                      .secondary,
+                  onPressed: () {
+                    Navigator.pushNamed(
+                        context, '/viewListmember');
+                  },
+                  shape:
+                  RoundedRectangleBorder(
+                      borderRadius:
+                      BorderRadius
+                          .circular(
+                          4)),
+                  child: Padding(
+                      padding:
+                      EdgeInsets.only(
+                          bottom: 10,
+                          top: 10,
+                          left: 8,
+                          right: 8),
+                      child: Row(
+                        // mainAxisAlignment:
+                        // MainAxisAlignment
+                        //     .spaceAround,
+                        children: [
+                          Icon(
+                              Icons.description,
+                              size: 13),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text("Danh sách thành viên",
+                              style: TextStyle(
+                                  fontWeight:
+                                  FontWeight
+                                      .w600,
+                                  fontSize:
+                                  16))
+                        ],
+                      ))),
+            ),
+          ]),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: getProportionateScreenWidth(20),
+            vertical: 10,
+          ),
+          child: Column(children: [
+            Row(
+              children: [
+                Text(
+                  'Các cuộc thi và sự kiện câu lạc bộ hiện có',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 18),
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            Container(
+              width: double.infinity,
+              height: 36,
+              margin:
+              new EdgeInsets.only(right: 90, left: 30, bottom: 15),
+              child: RaisedButton(
+                  textColor: ArgonColors
+                      .primary,
+                  color: ArgonColors
+                      .secondary,
+                  onPressed: () {
+                    Navigator.pushNamed(
+                        context, '/viewListCompetitionOfClub');
+                  },
+                  shape:
+                  RoundedRectangleBorder(
+                      borderRadius:
+                      BorderRadius
+                          .circular(
+                          4)),
+                  child: Padding(
+                      padding:
+                      EdgeInsets.only(
+                          bottom: 10,
+                          top: 10,
+                          left: 8,
+                          right: 8),
+                      child: Row(
+                        // mainAxisAlignment:
+                        // MainAxisAlignment
+                        //     .spaceAround,
+                        children: [
+                          Icon(
+                              Icons.description,
+                              size: 13),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text("Danh sách các cuộc thi & sự kiện",
+                              style: TextStyle(
+                                  fontWeight:
+                                  FontWeight
+                                      .w600,
+                                  fontSize:
+                                  16))
+                        ],
+                      ))),
+            ),
+
+            SizedBox(height: 10),
+          ]),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: getProportionateScreenWidth(20),
+            // vertical: 10,
+          ),
+          child: Column(children: [
+            if (widget.club?.clubFanpage != null || widget.club?.clubContact != null)
+              Row(
+                children: [
+                  Text(
+                    'Thông tin liên hệ',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18),
+                  ),
+                ],
+              ),
+            SizedBox(height: 10),
+            if (widget.club?.clubFanpage != null)
+              Padding(
+                padding: const EdgeInsets.only(left: 30.0),
+                child: Row(
+                  children: [
+                    Icon(Icons.web),
+                    SizedBox(width: 10),
+                    Text(
+                      widget.club?.clubFanpage ?? '', style: TextStyle(fontSize: 16),
+                    ),
+                  ],
                 ),
               ),
-            ]),
+            SizedBox(height: 10),
+            if (widget.club?.clubContact != null)
+              Padding(
+                padding: const EdgeInsets.only(left: 30.0),
+                child: Row(
+                  children: [
+                    Icon(Icons.phone),
+                    SizedBox(width: 10),
+                    Text(
+                        widget.club?.clubContact ?? '', style: TextStyle(fontSize: 16)
+                    ),
+                  ],
+                ),
+              )
           ]),
-        )
+        ),
       ],
     );
   }
