@@ -24,11 +24,13 @@ class CardSmall extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
+    // double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Flexible(
-        child: SizedBox(
+        child: Container(     
+          margin: const EdgeInsets.symmetric(vertical: 5.0),
       // width: screenWidth / 3,
-      height: 350,
+      height: screenHeight / 3,
       child: GestureDetector(
         onTap: tap,
         child: Card(
@@ -53,15 +55,15 @@ class CardSmall extends StatelessWidget {
                     flex: 1,
                     child: Padding(
                       padding: const EdgeInsets.only(
-                          top: 8.0, bottom: 8.0, left: 8.0),
+                          top: 8.0, bottom: 5.0, left: 8.0),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("#" + type,
+                              Text("@$type",
                                   style: TextStyle(
                                       color: ArgonColors.warning,
                                       fontSize: 16)),
@@ -80,14 +82,19 @@ class CardSmall extends StatelessWidget {
                                       fontSize: 16,
                                     )),
                               ),
-
                             ],
                           ),
                           Text(title,
                               style: TextStyle(
                                   color: ArgonColors.header, fontSize: 18)),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 5.0),
+                                //   Text(cta,
+                                // style: TextStyle(
+                                //     color: ArgonColors.primary,
+                                //     fontSize: 11,
+                                //     fontWeight: FontWeight.w600)),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            // padding: const EdgeInsets.only(top: 8.0),
                             child: Text(cta,
                                 style: TextStyle(
                                     color: ArgonColors.primary,

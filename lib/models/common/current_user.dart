@@ -1,8 +1,7 @@
 import 'package:unicec_mobi/models/entities/member/member_detail_model.dart';
-import 'package:unicec_mobi/screens/size_config.dart';
+import 'package:unicec_mobi/models/entities/seedswallet/seeds_wallet_model.dart';
 
 import '../entities/club/club_model.dart';
-import '../entities/member/member_model.dart';
 
 class CurrentUser {
   int id;
@@ -12,6 +11,8 @@ class CurrentUser {
   String email;
   String fullname;
   String? avatar;
+  SeedsWalletModel seedsWallet;
+
   //
   List<ClubModel> clubsBelongToStudent;
   int clubIdSelected;
@@ -29,6 +30,7 @@ class CurrentUser {
     required this.clubsBelongToStudent,
     required this.membersBelongToClubs,
     required this.clubIdSelected,
+    required this.seedsWallet
   });
 
   CurrentUser get currentUser => CurrentUser(
@@ -41,7 +43,8 @@ class CurrentUser {
       avatar: avatar,
       clubsBelongToStudent: clubsBelongToStudent,
       membersBelongToClubs: membersBelongToClubs,
-      clubIdSelected: clubIdSelected);
+      clubIdSelected: clubIdSelected,
+      seedsWallet: seedsWallet);
 
   void reset() {
     id = 0;

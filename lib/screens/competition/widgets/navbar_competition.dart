@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unicec_mobi/utils/log.dart';
 //import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import '../../../bloc/competition/competition_bloc.dart';
@@ -23,7 +24,7 @@ class NavbarCompetition extends StatefulWidget implements PreferredSizeWidget {
   final bool noShadow;
   final Color bgColor;
   final CompetitionBloc bloc;
-  final CompetitionState state;
+  // final CompetitionState state;
 
   NavbarCompetition(
       {this.title = "Competition",
@@ -42,7 +43,9 @@ class NavbarCompetition extends StatefulWidget implements PreferredSizeWidget {
       this.bgColor = ArgonColors.white,
       this.searchBar = false,
       required this.bloc,
-      required this.state});
+      // required this.state
+      required Key key
+      }) : super(key:key);
 
   final double _prefferedHeight = 180.0;
 
@@ -56,7 +59,9 @@ class NavbarCompetition extends StatefulWidget implements PreferredSizeWidget {
 class _NavbarCompetitionState extends State<NavbarCompetition> {
   late String activeTag;
   CompetitionBloc get _bloc => widget.bloc;
-  CompetitionState get _state => widget.state;
+  // CompetitionBloc get _bloc => widget.bloc;
+  // CompetitionState get _state => widget.state;
+  
   var _controller = TextEditingController();
 
   void initState() {
@@ -68,11 +73,12 @@ class _NavbarCompetitionState extends State<NavbarCompetition> {
 
   @override
   Widget build(BuildContext context) {
+    // CompetitionBloc bloc = BlocProvider.of<CompetitionBloc>(context);
     final bool categories =
         widget.categoryOne.isNotEmpty && widget.categoryTwo.isNotEmpty;
     // final bool tagsExist =
     //     widget.tags == null ? false : (widget.tags?.length == 0 ? false : true);
-    String searchString = _state.requestModel?.name ?? '';
+    String searchString = _bloc.state.requestModel?.name ?? '';
     if (searchString != '') {
       _controller = TextEditingController(text: searchString);
     }

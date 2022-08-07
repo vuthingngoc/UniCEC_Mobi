@@ -3,24 +3,29 @@ import 'package:unicec_mobi/models/entities/notification/notification_model.dart
 
 class NotificationState extends Equatable {
   final List<NotificationModel> notifications;
+  List<NotificationModel> currentNotifications;
   int currentPage;
   int pageSize;
+  bool hasNext;
 
   NotificationState(
       {required this.notifications,
+      required this.currentNotifications,
       required this.currentPage,
-      required this.pageSize});
+      required this.pageSize,
+      required this.hasNext});
 
   NotificationState copyWith(
-      List<NotificationModel> notifications, int currentPage, int pageSize) {
+      List<NotificationModel> notifications, List<NotificationModel> currentNotifications, int? currentPage, int? pageSize, bool hasNext) {
     return NotificationState(
         notifications: notifications,
-        currentPage: currentPage,
-        pageSize: pageSize
+        currentNotifications: currentNotifications,
+        currentPage: currentPage ?? 1,
+        pageSize: pageSize ?? 10,
+        hasNext: hasNext
     );
   }
 
   @override
-  // TODO: implement props
-  List<Object?> get props => [notifications, currentPage, pageSize];
+  List<Object?> get props => [notifications, currentNotifications, currentPage, pageSize, hasNext];
 }
