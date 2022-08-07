@@ -11,50 +11,13 @@ import '../../constants/theme.dart';
 //widgets
 import '../../utils/loading.dart';
 import '../../utils/router.dart';
+import '../detail_competition/detail_competition_page.dart';
 import '../size_config.dart';
 import '../widgets/card-small.dart';
 import '../widgets/drawer.dart';
 import 'widgets/navbar_competition.dart';
 import 'widgets/suggest_competition.dart';
 import 'widgets/section_title.dart';
-
-final Map<String, Map<String, dynamic>> homeCards = {
-  "Ice Cream": {
-    "title": "Ice cream is made with carrageenan …",
-    "image":
-        "https://images.unsplash.com/photo-1516559828984-fb3b99548b21?ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80",
-    "date": "20/05/2022",
-    "type": "Âm nhạc",
-  },
-  "Makeup": {
-    "title": "Is makeup one of your daily esse …",
-    "image":
-        "https://images.unsplash.com/photo-1519368358672-25b03afee3bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2004&q=80",
-    "date": "20/05/2022",
-    "type": "Âm nhạc",
-  },
-  "Coffee": {
-    "title": "Coffee is more than just a drink: It’s …",
-    "image":
-        "https://images.unsplash.com/photo-1500522144261-ea64433bbe27?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2102&q=80",
-    "date": "20/05/2022",
-    "type": "Âm nhạc",
-  },
-  "Fashion": {
-    "title": "Fashion is a popular style, especially in …",
-    "image":
-        "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1326&q=80",
-    "date": "20/05/2022",
-    "type": "Âm nhạc",
-  },
-  "Argon": {
-    "title": "Argon is a great free UI packag …",
-    "image":
-        "https://images.unsplash.com/photo-1482686115713-0fbcaced6e28?fit=crop&w=1947&q=80",
-    "date": "20/05/2022",
-    "type": "Âm nhạc",
-  }
-};
 
 class CompetitionPage extends StatefulWidget {
   final CompetitionBloc bloc;
@@ -65,8 +28,10 @@ class CompetitionPage extends StatefulWidget {
   _CompetitionPageState createState() => _CompetitionPageState();
 }
 
-class _CompetitionPageState extends State<CompetitionPage> {
+class _CompetitionPageState extends State<CompetitionPage>
+    with AutomaticKeepAliveClientMixin {
   CompetitionBloc get _bloc => widget.bloc;
+  static final GlobalKey _formKey = GlobalKey();
 
   void initState() {
     _bloc.listenerStream.listen((event) {});
@@ -76,25 +41,30 @@ class _CompetitionPageState extends State<CompetitionPage> {
   }
 
   @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
     Log.info('Build competition page');
-    // SizeConfig().init(context);
+
     return BlocBuilder<CompetitionBloc, CompetitionState>(
-        bloc: _bloc,
-        builder: (context, state) {
-          return _bloc.isLoading ? Loading() : Scaffold(
-              appBar: NavbarCompetition(
-                title: "Cuộc Thi",
-                searchBar: true,
-                categoryOne: "Liên Trường",
-                categoryTwo: "Trong Trường",
-                bloc: _bloc,
-                state: state,
-              ),
-              backgroundColor: ArgonColors.bgColorScreen,
-              //key: _scaffoldKey,
-              drawer: ArgonDrawer(currentPage: "Competition"),
-              body: Container(
+      bloc: _bloc,
+      builder: (context, state){
+        return (_bloc.isLoading) ? Loading() : Scaffold(
+          appBar: NavbarCompetition(
+            title: "Cuộc Thi",
+            searchBar: true,
+            categoryOne: "Liên Trường",
+            categoryTwo: "Trong Trường",
+            key: _formKey,
+            bloc: _bloc,
+          ),
+          resizeToAvoidBottomInset: false,
+          backgroundColor: ArgonColors.bgColorScreen,
+          //key: _scaffoldKey,
+          drawer: ArgonDrawer(currentPage: "Competition"),
+          body: Container(
                 padding: EdgeInsets.only(left: 24.0, right: 24.0),
                 child: SingleChildScrollView(
                   child: Column(
@@ -140,19 +110,27 @@ class _CompetitionPageState extends State<CompetitionPage> {
                                         date:
                                             '${(state.outStandingCompetitions?[index])!.startTime}', //homeCards["Makeup"]!['date'],
                                         tap: () {
-                                          Navigator.of(context).pushNamed(
-                                              Routes.detailCompetition);
+                                          _bloc.add(SelectACompetitionEvent(
+                                              competitionId: (state
+                                                  .outStandingCompetitions?[
+                                                      index]
+                                                  .id)!));
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => DetailCompetitionPage(bloc: _bloc)));
+                                          // Navigator.of(context).pushNamed(
+                                          //     Routes.detailCompetition);
                                         });
                                   }),
-                                )
+                                ),
+                                SizedBox(height: 55.0),
                               ],
                             )
-                          : Text('Không có cuộc thi nào đang diễn ra'),
-                      SizedBox(height: 8.0),                    
+                          : Text('Không có cuộc thi nào đang diễn ra'),                      
                     ],
-                  ),                  
+                  ),
                 ),
-              ));
-        });
+              )
+          );
+      } 
+    );
   }
 }

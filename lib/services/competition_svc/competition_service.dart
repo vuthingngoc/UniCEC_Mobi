@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/models/common/current_user.dart';
 import 'package:unicec_mobi/models/common/paging_result.dart';
+import 'package:unicec_mobi/models/entities/competition/competition_detail_model.dart';
 import 'package:unicec_mobi/models/entities/competition/competition_model.dart';
 import 'package:unicec_mobi/models/entities/competition/competition_request_model.dart';
 import 'package:unicec_mobi/models/entities/competition/competition_show_model.dart';
@@ -119,6 +120,24 @@ class CompetitionService implements ICompetitionService {
         return PagingResult.fromJson(json, CompetitionShowModel.fromJson);
       }
     } catch (e) {
+      Log.error(e.toString());
+    }
+
+    return null;
+  }
+
+  @override
+  Future<CompetitionDetailModel?> loadDetailById(int competitionId) async {
+    var client = http.Client();
+    String url = Api.GetUrl(apiPath: '${Api.competitions}/$competitionId');
+    String token = GetIt.I.get<CurrentUser>().idToken;
+    try{
+      var response = await client.get(Uri.parse(url), headers: Api.GetHeader(token));
+      if(response.statusCode == 200){
+        Map<String, dynamic> json = adapter.parseToMap(response);
+        return CompetitionDetailModel.fromJson(json);
+      }
+    }catch(e){
       Log.error(e.toString());
     }
 

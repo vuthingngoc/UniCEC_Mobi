@@ -9,7 +9,6 @@ import '/bloc/login/login_bloc.dart';
 import '/bloc/my_account/my_account_bloc.dart';
 import '/bloc/splash/splash_bloc.dart';
 import '/bloc/university_selection/university_selection_bloc.dart';
-import '/services/services.dart';
 import '../bloc/club_selection/club_selection_bloc.dart';
 import '../bloc/club_view_detail/club_view_detail_bloc.dart';
 import '../bloc/event/event_bloc.dart';
@@ -31,7 +30,7 @@ class BlocDependencies {
     injector.registerFactory<SplashBloc>(() => SplashBloc(service: injector()));
 
     //import login bloc
-    injector.registerFactory<LoginBloc>(() => LoginBloc(service: injector()));
+    injector.registerFactory<LoginBloc>(() => LoginBloc(service: injector(), userService: injector()));
 
     //import UniversitySelectionBloc
     injector.registerFactory<UniversitySelectionBloc>(

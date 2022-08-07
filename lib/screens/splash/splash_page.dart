@@ -49,8 +49,7 @@ class _SplashPageState extends State<SplashPage> {
               child: Container(
                 width: MediaQuery.of(context).size.width * 2/3,
                 height: MediaQuery.of(context).size.width * 2/3,
-                  decoration: BoxDecoration(
-                      // shape: BoxShape.circle,                      
+                  decoration: const BoxDecoration(                     
                       image: DecorationImage(                          
                           image: AssetImage("assets/img/logo-app-splash.jpg"),
                           alignment: Alignment.center,

@@ -1,12 +1,12 @@
+
 import 'package:unicec_mobi/bloc/competition/competition_event.dart';
 import 'package:unicec_mobi/bloc/competition/competition_state.dart';
 import 'package:unicec_mobi/models/common/paging_result.dart';
-import 'package:unicec_mobi/models/entities/competition/competition_model.dart';
+import 'package:unicec_mobi/models/entities/competition/competition_detail_model.dart';
 import 'package:unicec_mobi/models/entities/competition/competition_request_model.dart';
 import 'package:unicec_mobi/models/enums/competition_status.dart';
 import 'package:unicec_mobi/services/i_services.dart';
 import 'package:unicec_mobi/utils/base_bloc.dart';
-import 'package:unicec_mobi/utils/log.dart';
 
 import '../../models/common/paging_result.dart';
 import '../../models/entities/competition/competition_show_model.dart';
@@ -54,6 +54,15 @@ class CompetitionBloc extends BaseBloc<CompetitionEvent, CompetitionState> {
             await service.showCompetition(request);
         emit(state.copyWith(competitions: result?.items));
         _isLoading = false;
+      }
+
+      if(event is SelectACompetitionEvent){
+        print('SelectACompetitionEvent is running ...');
+        _isLoading = true;
+        CompetitionDetailModel? competitionDetail = await service.loadDetailById(event.competitionId);
+        emit(state.copyWith(competitionDetail: competitionDetail));
+        _isLoading = false;
+        print('_isLoading done: $_isLoading');
       }
     });
   }

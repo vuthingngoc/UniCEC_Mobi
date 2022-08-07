@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:unicec_mobi/models/entities/competition/competition_in_clubs_model.dart';
 import 'package:unicec_mobi/models/entities/competition/competition_in_majors_model.dart';
 
@@ -66,38 +68,44 @@ class CompetitionDetailModel {
       required this.competitionEntities});
 
   factory CompetitionDetailModel.fromJson(Map<String, dynamic> json) {
-    int id = json['id'];
-    int universityId = json['university_id'];
-    String name = json['name'];
-    int competitionTypeId = json['competition_type_id'];
-    String competitionTypeName = json['competition_type_name'];
-    double fee = json['fee'];
-    String seedsCode = json['seeds_code'];
-    double seedsPoint = json['seeds_point'];
-    double seedsDeposited = json['seeds_deposited'];
-    int numberOfParticipation = json['number_of_participations'];
-    int? numberOfTeam = json['number_of_team'];
-    int maxNumber = json['max_number'];
-    int minNumber = json['min_number'];
+    int id = json['id'] ?? 0;
+    int universityId = json['university_id'] ?? 0;
+    String name = json['name'] ?? '';
+    int competitionTypeId = json['competition_type_id'] ?? 0;
+    String competitionTypeName = json['competition_type_name'] ?? '';
+    double fee = json['fee'] + .0 ?? 0;
+    String seedsCode = json['seeds_code'] ?? '';
+    double seedsPoint = json['seeds_point'] + .0 ?? 0;
+    double seedsDeposited = json['seeds_deposited'] + .0 ?? 0;
+    int numberOfParticipation = json['number_of_participations'] ?? 0;
+    int? numberOfTeam = json['number_of_team'] ?? 0;
+    int maxNumber = json['max_number'] ?? 0;
+    int minNumber = json['min_number'] ?? 0;
     DateTime createTime = DateTime.parse(json['create_time']);
     DateTime startTimeRegister = DateTime.parse(json['start_time_register']);
     DateTime endTimeRegister = DateTime.parse(json['end_time_register']);
     DateTime startTime = DateTime.parse(json['start_time']);
     DateTime endTime = DateTime.parse(json['end_time']);
-    String addressName = json['address_name'];
-    String address = json['address'];
-    String content = json['content'];
-    bool isSponsor = json['is_sponsor'];
-    CompetitionScopeStatus scope = json['scope'];
+    String addressName = json['address_name'] ?? '';
+    String address = json['address'] ?? '';
+    String content = json['content'] ?? '';
+    bool isSponsor = json['is_sponsor'] ?? false;
+    CompetitionScopeStatus scope = CompetitionScopeStatus.values[int.parse(json['scope'].toString())];
     CompetitionStatus status =
         CompetitionStatus.values[int.parse(json['status'].toString())];
-    int view = json['view'];
-    List<CompetitionInClubsModel> competitionInClub =
-        json['clubs_in_competition'];
-    List<CompetitionInMajorsModel> competitionInDepartment =
-        json['departments_in_competition'];
-    List<CompetitionEntityModel> competitionEntities =
-        json['competition_entities'];
+    int view = json['view'] ?? 0;
+    List<CompetitionInClubsModel> competitionInClub = [];
+    json['clubs_in_competition']?.forEach((v) {
+      competitionInClub.add(CompetitionInClubsModel.fromJson(v));
+    });
+    List<CompetitionInMajorsModel> competitionInDepartment = [];
+    json['departments_in_competition']?.forEach((v) {
+      competitionInDepartment.add(CompetitionInMajorsModel.fromJson(v));
+    });
+    List<CompetitionEntityModel> competitionEntities = [];
+    json['competition_entities']?.forEach((v) {
+      competitionEntities.add(CompetitionEntityModel.fromJson(v));
+    });
 
     return CompetitionDetailModel(
         id: id,
