@@ -13,6 +13,8 @@ export 'club/club_page.dart'; //-> show thông tin club
 export 'task/task_page.dart'; //-> show task của member
 
 export 'clubs_view/clubs_view_page.dart';
+export 'view_list_member/view_list_member_page.dart';
+export 'view_list_competition_of_club/view_list_competition_of_club.dart';
 
 export 'view_list_teams/view_list_team_page.dart';
 export 'view_detail_team/view_detail_team_page.dart';

@@ -4,8 +4,6 @@ import 'package:get_it/get_it.dart';
 import 'package:loadmore/loadmore.dart';
 import 'package:unicec_mobi/bloc/view_competition_member_task/view_competition_member_task_event.dart';
 import 'package:unicec_mobi/models/common/current_user.dart';
-import 'package:unicec_mobi/models/entities/competition/competition_model.dart';
-import 'package:unicec_mobi/models/enums/competition_scope_status.dart';
 import '../../../bloc/view_competition_member_task/view_competition_member_task_bloc.dart';
 import '../../../bloc/view_competition_member_task/view_competition_member_task_state.dart';
 import '../../../models/enums/competition_status.dart';
@@ -36,72 +34,6 @@ class _ViewCompetitionMemberTaskMenuState
 
   @override
   Widget build(BuildContext context) {
-    // List<CompetitionModel> fakeData = [
-    //   CompetitionModel(
-    //     view: 26,
-    //     name: 'Competition này được dùng để test thôi, không có gì cả',
-    //     clubsInCompetition: [],
-    //     scope: CompetitionScopeStatus.Club,
-    //     competitionTypeId: 2,
-    //     competitionEntities: [],
-    //     universityId: 1,
-    //     competitionTypeName: ' check check',
-    //     status: CompetitionStatus.OnGoing,
-    //     startTime: "29/07/2022 5:300",
-    //     createTime: '29/07/2022 5:30:00',
-    //     majorsInCompetition: [],
-    //     isSponsor: true,
-    //     id: 1,
-    //   ),
-    //   CompetitionModel(
-    //     view: 26,
-    //     name: 'Competition này được dùng để test thôi, không có gì cả',
-    //     clubsInCompetition: [],
-    //     scope: CompetitionScopeStatus.Club,
-    //     competitionTypeId: 2,
-    //     competitionEntities: [],
-    //     universityId: 1,
-    //     competitionTypeName: ' check check',
-    //     status: CompetitionStatus.Pending,
-    //     startTime: "29/07/2022 5:300",
-    //     createTime: '29/07/2022 5:30:00',
-    //     majorsInCompetition: [],
-    //     isSponsor: true,
-    //     id: 1,
-    //   ),
-    //   CompetitionModel(
-    //     view: 26,
-    //     name: 'Competition này ',
-    //     clubsInCompetition: [],
-    //     scope: CompetitionScopeStatus.Club,
-    //     competitionTypeId: 2,
-    //     competitionEntities: [],
-    //     universityId: 1,
-    //     competitionTypeName: ' check check',
-    //     status: CompetitionStatus.OnGoing,
-    //     startTime: "29/07/2022 5:300",
-    //     createTime: '29/07/2022 5:30:00',
-    //     majorsInCompetition: [],
-    //     isSponsor: true,
-    //     id: 1,
-    //   ),
-    //   CompetitionModel(
-    //     view: 26,
-    //     name: 'Competition này được dùn',
-    //     clubsInCompetition: [],
-    //     scope: CompetitionScopeStatus.Club,
-    //     competitionTypeId: 2,
-    //     competitionEntities: [],
-    //     universityId: 1,
-    //     competitionTypeName: ' check check',
-    //     status: CompetitionStatus.Finish,
-    //     startTime: "29/07/2022 5:300",
-    //     createTime: '29/07/2022 5:30:00',
-    //     majorsInCompetition: [],
-    //     isSponsor: true,
-    //     id: 1,
-    //   ),
-    // ];
     //bloc
     ViewCompetitionMemberTaskBloc bloc =
         BlocProvider.of<ViewCompetitionMemberTaskBloc>(context);
@@ -173,7 +105,7 @@ class _ViewCompetitionMemberTaskMenuState
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 10),
+                                horizontal: 20, vertical: 30),
                             child: TextButton(
                               style: TextButton.styleFrom(
                                 primary: Colors.black87,
@@ -197,13 +129,13 @@ class _ViewCompetitionMemberTaskMenuState
                                       children: [
                                         Padding(
                                           padding:
-                                              const EdgeInsets.only(right: 8.0),
+                                              const EdgeInsets.only(right: 8.0, top: 10),
                                           child: Text(
                                               state.listCompetition[index].id
                                                   .toString(),
                                               style: TextStyle(
                                                   fontSize: 20,
-                                                  color: Colors.grey)),
+                                                  color: Colors.red)),
                                         ),
                                         Expanded(
                                           child: Text(
@@ -246,6 +178,22 @@ class _ViewCompetitionMemberTaskMenuState
                                           style: TextStyle(
                                               fontSize: 18,
                                               color: Colors.green),
+                                        ),
+                                      if (state.listCompetition[index].status ==
+                                          CompetitionStatus.Upcoming)
+                                        Text(
+                                          "Sắp diễn ra",
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: Colors.orange),
+                                        ),
+                                      if (state.listCompetition[index].status ==
+                                          CompetitionStatus.Start)
+                                        Text(
+                                          "Khai mạc",
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: Colors.redAccent),
                                         ),
                                       if (state.listCompetition[index].status ==
                                           CompetitionStatus.OnGoing)

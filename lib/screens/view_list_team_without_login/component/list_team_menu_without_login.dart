@@ -9,16 +9,16 @@ import '../../../utils/router.dart';
 import '/models/entities/team/team_model.dart';
 import '../../../models/enums/team_status.dart';
 
-class ViewListTeamMenu extends StatefulWidget {
-  const ViewListTeamMenu({
+class ViewListTeamWithouLoginMenu extends StatefulWidget {
+  const ViewListTeamWithouLoginMenu({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<ViewListTeamMenu> createState() => _ViewListTeamMenuState();
+  State<ViewListTeamWithouLoginMenu> createState() => _ViewListTeamWithouLoginMenuState();
 }
 
-class _ViewListTeamMenuState extends State<ViewListTeamMenu> {
+class _ViewListTeamWithouLoginMenuState extends State<ViewListTeamWithouLoginMenu> {
 //   @override
   void load(BuildContext context) {
     BlocProvider.of<ViewListTeamBloc>(context).add(LoadAddMoreEvent());
@@ -129,9 +129,6 @@ class _ViewListTeamMenuState extends State<ViewListTeamMenu> {
                               Expanded(
                                   child: Text(state.listTeam[index].name,
                                       style: TextStyle(fontSize: 15))),
-                              // SizedBox(
-                              //   width: 15,
-                              // ),
                               Expanded(
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 35.0),
@@ -143,7 +140,6 @@ class _ViewListTeamMenuState extends State<ViewListTeamMenu> {
                               SizedBox(
                                 width: 30,
                               ),
-
                               SizedBox(
                                 width: 10,
                               ),
