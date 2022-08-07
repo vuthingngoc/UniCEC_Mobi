@@ -100,14 +100,14 @@ class _MyAccountPageState extends State<MyAccountPage>
                                         Align(
                                           child: Text(
                                               "${currentUser.fullname}",
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   color: Color.fromRGBO(
                                                       50, 50, 93, 1),
                                                   fontSize: 28.0,
                                                   fontWeight:
                                                       FontWeight.w800)),
                                         ),
-                                        SizedBox(height: 10.0),
+                                        const SizedBox(height: 10.0),
                                         Align(
                                           child: Container(
                                             margin: const EdgeInsets.only(right: 20),
@@ -117,16 +117,16 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                     color: Colors.grey.withOpacity(0.15)),
                                                 color: Colors.grey.withOpacity(0.15),
                                                 borderRadius:
-                                                BorderRadius.all(
+                                                const BorderRadius.all(
                                                     Radius.circular(10))),
                                             child: Text("${state.user.studentCode} | ${state.seedsWallet.amount} seeds",
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   // color: Colors.bl,
                                                   fontSize: 18,
                                                 )),
                                           ),
                                         ),
-                                        Divider(
+                                        const Divider(
                                           height: 40.0,
                                           thickness: 1.5,
                                           indent: 32.0,
@@ -140,7 +140,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                 "${state.user.description}",
                                                 textAlign:
                                                     TextAlign.center,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     fontSize: 17.0,
                                                     fontWeight:
                                                         FontWeight.w400)),
@@ -164,7 +164,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                   Text(
                                                     state.user.universityName ??
                                                         '',
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         fontSize: 18  ),
                                                   )
                                                 ]),
@@ -177,7 +177,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                 padding: EdgeInsets.all(
                                                     Dimens.size10),
                                                 child: Row(children: [
-                                                  Icon(Icons
+                                                  const Icon(Icons
                                                       .business_center),
                                                   SizedBox(
                                                     width: Dimens.size20,
@@ -185,7 +185,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                   Text(
                                                     state.user.departmentName ??
                                                         '',
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         fontSize: 18),
                                                   )
                                                 ]),
@@ -218,14 +218,14 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                 padding: EdgeInsets.all(
                                                     Dimens.size10),
                                                 child: Row(children: [
-                                                  Icon(Icons
+                                                  const Icon(Icons
                                                       .alternate_email),
                                                   SizedBox(
                                                     width: Dimens.size20,
                                                   ),
                                                   Text(
                                                     state.user.email,
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         fontSize: 17),
                                                   )
                                                 ]),
@@ -245,7 +245,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                   Text(
                                                     state
                                                         .user.phoneNumber,
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         fontSize: 17),
                                                   )
                                                 ]),
@@ -258,13 +258,13 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                 padding: EdgeInsets.all(
                                                     Dimens.size10),
                                                 child: Row(children: [
-                                                  Icon(Icons.cake),
+                                                  const Icon(Icons.cake),
                                                   SizedBox(
                                                     width: Dimens.size20,
                                                   ),
                                                   Text(
                                                     state.user.dob,
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         fontSize: 17),
                                                   )
                                                 ]),
@@ -283,7 +283,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                   ),
                                                   Text(
                                                     state.user.gender,
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         fontSize: 17),
                                                   )
                                                 ]),
@@ -300,7 +300,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                                   )),
                             ),
                             FractionalTranslation(
-                                translation: Offset(0.0, -0.5),
+                                translation: const Offset(0.0, -0.5),
                                 child: Align(
                                   child: CircleAvatar(
                                     backgroundImage: NetworkImage(//AssetImage(
@@ -317,7 +317,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                             child: Container(
                               width: double.infinity,
                               margin:
-                              new EdgeInsets.only(right: 15, left: 15, bottom: 15),
+                              const EdgeInsets.only(right: 15, left: 15, bottom: 15),
                               child: FlatButton(
                                 textColor: ArgonColors.white,
                                 color: ArgonColors.warning,
@@ -330,7 +330,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                                   borderRadius:
                                   BorderRadius.circular(4.0),
                                 ),
-                                child: Padding(
+                                child: const Padding(
                                     padding: EdgeInsets.only(
                                         left: 16.0,
                                         right: 16.0,

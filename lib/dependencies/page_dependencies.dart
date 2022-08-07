@@ -36,7 +36,7 @@ class PageDependencies {
         instanceName: Routes.event);
 
     //Profile Page -> show general info Student
-    injector.registerFactory<Widget>(() => DetailCompetitionPage(),
+    injector.registerFactory<Widget>(() => DetailCompetitionPage(bloc: injector()),
         instanceName: Routes.detailCompetition);
 
     injector.registerFactory<Widget>(() => ViewListTeamPage(bloc: injector()),

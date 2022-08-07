@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/models/common/current_user.dart';
 import 'package:unicec_mobi/models/entities/member/member_detail_model.dart';
+import 'package:unicec_mobi/models/entities/seedswallet/seeds_wallet_model.dart';
 import '../../models/entities/uni_selector/uni_selector_model.dart';
 import '../../services/i_services.dart';
 import '../../utils/base_bloc.dart';
@@ -12,9 +13,11 @@ import 'login_state.dart';
 
 class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
   final ILoginService service;
+  final IUserService userService;
   bool isLoading = false;
 
-  LoginBloc({required this.service}) : super(LoginState(errorEmail: '')) {
+  LoginBloc({required this.service, required this.userService})
+      : super(LoginState(errorEmail: '')) {
     on((event, emit) async {
       if (event is SignInGoogleEvent) {
         isLoading = true;
@@ -71,6 +74,8 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
     user.email = (credentialUser?.email)!;
     user.fullname = userMap['Fullname'];
     user.avatar = imagePath!;
+    user.seedsWallet = await userService.getSeedsWalletByUser(user.id) ??
+        SeedsWalletModel(id: 0, studentId: 0, amount: 0, status: false);
 
     return uniSelector;
 

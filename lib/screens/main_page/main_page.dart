@@ -351,7 +351,7 @@ class _MainPageState extends State<MainPage> {
                       _pageController.jumpToPage(2);
                     },
                     backgroundColor: AppColors.mainColor,
-                    heroTag: "main_page",
+                    heroTag: "main_page",                  
                   ),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,

@@ -6,38 +6,37 @@ import 'package:unicec_mobi/utils/firebase.dart';
 import 'package:unicec_mobi/utils/router.dart';
 
 import '../../../bloc/profile/profile_bloc.dart';
-import '../../../bloc/profile/profile_state.dart';
 import 'profile_menu.dart';
 import 'profile_pic.dart';
 
 class Body extends StatelessWidget {
-  String avatar = GetIt.I.get<CurrentUser>().avatar!;
-  ProfileBloc bloc;
-  ProfileState state;
-  Body({Key? key, required this.bloc, required this.state}) : super(key: key);
+  CurrentUser user = GetIt.I.get<CurrentUser>();
+  Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(vertical: 20),
+      padding: const EdgeInsets.symmetric(vertical: 20),
       child: Column(
         children: [
           Row(
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 25.0),
-                child: ProfilePic(avatar: avatar),
+                child: ProfilePic(avatar: user.avatar!),
               ),
                Padding(
                  padding: const EdgeInsets.only(left: 20.0),
                  child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                    children: [
                      Text(
-                        "Gan ten vo day ne",
-                        style: TextStyle(
+                        "${user.fullname}",
+                        style: const TextStyle(
                             color: Color.fromRGBO(
                                 50, 50, 93, 1),
                             fontSize: 23.0,
+                            fontWeight: FontWeight.bold
                         )),
                      Padding(
                        padding: const EdgeInsets.only(top: 20.0),
@@ -49,10 +48,11 @@ class Body extends StatelessWidget {
                                  color: ArgonColors.warning),
                              color: ArgonColors.warning,
                              borderRadius:
-                             BorderRadius.all(
+                             const BorderRadius.all(
                                  Radius.circular(10))),
-                         child: Text("gan them điểm seeds",
-                             style: TextStyle(
+                         child: Text(
+                          "${user.seedsWallet.amount}",
+                             style: const TextStyle(
                                // color: Colors.bl,
                                fontSize: 18,
                                color: ArgonColors.white

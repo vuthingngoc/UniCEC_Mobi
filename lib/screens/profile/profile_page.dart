@@ -41,12 +41,12 @@ class _ProfilePageState extends State<ProfilePage>
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              title: Text("Trang cá nhân", style: TextStyle(color: Colors.black)),
+              title: const Text("Trang cá nhân", style: TextStyle(color: Colors.black)),
               automaticallyImplyLeading: false,
               backgroundColor: ArgonColors.bgColorScreen,
               centerTitle: true,
             ),
-            body: Body(bloc: _bloc, state: state,),
+            body: Body(),
             //bottomNavigationBar: CustomBottomNavBar(selectedMenu: MenuState.profile),
           );
         });
