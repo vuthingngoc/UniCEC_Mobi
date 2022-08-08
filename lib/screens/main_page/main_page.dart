@@ -7,7 +7,6 @@ import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/bloc/competition/competition_bloc.dart';
 import 'package:unicec_mobi/bloc/view_competition_member_task/view_competition_member_task_bloc.dart';
 import 'package:unicec_mobi/screens/club/club_page.dart';
-import 'package:unicec_mobi/screens/detail_competition/detail_competition_page.dart';
 import 'package:unicec_mobi/screens/event/event_page.dart';
 import 'package:unicec_mobi/screens/pages.dart';
 import '../../bloc/club/club_bloc.dart';

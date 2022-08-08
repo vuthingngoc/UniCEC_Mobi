@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:unicec_mobi/models/entities/competition/competition_in_clubs_model.dart';
 import 'package:unicec_mobi/models/entities/competition/competition_in_majors_model.dart';
 
