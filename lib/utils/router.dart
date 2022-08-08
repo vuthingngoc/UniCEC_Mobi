@@ -8,6 +8,7 @@ class Routes {
   static String get competition => '/competition';
   static String get event => '/event';
   static String get detailCompetition => '/detailCompetition';
+  static String get viewDetailCompetitionParticipant => '/viewDetailCompetitionParticipant';
   static String get viewListTeam => '/viewListTeam';
   static String get viewDetailTeam => '/viewDetailTeam';
   static String get viewListTeamStudent => '/viewListTeamStudent';
