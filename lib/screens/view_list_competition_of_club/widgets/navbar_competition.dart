@@ -22,8 +22,8 @@ class NavbarCompetitionOfClub extends StatefulWidget implements PreferredSizeWid
   final bool searchAutofocus;
   final bool noShadow;
   final Color bgColor;
-  final CompetitionBloc bloc;
-  final CompetitionState state;
+  // final CompetitionBloc bloc;
+  // final CompetitionState state;
 
   NavbarCompetitionOfClub(
       {this.title = "Competition",
@@ -41,8 +41,9 @@ class NavbarCompetitionOfClub extends StatefulWidget implements PreferredSizeWid
       this.noShadow = false,
       this.bgColor = ArgonColors.white,
       this.searchBar = false,
-      required this.bloc,
-      required this.state});
+      // required this.bloc,
+      // required this.state
+      });
 
   final double _prefferedHeight = 180.0;
 
@@ -55,8 +56,8 @@ class NavbarCompetitionOfClub extends StatefulWidget implements PreferredSizeWid
 
 class _NavbarCompetitionOfClubState extends State<NavbarCompetitionOfClub> {
   late String activeTag;
-  CompetitionBloc get _bloc => widget.bloc;
-  CompetitionState get _state => widget.state;
+  // CompetitionBloc get _bloc => widget.bloc;
+  // CompetitionState get _state => widget.state;
   var _controller = TextEditingController();
 
   void initState() {
@@ -72,10 +73,10 @@ class _NavbarCompetitionOfClubState extends State<NavbarCompetitionOfClub> {
         widget.categoryOne.isNotEmpty && widget.categoryTwo.isNotEmpty;
     // final bool tagsExist =
     //     widget.tags == null ? false : (widget.tags?.length == 0 ? false : true);
-    String searchString = _state.requestModel?.name ?? '';
-    if (searchString != '') {
-      _controller = TextEditingController(text: searchString);
-    }
+    // String searchString = _state.requestModel?.name ?? '';
+    // if (searchString != '') {
+    //   _controller = TextEditingController(text: searchString);
+    // }
 
     return Container(
         // height: widget.searchBar
@@ -106,9 +107,7 @@ class _NavbarCompetitionOfClubState extends State<NavbarCompetitionOfClub> {
                   children: [
                     IconButton(
                         icon: Icon(
-                            !widget.backButton
-                                ? Icons.menu
-                                : Icons.arrow_back_ios,
+Icons.arrow_back_ios,
                             color: !widget.transparent
                                 ? (widget.bgColor == ArgonColors.white
                                     ? ArgonColors.initial
@@ -116,9 +115,6 @@ class _NavbarCompetitionOfClubState extends State<NavbarCompetitionOfClub> {
                                 : ArgonColors.white,
                             size: 24.0),
                         onPressed: () {
-                          if (!widget.backButton)
-                            Scaffold.of(context).openDrawer();
-                          else
                             Navigator.pop(context);
                         }),
                     Text(widget.title,
@@ -128,8 +124,8 @@ class _NavbarCompetitionOfClubState extends State<NavbarCompetitionOfClub> {
                                     ? ArgonColors.initial
                                     : ArgonColors.white)
                                 : ArgonColors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18.0)),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20.0)),
                   ],
                 ),
 

@@ -10,7 +10,6 @@ enum CompetitionStatus{
   Approve,
   Pending,
   Finish,
-  Evaluate,
   Complete,
   Cancel
 }

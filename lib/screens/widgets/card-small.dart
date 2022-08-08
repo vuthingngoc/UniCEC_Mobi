@@ -27,7 +27,7 @@ class CardSmall extends StatelessWidget {
     // double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Flexible(
-        child: Container(     
+        child: Container(
           margin: const EdgeInsets.symmetric(vertical: 5.0),
       // width: screenWidth / 3,
       height: screenHeight / 3,
