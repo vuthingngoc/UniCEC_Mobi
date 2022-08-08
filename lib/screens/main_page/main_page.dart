@@ -208,7 +208,7 @@ class _MainPageState extends State<MainPage> {
                         ViewCompetitionMemberTaskBloc>()), // trang show Competition mà Member này có task ở trỏng
                 CompetitionPage(bloc: GetIt.I.get<CompetitionBloc>()),
                 // NotificationPage(bloc: GetIt.I.get<NotificationBloc>()),
-                ViewListCompetitionOfClubPage(),
+                ViewListCompetitionOfParticipantPage(),
                 ProfilePage(bloc: GetIt.I.get<ProfileBloc>())
                 //ViewDetailActivityPage(),
                 // EventPage(bloc: GetIt.I.get<EventBloc>()),
