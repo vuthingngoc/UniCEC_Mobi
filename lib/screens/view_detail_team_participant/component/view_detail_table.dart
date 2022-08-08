@@ -162,36 +162,46 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
                               ),
                             ];
                           })))
-                        : (GetIt.I.get<CurrentUser>().id != member.studentId &&
+                        :
+                        //trường hợp cho mình chỉ thấy những thằng còn lại
+                        (GetIt.I.get<CurrentUser>().id != member.studentId &&
                                 BlocProvider.of<ViewDetailTeamParticipantBloc>(
                                             context)
                                         .state
                                         .userIdInTeam !=
-                                    -1)
+                                    -1 &&
+                                member.teamRoleName.compareTo("Leader") != 0)
                             ? DataCell(SizedBox(child:
                                 PopupMenuButton<int>(itemBuilder: (context) {
                                 return [
-                                  PopupMenuItem(
-                                    onTap: () {
-                                      BlocProvider.of<
+                                  if (BlocProvider.of<
                                                   ViewDetailTeamParticipantBloc>(
                                               context)
-                                          .add(UpdateMemberRoleEvent(
-                                              participantInTeamId:
-                                                  member.participantInTeamId));
-                                    },
-                                    value: 1,
-                                    child: Row(
-                                      children: <Widget>[
-                                        Icon(Icons.access_time_sharp, size: 18),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 8.0),
-                                          child: Text('Chọn làm đội trưởng'),
-                                        ),
-                                      ],
+                                          .state
+                                          .userIdIsLeaderTeam ==
+                                      GetIt.I.get<CurrentUser>().id)
+                                    PopupMenuItem(
+                                      onTap: () {
+                                        BlocProvider.of<
+                                                    ViewDetailTeamParticipantBloc>(
+                                                context)
+                                            .add(UpdateMemberRoleEvent(
+                                                participantInTeamId: member
+                                                    .participantInTeamId));
+                                      },
+                                      value: 1,
+                                      child: Row(
+                                        children: <Widget>[
+                                          Icon(Icons.access_time_sharp,
+                                              size: 18),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 8.0),
+                                            child: Text('Chọn làm đội trưởng'),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
                                   PopupMenuItem(
                                     onTap: () {},
                                     value: 2,
@@ -206,25 +216,49 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
                                       ],
                                     ),
                                   ),
+                                  if (BlocProvider.of<
+                                                  ViewDetailTeamParticipantBloc>(
+                                              context)
+                                          .state
+                                          .userIdIsLeaderTeam ==
+                                      GetIt.I.get<CurrentUser>().id)
+                                    PopupMenuItem(
+                                      onTap: () {
+                                        _showDeleteDialog(member.participantId);
+                                      },
+                                      value: 3,
+                                      child: Row(
+                                        children: <Widget>[
+                                          Icon(Icons.delete, size: 18),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 8.0),
+                                            child: Text('Xóa thành viên'),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                ];
+                              })))
+                            : DataCell(SizedBox(child:
+                                PopupMenuButton<int>(itemBuilder: (context) {
+                                return [
                                   PopupMenuItem(
-                                    onTap: () {
-                                      _showDeleteDialog(member.participantId);
-                                    },
-                                    value: 3,
+                                    onTap: () {},
+                                    value: 2,
                                     child: Row(
                                       children: <Widget>[
-                                        Icon(Icons.delete, size: 18),
+                                        Icon(Icons.remove_red_eye, size: 18),
                                         Padding(
                                           padding:
                                               const EdgeInsets.only(left: 8.0),
-                                          child: Text('Xóa thành viên'),
+                                          child: Text('Xem thông tin'),
                                         ),
                                       ],
                                     ),
                                   ),
                                 ];
-                              })))
-                            : DataCell(SizedBox(child: Text('aa')));
+                              })));
           }
         });
         return DataRow(cells: getListData.toList());
