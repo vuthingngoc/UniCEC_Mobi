@@ -129,8 +129,8 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
               state.competitionId, state.teamId);
           if (result != null) {
             //
-            int userIdIsLeaderTeam = -2;
-            int userIdInTeam = -2;
+            int userIdIsLeaderTeam = -1;
+            int userIdInTeam = -1;
             //Tìm User Id Leader Team
             for (ViewDetailParticipantModel participant
                 in result.participants) {
@@ -171,8 +171,8 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
               state.competitionId, state.teamId);
           if (result != null) {
             //
-            int userIdIsLeaderTeam = -2;
-            int userIdInTeam = -2;
+            int userIdIsLeaderTeam = -1;
+            int userIdInTeam = -1;
             //Tìm User Id Leader Team
             for (ViewDetailParticipantModel participant
                 in result.participants) {
@@ -207,8 +207,8 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
               state.competitionId, state.teamId);
           if (result != null) {
             //
-            int userIdIsLeaderTeam = -2;
-            int userIdInTeam = -2;
+            int userIdIsLeaderTeam = -1;
+            int userIdInTeam = -1;
             //Tìm User Id Leader Team
             for (ViewDetailParticipantModel participant
                 in result.participants) {
