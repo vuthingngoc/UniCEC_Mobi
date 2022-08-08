@@ -13,13 +13,32 @@ class CompetitionState extends Equatable {
   CompetitionRequestModel? requestModel;
 
   CompetitionState(
-      {this.competitions, this.outStandingCompetitions, this.requestModel, this.competitionDetail, this.selectedCompetitionId});
+      {this.competitions,
+      this.outStandingCompetitions,
+      this.requestModel,
+      this.competitionDetail,
+      this.selectedCompetitionId});
 
   CompetitionState copyWith(
-      {List<CompetitionShowModel>? competitions, List<CompetitionShowModel>? outStandingCompetitions, CompetitionDetailModel? competitionDetail}) {
-    return CompetitionState(competitions: competitions, outStandingCompetitions: outStandingCompetitions, requestModel: requestModel, competitionDetail: competitionDetail);
+      {List<CompetitionShowModel>? competitions,
+      List<CompetitionShowModel>? outStandingCompetitions,
+      CompetitionDetailModel? competitionDetail,
+      int? selectedCompetitionId}) {
+    return CompetitionState(
+        competitions: competitions,
+        outStandingCompetitions: outStandingCompetitions,
+        requestModel: requestModel,
+        competitionDetail: competitionDetail,
+        selectedCompetitionId: selectedCompetitionId);
   }
+
   @override
   // TODO: implement props
-  List<Object?> get props => [competitions, outStandingCompetitions, requestModel, competitionDetail];
+  List<Object?> get props => [
+        competitions,
+        outStandingCompetitions,
+        requestModel,
+        competitionDetail,
+        selectedCompetitionId
+      ];
 }

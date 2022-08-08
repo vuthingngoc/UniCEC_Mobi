@@ -17,18 +17,20 @@ import '../../bloc/main/main_event.dart';
 import '../../bloc/main/main_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../bloc/notification/notification_bloc.dart';
 import '../../bloc/profile/profile_bloc.dart';
-import '../../bloc/view_list_team/view_list_team_bloc.dart';
+import '../../bloc/view_list_team_participant/view_list_team_participant_bloc.dart';
 import '../../models/common/current_user.dart';
 import '../../utils/app_color.dart';
 import '../../utils/router.dart';
 import '../competition/competition_page.dart';
+import '../notification/notification_page.dart';
 import '../profile/profile_page.dart';
 import '../size_config.dart';
 import '../view_competition_member_task/view_competition_member_task_page.dart';
 import '../view_competition_round/view_competition_round.dart';
-import '../view_detail_team/view_detail_team_page.dart';
-import '../view_list_teams/view_list_team_page.dart';
+import '../view_detail_team_participant/view_detail_team_participant_page.dart';
+import '../view_list_teams_participant/view_list_team_participant_page.dart';
 import 'widget/component_button.dart';
 
 class MainPage extends StatefulWidget {
@@ -206,12 +208,14 @@ class _MainPageState extends State<MainPage> {
                     bloc: GetIt.I.get<
                         ViewCompetitionMemberTaskBloc>()), // trang show Competition mà Member này có task ở trỏng
                 CompetitionPage(bloc: GetIt.I.get<CompetitionBloc>()),
-                ViewListTeamPage(bloc: GetIt.I.get<ViewListTeamBloc>()),
+                NotificationPage(bloc: GetIt.I.get<NotificationBloc>()),
                 ProfilePage(bloc: GetIt.I.get<ProfileBloc>())
                 //ViewDetailActivityPage(),
                 // EventPage(bloc: GetIt.I.get<EventBloc>()),
                 // ViewCompetitionMemberTaskPage(
                 //     bloc: GetIt.I.get<ViewCompetitionMemberTaskBloc>()),
+                // ViewListTeamParticipantPage(
+                //     bloc: GetIt.I.get<ViewListTeamParticipantBloc>()),
               ],
             ),
             bottomNavigationBar: BottomAppBar(
@@ -351,7 +355,7 @@ class _MainPageState extends State<MainPage> {
                       _pageController.jumpToPage(2);
                     },
                     backgroundColor: AppColors.mainColor,
-                    heroTag: "main_page",                  
+                    heroTag: "main_page",
                   ),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,

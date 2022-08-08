@@ -1,6 +1,9 @@
 import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/bloc/add_team_dialog/add_team_dialog_bloc.dart';
-import '../bloc/view_detail_team/view_detail_team_bloc.dart';
+import '../bloc/notification/notification_bloc.dart';
+import '../bloc/view_detail_team_participant/view_detail_team_participant_bloc.dart';
+import '../bloc/view_detail_team_student/view_detail_team_student_bloc.dart';
+import '../bloc/view_list_team_student/view_list_team_student_bloc.dart';
 import '/bloc/club/club_bloc.dart';
 import '/bloc/clubs_view/clubs_view_bloc.dart';
 import '/bloc/competition/competition_bloc.dart';
@@ -19,7 +22,7 @@ import '../bloc/team/team_bloc.dart';
 import '../bloc/view_competition_activity/view_competition_activity_bloc.dart';
 import '../bloc/view_competition_member_task/view_competition_member_task_bloc.dart';
 import '../bloc/view_detail_activity/view_detail_activity_bloc.dart';
-import '../bloc/view_list_team/view_list_team_bloc.dart';
+import '../bloc/view_list_team_participant/view_list_team_participant_bloc.dart';
 
 class BlocDependencies {
   static Future setup(GetIt injector) async {
@@ -30,7 +33,8 @@ class BlocDependencies {
     injector.registerFactory<SplashBloc>(() => SplashBloc(service: injector()));
 
     //import login bloc
-    injector.registerFactory<LoginBloc>(() => LoginBloc(service: injector(), userService: injector()));
+    injector.registerFactory<LoginBloc>(
+        () => LoginBloc(service: injector(), userService: injector()));
 
     //import UniversitySelectionBloc
     injector.registerFactory<UniversitySelectionBloc>(
@@ -79,15 +83,26 @@ class BlocDependencies {
     injector.registerFactory<ViewDetailActivityBloc>(
         () => ViewDetailActivityBloc(service: injector()));
 
+//--------------------------------PARTICIPANT
     // import view list teams
-    injector.registerSingleton<ViewListTeamBloc>(
-        ViewListTeamBloc(service: injector()));
+    injector.registerSingleton<ViewListTeamParticipantBloc>(
+        ViewListTeamParticipantBloc(service: injector()));
 
     //import view detail team
-    injector.registerFactory<ViewDetailTeamBloc>(
-        () => ViewDetailTeamBloc(service: injector()));
+    injector.registerFactory<ViewDetailTeamParticipantBloc>(
+        () => ViewDetailTeamParticipantBloc(service: injector()));
+
+//--------------------------------STUDENT (who not join in competition)
+
+    injector.registerFactory<ViewListTeamStudentBloc>(
+        () => ViewListTeamStudentBloc(service: injector()));
+
+    injector.registerFactory<ViewDetailTeamStudentBloc>(
+        () => ViewDetailTeamStudentBloc(service: injector()));
 
     //import add team dialog
     injector.registerFactory<AddTeamDialogBloc>(() => AddTeamDialogBloc());
+
+    injector.registerFactory<NotificationBloc>(() => NotificationBloc());
   }
 }
