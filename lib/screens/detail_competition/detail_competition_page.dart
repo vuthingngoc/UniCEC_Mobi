@@ -69,14 +69,14 @@ class _DetailCompetitionPageState extends State<DetailCompetitionPage> {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: Icon(Icons.arrow_back, color: Colors.black),
+                      icon: Icon(Icons.arrow_back_ios, color: Colors.black),
                     ),
                     title: const Text("Chi tiết",
                         style: TextStyle(color: Colors.black, fontSize: 23)),
+                    automaticallyImplyLeading: false,
                     centerTitle: true,
-                    backgroundColor: AppColors.mainColor,
+                    backgroundColor: AppColors.backgroundPageColor,
                   ),
-                  backgroundColor: ArgonColors.bgColorScreen,
                   drawer: ArgonDrawer(currentPage: "Competition Detail"),
                   body: Stack(children: <Widget>[
                     SafeArea(
@@ -837,12 +837,8 @@ class _DetailCompetitionPageState extends State<DetailCompetitionPage> {
                                                       child: FlatButton(
                                                         textColor:
                                                             ArgonColors.white,
-                                                        color: Colors.orange,
-                                                        onPressed: () {
-                                                          // Respond to button press
-                                                          Navigator.pushNamed(
-                                                              context, '/home');
-                                                        },
+                                                        color: ArgonColors.warning,
+                                                        onPressed: () {},
                                                         shape:
                                                             RoundedRectangleBorder(
                                                           borderRadius:

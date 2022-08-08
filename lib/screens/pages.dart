@@ -6,6 +6,7 @@ export 'club_selection/club_selection_page.dart';
 
 //template
 export 'competition/competition_page.dart'; //->show trang cuộc thi và sự kiện
+// export 'view_detail_competition_participant/view_detail_competition_participant.dart';
 export 'profile/profile_page.dart'; //->show thông tin sinh viên
 export 'my_account/my_account_page.dart';
 export 'edit_my_account/edit_my_account_page.dart';
