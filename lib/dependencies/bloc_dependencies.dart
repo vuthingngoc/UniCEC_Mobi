@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/bloc/add_team_dialog/add_team_dialog_bloc.dart';
+import '../bloc/competition_detail/competition_detail_bloc.dart';
 import '../bloc/notification/notification_bloc.dart';
 import '../bloc/view_detail_team_participant/view_detail_team_participant_bloc.dart';
 import '../bloc/view_detail_team_student/view_detail_team_student_bloc.dart';
@@ -57,6 +58,8 @@ class BlocDependencies {
     injector.registerSingleton<CompetitionBloc>(
         CompetitionBloc(service: injector()));
 
+    injector.registerFactory<CompetitionDetailBloc>(() => CompetitionDetailBloc(service: injector()));   
+
     injector.registerFactory<EventBloc>(() => EventBloc(service: injector()));
 
     injector.registerFactory<TeamBloc>(() => TeamBloc(service: injector()));
@@ -72,7 +75,7 @@ class BlocDependencies {
     injector.registerFactory<ClubViewDetailBloc>(
         () => ClubViewDetailBloc(service: injector()));
 
-    // improt view competition member task
+    // import view competition member task
     injector.registerFactory<ViewCompetitionMemberTaskBloc>(
         () => ViewCompetitionMemberTaskBloc(service: injector()));
 

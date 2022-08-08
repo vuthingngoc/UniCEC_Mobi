@@ -26,6 +26,7 @@ class _BodyStudentState extends State<BodyStudent> {
           return SingleChildScrollView(
             padding: EdgeInsets.symmetric(vertical: 20),
             child: Column(children: [
+              if (state.listTeam.isNotEmpty)
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [

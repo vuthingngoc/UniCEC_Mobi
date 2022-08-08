@@ -1,26 +1,24 @@
-import 'package:unicec_mobi/bloc/competition/competition_event.dart';
-import 'package:unicec_mobi/bloc/competition/competition_state.dart';
 import 'package:unicec_mobi/models/entities/competition/competition_detail_model.dart';
-import 'package:unicec_mobi/models/entities/competition/competition_model.dart';
-import 'package:unicec_mobi/models/entities/competition/competition_request_model.dart';
 import 'package:unicec_mobi/models/enums/competition_scope_status.dart';
 import 'package:unicec_mobi/models/enums/competition_status.dart';
-import 'package:unicec_mobi/services/detail_competition_svc/i_detail_competition.dart';
-import 'package:unicec_mobi/services/i_services.dart';
 import 'package:unicec_mobi/utils/base_bloc.dart';
-import 'package:unicec_mobi/utils/log.dart';
+import '../../services/competition_detail_svc/i_competition_detail_service.dart';
+import 'competition_detail_event.dart';
+import 'competition_detail_state.dart';
 
-import '../../models/entities/competition/competition_in_majors_model.dart';
-import 'detail_competition_event.dart';
-import 'detail_competition_state.dart';
+class CompetitionDetailBloc
+    extends BaseBloc<CompetitionDetailEvent, CompetitionDetailState> {
+  final ICompetitionDetailService service;
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
 
-class DetailCompetitionBloc
-    extends BaseBloc<DetailCompetitionEvent, DetailCompetitionState> {
-  final IDetailCompetitionService service;
+  set isLoading(bool isLoading){
+    _isLoading = isLoading;
+  }
 
-  DetailCompetitionBloc({required this.service})
-      : super(DetailCompetitionState(
-            detailCompetition: CompetitionDetailModel(
+  CompetitionDetailBloc({required this.service})
+      : super(CompetitionDetailState(
+            competitionDetail: CompetitionDetailModel(
                 addressName: '',
                 competitionEntities: [],
                 maxNumber: 0,
@@ -49,14 +47,12 @@ class DetailCompetitionBloc
                 competitionTypeName: '',
                 content: ''))) {
     on((event, emit) async {
-      if (event is GetDetailCompetitionEvent) {
+      if (event is LoadCompetitionDetailEvent) {
         print('LoadCompetitionEvent is running ...');
-        // CompetitionRequestModel request =
-        //     CompetitionRequestModel(); // add more params if you want
-        // CompetitionModel? competition = await service.loadCompetition(request);
-        // return (competition != null)
-        //     ? competition
-        //     : Log.error("Competition model is null");
+        _isLoading = true;
+        CompetitionDetailModel? competition = await service.getById(event.competitionId);
+        emit(state.copyWith(competitionDetail: competition));
+        _isLoading = false;
       }
     });
   }

@@ -27,7 +27,7 @@ class SectionTitleCompetitionOfClub extends StatelessWidget {
         GestureDetector(
           onTap: press,
           child: Text(
-            "Xem thêm",
+            "",
             style: TextStyle(color: Color(0xFFBBBBBB)),
           ),
         ),

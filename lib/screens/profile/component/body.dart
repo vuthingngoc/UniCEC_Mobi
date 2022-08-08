@@ -51,7 +51,7 @@ class Body extends StatelessWidget {
                              const BorderRadius.all(
                                  Radius.circular(10))),
                          child: Text(
-                          "${user.seedsWallet.amount}",
+                          "${user.seedsWallet.amount} seeds",
                              style: const TextStyle(
                                // color: Colors.bl,
                                fontSize: 18,
