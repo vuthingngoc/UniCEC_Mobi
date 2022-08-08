@@ -76,14 +76,14 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                         Navigator.pop(context);
                       },
                       icon:
-                          const Icon(Icons.arrow_back_ios, color: Colors.black),
+                          const Icon(Icons.arrow_back_ios, color: Colors.white),
                     ),
                     title: const Text("Chi tiết",
-                        style: TextStyle(color: Colors.black, fontSize: 23)),
-                    automaticallyImplyLeading: false,
+                        style: TextStyle(color: Colors.white, fontSize: 23)),
                     centerTitle: true,
-                    backgroundColor: AppColors.backgroundPageColor,
+                    backgroundColor: AppColors.mainColor,
                   ),
+                  backgroundColor: ArgonColors.bgColorScreen,
                   drawer: ArgonDrawer(currentPage: "Competition Detail"),
                   body: Stack(children: <Widget>[
                     SafeArea(

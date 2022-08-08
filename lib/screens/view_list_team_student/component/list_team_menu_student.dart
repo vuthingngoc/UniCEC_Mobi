@@ -33,32 +33,6 @@ class _ViewListTeamStudentMenuMenuState extends State<ViewListTeamStudentMenu> {
 
   @override
   Widget build(BuildContext context) {
-    List<TeamModel> fakeData = [
-      TeamModel(
-          id: 1,
-          competitionId: 1,
-          name: "name name name ame name",
-          description: "description",
-          invitedCode: "invitedCode",
-          status: TeamStatus.Available,
-          numberOfMemberInTeam: 3),
-      TeamModel(
-          id: 2,
-          competitionId: 2,
-          name: "name2",
-          description: "description",
-          invitedCode: "invitedCode2",
-          status: TeamStatus.Available,
-          numberOfMemberInTeam: 3),
-      TeamModel(
-          id: 3,
-          competitionId: 3,
-          name: "name3",
-          description: "description",
-          invitedCode: "invitedCode3",
-          status: TeamStatus.IsLocked,
-          numberOfMemberInTeam: 3),
-    ];
     ViewListTeamStudentBloc bloc =
         BlocProvider.of<ViewListTeamStudentBloc>(context);
     return BlocBuilder<ViewListTeamStudentBloc, ViewListTeamStudentState>(
@@ -80,7 +54,7 @@ class _ViewListTeamStudentMenuMenuState extends State<ViewListTeamStudentMenu> {
                     Padding(
                       padding: const EdgeInsets.only(top: 25.0),
                       child: Text(
-                        'Hiện tại cuộc thi chưa có team nào!',
+                        'Hiện tại cuộc thi chưa có đội tham gia!',
                         style: TextStyle(fontSize: 20),
                       ),
                     ),
