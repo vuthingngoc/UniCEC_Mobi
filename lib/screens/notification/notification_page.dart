@@ -10,7 +10,7 @@ import 'widgets/list_notification.dart';
 class NotificationPage extends StatefulWidget {
   final NotificationBloc bloc;
 
-  const NotificationPage(this.bloc, {required Key key});
+  NotificationPage({required this.bloc});
 
   @override
   _NotificationState createState() => _NotificationState();

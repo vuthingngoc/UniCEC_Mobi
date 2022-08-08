@@ -36,14 +36,27 @@ class PageDependencies {
         instanceName: Routes.event);
 
     //Profile Page -> show general info Student
-    injector.registerFactory<Widget>(() => DetailCompetitionPage(bloc: injector()),
+    injector.registerFactory<Widget>(
+        () => DetailCompetitionPage(bloc: injector()),
         instanceName: Routes.detailCompetition);
 
-    injector.registerFactory<Widget>(() => ViewListTeamPage(bloc: injector()),
+//--------------------------------PARTICIPANT
+    injector.registerFactory<Widget>(
+        () => ViewListTeamParticipantPage(bloc: injector()),
         instanceName: Routes.viewListTeam);
 
-    injector.registerFactory<Widget>(() => ViewDetailTeamPage(bloc: injector()),
-        instanceName: Routes.viewDetailTeam);
+    // injector.registerFactory<Widget>(
+    //     () => ViewDetailTeamParticipantPage(bloc: injector()),
+    //     instanceName: Routes.viewDetailTeam);
+
+//--------------------------------STUDENT (who not join in competition)
+    injector.registerFactory<Widget>(
+        () => ViewListTeamStudentPage(bloc: injector()),
+        instanceName: Routes.viewListTeamStudent);
+
+    injector.registerFactory<Widget>(
+        () => ViewDetailTeamStudentPage(bloc: injector()),
+        instanceName: Routes.viewDetailTeamStudent);
 
     //round
     injector.registerFactory<Widget>(() => ViewCompetitionRoundPage(),
@@ -83,7 +96,8 @@ class PageDependencies {
     injector.registerFactory<Widget>(() => ClubsViewPage(bloc: injector()),
         instanceName: Routes.clubsView);
 
-    injector.registerFactory<Widget>(() => ViewListCompetitionOfClubPage(bloc: injector()),
+    injector.registerFactory<Widget>(
+        () => ViewListCompetitionOfClubPage(bloc: injector()),
         instanceName: Routes.viewListCompetitionOfClub);
 
     //Task Page -> show Tasks

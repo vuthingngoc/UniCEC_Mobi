@@ -16,9 +16,6 @@ export 'clubs_view/clubs_view_page.dart';
 export 'view_list_member/view_list_member_page.dart';
 export 'view_list_competition_of_club/view_list_competition_of_club.dart';
 
-export 'view_list_teams/view_list_team_page.dart';
-export 'view_detail_team/view_detail_team_page.dart';
-
 export 'detail_competition/detail_competition_page.dart';
 
 export 'view_competition_round/view_competition_round.dart';
@@ -26,3 +23,7 @@ export 'view_competition_round/view_competition_round.dart';
 export 'view_competition_member_task/view_competition_member_task_page.dart';
 export 'view_list_activity/view_list_activity_page.dart';
 export 'detail_activity/detail_activity_page.dart';
+export 'view_list_teams_participant/view_list_team_participant_page.dart';
+export 'view_detail_team_participant/view_detail_team_participant_page.dart';
+export 'view_list_team_student/view_list_team_student.dart';
+export 'view_detail_team_student/view_detail_team_student.dart';

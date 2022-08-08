@@ -11,6 +11,7 @@ import '../../constants/Theme.dart';
 import '../../utils/app_color.dart';
 import '../../utils/loading.dart';
 import '../../utils/log.dart';
+import '../../utils/router.dart';
 import '../size_config.dart';
 import '../widgets/drawer.dart';
 
@@ -41,7 +42,7 @@ class _DetailCompetitionPageState extends State<DetailCompetitionPage> {
         case CompetitionScopeStatus.Club:
           return 'Câu lạc bộ';
         default:
-          return '';  
+          return '';
       }
     }
 
@@ -52,7 +53,9 @@ class _DetailCompetitionPageState extends State<DetailCompetitionPage> {
   Widget build(BuildContext context) {
     print('detailCompetitionPage - isloading: ${_bloc.isLoading}');
     var universityName = GetIt.I.get<CurrentUser>().universityName;
-    var sponsors = _bloc.state.competitionDetail?.competitionEntities.where((element) => element.entityTypeId == 2) ?? [];
+    var sponsors = _bloc.state.competitionDetail?.competitionEntities
+            .where((element) => element.entityTypeId == 2) ??
+        [];
 
     return BlocBuilder<CompetitionBloc, CompetitionState>(
         bloc: _bloc,
@@ -186,7 +189,8 @@ class _DetailCompetitionPageState extends State<DetailCompetitionPage> {
                                                                         0
                                                                 ? '${_bloc.state.competitionDetail?.fee} VNĐ'
                                                                 : "Không thu phí",
-                                                            style: const TextStyle(
+                                                            style:
+                                                                const TextStyle(
                                                               color:
                                                                   Colors.white,
                                                               fontSize: 18,
@@ -203,14 +207,16 @@ class _DetailCompetitionPageState extends State<DetailCompetitionPage> {
                                                     child: Align(
                                                       child: Text(
                                                           "${_bloc.state.competitionDetail?.name}",
-                                                          style: const TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      50,
-                                                                      50,
-                                                                      93,
-                                                                      1),
-                                                              fontSize: 28.0)),
+                                                          style:
+                                                              const TextStyle(
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          50,
+                                                                          50,
+                                                                          93,
+                                                                          1),
+                                                                  fontSize:
+                                                                      28.0)),
                                                     ),
                                                   ),
                                                   SizedBox(height: 5.0),
@@ -231,7 +237,8 @@ class _DetailCompetitionPageState extends State<DetailCompetitionPage> {
                                                         const SizedBox(
                                                           width: 20,
                                                         ),
-                                                        const Text("@" + "Nhạc cụ",
+                                                        const Text(
+                                                            "@" + "Nhạc cụ",
                                                             style: TextStyle(
                                                                 color:
                                                                     ArgonColors
@@ -252,7 +259,7 @@ class _DetailCompetitionPageState extends State<DetailCompetitionPage> {
                                                           null)
                                                       ? Image.network(
                                                           '${_bloc.state.competitionDetail?.competitionEntities.where((element) => element.entityTypeId == 1).first.imageUrl}')
-                                                      : const SizedBox.shrink(),                                                  
+                                                      : const SizedBox.shrink(),
                                                   const SizedBox(height: 5.0),
                                                   (_bloc.state.competitionDetail
                                                                   ?.majorsInCompetition !=
@@ -626,7 +633,9 @@ class _DetailCompetitionPageState extends State<DetailCompetitionPage> {
                                                                               .horizontal,
                                                                       shrinkWrap:
                                                                           true,
-                                                                      itemCount: sponsors.length,
+                                                                      itemCount:
+                                                                          sponsors
+                                                                              .length,
                                                                       itemBuilder:
                                                                           (context,
                                                                               index) {
@@ -640,9 +649,8 @@ class _DetailCompetitionPageState extends State<DetailCompetitionPage> {
                                                                                 2.0,
                                                                                 10.0,
                                                                                 2.0),
-                                                                            child: CircleAvatar(
-                                                                                backgroundImage: NetworkImage("${sponsors.elementAt(index).imageUrl}"
-                                                                                    )));
+                                                                            child:
+                                                                                CircleAvatar(backgroundImage: NetworkImage("${sponsors.elementAt(index).imageUrl}")));
                                                                       }),
                                                             ),
                                                           ]),
@@ -668,9 +676,14 @@ class _DetailCompetitionPageState extends State<DetailCompetitionPage> {
                                                               color: ArgonColors
                                                                   .secondary,
                                                               onPressed: () {
-                                                                Navigator.pushNamed(
-                                                                    context,
-                                                                    '/viewListTeam');
+                                                                //chuyển sang trang list team
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pushNamed(
+                                                                        Routes
+                                                                            .viewListTeamStudent,
+                                                                        arguments:
+                                                                            state.selectedCompetitionId);
                                                               },
                                                               shape: RoundedRectangleBorder(
                                                                   borderRadius:

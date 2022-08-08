@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:unicec_mobi/bloc/notification/notification_state.dart';
 import 'package:unicec_mobi/utils/base_bloc.dart';
@@ -43,7 +41,7 @@ class NotificationBloc extends BaseBloc<NotificationEvent, NotificationState> {
       } else if (event is LoadMoreEvent) {
         int currentPage = state.currentPage + 1;
         bool hasNext = false;
-        
+
         if (state.notifications.length > currentPage * pageSize) hasNext = true;
 
         for (int i = state.currentPage * pageSize;
@@ -53,7 +51,7 @@ class NotificationBloc extends BaseBloc<NotificationEvent, NotificationState> {
         }
         emit(state.copyWith(state.notifications, state.currentNotifications,
             currentPage, pageSize, hasNext));
-      }else if(event is RefreshNotificationsEvent){
+      } else if (event is RefreshNotificationsEvent) {
         emit(state.copyWith([], [], 1, pageSize, false));
       }
     }));
