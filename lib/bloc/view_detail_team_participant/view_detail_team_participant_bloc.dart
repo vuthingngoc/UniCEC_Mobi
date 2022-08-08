@@ -29,8 +29,8 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
             await service.GetDetailTeamModel(event.competitionId, event.teamId);
         if (result != null) {
           //
-          int userIdIsLeaderTeam = -2;
-          int userIdInTeam = -2;
+          int userIdIsLeaderTeam = -1;
+          int userIdInTeam = -1;
           //Tìm User Id Leader Team
           for (ViewDetailParticipantModel participant in result.participants) {
             //Tìm User Id Leader Team

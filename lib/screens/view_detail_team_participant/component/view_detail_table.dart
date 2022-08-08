@@ -119,78 +119,112 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
               style: TextStyle(fontSize: 15),
             ));
           } else {
-            return (member.teamRoleName.compareTo("Leader") == 0 &&
-                    GetIt.I.get<CurrentUser>().id == member.studentId)
-                ? DataCell(SizedBox(
-                    child: PopupMenuButton<int>(itemBuilder: (context) {
-                    return [
-                      PopupMenuItem(
-                        onTap: () {},
-                        value: 2,
-                        child: Row(
-                          children: <Widget>[
-                            Icon(Icons.remove_red_eye, size: 18),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Text('Xem thông tin'),
+            return
+                //show cho bản thân mình
+                (GetIt.I.get<CurrentUser>().id == member.studentId)
+                    ? DataCell(SizedBox(
+                        child: PopupMenuButton<int>(itemBuilder: (context) {
+                        return [
+                          PopupMenuItem(
+                            onTap: () {},
+                            value: 2,
+                            child: Row(
+                              children: <Widget>[
+                                Icon(Icons.remove_red_eye, size: 18),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: Text('Xem thông tin'),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      ),
-                    ];
-                  })))
-                : DataCell(SizedBox(
-                    child: PopupMenuButton<int>(itemBuilder: (context) {
-                    return [
-                      PopupMenuItem(
-                        onTap: () {
-                          BlocProvider.of<ViewDetailTeamParticipantBloc>(
-                                  context)
-                              .add(UpdateMemberRoleEvent(
-                                  participantInTeamId:
-                                      member.participantInTeamId));
-                        },
-                        value: 1,
-                        child: Row(
-                          children: <Widget>[
-                            Icon(Icons.access_time_sharp, size: 18),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Text('Chọn làm đội trưởng'),
-                            ),
-                          ],
-                        ),
-                      ),
-                      PopupMenuItem(
-                        onTap: () {},
-                        value: 2,
-                        child: Row(
-                          children: <Widget>[
-                            Icon(Icons.remove_red_eye, size: 18),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Text('Xem thông tin'),
-                            ),
-                          ],
-                        ),
-                      ),
-                      PopupMenuItem(
-                        onTap: () {
-                          _showDeleteDialog(member.participantId);
-                        },
-                        value: 3,
-                        child: Row(
-                          children: <Widget>[
-                            Icon(Icons.delete, size: 18),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Text('Xóa thành viên'),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ];
-                  })));
+                          ),
+                        ];
+                      })))
+                    : (BlocProvider.of<ViewDetailTeamParticipantBloc>(context)
+                                .state
+                                .userIdInTeam ==
+                            -1)
+                        ? DataCell(SizedBox(
+                            child: PopupMenuButton<int>(itemBuilder: (context) {
+                            return [
+                              PopupMenuItem(
+                                onTap: () {},
+                                value: 2,
+                                child: Row(
+                                  children: <Widget>[
+                                    Icon(Icons.remove_red_eye, size: 18),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Text('Xem thông tin'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ];
+                          })))
+                        : (GetIt.I.get<CurrentUser>().id != member.studentId &&
+                                BlocProvider.of<ViewDetailTeamParticipantBloc>(
+                                            context)
+                                        .state
+                                        .userIdInTeam !=
+                                    -1)
+                            ? DataCell(SizedBox(child:
+                                PopupMenuButton<int>(itemBuilder: (context) {
+                                return [
+                                  PopupMenuItem(
+                                    onTap: () {
+                                      BlocProvider.of<
+                                                  ViewDetailTeamParticipantBloc>(
+                                              context)
+                                          .add(UpdateMemberRoleEvent(
+                                              participantInTeamId:
+                                                  member.participantInTeamId));
+                                    },
+                                    value: 1,
+                                    child: Row(
+                                      children: <Widget>[
+                                        Icon(Icons.access_time_sharp, size: 18),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 8.0),
+                                          child: Text('Chọn làm đội trưởng'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  PopupMenuItem(
+                                    onTap: () {},
+                                    value: 2,
+                                    child: Row(
+                                      children: <Widget>[
+                                        Icon(Icons.remove_red_eye, size: 18),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 8.0),
+                                          child: Text('Xem thông tin'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  PopupMenuItem(
+                                    onTap: () {
+                                      _showDeleteDialog(member.participantId);
+                                    },
+                                    value: 3,
+                                    child: Row(
+                                      children: <Widget>[
+                                        Icon(Icons.delete, size: 18),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 8.0),
+                                          child: Text('Xóa thành viên'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ];
+                              })))
+                            : DataCell(SizedBox(child: Text('aa')));
           }
         });
         return DataRow(cells: getListData.toList());
