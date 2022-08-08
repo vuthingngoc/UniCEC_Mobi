@@ -45,9 +45,9 @@ class PageDependencies {
         () => ViewListTeamParticipantPage(bloc: injector()),
         instanceName: Routes.viewListTeam);
 
-    // injector.registerFactory<Widget>(
-    //     () => ViewDetailTeamParticipantPage(bloc: injector()),
-    //     instanceName: Routes.viewDetailTeam);
+    injector.registerFactory<Widget>(
+        () => ViewDetailTeamParticipantPage(bloc: injector()),
+        instanceName: Routes.viewDetailTeam);
 
 //--------------------------------STUDENT (who not join in competition)
     injector.registerFactory<Widget>(
@@ -106,5 +106,8 @@ class PageDependencies {
 
     injector.registerFactory<Widget>(() => ClubViewDetailPage(bloc: injector()),
         instanceName: Routes.clubViewDetail);
+
+    injector.registerFactory<Widget>(() => ViewListMemberPage(bloc: injector()),
+        instanceName: Routes.viewListMember);
   }
 }

@@ -1,11 +1,8 @@
-import 'dart:convert';
-import 'dart:io';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
-import 'package:unicec_mobi/models/entities/member/member_model.dart';
-import 'package:unicec_mobi/services/member_svc/i_member_service.dart';
-import 'package:unicec_mobi/utils/api.dart';
-
+import '/models/entities/member/member_model.dart';
+import '/services/member_svc/i_member_service.dart';
+import '/utils/api.dart';
 import '../../models/common/current_user.dart';
 import '../../models/entities/member/member_detail_model.dart';
 import '../../models/enums/member_status.dart';
@@ -86,5 +83,36 @@ class MemberService implements IMemberService {
       client.close();
     }
     return MemberStatus.InActive;
+  }
+
+  @override
+  Future<List<MemberModel>?> getListMemberByClubId(int clubId) async {
+    var client = http.Client();
+    String url = Api.GetUrl(apiPath: Api.members);
+    url += "/by-club?clubId=" + clubId.toString();
+    String? idToken = GetIt.I.get<CurrentUser>().idToken;
+    try {
+      var response =
+          await client.get(Uri.parse(url), headers: Api.GetHeader(idToken));
+      if (response.statusCode == 200) {
+        List<dynamic> result = adapter.parseToList(response);
+        if (result.isEmpty) {
+          return null;
+        }
+        //
+        List<MemberModel> membersBelongToClubs = [];
+        //
+        for (var element in result) {
+          MemberModel model = MemberModel.fromJson(element);
+          membersBelongToClubs.add(model);
+        }
+        return membersBelongToClubs;
+      }
+    } catch (e) {
+      Log.error(e.toString());
+    } finally {
+      client.close();
+    }
+    return null;
   }
 }
