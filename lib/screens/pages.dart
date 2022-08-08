@@ -17,7 +17,7 @@ export 'clubs_view/clubs_view_page.dart';
 export 'view_list_member/view_list_member_page.dart';
 export 'view_list_competition_of_club/view_list_competition_of_club.dart';
 
-export 'detail_competition/detail_competition_page.dart';
+export 'competition_detail/competition_detail_page.dart';
 
 export 'view_competition_round/view_competition_round.dart';
 

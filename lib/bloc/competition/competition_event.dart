@@ -1,5 +1,3 @@
-import '../../models/entities/competition/competition_detail_model.dart';
-
 class CompetitionEvent{}
 
 class LoadOutStandingCompetitionEvent extends CompetitionEvent{}
