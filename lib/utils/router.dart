@@ -23,6 +23,7 @@ class Routes {
   static String get viewListMember => '/viewListmember';
 
   static String get viewListCompetitionOfClub => '/viewListCompetitionOfClub';
+  static String get viewListCompetitionOfParticipant => '/viewListCompetitionOfParticipant';
   //
   static String get splash => '/splash';
   static String get club => '/club';

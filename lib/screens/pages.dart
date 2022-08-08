@@ -16,6 +16,7 @@ export 'task/task_page.dart'; //-> show task của member
 export 'clubs_view/clubs_view_page.dart';
 export 'view_list_member/view_list_member_page.dart';
 export 'view_list_competition_of_club/view_list_competition_of_club.dart';
+export 'view_list_competition_of_participant/view_list_competition_of_participant.dart';
 
 export 'competition_detail/competition_detail_page.dart';
 
