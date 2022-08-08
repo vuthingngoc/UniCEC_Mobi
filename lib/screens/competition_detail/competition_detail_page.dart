@@ -75,7 +75,8 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+                      icon:
+                          const Icon(Icons.arrow_back_ios, color: Colors.black),
                     ),
                     title: const Text("Chi tiết",
                         style: TextStyle(color: Colors.black, fontSize: 23)),
@@ -152,7 +153,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                               .shrink(),
                                                       Text(
                                                         "${_bloc.state.competitionDetail?.clubsInCompetition.where((element) => element.isOwner == true).first.name}",
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             fontSize: 18,
                                                             fontWeight:
                                                                 FontWeight
@@ -175,10 +176,10 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                     .green),
                                                             color: Colors.green,
                                                             borderRadius:
-                                                                BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            10))),
+                                                                const BorderRadius
+                                                                        .all(
+                                                                    Radius.circular(
+                                                                        10))),
                                                         child: Text(
                                                             (_bloc.state.competitionDetail
                                                                             ?.fee) !=
@@ -311,11 +312,12 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                           ],
                                                         )
                                                       : Row(
-                                                        children: [
-                                                          Container(
+                                                          children: [
+                                                            Container(
                                                               margin:
                                                                   const EdgeInsets
-                                                                      .all(15.0),
+                                                                          .all(
+                                                                      15.0),
                                                               padding:
                                                                   const EdgeInsets
                                                                       .all(3.0),
@@ -325,21 +327,22 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                           .orangeAccent),
                                                                   color: Colors
                                                                       .orangeAccent,
-                                                                  borderRadius: BorderRadius
-                                                                      .all(Radius
-                                                                          .circular(
-                                                                              10))),
-                                                              child: Text(
+                                                                  borderRadius: const BorderRadius
+                                                                          .all(
+                                                                      Radius.circular(
+                                                                          10))),
+                                                              child: const Text(
                                                                   'Toàn bộ các ngành',
                                                                   style:
-                                                                      const TextStyle(
+                                                                      TextStyle(
                                                                     color: Colors
                                                                         .white,
-                                                                    fontSize: 18,
+                                                                    fontSize:
+                                                                        18,
                                                                   )),
                                                             ),
-                                                        ],
-                                                      ),
+                                                          ],
+                                                        ),
                                                   Padding(
                                                     padding:
                                                         const EdgeInsets.only(
@@ -357,8 +360,9 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                             width: 10.0),
                                                         Text(
                                                           "${_bloc.state.competitionDetail?.startTime}",
-                                                          style: const TextStyle(
-                                                              fontSize: 18),
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontSize: 18),
                                                         ),
                                                       ],
                                                     ),
@@ -490,7 +494,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                           child: Text(
                                                             "Các câu lạc bộ tham gia tổ chức",
                                                             style: TextStyle(
-                                                                fontSize: 18,
+                                                                fontSize: 20,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
@@ -514,7 +518,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                           child: Row(
                                                             children: [
                                                               SizedBox(
-                                                                height: 100.0,
+                                                                height: 60.0,
                                                                 child: ListView
                                                                     .builder(
                                                                         scrollDirection:
@@ -533,12 +537,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                           return Container(
                                                                               width: 48,
                                                                               height: 48,
-                                                                              child: ((_bloc.state.competitionDetail?.clubsInCompetition[index].image)! != '')
-                                                                                  ? CircleAvatar(backgroundImage: NetworkImage("${_bloc.state.competitionDetail?.clubsInCompetition[index].image}"))
-                                                                                  : Text(
-                                                                                      '${_bloc.state.competitionDetail?.clubsInCompetition[index].name}',
-                                                                                      style: const TextStyle(fontSize: 15.0),
-                                                                                    ));
+                                                                              child: CircleAvatar(backgroundImage: NetworkImage(_bloc.state.competitionDetail?.clubsInCompetition[index].image != "" ? "${_bloc.state.competitionDetail?.clubsInCompetition[index].image}" : "https://picsum.photos/seed/513/600")));
                                                                         }),
                                                               )
                                                             ],
@@ -557,7 +556,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                           child: Text(
                                                             "Ban giám khảo",
                                                             style: TextStyle(
-                                                                fontSize: 18,
+                                                                fontSize: 20,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
@@ -581,7 +580,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                           child: Row(
                                                             children: [
                                                               SizedBox(
-                                                                height: 100.0,
+                                                                height: 60.0,
                                                                 child: ListView
                                                                     .builder(
                                                                         scrollDirection:
@@ -600,12 +599,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                           return Container(
                                                                               width: 48,
                                                                               height: 48,
-                                                                              child: ((_bloc.state.competitionDetail?.clubsInCompetition[index].image)! != '')
-                                                                                  ? CircleAvatar(backgroundImage: NetworkImage("${_bloc.state.competitionDetail?.clubsInCompetition[index].image}"))
-                                                                                  : Text(
-                                                                                      '${_bloc.state.competitionDetail?.clubsInCompetition[index].name}',
-                                                                                      style: const TextStyle(fontSize: 15.0),
-                                                                                    ));
+                                                                              child: CircleAvatar(backgroundImage: NetworkImage((_bloc.state.competitionDetail?.clubsInCompetition[index].image)! != '' ? "${_bloc.state.competitionDetail?.clubsInCompetition[index].image}" : "https://picsum.photos/seed/513/600")));
                                                                         }),
                                                               ),
                                                             ],
@@ -625,7 +619,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                           child: Text(
                                                             "Các đơn vị tài trợ",
                                                             style: TextStyle(
-                                                                fontSize: 18,
+                                                                fontSize: 20,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
@@ -660,7 +654,14 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                               .horizontal,
                                                                       shrinkWrap:
                                                                           true,
-                                                                      itemCount: _bloc.state.competitionDetail?.competitionEntities.where((element) => element.entityTypeId == 2).length,
+                                                                      itemCount: _bloc
+                                                                          .state
+                                                                          .competitionDetail
+                                                                          ?.competitionEntities
+                                                                          .where((element) =>
+                                                                              element.entityTypeId ==
+                                                                              2)
+                                                                          .length,
                                                                       itemBuilder:
                                                                           (context,
                                                                               index) {
@@ -674,15 +675,32 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                                 2.0,
                                                                                 10.0,
                                                                                 2.0),
-                                                                            child: CircleAvatar(
-                                                                                backgroundImage: NetworkImage("${_bloc.state.competitionDetail?.competitionEntities.where((element) => element.entityTypeId == 2).elementAt(index).imageUrl}"
-                                                                                    )));
+                                                                            child:
+                                                                                CircleAvatar(backgroundImage: NetworkImage("${_bloc.state.competitionDetail?.competitionEntities.where((element) => element.entityTypeId == 2).elementAt(index).imageUrl}")));
                                                                       }),
                                                             ),
                                                           ]),
                                                         )
-                                                      : Text(
-                                                          'Ban tổ chức trường $universityName'),
+                                                      : Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                              Padding(
+                                                                padding: const EdgeInsets
+                                                                        .symmetric(
+                                                                    horizontal:
+                                                                        10.0,
+                                                                    vertical:
+                                                                        15.0),
+                                                                child: Text(
+                                                                  'Ban tổ chức trường $universityName',
+                                                                  style: const TextStyle(
+                                                                      fontSize:
+                                                                          18.0),
+                                                                ),
+                                                              ),
+                                                            ]),
                                                   Padding(
                                                     padding:
                                                         const EdgeInsets.only(
@@ -708,8 +726,9 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                     .pushNamed(
                                                                         Routes
                                                                             .viewListTeamStudent,
-                                                                        arguments:
-                                                                            state.competitionDetail?.id);
+                                                                        arguments: state
+                                                                            .competitionDetail
+                                                                            ?.id);
                                                               },
                                                               shape: RoundedRectangleBorder(
                                                                   borderRadius:
@@ -813,12 +832,13 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                             color: Colors.red),
                                                         color: Colors.red,
                                                         borderRadius:
-                                                            BorderRadius.all(
+                                                            const BorderRadius
+                                                                    .all(
                                                                 Radius.circular(
                                                                     10))),
                                                     child: Text(
                                                         "Hạn cuối đăng ký: ${_bloc.state.competitionDetail?.endTimeRegister}",
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 18,
                                                         )),
@@ -829,14 +849,17 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                             right: 10,
                                                             left: 10),
                                                     child: Row(
-                                                      mainAxisAlignment: MainAxisAlignment.end,
-                                                      children: [                                                        
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
+                                                      children: [
                                                         Text(
                                                             "${_bloc.state.competitionDetail?.view} lượt xem",
-                                                            style: const TextStyle(
-                                                                color:
-                                                                    Colors.grey,
-                                                                fontSize: 18)),
+                                                            style:
+                                                                const TextStyle(
+                                                                    color: Colors
+                                                                        .grey,
+                                                                    fontSize:
+                                                                        18)),
                                                       ],
                                                     ),
                                                   ),
@@ -847,14 +870,15 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                     child: Container(
                                                       width: double.infinity,
                                                       margin:
-                                                            const EdgeInsets.only(
+                                                          const EdgeInsets.only(
                                                               right: 15,
                                                               left: 15,
                                                               bottom: 15),
                                                       child: FlatButton(
                                                         textColor:
                                                             ArgonColors.white,
-                                                        color: ArgonColors.warning,
+                                                        color:
+                                                            ArgonColors.warning,
                                                         onPressed: () {},
                                                         shape:
                                                             RoundedRectangleBorder(
