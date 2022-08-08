@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import '../../../bloc/view_list_member/view_list_member_bloc.dart';
-import '../../../models/common/current_user.dart';
 import '../../../models/entities/member/member_model.dart';
 
-class ViewDetailTableMenu extends StatefulWidget {
+class ViewDetailTableMemberMenu extends StatefulWidget {
   final List<MemberModel> listModel;
 
-  ViewDetailTableMenu({required this.listModel});
+  ViewDetailTableMemberMenu({required this.listModel});
 
   @override
-  State<ViewDetailTableMenu> createState() => _ViewDetailTableMenuState();
+  State<ViewDetailTableMemberMenu> createState() =>
+      _ViewDetailTableMemberMenuState();
 }
 
-class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
+class _ViewDetailTableMemberMenuState extends State<ViewDetailTableMemberMenu> {
   List<MemberModel> get listModel => widget.listModel;
 
   @override
@@ -51,40 +50,6 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
     );
   }
 
-  Future<void> _showDeleteDialog() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Cảnh báo'),
-          content: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Text('Bạn có chắc chắn muốn xóa?'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text('Đồng ý'),
-              onPressed: () {
-                print('Confirmed');
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: Text('Hủy'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   List getRows(List<MemberModel> member) => listModel.map((MemberModel member) {
         final cells = [1, 2, 3, 4];
         Iterable<DataCell> getListData = cells.map<DataCell>((e) {
@@ -114,7 +79,7 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
               return [
                 PopupMenuItem(
                   onTap: () {
-                    //_showDeleteDialog();
+                    //chuyển sang trang view thông tin
                   },
                   value: 3,
                   child: Row(

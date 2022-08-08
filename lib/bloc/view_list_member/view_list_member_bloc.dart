@@ -12,7 +12,7 @@ class ViewListMemberBloc
   IMemberService service;
 
   ViewListMemberBloc({required this.service})
-      : super(ViewListMemberState(listMember: [])) {
+      : super(ViewListMemberState(listMember: null)) {
     (on((event, emit) async {
       if (event is LoadListMemberEvent) {
         int clubIdSelected = GetIt.I.get<CurrentUser>().clubIdSelected;

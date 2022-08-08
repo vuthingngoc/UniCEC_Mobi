@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:unicec_mobi/models/entities/team/sending_data_model.dart';
-
+import '/models/entities/team/sending_data_model.dart';
 import '../../bloc/view_list_team_participant/view_list_team_participant_bloc.dart';
 import '../../bloc/view_list_team_participant/view_list_team_participant_event.dart';
 import '../../bloc/view_list_team_participant/view_list_team_participant_state.dart';
-import '../../constants/Theme.dart';
-
 import '../../utils/app_color.dart';
 import '../../utils/router.dart';
-import '../widgets/input.dart';
 import 'component/add_team_button.dart';
 import 'component/body.dart';
 
@@ -36,7 +32,7 @@ class _ViewListTeamParticipantPageState
   void initState() {
     super.initState();
     //mặc định competition id 2
-    bloc.add(RecieveDataEvent(competitionId: 2));
+    //bloc.add(RecieveDataEvent(competitionId: 2));
     //
     bloc.listenerStream.listen((event) {
       if (event is ShowingSnackBarEvent) {
@@ -50,7 +46,8 @@ class _ViewListTeamParticipantPageState
             teamName: event.teamName,
             teamDescription: event.teamDescription,
             status: event.status);
-        Navigator.of(context).pushNamed(Routes.viewDetailTeam, arguments: data);
+        Navigator.of(context)
+            .pushNamed(Routes.viewDetailTeamParticipant, arguments: data);
       }
       if (event is RebuildListViewTeamEvent) {
         bloc.add(ViewListTeamInitEvent());
@@ -62,13 +59,13 @@ class _ViewListTeamParticipantPageState
 
   //nhận competition Id
   void didChangeDependencies() {
-    // RouteSettings settings = ModalRoute.of(context)!.settings;
-    // if (settings.arguments != null) {
-    //   int competitionId = settings.arguments as int;
-    //   if (competitionId != 0) {
-    //     bloc.add(RecieveDataEvent(competitionId: competitionId));
-    //   }
-    // }
+    RouteSettings settings = ModalRoute.of(context)!.settings;
+    if (settings.arguments != null) {
+      int competitionId = settings.arguments as int;
+      if (competitionId != 0) {
+        bloc.add(RecieveDataEvent(competitionId: competitionId));
+      }
+    }
   }
 
   @override

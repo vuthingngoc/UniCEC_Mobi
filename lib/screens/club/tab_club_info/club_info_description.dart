@@ -4,6 +4,7 @@ import 'package:unicec_mobi/screens/club/widgets/club_pic.dart';
 import '../../../constants/Constants.dart';
 import '../../../constants/Theme.dart';
 import '../../../models/entities/club/club_model.dart';
+import '../../../utils/router.dart';
 import '../../size_config.dart';
 
 class ClubDescription extends StatefulWidget {
@@ -52,34 +53,30 @@ class _ClubDescriptionState extends State<ClubDescription> {
                     padding: const EdgeInsets.only(left: 0),
                     child: (widget.club?.name == null)
                         ? Text(
-                      'Không tìm thấy tên',
-                      style: Theme.of(context).textTheme.headline6,
-                    )
+                            'Không tìm thấy tên',
+                            style: Theme.of(context).textTheme.headline6,
+                          )
                         : Text(
-                      widget.club!.name,
-                      style: TextStyle(
-                        color: Color.fromRGBO(
-                            50, 50, 93, 1),
-                        fontSize: 23.0,
-                      ),
-                    )
-                ),
+                            widget.club!.name,
+                            style: TextStyle(
+                              color: Color.fromRGBO(50, 50, 93, 1),
+                              fontSize: 23.0,
+                            ),
+                          )),
                 Padding(
                     padding: const EdgeInsets.only(top: 20, left: 20),
                     child: (widget.club?.founding == null)
                         ? Text(
-                      '',
-                      style: Theme.of(context).textTheme.headline6,
-                    )
+                            '',
+                            style: Theme.of(context).textTheme.headline6,
+                          )
                         : Text(
-                      widget.club!.founding.toString(),
-                      style: TextStyle(
-                        color: Color.fromRGBO(
-                            50, 50, 93, 1),
-                        fontSize: 16.0,
-                      ),
-                    )
-                ),
+                            widget.club!.founding.toString(),
+                            style: TextStyle(
+                              color: Color.fromRGBO(50, 50, 93, 1),
+                              fontSize: 16.0,
+                            ),
+                          )),
               ],
             ),
           ],
@@ -96,7 +93,8 @@ class _ClubDescriptionState extends State<ClubDescription> {
                 )
               : Text(
                   widget.club!.description,
-                  maxLines: 10, style: TextStyle(fontSize: 16),
+                  maxLines: 10,
+                  style: TextStyle(fontSize: 16),
                 ),
         ),
         Padding(
@@ -109,59 +107,49 @@ class _ClubDescriptionState extends State<ClubDescription> {
               children: [
                 Text(
                   'Thông tin cá nhân',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18),
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                 ),
               ],
             ),
             SizedBox(height: 10),
             if (widget.member?.name != null)
-            Padding(
-              padding: const EdgeInsets.only(left: 30.0),
-              child: Row(
-                children: [
-                  Icon(Icons.account_circle),
-                  SizedBox(width: 10),
-                  Text(
-                      widget.member?.name ?? '', style: TextStyle(fontSize: 16)
-                  ),
-                  Container(
-                    margin:
-                    const EdgeInsets.all(10.0),
-                    padding:
-                    const EdgeInsets.all(3.0),
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            color:
-                            Colors.orangeAccent),
-                        color: Colors.orangeAccent,
-                        borderRadius:
-                        BorderRadius.all(
-                            Radius.circular(10))),
-                    child: Text( widget.member?.clubRoleName ?? 'Thành viên',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                        )),
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.only(left: 30.0),
+                child: Row(
+                  children: [
+                    Icon(Icons.account_circle),
+                    SizedBox(width: 10),
+                    Text(widget.member?.name ?? '',
+                        style: TextStyle(fontSize: 16)),
+                    Container(
+                      margin: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(3.0),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.orangeAccent),
+                          color: Colors.orangeAccent,
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      child: Text(widget.member?.clubRoleName ?? 'Thành viên',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                          )),
+                    ),
+                  ],
+                ),
               ),
-            ),
             SizedBox(height: 10),
             if (widget.member?.phone != null)
-            Padding(
-              padding: const EdgeInsets.only(left: 30.0),
-              child: Row(
-                children: [
-                  Icon(Icons.phone),
-                  SizedBox(width: 10),
-                  Text(
-                      widget.member?.phone ?? '', style: TextStyle(fontSize: 16)
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.only(left: 30.0),
+                child: Row(
+                  children: [
+                    Icon(Icons.phone),
+                    SizedBox(width: 10),
+                    Text(widget.member?.phone ?? '',
+                        style: TextStyle(fontSize: 16)),
+                  ],
+                ),
               ),
-            ),
             // SizedBox(height: 10),
           ]),
         ),
@@ -171,62 +159,43 @@ class _ClubDescriptionState extends State<ClubDescription> {
             vertical: 10,
           ),
           child: Column(children: [
-              Row(
-                children: [
-                  Text(
-                    'Xem danh sách thành viên của CLB',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18),
-                  ),
-                ],
-              ),
+            Row(
+              children: [
+                Text(
+                  'Xem danh sách thành viên của CLB',
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                ),
+              ],
+            ),
             SizedBox(height: 10),
             Container(
               width: double.infinity,
               height: 36,
-              margin:
-              new EdgeInsets.only(right: 90, left: 30, bottom: 15),
+              margin: new EdgeInsets.only(right: 90, left: 30, bottom: 15),
               child: RaisedButton(
-                  textColor: ArgonColors
-                      .primary,
-                  color: ArgonColors
-                      .secondary,
+                  textColor: ArgonColors.primary,
+                  color: ArgonColors.secondary,
                   onPressed: () {
-                    Navigator.pushNamed(
-                        context, '/viewListmember');
+                    //chuyển sang trang
+                    Navigator.of(context).pushNamed(Routes.viewListMember);
                   },
-                  shape:
-                  RoundedRectangleBorder(
-                      borderRadius:
-                      BorderRadius
-                          .circular(
-                          4)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4)),
                   child: Padding(
-                      padding:
-                      EdgeInsets.only(
-                          bottom: 10,
-                          top: 10,
-                          left: 8,
-                          right: 8),
+                      padding: EdgeInsets.only(
+                          bottom: 10, top: 10, left: 8, right: 8),
                       child: Row(
                         // mainAxisAlignment:
                         // MainAxisAlignment
                         //     .spaceAround,
                         children: [
-                          Icon(
-                              Icons.description,
-                              size: 13),
+                          Icon(Icons.description, size: 13),
                           SizedBox(
                             width: 5,
                           ),
                           Text("Danh sách thành viên",
                               style: TextStyle(
-                                  fontWeight:
-                                  FontWeight
-                                      .w600,
-                                  fontSize:
-                                  16))
+                                  fontWeight: FontWeight.w600, fontSize: 16))
                         ],
                       ))),
             ),
@@ -242,9 +211,7 @@ class _ClubDescriptionState extends State<ClubDescription> {
               children: [
                 Text(
                   'Các cuộc thi và sự kiện câu lạc bộ hiện có',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18),
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                 ),
               ],
             ),
@@ -252,52 +219,33 @@ class _ClubDescriptionState extends State<ClubDescription> {
             Container(
               width: double.infinity,
               height: 36,
-              margin:
-              new EdgeInsets.only(right: 90, left: 30, bottom: 15),
+              margin: new EdgeInsets.only(right: 90, left: 30, bottom: 15),
               child: RaisedButton(
-                  textColor: ArgonColors
-                      .primary,
-                  color: ArgonColors
-                      .secondary,
+                  textColor: ArgonColors.primary,
+                  color: ArgonColors.secondary,
                   onPressed: () {
-                    Navigator.pushNamed(
-                        context, '/viewListCompetitionOfClub');
+                    Navigator.pushNamed(context, '/viewListCompetitionOfClub');
                   },
-                  shape:
-                  RoundedRectangleBorder(
-                      borderRadius:
-                      BorderRadius
-                          .circular(
-                          4)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4)),
                   child: Padding(
-                      padding:
-                      EdgeInsets.only(
-                          bottom: 10,
-                          top: 10,
-                          left: 8,
-                          right: 8),
+                      padding: EdgeInsets.only(
+                          bottom: 10, top: 10, left: 8, right: 8),
                       child: Row(
                         // mainAxisAlignment:
                         // MainAxisAlignment
                         //     .spaceAround,
                         children: [
-                          Icon(
-                              Icons.description,
-                              size: 13),
+                          Icon(Icons.description, size: 13),
                           SizedBox(
                             width: 5,
                           ),
                           Text("Danh sách các cuộc thi & sự kiện",
                               style: TextStyle(
-                                  fontWeight:
-                                  FontWeight
-                                      .w600,
-                                  fontSize:
-                                  16))
+                                  fontWeight: FontWeight.w600, fontSize: 16))
                         ],
                       ))),
             ),
-
             SizedBox(height: 10),
           ]),
         ),
@@ -307,14 +255,13 @@ class _ClubDescriptionState extends State<ClubDescription> {
             // vertical: 10,
           ),
           child: Column(children: [
-            if (widget.club?.clubFanpage != null || widget.club?.clubContact != null)
+            if (widget.club?.clubFanpage != null ||
+                widget.club?.clubContact != null)
               Row(
                 children: [
                   Text(
                     'Thông tin liên hệ',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18),
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                   ),
                 ],
               ),
@@ -327,7 +274,8 @@ class _ClubDescriptionState extends State<ClubDescription> {
                     Icon(Icons.web),
                     SizedBox(width: 10),
                     Text(
-                      widget.club?.clubFanpage ?? '', style: TextStyle(fontSize: 16),
+                      widget.club?.clubFanpage ?? '',
+                      style: TextStyle(fontSize: 16),
                     ),
                   ],
                 ),
@@ -340,9 +288,8 @@ class _ClubDescriptionState extends State<ClubDescription> {
                   children: [
                     Icon(Icons.phone),
                     SizedBox(width: 10),
-                    Text(
-                        widget.club?.clubContact ?? '', style: TextStyle(fontSize: 16)
-                    ),
+                    Text(widget.club?.clubContact ?? '',
+                        style: TextStyle(fontSize: 16)),
                   ],
                 ),
               )

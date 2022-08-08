@@ -721,14 +721,23 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                   .secondary,
                                                               onPressed: () {
                                                                 //chuyển sang trang list team
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pushNamed(
-                                                                        Routes
-                                                                            .viewListTeamStudent,
-                                                                        arguments: state
-                                                                            .competitionDetail
-                                                                            ?.id);
+                                                                if (state
+                                                                        .isParticipant ==
+                                                                    true) {
+                                                                  Navigator.of(context).pushNamed(
+                                                                      Routes
+                                                                          .viewListTeamParticipant,
+                                                                      arguments: state
+                                                                          .competitionDetail
+                                                                          ?.id);
+                                                                } else {
+                                                                  Navigator.of(context).pushNamed(
+                                                                      Routes
+                                                                          .viewListTeamStudent,
+                                                                      arguments: state
+                                                                          .competitionDetail
+                                                                          ?.id);
+                                                                }
                                                               },
                                                               shape: RoundedRectangleBorder(
                                                                   borderRadius:

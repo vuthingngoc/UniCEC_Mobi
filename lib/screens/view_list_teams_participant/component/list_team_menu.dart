@@ -125,7 +125,7 @@ class _ViewListTeamMenuState extends State<ViewListTeamMenu> {
                                     state.listTeam[index].description,
                                 status: state.listTeam[index].status);
                             Navigator.of(context).pushNamed(
-                                Routes.viewDetailTeam,
+                                Routes.viewDetailTeamParticipant,
                                 arguments: data);
                           },
                           child: Row(
