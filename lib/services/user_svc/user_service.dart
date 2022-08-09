@@ -10,6 +10,8 @@ import 'package:unicec_mobi/utils/adapter.dart';
 import 'package:unicec_mobi/utils/api.dart';
 import 'package:unicec_mobi/utils/log.dart';
 
+import '../../models/common/paging_result.dart';
+
 class UserService implements IUserService{
   Adapter adapter = Adapter();
 
@@ -91,6 +93,44 @@ class UserService implements IUserService{
       }
     }catch(e){
       Log.error(e.toString());
+    }
+
+    return null;
+  }
+  
+  @override
+  Future<bool> updateUser(UserModel user) async {
+    var client = http.Client();
+    String url = Api.GetUrl(apiPath: '${Api.users}');
+    String token = GetIt.I.get<CurrentUser>().idToken;
+
+    try{
+      var response = await client.put(Uri.parse(url), headers: Api.GetHeader(token), body: user);
+      return (response.statusCode == 200) ? true : false;
+      
+    }catch(error){
+      Log.error(error.toString());
+    }
+
+    return false;
+  }
+  
+  @override
+  Future<PagingResult<DepartmentModel>?> loadDepartmentsByUni(int universityId) async {
+    var client = http.Client();
+    String params = '?universityId=$universityId';
+    String url = Api.GetUrl(apiPath: '${Api.departments}/search$params');
+    String token = GetIt.I.get<CurrentUser>().idToken;
+
+    try{
+      var response = await client.get(Uri.parse(url), headers: Api.GetHeader(token));
+      if(response.statusCode == 200){
+        Map<String, dynamic> json = adapter.parseToMap(response);
+        return PagingResult.fromJson(json, DepartmentModel.fromJson);
+      }
+
+    }catch(error){
+      Log.error(error.toString());
     }
 
     return null;

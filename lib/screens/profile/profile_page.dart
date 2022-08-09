@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unicec_mobi/bloc/profile/profile_bloc.dart';
 import 'package:unicec_mobi/bloc/profile/profile_event.dart';
 import 'package:unicec_mobi/bloc/profile/profile_state.dart';
+import 'package:unicec_mobi/utils/app_color.dart';
 // import 'package:shop_app/components/coustom_bottom_nav_bar.dart';
 
 //import '../../enums.dart';
@@ -41,9 +42,9 @@ class _ProfilePageState extends State<ProfilePage>
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              title: const Text("Trang cá nhân", style: TextStyle(color: Colors.black)),
+              title: const Text("Trang cá nhân", style: TextStyle(color: Colors.white)),
               automaticallyImplyLeading: false,
-              backgroundColor: ArgonColors.bgColorScreen,
+              backgroundColor: AppColors.mainColor,
               centerTitle: true,
             ),
             body: Body(),

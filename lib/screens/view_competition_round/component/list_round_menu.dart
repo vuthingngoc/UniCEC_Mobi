@@ -5,6 +5,7 @@ import 'package:unicec_mobi/models/enums/competition_round_status.dart';
 import 'package:unicec_mobi/utils/log.dart';
 import '../../../constants/Theme.dart';
 import '../../../models/entities/competition_round/competition_round_model.dart';
+import '../../../utils/app_color.dart';
 
 class ViewListRoundMenu extends StatefulWidget {
   List<CompetitionRoundModel> competitionRounds;
@@ -17,50 +18,19 @@ class ViewListRoundMenu extends StatefulWidget {
 }
 
 class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
-  List<CompetitionRoundModel>? get _competitionRounds =>
+  List<CompetitionRoundModel> get _competitionRounds =>
       widget.competitionRounds;
 
   @override
   Widget build(BuildContext context) {
     CompetitionRoundBloc _bloc = BlocProvider.of<CompetitionRoundBloc>(context);
     Log.info('data competitionRound: ${_competitionRounds}');
-    List<CompetitionRoundModel> fakeData = [
-      CompetitionRoundModel(
-          id: 1,
-          competitionId: 1,
-          title: "Show what you got",
-          description: "Dui dẻ hỏng quạo",
-          startTime: "26/07/2020 3:00",
-          endTime: "26/07/2020 5:00",
-          numberOfTeam: 5,
-          seedsPoint: 30,
-          status: CompetitionRoundStatus.Active),
-      CompetitionRoundModel(
-          id: 1,
-          competitionId: 1,
-          title: "Show what you got",
-          description: "Dui dẻ hỏng quạo",
-          startTime: "26/07/2020 3:00",
-          endTime: "26/07/2020 5:00",
-          numberOfTeam: 5,
-          seedsPoint: 30,
-          status: CompetitionRoundStatus.Cancel),
-      CompetitionRoundModel(
-          id: 1,
-          competitionId: 1,
-          title: "Show what you got",
-          description: "Dui dẻ hỏng quạo",
-          startTime: "26/07/2020 3:00",
-          endTime: "26/07/2020 5:00",
-          numberOfTeam: 5,
-          seedsPoint: 30,
-          status: CompetitionRoundStatus.Finished),
-    ];
+  
     return Column(
       children: [
         ListView.builder(
           shrinkWrap: true,
-          itemCount: _competitionRounds?.length,
+          itemCount: _competitionRounds.length,
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -105,8 +75,8 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                         padding:
                                             const EdgeInsets.only(left: 8.0),
                                         child: Text(
-                                          fakeData[index].title,
-                                          style: TextStyle(fontSize: 18),
+                                          _competitionRounds[index].title,
+                                          style: const TextStyle(fontSize: 18),
                                         ),
                                       ),
                                     ],
@@ -130,10 +100,10 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                               border: Border.all(
                                                   color: Colors.orangeAccent),
                                               color: Colors.orangeAccent,
-                                              borderRadius: BorderRadius.all(
+                                              borderRadius: const BorderRadius.all(
                                                   Radius.circular(10))),
-                                          child: Text(fakeData[index].startTime,
-                                              style: TextStyle(
+                                          child: Text(_competitionRounds[index].startTime,
+                                              style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 18,
                                               )),
@@ -145,7 +115,7 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                     padding: const EdgeInsets.only(bottom: 8),
                                     child: Row(
                                       children: [
-                                        Text(
+                                        const Text(
                                           "Thời gian kết thúc:",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold),
@@ -159,10 +129,13 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                               border: Border.all(
                                                   color: Colors.orangeAccent),
                                               color: Colors.orangeAccent,
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10))),
-                                          child: Text(fakeData[index].endTime,
-                                              style: TextStyle(
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                      Radius.circular(10))),
+                                          child: Text(
+                                              _competitionRounds[index]
+                                                  .startTime,
+                                              style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 18,
                                               )),
@@ -174,7 +147,39 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                     padding: const EdgeInsets.only(bottom: 8),
                                     child: Row(
                                       children: [
-                                        Text(
+                                        const Text(
+                                          "Thời gian kết thúc:",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Container(
+                                          margin: const EdgeInsets.only(
+                                              top: 8.0, bottom: 8, left: 8),
+                                          padding:
+                                              const EdgeInsets.only(left: 3.0),
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.orangeAccent),
+                                              color: Colors.orangeAccent,
+
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                      Radius.circular(10))),
+                                          child: Text(
+                                              _competitionRounds[index].endTime,
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 18,
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 8),
+                                    child: Row(
+                                      children: [
+                                        const Text(
                                           "Nội dung:",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold),
@@ -183,8 +188,10 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                           padding:
                                               const EdgeInsets.only(left: 8.0),
                                           child: Text(
-                                            fakeData[index].description,
-                                            style: TextStyle(fontSize: 18),
+                                            _competitionRounds[index]
+                                                .description,
+                                            style:
+                                                const TextStyle(fontSize: 18),
                                           ),
                                         ),
                                       ],
@@ -195,7 +202,7 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                         top: 8.0, bottom: 8),
                                     child: Row(
                                       children: [
-                                        Text(
+                                        const Text(
                                           "Điểm:",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold),
@@ -204,10 +211,11 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                           padding:
                                               const EdgeInsets.only(left: 8.0),
                                           child: Text(
-                                              fakeData[index]
+                                              _competitionRounds[index]
                                                   .seedsPoint
                                                   .toString(),
-                                              style: TextStyle(fontSize: 18)),
+                                              style: const TextStyle(
+                                                  fontSize: 18)),
                                         ),
                                       ],
                                     ),
@@ -217,7 +225,7 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                         bottom: 8, top: 8),
                                     child: Row(
                                       children: [
-                                        Text(
+                                        const Text(
                                           "Trạng thái:",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold),
@@ -227,10 +235,10 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                                 left: 8.0),
                                             child: Row(
                                               children: [
-                                                if (fakeData[index]
-                                                        .status
-                                                        .toString() ==
-                                                    "CompetitionRoundStatus.Active")
+                                                if (_competitionRounds[index]
+                                                        .status ==
+                                                    CompetitionRoundStatus
+                                                        .Active)
                                                   Container(
                                                     margin:
                                                         const EdgeInsets.only(
@@ -246,19 +254,22 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                                                 Colors.green),
                                                         color: Colors.green,
                                                         borderRadius:
-                                                            BorderRadius.all(
+                                                            const BorderRadius
+                                                                    .all(
                                                                 Radius.circular(
                                                                     10))),
-                                                    child: Text("Sắp diên ra",
+                                                    child: const Text(
+                                                        "Sắp diên ra",
                                                         style: TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 18,
                                                         )),
                                                   )
-                                                else if (fakeData[index]
-                                                        .status
-                                                        .toString() ==
-                                                    "CompetitionRoundStatus.Cancel")
+                                                else if (_competitionRounds[
+                                                            index]
+                                                        .status ==
+                                                    CompetitionRoundStatus
+                                                        .Cancel)
                                                   Container(
                                                     margin:
                                                         const EdgeInsets.only(
@@ -273,19 +284,22 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                                             color: Colors.red),
                                                         color: Colors.red,
                                                         borderRadius:
-                                                            BorderRadius.all(
+                                                            const BorderRadius
+                                                                    .all(
                                                                 Radius.circular(
                                                                     10))),
-                                                    child: Text("Đã hủy",
+                                                    child: const Text(
+                                                        "Đã hủy",
                                                         style: TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 18,
                                                         )),
                                                   )
-                                                else if (fakeData[index]
-                                                        .status
-                                                        .toString() ==
-                                                    "CompetitionRoundStatus.Happening")
+                                                else if (_competitionRounds[
+                                                            index]
+                                                        .status ==
+                                                    CompetitionRoundStatus
+                                                        .Happening)
                                                   Container(
                                                     margin:
                                                         const EdgeInsets.only(
@@ -302,19 +316,22 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                                         color:
                                                             Colors.yellowAccent,
                                                         borderRadius:
-                                                            BorderRadius.all(
+                                                            const BorderRadius
+                                                                    .all(
                                                                 Radius.circular(
                                                                     10))),
-                                                    child: Text("Đang diễn ra",
+                                                    child: const Text(
+                                                        "Đang diễn ra",
                                                         style: TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 18,
                                                         )),
                                                   )
-                                                else if (fakeData[index]
-                                                        .status
-                                                        .toString() ==
-                                                    "CompetitionRoundStatus.Finished")
+                                                else if (_competitionRounds[
+                                                            index]
+                                                        .status ==
+                                                    CompetitionRoundStatus
+                                                        .Finished)
                                                   Container(
                                                     margin:
                                                         const EdgeInsets.only(
@@ -329,10 +346,10 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                                             color: Colors.grey),
                                                         color: Colors.grey,
                                                         borderRadius:
-                                                            BorderRadius.all(
+                                                            const BorderRadius.all(
                                                                 Radius.circular(
                                                                     10))),
-                                                    child: Text("Kết thúc",
+                                                    child: const Text("Kết thúc",
                                                         style: TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 18,
@@ -349,22 +366,24 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                             actions: [
                               Container(
                                 width: double.infinity,
-                                margin: new EdgeInsets.only(
+                                margin: const EdgeInsets.only(
                                     right: 15, left: 15, bottom: 15),
                                 child: FlatButton(
                                   textColor: ArgonColors.white,
-                                  color: ArgonColors.warning,
-                                  onPressed: () {},
+                                  color: AppColors.mainColor,
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(5.0),
                                   ),
-                                  child: Padding(
+                                  child: const Padding(
                                       padding: EdgeInsets.only(
                                           left: 16.0,
                                           right: 16.0,
                                           top: 12,
                                           bottom: 12),
-                                      child: Text("Tham gia",
+                                      child: Text("Đóng",
                                           style: TextStyle(
                                               fontWeight: FontWeight.w600,
                                               fontSize: 18.0))),
@@ -376,33 +395,18 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                       });
                 },
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                        child: Text(
-                            (_bloc.state.competitionRounds
-                                .elementAt(index)
-                                .title),
-                            style: const TextStyle(fontSize: 15))),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                        child: Text(
-                            (_bloc.state.competitionRounds
-                                .elementAt(index)
-                                .startTime),
-                            style: const TextStyle(fontSize: 15))),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                        child: Text(
-                            (_bloc.state.competitionRounds
-                                .elementAt(index)
-                                .endTime),
-                            style: const TextStyle(fontSize: 15))),
-                    const Icon(
+
+                    Text(
+                        _competitionRounds[index].title,
+                        style: const TextStyle(fontSize: 15)),
+                    Text(
+                        _competitionRounds[index].description,
+                        style: const TextStyle(fontSize: 15)),
+                    Icon(
                       Icons.arrow_forward_ios,
+                      color: AppColors.mainColor,
                     ),
                   ],
                 ),

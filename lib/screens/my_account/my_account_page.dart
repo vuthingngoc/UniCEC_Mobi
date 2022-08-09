@@ -60,12 +60,12 @@ class _MyAccountPageState extends State<MyAccountPage>
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+                  icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
                 ),
-                title: Text("Thông tin tài khoản",
-                    style: TextStyle(color: Colors.black)),
+                title: const Text("Thông tin tài khoản",
+                    style: TextStyle(color: Colors.white)),
                 centerTitle: true,
-                backgroundColor: AppColors.backgroundPageColor,
+                backgroundColor: AppColors.mainColor,
               ),
                backgroundColor: AppColors.backgroundPageColor,
               drawer: ArgonDrawer(currentPage: "My account"),
@@ -328,7 +328,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                                 },
                                 shape: RoundedRectangleBorder(
                                   borderRadius:
-                                  BorderRadius.circular(4.0),
+                                  BorderRadius.circular(8.0),
                                 ),
                                 child: const Padding(
                                     padding: EdgeInsets.only(
