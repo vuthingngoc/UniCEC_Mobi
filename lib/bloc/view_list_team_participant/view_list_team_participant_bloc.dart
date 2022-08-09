@@ -1,5 +1,6 @@
 import 'package:unicec_mobi/bloc/view_list_team_participant/view_list_team_participant_event.dart';
 import '../../models/common/paging_result.dart';
+import '../../models/common/resultCRUD.dart';
 import '../../models/entities/team/team_model.dart';
 import '../../models/entities/team/team_request_model.dart';
 import '../../services/i_services.dart';
@@ -112,14 +113,13 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
 
       //create team
       if (event is CreateTeamEvent) {
-        bool check = await service.CreateTeam(
+        ResultCRUD check = await service.CreateTeam(
             state.competitionId, event.teamName, event.teamDescription);
-        if (check) {
+        if (check.check) {
           listener.add(RebuildListViewTeamEvent());
           //listener.add(ShowingSnackBarEvent(message: "Tạo team thành công"));
         } else {
-          listener.add(ShowingSnackBarEvent(
-              message: "Bạn đã có Team rồi không thể tạo thêm Team mới !"));
+          listener.add(ShowingSnackBarEvent(message: check.errorMessage));
         }
       }
 

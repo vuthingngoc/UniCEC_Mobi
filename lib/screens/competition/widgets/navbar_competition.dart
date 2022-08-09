@@ -92,17 +92,17 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          IconButton(
-                              icon: Icon(Icons.arrow_back_ios,
-                                  color: !widget.transparent
-                                      ? (widget.bgColor == ArgonColors.white
-                                          ? ArgonColors.initial
-                                          : ArgonColors.white)
-                                      : ArgonColors.white,
-                                  size: 24.0),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              }),
+                          // IconButton(
+                          //     icon: Icon(Icons.arrow_back_ios,
+                          //         color: !widget.transparent
+                          //             ? (widget.bgColor == ArgonColors.white
+                          //                 ? ArgonColors.initial
+                          //                 : ArgonColors.white)
+                          //             : ArgonColors.white,
+                          //         size: 24.0),
+                          //     onPressed: () {
+                          //       Navigator.pop(context);
+                          //     }),
                           Text(widget.title,
                               style: TextStyle(
                                   color: !widget.transparent
@@ -160,13 +160,85 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                   return [
                                     PopupMenuItem(
                                       onTap: () {
-                                        bloc.add(ResetFilterEvent());
+                                        //add biến liên trường
+                                        bloc.add(ChangeCompetitionScopeEvent(
+                                            scope: CompetitionScopeStatus
+                                                .InterUniversity));
                                       },
                                       value: 1,
+                                      child: (state.scope ==
+                                              CompetitionScopeStatus
+                                                  .InterUniversity)
+                                          ? Container(
+                                              color: Colors.green,
+                                              child: Row(
+                                                children: <Widget>[
+                                                  Icon(Icons.camera, size: 18),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 8.0),
+                                                    child: Text('Liên Trường'),
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                          : Row(
+                                              children: <Widget>[
+                                                Icon(Icons.camera, size: 18),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 8.0),
+                                                  child: Text('Liên Trường'),
+                                                ),
+                                              ],
+                                            ),
+                                    ),
+                                    PopupMenuItem(
+                                      onTap: () {
+                                        //add biến trong trường
+                                        bloc.add(ChangeCompetitionScopeEvent(
+                                            scope: CompetitionScopeStatus
+                                                .University));
+                                      },
+                                      value: 2,
+                                      child: (state.scope ==
+                                              CompetitionScopeStatus.University)
+                                          ? Container(
+                                              color: Colors.green,
+                                              child: Row(
+                                                children: <Widget>[
+                                                  Icon(Icons.school, size: 18),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 8.0),
+                                                    child: Text('Trong Trường'),
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                          : Row(
+                                              children: <Widget>[
+                                                Icon(Icons.school, size: 18),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 8.0),
+                                                  child: Text('Trong Trường'),
+                                                ),
+                                              ],
+                                            ),
+                                    ),
+                                    PopupMenuItem(
+                                      onTap: () {
+                                        bloc.add(ResetFilterEvent());
+                                      },
+                                      value: 3,
                                       child: Row(
                                         children: <Widget>[
-                                          Icon(Icons.access_time_sharp,
-                                              size: 18),
+                                          Icon(Icons.delete, size: 18),
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 8.0),
@@ -189,14 +261,10 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                           children: [
                             GestureDetector(
                                 onTap: () {
-                                  bloc.add(ChangeCompetitionScopeEvent(
-                                      scope: CompetitionScopeStatus
-                                          .InterUniversity));
+                                  bloc.add(ChangeValueEvent(isEvent: false));
                                 },
                                 child: Row(children: [
-                                  (state.scope ==
-                                          CompetitionScopeStatus
-                                              .InterUniversity)
+                                  (state.isEvent == false)
                                       ? Container(
                                           child: Row(children: [
                                             Icon(Icons.camera,
@@ -223,13 +291,11 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                 ])),
                             GestureDetector(
                               onTap: () {
-                                bloc.add(ChangeCompetitionScopeEvent(
-                                    scope: CompetitionScopeStatus.University));
+                                bloc.add(ChangeValueEvent(isEvent: true));
                               },
                               child: Row(
                                 children: [
-                                  (state.scope ==
-                                          CompetitionScopeStatus.University)
+                                  ((state.isEvent == true))
                                       ? Container(
                                           child: Row(children: [
                                             Icon(Icons.school,

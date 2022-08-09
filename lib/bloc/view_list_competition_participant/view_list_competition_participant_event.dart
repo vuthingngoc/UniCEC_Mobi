@@ -24,6 +24,12 @@ class ChangeCompetitionScopeEvent extends ViewListCompetitionParticipantEvent {
   ChangeCompetitionScopeEvent({required this.scope});
 }
 
+//Change Event
+class ChangeValueEvent extends ViewListCompetitionParticipantEvent {
+  bool isEvent;
+  ChangeValueEvent({required this.isEvent});
+}
+
 //Search Event
 class SearchEvent extends ViewListCompetitionParticipantEvent {}
 

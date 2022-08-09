@@ -15,6 +15,7 @@ class CompetitionState extends Equatable {
   //Search
   String? searchName;
   CompetitionScopeStatus? scope;
+  bool? isEvent;
   bool hasNext;
   int currentPage;
 
@@ -23,6 +24,7 @@ class CompetitionState extends Equatable {
       required this.outStandingCompetitions,
       required this.searchName,
       required this.scope,
+      required this.isEvent,
       this.competitionDetail,
       this.selectedCompetitionId,
       required this.hasNext,
@@ -35,6 +37,7 @@ class CompetitionState extends Equatable {
     //required CompetitionRequestModel requestModel,
     required String? searchName,
     required CompetitionScopeStatus? scope,
+    required bool? isEvent,
     int? selectedCompetitionId,
     required bool newHasNext,
     required int newCurrentPage,
@@ -45,6 +48,7 @@ class CompetitionState extends Equatable {
         //requestModel: requestModel,
         searchName: searchName,
         scope: scope,
+        isEvent: isEvent,
         competitionDetail: competitionDetail,
         selectedCompetitionId: selectedCompetitionId,
         hasNext: newHasNext,
@@ -59,6 +63,7 @@ class CompetitionState extends Equatable {
         //requestModel,
         searchName,
         scope,
+        isEvent,
         competitionDetail,
         selectedCompetitionId,
         hasNext,

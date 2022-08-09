@@ -34,8 +34,12 @@ class _CompetitionPageState extends State<CompetitionPage>
   static final GlobalKey _formKey = GlobalKey();
 
   void initState() {
-    _bloc.listenerStream.listen((event) {});
-    //_bloc.add(LoadOutStandingCompetitionEvent());
+    _bloc.listenerStream.listen((event) {
+      if (event is ListenLoadOutStandingEvent) {
+        _bloc.add(LoadOutStandingCompetitionEvent());
+      }
+    });
+    _bloc.add(LoadOutStandingCompetitionEvent());
     _bloc.isLoading = true;
     _bloc.add(LoadCompetitionEvent());
   }
@@ -70,8 +74,8 @@ class _CompetitionPageState extends State<CompetitionPage>
                 appBar: NavbarCompetition(
                   title: "Cuộc Thi",
                   searchBar: true,
-                  categoryOne: "Liên Trường",
-                  categoryTwo: "Trong Trường",
+                  categoryOne: "Cuộc Thi",
+                  categoryTwo: "Sự Kiện",
                 ),
                 resizeToAvoidBottomInset: false,
                 backgroundColor: ArgonColors.bgColorScreen,

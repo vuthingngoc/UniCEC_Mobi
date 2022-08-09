@@ -18,10 +18,16 @@ class ChangeSearchNameEvent extends CompetitionEvent {
   ChangeSearchNameEvent({required this.searchName});
 }
 
-//Chang Competition Scope
+//Change Competition Scope
 class ChangeCompetitionScopeEvent extends CompetitionEvent {
   CompetitionScopeStatus? scope;
   ChangeCompetitionScopeEvent({required this.scope});
+}
+
+//Change Event
+class ChangeValueEvent extends CompetitionEvent {
+  bool isEvent;
+  ChangeValueEvent({required this.isEvent});
 }
 
 //Search Event
@@ -38,3 +44,6 @@ class RefreshEvent extends CompetitionEvent {}
 class LoadAddMoreEvent extends CompetitionEvent {}
 
 class LoadRefreshEvent extends CompetitionEvent {}
+
+//
+class ListenLoadOutStandingEvent extends CompetitionEvent {}

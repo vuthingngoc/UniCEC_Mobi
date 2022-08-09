@@ -80,7 +80,7 @@ class TeamService extends ITeamService {
   }
 
   @override
-  Future<bool> CreateTeam(
+  Future<ResultCRUD> CreateTeam(
       int competitionId, String teamName, String teamDescription) async {
     var client = http.Client();
     String url = Api.GetUrl(apiPath: '${Api.teams}');
@@ -94,12 +94,18 @@ class TeamService extends ITeamService {
             "description": teamDescription
           }));
       if (response.statusCode == 200) {
-        return true;
+        ResultCRUD result = ResultCRUD(check: true, errorMessage: '');
+        return result;
+      }
+      if (response.statusCode == 400) {
+        ResultCRUD result =
+            ResultCRUD(check: false, errorMessage: response.body);
+        return result;
       }
     } catch (e) {
       Log.error(e.toString());
     }
-    return false;
+    return ResultCRUD(check: false, errorMessage: 'Lỗi rồi!');
   }
 
   @override

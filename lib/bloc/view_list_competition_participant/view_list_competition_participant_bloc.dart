@@ -1,5 +1,6 @@
 import '../../models/common/paging_result.dart';
 import '../../models/entities/competition/competition_model.dart';
+import '../../models/enums/competition_scope_status.dart';
 import '../../services/competition_svc/i_competition_service.dart';
 import '/bloc/view_list_competition_participant/view_list_competition_participant_state.dart';
 import '../../utils/base_bloc.dart';
@@ -12,19 +13,21 @@ class ViewListCompetitionParticipantBloc extends BaseBloc<
       : super(ViewListCompetitionParticipantState(
             competitions: [],
             searchName: null,
-            scope: null,
+            scope: CompetitionScopeStatus.InterUniversity,
+            isEvent: false,
             hasNext: false,
             currentPage: 1)) {
     (on((event, emit) async {
       if (event is LoadListCompetitionParticipantEvent) {
         PagingResult<CompetitionModel>? result =
-            await service.loadCompetitionParticipant(
-                state.currentPage, state.scope, state.searchName);
+            await service.loadCompetitionParticipant(state.currentPage,
+                state.scope, state.searchName, state.isEvent);
         if (result != null) {
           emit(state.copyWith(
             newCompetitions: result.items,
             newScope: state.scope,
             newSearchName: state.searchName,
+            newIsEvent: state.isEvent,
             newHasNext: result.hasNext,
             newCurrentPage: result.currentPage,
           ));
@@ -36,6 +39,7 @@ class ViewListCompetitionParticipantBloc extends BaseBloc<
           newCompetitions: [],
           newScope: state.scope,
           newSearchName: state.searchName,
+          newIsEvent: state.isEvent,
           newHasNext: false,
           newCurrentPage: 1,
         ));
@@ -47,14 +51,15 @@ class ViewListCompetitionParticipantBloc extends BaseBloc<
             newCompetitions: state.competitions,
             newScope: state.scope,
             newSearchName: state.searchName,
+            newIsEvent: state.isEvent,
             newHasNext: state.hasNext,
             newCurrentPage: increase));
       }
       //LoadMore
       if (event is LoadAddMoreEvent) {
         PagingResult<CompetitionModel>? result =
-            await service.loadCompetitionParticipant(
-                state.currentPage, state.scope, state.searchName);
+            await service.loadCompetitionParticipant(state.currentPage,
+                state.scope, state.searchName, state.isEvent);
         //
         List<CompetitionModel> listContinute = result?.items ?? [];
         //
@@ -68,6 +73,7 @@ class ViewListCompetitionParticipantBloc extends BaseBloc<
           newCompetitions: state.competitions,
           newScope: state.scope,
           newSearchName: state.searchName,
+          newIsEvent: state.isEvent,
           newHasNext: result?.hasNext ??
               false, // result trả ra null thì đồng nghĩa với việc hasNext = false
           newCurrentPage: result?.currentPage ?? state.currentPage,
@@ -77,13 +83,15 @@ class ViewListCompetitionParticipantBloc extends BaseBloc<
       //dựa theo state search
       //mỗi lần search là current page = 1
       if (event is SearchEvent) {
-        PagingResult<CompetitionModel>? result = await service
-            .loadCompetitionParticipant(1, state.scope, state.searchName);
+        PagingResult<CompetitionModel>? result =
+            await service.loadCompetitionParticipant(
+                1, state.scope, state.searchName, state.isEvent);
         if (result != null) {
           emit(state.copyWith(
             newCompetitions: result.items,
             newScope: state.scope,
             newSearchName: state.searchName,
+            newIsEvent: state.isEvent,
             newHasNext: result.hasNext,
             newCurrentPage: result.currentPage,
           ));
@@ -93,6 +101,7 @@ class ViewListCompetitionParticipantBloc extends BaseBloc<
             newCompetitions: [],
             newScope: state.scope,
             newSearchName: state.searchName,
+            newIsEvent: state.isEvent,
             newHasNext: false,
             newCurrentPage: 1,
           ));
@@ -102,8 +111,9 @@ class ViewListCompetitionParticipantBloc extends BaseBloc<
       if (event is ChangeSearchNameEvent) {
         emit(state.copyWith(
             newCompetitions: state.competitions,
-            newSearchName: event.searchName,
+            newSearchName: event.searchName, //change
             newScope: state.scope,
+            newIsEvent: state.isEvent,
             newCurrentPage: state.currentPage,
             newHasNext: state.hasNext));
       }
@@ -112,19 +122,31 @@ class ViewListCompetitionParticipantBloc extends BaseBloc<
         emit(state.copyWith(
             newCompetitions: state.competitions,
             newSearchName: state.searchName,
-            newScope: event.scope,
+            newScope: event.scope, // change
+            newIsEvent: state.isEvent,
             newCurrentPage: state.currentPage,
             newHasNext: state.hasNext));
       }
-      //load lại trạng thái ban đầu
+      if (event is ChangeValueEvent) {
+        emit(state.copyWith(
+            newCompetitions: state.competitions,
+            newSearchName: state.searchName,
+            newScope: state.scope,
+            newIsEvent: event.isEvent, //change
+            newCurrentPage: state.currentPage,
+            newHasNext: state.hasNext));
+      }
+      //load lại trạng thái ban đầu mặc định
       if (event is ResetFilterEvent) {
         PagingResult<CompetitionModel>? result =
-            await service.loadCompetitionParticipant(1, null, null);
+            await service.loadCompetitionParticipant(
+                1, CompetitionScopeStatus.InterUniversity, null, false);
         if (result != null) {
           emit(state.copyWith(
             newCompetitions: result.items,
-            newScope: null,
+            newScope: CompetitionScopeStatus.InterUniversity,
             newSearchName: null,
+            newIsEvent: false,
             newHasNext: result.hasNext,
             newCurrentPage: result.currentPage,
           ));
@@ -132,8 +154,9 @@ class ViewListCompetitionParticipantBloc extends BaseBloc<
         else {
           emit(state.copyWith(
             newCompetitions: [],
-            newScope: null,
+            newScope: CompetitionScopeStatus.InterUniversity,
             newSearchName: null,
+            newIsEvent: false,
             newHasNext: false,
             newCurrentPage: 1,
           ));

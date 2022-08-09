@@ -7,6 +7,7 @@ class ViewListCompetitionParticipantState extends Equatable {
   //Search
   String? searchName;
   CompetitionScopeStatus? scope;
+  bool? isEvent;
   bool hasNext;
   int currentPage;
 
@@ -14,6 +15,7 @@ class ViewListCompetitionParticipantState extends Equatable {
       {required this.competitions,
       required this.searchName,
       required this.scope,
+      required this.isEvent,
       required this.hasNext,
       required this.currentPage});
 
@@ -21,17 +23,19 @@ class ViewListCompetitionParticipantState extends Equatable {
       {required List<CompetitionModel> newCompetitions,
       required String? newSearchName,
       required CompetitionScopeStatus? newScope,
+      required bool? newIsEvent,
       required bool newHasNext,
       required int newCurrentPage}) {
     return ViewListCompetitionParticipantState(
         competitions: newCompetitions,
         searchName: newSearchName,
         scope: newScope,
+        isEvent: newIsEvent,
         hasNext: newHasNext,
         currentPage: newCurrentPage);
   }
 
   @override
   List<Object?> get props =>
-      [competitions, searchName, scope, hasNext, currentPage];
+      [competitions, searchName, scope, isEvent, hasNext, currentPage];
 }
