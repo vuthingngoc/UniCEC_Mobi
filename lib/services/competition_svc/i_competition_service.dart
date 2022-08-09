@@ -11,7 +11,7 @@ abstract class ICompetitionService {
   Future<PagingResult<CompetitionModel>?> loadCompetition(
       CompetitionRequestModel request);
   Future<PagingResult<CompetitionShowModel>?> showCompetition(
-      CompetitionRequestModel request);
+      CompetitionRequestModel request, int currentPage);
   Future<TeamModel?> LoadTeamsInCompetitions(int competitionId);
   Future<CompetitionDetailModel?> loadDetailById(int competitionId);
 

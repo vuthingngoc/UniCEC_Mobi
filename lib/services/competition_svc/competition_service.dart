@@ -1,15 +1,15 @@
 import 'package:get_it/get_it.dart';
-import 'package:unicec_mobi/models/common/current_user.dart';
-import 'package:unicec_mobi/models/common/paging_result.dart';
-import 'package:unicec_mobi/models/entities/competition/competition_detail_model.dart';
-import 'package:unicec_mobi/models/entities/competition/competition_model.dart';
-import 'package:unicec_mobi/models/entities/competition/competition_request_model.dart';
-import 'package:unicec_mobi/models/entities/competition/competition_show_model.dart';
-import 'package:unicec_mobi/models/entities/team/team_model.dart';
-import 'package:unicec_mobi/services/competition_svc/i_competition_service.dart';
+import '/models/common/current_user.dart';
+import '/models/common/paging_result.dart';
+import '/models/entities/competition/competition_detail_model.dart';
+import '/models/entities/competition/competition_model.dart';
+import '/models/entities/competition/competition_request_model.dart';
+import '/models/entities/competition/competition_show_model.dart';
+import '/models/entities/team/team_model.dart';
+import '/services/competition_svc/i_competition_service.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:unicec_mobi/utils/log.dart';
+import '/utils/log.dart';
 import '../../models/enums/competition_scope_status.dart';
 import '../../utils/adapter.dart';
 import '../../utils/api.dart';
@@ -85,15 +85,20 @@ class CompetitionService implements ICompetitionService {
 
   @override
   Future<PagingResult<CompetitionShowModel>?> showCompetition(
-      CompetitionRequestModel request) async {
+      CompetitionRequestModel request, int currentPage) async {
     var client = http.Client();
     String params = '?';
+    //lấy thằng status đầu tiên
+    params += 'statuses=${request.statuses?[0]}';
+    //remove thằng status đầu tiên ra
+    request.statuses?.removeAt(0);
+
     if (request.clubId != null) {
-      params += 'clubId=${request.clubId}';
+      params += '&clubId=${request.clubId}';
     }
 
     if (request.scope != null) {
-      params += '&scope=${request.scope}';
+      params += '&scope=${request.scope?.index}';
     }
 
     if (request.viewMost != null) {
@@ -110,16 +115,31 @@ class CompetitionService implements ICompetitionService {
       });
     }
 
-    String url = Api.GetUrl(apiPath: '${Api.competitions}$params');
+    String url = Api.GetUrl(
+        apiPath:
+            '${Api.competitions}$params&currentPage=${currentPage}&pageSize=1');
     String? token = GetIt.I.get<CurrentUser>().idToken;
     try {
       var response =
           await client.get(Uri.parse(url), headers: Api.GetHeader(token));
+
+      String isList = "[]";
       if (response.statusCode == 200) {
-        print('response: ${response.body}');
-        Map<String, dynamic> json = adapter.parseToMap(response);
-        return PagingResult.fromJson(json, CompetitionShowModel.fromJson);
+        if (response.body.toString().compareTo(isList) == 0) {
+          //TH1
+          List<dynamic> list = adapter.parseToList(response);
+          return null;
+        } else {
+          //TH2
+          Map<String, dynamic> json = adapter.parseToMap(response);
+          return PagingResult.fromJson(json, CompetitionShowModel.fromJson);
+        }
       }
+      // if (response.statusCode == 200) {
+      //   print('response: ${response.body}');
+      //   Map<String, dynamic> json = adapter.parseToMap(response);
+      //   return PagingResult.fromJson(json, CompetitionShowModel.fromJson);
+      // }
     } catch (e) {
       Log.error(e.toString());
     }

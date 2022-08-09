@@ -28,11 +28,12 @@ class EventBloc extends BaseBloc<EventEvent, EventState> {
         _isLoading = true;
         List<int> statuses = [];
         statuses.add(CompetitionStatus.Publish.index);
-        statuses.add(CompetitionStatus.Approve.index); // maybe will delete later
+        statuses
+            .add(CompetitionStatus.Approve.index); // maybe will delete later
         CompetitionRequestModel request = CompetitionRequestModel(
             viewMost: true, statuses: statuses); // add more params if you want
         PagingResult<CompetitionShowModel>? result =
-            await service.showCompetition(request);
+            await service.showCompetition(request, 1);
         emit(state.copyWith(outStandingEvents: result?.items));
         _isLoading = false;
       }
@@ -42,11 +43,12 @@ class EventBloc extends BaseBloc<EventEvent, EventState> {
         _isLoading = true;
         List<int> statuses = [];
         statuses.add(CompetitionStatus.Publish.index);
-        statuses.add(CompetitionStatus.Approve.index); // maybe will delete later
+        statuses
+            .add(CompetitionStatus.Approve.index); // maybe will delete later
         CompetitionRequestModel request = CompetitionRequestModel(
             statuses: statuses); // add more params if you want
         PagingResult<CompetitionShowModel>? result =
-            await service.showCompetition(request);
+            await service.showCompetition(request, 1);
         emit(state.copyWith(events: result?.items));
         _isLoading = false;
       }

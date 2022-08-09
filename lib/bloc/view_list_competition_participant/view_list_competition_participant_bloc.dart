@@ -34,8 +34,8 @@ class ViewListCompetitionParticipantBloc extends BaseBloc<
       if (event is RefreshEvent) {
         emit(state.copyWith(
           newCompetitions: [],
-          newScope: null,
-          newSearchName: null,
+          newScope: state.scope,
+          newSearchName: state.searchName,
           newHasNext: false,
           newCurrentPage: 1,
         ));
@@ -127,6 +127,15 @@ class ViewListCompetitionParticipantBloc extends BaseBloc<
             newSearchName: null,
             newHasNext: result.hasNext,
             newCurrentPage: result.currentPage,
+          ));
+        } //null cho về mặc định
+        else {
+          emit(state.copyWith(
+            newCompetitions: [],
+            newScope: null,
+            newSearchName: null,
+            newHasNext: false,
+            newCurrentPage: 1,
           ));
         }
       }

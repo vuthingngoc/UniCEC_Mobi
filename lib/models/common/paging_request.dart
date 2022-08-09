@@ -1,4 +1,4 @@
-class PagingRequest{
+class PagingRequest {
   int? currentPage;
   int? pageSize;
 

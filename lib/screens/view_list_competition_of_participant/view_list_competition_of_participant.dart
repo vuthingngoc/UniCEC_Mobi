@@ -145,25 +145,6 @@ class _ViewListCompetitionOfParticipantPageState
                                               arguments:
                                                   state.competitions[index].id);
                                         });
-                                    // Container(
-                                    //     padding: EdgeInsets.all(3),
-                                    // child: Column(
-                                    //   children: [
-                                    //     SizedBox(
-                                    //         height:
-                                    //             getProportionateScreenWidth(
-                                    //                 15)),
-                                    //    SizedBox(height: 8.0),
-                                    // child: Column(
-                                    //   children: [
-                                    //Wrap(children: [
-                                    //child:
-                                    //])
-                                    //],
-                                    //)
-                                    //],
-                                    //),
-                                    //);
                                   })));
                   //);
                 })));
