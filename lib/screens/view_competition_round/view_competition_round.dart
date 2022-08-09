@@ -28,6 +28,16 @@ class _ViewCompetitionRoundPageState extends State<ViewCompetitionRoundPage>
     super.initState();
   }
 
+  void didChangeDependencies() {
+    RouteSettings settings = ModalRoute.of(context)!.settings;
+    if (settings.arguments != null) {
+      Log.info('Settings arguments: ${settings.arguments}');
+      _bloc.add(
+          LoadRoundsByCompetition(competitionId: settings.arguments as int));
+      _bloc.isLoading = true;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
@@ -40,7 +50,10 @@ class _ViewCompetitionRoundPageState extends State<ViewCompetitionRoundPage>
             },
             icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
           ),
-          title: const Text("Các vòng thi", style: TextStyle(color: Colors.white),),
+          title: const Text(
+            "Các vòng thi",
+            style: TextStyle(color: Colors.white),
+          ),
           automaticallyImplyLeading: false,
           centerTitle: true,
           backgroundColor: AppColors.mainColor,
