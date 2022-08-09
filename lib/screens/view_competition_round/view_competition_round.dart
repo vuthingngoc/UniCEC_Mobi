@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
-import '../../constants/Theme.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unicec_mobi/bloc/competition_round/competition_round_bloc.dart';
+import '../../bloc/competition_round/competition_round_event.dart';
 import '../../utils/app_color.dart';
-import '../widgets/input.dart';
+import '../../utils/log.dart';
 import 'component/body_round.dart';
 
 class ViewCompetitionRoundPage extends StatefulWidget {
+  CompetitionRoundBloc bloc;
+
+  ViewCompetitionRoundPage({required this.bloc});
+
   @override
   State<StatefulWidget> createState() => _ViewCompetitionRoundPageState();
 }
@@ -16,6 +21,8 @@ class _ViewCompetitionRoundPageState extends State<ViewCompetitionRoundPage>
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 
+  CompetitionRoundBloc get _bloc => widget.bloc;
+
   @override
   void initState() {
     super.initState();
@@ -23,21 +30,23 @@ class _ViewCompetitionRoundPageState extends State<ViewCompetitionRoundPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+    return BlocProvider.value(
+      value: _bloc,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+          ),
+          title: const Text("Các vòng thi", style: TextStyle(color: Colors.white),),
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          backgroundColor: AppColors.mainColor,
         ),
-        title: Text("Các vòng thi", style: TextStyle(color: Colors.black),),
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        backgroundColor: AppColors.backgroundPageColor,
+        body: Body(),
       ),
-      body: Body(),
-      //bottomNavigationBar: CustomBottomNavBar(selectedMenu: MenuState.profile),
     );
   }
 }

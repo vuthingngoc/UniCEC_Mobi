@@ -26,17 +26,15 @@ class CompetitionRoundModel{
   });
 
   factory CompetitionRoundModel.fromJson(Map<String, dynamic> json){
-    int id = json['id'];
-    int competitionId = json['competition_id'];
-    String title = json['title'];
-    String description = json['description'];
-    // DateTime startTime = DateTime.parse(json['start_time']);
-    // DateTime endTime = DateTime.parse(json['end_time']);
-    String startTime = json['start_time'];
-    String endTime = json['end_time'];
-    int numberOfTeam = json['number_of_team'];
-    int seedsPoint = json['seeds_point'];
-    CompetitionRoundStatus status = json['status'];
+    int id = json['id'] ?? 0;
+    int competitionId = json['competition_id'] ?? 0;
+    String title = json['title'] ?? '';
+    String description = json['description'] ?? '';
+    String startTime = json['start_time'] ?? '';
+    String endTime = json['end_time'] ?? '';
+    int numberOfTeam = json['number_of_team'] ?? 0;
+    int seedsPoint = json['seeds_point'] ?? 0;
+    CompetitionRoundStatus status = CompetitionRoundStatus.values[json['status']];
 
     return CompetitionRoundModel(
       id: id, 

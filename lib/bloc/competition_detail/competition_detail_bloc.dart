@@ -1,4 +1,5 @@
 import 'package:unicec_mobi/models/entities/competition/competition_detail_model.dart';
+import 'package:unicec_mobi/models/entities/participant/participant_model.dart';
 import 'package:unicec_mobi/models/enums/competition_scope_status.dart';
 import 'package:unicec_mobi/models/enums/competition_status.dart';
 import 'package:unicec_mobi/utils/base_bloc.dart';
@@ -67,6 +68,14 @@ class CompetitionDetailBloc
 
         emit(state.copyWith(
             competitionDetail: competition, isParticipant: isParticipant));
+        _isLoading = false;
+      }
+
+      if(event is ParticipateTheCompetitionEvent){
+        print('ParticipateTheCompetitionEvent is running ...');
+        _isLoading = true;
+        ParticipantModel? participant = await service.participateCompetition(event.competitionId);        
+        emit(state.copyWith(isSuccess: (participant != null) ? true : false));
         _isLoading = false;
       }
     });

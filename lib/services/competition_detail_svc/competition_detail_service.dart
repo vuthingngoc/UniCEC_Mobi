@@ -1,7 +1,11 @@
 import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/models/entities/competition/competition_detail_model.dart';
 import 'package:http/http.dart' as http;
+
 import 'package:unicec_mobi/models/entities/competition/competition_model.dart';
+
+import 'package:unicec_mobi/models/entities/participant/participant_model.dart';
+
 import 'package:unicec_mobi/utils/adapter.dart';
 
 import '../../models/common/current_user.dart';
@@ -38,6 +42,7 @@ class CompetitionDetailService implements ICompetitionDetailService {
   }
 
   @override
+
   Future<CompetitionModel?> getCompetitionStudentJoin(int competitionId) async {
     var client = http.Client();
     String url = Api.GetUrl(
@@ -56,4 +61,23 @@ class CompetitionDetailService implements ICompetitionDetailService {
     }
     return null;
   }
+
+  Future<ParticipantModel?> participateCompetition(int competitionId) async {
+    var client = http.Client();
+    String url = Api.GetUrl(apiPath: '${Api.participants}');
+    String token = GetIt.I.get<CurrentUser>().idToken;
+    try{
+      var response = await client.post(Uri.parse(url), headers: Api.GetHeader(token), body: competitionId);
+      if(response.statusCode == 200){
+        Map<String, dynamic> json = adapter.parseToMap(response);
+        return ParticipantModel.fromJson(json);
+      }
+    }catch(e){
+      Log.error(e.toString());
+    }
+
+    return null;
+  }
+
 }
+

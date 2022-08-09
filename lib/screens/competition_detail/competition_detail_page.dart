@@ -61,7 +61,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
     }
 
     var universityName = GetIt.I.get<CurrentUser>().universityName;
-    // var sponsors = _bloc.state.competitionDetail?.competitionEntities.where((element) => element.entityTypeId == 2) ?? [];
+    const defaultImage = 'https://picsum.photos/seed/513/600';
 
     return BlocBuilder<CompetitionDetailBloc, CompetitionDetailState>(
         bloc: _bloc,
@@ -80,6 +80,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                     ),
                     title: const Text("Chi tiết",
                         style: TextStyle(color: Colors.white, fontSize: 23)),
+                    automaticallyImplyLeading: false,
                     centerTitle: true,
                     backgroundColor: AppColors.mainColor,
                   ),
@@ -123,8 +124,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                           children: [
                                             Expanded(
                                               child: Column(
-                                                children: [
-                                                  //Image(image: Image.network("https://img.freepik.com/premium-photo/astronaut-outer-open-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-16829.jpg?w=2000"))
+                                                children: [                                                  
                                                   const SizedBox(height: 10.0),
                                                   Row(
                                                     children: [
@@ -148,7 +148,10 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                   child: CircleAvatar(
                                                                       backgroundImage:
                                                                           NetworkImage(
-                                                                              '${_bloc.state.competitionDetail?.clubsInCompetition.firstWhere((element) => element.isOwner == true).image}'))))
+                                                                              _bloc.state.competitionDetail?.clubsInCompetition.firstWhere((element) => element.isOwner == true).image != '' 
+                                                                              ? '${_bloc.state.competitionDetail?.clubsInCompetition.firstWhere((element) => element.isOwner == true).image}'
+                                                                              : defaultImage
+                                                                              ))))
                                                           : const SizedBox
                                                               .shrink(),
                                                       Text(
@@ -221,7 +224,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                       28.0)),
                                                     ),
                                                   ),
-                                                  SizedBox(height: 5.0),
+                                                  const SizedBox(height: 5.0),
                                                   Padding(
                                                     padding:
                                                         const EdgeInsets.only(
@@ -231,21 +234,19 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                       children: [
                                                         Text(
                                                             "@${_bloc.state.competitionDetail?.competitionTypeName}",
-                                                            style: const TextStyle(
-                                                                color:
-                                                                    ArgonColors
-                                                                        .warning,
+                                                            style: TextStyle(
+                                                                color: AppColors.mainColor,
                                                                 fontSize: 18)),
                                                         const SizedBox(
                                                           width: 20,
                                                         ),
-                                                        const Text(
-                                                            "@" + "Nhạc cụ",
-                                                            style: TextStyle(
-                                                                color:
-                                                                    ArgonColors
-                                                                        .warning,
-                                                                fontSize: 18)),
+                                                        // const Text(
+                                                        //     "@" + "Nhạc cụ",
+                                                        //     style: TextStyle(
+                                                        //         color:
+                                                        //             ArgonColors
+                                                        //                 .warning,
+                                                        //         fontSize: 18)),
                                                       ],
                                                     ),
                                                   ),
@@ -537,7 +538,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                           return Container(
                                                                               width: 48,
                                                                               height: 48,
-                                                                              child: CircleAvatar(backgroundImage: NetworkImage(_bloc.state.competitionDetail?.clubsInCompetition[index].image != "" ? "${_bloc.state.competitionDetail?.clubsInCompetition[index].image}" : "https://picsum.photos/seed/513/600")));
+                                                                              child: CircleAvatar(backgroundImage: NetworkImage(_bloc.state.competitionDetail?.clubsInCompetition[index].image != "" ? "${_bloc.state.competitionDetail?.clubsInCompetition[index].image}" : defaultImage)));
                                                                         }),
                                                               )
                                                             ],
@@ -599,7 +600,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                           return Container(
                                                                               width: 48,
                                                                               height: 48,
-                                                                              child: CircleAvatar(backgroundImage: NetworkImage((_bloc.state.competitionDetail?.clubsInCompetition[index].image)! != '' ? "${_bloc.state.competitionDetail?.clubsInCompetition[index].image}" : "https://picsum.photos/seed/513/600")));
+                                                                              child: CircleAvatar(backgroundImage: NetworkImage((_bloc.state.competitionDetail?.clubsInCompetition[index].image)! != '' ? "${_bloc.state.competitionDetail?.clubsInCompetition[index].image}" : defaultImage)));
                                                                         }),
                                                               ),
                                                             ],
@@ -745,7 +746,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                           .circular(
                                                                               4)),
                                                               child: Padding(
-                                                                  padding: EdgeInsets.only(
+                                                                  padding: const EdgeInsets.only(
                                                                       bottom:
                                                                           10,
                                                                       top: 10,
@@ -756,7 +757,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                     mainAxisAlignment:
                                                                         MainAxisAlignment
                                                                             .spaceAround,
-                                                                    children: [
+                                                                    children: const [
                                                                       Icon(
                                                                           Icons
                                                                               .description,
@@ -786,7 +787,8 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                               onPressed: () {
                                                                 Navigator.pushNamed(
                                                                     context,
-                                                                    '/viewListActivity');
+                                                                    Routes.viewCompetitionRound,
+                                                                    arguments: _bloc.state.competitionDetail?.id);
                                                               },
                                                               shape: RoundedRectangleBorder(
                                                                   borderRadius:
@@ -794,7 +796,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                           .circular(
                                                                               4)),
                                                               child: Padding(
-                                                                  padding: EdgeInsets
+                                                                  padding: const EdgeInsets
                                                                       .only(
                                                                           bottom:
                                                                               10,
@@ -808,7 +810,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                     mainAxisAlignment:
                                                                         MainAxisAlignment
                                                                             .spaceAround,
-                                                                    children: [
+                                                                    children: const [
                                                                       Icon(
                                                                           Icons
                                                                               .description,
@@ -887,8 +889,10 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                         textColor:
                                                             ArgonColors.white,
                                                         color:
-                                                            ArgonColors.warning,
-                                                        onPressed: () {},
+                                                            AppColors.mainColor,
+                                                        onPressed: () {
+                                                          _bloc.add(ParticipateTheCompetitionEvent(competitionId: (_bloc.state.competitionDetail?.id)!));                                                          
+                                                        },
                                                         shape:
                                                             RoundedRectangleBorder(
                                                           borderRadius:

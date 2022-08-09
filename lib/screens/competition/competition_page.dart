@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unicec_mobi/bloc/competition/competition_bloc.dart';
 import 'package:unicec_mobi/bloc/competition/competition_state.dart';
+import 'package:unicec_mobi/models/entities/competition_entity/competition_entity_model.dart';
 import 'package:unicec_mobi/utils/log.dart';
 
 import '../../bloc/competition/competition_event.dart';
@@ -45,6 +46,8 @@ class _CompetitionPageState extends State<CompetitionPage>
   @override
   Widget build(BuildContext context) {
     Log.info('Build competition page');
+    const defaultImage = 'https://picsum.photos/seed/513/600';
+
     return BlocBuilder<CompetitionBloc, CompetitionState>(
         bloc: _bloc,
         builder: (context, state) {
@@ -94,40 +97,45 @@ class _CompetitionPageState extends State<CompetitionPage>
                                       children: List.generate(
                                           (state.outStandingCompetitions
                                               ?.length)!, (index) {
+                                        var competitionEntities = state
+                                            .outStandingCompetitions
+                                            ?.elementAt(index)
+                                            .competitionEntities;
+                                        String? imageUrl;
+                                        if ((competitionEntities?.length)! >
+                                            0) {
+                                          imageUrl = competitionEntities
+                                              ?.firstWhere(
+                                                  (element) =>
+                                                      element.entityTypeId == 1,
+                                                  orElse: () =>
+                                                      CompetitionEntityModel(
+                                                          id: 0,
+                                                          competitionId: 0,
+                                                          entityTypeId: 0,
+                                                          entityTypeName: '',
+                                                          name: '',
+                                                          imageUrl:
+                                                              defaultImage,
+                                                          website: '',
+                                                          email: '',
+                                                          description: ''))
+                                              .imageUrl;
+                                        }
                                         return CardSmall(
                                             cta: "Xem thêm",
-                                            title: (state
-                                                        .outStandingCompetitions?[
-                                                    index])!
-                                                .name, // homeCards["Makeup"]!['title'],
-                                            img: (state.outStandingCompetitions?[
-                                                    index])!
-                                                .competitionEntities[0]
-                                                .imageUrl, //homeCards["Makeup"]!['image'],
-                                            type: (state.outStandingCompetitions?[
-                                                    index])!
-                                                .competitionTypeName, //homeCards["Makeup"]!['type'],
+                                            title:
+                                                (state.outStandingCompetitions?[
+                                                        index])!
+                                                    .name,
+                                            img: imageUrl ?? defaultImage,
+                                            type:
+                                                (state.outStandingCompetitions?[
+                                                        index])!
+                                                    .competitionTypeName,
                                             date:
-                                                '${(state.outStandingCompetitions?[index])!.startTime}', //homeCards["Makeup"]!['date'],
+                                                '${(state.outStandingCompetitions?[index])!.startTime}',
                                             tap: () {
-                                              // _bloc.add(SelectACompetitionEvent(
-                                              //     competitionId: (state
-                                              //         .outStandingCompetitions?[
-                                              //             index]
-                                              //         .id)!));
-
-                                              // Navigator.push(
-                                              //     context,
-                                              //     MaterialPageRoute(
-                                              //         builder: (context) =>
-                                              //             DetailCompetitionPage(
-                                              //                 bloc:
-                                              //                     _bloc)));
-                                              //                 .then(
-                                              // (value) => {
-                                              //   _bloc.add(LoadOutStandingCompetitionEvent()),
-                                              //   _bloc.isLoading = true
-                                              // });
                                               Navigator.of(context).pushNamed(
                                                   Routes.detailCompetition,
                                                   arguments: state
@@ -137,7 +145,7 @@ class _CompetitionPageState extends State<CompetitionPage>
                                             });
                                       }),
                                     ),
-                                    SizedBox(height: 55.0),
+                                    const SizedBox(height: 55.0),
                                   ],
                                 )
                               : Text('Không có cuộc thi nào đang diễn ra'),

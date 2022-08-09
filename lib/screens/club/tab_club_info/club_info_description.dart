@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unicec_mobi/models/entities/member/member_detail_model.dart';
-import 'package:unicec_mobi/screens/club/widgets/club_pic.dart';
-import '../../../constants/Constants.dart';
+import 'package:unicec_mobi/utils/router.dart';
 import '../../../constants/Theme.dart';
 import '../../../models/entities/club/club_model.dart';
 import '../../../utils/router.dart';
@@ -176,8 +175,8 @@ class _ClubDescriptionState extends State<ClubDescription> {
                   textColor: ArgonColors.primary,
                   color: ArgonColors.secondary,
                   onPressed: () {
-                    //chuyển sang trang
-                    Navigator.of(context).pushNamed(Routes.viewListMember);
+                    Navigator.pushNamed(
+                        context, '/viewListmember');
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(4)),
@@ -189,7 +188,9 @@ class _ClubDescriptionState extends State<ClubDescription> {
                         // MainAxisAlignment
                         //     .spaceAround,
                         children: [
-                          Icon(Icons.description, size: 13),
+                          Icon(
+                              Icons.description,
+                              size: 13),
                           SizedBox(
                             width: 5,
                           ),
@@ -208,29 +209,35 @@ class _ClubDescriptionState extends State<ClubDescription> {
           ),
           child: Column(children: [
             Row(
-              children: [
+              children: const [
                 Text(
                   'Các cuộc thi và sự kiện câu lạc bộ hiện có',
                   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Container(
               width: double.infinity,
               height: 36,
-              margin: new EdgeInsets.only(right: 90, left: 30, bottom: 15),
+              margin:
+              new EdgeInsets.only(right: 90, left: 30, bottom: 15),
               child: RaisedButton(
                   textColor: ArgonColors.primary,
                   color: ArgonColors.secondary,
                   onPressed: () {
-                    Navigator.pushNamed(context, '/viewListCompetitionOfClub');
+                    Navigator.pushNamed(
+                        context, '/viewListCompetitionOfClub');
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(4)),
                   child: Padding(
-                      padding: EdgeInsets.only(
-                          bottom: 10, top: 10, left: 8, right: 8),
+                      padding:
+                      EdgeInsets.only(
+                          bottom: 10,
+                          top: 10,
+                          left: 8,
+                          right: 8),
                       child: Row(
                         // mainAxisAlignment:
                         // MainAxisAlignment
