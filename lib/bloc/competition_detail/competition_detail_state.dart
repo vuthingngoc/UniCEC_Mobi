@@ -5,11 +5,9 @@ import '../../models/entities/competition/competition_model.dart';
 
 class CompetitionDetailState extends Equatable {
   CompetitionDetailModel? competitionDetail;
-
   bool? isParticipant;
-  bool? isSuccess = false;
 
-  CompetitionDetailState({this.competitionDetail, this.isParticipant, this.isSuccess});
+  CompetitionDetailState({this.competitionDetail, this.isParticipant});
 
   CompetitionDetailState copyWith(
       {CompetitionDetailModel? competitionDetail,
@@ -18,12 +16,11 @@ class CompetitionDetailState extends Equatable {
       List<CompetitionModel>? listCompetitionBelongToCurrentUser}) {
     return CompetitionDetailState(
       competitionDetail: competitionDetail,
-      isParticipant: isParticipant,
-      isSuccess: isSuccess
+      isParticipant: isParticipant
     );
   }
 
   @override
   // TODO: implement props
-  List<Object?> get props => [competitionDetail, isParticipant, isSuccess];
+  List<Object?> get props => [competitionDetail, isParticipant];
 }

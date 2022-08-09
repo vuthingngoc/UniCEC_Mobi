@@ -4,6 +4,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/models/common/current_user.dart';
 import 'package:unicec_mobi/models/enums/competition_scope_status.dart';
+import 'package:unicec_mobi/models/enums/competition_status.dart';
 import '../../bloc/competition_detail/competition_detail_bloc.dart';
 import '../../bloc/competition_detail/competition_detail_event.dart';
 import '../../bloc/competition_detail/competition_detail_state.dart';
@@ -29,6 +30,13 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
 
   void initState() {
     super.initState();
+
+    _bloc.listenerStream.listen((event) {
+      if(event is ShowPopUpAnnouncement){
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(event.message)));
+      }
+    });
   }
 
   String switchScope() {
@@ -66,6 +74,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
     return BlocBuilder<CompetitionDetailBloc, CompetitionDetailState>(
         bloc: _bloc,
         builder: (context, state) {
+          Log.info('content: ${state.competitionDetail?.content}');
           return (_bloc.isLoading)
               ? Loading()
               : Scaffold(
@@ -880,41 +889,82 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                               right: 15,
                                                               left: 15,
                                                               bottom: 15),
-                                                      child: FlatButton(
-                                                        textColor:
-                                                            ArgonColors.white,
-                                                        color:
-                                                            AppColors.mainColor,
-                                                        onPressed: () {
-                                                          _bloc.add(ParticipateTheCompetitionEvent(
-                                                              competitionId: (_bloc
-                                                                  .state
-                                                                  .competitionDetail
-                                                                  ?.id)!));
-                                                        },
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      4.0),
-                                                        ),
-                                                        child: const Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    left: 16.0,
-                                                                    right: 16.0,
-                                                                    top: 12,
-                                                                    bottom: 12),
-                                                            child: Text(
-                                                                "Tham gia ngay",
-                                                                style: TextStyle(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        18.0))),
-                                                      ),
+                                                      child:
+                                                          (state.isParticipant ==
+                                                                  false)
+                                                              ? FlatButton(
+                                                                  textColor:
+                                                                      ArgonColors
+                                                                          .white,
+                                                                  color: AppColors
+                                                                      .mainColor,
+                                                                  onPressed:
+                                                                      () {                                                                        
+                                                                    _bloc.add(ParticipateTheCompetitionEvent(
+                                                                        competitionId: (state
+                                                                            .competitionDetail
+                                                                            ?.id)!));
+                                                                  },
+                                                                  shape:
+                                                                      RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            4.0),
+                                                                  ),
+                                                                  child: const Padding(
+                                                                      padding: EdgeInsets.only(
+                                                                          left:
+                                                                              16.0,
+                                                                          right:
+                                                                              16.0,
+                                                                          top:
+                                                                              12,
+                                                                          bottom:
+                                                                              12),
+                                                                      child: Text(
+                                                                          "Tham gia ngay",
+                                                                          style: TextStyle(
+                                                                              fontWeight: FontWeight.w600,
+                                                                              fontSize: 18.0))),
+                                                                )
+                                                              : FlatButton(                                                                
+                                                                  textColor:
+                                                                      ArgonColors
+                                                                          .white,
+                                                                  color: (state.competitionDetail?.status == CompetitionStatus.Start)
+                                                                  ? AppColors
+                                                                      .mainColor
+                                                                  : Colors.grey,
+                                                                  onPressed:
+                                                                      () {
+                                                                        if(state.competitionDetail?.status != CompetitionStatus.Start){
+                                                                          return;
+                                                                        }
+
+                                                                        _bloc.add(AttendanceCompetitionEvent(seedsCode: (state.competitionDetail?.seedsCode)!));
+                                                                      },
+                                                                  shape:
+                                                                      RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            8.0),
+                                                                  ),
+                                                                  child: const Padding(
+                                                                      padding: EdgeInsets.only(
+                                                                          left:
+                                                                              16.0,
+                                                                          right:
+                                                                              16.0,
+                                                                          top:
+                                                                              12,
+                                                                          bottom:
+                                                                              12),
+                                                                      child: Text(
+                                                                          "Điểm danh",
+                                                                          style: TextStyle(
+                                                                              fontWeight: FontWeight.w600,
+                                                                              fontSize: 18.0))),
+                                                                ),
                                                     ),
                                                   ),
                                                 ],
