@@ -25,44 +25,36 @@ class Body extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 25.0),
                 child: ProfilePic(avatar: user.avatar!),
               ),
-               Padding(
-                 padding: const EdgeInsets.only(left: 20.0),
-                 child: Column(
+              Padding(
+                padding: const EdgeInsets.only(left: 20.0),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                   children: [
-                     Text(
-                        "${user.fullname}",
+                  children: [
+                    Text("${user.fullname}",
                         style: const TextStyle(
-                            color: Color.fromRGBO(
-                                50, 50, 93, 1),
+                            color: Color.fromRGBO(50, 50, 93, 1),
                             fontSize: 23.0,
-                            fontWeight: FontWeight.bold
-                        )),
-                     Padding(
-                       padding: const EdgeInsets.only(top: 20.0),
-                       child: Container(
-                         margin: const EdgeInsets.only(right: 20),
-                         padding: const EdgeInsets.all(5),
-                         decoration: BoxDecoration(
-                             border: Border.all(
-                                 color: ArgonColors.warning),
-                             color: ArgonColors.warning,
-                             borderRadius:
-                             const BorderRadius.all(
-                                 Radius.circular(10))),
-                         child: Text(
-                          "${user.seedsWallet.amount} seeds",
-                             style: const TextStyle(
-                               // color: Colors.bl,
-                               fontSize: 18,
-                               color: ArgonColors.white
-                             )),
-                       ),
-                     ),
-                   ],
-                 ),
-               ),
-
+                            fontWeight: FontWeight.bold)),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: Container(
+                        margin: const EdgeInsets.only(right: 20),
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: ArgonColors.warning),
+                            color: ArgonColors.warning,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10))),
+                        child: Text("${user.seedsWallet.amount} seeds",
+                            style: const TextStyle(
+                                // color: Colors.bl,
+                                fontSize: 18,
+                                color: ArgonColors.white)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
           SizedBox(height: 20),
@@ -74,7 +66,10 @@ class Body extends StatelessWidget {
           ProfileMenu(
             text: "Các cuộc thi & sự kiện đang tham gia",
             icon: "assets/icons/Bell.svg",
-            press: () {},
+            press: () {
+              Navigator.of(context)
+                  .pushNamed(Routes.viewListCompetitionOfParticipant);
+            },
           ),
           ProfileMenu(
             text: "Cài đặt",

@@ -36,7 +36,7 @@ class _BodyState extends State<Body> {
                   child: (state.competitionRounds != null)
                       //?.length)! > 0)
                       ? ViewListRoundMenu(
-                          competitionRounds: state.competitionRounds!)
+                          competitionRounds: state.competitionRounds)
                       : const Center(
                           child: Text(
                             'Cuộc thi không có vòng thi nào',

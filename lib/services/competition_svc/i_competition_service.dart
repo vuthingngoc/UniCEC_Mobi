@@ -5,6 +5,7 @@ import 'package:unicec_mobi/models/entities/competition/competition_show_model.d
 
 import '../../models/entities/competition/competition_model.dart';
 import '../../models/entities/team/team_model.dart';
+import '../../models/enums/competition_scope_status.dart';
 
 abstract class ICompetitionService {
   Future<PagingResult<CompetitionModel>?> loadCompetition(
@@ -16,4 +17,6 @@ abstract class ICompetitionService {
 
   //TA
   Future<PagingResult<CompetitionModel>?> loadCompetitionMemberTask(int clubId);
+  Future<PagingResult<CompetitionModel>?> loadCompetitionParticipant(
+      int currentPage, CompetitionScopeStatus? scope, String? name);
 }
