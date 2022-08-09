@@ -52,8 +52,8 @@ class BlocDependencies {
     injector
         .registerFactory<ProfileBloc>(() => ProfileBloc(service: injector()));
 
-    injector
-        .registerFactory<EditProfileBloc>(() => EditProfileBloc(service: injector()));
+    injector.registerFactory<EditProfileBloc>(
+        () => EditProfileBloc(service: injector()));
 
     injector.registerFactory<MyAccountBloc>(
         () => MyAccountBloc(service: injector()));
@@ -99,8 +99,8 @@ class BlocDependencies {
 
 //--------------------------------PARTICIPANT
     // import view list teams
-    injector.registerSingleton<ViewListTeamParticipantBloc>(
-        ViewListTeamParticipantBloc(service: injector()));
+    injector.registerFactory<ViewListTeamParticipantBloc>(
+        () => ViewListTeamParticipantBloc(service: injector()));
 
     //import view detail team
     injector.registerFactory<ViewDetailTeamParticipantBloc>(

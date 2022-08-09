@@ -18,16 +18,21 @@ class CompetitionService implements ICompetitionService {
   Adapter adapter = Adapter();
 
   @override
-  Future<PagingResult<CompetitionModel>?> loadCompetition(
+  Future<PagingResult<CompetitionShowModel>?> loadCompetition(
       CompetitionRequestModel request) async {
     var client = http.Client();
     String params = '?';
+    //lấy thằng status đầu tiên
+    params += 'statuses=${request.statuses?[0]}';
+    //remove thằng status đầu tiên ra
+    request.statuses?.removeAt(0);
+
     if (request.clubId != null) {
-      params += 'clubId=${request.clubId}';
+      params += '&clubId=${request.clubId}';
     }
 
     if (request.scope != null) {
-      params += '&scope=${request.scope}';
+      params += '&scope=${request.scope?.index}';
     }
 
     if (request.viewMost != null) {
@@ -43,17 +48,33 @@ class CompetitionService implements ICompetitionService {
         params += '&statuses=$element';
       });
     }
+    if (request.event != null) {
+      params += '&event=${request.event}';
+    }
 
-    String url = Api.GetUrl(apiPath: '${Api.competitions}$params');
+    String url = Api.GetUrl(apiPath: '${Api.competitions}$params&pageSize=5');
     String? token = GetIt.I.get<CurrentUser>().idToken;
     try {
       var response =
           await client.get(Uri.parse(url), headers: Api.GetHeader(token));
+
+      String isList = "[]";
       if (response.statusCode == 200) {
-        print('response: ${response.body}');
-        Map<String, dynamic> json = adapter.parseToMap(response);
-        return PagingResult.fromJson(json, CompetitionModel.fromJson);
+        if (response.body.toString().compareTo(isList) == 0) {
+          //TH1
+          List<dynamic> list = adapter.parseToList(response);
+          return null;
+        } else {
+          //TH2
+          Map<String, dynamic> json = adapter.parseToMap(response);
+          return PagingResult.fromJson(json, CompetitionShowModel.fromJson);
+        }
       }
+      // if (response.statusCode == 200) {
+      //   print('response: ${response.body}');
+      //   Map<String, dynamic> json = adapter.parseToMap(response);
+      //   return PagingResult.fromJson(json, CompetitionShowModel.fromJson);
+      // }
     } catch (e) {
       Log.error(e.toString());
     }
@@ -114,10 +135,13 @@ class CompetitionService implements ICompetitionService {
         params += '&statuses=$element';
       });
     }
+    if (request.event != null) {
+      params += '&event=${request.event}';
+    }
 
     String url = Api.GetUrl(
         apiPath:
-            '${Api.competitions}$params&currentPage=${currentPage}&pageSize=1');
+            '${Api.competitions}$params&currentPage=${currentPage}&pageSize=5');
     String? token = GetIt.I.get<CurrentUser>().idToken;
     try {
       var response =
@@ -201,11 +225,14 @@ class CompetitionService implements ICompetitionService {
 
   @override
   Future<PagingResult<CompetitionModel>?> loadCompetitionParticipant(
-      int currentPage, CompetitionScopeStatus? scope, String? name) async {
+      int currentPage,
+      CompetitionScopeStatus? scope,
+      String? name,
+      bool? isEvent) async {
     var client = http.Client();
     String url = Api.GetUrl(
         apiPath:
-            '${Api.competitions}/student-join-competitions?pageSize=1&currentPage=$currentPage');
+            '${Api.competitions}/student-join-competitions?pageSize=2&currentPage=$currentPage');
 
     if (scope != null) {
       url += "&scope=${scope.index}";
@@ -213,6 +240,10 @@ class CompetitionService implements ICompetitionService {
 
     if (name != null) {
       url += "&name=${name}";
+    }
+
+    if (isEvent != null) {
+      url += "&event=${isEvent}";
     }
 
     String token = GetIt.I.get<CurrentUser>().idToken;

@@ -53,9 +53,9 @@ class _ViewListCompetitionOfParticipantPageState
             appBar: NavbarCompetitionOfParticipant(
               title: "Cuộc thi và sự kiện đang tham gia",
               searchBar: true,
-              categoryOne: "Liên Trường",
-              categoryTwo: "Trong Trường",
-              categoryThree: "Câu Lạc Bộ",
+              categoryOne: "Cuộc Thi",
+              categoryTwo: "Sự Kiện",
+              //categoryThree: "Câu Lạc Bộ",
             ),
             backgroundColor: ArgonColors.bgColorScreen,
             drawer: ArgonDrawer(currentPage: "Competition"),

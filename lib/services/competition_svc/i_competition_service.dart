@@ -8,7 +8,7 @@ import '../../models/entities/team/team_model.dart';
 import '../../models/enums/competition_scope_status.dart';
 
 abstract class ICompetitionService {
-  Future<PagingResult<CompetitionModel>?> loadCompetition(
+  Future<PagingResult<CompetitionShowModel>?> loadCompetition(
       CompetitionRequestModel request);
   Future<PagingResult<CompetitionShowModel>?> showCompetition(
       CompetitionRequestModel request, int currentPage);
@@ -18,5 +18,8 @@ abstract class ICompetitionService {
   //TA
   Future<PagingResult<CompetitionModel>?> loadCompetitionMemberTask(int clubId);
   Future<PagingResult<CompetitionModel>?> loadCompetitionParticipant(
-      int currentPage, CompetitionScopeStatus? scope, String? name);
+      int currentPage,
+      CompetitionScopeStatus? scope,
+      String? name,
+      bool? isEvent);
 }

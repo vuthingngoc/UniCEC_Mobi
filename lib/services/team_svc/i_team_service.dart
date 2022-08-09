@@ -10,7 +10,7 @@ abstract class ITeamService {
   //
   Future<PagingResult<TeamModel>?> GetListTeam(TeamRequestModel request);
   //
-  Future<bool> CreateTeam(
+  Future<ResultCRUD> CreateTeam(
       int competitionId, String teamName, String teamDescription);
   //
   Future<ResultCRUD> UpdateTeam(
