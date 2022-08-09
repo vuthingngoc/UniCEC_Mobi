@@ -18,13 +18,14 @@ class CompetitionRoundBloc
   }
 
   CompetitionRoundBloc({required this.service})
-      : super(CompetitionRoundState(competitionRounds: null)) {
+      : super(CompetitionRoundState(competitionRounds: [])) {
     on((event, emit) async {
       if (event is LoadRoundsByCompetition) {
         _isLoading = true;
         PagingResult<CompetitionRoundModel>? competitionRounds =
             await service.loadRoundsByCompetition(event.competitionId);
-        emit(state.copyWith(competitionRoundModel: competitionRounds?.items));
+        emit(state.copyWith(
+            competitionRoundModel: competitionRounds?.items ?? []));
         _isLoading = false;
         Log.info('isLoading: $_isLoading');
       }

@@ -10,6 +10,7 @@ import 'package:unicec_mobi/services/competition_svc/i_competition_service.dart'
 
 import 'package:http/http.dart' as http;
 import 'package:unicec_mobi/utils/log.dart';
+import '../../models/enums/competition_scope_status.dart';
 import '../../utils/adapter.dart';
 import '../../utils/api.dart';
 
@@ -131,13 +132,14 @@ class CompetitionService implements ICompetitionService {
     var client = http.Client();
     String url = Api.GetUrl(apiPath: '${Api.competitions}/$competitionId');
     String token = GetIt.I.get<CurrentUser>().idToken;
-    try{
-      var response = await client.get(Uri.parse(url), headers: Api.GetHeader(token));
-      if(response.statusCode == 200){
+    try {
+      var response =
+          await client.get(Uri.parse(url), headers: Api.GetHeader(token));
+      if (response.statusCode == 200) {
         Map<String, dynamic> json = adapter.parseToMap(response);
         return CompetitionDetailModel.fromJson(json);
       }
-    }catch(e){
+    } catch (e) {
       Log.error(e.toString());
     }
 
@@ -155,6 +157,44 @@ class CompetitionService implements ICompetitionService {
         apiPath:
             '${Api.competitions}/student-is-assigned?clubId=$clubIdSelected' +
                 "&pageSize=1&currentPage=$currentPage");
+    String token = GetIt.I.get<CurrentUser>().idToken;
+    try {
+      var response =
+          await client.get(Uri.parse(url), headers: Api.GetHeader(token));
+      String isList = "[]";
+      if (response.statusCode == 200) {
+        if (response.body.toString().compareTo(isList) == 0) {
+          //TH1
+          List<dynamic> list = adapter.parseToList(response);
+          return null;
+        } else {
+          //TH2
+          Map<String, dynamic> json = adapter.parseToMap(response);
+          return PagingResult.fromJson(json, CompetitionModel.fromJson);
+        }
+      }
+    } catch (e) {
+      Log.error(e.toString());
+    }
+    return null;
+  }
+
+  @override
+  Future<PagingResult<CompetitionModel>?> loadCompetitionParticipant(
+      int currentPage, CompetitionScopeStatus? scope, String? name) async {
+    var client = http.Client();
+    String url = Api.GetUrl(
+        apiPath:
+            '${Api.competitions}/student-join-competitions?pageSize=1&currentPage=$currentPage');
+
+    if (scope != null) {
+      url += "&scope=${scope.index}";
+    }
+
+    if (name != null) {
+      url += "&name=${name}";
+    }
+
     String token = GetIt.I.get<CurrentUser>().idToken;
     try {
       var response =
