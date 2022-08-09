@@ -86,7 +86,7 @@ class PageDependencies {
     injector.registerFactory<Widget>(() => MyAccountPage(bloc: injector()),
         instanceName: Routes.myAccount);
 
-    injector.registerFactory<Widget>(() => EditMyAccountPage(),
+    injector.registerFactory<Widget>(() => EditMyAccountPage(bloc: injector()),
         instanceName: Routes.editMyAccount);
 
     //Club Page -> show Club

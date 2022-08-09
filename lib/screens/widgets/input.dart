@@ -10,6 +10,7 @@ class Input extends StatelessWidget {
   final TextEditingController? controller;
   final bool autofocus;
   final Color borderColor;
+  final bool? isReadOnly;
 
   Input(
       {required this.placeholder,
@@ -19,7 +20,8 @@ class Input extends StatelessWidget {
       this.onChanged,
       this.autofocus = false,
       this.borderColor = ArgonColors.border,
-      this.controller});
+      this.controller,
+      this.isReadOnly});
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,7 @@ class Input extends StatelessWidget {
         style:
             TextStyle(height: 0.85, fontSize: 14.0, color: ArgonColors.initial),
         textAlignVertical: TextAlignVertical(y: 0.6),
+        readOnly: isReadOnly ?? false,
         decoration: InputDecoration(
             filled: true,
             fillColor: ArgonColors.white,
