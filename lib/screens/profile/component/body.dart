@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/constants/Theme.dart';
 import 'package:unicec_mobi/models/common/current_user.dart';
+import 'package:unicec_mobi/utils/app_color.dart';
 import 'package:unicec_mobi/utils/firebase.dart';
 import 'package:unicec_mobi/utils/router.dart';
 
@@ -34,27 +35,33 @@ class Body extends StatelessWidget {
                         style: const TextStyle(
                             color: Color.fromRGBO(50, 50, 93, 1),
                             fontSize: 23.0,
-                            fontWeight: FontWeight.bold)),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20.0),
-                      child: Container(
-                        margin: const EdgeInsets.only(right: 20),
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: ArgonColors.warning),
-                            color: ArgonColors.warning,
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(10))),
-                        child: Text("${user.seedsWallet.amount} seeds",
-                            style: const TextStyle(
-                                // color: Colors.bl,
-                                fontSize: 18,
-                                color: ArgonColors.white)),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                            fontWeight: FontWeight.bold
+                        )),
+                     Padding(
+                       padding: const EdgeInsets.only(top: 20.0),
+                       child: Container(
+                         margin: const EdgeInsets.only(right: 20),
+                         padding: const EdgeInsets.all(5),
+                         decoration: BoxDecoration(
+                             border: Border.all(
+                                 color: AppColors.mainColor),
+                             color: AppColors.mainColor,
+                             borderRadius:
+                             const BorderRadius.all(
+                                 Radius.circular(10))),
+                         child: Text(
+                          "${user.seedsWallet.amount} seeds",
+                             style: const TextStyle(
+                               // color: Colors.bl,
+                               fontSize: 18,
+                               color: ArgonColors.white
+                             )),
+                       ),
+                     ),
+                   ],
+                 ),
+               ),
+
             ],
           ),
           SizedBox(height: 20),

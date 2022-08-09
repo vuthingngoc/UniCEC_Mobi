@@ -28,13 +28,12 @@ class _BodyState extends State<Body> {
         bloc: _bloc,
         builder: (context, state) {
           return
-              //_bloc.isLoading
-              //     ? Loading()
-              //    :
+              _bloc.isLoading
+                  ? Loading()
+                 :
               SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: (state.competitionRounds != null)
-                      //?.length)! > 0)
                       ? ViewListRoundMenu(
                           competitionRounds: state.competitionRounds)
                       : const Center(

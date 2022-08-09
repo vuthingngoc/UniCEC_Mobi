@@ -237,13 +237,6 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                         const SizedBox(
                                                           width: 20,
                                                         ),
-                                                        // const Text(
-                                                        //     "@" + "Nhạc cụ",
-                                                        //     style: TextStyle(
-                                                        //         color:
-                                                        //             ArgonColors
-                                                        //                 .warning,
-                                                        //         fontSize: 18)),
                                                       ],
                                                     ),
                                                   ),
