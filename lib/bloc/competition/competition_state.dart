@@ -4,32 +4,51 @@ import 'package:unicec_mobi/models/entities/competition/competition_detail_model
 
 import '../../models/entities/competition/competition_request_model.dart';
 import '../../models/entities/competition/competition_show_model.dart';
+import '../../models/enums/competition_scope_status.dart';
 
 class CompetitionState extends Equatable {
-  List<CompetitionShowModel>? outStandingCompetitions;
-  List<CompetitionShowModel>? competitions;
+  List<CompetitionShowModel> outStandingCompetitions;
+  List<CompetitionShowModel> competitions;
   int? selectedCompetitionId;
   CompetitionDetailModel? competitionDetail;
-  CompetitionRequestModel? requestModel;
+  //CompetitionRequestModel requestModel;
+  //Search
+  String? searchName;
+  CompetitionScopeStatus? scope;
+  bool hasNext;
+  int currentPage;
 
   CompetitionState(
-      {this.competitions,
-      this.outStandingCompetitions,
-      this.requestModel,
+      {required this.competitions,
+      required this.outStandingCompetitions,
+      required this.searchName,
+      required this.scope,
       this.competitionDetail,
-      this.selectedCompetitionId});
+      this.selectedCompetitionId,
+      required this.hasNext,
+      required this.currentPage});
 
-  CompetitionState copyWith(
-      {List<CompetitionShowModel>? competitions,
-      List<CompetitionShowModel>? outStandingCompetitions,
-      CompetitionDetailModel? competitionDetail,
-      int? selectedCompetitionId}) {
+  CompetitionState copyWith({
+    required List<CompetitionShowModel> competitions,
+    required List<CompetitionShowModel> outStandingCompetitions,
+    CompetitionDetailModel? competitionDetail,
+    //required CompetitionRequestModel requestModel,
+    required String? searchName,
+    required CompetitionScopeStatus? scope,
+    int? selectedCompetitionId,
+    required bool newHasNext,
+    required int newCurrentPage,
+  }) {
     return CompetitionState(
         competitions: competitions,
         outStandingCompetitions: outStandingCompetitions,
-        requestModel: requestModel,
+        //requestModel: requestModel,
+        searchName: searchName,
+        scope: scope,
         competitionDetail: competitionDetail,
-        selectedCompetitionId: selectedCompetitionId);
+        selectedCompetitionId: selectedCompetitionId,
+        hasNext: newHasNext,
+        currentPage: newCurrentPage);
   }
 
   @override
@@ -37,8 +56,12 @@ class CompetitionState extends Equatable {
   List<Object?> get props => [
         competitions,
         outStandingCompetitions,
-        requestModel,
+        //requestModel,
+        searchName,
+        scope,
         competitionDetail,
-        selectedCompetitionId
+        selectedCompetitionId,
+        hasNext,
+        currentPage
       ];
 }

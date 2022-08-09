@@ -1,11 +1,11 @@
-import 'package:unicec_mobi/bloc/competition/competition_event.dart';
-import 'package:unicec_mobi/bloc/competition/competition_state.dart';
-import 'package:unicec_mobi/models/common/paging_result.dart';
-import 'package:unicec_mobi/models/entities/competition/competition_detail_model.dart';
-import 'package:unicec_mobi/models/entities/competition/competition_request_model.dart';
-import 'package:unicec_mobi/models/enums/competition_status.dart';
-import 'package:unicec_mobi/services/i_services.dart';
-import 'package:unicec_mobi/utils/base_bloc.dart';
+import '/bloc/competition/competition_event.dart';
+import '/bloc/competition/competition_state.dart';
+import '/models/common/paging_result.dart';
+import '/models/entities/competition/competition_detail_model.dart';
+import '/models/entities/competition/competition_request_model.dart';
+import '/models/enums/competition_status.dart';
+import '/services/i_services.dart';
+import '/utils/base_bloc.dart';
 
 import '../../models/common/paging_result.dart';
 import '../../models/entities/competition/competition_show_model.dart';
@@ -23,57 +23,216 @@ class CompetitionBloc extends BaseBloc<CompetitionEvent, CompetitionState> {
   }
 
   CompetitionBloc({required this.service})
-      : super(CompetitionState(
-            competitions: <CompetitionShowModel>[],
-            outStandingCompetitions: <CompetitionShowModel>[])) {
+      : super(
+          CompetitionState(
+              competitions: <CompetitionShowModel>[],
+              outStandingCompetitions: <CompetitionShowModel>[],
+              scope: null,
+              searchName: null,
+              hasNext: false,
+              currentPage: 1),
+        ) {
     on((event, emit) async {
       if (event is LoadOutStandingCompetitionEvent) {
-        print('LoadOutStandingCompetitionEvent is running ...');
-        _isLoading = true;
-        List<int> statuses = [];
-        statuses.add(CompetitionStatus.Publish.index);
-        statuses
-            .add(CompetitionStatus.Approve.index); // maybe will delete later
-        //
-        statuses
-            .add(CompetitionStatus.OnGoing.index); // maybe will delete later
-        CompetitionRequestModel request = CompetitionRequestModel(
-            viewMost: true, statuses: statuses); // add more params if you want
-        PagingResult<CompetitionShowModel>? result =
-            await service.showCompetition(request);
-        emit(state.copyWith(outStandingCompetitions: result?.items));
-        _isLoading = false;
+        // print('LoadOutStandingCompetitionEvent is running ...');
+        // _isLoading = true;
+        // List<int> statuses = [];
+        // statuses.add(CompetitionStatus.Publish.index);
+        // statuses
+        //     .add(CompetitionStatus.Approve.index); // maybe will delete later
+        // //
+        // statuses
+        //     .add(CompetitionStatus.OnGoing.index); // maybe will delete later
+        // CompetitionRequestModel request = CompetitionRequestModel(
+        //     viewMost: true, statuses: statuses); // add more params if you want
+        // PagingResult<CompetitionShowModel>? result =
+        //     await service.showCompetition(request);
+        // emit(state.copyWith(
+        //     outStandingCompetitions: result?.items, requestModel: request));
+        // _isLoading = false;
       }
 
       if (event is LoadCompetitionEvent) {
         print('LoadCompetitionEvent is running ...');
-        _isLoading = true;
+        //_isLoading = true;
         List<int> statuses = [];
         statuses.add(CompetitionStatus.Publish.index);
         statuses
-            .add(CompetitionStatus.Approve.index); // maybe will delete later
-        //
+            .add(CompetitionStatus.Register.index); // maybe will delete later
         statuses
             .add(CompetitionStatus.OnGoing.index); // maybe will delete later
+
         CompetitionRequestModel request = CompetitionRequestModel(
-            statuses: statuses); // add more params if you want
+            scope: state.scope, name: state.searchName, statuses: statuses);
+        // add more params if you want
+
         PagingResult<CompetitionShowModel>? result =
-            await service.showCompetition(request);
-        emit(state.copyWith(competitions: result?.items));
-        _isLoading = false;
+            await service.showCompetition(request, state.currentPage);
+        if (result != null) {
+          emit(state.copyWith(
+              outStandingCompetitions: state.outStandingCompetitions,
+              competitions: result.items,
+              scope: state.scope,
+              searchName: state.searchName,
+              newHasNext: result.hasNext,
+              newCurrentPage: result.currentPage));
+        }
+
+        // _isLoading = false;
       }
 
       if (event is SelectACompetitionEvent) {
         print('SelectACompetitionEvent is running ...');
-        _isLoading = true;
+        //_isLoading = true;
         CompetitionDetailModel? competitionDetail =
             await service.loadDetailById(event.competitionId);
         emit(state.copyWith(
+            outStandingCompetitions: state.outStandingCompetitions,
+            competitions: state.competitions,
             competitionDetail: competitionDetail,
+            scope: state.scope,
+            searchName: state.searchName,
+            newHasNext: state.hasNext,
+            newCurrentPage: state.currentPage,
             //emit thêm competitionId Selected
             selectedCompetitionId: event.competitionId));
-        _isLoading = false;
+        //_isLoading = false;
         print('_isLoading done: $_isLoading');
+      }
+
+      //--------------------------------TA
+      //emit state thay đổi của request
+      if (event is ChangeSearchNameEvent) {
+        emit(state.copyWith(
+            outStandingCompetitions: state.outStandingCompetitions,
+            competitions: state.competitions,
+            scope: state.scope,
+            searchName: event.searchName, // change
+            newHasNext: state.hasNext,
+            newCurrentPage: state.currentPage));
+      }
+      //change scope
+      if (event is ChangeCompetitionScopeEvent) {
+        emit(state.copyWith(
+            competitions: state.competitions,
+            outStandingCompetitions: state.outStandingCompetitions,
+            scope: event.scope, // change
+            searchName: state.searchName,
+            newHasNext: state.hasNext,
+            newCurrentPage: state.currentPage));
+      }
+      if (event is ResetFilterEvent) {
+        //load lại trạng thái ban đầu
+        print('LoadCompetitionEvent is ResetFilter ...');
+        _isLoading = true;
+        List<int> statuses = [];
+        statuses.add(CompetitionStatus.Publish.index);
+        statuses
+            .add(CompetitionStatus.Register.index); // maybe will delete later
+        statuses
+            .add(CompetitionStatus.OnGoing.index); // maybe will delete later
+
+        CompetitionRequestModel request = CompetitionRequestModel(
+            statuses: statuses); // add more params if you want
+
+        PagingResult<CompetitionShowModel>? result =
+            await service.showCompetition(request, 1);
+        //bằng null cho về mặc định
+        emit(state.copyWith(
+            outStandingCompetitions: state.outStandingCompetitions,
+            competitions: result?.items ?? [],
+            scope: null,
+            searchName: null,
+            newHasNext: result?.hasNext ?? false,
+            newCurrentPage: result?.currentPage ?? 1));
+      }
+      //Refesh Event
+      if (event is RefreshEvent) {
+        emit(state.copyWith(
+          outStandingCompetitions: state.outStandingCompetitions,
+          competitions: [], // list empty
+          scope: state.scope,
+          searchName: state.searchName,
+          newHasNext: false,
+          newCurrentPage: 1,
+        ));
+      }
+      //Increase Event
+      if (event is IncrementalEvent) {
+        int increase = state.currentPage + 1;
+        emit(state.copyWith(
+            outStandingCompetitions: state.outStandingCompetitions,
+            competitions: state.competitions,
+            scope: state.scope,
+            searchName: state.searchName,
+            newHasNext: state.hasNext,
+            newCurrentPage: increase // change
+            ));
+      }
+      //Load more
+      if (event is LoadAddMoreEvent) {
+        //-----------request
+        List<int> statuses = [];
+        statuses.add(CompetitionStatus.Publish.index);
+        statuses
+            .add(CompetitionStatus.Register.index); // maybe will delete later
+        statuses
+            .add(CompetitionStatus.OnGoing.index); // maybe will delete later
+
+        CompetitionRequestModel request = CompetitionRequestModel(
+            scope: state.scope, name: state.searchName, statuses: statuses);
+
+        PagingResult<CompetitionShowModel>? result =
+            await service.showCompetition(request, state.currentPage);
+        //
+        List<CompetitionShowModel> listContinute = result?.items ?? [];
+        //
+        if (listContinute.isNotEmpty) {
+          for (CompetitionShowModel competition in listContinute) {
+            state.competitions.add(competition);
+          }
+        }
+        emit(state.copyWith(
+            outStandingCompetitions: state.outStandingCompetitions,
+            competitions: state.competitions,
+            scope: state.scope,
+            searchName: state.searchName,
+            newHasNext: result?.hasNext ?? false,
+            newCurrentPage: result?.currentPage ?? state.currentPage));
+      }
+      //Search event
+      if (event is SearchEvent) {
+        //-----------request
+        List<int> statuses = [];
+        statuses.add(CompetitionStatus.Publish.index);
+        statuses
+            .add(CompetitionStatus.Register.index); // maybe will delete later
+        statuses
+            .add(CompetitionStatus.OnGoing.index); // maybe will delete later
+
+        CompetitionRequestModel request = CompetitionRequestModel(
+            scope: state.scope, name: state.searchName, statuses: statuses);
+
+        PagingResult<CompetitionShowModel>? result =
+            await service.showCompetition(request, state.currentPage);
+
+        if (result != null) {
+          emit(state.copyWith(
+              competitions: result.items,
+              outStandingCompetitions: state.outStandingCompetitions,
+              searchName: state.searchName,
+              scope: state.scope,
+              newHasNext: result.hasNext,
+              newCurrentPage: result.currentPage));
+        } else {
+          emit(state.copyWith(
+              competitions: [],
+              outStandingCompetitions: state.outStandingCompetitions,
+              searchName: state.searchName,
+              scope: state.scope,
+              newHasNext: false,
+              newCurrentPage: 1));
+        }
       }
     });
   }
