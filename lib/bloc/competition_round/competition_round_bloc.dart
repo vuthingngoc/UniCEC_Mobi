@@ -6,28 +6,28 @@ import '../../utils/log.dart';
 import 'competition_round_event.dart';
 import 'competition_round_state.dart';
 
-class CompetitionRoundBloc extends BaseBloc<CompetitionRoundEvent, CompetitionRoundState>{
+class CompetitionRoundBloc
+    extends BaseBloc<CompetitionRoundEvent, CompetitionRoundState> {
   final ICompetitionRoundService service;
   bool _isLoading = false;
-  
+
   bool get isLoading => _isLoading;
 
-  set isLoading(bool isLoading){
+  set isLoading(bool isLoading) {
     _isLoading = isLoading;
   }
 
-  CompetitionRoundBloc({required this.service}) 
-    : super(CompetitionRoundState(
-      competitionRounds: const [])){
-          on((event, emit) async {
-            if(event is LoadRoundsByCompetition){
-              _isLoading = true;
-              PagingResult<CompetitionRoundModel>? competitionRounds = await service.loadRoundsByCompetition(event.competitionId);   
-              emit(state.copyWith(competitionRoundModel: competitionRounds?.items));
-              _isLoading = false;
-              Log.info('isLoading: $_isLoading');
-            }
-          });
-        }
-
+  CompetitionRoundBloc({required this.service})
+      : super(CompetitionRoundState(competitionRounds: null)) {
+    on((event, emit) async {
+      if (event is LoadRoundsByCompetition) {
+        _isLoading = true;
+        PagingResult<CompetitionRoundModel>? competitionRounds =
+            await service.loadRoundsByCompetition(event.competitionId);
+        emit(state.copyWith(competitionRoundModel: competitionRounds?.items));
+        _isLoading = false;
+        Log.info('isLoading: $_isLoading');
+      }
+    });
+  }
 }
