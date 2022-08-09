@@ -53,6 +53,13 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
               newHasNext: result.hasNext,
               newCurrentPage: result.currentPage,
               valueInvitedCode: state.valueInvitedCode));
+        } else {
+          emit(state.copyWith(
+              newListTeam: state.listTeam,
+              newCompetitionId: event.competitionId, //change
+              newHasNext: state.hasNext,
+              newCurrentPage: state.currentPage,
+              valueInvitedCode: state.valueInvitedCode));
         }
       }
       //Refesh Event
