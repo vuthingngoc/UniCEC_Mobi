@@ -87,7 +87,8 @@ class ViewListCompetitionParticipantBloc extends BaseBloc<
             newHasNext: result.hasNext,
             newCurrentPage: result.currentPage,
           ));
-        } else {
+        } //nếu kq ra null thì emit như v
+        else {
           emit(state.copyWith(
             newCompetitions: [],
             newScope: state.scope,
