@@ -3,15 +3,14 @@ class ParticipantModel{
   int competitionId;
   String studentId;
   String avatar;
-  //DateTime registerTime;
-  String university;
+  DateTime registerTime;
 
   ParticipantModel({
     required this.id,
     required this.competitionId,
     required this.studentId,
     required this.avatar,
-    required this.university
+    required this.registerTime
   });
 
   factory ParticipantModel.fromJson(Map<String, dynamic> json){
@@ -19,15 +18,14 @@ class ParticipantModel{
     int competitionId = json['competition_id'] ?? 0;
     String studentId = json['student_id'] ?? 0;
     String avatar = json['avatar'] ?? '';
-    //DateTime registerTime = DateTime.parse(json['register_time']);
-    String university = json['university'] ?? '';
+    DateTime registerTime = DateTime.parse(json['register_time']);
 
     return ParticipantModel(
       id: id, 
       competitionId: competitionId, 
       studentId: studentId, 
       avatar: avatar,
-        university: university
+      registerTime: registerTime
     );
   }
 }

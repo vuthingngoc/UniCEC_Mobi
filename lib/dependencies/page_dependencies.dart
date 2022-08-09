@@ -59,7 +59,7 @@ class PageDependencies {
         instanceName: Routes.viewDetailTeamStudent);
 
     //round
-    injector.registerFactory<Widget>(() => ViewCompetitionRoundPage(),
+    injector.registerFactory<Widget>(() => ViewCompetitionRoundPage(bloc: injector()),
         instanceName: Routes.viewCompetitionRound);
 
     //--------------------------TASK
