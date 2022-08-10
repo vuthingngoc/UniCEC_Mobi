@@ -36,7 +36,7 @@ class _ViewCompetitionMemberTaskPagePageState
         child: Scaffold(
           appBar: AppBar(
             title: const Text(
-              "Cuộc thi & Sự kiện tham gia",
+              "Công việc Cuộc thi & Sự kiện tham gia",
               style: TextStyle(color: Colors.white),
             ),
             automaticallyImplyLeading: false,
