@@ -28,29 +28,27 @@ class ClubCard extends StatefulWidget {
 }
 
 class _ClubCardState extends State<ClubCard> {
+  ClubModel get _club => widget.club;
+
   @override
   Widget build(BuildContext context) {
     ClubSelectionBloc bloc = BlocProvider.of<ClubSelectionBloc>(context);
     Size size = MediaQuery.of(context).size;
+    const defaultImage = 'https://picsum.photos/seed/513/600';
 
     return BlocBuilder<ClubSelectionBloc, ClubSelectionState>(
       bloc: bloc,
       builder: (context, state) {
         return Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Container(
             height: size.height * 0.15,
             width: size.width,
             decoration: BoxDecoration(
-                  border: Border.all(
-                      color: Color.fromARGB(255, 235, 237, 241)),
-                  color:
-                  Color.fromARGB(255, 235, 237, 241),
-                  borderRadius:
-                  BorderRadius.all(
-                      Radius
-                          .circular(
-                          15)),
+              border:
+                  Border.all(color: const Color.fromARGB(255, 235, 237, 241)),
+              color: const Color.fromARGB(255, 235, 237, 241),
+              borderRadius: const BorderRadius.all(Radius.circular(15)),
               // borderRadius: BorderRadius.circular(10.0),
               // color: Colors.white.withOpacity(0.5),
             ),
@@ -60,69 +58,80 @@ class _ClubCardState extends State<ClubCard> {
                     ChooseClubSelectionEvent(clubIdSelected: widget.club.id));
               },
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
-                    padding: const EdgeInsets.only(
-                      left: 15
-                    ),
+                      margin: const EdgeInsets.symmetric(horizontal: 15.0),
                       height: size.height * 0.1,
                       width: size.width * 0.2,
                       decoration: BoxDecoration(
+                        shape: BoxShape.circle,
                         image: DecorationImage(
-                          image: NetworkImage(
-                              'https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/FPT_logo_2010.svg/800px-FPT_logo_2010.svg.png'),
+                          image: NetworkImage((_club.image != '')
+                              ? '${_club.image}'
+                              : defaultImage),
                         ),
                       )),
                   // SizedBox(
                   //   width: 15.0,
                   // ),
                   Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        // Text('Tên CLB:', style: TextStyle(fontSize: 15),),
-                        // SizedBox(
-                        //   height: 10.0,
-                        // ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15.0, bottom: 20, top: 20, right: 15),
-                          child: Container(
-                            child: const Text(
-                              "Fanpage: https//asdasdasdasdasdasd.com,mmmmmmmmmmmmmm", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                            ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Row(
+                            children: [
+                              const Text(
+                                'CLB: ',
+                                style: TextStyle(fontSize: 15.0),
+                              ),
+                              Text(
+                                '${_club.name}',
+                                style: const TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              )
+                            ],
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15.0, bottom: 20, right: 15),
-                          child: Row(children: [
-                            Text('Vai trò:'),
-                            SizedBox(width: 10),
+                          RichText(
+                              text: TextSpan(
+                                children: [                                  
+                            const TextSpan(
+                                text: 'Fanpage: ',
+                                style: TextStyle(
+                                    fontSize: 15.0, color: Colors.black)),
+                            TextSpan(
+                                text: "${_club.clubFanpage}",
+                                style: const TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black)),
+                          ])),
+                          Row(children: [
+                            const Text(
+                              'Vai trò:',
+                              style: TextStyle(fontSize: 15.0),
+                            ),
+                            const SizedBox(width: 10.0),
                             Container(
-                              padding:
-                              const EdgeInsets.all(
-                                  3.0),
+                              padding: const EdgeInsets.all(3.0),
                               decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors
-                                          .lightGreen),
-                                  color:
-                                  Colors.lightGreen,
-                                  borderRadius:
-                                  BorderRadius.all(
-                                      Radius
-                                          .circular(
-                                          10))),
+                                  border: Border.all(color: Colors.lightGreen),
+                                  color: Colors.lightGreen,
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(10))),
                               child: Text(
                                 widget.member!.clubRoleName,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold, color: Colors.white
-                                ),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
                               ),
                             ),
                           ]),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],
