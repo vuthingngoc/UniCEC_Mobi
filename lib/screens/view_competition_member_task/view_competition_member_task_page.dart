@@ -35,13 +35,13 @@ class _ViewCompetitionMemberTaskPagePageState
         value: bloc,
         child: Scaffold(
           appBar: AppBar(
-            title: Text(
+            title: const Text(
               "Cuộc thi & Sự kiện tham gia",
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: Colors.white),
             ),
             automaticallyImplyLeading: false,
             centerTitle: true,
-            backgroundColor: AppColors.backgroundPageColor,
+            backgroundColor: AppColors.mainColor,
           ),
           body: ViewCompetitionMemberTaskMenu(),
         ));

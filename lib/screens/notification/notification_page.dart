@@ -37,6 +37,7 @@ class _NotificationState extends State<NotificationPage> {
             'Thông báo',
             style: TextStyle(color: Colors.white, fontSize: 23),
           ),
+          automaticallyImplyLeading: false,
         ),
         body: Stack(children: <Widget>[
           Padding(
