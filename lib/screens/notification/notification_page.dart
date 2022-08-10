@@ -31,11 +31,11 @@ class _NotificationState extends State<NotificationPage> {
       value: _bloc,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: AppColors.primaryColor,
+          backgroundColor: AppColors.mainColor,
           centerTitle: true,
           title: const Text(
             'Thông báo',
-            style: TextStyle(color: Colors.black54, fontSize: 23),
+            style: TextStyle(color: Colors.white, fontSize: 23),
           ),
         ),
         body: Stack(children: <Widget>[
