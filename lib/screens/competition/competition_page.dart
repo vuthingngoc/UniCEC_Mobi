@@ -78,7 +78,7 @@ class _CompetitionPageState extends State<CompetitionPage>
                   categoryTwo: "Sự Kiện",
                 ),
                 resizeToAvoidBottomInset: false,
-                backgroundColor: ArgonColors.bgColorScreen,
+                backgroundColor: ArgonColors.bgColorScreen,                
                 //key: _scaffoldKey,
                 drawer: ArgonDrawer(currentPage: "Competition"),
                 body: Container(

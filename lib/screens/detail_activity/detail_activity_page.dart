@@ -58,12 +58,12 @@ class _ViewDetailActivityPageState extends State<ViewDetailActivityPage>
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.arrow_back, color: Colors.black),
+              icon: const Icon(Icons.arrow_back, color: Colors.white),
             ),
-            title: Text("Chi tiết",
-                style: TextStyle(color: Colors.black)),
+            title: const Text("Chi tiết",
+                style: TextStyle(color: Colors.white)),
             centerTitle: true,
-            backgroundColor: AppColors.backgroundPageColor,
+            backgroundColor: AppColors.mainColor,
           ),
           backgroundColor: ArgonColors.bgColorScreen,
           drawer: ArgonDrawer(currentPage: "Profile"),

@@ -4,13 +4,12 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 //import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 // import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_it/get_it.dart';
+import 'package:unicec_mobi/bloc/club_selection/club_selection_bloc.dart';
 import 'package:unicec_mobi/bloc/competition/competition_bloc.dart';
 import 'package:unicec_mobi/bloc/view_competition_member_task/view_competition_member_task_bloc.dart';
 import 'package:unicec_mobi/screens/club/club_page.dart';
-import 'package:unicec_mobi/screens/event/event_page.dart';
 import 'package:unicec_mobi/screens/pages.dart';
 import '../../bloc/club/club_bloc.dart';
-import '../../bloc/event/event_bloc.dart';
 import '../../bloc/main/main_bloc.dart';
 import '../../bloc/main/main_event.dart';
 import '../../bloc/main/main_state.dart';
@@ -18,18 +17,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/notification/notification_bloc.dart';
 import '../../bloc/profile/profile_bloc.dart';
-import '../../bloc/view_list_team_participant/view_list_team_participant_bloc.dart';
 import '../../models/common/current_user.dart';
 import '../../utils/app_color.dart';
-import '../../utils/router.dart';
 import '../competition/competition_page.dart';
 import '../notification/notification_page.dart';
 import '../profile/profile_page.dart';
 import '../size_config.dart';
 import '../view_competition_member_task/view_competition_member_task_page.dart';
-import '../view_competition_round/view_competition_round.dart';
-import '../view_detail_team_participant/view_detail_team_participant_page.dart';
-import '../view_list_teams_participant/view_list_team_participant_page.dart';
 import 'widget/component_button.dart';
 
 class MainPage extends StatefulWidget {
@@ -200,6 +194,7 @@ class _MainPageState extends State<MainPage> {
                 }
               },
               children: <Widget>[
+                // ClubSelectionPage(bloc: GetIt.I.get<ClubSelectionBloc>()),
                 ClubPage(
                     bloc: GetIt.I.get<
                         ClubBloc>()), // cố định tại vị trí là page 0, nếu chuyển sẻ phải implement lại
