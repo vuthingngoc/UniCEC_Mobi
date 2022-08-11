@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/models/entities/department/department_model.dart';
+import 'package:unicec_mobi/models/entities/university/university_model.dart';
 
 import '../../models/common/current_user.dart';
 import '../../models/common/paging_result.dart';
@@ -68,6 +69,7 @@ class UniversitySelectionService implements IUniversitySelectionService {
 
     PagingResult<DepartmentModel> pagingResult;
 
+    //chỗ này phải thêm hàm get department trả ra list chứ kh đc paging
     url += "/search?universityId=" + universityId.toString() + "&pageSize=40";
 
     try {
@@ -85,6 +87,45 @@ class UniversitySelectionService implements IUniversitySelectionService {
         //
         List<DepartmentModel> listDepartment = pagingResult.items;
         return listDepartment;
+      }
+    } catch (e) {
+      Log.error(e.toString());
+    } finally {
+      client.close();
+    }
+    return null;
+  }
+
+  @override
+  Future<List<UniversityModel>?> getUniversities() async {
+    Adapter adapter = Adapter();
+
+    var client = http.Client();
+    String url = Api.GetUrl(apiPath: Api.universities);
+
+    //PagingResult<DepartmentModel> pagingResult;
+
+    url += "/all";
+
+    try {
+      //get_it lấy IdToken
+      String? idToken = GetIt.I.get<CurrentUser>().idToken;
+
+      var response = await client.get(Uri.parse(url), headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': "Bearer $idToken"
+      });
+
+      if (response.statusCode == 200) {
+        List<dynamic> result = adapter.parseToList(response);
+        if (result.isEmpty) {
+          return null;
+        }
+        List<UniversityModel> universities = [];
+        for (dynamic uni in result) {
+          universities.add(UniversityModel.fromJson(uni));
+        }
+        return universities;
       }
     } catch (e) {
       Log.error(e.toString());

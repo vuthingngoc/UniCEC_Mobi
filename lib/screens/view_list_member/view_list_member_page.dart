@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/view_list_member/view_list_member_bloc.dart';
+import '../../bloc/view_list_member/view_list_member_event.dart';
 import '../../bloc/view_list_member/view_list_member_state.dart';
 import '../../utils/app_color.dart';
 import 'component/view_detail_table_member.dart';
@@ -20,8 +21,11 @@ class _ViewListMemberPageState extends State<ViewListMemberPage>
   @override
   bool get wantKeepAlive => true;
 
+  var _controller = TextEditingController();
+
   @override
   void initState() {
+    bloc.add(LoadListMemberEvent());
     super.initState();
   }
 
@@ -45,18 +49,64 @@ class _ViewListMemberPageState extends State<ViewListMemberPage>
                 ),
                 title: Text(
                   "Danh sách các thành viên trong CLB",
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(color: Colors.white),
                 ),
                 automaticallyImplyLeading: false,
                 centerTitle: true,
-                backgroundColor: AppColors.backgroundPageColor,
+                backgroundColor: AppColors.mainColor,
               ),
               body: SingleChildScrollView(
-                  child: (state.listMember != null)
-                      ? ViewDetailTableMemberMenu(
-                          listModel: state.listMember!,
-                        )
-                      : Text('Chưa có load Member')));
+                  child: Column(children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                            controller: _controller,
+                            onFieldSubmitted: (value) {
+                              // bloc.add(ChangeSearchNameEvent(
+                              //     searchName: value));
+                            },
+                            autofocus: false,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                  onPressed: () {
+                                    _controller.clear;
+                                    _controller.text = "";
+                                    //sửa lại cái
+                                    // bloc.add(ChangeSearchNameEvent(
+                                    //     searchName: null));
+                                  },
+                                  icon: const Icon(Icons.clear)),
+                              labelText: 'Tìm Thành Viên',
+                              focusedBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.grey, width: 1.0),
+                              ),
+                            )),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          //bloc.add(SearchEvent());
+                        },
+                        child: Icon(Icons.search),
+                      ),
+                    ],
+                  ),
+                ),
+                (state.listMember != null)
+                    ? ViewDetailTableMemberMenu(
+                        listModel: state.listMember!,
+                      )
+                    : Text('Chưa có load Member'),
+              ])));
         }),
       ),
     );

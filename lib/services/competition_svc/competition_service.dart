@@ -200,7 +200,7 @@ class CompetitionService implements ICompetitionService {
     String url = Api.GetUrl(
         apiPath:
             '${Api.competitions}/student-is-assigned?clubId=$clubIdSelected' +
-                "&pageSize=1&currentPage=$currentPage");
+                "&pageSize=10&currentPage=$currentPage");
     String token = GetIt.I.get<CurrentUser>().idToken;
     try {
       var response =

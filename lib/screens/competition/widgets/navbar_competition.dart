@@ -86,7 +86,8 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                   ]),
               child: SafeArea(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                  padding:
+                      const EdgeInsets.only(left: 16.0, right: 16.0, top: 10),
                   child: Column(
                     children: [
                       Row(
@@ -115,63 +116,79 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                         ],
                       ),
                       if (widget.searchBar)
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: TextFormField(
-                                  controller: _controller,
-                                  onFieldSubmitted: (value) {
-                                    bloc.add(ChangeSearchNameEvent(
-                                        searchName: value));
-                                  },
-                                  autofocus: false,
-                                  decoration: InputDecoration(
-                                    suffixIcon: IconButton(
-                                        onPressed: () {
-                                          _controller.clear;
-                                          _controller.text = "";
-                                          //sửa lại cái
-                                          bloc.add(ChangeSearchNameEvent(
-                                              searchName: null));
-                                        },
-                                        icon: const Icon(Icons.clear)),
-                                    labelText: 'Tìm Kiếm Cuộc Thi',
-                                    focusedBorder: const OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Colors.grey,
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: TextFormField(
+                                    controller: _controller,
+                                    onFieldSubmitted: (value) {
+                                      bloc.add(ChangeSearchNameEvent(
+                                          searchName: value));
+                                    },
+                                    autofocus: false,
+                                    decoration: InputDecoration(
+                                      suffixIcon: IconButton(
+                                          onPressed: () {
+                                            _controller.clear;
+                                            _controller.text = "";
+                                            //sửa lại cái
+                                            bloc.add(ChangeSearchNameEvent(
+                                                searchName: null));
+                                          },
+                                          icon: const Icon(Icons.clear)),
+                                      labelText: 'Tìm Kiếm Cuộc Thi',
+                                      focusedBorder: const OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.grey,
+                                        ),
                                       ),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.grey, width: 1.0),
-                                    ),
-                                  )),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                bloc.add(SearchEvent());
-                              },
-                              child: Icon(Icons.search),
-                            ),
-                            PopupMenuButton<int>(
-                                icon: Icon(Icons.filter_alt_outlined),
-                                itemBuilder: (context) {
-                                  return [
-                                    PopupMenuItem(
-                                      onTap: () {
-                                        //add biến liên trường
-                                        bloc.add(ChangeCompetitionScopeEvent(
-                                            scope: CompetitionScopeStatus
-                                                .InterUniversity));
-                                      },
-                                      value: 1,
-                                      child: (state.scope ==
-                                              CompetitionScopeStatus
-                                                  .InterUniversity)
-                                          ? Container(
-                                              color: Colors.green,
-                                              child: Row(
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.grey, width: 1.0),
+                                      ),
+                                    )),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  bloc.add(SearchEvent());
+                                },
+                                child: Icon(Icons.search),
+                              ),
+                              PopupMenuButton<int>(
+                                  icon: Icon(Icons.filter_alt_outlined),
+                                  itemBuilder: (context) {
+                                    return [
+                                      PopupMenuItem(
+                                        onTap: () {
+                                          //add biến liên trường
+                                          bloc.add(ChangeCompetitionScopeEvent(
+                                              scope: CompetitionScopeStatus
+                                                  .InterUniversity));
+                                        },
+                                        value: 1,
+                                        child: (state.scope ==
+                                                CompetitionScopeStatus
+                                                    .InterUniversity)
+                                            ? Container(
+                                                color: Colors.green,
+                                                child: Row(
+                                                  children: <Widget>[
+                                                    Icon(Icons.camera,
+                                                        size: 18),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 8.0),
+                                                      child:
+                                                          Text('Liên Trường'),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            : Row(
                                                 children: <Widget>[
                                                   Icon(Icons.camera, size: 18),
                                                   Padding(
@@ -182,32 +199,35 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                                   ),
                                                 ],
                                               ),
-                                            )
-                                          : Row(
-                                              children: <Widget>[
-                                                Icon(Icons.camera, size: 18),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 8.0),
-                                                  child: Text('Liên Trường'),
+                                      ),
+                                      PopupMenuItem(
+                                        onTap: () {
+                                          //add biến trong trường
+                                          bloc.add(ChangeCompetitionScopeEvent(
+                                              scope: CompetitionScopeStatus
+                                                  .University));
+                                        },
+                                        value: 2,
+                                        child: (state.scope ==
+                                                CompetitionScopeStatus
+                                                    .University)
+                                            ? Container(
+                                                color: Colors.green,
+                                                child: Row(
+                                                  children: <Widget>[
+                                                    Icon(Icons.school,
+                                                        size: 18),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 8.0),
+                                                      child:
+                                                          Text('Trong Trường'),
+                                                    ),
+                                                  ],
                                                 ),
-                                              ],
-                                            ),
-                                    ),
-                                    PopupMenuItem(
-                                      onTap: () {
-                                        //add biến trong trường
-                                        bloc.add(ChangeCompetitionScopeEvent(
-                                            scope: CompetitionScopeStatus
-                                                .University));
-                                      },
-                                      value: 2,
-                                      child: (state.scope ==
-                                              CompetitionScopeStatus.University)
-                                          ? Container(
-                                              color: Colors.green,
-                                              child: Row(
+                                              )
+                                            : Row(
                                                 children: <Widget>[
                                                   Icon(Icons.school, size: 18),
                                                   Padding(
@@ -218,38 +238,27 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                                   ),
                                                 ],
                                               ),
-                                            )
-                                          : Row(
-                                              children: <Widget>[
-                                                Icon(Icons.school, size: 18),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 8.0),
-                                                  child: Text('Trong Trường'),
-                                                ),
-                                              ],
-                                            ),
-                                    ),
-                                    PopupMenuItem(
-                                      onTap: () {
-                                        bloc.add(ResetFilterEvent());
-                                      },
-                                      value: 3,
-                                      child: Row(
-                                        children: <Widget>[
-                                          Icon(Icons.delete, size: 18),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 8.0),
-                                            child: Text('làm mới Filter'),
-                                          ),
-                                        ],
                                       ),
-                                    ),
-                                  ];
-                                }),
-                          ],
+                                      PopupMenuItem(
+                                        onTap: () {
+                                          bloc.add(ResetFilterEvent());
+                                        },
+                                        value: 3,
+                                        child: Row(
+                                          children: <Widget>[
+                                            Icon(Icons.delete, size: 18),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 8.0),
+                                              child: Text('làm mới Filter'),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ];
+                                  }),
+                            ],
+                          ),
                         ),
                       SizedBox(
                         height: 22.0,
