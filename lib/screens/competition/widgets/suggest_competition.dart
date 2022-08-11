@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // import '../../../models/entities/competition/competition_model.dart';
 import '../../../models/entities/competition/competition_show_model.dart';
+import '../../../utils/router.dart';
 import '../../size_config.dart';
 import 'section_title.dart';
 
@@ -28,12 +29,13 @@ class SpecialOffers extends StatelessWidget {
           child: Row(
               children: List.generate(outStandingEvents.length, (index) {
             return SpecialOfferCard(
-              image: (outStandingEvents[index])
-                  .competitionEntities[0]
-                  .imageUrl,
+              image: (outStandingEvents[index]).competitionEntities[0].imageUrl,
               description: '',
               name: (outStandingEvents[index]).name,
-              press: () {},
+              press: () {
+                Navigator.of(context).pushNamed(Routes.detailCompetition,
+                    arguments: (outStandingEvents[index]).id);
+              },
             );
           })
 

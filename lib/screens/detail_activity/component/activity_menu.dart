@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
 import '../../../bloc/view_detail_activity/view_detail_activity_bloc.dart';
 import '../../../bloc/view_detail_activity/view_detail_activity_event.dart';
 import '../../../bloc/view_detail_activity/view_detail_activity_state.dart';
 import '../../../constants/Constants.dart';
 import '../../../models/enums/competition_activity_status.dart';
 import '../../../models/enums/priority_status.dart';
+import '../../../utils/log.dart';
 import '../../club/tab_club_info/default_button.dart';
 import '../../club/tab_club_info/top_rounded_container.dart';
 import '../../size_config.dart';
@@ -464,13 +466,68 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                                                       ),
                                                       SizedBox(width: 10.0),
                                                       Expanded(
-                                                          child: Text(
-                                                        state.competitionActivityDetail
-                                                                ?.description ??
-                                                            "",
-                                                        style: TextStyle(
-                                                            fontSize: 18),
-                                                      )),
+                                                        child: Row(
+                                                          children: [
+                                                            Expanded(
+                                                                child: Html(
+                                                              data: state
+                                                                  .competitionActivityDetail
+                                                                  ?.description,
+                                                              tagsList:
+                                                                  Html.tags,
+                                                              style: {
+                                                                "p": Style(
+                                                                    fontSize:
+                                                                        const FontSize(
+                                                                            18.0)),
+                                                                "em": Style(
+                                                                    fontStyle:
+                                                                        FontStyle
+                                                                            .italic),
+                                                                "strong": Style(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                                "a": Style(
+                                                                    textDecoration:
+                                                                        TextDecoration
+                                                                            .underline,
+                                                                    color: Colors
+                                                                        .blueAccent),
+                                                                // "ul": Wrap()
+                                                                "li": Style(
+                                                                    fontSize:
+                                                                        const FontSize(
+                                                                            15.0))
+                                                              },
+                                                              // onLinkTap: (url, _, _){
+                                                              //   print('Open with url: $url ...');
+                                                              // },
+                                                              onCssParseError:
+                                                                  (css,
+                                                                      messages) {
+                                                                Log.error(
+                                                                    'css that errored: $css');
+                                                                Log.error(
+                                                                    'error messages: ');
+                                                                messages.forEach(
+                                                                    (element) {
+                                                                  Log.error(
+                                                                      '$element');
+                                                                });
+                                                              },
+                                                            )),
+                                                          ],
+                                                        ),
+
+                                                        //     Text(
+                                                        //   state.competitionActivityDetail
+                                                        //           ?.description ??
+                                                        //       "",
+                                                        //   style: TextStyle(
+                                                        //       fontSize: 18),
+                                                        // )
+                                                      ),
                                                     ],
                                                   ),
                                                 ),
