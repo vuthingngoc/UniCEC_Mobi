@@ -50,19 +50,19 @@ class _ClubSelectionPageState extends State<ClubSelectionPage> {
           builder: (context, state) {
             return Scaffold(
               appBar: AppBar(
-                leading: IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+                // leading: IconButton(
+                //   onPressed: () {
+                //     Navigator.of(context).pop();
+                //   },
+                //   icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+                // ),
+                title: const Text(
+                  "Chọn câu lạc bộ",
+                  style: TextStyle(color: Colors.white),
                 ),
-                title: Text(
-                  "Chọn Câu lạc bộ đã tham gia",
-                  style: TextStyle(color: Colors.black),
-                ),
-                // automaticallyImplyLeading: false,
+                automaticallyImplyLeading: false,
                 centerTitle: true,
-                backgroundColor: AppColors.backgroundPageColor,
+                backgroundColor: AppColors.mainColor,
               ),
               body: Container(
                 constraints: const BoxConstraints.expand(),
@@ -88,14 +88,19 @@ class _ClubSelectionPageState extends State<ClubSelectionPage> {
                   ),
                 ),
               ),
-              floatingActionButton: FloatingActionButton.extended(
+              floatingActionButton: FloatingActionButton.extended(                
                   onPressed: () {
                     //thêm event qua trang list club
                     _bloc.add(ClubsViewPageEvent());
                   },
-                  backgroundColor: ArgonColors.warning,
-                  label: Text("Tham gia clb khác"),
-                  icon: Icon(Icons.add)),
+                  backgroundColor: AppColors.mainColor,
+                  label: const Text("Tham gia clb khác"),
+                  icon: const Icon(Icons.add)),
+                  floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+                  extendBodyBehindAppBar: false,
+                  resizeToAvoidBottomInset: true,
+                  
+                  
             );
           },
         ));
