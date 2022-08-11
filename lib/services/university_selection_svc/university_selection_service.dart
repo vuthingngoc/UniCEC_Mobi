@@ -70,7 +70,7 @@ class UniversitySelectionService implements IUniversitySelectionService {
     PagingResult<DepartmentModel> pagingResult;
 
     //chỗ này phải thêm hàm get department trả ra list chứ kh đc paging
-    url += "/search?universityId=" + universityId.toString() + "&pageSize=40";
+    url += "/all-by-uni?universityId=" + universityId.toString();
 
     try {
       //get_it lấy IdToken
@@ -82,11 +82,15 @@ class UniversitySelectionService implements IUniversitySelectionService {
       });
 
       if (response.statusCode == 200) {
-        Map<String, dynamic> result = adapter.parseToMap(response);
-        pagingResult = PagingResult.fromJson(result, DepartmentModel.fromJson);
-        //
-        List<DepartmentModel> listDepartment = pagingResult.items;
-        return listDepartment;
+        List<dynamic> result = adapter.parseToList(response);
+        if (result.isEmpty) {
+          return null;
+        }
+        List<DepartmentModel> departments = [];
+        for (dynamic department in result) {
+          result.add(DepartmentModel.fromJson(department));
+        }
+        return departments;
       }
     } catch (e) {
       Log.error(e.toString());

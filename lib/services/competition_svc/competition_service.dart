@@ -17,6 +17,7 @@ import '../../utils/api.dart';
 class CompetitionService implements ICompetitionService {
   Adapter adapter = Adapter();
 
+  //load out standing
   @override
   Future<PagingResult<CompetitionShowModel>?> loadCompetition(
       CompetitionRequestModel request) async {
@@ -51,8 +52,11 @@ class CompetitionService implements ICompetitionService {
     if (request.event != null) {
       params += '&event=${request.event}';
     }
+    if (request.universityId != null) {
+      params += '&universityId=${request.universityId}';
+    }
 
-    String url = Api.GetUrl(apiPath: '${Api.competitions}$params&pageSize=5');
+    String url = Api.GetUrl(apiPath: '${Api.competitions}$params&pageSize=10');
     String? token = GetIt.I.get<CurrentUser>().idToken;
     try {
       var response =
@@ -70,11 +74,6 @@ class CompetitionService implements ICompetitionService {
           return PagingResult.fromJson(json, CompetitionShowModel.fromJson);
         }
       }
-      // if (response.statusCode == 200) {
-      //   print('response: ${response.body}');
-      //   Map<String, dynamic> json = adapter.parseToMap(response);
-      //   return PagingResult.fromJson(json, CompetitionShowModel.fromJson);
-      // }
     } catch (e) {
       Log.error(e.toString());
     }
@@ -104,6 +103,7 @@ class CompetitionService implements ICompetitionService {
     return null;
   }
 
+  //show Competition Loading use LoadMore not outStanding
   @override
   Future<PagingResult<CompetitionShowModel>?> showCompetition(
       CompetitionRequestModel request, int currentPage) async {
@@ -138,10 +138,13 @@ class CompetitionService implements ICompetitionService {
     if (request.event != null) {
       params += '&event=${request.event}';
     }
+    if (request.universityId != null) {
+      params += '&universityId=${request.universityId}';
+    }
 
     String url = Api.GetUrl(
         apiPath:
-            '${Api.competitions}$params&currentPage=${currentPage}&pageSize=5');
+            '${Api.competitions}$params&currentPage=${currentPage}&pageSize=3');
     String? token = GetIt.I.get<CurrentUser>().idToken;
     try {
       var response =
@@ -159,11 +162,6 @@ class CompetitionService implements ICompetitionService {
           return PagingResult.fromJson(json, CompetitionShowModel.fromJson);
         }
       }
-      // if (response.statusCode == 200) {
-      //   print('response: ${response.body}');
-      //   Map<String, dynamic> json = adapter.parseToMap(response);
-      //   return PagingResult.fromJson(json, CompetitionShowModel.fromJson);
-      // }
     } catch (e) {
       Log.error(e.toString());
     }

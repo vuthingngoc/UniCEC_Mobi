@@ -139,6 +139,8 @@ class _ViewListCompetitionOfParticipantPageState
                                             .competitionTypeName,
                                         date:
                                             '${(state.competitions[index]).startTime}',
+                                        status:
+                                            state.competitions[index].status,
                                         tap: () {
                                           Navigator.of(context).pushNamed(
                                               Routes.detailCompetition,

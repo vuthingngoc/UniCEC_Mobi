@@ -124,7 +124,6 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
             state.competitionId, event.teamName, event.teamDescription);
         if (check.check) {
           listener.add(RebuildListViewTeamEvent());
-          //listener.add(ShowingSnackBarEvent(message: "Tạo team thành công"));
         } else {
           listener.add(ShowingSnackBarEvent(message: check.errorMessage));
         }
@@ -132,26 +131,24 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
 
       //join team
       if (event is JoinTeamEvent) {
-        int teamId = await service.JoinTeam(state.valueInvitedCode);
-        if (teamId > 0) {
+        ResultCRUD check = await service.JoinTeam(state.valueInvitedCode);
+        if (check.returnIntData! > 0) {
           TeamModel? team = null;
           for (TeamModel model in state.listTeam) {
-            if (model.id == teamId) {
+            if (model.id == check.returnIntData!) {
               team = model;
             }
           }
           if (team != null) {
             listener.add(NavigatorTeamDetailPageEvent(
-                teamId: teamId,
+                teamId: check.returnIntData!,
                 competitionId: state.competitionId,
                 teamName: team.name,
                 teamDescription: team.description,
                 status: team.status));
           }
         } else {
-          listener.add(ShowingSnackBarEvent(
-              message:
-                  "Bạn đã có Team rồi không thể tham gia vào team khác !"));
+          listener.add(ShowingSnackBarEvent(message: check.errorMessage));
         }
       }
     });

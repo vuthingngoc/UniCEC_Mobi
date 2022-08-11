@@ -93,17 +93,6 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          // IconButton(
-                          //     icon: Icon(Icons.arrow_back_ios,
-                          //         color: !widget.transparent
-                          //             ? (widget.bgColor == ArgonColors.white
-                          //                 ? ArgonColors.initial
-                          //                 : ArgonColors.white)
-                          //             : ArgonColors.white,
-                          //         size: 24.0),
-                          //     onPressed: () {
-                          //       Navigator.pop(context);
-                          //     }),
                           Text(widget.title,
                               style: TextStyle(
                                   color: !widget.transparent

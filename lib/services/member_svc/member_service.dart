@@ -86,10 +86,21 @@ class MemberService implements IMemberService {
   }
 
   @override
-  Future<List<MemberModel>?> getListMemberByClubId(int clubId) async {
+  Future<List<MemberModel>?> getListMemberByClub(
+      int clubId, String? searchName, int? clubRoleId) async {
     var client = http.Client();
     String url = Api.GetUrl(apiPath: Api.members);
+
     url += "/by-club?clubId=" + clubId.toString();
+
+    if (searchName != null) {
+      url += "&searchName=${searchName}";
+    }
+
+    if (clubRoleId != null) {
+      url += "&roleId=${clubRoleId}";
+    }
+
     String? idToken = GetIt.I.get<CurrentUser>().idToken;
     try {
       var response =

@@ -6,5 +6,6 @@ import '../../models/entities/member/member_detail_model.dart';
 abstract class IMemberService {
   Future<MemberModel?> applyInClub(int clubId);
   Future<MemberStatus> getStatusMember(int clubId);
-  Future<List<MemberModel>?> getListMemberByClubId(int clubId);
+  Future<List<MemberModel>?> getListMemberByClub(
+      int clubId, String? searchName, int? clubRoleId);
 }

@@ -18,7 +18,7 @@ abstract class ITeamService {
   //
   Future<ResultCRUD> UpdateRoleToLeader(int participanInTeamId);
   //
-  Future<int> JoinTeam(String invitedCode);
+  Future<ResultCRUD> JoinTeam(String invitedCode);
   //
   Future<TeamDetailModel?> GetDetailTeamModel(int competitionId, int teamId);
   //

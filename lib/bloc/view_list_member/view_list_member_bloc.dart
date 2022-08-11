@@ -12,14 +12,64 @@ class ViewListMemberBloc
   IMemberService service;
 
   ViewListMemberBloc({required this.service})
-      : super(ViewListMemberState(listMember: null)) {
+      : super(ViewListMemberState(
+            listMember: [], searchName: null, clubRoleId: null)) {
     (on((event, emit) async {
       if (event is LoadListMemberEvent) {
         int clubIdSelected = GetIt.I.get<CurrentUser>().clubIdSelected;
-        List<MemberModel>? result =
-            await service.getListMemberByClubId(clubIdSelected);
+        List<MemberModel>? result = await service.getListMemberByClub(
+            clubIdSelected, state.searchName, state.clubRoleId);
         if (result != null) {
-          emit(state.copyWith(newListMember: result));
+          emit(state.copyWith(
+              newListMember: result,
+              newSearchName: state.searchName,
+              newClubRoleId: state.clubRoleId));
+        } else {
+          emit(state.copyWith(
+              newListMember: [],
+              newSearchName: state.searchName,
+              newClubRoleId: state.clubRoleId));
+        }
+      }
+      if (event is ChangeSearchNameEvent) {
+        emit(state.copyWith(
+            newListMember: state.listMember,
+            newSearchName: event.searchName, // change
+            newClubRoleId: state.clubRoleId));
+      }
+      if (event is ChangeClubRoleIdEvent) {
+        emit(state.copyWith(
+            newListMember: state.listMember,
+            newSearchName: state.searchName,
+            newClubRoleId: event.clubRoleId // change
+            ));
+      }
+      if (event is SearchEvent) {
+        int clubIdSelected = GetIt.I.get<CurrentUser>().clubIdSelected;
+        List<MemberModel>? result = await service.getListMemberByClub(
+            clubIdSelected, state.searchName, state.clubRoleId);
+        if (result != null) {
+          emit(state.copyWith(
+              newListMember: result,
+              newSearchName: state.searchName,
+              newClubRoleId: state.clubRoleId));
+        } else {
+          emit(state.copyWith(
+              newListMember: [],
+              newSearchName: state.searchName,
+              newClubRoleId: state.clubRoleId));
+        }
+      }
+      if (event is ResetFilterEvent) {
+        int clubIdSelected = GetIt.I.get<CurrentUser>().clubIdSelected;
+        List<MemberModel>? result =
+            await service.getListMemberByClub(clubIdSelected, null, null);
+        if (result != null) {
+          emit(state.copyWith(
+              newListMember: result, newSearchName: null, newClubRoleId: null));
+        } else {
+          emit(state.copyWith(
+              newListMember: [], newSearchName: null, newClubRoleId: null));
         }
       }
     }));

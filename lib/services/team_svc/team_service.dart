@@ -65,6 +65,7 @@ class TeamService extends ITeamService {
       if (response.statusCode == 200) {
         String isList = "[]";
         if (response.body.toString().compareTo(isList) == 0) {
+          List<dynamic> json = adapter.parseToList(response);
           //TH1
           return null;
         } else {
@@ -109,7 +110,7 @@ class TeamService extends ITeamService {
   }
 
   @override
-  Future<int> JoinTeam(String InvitedCode) async {
+  Future<ResultCRUD> JoinTeam(String InvitedCode) async {
     var client = http.Client();
     String url = Api.GetUrl(apiPath: '${Api.teams}/add-participant');
     String? token = GetIt.I.get<CurrentUser>().idToken;
@@ -120,12 +121,19 @@ class TeamService extends ITeamService {
       if (response.statusCode == 200) {
         Map<String, dynamic> result = adapter.parseToMap(response);
         ParticipantInTeamModel pit = ParticipantInTeamModel.fromJson(result);
-        return pit.teamId;
+        ResultCRUD returnData = ResultCRUD(
+            check: false, errorMessage: '', returnIntData: pit.teamId);
+        return returnData;
+      }
+      if (response.statusCode == 400) {
+        ResultCRUD result = ResultCRUD(
+            check: false, errorMessage: response.body, returnIntData: -1);
+        return result;
       }
     } catch (e) {
       Log.error(e.toString());
     }
-    return -1;
+    return ResultCRUD(check: false, errorMessage: '', returnIntData: -1);
   }
 
   @override

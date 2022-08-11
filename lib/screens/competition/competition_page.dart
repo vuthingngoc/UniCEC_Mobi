@@ -78,7 +78,7 @@ class _CompetitionPageState extends State<CompetitionPage>
                   categoryTwo: "Sự Kiện",
                 ),
                 resizeToAvoidBottomInset: false,
-                backgroundColor: ArgonColors.bgColorScreen,                
+                backgroundColor: ArgonColors.bgColorScreen,
                 //key: _scaffoldKey,
                 drawer: ArgonDrawer(currentPage: "Competition"),
                 body: Container(
@@ -109,7 +109,7 @@ class _CompetitionPageState extends State<CompetitionPage>
                                         horizontal:
                                             getProportionateScreenWidth(5)),
                                     child: SectionTitle(
-                                      title: "Đang diễn ra",
+                                      title: "Hiện Có",
                                       press: () {},
                                     ),
                                   ),
@@ -172,6 +172,8 @@ class _CompetitionPageState extends State<CompetitionPage>
                                                     .competitionTypeName,
                                                 date:
                                                     '${(state.competitions[index]).startTime}',
+                                                status: state
+                                                    .competitions[index].status,
                                                 tap: () {
                                                   Navigator.of(context)
                                                       .pushNamed(
