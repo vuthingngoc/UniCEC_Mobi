@@ -12,8 +12,8 @@ class NotiDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
-        title: const Text('Chi tiết'),
+        backgroundColor: AppColors.mainColor,
+        title: const Text('Chi tiết', style: TextStyle(color: Colors.white)),
       ),
       body: Card(
         margin: EdgeInsets.all(Dimens.size10),

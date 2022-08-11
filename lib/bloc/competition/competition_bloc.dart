@@ -68,7 +68,7 @@ class CompetitionBloc extends BaseBloc<CompetitionEvent, CompetitionState> {
 
       if (event is LoadCompetitionEvent) {
         print('LoadCompetitionEvent is running ...');
-        //_isLoading = true;
+        _isLoading = true;
         List<int> statuses = [];
         statuses.add(CompetitionStatus.Publish.index);
         statuses
@@ -96,7 +96,7 @@ class CompetitionBloc extends BaseBloc<CompetitionEvent, CompetitionState> {
               newCurrentPage: result.currentPage));
         }
 
-        // _isLoading = false;
+        _isLoading = false;
       }
 
       if (event is SelectACompetitionEvent) {

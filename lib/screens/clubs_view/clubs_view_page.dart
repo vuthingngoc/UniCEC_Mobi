@@ -46,8 +46,8 @@ class _ClubsViewPageState extends State<ClubsViewPage> {
             iconTheme: IconThemeData(color: Colors.black),
             title: Text('Danh sách các Câu Lạc Bộ',
                 style:
-                    TextStyle(color: Colors.black54, fontSize: Dimens.size23)),
-            backgroundColor: AppColors.primaryColor,
+                    TextStyle(color: Colors.white, fontSize: Dimens.size23)),
+            backgroundColor: AppColors.mainColor,
             centerTitle: true,
           ),
           body: ListViewClubs()),

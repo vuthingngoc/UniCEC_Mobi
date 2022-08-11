@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:unicec_mobi/utils/app_color.dart';
 import '../../bloc/club/club_bloc.dart';
 import '../../bloc/club/club_event.dart';
 import '../../bloc/club/club_state.dart';
@@ -63,10 +64,10 @@ class _ClubPageState extends State<ClubPage> {
           return (GetIt.I.get<CurrentUser>().clubIdSelected != 0)
               ? Scaffold(
                   appBar: AppBar(
-                    title: Text("Câu lạc bộ",
-                        style: TextStyle(color: Colors.black)),
+                    title: const Text("Câu lạc bộ",
+                        style: TextStyle(color: Colors.white)),
                     automaticallyImplyLeading: false,
-                    backgroundColor: ArgonColors.bgColorScreen,
+                    backgroundColor: AppColors.mainColor,
                     centerTitle: true,
                   ),
                   body: BodyClubInfo(
@@ -74,7 +75,7 @@ class _ClubPageState extends State<ClubPage> {
                 )
               : Scaffold(
                   appBar: AppBar(
-                    title: Text("Câu lạc bộ",
+                    title: const Text("Câu lạc bộ",
                         style: TextStyle(color: Colors.black)),
                     automaticallyImplyLeading: false,
                     backgroundColor: ArgonColors.bgColorScreen,
