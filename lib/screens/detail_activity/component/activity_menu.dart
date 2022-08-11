@@ -311,7 +311,7 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                                                             width: 10,
                                                           ),
                                                           Text(
-                                                            "Finished",
+                                                            "Completed",
                                                             style: TextStyle(
                                                                 fontSize: 18),
                                                           ),

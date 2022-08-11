@@ -175,8 +175,7 @@ class _ClubDescriptionState extends State<ClubDescription> {
                   textColor: ArgonColors.primary,
                   color: ArgonColors.secondary,
                   onPressed: () {
-                    Navigator.pushNamed(
-                        context, '/viewListmember');
+                    Navigator.of(context).pushNamed(Routes.viewListMember);
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(4)),
@@ -188,9 +187,7 @@ class _ClubDescriptionState extends State<ClubDescription> {
                         // MainAxisAlignment
                         //     .spaceAround,
                         children: [
-                          Icon(
-                              Icons.description,
-                              size: 13),
+                          Icon(Icons.description, size: 13),
                           SizedBox(
                             width: 5,
                           ),
@@ -220,24 +217,18 @@ class _ClubDescriptionState extends State<ClubDescription> {
             Container(
               width: double.infinity,
               height: 36,
-              margin:
-              new EdgeInsets.only(right: 90, left: 30, bottom: 15),
+              margin: new EdgeInsets.only(right: 90, left: 30, bottom: 15),
               child: RaisedButton(
                   textColor: ArgonColors.primary,
                   color: ArgonColors.secondary,
                   onPressed: () {
-                    Navigator.pushNamed(
-                        context, '/viewListCompetitionOfClub');
+                    Navigator.pushNamed(context, '/viewListCompetitionOfClub');
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(4)),
                   child: Padding(
-                      padding:
-                      EdgeInsets.only(
-                          bottom: 10,
-                          top: 10,
-                          left: 8,
-                          right: 8),
+                      padding: EdgeInsets.only(
+                          bottom: 10, top: 10, left: 8, right: 8),
                       child: Row(
                         // mainAxisAlignment:
                         // MainAxisAlignment

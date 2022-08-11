@@ -30,61 +30,53 @@ import 'widgets/navbar_competition.dart';
 import 'widgets/suggest_competition.dart';
 import 'widgets/section_title.dart';
 
-
 class ViewListCompetitionOfClubPage extends StatefulWidget {
-
   ViewListCompetitionOfClubPage();
 
   @override
-  _ViewListCompetitionOfClubPageState createState() => _ViewListCompetitionOfClubPageState();
+  _ViewListCompetitionOfClubPageState createState() =>
+      _ViewListCompetitionOfClubPageState();
 }
 
-class _ViewListCompetitionOfClubPageState extends State<ViewListCompetitionOfClubPage> {
-
-  void initState() {
-    // _bloc.listenerStream.listen((event) {});
-    // _bloc.add(LoadOutStandingCompetitionEvent());
-    // _bloc.isLoading = true;
-    // _bloc.add(LoadCompetitionEvent());
-  }
+class _ViewListCompetitionOfClubPageState
+    extends State<ViewListCompetitionOfClubPage> {
+  void initState() {}
 
   @override
   Widget build(BuildContext context) {
     Log.info('Build competition page');
-    // SizeConfig().init(context);
-          return Scaffold(
-              appBar: NavbarCompetitionOfClub(
-                title: "Cuộc thi và sự kiện trong CLB",
-                searchBar: true,
-                categoryOne: "Liên Trường",
-                categoryTwo: "Trong Trường",
-                // bloc: _bloc,
-                // state: "state",
-              ),
-              backgroundColor: ArgonColors.bgColorScreen,
-              //key: _scaffoldKey,
-              drawer: ArgonDrawer(currentPage: "Competition"),
-              body: Container(
-                padding: EdgeInsets.only(left: 24.0, right: 24.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      ApprovePage(),
-                      CancelPage(),
-                      CompletePage(),
-                      DraftPage(),
-                      EndPage(),
-                      OnGoingPage(),
-                      PendingPage(),
-                      PendingReviewPage(),
-                      PublishPage(),
-                      RegisterPage(),
-                      StartPage(),
-                      UpComingPage(),
-                    ],
-                  ),
-                ),
-              ));
-
+    return Scaffold(
+        // appBar: NavbarCompetitionOfClub(
+        //   title: "Cuộc thi và sự kiện trong CLB",
+        //   searchBar: true,
+        //   categoryOne: "Cuộc Thi",
+        //   categoryTwo: "Sự Kiện",
+        //   // bloc: _bloc,
+        //   // state: "state",
+        // ),
+        backgroundColor: ArgonColors.bgColorScreen,
+        //key: _scaffoldKey,
+        drawer: ArgonDrawer(currentPage: "Competition"),
+        body: Container(
+          padding: EdgeInsets.only(left: 24.0, right: 24.0),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                ApprovePage(),
+                CancelPage(),
+                CompletePage(),
+                DraftPage(),
+                EndPage(),
+                OnGoingPage(),
+                PendingPage(),
+                PendingReviewPage(),
+                PublishPage(),
+                RegisterPage(),
+                StartPage(),
+                UpComingPage(),
+              ],
+            ),
+          ),
+        ));
   }
 }

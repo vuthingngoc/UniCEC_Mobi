@@ -37,8 +37,11 @@ class _ViewDetailTableMemberMenuState extends State<ViewDetailTableMemberMenu> {
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
           )),
           DataColumn(
-              label: Text('Chức vụ',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
+              label: Container(
+            width: width * 0.18,
+            child: Text('Chức vụ',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          )),
           DataColumn(
               label: Container(
             width: width * 0.15,
