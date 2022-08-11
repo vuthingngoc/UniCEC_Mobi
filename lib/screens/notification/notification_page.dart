@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter/material.dart';
 
+import '../../bloc/notification/notification_event.dart';
 import '../../utils/app_color.dart';
 import '../../utils/dimens.dart';
 import 'widgets/list_notification.dart';
@@ -22,7 +23,8 @@ class _NotificationState extends State<NotificationPage> {
   @override
   void initState() {
     super.initState();
-    // _bloc.add(GettingAllNotiEvent());
+    _bloc.add(LoadNotificationsEvent());
+    _bloc.isLoading = true;
   }
 
   @override
@@ -42,7 +44,7 @@ class _NotificationState extends State<NotificationPage> {
         body: Stack(children: <Widget>[
           Padding(
               padding: EdgeInsets.all(Dimens.size10),
-              child: const ListNotification()),
+              child: ListNotification()),
         ]),
       ),
     );

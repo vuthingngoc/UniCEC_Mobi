@@ -7,11 +7,18 @@ import 'notification_event.dart';
 
 class NotificationBloc extends BaseBloc<NotificationEvent, NotificationState> {
   int pageSize = 10;
+  bool _isLoading = false;
+
+  bool get isLoading => _isLoading;
+  
+  set isLoading(bool isLoading){
+    _isLoading = isLoading;
+  }
 
   NotificationBloc()
       : super(NotificationState(
-            notifications: [],
-            currentNotifications: [],
+            notifications: const [],
+            currentNotifications: const [],
             currentPage: 1,
             pageSize: 10,
             hasNext: false)) {
@@ -38,7 +45,9 @@ class NotificationBloc extends BaseBloc<NotificationEvent, NotificationState> {
           emit(state.copyWith(
               notifications, state.currentNotifications, 1, pageSize, false));
         }
-      } else if (event is LoadMoreEvent) {
+      }
+      
+      if (event is LoadMoreEvent) {
         int currentPage = state.currentPage + 1;
         bool hasNext = false;
 
@@ -51,7 +60,9 @@ class NotificationBloc extends BaseBloc<NotificationEvent, NotificationState> {
         }
         emit(state.copyWith(state.notifications, state.currentNotifications,
             currentPage, pageSize, hasNext));
-      } else if (event is RefreshNotificationsEvent) {
+      } 
+      
+      if (event is RefreshNotificationsEvent) {
         emit(state.copyWith([], [], 1, pageSize, false));
       }
     }));
