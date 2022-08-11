@@ -1,3 +1,6 @@
+import 'package:get_it/get_it.dart';
+
+import '../../models/common/current_user.dart';
 import '../../models/enums/competition_scope_status.dart';
 import '/bloc/competition/competition_event.dart';
 import '/bloc/competition/competition_state.dart';
@@ -40,12 +43,13 @@ class CompetitionBloc extends BaseBloc<CompetitionEvent, CompetitionState> {
         //------------------------Request
         List<int> statuses = [];
         statuses.add(CompetitionStatus.Publish.index);
-        statuses
-            .add(CompetitionStatus.Register.index); // maybe will delete later
-        statuses
-            .add(CompetitionStatus.OnGoing.index); // maybe will delete later
+        statuses.add(CompetitionStatus.Register.index);
 
         CompetitionRequestModel request = CompetitionRequestModel(
+            universityId:
+                (state.scope == CompetitionScopeStatus.InterUniversity)
+                    ? null
+                    : GetIt.instance<CurrentUser>().universityId,
             viewMost: true,
             statuses: statuses,
             scope: state.scope,
@@ -71,12 +75,13 @@ class CompetitionBloc extends BaseBloc<CompetitionEvent, CompetitionState> {
         _isLoading = true;
         List<int> statuses = [];
         statuses.add(CompetitionStatus.Publish.index);
-        statuses
-            .add(CompetitionStatus.Register.index); // maybe will delete later
-        statuses
-            .add(CompetitionStatus.OnGoing.index); // maybe will delete later
+        statuses.add(CompetitionStatus.Register.index);
 
         CompetitionRequestModel request = CompetitionRequestModel(
+            universityId:
+                (state.scope == CompetitionScopeStatus.InterUniversity)
+                    ? null
+                    : GetIt.instance<CurrentUser>().universityId,
             scope: state.scope,
             name: state.searchName,
             statuses: statuses,
@@ -160,12 +165,10 @@ class CompetitionBloc extends BaseBloc<CompetitionEvent, CompetitionState> {
         _isLoading = true;
         List<int> statuses = [];
         statuses.add(CompetitionStatus.Publish.index);
-        statuses
-            .add(CompetitionStatus.Register.index); // maybe will delete later
-        statuses
-            .add(CompetitionStatus.OnGoing.index); // maybe will delete later
+        statuses.add(CompetitionStatus.Register.index);
 
         CompetitionRequestModel request = CompetitionRequestModel(
+            universityId: null,
             scope: CompetitionScopeStatus.InterUniversity,
             event: false,
             statuses: statuses); // add more params if you want
@@ -216,10 +219,12 @@ class CompetitionBloc extends BaseBloc<CompetitionEvent, CompetitionState> {
         statuses.add(CompetitionStatus.Publish.index);
         statuses
             .add(CompetitionStatus.Register.index); // maybe will delete later
-        statuses
-            .add(CompetitionStatus.OnGoing.index); // maybe will delete later
 
         CompetitionRequestModel request = CompetitionRequestModel(
+            universityId:
+                (state.scope == CompetitionScopeStatus.InterUniversity)
+                    ? null
+                    : GetIt.instance<CurrentUser>().universityId,
             scope: state.scope,
             name: state.searchName,
             statuses: statuses,
@@ -249,12 +254,13 @@ class CompetitionBloc extends BaseBloc<CompetitionEvent, CompetitionState> {
         //-----------request
         List<int> statuses = [];
         statuses.add(CompetitionStatus.Publish.index);
-        statuses
-            .add(CompetitionStatus.Register.index); // maybe will delete later
-        statuses
-            .add(CompetitionStatus.OnGoing.index); // maybe will delete later
+        statuses.add(CompetitionStatus.Register.index);
 
         CompetitionRequestModel request = CompetitionRequestModel(
+            universityId:
+                (state.scope == CompetitionScopeStatus.InterUniversity)
+                    ? null
+                    : GetIt.instance<CurrentUser>().universityId,
             scope: state.scope,
             name: state.searchName,
             statuses: statuses,

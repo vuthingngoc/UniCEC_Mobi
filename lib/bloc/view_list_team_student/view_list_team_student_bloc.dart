@@ -52,6 +52,12 @@ class ViewListTeamStudentBloc
             newHasNext: result.hasNext,
             newCurrentPage: result.currentPage,
           ));
+        } else {
+          emit(state.copyWith(
+              newListTeam: state.listTeam,
+              newCompetitionId: event.competitionId, //change
+              newHasNext: state.hasNext,
+              newCurrentPage: state.currentPage));
         }
       }
       //Refesh Event

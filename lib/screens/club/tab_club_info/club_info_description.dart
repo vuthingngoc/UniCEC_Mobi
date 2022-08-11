@@ -136,20 +136,20 @@ class _ClubDescriptionState extends State<ClubDescription> {
                   ],
                 ),
               ),
-            SizedBox(height: 10),
-            if (widget.member?.phone != null)
-              Padding(
-                padding: const EdgeInsets.only(left: 30.0),
-                child: Row(
-                  children: [
-                    Icon(Icons.phone),
-                    SizedBox(width: 10),
-                    Text(widget.member?.phone ?? '',
-                        style: TextStyle(fontSize: 16)),
-                  ],
-                ),
-              ),
             // SizedBox(height: 10),
+            // if (widget.member?.phone != null)
+            //   Padding(
+            //     padding: const EdgeInsets.only(left: 30.0),
+            //     child: Row(
+            //       children: [
+            //         Icon(Icons.phone),
+            //         SizedBox(width: 10),
+            //         Text(widget.member?.phone ?? '',
+            //             style: TextStyle(fontSize: 16)),
+            //       ],
+            //     ),
+            //   ),
+            // // SizedBox(height: 10),
           ]),
         ),
         Padding(
@@ -238,7 +238,7 @@ class _ClubDescriptionState extends State<ClubDescription> {
                           SizedBox(
                             width: 5,
                           ),
-                          Text("Danh sách các cuộc thi & sự kiện",
+                          Text("Danh sách Cuộc Thi & Sự Kiện",
                               style: TextStyle(
                                   fontWeight: FontWeight.w600, fontSize: 16))
                         ],

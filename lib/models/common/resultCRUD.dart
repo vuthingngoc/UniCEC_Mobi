@@ -1,5 +1,7 @@
 class ResultCRUD {
   final bool check;
   final String errorMessage;
-  ResultCRUD({required this.errorMessage, required this.check});
+  //return data
+  int? returnIntData;
+  ResultCRUD({required this.errorMessage, required this.check, returnIntData});
 }
