@@ -32,7 +32,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
     super.initState();
 
     _bloc.listenerStream.listen((event) {
-      if(event is ShowPopUpAnnouncement){
+      if (event is ShowPopUpAnnouncement) {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(event.message)));
       }
@@ -646,7 +646,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                   right: 10.0),
                                                           child: Row(children: [
                                                             SizedBox(
-                                                              height: 100.0,
+                                                              height: 60.0,
                                                               child: ListView
                                                                   .builder(
                                                                       scrollDirection:
@@ -667,9 +667,9 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                               index) {
                                                                         return Container(
                                                                             width:
-                                                                                100.0,
+                                                                                60.0,
                                                                             height:
-                                                                                100.0,
+                                                                                60.0,
                                                                             padding: const EdgeInsets.fromLTRB(
                                                                                 6.0,
                                                                                 2.0,
@@ -705,17 +705,18 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                     padding:
                                                         const EdgeInsets.only(
                                                             bottom: 8.0),
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceAround,
+                                                    child: Wrap(
+                                                      // mainAxisAlignment:
+                                                      //     MainAxisAlignment
+                                                      //         .spaceAround,
+                                                      runSpacing: 20.0,
                                                       children: [
                                                         if (state
                                                                 .competitionDetail
                                                                 ?.numberOfTeam !=
                                                             0)
                                                           Container(
-                                                            // width: 0,
+                                                            width: 180.0,
                                                             height: 36,
                                                             child: RaisedButton(
                                                                 textColor:
@@ -752,11 +753,8 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                             .only(
                                                                         bottom:
                                                                             10,
-                                                                        top: 10,
-                                                                        left:
-                                                                            14,
-                                                                        right:
-                                                                            14),
+                                                                        top:
+                                                                            10),
                                                                     child: Row(
                                                                       mainAxisAlignment:
                                                                           MainAxisAlignment
@@ -779,7 +777,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                     ))),
                                                           ),
                                                         Container(
-                                                          // width: 0,
+                                                          width: 180.0,
                                                           height: 36,
                                                           child: RaisedButton(
                                                               textColor:
@@ -807,9 +805,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                           .only(
                                                                       bottom:
                                                                           10,
-                                                                      top: 10,
-                                                                      left: 8,
-                                                                      right: 8),
+                                                                      top: 10),
                                                                   child: Row(
                                                                     mainAxisAlignment:
                                                                         MainAxisAlignment
@@ -899,7 +895,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                   color: AppColors
                                                                       .mainColor,
                                                                   onPressed:
-                                                                      () {                                                                        
+                                                                      () {
                                                                     _bloc.add(ParticipateTheCompetitionEvent(
                                                                         competitionId: (state
                                                                             .competitionDetail
@@ -927,22 +923,34 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                               fontWeight: FontWeight.w600,
                                                                               fontSize: 18.0))),
                                                                 )
-                                                              : FlatButton(                                                                
+                                                              : FlatButton(
                                                                   textColor:
                                                                       ArgonColors
                                                                           .white,
-                                                                  color: (state.competitionDetail?.status == CompetitionStatus.Start)
-                                                                  ? AppColors
-                                                                      .mainColor
-                                                                  : Colors.grey,
+                                                                  color: (state
+                                                                              .competitionDetail
+                                                                              ?.status ==
+                                                                          CompetitionStatus
+                                                                              .Start)
+                                                                      ? AppColors
+                                                                          .mainColor
+                                                                      : Colors
+                                                                          .grey,
                                                                   onPressed:
                                                                       () {
-                                                                        if(state.competitionDetail?.status != CompetitionStatus.Start){
-                                                                          return;
-                                                                        }
+                                                                    if (state
+                                                                            .competitionDetail
+                                                                            ?.status !=
+                                                                        CompetitionStatus
+                                                                            .Start) {
+                                                                      return;
+                                                                    }
 
-                                                                        _bloc.add(AttendanceCompetitionEvent(seedsCode: (state.competitionDetail?.seedsCode)!));
-                                                                      },
+                                                                    _bloc.add(AttendanceCompetitionEvent(
+                                                                        seedsCode: (state
+                                                                            .competitionDetail
+                                                                            ?.seedsCode)!));
+                                                                  },
                                                                   shape:
                                                                       RoundedRectangleBorder(
                                                                     borderRadius:

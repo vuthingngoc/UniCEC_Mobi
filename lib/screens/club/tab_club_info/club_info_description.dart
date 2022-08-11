@@ -157,20 +157,22 @@ class _ClubDescriptionState extends State<ClubDescription> {
             horizontal: getProportionateScreenWidth(20),
             vertical: 10,
           ),
-          child: Column(children: [
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
             Row(
-              children: [
+              children: const [
                 Text(
                   'Xem danh sách thành viên của CLB',
                   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Container(
-              width: double.infinity,
+              width: 220.0,
               height: 36,
-              margin: new EdgeInsets.only(right: 90, left: 30, bottom: 15),
+              margin: new EdgeInsets.only(bottom: 15),
               child: RaisedButton(
                   textColor: ArgonColors.primary,
                   color: ArgonColors.secondary,
@@ -180,14 +182,16 @@ class _ClubDescriptionState extends State<ClubDescription> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(4)),
                   child: Padding(
-                      padding: EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                           bottom: 10, top: 10, left: 8, right: 8),
                       child: Row(
                         // mainAxisAlignment:
                         // MainAxisAlignment
                         //     .spaceAround,
-                        children: [
-                          Icon(Icons.description, size: 13),
+                        children: const [
+                          Icon(
+                              Icons.description,
+                              size: 13),
                           SizedBox(
                             width: 5,
                           ),
@@ -205,7 +209,7 @@ class _ClubDescriptionState extends State<ClubDescription> {
             vertical: 10,
           ),
           child: Column(children: [
-            Row(
+            Wrap(
               children: const [
                 Text(
                   'Các cuộc thi và sự kiện câu lạc bộ hiện có',
@@ -215,9 +219,8 @@ class _ClubDescriptionState extends State<ClubDescription> {
             ),
             const SizedBox(height: 10),
             Container(
-              width: double.infinity,
+              width: 305.0,
               height: 36,
-              margin: new EdgeInsets.only(right: 90, left: 30, bottom: 15),
               child: RaisedButton(
                   textColor: ArgonColors.primary,
                   color: ArgonColors.secondary,
@@ -227,13 +230,17 @@ class _ClubDescriptionState extends State<ClubDescription> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(4)),
                   child: Padding(
-                      padding: EdgeInsets.only(
-                          bottom: 10, top: 10, left: 8, right: 8),
+                      padding:
+                      const EdgeInsets.only(
+                          bottom: 10,
+                          top: 10,
+                          left: 8,
+                          right: 8),
                       child: Row(
                         // mainAxisAlignment:
                         // MainAxisAlignment
                         //     .spaceAround,
-                        children: [
+                        children: const [
                           Icon(Icons.description, size: 13),
                           SizedBox(
                             width: 5,
@@ -244,7 +251,7 @@ class _ClubDescriptionState extends State<ClubDescription> {
                         ],
                       ))),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
           ]),
         ),
         Padding(
@@ -256,38 +263,39 @@ class _ClubDescriptionState extends State<ClubDescription> {
             if (widget.club?.clubFanpage != null ||
                 widget.club?.clubContact != null)
               Row(
-                children: [
+                children: const [
                   Text(
                     'Thông tin liên hệ',
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                   ),
                 ],
               ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             if (widget.club?.clubFanpage != null)
               Padding(
-                padding: const EdgeInsets.only(left: 30.0),
-                child: Row(
+                padding: const EdgeInsets.only(left: 15.0),
+                child: Wrap(
                   children: [
-                    Icon(Icons.web),
-                    SizedBox(width: 10),
+                    const Icon(Icons.web),
+                    const SizedBox(width: 10),
                     Text(
                       widget.club?.clubFanpage ?? '',
-                      style: TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16),
                     ),
                   ],
                 ),
               ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             if (widget.club?.clubContact != null)
               Padding(
-                padding: const EdgeInsets.only(left: 30.0),
-                child: Row(
+                padding: const EdgeInsets.only(left: 15.0),
+                child: Wrap(
+                  alignment: WrapAlignment.start,            
                   children: [
-                    Icon(Icons.phone),
-                    SizedBox(width: 10),
+                    const Icon(Icons.phone),
+                    const SizedBox(width: 10),
                     Text(widget.club?.clubContact ?? '',
-                        style: TextStyle(fontSize: 16)),
+                        style: const TextStyle(fontSize: 16)),
                   ],
                 ),
               )

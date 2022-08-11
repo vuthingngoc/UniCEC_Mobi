@@ -96,14 +96,15 @@ class _ClubCardState extends State<ClubCard> {
                             ],
                           ),
                           RichText(
-                              text: TextSpan(
+                            overflow: TextOverflow.ellipsis,
+                              text: TextSpan(                                
                                 children: [                                  
                             const TextSpan(
                                 text: 'Fanpage: ',
                                 style: TextStyle(
                                     fontSize: 15.0, color: Colors.black)),
                             TextSpan(
-                                text: "${_club.clubFanpage}",
+                                text: "${_club.clubFanpage}",                                                                
                                 style: const TextStyle(
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.bold,
