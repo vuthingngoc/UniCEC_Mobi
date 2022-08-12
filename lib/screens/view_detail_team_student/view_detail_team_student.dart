@@ -5,6 +5,7 @@ import '../../bloc/view_detail_team_student/view_detail_team_student_event.dart'
 import '../../bloc/view_detail_team_student/view_detail_team_student_state.dart';
 import '../../models/entities/team/sending_data_model.dart';
 import '../../utils/app_color.dart';
+import '../../utils/router.dart';
 import 'component/view_detail_team_student_table.dart';
 
 class ViewDetailTeamStudentPage extends StatefulWidget {
@@ -25,6 +26,12 @@ class _ViewDetailTeamStudentPageState extends State<ViewDetailTeamStudentPage>
 
   @override
   void initState() {
+    bloc.listenerStream.listen((event) {
+      if (event is NavigatorToAccountPageEvent) {
+        Navigator.of(context)
+            .pushNamed(Routes.myAccount, arguments: event.userId);
+      }
+    });
     super.initState();
   }
 
@@ -57,11 +64,11 @@ class _ViewDetailTeamStudentPageState extends State<ViewDetailTeamStudentPage>
                 ),
                 title: Text(
                   state.teamDetail?.name ?? "Chưa Load Team Name",
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(color: Colors.white),
                 ),
                 automaticallyImplyLeading: false,
                 centerTitle: true,
-                backgroundColor: AppColors.backgroundPageColor,
+                backgroundColor: AppColors.mainColor,
               ),
               body: SingleChildScrollView(
                 child: Column(children: [

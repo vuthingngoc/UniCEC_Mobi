@@ -123,8 +123,8 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
         }
       }
       if (event is MemberOutTeamEvent) {
-        bool check = await service.MemberOutTeam(state.teamDetail!.id);
-        if (check) {
+        ResultCRUD check = await service.MemberOutTeam(state.teamDetail!.id);
+        if (check.check) {
           TeamDetailModel? result = await service.GetDetailTeamModel(
               state.competitionId, state.teamId);
           if (result != null) {
@@ -152,21 +152,23 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
                 newValueTeamName: result.name,
                 newValueTeamDescription: result.description,
                 newStatus: result.status));
-            listener.add(
-                ShowingSnackBarEvent(message: "Thoát khỏi nhóm thành công"));
           }
+        } else {
+          listener.add(ShowingSnackBarEvent(message: check.errorMessage));
         }
       }
       if (event is DeleteTeamByLeaderEvent) {
-        bool check = await service.DeleteTeam(state.teamDetail!.id);
-        if (check) {
+        ResultCRUD check = await service.DeleteTeam(state.teamDetail!.id);
+        if (check.check) {
           listener.add(BackPreviousPageEvent());
+        } else {
+          listener.add(ShowingSnackBarEvent(message: check.errorMessage));
         }
       }
       if (event is DeleteMemberByTeamLeaderEvent) {
-        bool check = await service.DeleteMemberByTeamLeader(
+        ResultCRUD check = await service.DeleteMemberByTeamLeader(
             state.teamDetail!.id, event.participantId);
-        if (check) {
+        if (check.check) {
           TeamDetailModel? result = await service.GetDetailTeamModel(
               state.competitionId, state.teamId);
           if (result != null) {
@@ -197,6 +199,8 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
             listener.add(ShowingSnackBarEvent(
                 message: "Xóa thành viên khỏi nhóm thành công"));
           }
+        } else {
+          listener.add(ShowingSnackBarEvent(message: check.errorMessage));
         }
       }
       if (event is UpdateMemberRoleEvent) {
@@ -237,6 +241,9 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
           listener
               .add(ShowingSnackBarEvent(message: resultUpdate.errorMessage));
         }
+      }
+      if (event is ClickToViewInfoEvent) {
+        listener.add(NavigatorToAccountPageEvent(userId: event.userId));
       }
     });
   }

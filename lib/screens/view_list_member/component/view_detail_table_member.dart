@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unicec_mobi/bloc/view_list_member/view_list_member_event.dart';
 import '../../../bloc/view_list_member/view_list_member_bloc.dart';
 import '../../../models/entities/member/member_model.dart';
+import '../../../utils/router.dart';
 
 class ViewDetailTableMemberMenu extends StatefulWidget {
   final List<MemberModel> listModel;
@@ -83,8 +85,10 @@ class _ViewDetailTableMemberMenuState extends State<ViewDetailTableMemberMenu> {
                 PopupMenuItem(
                   onTap: () {
                     //chuyển sang trang view thông tin
+                    BlocProvider.of<ViewListMemberBloc>(context)
+                        .add(ClickToViewInfoEvent(userId: member.studentId));
                   },
-                  value: 3,
+                  value: 1,
                   child: Row(
                     children: <Widget>[
                       Icon(Icons.remove_red_eye, size: 18),

@@ -22,9 +22,9 @@ abstract class ITeamService {
   //
   Future<TeamDetailModel?> GetDetailTeamModel(int competitionId, int teamId);
   //
-  Future<bool> MemberOutTeam(int teamId);
+  Future<ResultCRUD> MemberOutTeam(int teamId);
   //
-  Future<bool> DeleteTeam(int teamId);
+  Future<ResultCRUD> DeleteTeam(int teamId);
   //
-  Future<bool> DeleteMemberByTeamLeader(int teamId, int participantId);
+  Future<ResultCRUD> DeleteMemberByTeamLeader(int teamId, int participantId);
 }

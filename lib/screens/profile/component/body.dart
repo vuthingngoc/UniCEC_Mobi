@@ -35,40 +35,37 @@ class Body extends StatelessWidget {
                         style: const TextStyle(
                             color: Color.fromRGBO(50, 50, 93, 1),
                             fontSize: 23.0,
-                            fontWeight: FontWeight.bold
-                        )),
-                     Padding(
-                       padding: const EdgeInsets.only(top: 20.0),
-                       child: Container(
-                         margin: const EdgeInsets.only(right: 20),
-                         padding: const EdgeInsets.all(5),
-                         decoration: BoxDecoration(
-                             border: Border.all(
-                                 color: AppColors.mainColor),
-                             color: AppColors.mainColor,
-                             borderRadius:
-                             const BorderRadius.all(
-                                 Radius.circular(10))),
-                         child: Text(
-                          "${user.seedsWallet.amount} seeds",
-                             style: const TextStyle(
-                               // color: Colors.bl,
-                               fontSize: 18,
-                               color: ArgonColors.white
-                             )),
-                       ),
-                     ),
-                   ],
-                 ),
-               ),
-
+                            fontWeight: FontWeight.bold)),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: Container(
+                        margin: const EdgeInsets.only(right: 20),
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: AppColors.mainColor),
+                            color: AppColors.mainColor,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10))),
+                        child: Text("${user.seedsWallet.amount} seeds",
+                            style: const TextStyle(
+                                // color: Colors.bl,
+                                fontSize: 18,
+                                color: ArgonColors.white)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
           SizedBox(height: 20),
           ProfileMenu(
             text: "Thông tin chi tiết",
             icon: "assets/icons/icon-user.svg",
-            press: () => {Navigator.pushNamed(context, Routes.myAccount)},
+            press: () => {
+              Navigator.pushNamed(context, Routes.myAccount,
+                  arguments: GetIt.I.get<CurrentUser>().id)
+            },
           ),
           ProfileMenu(
             text: "Các cuộc thi & sự kiện đang tham gia",

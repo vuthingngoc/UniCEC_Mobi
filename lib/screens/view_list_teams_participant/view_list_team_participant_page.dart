@@ -86,11 +86,11 @@ class _ViewListTeamParticipantPageState
                   ),
                   title: Text(
                     "Danh sách các đội tham gia",
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: Colors.white),
                   ),
                   automaticallyImplyLeading: false,
                   centerTitle: true,
-                  backgroundColor: AppColors.backgroundPageColor,
+                  backgroundColor: AppColors.mainColor,
                 ),
                 body: Body(),
                 floatingActionButton: AddTeamButton(),

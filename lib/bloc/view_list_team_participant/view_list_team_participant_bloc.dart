@@ -132,16 +132,16 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
       //join team
       if (event is JoinTeamEvent) {
         ResultCRUD check = await service.JoinTeam(state.valueInvitedCode);
-        if (check.returnIntData! > 0) {
+        if (check.returnIntData > 0) {
           TeamModel? team = null;
           for (TeamModel model in state.listTeam) {
-            if (model.id == check.returnIntData!) {
+            if (model.id == check.returnIntData) {
               team = model;
             }
           }
           if (team != null) {
             listener.add(NavigatorTeamDetailPageEvent(
-                teamId: check.returnIntData!,
+                teamId: check.returnIntData,
                 competitionId: state.competitionId,
                 teamName: team.name,
                 teamDescription: team.description,

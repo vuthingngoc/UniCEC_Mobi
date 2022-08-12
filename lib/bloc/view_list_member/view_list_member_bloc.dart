@@ -72,6 +72,9 @@ class ViewListMemberBloc
               newListMember: [], newSearchName: null, newClubRoleId: null));
         }
       }
+      if (event is ClickToViewInfoEvent) {
+        listener.add(NavigatorToAccountPageEvent(userId: event.userId));
+      }
     }));
   }
 }
