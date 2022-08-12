@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../bloc/view_detail_team_student/view_detail_team_student_bloc.dart';
+import '../../../bloc/view_detail_team_student/view_detail_team_student_event.dart';
 import '../../../models/entities/participant/view_detail_participant.dart';
+import '../../../utils/router.dart';
 
 class ViewDetailTableStudentMenu extends StatefulWidget {
   final List<ViewDetailParticipantModel> listModel;
@@ -86,7 +88,10 @@ class _ViewDetailTableStudentMenuState
                 SizedBox(child: PopupMenuButton<int>(itemBuilder: (context) {
               return [
                 PopupMenuItem(
-                  onTap: () {},
+                  onTap: () {
+                    BlocProvider.of<ViewDetailTeamStudentBloc>(context)
+                        .add(ClickToViewInfoEvent(userId: member.studentId));
+                  },
                   value: 1,
                   child: Row(
                     children: <Widget>[

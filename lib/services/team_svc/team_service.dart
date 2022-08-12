@@ -95,18 +95,20 @@ class TeamService extends ITeamService {
             "description": teamDescription
           }));
       if (response.statusCode == 200) {
-        ResultCRUD result = ResultCRUD(check: true, errorMessage: '');
+        ResultCRUD result =
+            ResultCRUD(check: true, errorMessage: '', returnIntData: -1);
         return result;
       }
       if (response.statusCode == 400) {
-        ResultCRUD result =
-            ResultCRUD(check: false, errorMessage: response.body);
+        ResultCRUD result = ResultCRUD(
+            check: false, errorMessage: response.body, returnIntData: -1);
         return result;
       }
     } catch (e) {
       Log.error(e.toString());
     }
-    return ResultCRUD(check: false, errorMessage: 'Lỗi rồi!');
+    return ResultCRUD(
+        check: false, errorMessage: 'Lỗi rồi!', returnIntData: -1);
   }
 
   @override
@@ -174,22 +176,24 @@ class TeamService extends ITeamService {
             "status": status.index
           }));
       if (response.statusCode == 200) {
-        ResultCRUD result = ResultCRUD(check: true, errorMessage: '');
+        ResultCRUD result =
+            ResultCRUD(check: true, errorMessage: '', returnIntData: -1);
         return result;
       }
       if (response.statusCode == 400) {
-        ResultCRUD result =
-            ResultCRUD(check: false, errorMessage: response.body);
+        ResultCRUD result = ResultCRUD(
+            check: false, errorMessage: response.body, returnIntData: -1);
         return result;
       }
     } catch (e) {
       Log.error(e.toString());
     }
-    return ResultCRUD(check: false, errorMessage: 'Lỗi rồi!');
+    return ResultCRUD(
+        check: false, errorMessage: 'Lỗi rồi!', returnIntData: -1);
   }
 
   @override
-  Future<bool> MemberOutTeam(int teamId) async {
+  Future<ResultCRUD> MemberOutTeam(int teamId) async {
     var client = http.Client();
     String url =
         Api.GetUrl(apiPath: '${Api.teams}/member-out-team?teamId=${teamId}');
@@ -200,16 +204,24 @@ class TeamService extends ITeamService {
         headers: Api.GetHeader(token),
       );
       if (response.statusCode == 200) {
-        return true;
+        ResultCRUD result =
+            ResultCRUD(check: true, errorMessage: '', returnIntData: -1);
+        return result;
+      }
+      if (response.statusCode == 400) {
+        ResultCRUD result = ResultCRUD(
+            check: false, errorMessage: response.body, returnIntData: -1);
+        return result;
       }
     } catch (e) {
       Log.error(e.toString());
     }
-    return false;
+    return ResultCRUD(
+        check: false, errorMessage: 'Lỗi rồi!', returnIntData: -1);
   }
 
   @override
-  Future<bool> DeleteTeam(int teamId) async {
+  Future<ResultCRUD> DeleteTeam(int teamId) async {
     var client = http.Client();
     String url = Api.GetUrl(apiPath: '${Api.teams}/team?teamId=${teamId}');
     String? token = GetIt.I.get<CurrentUser>().idToken;
@@ -219,16 +231,25 @@ class TeamService extends ITeamService {
         headers: Api.GetHeader(token),
       );
       if (response.statusCode == 200) {
-        return true;
+        ResultCRUD result =
+            ResultCRUD(check: true, errorMessage: '', returnIntData: -1);
+        return result;
+      }
+      if (response.statusCode == 400) {
+        ResultCRUD result = ResultCRUD(
+            check: false, errorMessage: response.body, returnIntData: -1);
+        return result;
       }
     } catch (e) {
       Log.error(e.toString());
     }
-    return false;
+    return ResultCRUD(
+        check: false, errorMessage: 'Lỗi rồi!', returnIntData: -1);
   }
 
   @override
-  Future<bool> DeleteMemberByTeamLeader(int teamId, int participantId) async {
+  Future<ResultCRUD> DeleteMemberByTeamLeader(
+      int teamId, int participantId) async {
     var client = http.Client();
     String url = Api.GetUrl(
         apiPath:
@@ -240,12 +261,20 @@ class TeamService extends ITeamService {
         headers: Api.GetHeader(token),
       );
       if (response.statusCode == 200) {
-        return true;
+        ResultCRUD result =
+            ResultCRUD(check: true, errorMessage: '', returnIntData: -1);
+        return result;
+      }
+      if (response.statusCode == 400) {
+        ResultCRUD result = ResultCRUD(
+            check: false, errorMessage: response.body, returnIntData: -1);
+        return result;
       }
     } catch (e) {
       Log.error(e.toString());
     }
-    return false;
+    return ResultCRUD(
+        check: false, errorMessage: 'Lỗi rồi!', returnIntData: -1);
   }
 
   @override
@@ -259,17 +288,19 @@ class TeamService extends ITeamService {
           body: jsonEncode(
               <String, dynamic>{"participant_in_team_id": participanInTeamId}));
       if (response.statusCode == 200) {
-        ResultCRUD result = ResultCRUD(check: true, errorMessage: '');
+        ResultCRUD result =
+            ResultCRUD(check: true, errorMessage: '', returnIntData: -1);
         return result;
       }
       if (response.statusCode == 400) {
-        ResultCRUD result =
-            ResultCRUD(check: false, errorMessage: response.body);
+        ResultCRUD result = ResultCRUD(
+            check: false, errorMessage: response.body, returnIntData: -1);
         return result;
       }
     } catch (e) {
       Log.error(e.toString());
     }
-    return ResultCRUD(check: false, errorMessage: 'Lỗi rồi!');
+    return ResultCRUD(
+        check: false, errorMessage: 'Lỗi rồi!', returnIntData: -1);
   }
 }

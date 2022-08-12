@@ -10,6 +10,7 @@ import '../../models/common/current_user.dart';
 import '../../models/entities/team/sending_data_model.dart';
 import '../../models/enums/team_status.dart';
 import '../../utils/app_color.dart';
+import '../../utils/router.dart';
 import '../widgets/input.dart';
 import 'component/view_detail_table.dart';
 
@@ -42,6 +43,9 @@ class _ViewDetailTeamParticipantPageState
       } else if (event is ShowingSnackBarEvent) {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(event.message)));
+      } else if (event is NavigatorToAccountPageEvent) {
+        Navigator.of(context)
+            .pushNamed(Routes.myAccount, arguments: event.userId);
       }
     });
   }
@@ -229,11 +233,11 @@ class _ViewDetailTeamParticipantPageState
                 ),
                 title: Text(
                   state.teamDetail?.name ?? "Chưa Load Team Name",
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(color: Colors.white),
                 ),
                 automaticallyImplyLeading: false,
                 centerTitle: true,
-                backgroundColor: AppColors.backgroundPageColor,
+                backgroundColor: AppColors.mainColor,
               ),
               body: SingleChildScrollView(
                 child: Column(children: [

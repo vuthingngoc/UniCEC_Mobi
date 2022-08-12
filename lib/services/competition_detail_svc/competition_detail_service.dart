@@ -45,7 +45,6 @@ class CompetitionDetailService implements ICompetitionDetailService {
   }
 
   @override
-
   Future<CompetitionModel?> getCompetitionStudentJoin(int competitionId) async {
     var client = http.Client();
     String url = Api.GetUrl(
@@ -69,34 +68,44 @@ class CompetitionDetailService implements ICompetitionDetailService {
     var client = http.Client();
     String url = Api.GetUrl(apiPath: Api.participants);
     String token = GetIt.I.get<CurrentUser>().idToken;
-    try{
-      var response = await client.post(Uri.parse(url), headers: Api.GetHeader(token), body: jsonEncode({'competition_id': '$competitionId'}));
-      return (response.statusCode == 200) 
-          ? ResultCRUD(errorMessage: '', check: true)
-          : ResultCRUD(errorMessage: response.body.toString(), check: false);
-    }catch(e){
+    try {
+      var response = await client.post(Uri.parse(url),
+          headers: Api.GetHeader(token),
+          body: jsonEncode({'competition_id': '$competitionId'}));
+      return (response.statusCode == 200)
+          ? ResultCRUD(errorMessage: '', check: true, returnIntData: -1)
+          : ResultCRUD(
+              errorMessage: response.body.toString(),
+              check: false,
+              returnIntData: -1);
+    } catch (e) {
       Log.error(e.toString());
     }
 
-    return ResultCRUD(errorMessage: '', check: false); // avoid error 
+    return ResultCRUD(
+        errorMessage: '', check: false, returnIntData: -1); // avoid error
   }
-  
+
   @override
   Future<ResultCRUD> attendanceCompetition(String seedsCode) async {
     var client = http.Client();
     String url = Api.GetUrl(apiPath: '${Api.participants}/attendance');
     String token = GetIt.I.get<CurrentUser>().idToken;
-    try{
-      var response = await client.put(Uri.parse(url), headers: Api.GetHeader(token), body: jsonEncode({'seeds_code': seedsCode}));
-      return (response.statusCode == 200) 
-          ? ResultCRUD(errorMessage: '', check: true)
-          : ResultCRUD(errorMessage: response.body.toString(), check: false);
-    }catch(e){
+    try {
+      var response = await client.put(Uri.parse(url),
+          headers: Api.GetHeader(token),
+          body: jsonEncode({'seeds_code': seedsCode}));
+      return (response.statusCode == 200)
+          ? ResultCRUD(errorMessage: '', check: true, returnIntData: -1)
+          : ResultCRUD(
+              errorMessage: response.body.toString(),
+              check: false,
+              returnIntData: -1);
+    } catch (e) {
       Log.error(e.toString());
     }
 
-    return ResultCRUD(errorMessage: '', check: false); // avoid error 
+    return ResultCRUD(
+        errorMessage: '', check: false, returnIntData: -1); // avoid error
   }
-
 }
-

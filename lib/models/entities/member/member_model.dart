@@ -2,6 +2,7 @@ import 'package:unicec_mobi/models/enums/member_status.dart';
 
 class MemberModel {
   int id;
+  int studentId;
   String name;
   String studentCode;
   int clubRoleId;
@@ -14,6 +15,7 @@ class MemberModel {
 
   MemberModel(
       {required this.id,
+      required this.studentId,
       required this.name,
       required this.studentCode,
       required this.clubRoleId,
@@ -26,6 +28,7 @@ class MemberModel {
 
   factory MemberModel.fromJson(Map<String, dynamic> json) {
     int id = json['id'] ?? '';
+    int studentId = json['student_id'] ?? '';
     String name = json['name'] ?? '';
     String studentCode = json['student_code'] ?? '';
     int clubRoleId = json['club_role_id'] ?? '';
@@ -38,6 +41,7 @@ class MemberModel {
 
     return MemberModel(
         id: id,
+        studentId: studentId,
         name: name,
         studentCode: studentCode,
         clubRoleId: clubRoleId,

@@ -51,6 +51,9 @@ class ViewDetailTeamStudentBloc
               newStatus: result.status));
         }
       }
+      if (event is ClickToViewInfoEvent) {
+        listener.add(NavigatorToAccountPageEvent(userId: event.userId));
+      }
     });
   }
 }

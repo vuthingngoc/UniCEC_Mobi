@@ -320,40 +320,6 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                 ],
                               ),
                             ),
-                            // GestureDetector(
-                            //   onTap: () {
-                            //     bloc.add(ChangeCompetitionScopeEvent(
-                            //         scope: CompetitionScopeStatus.Club));
-                            //   },
-                            //   child: Row(
-                            //     children: [
-                            //       (state.requestModel?.scope == CompetitionScopeStatus.Club)
-                            //           ? Container(
-                            //               child: Row(children: [
-                            //                 Icon(Icons.group,
-                            //                     color: ArgonColors.inputSuccess,
-                            //                     size: 22.0),
-                            //                 Text(widget.categoryThree,
-                            //                     style: TextStyle(
-                            //                         color: ArgonColors
-                            //                             .inputSuccess,
-                            //                         fontSize: 16.0))
-                            //               ]),
-                            //             )
-                            //           : Container(
-                            //               child: Row(children: [
-                            //                 Icon(Icons.group,
-                            //                     color: ArgonColors.initial,
-                            //                     size: 22.0),
-                            //                 Text(widget.categoryThree,
-                            //                     style: TextStyle(
-                            //                         color: ArgonColors.initial,
-                            //                         fontSize: 16.0))
-                            //               ]),
-                            //             )
-                            //     ],
-                            //   ),
-                            // )
                           ],
                         ),
                     ],

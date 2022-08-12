@@ -33,11 +33,24 @@ class MyAccountBloc extends BaseBloc<MyAccountEvent, MyAccountState> {
             seedsWallet: SeedsWalletModel(
                 id: 0, amount: 0, status: false, studentId: 0))) {
     on((event, emit) async {
-      if (event is LoadInfoAccountEvent) {
+      // if (event is LoadInfoAccountEvent) {
+      //   print('LoadProfileEvent is running ...');
+      //   CurrentUser currentUser = GetIt.I.get<CurrentUser>().currentUser;
+      //   UserModel? user = await service.getById(currentUser.id);
+      //   SeedsWalletModel? seedsWallet =
+      //       await service.getSeedsWalletByUser(currentUser.id);
+      //   if (user != null && seedsWallet != null) {
+      //     emit(state.copyWith(user, seedsWallet));
+      //   } else {
+      //     Log.error('ProfileBloc: user and seedsWallet null');
+      //   }
+      // }
+      if (event is ReceiveDataEvent) {
         print('LoadProfileEvent is running ...');
-        CurrentUser currentUser = GetIt.I.get<CurrentUser>().currentUser;
-        UserModel? user = await service.getById(currentUser.id);
-        SeedsWalletModel? seedsWallet = await service.getSeedsWalletByUser(currentUser.id);
+        //CurrentUser currentUser = GetIt.I.get<CurrentUser>().currentUser;
+        UserModel? user = await service.getById(event.userId);
+        SeedsWalletModel? seedsWallet =
+            await service.getSeedsWalletByUser(event.userId);
         if (user != null && seedsWallet != null) {
           emit(state.copyWith(user, seedsWallet));
         } else {

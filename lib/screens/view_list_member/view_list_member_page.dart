@@ -4,6 +4,7 @@ import '../../bloc/view_list_member/view_list_member_bloc.dart';
 import '../../bloc/view_list_member/view_list_member_event.dart';
 import '../../bloc/view_list_member/view_list_member_state.dart';
 import '../../utils/app_color.dart';
+import '../../utils/router.dart';
 import 'component/view_detail_table_member.dart';
 
 class ViewListMemberPage extends StatefulWidget {
@@ -25,6 +26,12 @@ class _ViewListMemberPageState extends State<ViewListMemberPage>
 
   @override
   void initState() {
+    bloc.listenerStream.listen((event) {
+      if (event is NavigatorToAccountPageEvent) {
+        Navigator.of(context)
+            .pushNamed(Routes.myAccount, arguments: event.userId);
+      }
+    });
     bloc.add(LoadListMemberEvent());
     super.initState();
   }

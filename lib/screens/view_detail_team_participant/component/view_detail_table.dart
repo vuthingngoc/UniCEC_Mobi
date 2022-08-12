@@ -5,6 +5,7 @@ import '../../../bloc/view_detail_team_participant/view_detail_team_participant_
 import '../../../bloc/view_detail_team_participant/view_detail_team_participant_event.dart';
 import '../../../models/common/current_user.dart';
 import '../../../models/entities/participant/view_detail_participant.dart';
+import '../../../utils/router.dart';
 
 class ViewDetailTableMenu extends StatefulWidget {
   final List<ViewDetailParticipantModel> listModel;
@@ -53,11 +54,11 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
     );
   }
 
-  Future<void> _showDeleteDialog(int participantId) async {
+  Future<void> _showDeleteDialog(int participantId, BuildContext context) {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
+      builder: (context) {
         return AlertDialog(
           title: Text('Cảnh báo'),
           content: SingleChildScrollView(
@@ -126,7 +127,12 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
                         child: PopupMenuButton<int>(itemBuilder: (context) {
                         return [
                           PopupMenuItem(
-                            onTap: () {},
+                            onTap: () {
+                              BlocProvider.of<ViewDetailTeamParticipantBloc>(
+                                      context)
+                                  .add(ClickToViewInfoEvent(
+                                      userId: member.studentId));
+                            },
                             value: 2,
                             child: Row(
                               children: <Widget>[
@@ -148,7 +154,13 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
                             child: PopupMenuButton<int>(itemBuilder: (context) {
                             return [
                               PopupMenuItem(
-                                onTap: () {},
+                                onTap: () {
+                                  BlocProvider.of<
+                                              ViewDetailTeamParticipantBloc>(
+                                          context)
+                                      .add(ClickToViewInfoEvent(
+                                          userId: member.studentId));
+                                },
                                 value: 2,
                                 child: Row(
                                   children: <Widget>[
@@ -203,7 +215,13 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
                                       ),
                                     ),
                                   PopupMenuItem(
-                                    onTap: () {},
+                                    onTap: () {
+                                      BlocProvider.of<
+                                                  ViewDetailTeamParticipantBloc>(
+                                              context)
+                                          .add(ClickToViewInfoEvent(
+                                              userId: member.studentId));
+                                    },
                                     value: 2,
                                     child: Row(
                                       children: <Widget>[
@@ -224,7 +242,51 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
                                       GetIt.I.get<CurrentUser>().id)
                                     PopupMenuItem(
                                       onTap: () {
-                                        _showDeleteDialog(member.participantId);
+                                        print('Xóa');
+                                        BlocProvider.of<
+                                                    ViewDetailTeamParticipantBloc>(
+                                                context)
+                                            .add(DeleteMemberByTeamLeaderEvent(
+                                                participantId:
+                                                    member.participantId));
+                                        // showDialog(
+                                        //   context: context,
+                                        //   barrierDismissible:
+                                        //       false, // user must tap button!
+                                        //   builder: (BuildContext context) {
+                                        //     return AlertDialog(
+                                        //       title: Text('Cảnh báo'),
+                                        //       content: SingleChildScrollView(
+                                        //         child: Column(
+                                        //           children: <Widget>[
+                                        //             Text(
+                                        //                 'Bạn có chắc chắn muốn xóa?'),
+                                        //           ],
+                                        //         ),
+                                        //       ),
+                                        //       actions: <Widget>[
+                                        //         TextButton(
+                                        //           child: Text('Đồng ý'),
+                                        //           onPressed: () {
+                                        //             BlocProvider.of<
+                                        //                         ViewDetailTeamParticipantBloc>(
+                                        //                     context)
+                                        //                 .add(DeleteMemberByTeamLeaderEvent(
+                                        //                     participantId: member
+                                        //                         .participantId));
+                                        //             Navigator.of(context).pop();
+                                        //           },
+                                        //         ),
+                                        //         TextButton(
+                                        //           child: Text('Hủy'),
+                                        //           onPressed: () {
+                                        //             Navigator.of(context).pop();
+                                        //           },
+                                        //         ),
+                                        //       ],
+                                        //     );
+                                        //   },
+                                        // );
                                       },
                                       value: 3,
                                       child: Row(
@@ -244,7 +306,13 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
                                 PopupMenuButton<int>(itemBuilder: (context) {
                                 return [
                                   PopupMenuItem(
-                                    onTap: () {},
+                                    onTap: () {
+                                      BlocProvider.of<
+                                                  ViewDetailTeamParticipantBloc>(
+                                              context)
+                                          .add(ClickToViewInfoEvent(
+                                              userId: member.studentId));
+                                    },
                                     value: 2,
                                     child: Row(
                                       children: <Widget>[

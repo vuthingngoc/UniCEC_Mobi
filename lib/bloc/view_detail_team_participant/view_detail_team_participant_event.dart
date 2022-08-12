@@ -55,3 +55,13 @@ class ShowingSnackBarEvent extends ViewDetailTeamParticipantEvent {
 
 //back lại trang trước
 class BackPreviousPageEvent extends ViewDetailTeamParticipantEvent {}
+
+class ClickToViewInfoEvent extends ViewDetailTeamParticipantEvent {
+  int userId;
+  ClickToViewInfoEvent({required this.userId});
+}
+
+class NavigatorToAccountPageEvent extends ViewDetailTeamParticipantEvent {
+  int userId;
+  NavigatorToAccountPageEvent({required this.userId});
+}

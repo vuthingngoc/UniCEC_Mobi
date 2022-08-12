@@ -97,7 +97,8 @@ class PageDependencies {
     injector.registerFactory<Widget>(() => ClubsViewPage(bloc: injector()),
         instanceName: Routes.clubsView);
 
-    injector.registerFactory<Widget>(() => ViewListCompetitionOfClubPage(),
+    injector.registerFactory<Widget>(
+        () => ViewListCompetitionOfClubPage(bloc: injector()),
         instanceName: Routes.viewListCompetitionOfClub);
 
     //Task Page -> show Tasks

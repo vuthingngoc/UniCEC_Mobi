@@ -37,7 +37,19 @@ class _MyAccountPageState extends State<MyAccountPage>
     // TODO: implement initState
     super.initState();
     _bloc.listenerStream.listen((event) {});
-    _bloc.add(LoadInfoAccountEvent());
+    //_bloc.add(LoadInfoAccountEvent());
+  }
+
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    //nhận data
+    RouteSettings settings = ModalRoute.of(context)!.settings;
+    if (settings.arguments != null) {
+      int userId = settings.arguments as int;
+      if (userId > 0) {
+        _bloc.add(ReceiveDataEvent(userId: userId));
+      }
+    }
   }
 
   @override
@@ -67,7 +79,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                 centerTitle: true,
                 backgroundColor: AppColors.mainColor,
               ),
-               backgroundColor: AppColors.backgroundPageColor,
+              backgroundColor: AppColors.backgroundPageColor,
               drawer: ArgonDrawer(currentPage: "My account"),
               body: Stack(children: <Widget>[
                 SafeArea(
@@ -93,257 +105,251 @@ class _MyAccountPageState extends State<MyAccountPage>
                               // ),
                               child: Container(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 85.0, bottom: 20.0),
-                                    child: Column(
-                                      children: [
-                                        Align(
-                                          child: Text(
-                                              "${currentUser.fullname}",
-                                              style: const TextStyle(
-                                                  color: Color.fromRGBO(
-                                                      50, 50, 93, 1),
-                                                  fontSize: 28.0,
-                                                  fontWeight:
-                                                      FontWeight.w800)),
-                                        ),
-                                        const SizedBox(height: 10.0),
-                                        Align(
-                                          child: Container(
-                                            margin: const EdgeInsets.only(right: 20),
-                                            padding: const EdgeInsets.all(5),
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color: Colors.grey.withOpacity(0.15)),
-                                                color: Colors.grey.withOpacity(0.15),
-                                                borderRadius:
+                                padding: const EdgeInsets.only(
+                                    top: 85.0, bottom: 20.0),
+                                child: Column(
+                                  children: [
+                                    Align(
+                                      child: Text("${state.user.fullname}",
+                                          style: const TextStyle(
+                                              color:
+                                                  Color.fromRGBO(50, 50, 93, 1),
+                                              fontSize: 28.0,
+                                              fontWeight: FontWeight.w800)),
+                                    ),
+                                    const SizedBox(height: 10.0),
+                                    Align(
+                                      child: Container(
+                                        margin:
+                                            const EdgeInsets.only(right: 20),
+                                        padding: const EdgeInsets.all(5),
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.grey
+                                                    .withOpacity(0.15)),
+                                            color:
+                                                Colors.grey.withOpacity(0.15),
+                                            borderRadius:
                                                 const BorderRadius.all(
                                                     Radius.circular(10))),
-                                            child: Text("${state.user.studentCode} | ${state.seedsWallet.amount} seeds",
+                                        child: Text(
+                                            "${state.user.studentCode} | ${state.seedsWallet.amount} seeds",
+                                            style: const TextStyle(
+                                              // color: Colors.bl,
+                                              fontSize: 18,
+                                            )),
+                                      ),
+                                    ),
+                                    const Divider(
+                                      height: 40.0,
+                                      thickness: 1.5,
+                                      indent: 32.0,
+                                      endIndent: 32.0,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 32.0, right: 32.0),
+                                      child: Align(
+                                        child: Text("${state.user.description}",
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                                fontSize: 17.0,
+                                                fontWeight: FontWeight.w400)),
+                                      ),
+                                    ),
+                                    SizedBox(height: Dimens.size20),
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: Dimens.size20),
+                                      child: Container(
+                                        child: Column(children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.all(Dimens.size10),
+                                            child: Row(children: [
+                                              Icon(Icons.school),
+                                              //account_circle_outlined
+                                              SizedBox(
+                                                width: Dimens.size20,
+                                              ),
+                                              Text(
+                                                state.user.universityName ?? '',
                                                 style: const TextStyle(
-                                                  // color: Colors.bl,
-                                                  fontSize: 18,
-                                                )),
-                                          ),
-                                        ),
-                                        const Divider(
-                                          height: 40.0,
-                                          thickness: 1.5,
-                                          indent: 32.0,
-                                          endIndent: 32.0,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 32.0, right: 32.0),
-                                          child: Align(
-                                            child: Text(
-                                                "${state.user.description}",
-                                                textAlign:
-                                                    TextAlign.center,
-                                                style: const TextStyle(
-                                                    fontSize: 17.0,
-                                                    fontWeight:
-                                                        FontWeight.w400)),
-                                          ),
-                                        ),
-                                        SizedBox(height: Dimens.size20),
-                                        Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: Dimens.size20),
-                                          child: Container(
-                                            child: Column(children: [
-                                              Padding(
-                                                padding: EdgeInsets.all(
-                                                    Dimens.size10),
-                                                child: Row(children: [
-                                                  Icon(Icons.school),
-                                                  //account_circle_outlined
-                                                  SizedBox(
-                                                    width: Dimens.size20,
-                                                  ),
-                                                  Text(
-                                                    state.user.universityName ??
-                                                        '',
-                                                    style: const TextStyle(
-                                                        fontSize: 18  ),
-                                                  )
-                                                ]),
-                                              ),
-                                              // Divider(
-                                              //   height: 0.6,
-                                              //   color: Colors.black,
-                                              // ),
-                                              Padding(
-                                                padding: EdgeInsets.all(
-                                                    Dimens.size10),
-                                                child: Row(children: [
-                                                  const Icon(Icons
-                                                      .business_center),
-                                                  SizedBox(
-                                                    width: Dimens.size20,
-                                                  ),
-                                                  Text(
-                                                    state.user.departmentName ??
-                                                        '',
-                                                    style: const TextStyle(
-                                                        fontSize: 18),
-                                                  )
-                                                ]),
-                                              ),
-                                              // Divider(
-                                              //   height: 0.6,
-                                              //   color: Colors.black,
-                                              // ),
-                                              // Padding(
-                                              //   padding: EdgeInsets.all(
-                                              //       Dimens.size10),
-                                              //   child: Row(children: [
-                                              //     Icon(Icons
-                                              //         .control_point),
-                                              //     SizedBox(
-                                              //       width: Dimens.size20,
-                                              //     ),
-                                              //     Text(
-                                              //       'SeedsPoint: ${state.seedsWallet.amount}',
-                                              //       style: TextStyle(
-                                              //           fontSize: 17),
-                                              //     )
-                                              //   ]),
-                                              // ),
-                                              // Divider(
-                                              //   height: 0.6,
-                                              //   color: Colors.black,
-                                              // ),
-                                              Padding(
-                                                padding: EdgeInsets.all(
-                                                    Dimens.size10),
-                                                child: Row(children: [
-                                                  const Icon(Icons
-                                                      .alternate_email),
-                                                  SizedBox(
-                                                    width: Dimens.size20,
-                                                  ),
-                                                  Text(
-                                                    state.user.email,
-                                                    style: const TextStyle(
-                                                        fontSize: 17),
-                                                  )
-                                                ]),
-                                              ),
-                                              // Divider(
-                                              //   height: 0.6,
-                                              //   color: Colors.black,
-                                              // ),
-                                              Padding(
-                                                padding: EdgeInsets.all(
-                                                    Dimens.size10),
-                                                child: Row(children: [
-                                                  Icon(Icons.phone),
-                                                  SizedBox(
-                                                    width: Dimens.size20,
-                                                  ),
-                                                  Text(
-                                                    state
-                                                        .user.phoneNumber,
-                                                    style: const TextStyle(
-                                                        fontSize: 17),
-                                                  )
-                                                ]),
-                                              ),
-                                              // Divider(
-                                              //   height: 0.6,
-                                              //   color: Colors.black,
-                                              // ),
-                                              Padding(
-                                                padding: EdgeInsets.all(
-                                                    Dimens.size10),
-                                                child: Row(children: [
-                                                  const Icon(Icons.cake),
-                                                  SizedBox(
-                                                    width: Dimens.size20,
-                                                  ),
-                                                  Text(
-                                                    state.user.dob,
-                                                    style: const TextStyle(
-                                                        fontSize: 17),
-                                                  )
-                                                ]),
-                                              ),
-                                              // Divider(
-                                              //   height: 0.6,
-                                              //   color: Colors.black,
-                                              // ),
-                                              Padding(
-                                                padding: EdgeInsets.all(
-                                                    Dimens.size10),
-                                                child: Row(children: [
-                                                  Icon(Icons.transgender),
-                                                  SizedBox(
-                                                    width: Dimens.size20,
-                                                  ),
-                                                  Text(
-                                                    state.user.gender,
-                                                    style: const TextStyle(
-                                                        fontSize: 17),
-                                                  )
-                                                ]),
-                                              ),
-                                              // Divider(
-                                              //   height: 0.6,
-                                              //   color: Colors.black,
-                                              // ),
+                                                    fontSize: 18),
+                                              )
                                             ]),
                                           ),
-                                        )
-                                      ],
-                                    ),
-                                  )),
+                                          // Divider(
+                                          //   height: 0.6,
+                                          //   color: Colors.black,
+                                          // ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.all(Dimens.size10),
+                                            child: Row(children: [
+                                              const Icon(Icons.business_center),
+                                              SizedBox(
+                                                width: Dimens.size20,
+                                              ),
+                                              Text(
+                                                state.user.departmentName ?? '',
+                                                style: const TextStyle(
+                                                    fontSize: 18),
+                                              )
+                                            ]),
+                                          ),
+                                          // Divider(
+                                          //   height: 0.6,
+                                          //   color: Colors.black,
+                                          // ),
+                                          // Padding(
+                                          //   padding: EdgeInsets.all(
+                                          //       Dimens.size10),
+                                          //   child: Row(children: [
+                                          //     Icon(Icons
+                                          //         .control_point),
+                                          //     SizedBox(
+                                          //       width: Dimens.size20,
+                                          //     ),
+                                          //     Text(
+                                          //       'SeedsPoint: ${state.seedsWallet.amount}',
+                                          //       style: TextStyle(
+                                          //           fontSize: 17),
+                                          //     )
+                                          //   ]),
+                                          // ),
+                                          // Divider(
+                                          //   height: 0.6,
+                                          //   color: Colors.black,
+                                          // ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.all(Dimens.size10),
+                                            child: Row(children: [
+                                              const Icon(Icons.alternate_email),
+                                              SizedBox(
+                                                width: Dimens.size20,
+                                              ),
+                                              Text(
+                                                state.user.email,
+                                                style: const TextStyle(
+                                                    fontSize: 17),
+                                              )
+                                            ]),
+                                          ),
+                                          // Divider(
+                                          //   height: 0.6,
+                                          //   color: Colors.black,
+                                          // ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.all(Dimens.size10),
+                                            child: Row(children: [
+                                              Icon(Icons.phone),
+                                              SizedBox(
+                                                width: Dimens.size20,
+                                              ),
+                                              Text(
+                                                state.user.phoneNumber,
+                                                style: const TextStyle(
+                                                    fontSize: 17),
+                                              )
+                                            ]),
+                                          ),
+                                          // Divider(
+                                          //   height: 0.6,
+                                          //   color: Colors.black,
+                                          // ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.all(Dimens.size10),
+                                            child: Row(children: [
+                                              const Icon(Icons.cake),
+                                              SizedBox(
+                                                width: Dimens.size20,
+                                              ),
+                                              Text(
+                                                state.user.dob,
+                                                style: const TextStyle(
+                                                    fontSize: 17),
+                                              )
+                                            ]),
+                                          ),
+                                          // Divider(
+                                          //   height: 0.6,
+                                          //   color: Colors.black,
+                                          // ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.all(Dimens.size10),
+                                            child: Row(children: [
+                                              Icon(Icons.transgender),
+                                              SizedBox(
+                                                width: Dimens.size20,
+                                              ),
+                                              Text(
+                                                state.user.gender,
+                                                style: const TextStyle(
+                                                    fontSize: 17),
+                                              )
+                                            ]),
+                                          ),
+                                          // Divider(
+                                          //   height: 0.6,
+                                          //   color: Colors.black,
+                                          // ),
+                                        ]),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )),
                             ),
                             FractionalTranslation(
                                 translation: const Offset(0.0, -0.5),
                                 child: Align(
                                   child: CircleAvatar(
                                     backgroundImage: NetworkImage(//AssetImage(
-                                        "${currentUser.avatar}"),
+                                        "${state.user.avatar}"),
                                     radius: 65.0,
                                     // maxRadius: 200.0,
                                   ),
                                   alignment: FractionalOffset(0.5, 0.0),
                                 ))
                           ]),
-                          Padding(
-                            padding:
-                            const EdgeInsets.only(top: 16),
-                            child: Container(
-                              width: double.infinity,
-                              margin:
-                              const EdgeInsets.only(right: 15, left: 15, bottom: 15),
-                              child: FlatButton(
-                                textColor: ArgonColors.white,
-                                color: ArgonColors.warning,
-                                onPressed: () {
-                                  // Respond to button press
-                                  Navigator.pushNamed(
-                                      context, '/editMyAccount');
-                                },
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                  BorderRadius.circular(8.0),
-                                ),
-                                child: const Padding(
-                                    padding: EdgeInsets.only(
-                                        left: 16.0,
-                                        right: 16.0,
-                                        top: 12,
-                                        bottom: 12),
-                                    child: Text("Chỉnh sửa thông tin",
-                                        style: TextStyle(
-                                            fontWeight:
-                                            FontWeight.w600,
-                                            fontSize: 18.0))),
-                              ),
-                            ),
-                          ),
+                          (state.user.id == GetIt.I.get<CurrentUser>().id)
+                              ? Padding(
+                                  padding: const EdgeInsets.only(top: 16),
+                                  child: Container(
+                                    width: double.infinity,
+                                    margin: const EdgeInsets.only(
+                                        right: 15, left: 15, bottom: 15),
+                                    child: FlatButton(
+                                      textColor: ArgonColors.white,
+                                      color: ArgonColors.warning,
+                                      onPressed: () {
+                                        // Respond to button press
+                                        Navigator.pushNamed(
+                                            context, '/editMyAccount');
+                                      },
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      child: const Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 16.0,
+                                              right: 16.0,
+                                              top: 12,
+                                              bottom: 12),
+                                          child: Text("Chỉnh sửa thông tin",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 18.0))),
+                                    ),
+                                  ),
+                                )
+                              : Text(''),
                         ],
                       ),
                     ),

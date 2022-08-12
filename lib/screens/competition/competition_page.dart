@@ -185,67 +185,6 @@ class _CompetitionPageState extends State<CompetitionPage>
                                                               .id);
                                                 });
                                           })),
-                                  //),
-                                  // (state.outStandingCompetitions != null)
-                                  //     ? Column(
-                                  //         children: [
-                                  //           Wrap(
-                                  //             children: List.generate(
-                                  //                 (state.outStandingCompetitions
-                                  //                     ?.length)!, (index) {
-                                  //               var competitionEntities = state
-                                  //                   .outStandingCompetitions
-                                  //                   ?.elementAt(index)
-                                  //                   .competitionEntities;
-                                  //               String? imageUrl;
-                                  //               if ((competitionEntities?.length)! >
-                                  //                   0) {
-                                  //                 imageUrl = competitionEntities
-                                  //                     ?.firstWhere(
-                                  //                         (element) =>
-                                  //                             element.entityTypeId ==
-                                  //                             1,
-                                  //                         orElse: () =>
-                                  //                             CompetitionEntityModel(
-                                  //                                 id: 0,
-                                  //                                 competitionId: 0,
-                                  //                                 entityTypeId: 0,
-                                  //                                 entityTypeName: '',
-                                  //                                 name: '',
-                                  //                                 imageUrl:
-                                  //                                     defaultImage,
-                                  //                                 website: '',
-                                  //                                 email: '',
-                                  //                                 description: ''))
-                                  //                     .imageUrl;
-                                  //               }
-                                  //               return CardSmall(
-                                  //                   cta: "Xem thêm",
-                                  //                   title:
-                                  //                       (state.outStandingCompetitions?[
-                                  //                               index])!
-                                  //                           .name,
-                                  //                   img: imageUrl ?? defaultImage,
-                                  //                   type:
-                                  //                       (state.outStandingCompetitions?[
-                                  //                               index])!
-                                  //                           .competitionTypeName,
-                                  //                   date:
-                                  //                       '${(state.outStandingCompetitions?[index])!.startTime}',
-                                  //                   tap: () {
-                                  //                     Navigator.of(context).pushNamed(
-                                  //                         Routes.detailCompetition,
-                                  //                         arguments: state
-                                  //                             .outStandingCompetitions?[
-                                  //                                 index]
-                                  //                             .id);
-                                  //                   });
-                                  //             }),
-                                  //           ),
-                                  //           const SizedBox(height: 55.0),
-                                  //         ],
-                                  //       )
-                                  //     : Text('Không có cuộc thi nào đang diễn ra'),
                                 ],
                               ),
                             ),

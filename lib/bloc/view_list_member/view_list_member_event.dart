@@ -19,3 +19,13 @@ class SearchEvent extends ViewListMemberEvent {}
 
 //Reset Filter
 class ResetFilterEvent extends ViewListMemberEvent {}
+
+class ClickToViewInfoEvent extends ViewListMemberEvent {
+  int userId;
+  ClickToViewInfoEvent({required this.userId});
+}
+
+class NavigatorToAccountPageEvent extends ViewListMemberEvent {
+  int userId;
+  NavigatorToAccountPageEvent({required this.userId});
+}
