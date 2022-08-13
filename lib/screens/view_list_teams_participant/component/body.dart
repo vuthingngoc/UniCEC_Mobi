@@ -4,6 +4,7 @@ import '../../../bloc/view_list_team_participant/view_list_team_participant_bloc
 import '../../../bloc/view_list_team_participant/view_list_team_participant_event.dart';
 import '../../../bloc/view_list_team_participant/view_list_team_participant_state.dart';
 import '../../../constants/Theme.dart';
+import '../../../models/enums/team_status.dart';
 import '../../widgets/input.dart';
 import 'list_team_menu.dart';
 
@@ -17,6 +18,7 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
 //   @override
   final _formKeyInvitedCode = GlobalKey<FormState>();
+  var _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +31,166 @@ class _BodyState extends State<Body> {
           return SingleChildScrollView(
             padding: EdgeInsets.symmetric(vertical: 20),
             child: Column(children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 10, bottom: 50),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                          controller: _controller,
+                          onFieldSubmitted: (value) {
+                            bloc.add(ChangeSearchNameEvent(searchName: value));
+                          },
+                          autofocus: false,
+                          decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                                onPressed: () {
+                                  _controller.clear;
+                                  _controller.text = "";
+                                  //sửa lại cái
+                                  bloc.add(
+                                      ChangeSearchNameEvent(searchName: null));
+                                },
+                                icon: const Icon(Icons.clear)),
+                            labelText: 'Tìm Tên Đội',
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                          )),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        bloc.add(SearchEvent());
+                      },
+                      child: Icon(Icons.search),
+                    ),
+                    PopupMenuButton<int>(
+                        icon: Icon(Icons.filter_alt_outlined),
+                        itemBuilder: (context) {
+                          return [
+                            PopupMenuItem(
+                              onTap: () {
+                                bloc.add(ChangeTeamStatusEvent(
+                                    status: TeamStatus.Available));
+                              },
+                              value: 1,
+                              child: (state.status == TeamStatus.Available)
+                                  ? Container(
+                                      color: Colors.green,
+                                      child: Row(
+                                        children: <Widget>[
+                                          Icon(Icons.camera, size: 18),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 8.0),
+                                            child: Text('Mở'),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : Row(
+                                      children: <Widget>[
+                                        Icon(Icons.camera, size: 18),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 8.0),
+                                          child: Text('Mở'),
+                                        ),
+                                      ],
+                                    ),
+                            ),
+                            PopupMenuItem(
+                              onTap: () {
+                                bloc.add(ChangeTeamStatusEvent(
+                                    status: TeamStatus.IsLocked));
+                              },
+                              value: 2,
+                              child: (state.status == TeamStatus.IsLocked)
+                                  ? Container(
+                                      color: Colors.green,
+                                      child: Row(
+                                        children: <Widget>[
+                                          Icon(Icons.school, size: 18),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 8.0),
+                                            child: Text('Đóng'),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : Row(
+                                      children: <Widget>[
+                                        Icon(Icons.school, size: 18),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 8.0),
+                                          child: Text('Đóng'),
+                                        ),
+                                      ],
+                                    ),
+                            ),
+                            PopupMenuItem(
+                              onTap: () {
+                                bloc.add(ResetFilterEvent());
+                              },
+                              value: 3,
+                              child: Row(
+                                children: <Widget>[
+                                  Icon(Icons.delete, size: 18),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 8.0),
+                                    child: Text('làm mới Filter'),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ];
+                        }),
+                  ],
+                ),
+              ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  SizedBox(
+                    width: 40,
+                  ),
+                  Expanded(
+                      child: Text(
+                    "Tên đội",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  )),
+                  Expanded(
+                      child: Text(
+                    "Số thành viên",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  )),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                      child: Text(
+                    "Trạng thái",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  )),
+                  Expanded(
+                      child: Text(
+                    "Chi tiết",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  )),
+                ],
+              ),
+              ViewListTeamMenu(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(right: 20, bottom: 20),
@@ -140,39 +300,7 @@ class _BodyState extends State<Body> {
                     ),
                   ),
                 ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SizedBox(
-                    width: 40,
-                  ),
-                  Expanded(
-                      child: Text(
-                    "Tên đội",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                  )),
-                  Expanded(
-                      child: Text(
-                    "Số thành viên",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                  )),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Expanded(
-                      child: Text(
-                    "Trạng thái",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                  )),
-                  Expanded(
-                      child: Text(
-                    "Chi tiết",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                  )),
-                ],
-              ),
-              ViewListTeamMenu(),
+              )
             ]),
           );
         });

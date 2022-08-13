@@ -146,7 +146,7 @@ class _NavbarCompetitionOfParticipantState
                                               searchName: null));
                                         },
                                         icon: const Icon(Icons.clear)),
-                                    labelText: 'Tìm Kiếm Cuộc Thi',
+                                    labelText: 'Tìm Kiếm Theo Tên',
                                     focusedBorder: const OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Colors.grey,

@@ -56,3 +56,21 @@ class ShowingSnackBarEvent extends ViewListTeamParticipantEvent {
 }
 
 class RebuildListViewTeamEvent extends ViewListTeamParticipantEvent {}
+
+//ChangeName
+class ChangeSearchNameEvent extends ViewListTeamParticipantEvent {
+  String? searchName;
+  ChangeSearchNameEvent({required this.searchName});
+}
+
+//ChangeRoleId
+class ChangeTeamStatusEvent extends ViewListTeamParticipantEvent {
+  TeamStatus? status;
+  ChangeTeamStatusEvent({required this.status});
+}
+
+//Search Filter
+class SearchEvent extends ViewListTeamParticipantEvent {}
+
+//Reset Filter
+class ResetFilterEvent extends ViewListTeamParticipantEvent {}
