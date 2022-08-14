@@ -19,6 +19,8 @@ class ViewListActivityMenu extends StatefulWidget {
 }
 
 class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
+  var _controller = TextEditingController();
+
   //load
   void load(BuildContext context) {
     BlocProvider.of<ViewCompetitionActivityBloc>(context)
@@ -33,70 +35,8 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
 
   @override
   Widget build(BuildContext context) {
-    // List<CompetitionActivityModel> fakeData = [
-    //   CompetitionActivityModel(
-    //     id: 1,
-    //     competitionId: 1,
-    //     createTime: "createTime",
-    //     ending: "ending",
-    //     name:
-    //         "Task này dùng để test thôi Task này dùng để test thôi Task này dùng để test thôi Task này dùng để test thôi",
-    //     creatorName: "Lam Minh An",
-    //     priority: PriorityStatus.High,
-    //     status: CompetitionActivityStatus.Open,
-    //   ),
-    //   CompetitionActivityModel(
-    //     id: 2,
-    //     competitionId: 1,
-    //     createTime: "createTime",
-    //     ending: "ending",
-    //     name: "Task này dùng để test thôi",
-    //     assigner: "Lam Minh An",
-    //     priority: PriorityStatus.Medium,
-    //     status: CompetitionActivityStatus.OnGoing,
-    //   ),
-    //   CompetitionActivityModel(
-    //     id: 3,
-    //     competitionId: 1,
-    //     createTime: "createTime",
-    //     ending: "ending",
-    //     name: "Task này dùng để test thôi",
-    //     assigner: "Lam Minh An",
-    //     priority: PriorityStatus.Low,
-    //     status: CompetitionActivityStatus.Pending,
-    //   ),
-    //   CompetitionActivityModel(
-    //     id: 3,
-    //     competitionId: 1,
-    //     createTime: "createTime",
-    //     ending: "ending",
-    //     name: "Task này dùng để test thôi",
-    //     assigner: "Lam Minh An",
-    //     priority: PriorityStatus.Low,
-    //     status: CompetitionActivityStatus.Finished,
-    //   ),
-    //   CompetitionActivityModel(
-    //     id: 3,
-    //     competitionId: 1,
-    //     createTime: "createTime",
-    //     ending: "ending",
-    //     name: "Task này dùng để test thôi",
-    //     assigner: "Lam Minh An",
-    //     priority: PriorityStatus.Low,
-    //     status: CompetitionActivityStatus.Completed,
-    //   ),
-    //   CompetitionActivityModel(
-    //     id: 3,
-    //     competitionId: 1,
-    //     createTime: "createTime",
-    //     ending: "ending",
-    //     name: "Task này dùng để test thôi",
-    //     assigner: "Lam Minh An",
-    //     priority: PriorityStatus.Low,
-    //     status: CompetitionActivityStatus.Cancelling,
-    //   ),
-    // ];
-
+    //size
+    Size size = MediaQuery.of(context).size;
     //bloc
     ViewCompetitionActivityBloc bloc =
         BlocProvider.of<ViewCompetitionActivityBloc>(context);
@@ -107,193 +47,421 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
         builder: (context, state) {
           return (state.listCompetitionActivity.isEmpty)
               ? Text('Chưa load dữ liệu')
-              : RefreshIndicator(
-                  onRefresh: () {
-                    return _refresh(context);
-                  },
-                  child: LoadMore(
-                      isFinish: !state.hasNext,
-                      onLoadMore: () {
-                        return _loadMore(context);
-                      },
-                      whenEmptyLoad: false,
-                      delegate: DefaultLoadMoreDelegate(),
-                      textBuilder: DefaultLoadMoreTextBuilder.english,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: state.listCompetitionActivity.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 10),
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                primary: Colors.black87,
-                                padding: EdgeInsets.all(20),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15)),
-                                backgroundColor:
-                                    Color.fromARGB(255, 235, 237, 241),
+              : Column(
+                  children: [
+                    //tìm kiếm
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: TextFormField(
+                                controller: _controller,
+                                onFieldSubmitted: (value) {
+                                  bloc.add(
+                                      ChangeSearchNameEvent(searchName: value));
+                                },
+                                autofocus: false,
+                                decoration: InputDecoration(
+                                  suffixIcon: IconButton(
+                                      onPressed: () {
+                                        _controller.clear;
+                                        _controller.text = "";
+                                        //sửa lại cái
+                                        bloc.add(ChangeSearchNameEvent(
+                                            searchName: null));
+                                      },
+                                      icon: const Icon(Icons.clear)),
+                                  labelText: 'Tìm theo tên',
+                                  focusedBorder: const OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
+                                  ),
+                                )),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              bloc.add(SearchEvent());
+                            },
+                            child: Icon(Icons.search),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    //dropdown status
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Text(
+                                "Trạng thái công việc:",
+                                style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              onPressed: () {
-                                //chuyển sang trang detail competition activity
-                                Navigator.of(context).pushNamed(
-                                    Routes.viewDetailActivity,
-                                    arguments: state
-                                        .listCompetitionActivity[index].id);
-                              },
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
+                            ),
+                            Container(
+                              width: size.width * 0.3,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.black),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: BlocBuilder<ViewCompetitionActivityBloc,
+                                      ViewCompetitionActivityState>(
+                                  bloc: bloc,
+                                  builder: (context, state) {
+                                    CompetitionActivityStatus dropdownValue =
+                                        state.chooseStatus;
+                                    return DropdownButtonHideUnderline(
+                                      child: DropdownButton<
+                                          CompetitionActivityStatus>(
+                                        value: dropdownValue,
+                                        icon: const Icon(Icons.arrow_drop_down),
+                                        iconSize: 24,
+                                        elevation: 16,
+                                        style: const TextStyle(
+                                            color: Colors.deepPurple,
+                                            fontWeight: FontWeight.bold),
+                                        onChanged: (CompetitionActivityStatus?
+                                            newValue) {
+                                          bloc.add(ChangeValueStatusEvent(
+                                              chooseStatus: newValue!));
+                                        },
+                                        items: state.loadListStatuses.map<
+                                                DropdownMenuItem<
+                                                    CompetitionActivityStatus>>(
+                                            (CompetitionActivityStatus value) {
+                                          return DropdownMenuItem<
+                                                  CompetitionActivityStatus>(
+                                              value: value,
+                                              child: Text((value ==
+                                                      CompetitionActivityStatus
+                                                          .All)
+                                                  ? 'Tất cả'
+                                                  : (value ==
+                                                          CompetitionActivityStatus
+                                                              .Open)
+                                                      ? 'Mở'
+                                                      : (value ==
+                                                              CompetitionActivityStatus
+                                                                  .OnGoing)
+                                                          ? 'Đang làm'
+                                                          : (value ==
+                                                                  CompetitionActivityStatus
+                                                                      .Finished)
+                                                              ? 'Hoàn thành'
+                                                              : (value ==
+                                                                      CompetitionActivityStatus
+                                                                          .Completed)
+                                                                  ? 'Kết thúc'
+                                                                  : (value ==
+                                                                          CompetitionActivityStatus
+                                                                              .Pending)
+                                                                      ? 'Chờ'
+                                                                      : 'trạng thái khác'));
+                                        }).toList(),
+                                      ),
+                                    );
+                                  }),
+                            ),
+                          ]),
+                    ),
+
+                    //dropdown priority
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Text(
+                                "Mức độ công việc:",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            Container(
+                              width: size.width * 0.3,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.black),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: BlocBuilder<ViewCompetitionActivityBloc,
+                                      ViewCompetitionActivityState>(
+                                  bloc: bloc,
+                                  builder: (context, state) {
+                                    PriorityStatus dropdownValue =
+                                        state.choosePriorityStatus;
+                                    return DropdownButtonHideUnderline(
+                                      child: DropdownButton<PriorityStatus>(
+                                        value: dropdownValue,
+                                        icon: const Icon(Icons.arrow_drop_down),
+                                        iconSize: 24,
+                                        elevation: 16,
+                                        style: const TextStyle(
+                                            color: Colors.deepPurple,
+                                            fontWeight: FontWeight.bold),
+                                        onChanged: (PriorityStatus? newValue) {
+                                          bloc.add(
+                                              ChangeValuePriorityStatusEvent(
+                                                  choosePriorityStatus:
+                                                      newValue!));
+                                        },
+                                        items: state.loadPriorityStatus.map<
+                                                DropdownMenuItem<
+                                                    PriorityStatus>>(
+                                            (PriorityStatus value) {
+                                          return DropdownMenuItem<
+                                                  PriorityStatus>(
+                                              value: value,
+                                              child: Text((value ==
+                                                      PriorityStatus.All)
+                                                  ? 'Tất cả'
+                                                  : (value ==
+                                                          PriorityStatus.Low)
+                                                      ? 'Thấp'
+                                                      : (value ==
+                                                              PriorityStatus
+                                                                  .Medium)
+                                                          ? 'Trung bình'
+                                                          : (value ==
+                                                                  PriorityStatus
+                                                                      .High)
+                                                              ? 'Cao'
+                                                              : 'trạng thái khác'));
+                                        }).toList(),
+                                      ),
+                                    );
+                                  }),
+                            ),
+                          ]),
+                    ),
+
+                    //
+                    RefreshIndicator(
+                        onRefresh: () {
+                          return _refresh(context);
+                        },
+                        child: LoadMore(
+                            isFinish: !state.hasNext,
+                            onLoadMore: () {
+                              return _loadMore(context);
+                            },
+                            whenEmptyLoad: false,
+                            delegate: DefaultLoadMoreDelegate(),
+                            textBuilder: DefaultLoadMoreTextBuilder.english,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: state.listCompetitionActivity.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  child: TextButton(
+                                    style: TextButton.styleFrom(
+                                      primary: Colors.black87,
+                                      padding: EdgeInsets.all(20),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                      backgroundColor:
+                                          Color.fromARGB(255, 235, 237, 241),
+                                    ),
+                                    onPressed: () {
+                                      //chuyển sang trang detail competition activity
+                                      Navigator.of(context).pushNamed(
+                                          Routes.viewDetailActivity,
+                                          arguments: state
+                                              .listCompetitionActivity[index]
+                                              .id);
+                                    },
+                                    child: Column(
                                       children: [
                                         Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 8.0),
-                                          child: Text(
-                                              state
-                                                  .listCompetitionActivity[
-                                                      index]
-                                                  .id
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  color: Colors.grey)),
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 8.0),
+                                                child: Text(
+                                                    state
+                                                        .listCompetitionActivity[
+                                                            index]
+                                                        .id
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        fontSize: 18,
+                                                        color: Colors.grey)),
+                                              ),
+                                              Expanded(
+                                                child: Text(
+                                                    state
+                                                        .listCompetitionActivity[
+                                                            index]
+                                                        .name,
+                                                    style: TextStyle(
+                                                        fontSize: 18)),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                        Expanded(
-                                          child: Text(
-                                              state
-                                                  .listCompetitionActivity[
-                                                      index]
-                                                  .name,
-                                              style: TextStyle(fontSize: 18)),
+                                        Row(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 16.0, right: 8),
+                                              child: Text("|",
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      color: Colors.blueGrey)),
+                                            ),
+                                            Text(
+                                                state
+                                                    .listCompetitionActivity[
+                                                        index]
+                                                    .creatorName,
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.normal)),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 16.0, right: 8),
+                                              child: Text("|",
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      color: Colors.blueGrey)),
+                                            ),
+                                            if (state
+                                                    .listCompetitionActivity[
+                                                        index]
+                                                    .status
+                                                    .toString() ==
+                                                "CompetitionActivityStatus.OnGoing")
+                                              Text(
+                                                "Đang diễn ra",
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    color: Colors.amber),
+                                              ),
+                                            if (state
+                                                    .listCompetitionActivity[
+                                                        index]
+                                                    .status
+                                                    .toString() ==
+                                                "CompetitionActivityStatus.Open")
+                                              Text(
+                                                "Mở",
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    color: Colors.purple),
+                                              ),
+                                            if (state
+                                                    .listCompetitionActivity[
+                                                        index]
+                                                    .status
+                                                    .toString() ==
+                                                "CompetitionActivityStatus.Pending")
+                                              Text(
+                                                "Chờ",
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    color: Colors
+                                                        .deepOrangeAccent),
+                                              ),
+                                            if (state
+                                                    .listCompetitionActivity[
+                                                        index]
+                                                    .status
+                                                    .toString() ==
+                                                "CompetitionActivityStatus.Finished")
+                                              Text(
+                                                "Hoàn thành",
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    color: Colors.green),
+                                              ),
+                                            if (state
+                                                    .listCompetitionActivity[
+                                                        index]
+                                                    .status
+                                                    .toString() ==
+                                                "CompetitionActivityStatus.Completed")
+                                              Text(
+                                                "Kết thúc",
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    color: Colors.grey),
+                                              ),
+                                            if (state
+                                                    .listCompetitionActivity[
+                                                        index]
+                                                    .status
+                                                    .toString() ==
+                                                "CompetitionActivityStatus.Cancelling")
+                                              Text(
+                                                "Hủy",
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    color: Colors.red),
+                                              ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 16.0, right: 8),
+                                              child: Text("|",
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      color: Colors.blueGrey)),
+                                            ),
+                                            if (state
+                                                    .listCompetitionActivity[
+                                                        index]
+                                                    .priority
+                                                    .toString() ==
+                                                "PriorityStatus.High")
+                                              Icon(
+                                                Icons.warning,
+                                                color: Colors.red,
+                                              ),
+                                            if (state
+                                                    .listCompetitionActivity[
+                                                        index]
+                                                    .priority
+                                                    .toString() ==
+                                                "PriorityStatus.Medium")
+                                              Icon(
+                                                Icons.warning,
+                                                color: Colors.amber,
+                                              ),
+                                            if (state
+                                                    .listCompetitionActivity[
+                                                        index]
+                                                    .priority
+                                                    .toString() ==
+                                                "PriorityStatus.Low")
+                                              Icon(
+                                                Icons.warning,
+                                                color: Colors.green,
+                                              ),
+                                          ],
                                         ),
                                       ],
                                     ),
                                   ),
-                                  Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 16.0, right: 8),
-                                        child: Text("|",
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.blueGrey)),
-                                      ),
-                                      Text(
-                                          state.listCompetitionActivity[index]
-                                              .creatorName,
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.normal)),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 16.0, right: 8),
-                                        child: Text("|",
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.blueGrey)),
-                                      ),
-                                      if (state.listCompetitionActivity[index]
-                                              .status
-                                              .toString() ==
-                                          "CompetitionActivityStatus.OnGoing")
-                                        Text(
-                                          "Đang diễn ra",
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              color: Colors.amber),
-                                        ),
-                                      if (state.listCompetitionActivity[index]
-                                              .status
-                                              .toString() ==
-                                          "CompetitionActivityStatus.Open")
-                                        Text(
-                                          "Mở",
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              color: Colors.purple),
-                                        ),
-                                      if (state.listCompetitionActivity[index]
-                                              .status
-                                              .toString() ==
-                                          "CompetitionActivityStatus.Pending")
-                                        Text(
-                                          "Chờ",
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              color: Colors.deepOrangeAccent),
-                                        ),
-                                      if (state.listCompetitionActivity[index]
-                                              .status
-                                              .toString() ==
-                                          "CompetitionActivityStatus.Finished")
-                                        Text(
-                                          "Hoàn thành",
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              color: Colors.green),
-                                        ),
-                                      if (state.listCompetitionActivity[index]
-                                              .status
-                                              .toString() ==
-                                          "CompetitionActivityStatus.Completed")
-                                        Text(
-                                          "Kết thúc",
-                                          style: TextStyle(
-                                              fontSize: 18, color: Colors.grey),
-                                        ),
-                                      if (state.listCompetitionActivity[index]
-                                              .status
-                                              .toString() ==
-                                          "CompetitionActivityStatus.Cancelling")
-                                        Text(
-                                          "Hủy",
-                                          style: TextStyle(
-                                              fontSize: 18, color: Colors.red),
-                                        ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 16.0, right: 8),
-                                        child: Text("|",
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.blueGrey)),
-                                      ),
-                                      if (state.listCompetitionActivity[index]
-                                              .priority
-                                              .toString() ==
-                                          "PriorityStatus.High")
-                                        Icon(
-                                          Icons.warning,
-                                          color: Colors.red,
-                                        ),
-                                      if (state.listCompetitionActivity[index]
-                                              .priority
-                                              .toString() ==
-                                          "PriorityStatus.Medium")
-                                        Icon(
-                                          Icons.warning,
-                                          color: Colors.amber,
-                                        ),
-                                      if (state.listCompetitionActivity[index]
-                                              .priority
-                                              .toString() ==
-                                          "PriorityStatus.Low")
-                                        Icon(
-                                          Icons.warning,
-                                          color: Colors.green,
-                                        )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      )));
+                                );
+                              },
+                            ))),
+                  ],
+                );
         });
   }
 

@@ -58,8 +58,7 @@ class _DropdownUniversityState extends State<DropdownUniversity> {
                                 (UniBelongToEmail value) {
                           return DropdownMenuItem<int>(
                             value: value.id,
-                            child:
-                                Text(value.name + (value.imgUrl ?? "img Null")),
+                            child: Text(value.name),
                           );
                         }).toList(),
                       ),

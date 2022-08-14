@@ -17,13 +17,18 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
             competitionId: -1,
             hasNext: false,
             currentPage: 1,
-            valueInvitedCode: '')) {
+            valueInvitedCode: '',
+            searchName: null,
+            status: null)) {
     on((event, emit) async {
       //InitEvent
       if (event is ViewListTeamInitEvent) {
         //------------Request
-        TeamRequestModel request =
-            TeamRequestModel(competitionId: state.competitionId);
+        TeamRequestModel request = TeamRequestModel(
+            competitionId: state.competitionId,
+            status: state.status,
+            teamName: state.searchName);
+        //
         request.currentPage = state.currentPage;
 
         PagingResult<TeamModel>? result = await service.GetListTeam(request);
@@ -34,14 +39,19 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
               newCompetitionId: state.competitionId,
               newHasNext: result.hasNext,
               newCurrentPage: result.currentPage,
-              valueInvitedCode: state.valueInvitedCode));
+              valueInvitedCode: state.valueInvitedCode,
+              newSearchName: state.searchName,
+              newStatus: state.status));
         }
       }
       //Recieve Data
       if (event is RecieveDataEvent) {
         //------------Request
-        TeamRequestModel request =
-            TeamRequestModel(competitionId: event.competitionId);
+        TeamRequestModel request = TeamRequestModel(
+            competitionId: event.competitionId,
+            status: state.status,
+            teamName: state.searchName);
+        //
         request.currentPage = state.currentPage;
 
         PagingResult<TeamModel>? result = await service.GetListTeam(request);
@@ -52,14 +62,18 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
               newCompetitionId: event.competitionId, //change
               newHasNext: result.hasNext,
               newCurrentPage: result.currentPage,
-              valueInvitedCode: state.valueInvitedCode));
+              valueInvitedCode: state.valueInvitedCode,
+              newSearchName: state.searchName,
+              newStatus: state.status));
         } else {
           emit(state.copyWith(
               newListTeam: state.listTeam,
               newCompetitionId: event.competitionId, //change
               newHasNext: state.hasNext,
               newCurrentPage: state.currentPage,
-              valueInvitedCode: state.valueInvitedCode));
+              valueInvitedCode: state.valueInvitedCode,
+              newSearchName: state.searchName,
+              newStatus: state.status));
         }
       }
       //Refesh Event
@@ -69,7 +83,9 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
             newCompetitionId: state.competitionId,
             newHasNext: false,
             newCurrentPage: 1,
-            valueInvitedCode: ''));
+            valueInvitedCode: '',
+            newSearchName: state.searchName,
+            newStatus: state.status));
       }
       //Increase Event
       if (event is IncrementalEvent) {
@@ -79,13 +95,17 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
             newCompetitionId: state.competitionId,
             newHasNext: state.hasNext,
             newCurrentPage: increase,
-            valueInvitedCode: state.valueInvitedCode));
+            valueInvitedCode: state.valueInvitedCode,
+            newSearchName: state.searchName,
+            newStatus: state.status));
       }
       //LoadMore
       if (event is LoadAddMoreEvent) {
         //------------Request
-        TeamRequestModel request =
-            TeamRequestModel(competitionId: state.competitionId);
+        TeamRequestModel request = TeamRequestModel(
+            competitionId: state.competitionId,
+            status: state.status,
+            teamName: state.searchName);
         request.currentPage = state.currentPage;
 
         PagingResult<TeamModel>? result = await service.GetListTeam(request);
@@ -104,18 +124,21 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
             newHasNext: result?.hasNext ??
                 false, // result trả ra null thì đồng nghĩa với việc hasNext = false
             newCurrentPage: result?.currentPage ?? state.currentPage,
-            valueInvitedCode: state.valueInvitedCode));
+            valueInvitedCode: state.valueInvitedCode,
+            newSearchName: state.searchName,
+            newStatus: state.status));
       }
 
       //get invited code
       if (event is ChangeInvitedCodeValueEvent) {
         emit(state.copyWith(
-                newListTeam: state.listTeam,
-                newCompetitionId: state.competitionId,
-                newHasNext: state.hasNext,
-                newCurrentPage: state.currentPage,
-                valueInvitedCode: event.newInvitedCodeValue) // change
-            );
+            newListTeam: state.listTeam,
+            newCompetitionId: state.competitionId,
+            newHasNext: state.hasNext,
+            newCurrentPage: state.currentPage,
+            valueInvitedCode: event.newInvitedCodeValue, // change
+            newSearchName: state.searchName,
+            newStatus: state.status));
       }
 
       //create team
@@ -150,6 +173,65 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
         } else {
           listener.add(ShowingSnackBarEvent(message: check.errorMessage));
         }
+      }
+      if (event is ChangeSearchNameEvent) {
+        emit(state.copyWith(
+            newListTeam: state.listTeam,
+            newCompetitionId: state.competitionId,
+            newHasNext: state.hasNext,
+            newCurrentPage: state.currentPage,
+            valueInvitedCode: state.valueInvitedCode,
+            newSearchName: event.searchName, // change
+            newStatus: state.status));
+      }
+      if (event is ChangeTeamStatusEvent) {
+        emit(state.copyWith(
+            newListTeam: state.listTeam,
+            newCompetitionId: state.competitionId,
+            newHasNext: state.hasNext,
+            newCurrentPage: state.currentPage,
+            valueInvitedCode: state.valueInvitedCode,
+            newSearchName: state.searchName,
+            newStatus: event.status // change
+            ));
+      }
+      if (event is SearchEvent) {
+        //------------Request
+        TeamRequestModel request = TeamRequestModel(
+            competitionId: state.competitionId,
+            status: state.status,
+            teamName: state.searchName);
+        //
+        request.currentPage = 1;
+
+        PagingResult<TeamModel>? result = await service.GetListTeam(request);
+
+        emit(state.copyWith(
+            newListTeam: result?.items ?? [],
+            newCompetitionId: state.competitionId,
+            newHasNext: result?.hasNext ?? false,
+            newCurrentPage: result?.currentPage ?? 1,
+            valueInvitedCode: state.valueInvitedCode,
+            newSearchName: state.searchName,
+            newStatus: state.status));
+      }
+      if (event is ResetFilterEvent) {
+        //------------Request
+        TeamRequestModel request = TeamRequestModel(
+            competitionId: state.competitionId, status: null, teamName: null);
+        //
+        request.currentPage = 1;
+
+        PagingResult<TeamModel>? result = await service.GetListTeam(request);
+
+        emit(state.copyWith(
+            newListTeam: result?.items ?? [],
+            newCompetitionId: state.competitionId,
+            newHasNext: result?.hasNext ?? false,
+            newCurrentPage: result?.currentPage ?? 1,
+            valueInvitedCode: state.valueInvitedCode,
+            newSearchName: state.searchName,
+            newStatus: state.status));
       }
     });
   }

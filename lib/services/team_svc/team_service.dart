@@ -48,12 +48,22 @@ class TeamService extends ITeamService {
 
     //competitionId
     if (request.competitionId != null) {
-      params += '&competitionId=${request.competitionId}';
+      params += 'competitionId=${request.competitionId}';
+    }
+
+    //teamName
+    if (request.teamName != null) {
+      params += '&teamName=${request.teamName}';
+    }
+
+    //status
+    if (request.status != null) {
+      params += '&status=${request.status?.index}';
     }
 
     //currentPage
     if (request.currentPage != null) {
-      params += '&currentPage${request.currentPage}';
+      params += '&currentPage=${request.currentPage}';
     }
 
     String url = Api.GetUrl(apiPath: '${Api.teams}/all$params');

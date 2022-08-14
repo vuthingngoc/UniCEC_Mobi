@@ -191,14 +191,21 @@ class CompetitionService implements ICompetitionService {
   //TA
   @override
   Future<PagingResult<CompetitionModel>?> loadCompetitionMemberTask(
-      int currentPage) async {
+      int currentPage, String? searchName, bool isEvent) async {
     var client = http.Client();
     //
     int clubIdSelected = GetIt.I.get<CurrentUser>().clubIdSelected;
     String url = Api.GetUrl(
         apiPath:
             '${Api.competitions}/student-is-assigned?clubId=$clubIdSelected' +
-                "&pageSize=10&currentPage=$currentPage");
+                "&pageSize=10&currentPage=$currentPage" +
+                "&event=${isEvent}");
+
+    //search name
+    if (searchName != null) {
+      url += "&name=${searchName}";
+    }
+
     String token = GetIt.I.get<CurrentUser>().idToken;
     try {
       var response =

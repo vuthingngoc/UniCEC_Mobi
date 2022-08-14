@@ -24,19 +24,24 @@ class CompetitionActivityService implements ICompetitionActivityService {
 
     //competitionId
     if (request.competitionId != null) {
-      params += '&competitionId=${request.competitionId}';
+      params += 'competitionId=${request.competitionId}';
     }
 
     //priority status
     if (request.priority != null) {
-      params += '&priorityStatus=${request.competitionId}';
+      params += '&priorityStatus=${request.priority?.index}';
     }
 
     //statuses
     if (request.statuses != null) {
       request.statuses?.forEach((element) {
-        params += '&statuses=$element';
+        params += '&statuses=${element.index}';
       });
+    }
+
+    //name
+    if (request.name != null) {
+      params += '&name=${request.name}';
     }
 
     //currentPage

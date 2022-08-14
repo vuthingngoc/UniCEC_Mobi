@@ -16,7 +16,8 @@ abstract class ICompetitionService {
   Future<CompetitionDetailModel?> loadDetailById(int competitionId);
 
   //TA
-  Future<PagingResult<CompetitionModel>?> loadCompetitionMemberTask(int clubId);
+  Future<PagingResult<CompetitionModel>?> loadCompetitionMemberTask(
+      int clubId, String? searchName, bool isEvent);
   Future<PagingResult<CompetitionModel>?> loadCompetitionParticipant(
       int currentPage,
       CompetitionScopeStatus? scope,

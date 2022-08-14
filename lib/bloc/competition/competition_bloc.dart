@@ -266,8 +266,8 @@ class CompetitionBloc extends BaseBloc<CompetitionEvent, CompetitionState> {
             statuses: statuses,
             event: state.isEvent);
 
-        PagingResult<CompetitionShowModel>? result =
-            await service.showCompetition(request, state.currentPage);
+        PagingResult<CompetitionShowModel>? result = await service
+            .showCompetition(request, 1); // search là currentPage = 1 hết
 
         if (result != null) {
           emit(state.copyWith(

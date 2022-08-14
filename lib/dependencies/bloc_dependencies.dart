@@ -87,8 +87,8 @@ class BlocDependencies {
         () => ClubViewDetailBloc(service: injector()));
 
     // import view competition member task
-    injector.registerFactory<ViewCompetitionMemberTaskBloc>(
-        () => ViewCompetitionMemberTaskBloc(service: injector()));
+    injector.registerSingleton<ViewCompetitionMemberTaskBloc>(
+        ViewCompetitionMemberTaskBloc(service: injector()));
 
     // import view competition activity
     injector.registerFactory<ViewCompetitionActivityBloc>(

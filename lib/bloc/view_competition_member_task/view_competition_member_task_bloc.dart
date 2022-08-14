@@ -16,7 +16,11 @@ class ViewCompetitionMemberTaskBloc extends BaseBloc<
 
   ViewCompetitionMemberTaskBloc({required this.service})
       : super(ViewCompetitionMemberTaskState(
-            listCompetition: [], hasNext: false, currentPage: 1)) {
+            listCompetition: [],
+            searchName: null,
+            isEvent: false,
+            hasNext: false,
+            currentPage: 1)) {
     on((event, emit) async {
       //init Event
       if (event is InitEvent) {
@@ -24,28 +28,45 @@ class ViewCompetitionMemberTaskBloc extends BaseBloc<
         if (GetIt.I.get<CurrentUser>().clubIdSelected != 0) {
           //load
           PagingResult<CompetitionModel>? result =
-              await service.loadCompetitionMemberTask(state.currentPage);
+              await service.loadCompetitionMemberTask(
+                  state.currentPage, state.searchName, state.isEvent);
           //
           if (result != null) {
             //emit
             emit(state.copyWith(
                 listCompetition: result.items,
+                searchName: state.searchName,
+                isEvent: state.isEvent,
                 hasNext: result.hasNext,
                 currentPage: result.currentPage));
+          } else {
+            //emit
+            emit(state.copyWith(
+                listCompetition: [],
+                searchName: state.searchName,
+                isEvent: state.isEvent,
+                hasNext: false,
+                currentPage: 1));
           }
         }
       }
       //Refesh Event
       if (event is RefreshEvent) {
         //refresh state
-        emit(state
-            .copyWith(listCompetition: [], hasNext: false, currentPage: 1));
+        emit(state.copyWith(
+            listCompetition: [],
+            searchName: state.searchName,
+            isEvent: state.isEvent,
+            hasNext: false,
+            currentPage: 1));
       }
       //Increase Event
       if (event is IncrementalEvent) {
         int increase = state.currentPage + 1;
         emit(state.copyWith(
             listCompetition: state.listCompetition,
+            searchName: state.searchName,
+            isEvent: state.isEvent,
             hasNext: state.hasNext,
             currentPage: increase));
       }
@@ -53,7 +74,8 @@ class ViewCompetitionMemberTaskBloc extends BaseBloc<
       if (event is LoadAddMoreEvent) {
         //load
         PagingResult<CompetitionModel>? result =
-            await service.loadCompetitionMemberTask(state.currentPage);
+            await service.loadCompetitionMemberTask(
+                state.currentPage, state.searchName, state.isEvent);
         //
         List<CompetitionModel> listContinute = result?.items ?? [];
         //
@@ -65,10 +87,59 @@ class ViewCompetitionMemberTaskBloc extends BaseBloc<
         //
         emit(state.copyWith(
             listCompetition: state.listCompetition,
+            searchName: state.searchName,
+            isEvent: state.isEvent,
             hasNext: result?.hasNext ??
                 false, // result trả ra null thì đồng nghĩa với việc hasNext = false
             currentPage: result?.currentPage ?? state.currentPage));
       }
+      if (event is ChangeSearchNameEvent) {
+        emit(state.copyWith(
+            listCompetition: state.listCompetition,
+            searchName: event.searchName, // change
+            isEvent: state.isEvent,
+            hasNext: state.hasNext,
+            currentPage: state.currentPage));
+      }
+      if (event is ChangeValueEvent) {
+        emit(state.copyWith(
+            listCompetition: state.listCompetition,
+            searchName: state.searchName,
+            isEvent: event.isEvent, // change
+            hasNext: state.hasNext,
+            currentPage: state.currentPage));
+      }
+      if (event is SearchEvent) {
+        //get clubIdSelected
+        if (GetIt.I.get<CurrentUser>().clubIdSelected != 0) {
+          //load
+          PagingResult<CompetitionModel>? result = await service
+              .loadCompetitionMemberTask(1, state.searchName, state.isEvent);
+          //
+
+          //emit
+          emit(state.copyWith(
+              listCompetition: result?.items ?? [],
+              searchName: state.searchName,
+              isEvent: state.isEvent,
+              hasNext: result?.hasNext ?? false,
+              currentPage: result?.currentPage ?? 1));
+        }
+      }
+      // if (event is ResetFilterEvent) {
+      //   if (GetIt.I.get<CurrentUser>().clubIdSelected != 0) {
+      //     //load
+      //     PagingResult<CompetitionModel>? result =
+      //         await service.loadCompetitionMemberTask(1, null, false);
+      //     //emit
+      //     emit(state.copyWith(
+      //         listCompetition: result?.items ?? [],
+      //         searchName: null,
+      //         isEvent: false,
+      //         hasNext: result?.hasNext ?? false,
+      //         currentPage: result?.currentPage ?? 1));
+      //   }
+      // }
     });
   }
 }

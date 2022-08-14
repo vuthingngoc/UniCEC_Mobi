@@ -229,7 +229,7 @@ class ViewListCompetitionOfClubBloc extends BaseBloc<
             event: state.isEvent);
 
         PagingResult<CompetitionShowModel>? result =
-            await service.showCompetition(request, state.currentPage);
+            await service.showCompetition(request, 1);
 
         if (result != null) {
           emit(state.copyWith(
