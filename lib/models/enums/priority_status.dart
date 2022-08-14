@@ -1,5 +1,6 @@
-enum PriorityStatus{
+enum PriorityStatus {
   Low,
   Medium,
-  High
+  High,
+  All // thêm vào để show
 }

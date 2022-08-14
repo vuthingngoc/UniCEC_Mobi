@@ -7,12 +7,11 @@ class CompetitionActivityRequestModel extends PagingRequest {
   int? competitionId;
   PriorityStatus? priority;
   List<CompetitionActivityStatus>? statuses;
+  String? name;
   //int? clubId;
 
-  CompetitionActivityRequestModel({
-    this.competitionId,
-    this.priority,
-    this.statuses,
-    //this.clubId
-  });
+  CompetitionActivityRequestModel(
+      {this.competitionId, this.priority, this.statuses, this.name
+      //this.clubId
+      });
 }
