@@ -56,6 +56,7 @@ class _ClubCardState extends State<ClubCard> {
               onTap: () {
                 bloc.add(
                     ChooseClubSelectionEvent(clubIdSelected: widget.club.id));
+                    bloc.isLoading = true;
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

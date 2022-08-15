@@ -33,7 +33,7 @@ class _ClubViewDetailPageState extends State<ClubViewDetailPage> {
 
       if (clubSelected != null) {
         //thêm sự kiện để cập nhật state
-        bloc.add(RecieveDataEvent(clubView: clubSelected));
+        bloc.add(RecieveDataEvent(clubView: clubSelected));        
       }
     }
   }
@@ -46,27 +46,17 @@ class _ClubViewDetailPageState extends State<ClubViewDetailPage> {
         bloc: bloc,
         builder: (context, state) {
           return Scaffold(
-            appBar: AppBar(
-              leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.arrow_back, color: Colors.white),
-              ),
-              title: const Text("Câu lạc bộ",
-                  style: TextStyle(color: Colors.white)),
-              automaticallyImplyLeading: false,
-              backgroundColor: AppColors.mainColor,
-              centerTitle: true,
-            ),
+            appBar: AppBar(),
             body: ListView(
               children: [
-                //ClubImages(club: state.clubViewDetail),
+                ClubImages(club: state.clubViewDetail),
                 TopRoundedContainer(
                   color: Colors.white,
                   child: Column(
                     children: [
-                      ClubViewDetailDescription(club: state.clubViewDetail),
+                      ClubViewDetailDescription(club: state.clubViewDetail
+                          //pressOnSeeMore: () {},
+                          ),
                       //
                       TopRoundedContainer(
                         color: Colors.white,

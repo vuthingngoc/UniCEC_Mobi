@@ -10,6 +10,14 @@ import 'club_selection_state.dart';
 class ClubSelectionBloc
     extends BaseBloc<ClubSelectionEvent, ClubSelectionState> {
   ILoginService service; //-> mượn hàm của login
+  bool _isLoading = false;
+  
+  bool get isLoading => _isLoading;
+
+  set isLoading(bool isLoading){
+    _isLoading = isLoading;
+  }
+
   ClubSelectionBloc({required this.service})
       : super(ClubSelectionState(
             listClubsBelongToStudent: [], listMembersBelongToClubs: [])) {
@@ -21,9 +29,11 @@ class ClubSelectionBloc
             listMembersBelongToClubs: user.membersBelongToClubs));
       }
       if (event is ChooseClubSelectionEvent) {
+        _isLoading = true;
         CurrentUser user = GetIt.I.get<CurrentUser>();
         user.clubIdSelected = event.clubIdSelected;
         listener.add(NavigatorClubPageEvent());
+        _isLoading = false;
       }
       if (event is ClubsViewPageEvent) {
         listener.add(NavigatorClubsViewPageEvent());
