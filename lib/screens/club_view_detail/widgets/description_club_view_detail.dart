@@ -24,74 +24,147 @@ class _ClubViewDetailDescriptionState extends State<ClubViewDetailDescription> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Row(
+          children: [
+            const Padding(
+              padding: const EdgeInsets.only(top: 60.0, left: 20),
+              child: FractionalTranslation(
+                  translation: Offset(0.0, -0.5),
+                  child: Align(
+                    child: CircleAvatar(
+                      backgroundImage: NetworkImage(
+                          "https://lh3.googleusercontent.com/DQj-gonAVTlhj5W7_DhBVmX-0P42rfvx8TSp1WfQeZ6iFIon6InIS8M4Nbqy7Ql5ahgEXSiRDiWD88v-bcPYIEAg3Q=w640-h400-e365-rj-sc0x00ffffff"),
+                      radius: 40.0,
+                    ),
+                    alignment: FractionalOffset(0.5, 0.0),
+                  )),
+            ),
+            Column(
+              children: [
+                Padding(
+                    padding: const EdgeInsets.only(left: 0),
+                    child: (widget.club?.name == null)
+                        ? Text(
+                            'Không tìm thấy tên',
+                            style: Theme.of(context).textTheme.headline6,
+                          )
+                        : Text(
+                            widget.club!.name,
+                            style: TextStyle(
+                              color: Color.fromRGBO(50, 50, 93, 1),
+                              fontSize: 23.0,
+                            ),
+                          )),
+                Padding(
+                    padding: const EdgeInsets.only(top: 20, left: 20),
+                    child: (widget.club?.founding == null)
+                        ? Text(
+                            '',
+                            style: Theme.of(context).textTheme.headline6,
+                          )
+                        : Text(
+                            widget.club!.founding.toString(),
+                            style: TextStyle(
+                              color: Color.fromRGBO(50, 50, 93, 1),
+                              fontSize: 16.0,
+                            ),
+                          )),
+              ],
+            ),
+          ],
+        ),
         Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(20),
-            vertical: 10,
-          ),
-          child: GestureDetector(
-            onTap: () {},
-            child: Row(
+              horizontal: getProportionateScreenWidth(20), vertical: 20),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Row(
               children: [
                 Text(
-                  "Thông Tin Câu Lạc Bộ",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      color: kPrimaryColor,
-                      fontSize: 20),
+                  'Giới thiệu',
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                 ),
               ],
             ),
-          ),
+            if (widget.club?.description == null)
+              Text(
+                '',
+                maxLines: 10,
+              ),
+            if (widget.club?.description != null)
+              Text(
+                widget.club!.description,
+                maxLines: 10,
+                style: TextStyle(fontSize: 16),
+              ),
+          ]),
         ),
+
+        // //description
+        // Padding(
+        //   padding: EdgeInsets.only(
+        //     left: getProportionateScreenWidth(20),
+        //     right: getProportionateScreenWidth(64),
+        //   ),
+        //   child: (widget.club?.description == null)
+        //       ? Text(
+        //           '',
+        //           maxLines: 10,
+        //         )
+        //       : Text(
+        //           widget.club!.description,
+        //           maxLines: 10,
+        //           style: TextStyle(fontSize: 16),
+        //         ),
+        // ),
+
+        //Thông tin liên hệ
         Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: getProportionateScreenWidth(20)),
-            child: (widget.club?.name == null)
-                ? Text(
-                    'Không có dữ liệu name',
-                    style: Theme.of(context).textTheme.headline6,
-                  )
-                : Text(
-                    widget.club!.name,
-                    style: Theme.of(context).textTheme.headline5,
-                  )),
-        // Align(
-        //   alignment: Alignment.centerRight,
-        //   child: Container(
-        //     padding: EdgeInsets.all(getProportionateScreenWidth(15)),
-        //     width: getProportionateScreenWidth(64),
-        //     decoration: BoxDecoration(
-        //       color:
-        //           widget.product.isFavourite ? Color(0xFFFFE6E6) : Color(0xFFF5F6F9),
-        //       borderRadius: BorderRadius.only(
-        //         topLeft: Radius.circular(20),
-        //         bottomLeft: Radius.circular(20),
-        //       ),
-        //     ),
-        //     child: SvgPicture.asset(
-        //       "assets/icons/Heart Icon_2.svg",
-        //       color:
-        //           widget.product.isFavourite ? Color(0xFFFF4848) : Color(0xFFDBDEE4),
-        //       height: getProportionateScreenWidth(16),
-        //     ),
-        //   ),
-        // ),
-        Padding(
-          padding: EdgeInsets.only(
-            left: getProportionateScreenWidth(20),
-            right: getProportionateScreenWidth(64),
-          ),
-          child: (widget.club?.description == null)
-              ? Text(
-                  'Không có dữ liệu Description',
-                  maxLines: 10,
-                )
-              : Text(
-                  widget.club!.description,
-                  maxLines: 10,
+              horizontal: getProportionateScreenWidth(20),
+              vertical: 30,
+            ),
+            child: Column(children: [
+              if (widget.club?.clubFanpage != null ||
+                  widget.club?.clubContact != null)
+                Row(
+                  children: const [
+                    Text(
+                      'Thông tin liên hệ',
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                    ),
+                  ],
                 ),
-        ),
+              const SizedBox(height: 10),
+              if (widget.club?.clubFanpage != null)
+                Padding(
+                  padding: const EdgeInsets.only(left: 0),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.web),
+                      const SizedBox(width: 10),
+                      Text(
+                        widget.club?.clubFanpage ?? '',
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  ),
+                ),
+              const SizedBox(height: 10),
+              if (widget.club?.clubContact != null)
+                Padding(
+                  padding: const EdgeInsets.only(left: 0),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.phone),
+                      const SizedBox(width: 10),
+                      Text(widget.club?.clubContact ?? '',
+                          style: const TextStyle(fontSize: 16)),
+                    ],
+                  ),
+                )
+            ]))
         // Padding(
         //   padding: EdgeInsets.symmetric(
         //     horizontal: getProportionateScreenWidth(20),
@@ -102,55 +175,78 @@ class _ClubViewDetailDescriptionState extends State<ClubViewDetailDescription> {
         //     child: Row(
         //       children: [
         //         Text(
-        //           "See More Detail",
+        //           "Thông Tin Câu Lạc Bộ",
         //           style: TextStyle(
-        //               fontWeight: FontWeight.w600, color: kPrimaryColor),
-        //         ),
-        //         SizedBox(width: 5),
-        //         Icon(
-        //           Icons.arrow_forward_ios,
-        //           size: 12,
-        //           color: kPrimaryColor,
+        //               fontWeight: FontWeight.w600,
+        //               color: kPrimaryColor,
+        //               fontSize: 20),
         //         ),
         //       ],
         //     ),
         //   ),
         // ),
-        Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(20),
-            vertical: 10,
-          ),
-          child: Column(children: [
-            Text(
-              'Liên Hệ và Hợp Tác với Chúng Tôi',
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  color: kPrimaryColor,
-                  fontSize: 20),
-            ),
-            SizedBox(height: 10),
-            Row(
-              children: [
-                Icon(Icons.web),
-                SizedBox(width: 10),
-                Text(
-                  widget.club?.clubFanpage ?? 'Không có dữ liệu clubFanpage',
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            Row(
-              children: [
-                Icon(Icons.phone),
-                SizedBox(width: 10),
-                Text(
-                  widget.club?.clubContact ?? 'Không có dữ liệu clubContact',
-                ),
-              ],
-            )
-          ]),
-        )
+        // Padding(
+        //     padding: EdgeInsets.symmetric(
+        //         horizontal: getProportionateScreenWidth(20)),
+        //     child: (widget.club?.name == null)
+        //         ? Text(
+        //             'Không có dữ liệu name',
+        //             style: Theme.of(context).textTheme.headline6,
+        //           )
+        //         : Text(
+        //             widget.club!.name,
+        //             style: Theme.of(context).textTheme.headline5,
+        //           )),
+        // Padding(
+        //   padding: EdgeInsets.only(
+        //     left: getProportionateScreenWidth(20),
+        //     right: getProportionateScreenWidth(64),
+        //   ),
+        //   child: (widget.club?.description == null)
+        //       ? Text(
+        //           'Không có dữ liệu Description',
+        //           maxLines: 10,
+        //         )
+        //       : Text(
+        //           widget.club!.description,
+        //           maxLines: 10,
+        //         ),
+        // ),
+        // Padding(
+        //   padding: EdgeInsets.symmetric(
+        //     horizontal: getProportionateScreenWidth(20),
+        //     vertical: 10,
+        //   ),
+        //   child: Column(children: [
+        //     Text(
+        //       'Liên Hệ và Hợp Tác với Chúng Tôi',
+        //       style: TextStyle(
+        //           fontWeight: FontWeight.w600,
+        //           color: kPrimaryColor,
+        //           fontSize: 20),
+        //     ),
+        //     SizedBox(height: 10),
+        //     Row(
+        //       children: [
+        //         Icon(Icons.web),
+        //         SizedBox(width: 10),
+        //         Text(
+        //           widget.club?.clubFanpage ?? 'Không có dữ liệu clubFanpage',
+        //         ),
+        //       ],
+        //     ),
+        //     SizedBox(height: 10),
+        //     Row(
+        //       children: [
+        //         Icon(Icons.phone),
+        //         SizedBox(width: 10),
+        //         Text(
+        //           widget.club?.clubContact ?? 'Không có dữ liệu clubContact',
+        //         ),
+        //       ],
+        //     )
+        //   ]),
+        // )
       ],
     );
   }

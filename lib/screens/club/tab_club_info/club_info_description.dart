@@ -28,10 +28,6 @@ class _ClubDescriptionState extends State<ClubDescription> {
       children: [
         Row(
           children: [
-            // Padding(
-            //   padding: const EdgeInsets.only(left: 25.0),
-            //   child: ClubPic(avatar: avatar),
-            // ),
             const Padding(
               padding: const EdgeInsets.only(top: 60.0, left: 20),
               child: FractionalTranslation(
@@ -81,21 +77,47 @@ class _ClubDescriptionState extends State<ClubDescription> {
           ],
         ),
         Padding(
-          padding: EdgeInsets.only(
-            left: getProportionateScreenWidth(20),
-            right: getProportionateScreenWidth(64),
-          ),
-          child: (widget.club?.description == null)
-              ? Text(
-                  '',
-                  maxLines: 10,
-                )
-              : Text(
-                  widget.club!.description,
-                  maxLines: 10,
-                  style: TextStyle(fontSize: 16),
+          padding: EdgeInsets.symmetric(
+              horizontal: getProportionateScreenWidth(20), vertical: 20),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Row(
+              children: [
+                Text(
+                  'Giới thiệu',
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                 ),
+              ],
+            ),
+            if (widget.club?.description == null)
+              Text(
+                '',
+                maxLines: 10,
+              ),
+            if (widget.club?.description != null)
+              Text(
+                widget.club!.description,
+                maxLines: 10,
+                style: TextStyle(fontSize: 16),
+              ),
+          ]),
         ),
+        // Padding(
+        //   padding: EdgeInsets.only(
+        //     left: getProportionateScreenWidth(20),
+        //     right: getProportionateScreenWidth(64),
+        //   ),
+        //   child: (widget.club?.description == null)
+        //       ? Text(
+        //           '',
+        //           maxLines: 10,
+        //         )
+        //       : Text(
+        //           widget.club!.description,
+        //           maxLines: 10,
+        //           style: TextStyle(fontSize: 16),
+        //         ),
+        // ),
         Padding(
           padding: EdgeInsets.symmetric(
             horizontal: getProportionateScreenWidth(20),
@@ -157,9 +179,8 @@ class _ClubDescriptionState extends State<ClubDescription> {
             horizontal: getProportionateScreenWidth(20),
             vertical: 10,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Row(
               children: const [
                 Text(
@@ -172,7 +193,7 @@ class _ClubDescriptionState extends State<ClubDescription> {
             Container(
               width: 220.0,
               height: 36,
-              margin: new EdgeInsets.only(bottom: 15),
+              margin: new EdgeInsets.all(15),
               child: RaisedButton(
                   textColor: ArgonColors.primary,
                   color: ArgonColors.secondary,
@@ -189,9 +210,7 @@ class _ClubDescriptionState extends State<ClubDescription> {
                         // MainAxisAlignment
                         //     .spaceAround,
                         children: const [
-                          Icon(
-                              Icons.description,
-                              size: 13),
+                          Icon(Icons.description, size: 13),
                           SizedBox(
                             width: 5,
                           ),
@@ -221,6 +240,7 @@ class _ClubDescriptionState extends State<ClubDescription> {
             Container(
               width: 305.0,
               height: 36,
+              margin: new EdgeInsets.all(15),
               child: RaisedButton(
                   textColor: ArgonColors.primary,
                   color: ArgonColors.secondary,
@@ -230,12 +250,8 @@ class _ClubDescriptionState extends State<ClubDescription> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(4)),
                   child: Padding(
-                      padding:
-                      const EdgeInsets.only(
-                          bottom: 10,
-                          top: 10,
-                          left: 8,
-                          right: 8),
+                      padding: const EdgeInsets.only(
+                          bottom: 10, top: 10, left: 8, right: 8),
                       child: Row(
                         // mainAxisAlignment:
                         // MainAxisAlignment
@@ -273,8 +289,8 @@ class _ClubDescriptionState extends State<ClubDescription> {
             const SizedBox(height: 10),
             if (widget.club?.clubFanpage != null)
               Padding(
-                padding: const EdgeInsets.only(left: 15.0),
-                child: Wrap(
+                padding: const EdgeInsets.only(left: 30),
+                child: Row(
                   children: [
                     const Icon(Icons.web),
                     const SizedBox(width: 10),
@@ -288,9 +304,8 @@ class _ClubDescriptionState extends State<ClubDescription> {
             const SizedBox(height: 10),
             if (widget.club?.clubContact != null)
               Padding(
-                padding: const EdgeInsets.only(left: 15.0),
-                child: Wrap(
-                  alignment: WrapAlignment.start,            
+                padding: const EdgeInsets.only(left: 30),
+                child: Row(
                   children: [
                     const Icon(Icons.phone),
                     const SizedBox(width: 10),

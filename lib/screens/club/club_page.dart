@@ -76,9 +76,9 @@ class _ClubPageState extends State<ClubPage> {
               : Scaffold(
                   appBar: AppBar(
                     title: const Text("Câu lạc bộ",
-                        style: TextStyle(color: Colors.black)),
+                        style: TextStyle(color: Colors.white)),
                     automaticallyImplyLeading: false,
-                    backgroundColor: ArgonColors.bgColorScreen,
+                    backgroundColor: AppColors.mainColor,
                     centerTitle: true,
                   ),
                   body:

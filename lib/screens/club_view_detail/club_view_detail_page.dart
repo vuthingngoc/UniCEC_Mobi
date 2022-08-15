@@ -7,6 +7,7 @@ import 'package:unicec_mobi/screens/club_view_detail/widgets/images_club_view_de
 import 'package:unicec_mobi/screens/club_view_detail/widgets/top_rounded_container.dart';
 import '../../bloc/club_view_detail/club_view_detail_event.dart';
 import '../../bloc/club_view_detail/club_view_detail_state.dart';
+import '../../utils/app_color.dart';
 import '../club/tab_club_info/default_button.dart';
 import '../size_config.dart';
 import 'widgets/description_club_view_detail.dart';
@@ -45,17 +46,27 @@ class _ClubViewDetailPageState extends State<ClubViewDetailPage> {
         bloc: bloc,
         builder: (context, state) {
           return Scaffold(
-            appBar: AppBar(),
+            appBar: AppBar(
+              leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.arrow_back, color: Colors.white),
+              ),
+              title: const Text("Câu lạc bộ",
+                  style: TextStyle(color: Colors.white)),
+              automaticallyImplyLeading: false,
+              backgroundColor: AppColors.mainColor,
+              centerTitle: true,
+            ),
             body: ListView(
               children: [
-                ClubImages(club: state.clubViewDetail),
+                //ClubImages(club: state.clubViewDetail),
                 TopRoundedContainer(
                   color: Colors.white,
                   child: Column(
                     children: [
-                      ClubViewDetailDescription(club: state.clubViewDetail
-                          //pressOnSeeMore: () {},
-                          ),
+                      ClubViewDetailDescription(club: state.clubViewDetail),
                       //
                       TopRoundedContainer(
                         color: Colors.white,

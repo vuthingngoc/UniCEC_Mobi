@@ -33,6 +33,24 @@ class ViewCompetitionActivityBloc extends BaseBloc<ViewCompetitionActivityEvent,
         request.currentPage = state.currentPage;
         request.name = state.searchName;
 
+        if (state.chooseStatus == CompetitionActivityStatus.All) {
+          //status
+          request.statuses = [];
+          request.statuses?.add(CompetitionActivityStatus.Open);
+          request.statuses?.add(CompetitionActivityStatus.OnGoing);
+          request.statuses?.add(CompetitionActivityStatus.Finished);
+          request.statuses?.add(CompetitionActivityStatus.Pending);
+          request.statuses?.add(CompetitionActivityStatus.Completed);
+        } else {
+          request.statuses = [];
+          request.statuses?.add(state.chooseStatus);
+        }
+        if (state.choosePriorityStatus == PriorityStatus.All) {
+          request.priority = null;
+        } else {
+          request.priority = state.choosePriorityStatus;
+        }
+
         PagingResult<CompetitionActivityModel>? result =
             await service.getListCompetititonActivity(request);
 
@@ -88,12 +106,14 @@ class ViewCompetitionActivityBloc extends BaseBloc<ViewCompetitionActivityEvent,
         request.name = state.searchName; // null
         if (state.chooseStatus == CompetitionActivityStatus.All) {
           //status
+          request.statuses = [];
           request.statuses?.add(CompetitionActivityStatus.Open);
           request.statuses?.add(CompetitionActivityStatus.OnGoing);
           request.statuses?.add(CompetitionActivityStatus.Finished);
           request.statuses?.add(CompetitionActivityStatus.Pending);
           request.statuses?.add(CompetitionActivityStatus.Completed);
         } else {
+          request.statuses = [];
           request.statuses?.add(state.chooseStatus);
         }
         if (state.choosePriorityStatus == PriorityStatus.All) {
@@ -156,12 +176,14 @@ class ViewCompetitionActivityBloc extends BaseBloc<ViewCompetitionActivityEvent,
         request.name = state.searchName;
         if (state.chooseStatus == CompetitionActivityStatus.All) {
           //status
+          request.statuses = [];
           request.statuses?.add(CompetitionActivityStatus.Open);
           request.statuses?.add(CompetitionActivityStatus.OnGoing);
           request.statuses?.add(CompetitionActivityStatus.Finished);
           request.statuses?.add(CompetitionActivityStatus.Pending);
           request.statuses?.add(CompetitionActivityStatus.Completed);
         } else {
+          request.statuses = [];
           request.statuses?.add(state.chooseStatus);
         }
         if (state.choosePriorityStatus == PriorityStatus.All) {
@@ -237,14 +259,17 @@ class ViewCompetitionActivityBloc extends BaseBloc<ViewCompetitionActivityEvent,
         request.competitionId = state.competitionId;
         request.currentPage = 1;
         request.name = state.searchName;
+
         if (state.chooseStatus == CompetitionActivityStatus.All) {
           //status
+          request.statuses = [];
           request.statuses?.add(CompetitionActivityStatus.Open);
           request.statuses?.add(CompetitionActivityStatus.OnGoing);
           request.statuses?.add(CompetitionActivityStatus.Finished);
           request.statuses?.add(CompetitionActivityStatus.Pending);
           request.statuses?.add(CompetitionActivityStatus.Completed);
         } else {
+          request.statuses = [];
           request.statuses?.add(state.chooseStatus);
         }
         if (state.choosePriorityStatus == PriorityStatus.All) {
