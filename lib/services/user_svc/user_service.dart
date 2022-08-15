@@ -13,6 +13,7 @@ import 'package:unicec_mobi/utils/api.dart';
 import 'package:unicec_mobi/utils/log.dart';
 
 import '../../models/common/paging_result.dart';
+import '../../models/common/resultCRUD.dart';
 
 class UserService implements IUserService {
   Adapter adapter = Adapter();
@@ -104,9 +105,9 @@ class UserService implements IUserService {
   }
 
   @override
-  Future<bool> updateUser(UserModel user) async {
+  Future<ResultCRUD> updateUser(UserModel user) async {
     var client = http.Client();
-    String url = Api.GetUrl(apiPath: '${Api.users}');
+    String url = Api.GetUrl(apiPath: Api.users);
     String token = GetIt.I.get<CurrentUser>().idToken;
 
     try {
@@ -120,18 +121,24 @@ class UserService implements IUserService {
             "email": user.email,
             "phone_number": user.phoneNumber,
             "gender": user.gender,
-            "status": user.status,
+            "status": user.status.index,
             "dob": user.dob,
             "description": user.description,
             "avatar": user.avatar,
             "is_online": true // default status
           }));
-      return (response.statusCode == 200) ? true : false;
+      return (response.statusCode == 200)
+          ? ResultCRUD(errorMessage: 'Cập nhật thành công', check: true, returnIntData: -1)
+          : ResultCRUD(
+              errorMessage: response.body.toString(),
+              check: false,
+              returnIntData: -1);
     } catch (error) {
       Log.error(error.toString());
     }
 
-    return false;
+    return ResultCRUD(
+        errorMessage: '', check: false, returnIntData: -1); // avoid error
   }
 
   @override
