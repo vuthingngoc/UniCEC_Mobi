@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/bloc/my_account/my_account_bloc.dart';
-import 'package:unicec_mobi/bloc/profile/profile_bloc.dart';
-import 'package:unicec_mobi/bloc/profile/profile_state.dart';
 import 'package:unicec_mobi/constants/Theme.dart';
 import '../../bloc/my_account/my_account_event.dart';
 import '../../bloc/my_account/my_account_state.dart';
-import '../../bloc/profile/profile_event.dart';
 
 //widgets
 import '../../models/common/current_user.dart';

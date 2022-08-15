@@ -2,6 +2,7 @@ import 'package:unicec_mobi/bloc/edit_profile/edit_profile_event.dart';
 import 'package:unicec_mobi/bloc/edit_profile/edit_profile_state.dart';
 import 'package:unicec_mobi/models/common/paging_request.dart';
 import 'package:unicec_mobi/models/common/paging_result.dart';
+import 'package:unicec_mobi/models/common/resultCRUD.dart';
 import 'package:unicec_mobi/models/entities/department/department_model.dart';
 import 'package:unicec_mobi/models/entities/user/user_model.dart';
 import 'package:unicec_mobi/services/i_services.dart';
@@ -46,9 +47,10 @@ class EditProfileBloc extends BaseBloc<EditProfileEvent, EditProfileState> {
 
       if (event is EditInfoEvent) {
         _isLoading = true;
-        bool result = await service.updateUser(event.user);
-        Log.info('result edit info user: $result');
-        emit(state.copyWith(isSuccess: result));
+        ResultCRUD result = await service.updateUser(event.user);
+        Log.info('result edit info user: ${result.errorMessage}');
+        emit(state.copyWith(isSuccess: result.check));
+        listener.add(ShowPopUpAnnouncement(message: result.errorMessage));
         _isLoading = false;
       }
 

@@ -24,3 +24,9 @@ class ChangeSelectionDepartment extends EditProfileEvent{
 
   ChangeSelectionDepartment({required this.newValue});
 }
+
+class ShowPopUpAnnouncement extends EditProfileEvent{
+  String message;
+
+  ShowPopUpAnnouncement({required this.message});
+}

@@ -40,7 +40,16 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
     _bloc.add(LoadProfileEvent(userId: userId));
     _bloc.add(LoadDepartmentsByUni(universityId: universityId));
     _bloc.isLoading = true;
+
+    _bloc.listenerStream.listen((event) {
+      if (event is ShowPopUpAnnouncement) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(event.message)));
+      }
+    });
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -279,10 +288,10 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
                                           padding: const EdgeInsets.all(8.0),
                                           child: Column(children: [
                                             DropdownButton(
-                                              isExpanded: true,
-                                              dropdownColor: Colors.white,                                              
-                                                value: state.selectedDepartment ?? 
-                                                state.departments
+                                                isExpanded: true,
+                                                dropdownColor: Colors.white,
+                                                value: state.selectedDepartment ??
+                                                    state.departments
                                                         ?.firstWhere((element) => (state
                                                                     .user
                                                                     ?.departmentId !=
@@ -307,7 +316,8 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
                                                 onChanged: (DepartmentModel?
                                                     selectedValue) {
                                                   setState(() {
-                                                    Log.info('SelectedValue: $selectedValue');
+                                                    Log.info(
+                                                        'SelectedValue: $selectedValue');
                                                     state.selectedDepartment =
                                                         selectedValue!;
                                                   });
@@ -413,9 +423,9 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
                                       child: Align(
                                         alignment: FractionalOffset(0.5, 0.0),
                                         child: CircleAvatar(
-                                          backgroundImage:
-                                              NetworkImage(//AssetImage(
-                                                  state.user?.avatar != null 
+                                          backgroundImage: NetworkImage(
+                                              //AssetImage(
+                                              state.user?.avatar != null
                                                   ? "${state.user?.avatar}"
                                                   : defaultImage),
                                           radius: 65.0,
@@ -434,23 +444,28 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
                                     textColor: ArgonColors.white,
                                     color: ArgonColors.warning,
                                     onPressed: () {
-                                      UserModel user =
-                                        UserModel(
+                                      UserModel user = UserModel(
                                           id: (state.user?.id)!,
                                           roleId: (state.user?.roleId)!,
                                           email: emailController.value.text,
-                                          fullname: fullnameController.value.text,
+                                          fullname:
+                                              fullnameController.value.text,
                                           avatar: (state.user?.avatar)!,
                                           gender: genderController.value.text,
-                                          departmentId: state.selectedDepartment?.id,
-                                          studentCode: (state.user?.studentCode)!,
-                                          phoneNumber: phoneController.value.text,
-                                          status: UserStatus.Active, // default status
+                                          departmentId:
+                                              state.selectedDepartment?.id,
+                                          studentCode:
+                                              (state.user?.studentCode)!,
+                                          phoneNumber:
+                                              phoneController.value.text,
+                                          status: UserStatus
+                                              .Active, // default status
                                           dob: dobController.value.text,
-                                          description: descriptionController.value.text,
+                                          description:
+                                              descriptionController.value.text,
                                           isOnline: true);
                                       _bloc.add(EditInfoEvent(user: user));
-                                      Navigator.pop(context);
+                                      Navigator.pop(context, user.id);
                                     },
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(4.0),
