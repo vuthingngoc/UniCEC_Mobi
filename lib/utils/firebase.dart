@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,5 +32,35 @@ class FirebaseUtils {
       await FirebaseAuth.instance.signOut();
       Log.info("Sign out successfully");
     }
+  }
+
+  // config local notification
+  static final FlutterLocalNotificationsPlugin _notificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
+  static void initialize() {
+    final InitializationSettings initializationSettings =
+        InitializationSettings(
+            android: AndroidInitializationSettings("@mipmap/ic_launcher"));
+
+    _notificationsPlugin.initialize(initializationSettings);
+  }
+
+  static Future<void> display(RemoteMessage message) async {
+    try {
+  final id = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+  final NotificationDetails notificationDetails = NotificationDetails(
+      android: AndroidNotificationDetails(
+          'high_importance_channel', // id
+          'High Importance Notifications',
+          channelDescription: "This channel is used for important notification", // name
+          importance: Importance.high,
+          priority: Priority.high));
+  
+  await _notificationsPlugin.show(id, message.notification!.title,
+      message.notification!.body, notificationDetails);
+} on Exception catch (e) {
+  Log.debug(e.toString());
+}
   }
 }

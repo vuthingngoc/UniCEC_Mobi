@@ -18,7 +18,7 @@ class NotificationModel implements Comparable<NotificationModel> {
     int id = json['Id'] ?? 0;
     String title = json['Title'] ?? '';
     String content = json['Content'] ?? '';
-    DateTime sortDate = DateTime.parse(json['SortDate']);
+    DateTime sortDate = json['DateCreate'] != null ? DateTime.parse(json['DateCreate']) : DateTime.now();
     String createdDate = DateFormat('dd-MM-yyyy HH:mm').format(sortDate);
 
     return NotificationModel(

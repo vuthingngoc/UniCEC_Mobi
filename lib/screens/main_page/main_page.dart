@@ -1,6 +1,9 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 //import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 // import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_it/get_it.dart';
@@ -9,6 +12,7 @@ import 'package:unicec_mobi/bloc/competition/competition_bloc.dart';
 import 'package:unicec_mobi/bloc/view_competition_member_task/view_competition_member_task_bloc.dart';
 import 'package:unicec_mobi/screens/club/club_page.dart';
 import 'package:unicec_mobi/screens/pages.dart';
+import 'package:unicec_mobi/utils/firebase.dart';
 import '../../bloc/club/club_bloc.dart';
 import '../../bloc/main/main_bloc.dart';
 import '../../bloc/main/main_event.dart';
@@ -17,8 +21,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/notification/notification_bloc.dart';
 import '../../bloc/profile/profile_bloc.dart';
+import '../../main.dart';
 import '../../models/common/current_user.dart';
 import '../../utils/app_color.dart';
+import '../../utils/log.dart';
 import '../competition/competition_page.dart';
 import '../notification/notification_page.dart';
 import '../profile/profile_page.dart';
@@ -90,58 +96,70 @@ class _MainPageState extends State<MainPage> {
     //       }
     //     });
 
-    // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    //   print("FirebaseMessaging.onMessage ${message.notification.title}");
-    //   RemoteNotification notification = message.notification;
-    //   AndroidNotification android = message.notification?.android;
-    //   // If `onMessage` is triggered with a notification, construct our own
-    //   // local notification to show to users using the created channel.
-    //   if (notification != null && android != null) {
-    //     flutterLocalNotificationsPlugin.show(
-    //         notification.hashCode,
-    //         notification.title,
-    //         notification.body,
-    //         NotificationDetails(
-    //           android: AndroidNotificationDetails(channel.id, channel.name,
-    //               importance: Importance.high,
-    //               channelDescription: channel.description,
-    //               icon: '@mipmap/ic_launcher',
-    //               color: AppColors.primaryColor),
-    //         ));
-    //   }
-    // });
+    /// gives  you the message on which user taps
+    /// and it opened  the app from terminated state
+    FirebaseMessaging.instance.getInitialMessage().then((message) {
+      if(message != null){
+        final routeFromMessage = message.data['route'];
 
-    // FirebaseMessaging.instance.getInitialMessage().then((value) {
-    //   if (value != null) {
-    //     print("FirebaseMessaging.instance.getInitialMessage()");
-    //   }
-    // });
+        Navigator.of(context).pushNamed(routeFromMessage);
+      }
+    });
 
-    // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-    //   print(
-    //       "FirebaseMessaging.onMessageOpenedApp ${message.notification.title}");
-    //   RemoteNotification notification = message.notification;
-    //   AndroidNotification android = message.notification?.android;
-    //   // If `onMessage` is triggered with a notification, construct our own
-    //   // local notification to show to users using the created channel.
-    //   if (notification != null && android != null) {
-    //     // Navigator.pushNamed(context, Routes.test);
-    //     flutterLocalNotificationsPlugin.show(
-    //         notification.hashCode,
-    //         notification.title,
-    //         notification.body,
-    //         NotificationDetails(
-    //           android: AndroidNotificationDetails(channel.id, channel.name,
-    //               importance: Importance.high,
-    //               channelDescription: channel.description,
-    //               icon: '@mipmap/ic_launcher',
-    //               color: AppColors.primaryColor),
-    //         ));
-    //   }
-    // });
+    /// foreground
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print("FirebaseMessaging.onMessage.title ${message.notification?.title}");
+      print('FirebaseMessaging.onMessage.body ${message.notification?.body}');
+      FirebaseUtils.display(message);     
+      RemoteNotification notification = message.notification!;
+      AndroidNotification android = (message.notification?.android)!;
+      // If `onMessage` is triggered with a notification, construct our own
+      // local notification to show to users using the created channel.
+      if (notification != null && android != null) {
+        flutterLocalNotificationsPlugin.show(
+            notification.hashCode,
+            notification.title,
+            notification.body,
+            NotificationDetails(
+              android: AndroidNotificationDetails(channel.id, channel.name,
+                  importance: Importance.high,
+                  channelDescription: channel.description,
+                  icon: '@mipmap/ic_launcher',
+                  color: AppColors.mainColor),
+            ));
+      }
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print(
+          "FirebaseMessaging.onMessageOpenedApp ${message.notification?.title}");
+      final routeFromMessage = message.data['route'];
+      print(routeFromMessage);
+      Navigator.of(context).pushNamed(routeFromMessage);
+
+      RemoteNotification notification = message.notification!;
+      AndroidNotification android = (message.notification?.android)!;
+      // If `onMessage` is triggered with a notification, construct our own
+      // local notification to show to users using the created channel.
+      if (notification != null && android != null) {
+        // Navigator.pushNamed(context, Routes.test);
+        flutterLocalNotificationsPlugin.show(
+            notification.hashCode,
+            notification.title,
+            notification.body,
+            NotificationDetails(
+              android: AndroidNotificationDetails(channel.id, channel.name,
+                  importance: Importance.high,
+                  channelDescription: channel.description,
+                  icon: '@mipmap/ic_launcher',
+                  color: AppColors.mainColor),
+            ));
+      }
+    });
 
     // FirebaseMessaging.onBackgroundMessage((message) {
-    //   Log.i("onBackgroundMessage ${message?.data}");
+    //   Log.info("onBackgroundMessage ${message.data}");
+    //   // return ;
     // });
 
     // print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");

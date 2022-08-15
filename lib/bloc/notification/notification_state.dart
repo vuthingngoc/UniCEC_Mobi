@@ -3,12 +3,12 @@ import 'package:unicec_mobi/models/entities/notification/notification_model.dart
 
 class NotificationState extends Equatable {
   final List<NotificationModel> notifications;
-  List<NotificationModel> currentNotifications;
-  int currentPage;
-  int pageSize;
-  bool hasNext;
+  final List<NotificationModel> currentNotifications;
+  final int currentPage;
+  final int pageSize;
+  final bool hasNext;
 
-  NotificationState(
+  const NotificationState(
       {required this.notifications,
       required this.currentNotifications,
       required this.currentPage,

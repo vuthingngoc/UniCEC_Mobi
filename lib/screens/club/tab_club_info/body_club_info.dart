@@ -5,11 +5,7 @@ import 'package:unicec_mobi/models/entities/member/member_detail_model.dart';
 import '../../../bloc/club/club_bloc.dart';
 import '../../../constants/Theme.dart';
 import '../../../models/entities/club/club_model.dart';
-import '../../size_config.dart';
 import 'club_info_description.dart';
-import 'default_button.dart';
-import 'images_club_info.dart';
-import 'top_rounded_container.dart';
 
 class BodyClubInfo extends StatefulWidget {
   final ClubModel? Club;
@@ -45,7 +41,7 @@ class _BodyClubInfoState extends State<BodyClubInfo> {
                   child: Container(
                     width: double.infinity,
                     margin:
-                    new EdgeInsets.only(right: 15, left: 15, bottom: 15),
+                    const EdgeInsets.only(right: 15, left: 15, bottom: 15),
                     child: FlatButton(
                       textColor: ArgonColors.white,
                       color: ArgonColors.warning,
@@ -56,7 +52,7 @@ class _BodyClubInfoState extends State<BodyClubInfo> {
                         borderRadius:
                         BorderRadius.circular(4.0),
                       ),
-                      child: Padding(
+                      child: const Padding(
                           padding: EdgeInsets.only(
                               left: 16.0,
                               right: 16.0,

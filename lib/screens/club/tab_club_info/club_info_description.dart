@@ -32,7 +32,7 @@ class _ClubDescriptionState extends State<ClubDescription> {
             //   padding: const EdgeInsets.only(left: 25.0),
             //   child: ClubPic(avatar: avatar),
             // ),
-            Padding(
+            const Padding(
               padding: const EdgeInsets.only(top: 60.0, left: 20),
               child: FractionalTranslation(
                   translation: Offset(0.0, -0.5),
