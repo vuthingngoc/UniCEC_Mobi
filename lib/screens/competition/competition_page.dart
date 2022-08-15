@@ -204,7 +204,9 @@ class _CompetitionPageState extends State<CompetitionPage>
                                 Padding(
                                   padding: const EdgeInsets.only(top: 25.0),
                                   child: Text(
-                                    'Chưa có Cuộc thi nào!',
+                                    (state.isEvent == false)
+                                        ? 'Chưa có Cuộc Thi nào!'
+                                        : 'Chưa có Sự Kiện nào!',
                                     style: TextStyle(fontSize: 20),
                                   ),
                                 ),

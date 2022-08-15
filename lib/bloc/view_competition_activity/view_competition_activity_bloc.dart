@@ -229,28 +229,82 @@ class ViewCompetitionActivityBloc extends BaseBloc<ViewCompetitionActivityEvent,
             newCurrentPage: state.currentPage));
       }
       if (event is ChangeValueStatusEvent) {
+        //------------Request
+        CompetitionActivityRequestModel request =
+            CompetitionActivityRequestModel();
+        request.competitionId = state.competitionId;
+        request.currentPage = 1; // này là 1 để search từ đầu
+        request.name = state.searchName; // null
+        if (event.chooseStatus == CompetitionActivityStatus.All) {
+          //status
+          request.statuses = [];
+          request.statuses?.add(CompetitionActivityStatus.Open);
+          request.statuses?.add(CompetitionActivityStatus.OnGoing);
+          request.statuses?.add(CompetitionActivityStatus.Finished);
+          request.statuses?.add(CompetitionActivityStatus.Pending);
+          request.statuses?.add(CompetitionActivityStatus.Completed);
+        } else {
+          request.statuses = [];
+          request.statuses?.add(event.chooseStatus);
+        }
+        if (state.choosePriorityStatus == PriorityStatus.All) {
+          request.priority = null;
+        } else {
+          request.priority = state.choosePriorityStatus;
+        }
+
+        PagingResult<CompetitionActivityModel>? result =
+            await service.getListCompetititonActivity(request);
+
         emit(state.copyWith(
-            newListCompetitionActivity: state.listCompetitionActivity,
+            newListCompetitionActivity: result?.items ?? [],
             newCompetitionId: state.competitionId,
             choosePriorityStatus: state.choosePriorityStatus,
             loadPriorityStatus: state.loadPriorityStatus,
             searchName: state.searchName,
             chooseStatus: event.chooseStatus, // change
             loadListStatuses: state.loadListStatuses,
-            newHasNext: state.hasNext,
-            newCurrentPage: state.currentPage));
+            newHasNext: result?.hasNext ?? false,
+            newCurrentPage: result?.currentPage ?? 1));
       }
       if (event is ChangeValuePriorityStatusEvent) {
+        //------------Request
+        CompetitionActivityRequestModel request =
+            CompetitionActivityRequestModel();
+        request.competitionId = state.competitionId;
+        request.currentPage = 1;
+        request.name = state.searchName; // null
+        if (state.chooseStatus == CompetitionActivityStatus.All) {
+          //status
+          request.statuses = [];
+          request.statuses?.add(CompetitionActivityStatus.Open);
+          request.statuses?.add(CompetitionActivityStatus.OnGoing);
+          request.statuses?.add(CompetitionActivityStatus.Finished);
+          request.statuses?.add(CompetitionActivityStatus.Pending);
+          request.statuses?.add(CompetitionActivityStatus.Completed);
+        } else {
+          request.statuses = [];
+          request.statuses?.add(state.chooseStatus);
+        }
+        if (event.choosePriorityStatus == PriorityStatus.All) {
+          request.priority = null;
+        } else {
+          request.priority = event.choosePriorityStatus;
+        }
+
+        PagingResult<CompetitionActivityModel>? result =
+            await service.getListCompetititonActivity(request);
+
         emit(state.copyWith(
-            newListCompetitionActivity: state.listCompetitionActivity,
+            newListCompetitionActivity: result?.items ?? [],
             newCompetitionId: state.competitionId,
             choosePriorityStatus: event.choosePriorityStatus, // change
             loadPriorityStatus: state.loadPriorityStatus,
             searchName: state.searchName,
             chooseStatus: state.chooseStatus,
             loadListStatuses: state.loadListStatuses,
-            newHasNext: state.hasNext,
-            newCurrentPage: state.currentPage));
+            newHasNext: result?.hasNext ?? false,
+            newCurrentPage: result?.currentPage ?? 1));
       }
       if (event is SearchEvent) {
         //------------Request

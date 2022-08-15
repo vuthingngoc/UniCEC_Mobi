@@ -185,11 +185,21 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
             newStatus: state.status));
       }
       if (event is ChangeTeamStatusEvent) {
+        //------------Request
+        TeamRequestModel request = TeamRequestModel(
+            competitionId: state.competitionId,
+            status: event.status,
+            teamName: state.searchName);
+        //
+        request.currentPage = 1;
+
+        PagingResult<TeamModel>? result = await service.GetListTeam(request);
+
         emit(state.copyWith(
-            newListTeam: state.listTeam,
+            newListTeam: result?.items ?? [],
             newCompetitionId: state.competitionId,
-            newHasNext: state.hasNext,
-            newCurrentPage: state.currentPage,
+            newHasNext: result?.hasNext ?? false,
+            newCurrentPage: result?.currentPage ?? 1,
             valueInvitedCode: state.valueInvitedCode,
             newSearchName: state.searchName,
             newStatus: event.status // change
