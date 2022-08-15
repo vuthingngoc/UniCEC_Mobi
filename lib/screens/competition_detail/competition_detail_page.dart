@@ -643,7 +643,8 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                               const EdgeInsets
                                                                       .only(
                                                                   left: 10.0,
-                                                                  right: 10.0),
+                                                                  right: 10.0,
+                                                                  bottom: 20.0),
                                                           child: Row(children: [
                                                             SizedBox(
                                                               height: 60.0,
@@ -703,13 +704,13 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                             ]),
                                                   Padding(
                                                     padding:
-                                                        const EdgeInsets.only(
-                                                            bottom: 8.0),
+                                                        const EdgeInsets.symmetric(horizontal: 20.0),
                                                     child: Wrap(
                                                       // mainAxisAlignment:
                                                       //     MainAxisAlignment
                                                       //         .spaceAround,
                                                       runSpacing: 20.0,
+                                                      spacing: 20.0,
                                                       children: [
                                                         if (state
                                                                 .competitionDetail

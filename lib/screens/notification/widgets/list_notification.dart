@@ -10,11 +10,12 @@ import '../../../utils/dimens.dart';
 import '../noti_detail_page.dart';
 
 class ListNotification extends StatefulWidget {
+  const ListNotification({Key? key}) : super(key: key);
+
   _ListNotificationState createState() => _ListNotificationState();
 }
 
 class _ListNotificationState extends State<ListNotification> {
-  
   Future _loadMore(BuildContext context) async {
     await Future.delayed(const Duration(seconds: 0, milliseconds: 2000));
     BlocProvider.of<NotificationBloc>(context).add(LoadMoreEvent());
@@ -116,7 +117,12 @@ class _ListNotificationState extends State<ListNotification> {
                         }),
                   ),
                 )
-              : const Text('Đang tải...');
+              : const Center(                  
+                  child: Text(
+                  'Không có thông báo nào',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                  textAlign: TextAlign.center,
+                ));
         });
   }
 }

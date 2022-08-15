@@ -8,10 +8,13 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:unicec_mobi/utils/log.dart';
 import 'package:unicec_mobi/utils/router.dart';
 import 'dependencies/app_dependencies.dart';
+import 'utils/firebase.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   Log.info("Handling a background message: ${message.messageId}");
+  print(message.data.toString());
+  print(message.notification!.title);
 }
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -34,6 +37,7 @@ class MyHttpOverrides extends HttpOverrides {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  FirebaseUtils.initialize();
   await AppDependencies.setup();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await flutterLocalNotificationsPlugin

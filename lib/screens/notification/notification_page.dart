@@ -9,7 +9,7 @@ import '../../utils/dimens.dart';
 import 'widgets/list_notification.dart';
 
 class NotificationPage extends StatefulWidget {
-  final NotificationBloc bloc;
+  NotificationBloc bloc;
 
   NotificationPage({required this.bloc});
 

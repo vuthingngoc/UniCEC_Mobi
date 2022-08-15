@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:unicec_mobi/bloc/notification/notification_state.dart';
 import 'package:unicec_mobi/utils/base_bloc.dart';
+import 'package:unicec_mobi/utils/log.dart';
 
 import '../../models/entities/notification/notification_model.dart';
 import 'notification_event.dart';
@@ -17,8 +18,8 @@ class NotificationBloc extends BaseBloc<NotificationEvent, NotificationState> {
 
   NotificationBloc()
       : super(NotificationState(
-            notifications: const [],
-            currentNotifications: const [],
+            notifications: [],
+            currentNotifications: [],
             currentPage: 1,
             pageSize: 10,
             hasNext: false)) {
@@ -28,8 +29,11 @@ class NotificationBloc extends BaseBloc<NotificationEvent, NotificationState> {
         QuerySnapshot<Map<String, dynamic>> querySnapshot =
             await FirebaseFirestore.instance.collection('Notification').get();
 
+        Log.info("querySnapshot: ${querySnapshot.size}");    
+
         for (var element in querySnapshot.docs) {
           Map<String, dynamic> data = element.data();
+          Log.info('data notification: $data');
           notifications.add(NotificationModel.fromJson(data));
         }
         notifications.sort();
