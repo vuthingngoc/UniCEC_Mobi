@@ -31,6 +31,15 @@ class ViewListCompetitionParticipantBloc extends BaseBloc<
             newHasNext: result.hasNext,
             newCurrentPage: result.currentPage,
           ));
+        } else {
+          emit(state.copyWith(
+            newCompetitions: state.competitions,
+            newScope: state.scope,
+            newSearchName: state.searchName,
+            newIsEvent: state.isEvent,
+            newHasNext: false,
+            newCurrentPage: 1,
+          ));
         }
       }
       //Refesh Event
@@ -119,22 +128,31 @@ class ViewListCompetitionParticipantBloc extends BaseBloc<
       }
       //
       if (event is ChangeCompetitionScopeEvent) {
+        //search luôn
+        PagingResult<CompetitionModel>? result =
+            await service.loadCompetitionParticipant(
+                1, event.scope, state.searchName, state.isEvent);
         emit(state.copyWith(
-            newCompetitions: state.competitions,
+            newCompetitions: result?.items ?? [],
             newSearchName: state.searchName,
             newScope: event.scope, // change
             newIsEvent: state.isEvent,
-            newCurrentPage: state.currentPage,
-            newHasNext: state.hasNext));
+            newCurrentPage: result?.currentPage ?? 1,
+            newHasNext: result?.hasNext ?? false));
       }
       if (event is ChangeValueEvent) {
+        //search luôn
+        PagingResult<CompetitionModel>? result =
+            await service.loadCompetitionParticipant(
+                1, state.scope, state.searchName, event.isEvent);
+        //nếu get kh ra thì trả ra như v
         emit(state.copyWith(
-            newCompetitions: state.competitions,
+            newCompetitions: result?.items ?? [],
             newSearchName: state.searchName,
             newScope: state.scope,
             newIsEvent: event.isEvent, //change
-            newCurrentPage: state.currentPage,
-            newHasNext: state.hasNext));
+            newCurrentPage: result?.currentPage ?? 1,
+            newHasNext: result?.hasNext ?? false));
       }
       //load lại trạng thái ban đầu mặc định
       if (event is ResetFilterEvent) {

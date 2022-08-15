@@ -59,8 +59,7 @@ class CompetitionBloc extends BaseBloc<CompetitionEvent, CompetitionState> {
             await service.loadCompetition(request);
 
         emit(state.copyWith(
-          outStandingCompetitions:
-              result?.items ?? state.outStandingCompetitions, // change
+          outStandingCompetitions: result?.items ?? [], // change
           competitions: state.competitions,
           scope: state.scope,
           isEvent: state.isEvent,
@@ -138,25 +137,73 @@ class CompetitionBloc extends BaseBloc<CompetitionEvent, CompetitionState> {
       }
       //change scope
       if (event is ChangeCompetitionScopeEvent) {
+        _isLoading = true;
+        List<int> statuses = [];
+        statuses.add(CompetitionStatus.Publish.index);
+        statuses.add(CompetitionStatus.Register.index);
+
+        CompetitionRequestModel request = CompetitionRequestModel(
+            universityId:
+                (state.scope == CompetitionScopeStatus.InterUniversity)
+                    ? null
+                    : GetIt.instance<CurrentUser>().universityId,
+            scope: event.scope,
+            name: state.searchName,
+            statuses: statuses,
+            event: state.isEvent);
+        // add more params if you want
+
+        PagingResult<CompetitionShowModel>? result =
+            await service.showCompetition(request, 1);
+
         emit(state.copyWith(
-            competitions: state.competitions,
-            outStandingCompetitions: state.outStandingCompetitions,
+            competitions: result?.items ?? [],
+            outStandingCompetitions: [], //state.outStandingCompetitions,
             scope: event.scope, // change
             searchName: state.searchName,
             isEvent: state.isEvent,
-            newHasNext: state.hasNext,
-            newCurrentPage: state.currentPage));
+            newHasNext: result?.hasNext ?? false,
+            newCurrentPage: result?.currentPage ?? 1));
+
+        // muốn search ăn theo filter luôn
+        listener.add(ListenLoadOutStandingEvent());
+
+        _isLoading = false;
       }
       //change event
       if (event is ChangeValueEvent) {
+        _isLoading = true;
+        List<int> statuses = [];
+        statuses.add(CompetitionStatus.Publish.index);
+        statuses.add(CompetitionStatus.Register.index);
+
+        CompetitionRequestModel request = CompetitionRequestModel(
+            universityId:
+                (state.scope == CompetitionScopeStatus.InterUniversity)
+                    ? null
+                    : GetIt.instance<CurrentUser>().universityId,
+            scope: state.scope,
+            name: state.searchName,
+            statuses: statuses,
+            event: event.isEvent);
+        // add more params if you want
+
+        PagingResult<CompetitionShowModel>? result =
+            await service.showCompetition(request, 1);
+
         emit(state.copyWith(
-            competitions: state.competitions,
-            outStandingCompetitions: state.outStandingCompetitions,
+            competitions: result?.items ?? [],
+            outStandingCompetitions: [],
             scope: state.scope,
             searchName: state.searchName,
             isEvent: event.isEvent, // change
-            newHasNext: state.hasNext,
-            newCurrentPage: state.currentPage));
+            newHasNext: result?.hasNext ?? false,
+            newCurrentPage: result?.currentPage ?? 1));
+
+        // muốn search ăn theo filter luôn
+        listener.add(ListenLoadOutStandingEvent());
+
+        _isLoading = false;
       }
 
       if (event is ResetFilterEvent) {
@@ -177,7 +224,7 @@ class CompetitionBloc extends BaseBloc<CompetitionEvent, CompetitionState> {
             await service.showCompetition(request, 1);
         //bằng null cho về mặc định
         emit(state.copyWith(
-            outStandingCompetitions: state.outStandingCompetitions,
+            outStandingCompetitions: [], //state.outStandingCompetitions,
             competitions: result?.items ?? [],
             scope: CompetitionScopeStatus.InterUniversity,
             searchName: null,

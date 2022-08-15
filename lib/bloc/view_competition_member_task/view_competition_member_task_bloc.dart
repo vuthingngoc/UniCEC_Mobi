@@ -102,12 +102,16 @@ class ViewCompetitionMemberTaskBloc extends BaseBloc<
             currentPage: state.currentPage));
       }
       if (event is ChangeValueEvent) {
+        //load
+        PagingResult<CompetitionModel>? result = await service
+            .loadCompetitionMemberTask(1, state.searchName, event.isEvent);
+
         emit(state.copyWith(
-            listCompetition: state.listCompetition,
+            listCompetition: result?.items ?? [],
             searchName: state.searchName,
             isEvent: event.isEvent, // change
-            hasNext: state.hasNext,
-            currentPage: state.currentPage));
+            hasNext: result?.hasNext ?? false,
+            currentPage: result?.currentPage ?? 1));
       }
       if (event is SearchEvent) {
         //get clubIdSelected

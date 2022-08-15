@@ -86,7 +86,7 @@ class _BodyState extends State<Body> {
                                       color: Colors.green,
                                       child: Row(
                                         children: <Widget>[
-                                          Icon(Icons.camera, size: 18),
+                                          //Icon(Icons.camera, size: 18),
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 8.0),
@@ -97,7 +97,7 @@ class _BodyState extends State<Body> {
                                     )
                                   : Row(
                                       children: <Widget>[
-                                        Icon(Icons.camera, size: 18),
+                                        //Icon(Icons.camera, size: 18),
                                         Padding(
                                           padding:
                                               const EdgeInsets.only(left: 8.0),
@@ -117,7 +117,7 @@ class _BodyState extends State<Body> {
                                       color: Colors.green,
                                       child: Row(
                                         children: <Widget>[
-                                          Icon(Icons.school, size: 18),
+                                          //Icon(Icons.school, size: 18),
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 8.0),
@@ -128,7 +128,7 @@ class _BodyState extends State<Body> {
                                     )
                                   : Row(
                                       children: <Widget>[
-                                        Icon(Icons.school, size: 18),
+                                        //Icon(Icons.school, size: 18),
                                         Padding(
                                           padding:
                                               const EdgeInsets.only(left: 8.0),
@@ -144,10 +144,10 @@ class _BodyState extends State<Body> {
                               value: 3,
                               child: Row(
                                 children: <Widget>[
-                                  Icon(Icons.delete, size: 18),
+                                  //Icon(Icons.delete, size: 18),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 8.0),
-                                    child: Text('làm mới Filter'),
+                                    child: Text('Tất Cả'),
                                   ),
                                 ],
                               ),

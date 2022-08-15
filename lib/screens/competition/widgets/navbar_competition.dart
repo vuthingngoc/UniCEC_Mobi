@@ -6,6 +6,7 @@ import '../../../bloc/competition/competition_event.dart';
 import '../../../bloc/competition/competition_state.dart';
 import '../../../constants/theme.dart';
 import '../../../models/enums/competition_scope_status.dart';
+import '../../../utils/app_color.dart';
 
 class NavbarCompetition extends StatefulWidget implements PreferredSizeWidget {
   final String title;
@@ -75,6 +76,7 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
               decoration: BoxDecoration(
                   color:
                       !widget.transparent ? widget.bgColor : Colors.transparent,
+                  //AppColors.mainColor,
                   boxShadow: [
                     BoxShadow(
                         color: !widget.transparent && !widget.noShadow
@@ -128,7 +130,9 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                                 searchName: null));
                                           },
                                           icon: const Icon(Icons.clear)),
-                                      labelText: 'Tìm Kiếm Cuộc Thi',
+                                      labelText: (state.isEvent == false)
+                                          ? 'Tìm kiếm theo tên Cuộc Thi'
+                                          : 'Tìm kiếm theo tên Sự Kiện',
                                       focusedBorder: const OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Colors.grey,
@@ -165,8 +169,8 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                                 color: Colors.green,
                                                 child: Row(
                                                   children: <Widget>[
-                                                    Icon(Icons.camera,
-                                                        size: 18),
+                                                    // Icon(Icons.camera,
+                                                    //     size: 18),
                                                     Padding(
                                                       padding:
                                                           const EdgeInsets.only(
@@ -179,7 +183,7 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                               )
                                             : Row(
                                                 children: <Widget>[
-                                                  Icon(Icons.camera, size: 18),
+                                                  //Icon(Icons.camera, size: 18),
                                                   Padding(
                                                     padding:
                                                         const EdgeInsets.only(
@@ -204,8 +208,8 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                                 color: Colors.green,
                                                 child: Row(
                                                   children: <Widget>[
-                                                    Icon(Icons.school,
-                                                        size: 18),
+                                                    // Icon(Icons.school,
+                                                    //     size: 18),
                                                     Padding(
                                                       padding:
                                                           const EdgeInsets.only(
@@ -218,7 +222,7 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                               )
                                             : Row(
                                                 children: <Widget>[
-                                                  Icon(Icons.school, size: 18),
+                                                  // Icon(Icons.school, size: 18),
                                                   Padding(
                                                     padding:
                                                         const EdgeInsets.only(
@@ -231,11 +235,13 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                       PopupMenuItem(
                                         onTap: () {
                                           bloc.add(ResetFilterEvent());
+                                          //làm cho đoạn search bị xóa đi
+                                          _controller.text = "";
                                         },
                                         value: 3,
                                         child: Row(
                                           children: <Widget>[
-                                            Icon(Icons.delete, size: 18),
+                                            // Icon(Icons.delete, size: 18),
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   left: 8.0),
@@ -265,9 +271,9 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                   (state.isEvent == false)
                                       ? Container(
                                           child: Row(children: [
-                                            Icon(Icons.camera,
-                                                color: ArgonColors.inputSuccess,
-                                                size: 22.0),
+                                            // Icon(Icons.camera,
+                                            //     color: ArgonColors.inputSuccess,
+                                            //     size: 22.0),
                                             Text(widget.categoryOne,
                                                 style: TextStyle(
                                                     color: ArgonColors
@@ -277,9 +283,9 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                         )
                                       : Container(
                                           child: Row(children: [
-                                            Icon(Icons.camera,
-                                                color: ArgonColors.initial,
-                                                size: 22.0),
+                                            // Icon(Icons.camera,
+                                            //     color: ArgonColors.initial,
+                                            //     size: 22.0),
                                             Text(widget.categoryOne,
                                                 style: TextStyle(
                                                     color: ArgonColors.initial,
@@ -287,6 +293,11 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                           ]),
                                         ),
                                 ])),
+                            Container(
+                              color: ArgonColors.initial,
+                              height: 25,
+                              width: 1,
+                            ),
                             GestureDetector(
                               onTap: () {
                                 bloc.add(ChangeValueEvent(isEvent: true));
@@ -296,9 +307,9 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                   ((state.isEvent == true))
                                       ? Container(
                                           child: Row(children: [
-                                            Icon(Icons.school,
-                                                color: ArgonColors.inputSuccess,
-                                                size: 22.0),
+                                            // Icon(Icons.school,
+                                            //     color: ArgonColors.inputSuccess,
+                                            //     size: 22.0),
                                             Text(widget.categoryTwo,
                                                 style: TextStyle(
                                                     color: ArgonColors
@@ -308,9 +319,9 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                         )
                                       : Container(
                                           child: Row(children: [
-                                            Icon(Icons.school,
-                                                color: ArgonColors.initial,
-                                                size: 22.0),
+                                            // Icon(Icons.school,
+                                            //     color: ArgonColors.initial,
+                                            //     size: 22.0),
                                             Text(widget.categoryTwo,
                                                 style: TextStyle(
                                                     color: ArgonColors.initial,

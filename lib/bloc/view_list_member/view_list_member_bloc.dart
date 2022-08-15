@@ -38,8 +38,12 @@ class ViewListMemberBloc
             newClubRoleId: state.clubRoleId));
       }
       if (event is ChangeClubRoleIdEvent) {
+        int clubIdSelected = GetIt.I.get<CurrentUser>().clubIdSelected;
+        List<MemberModel>? result = await service.getListMemberByClub(
+            clubIdSelected, state.searchName, event.clubRoleId);
+
         emit(state.copyWith(
-            newListMember: state.listMember,
+            newListMember: result ?? [],
             newSearchName: state.searchName,
             newClubRoleId: event.clubRoleId // change
             ));

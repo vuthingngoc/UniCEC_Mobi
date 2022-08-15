@@ -59,8 +59,7 @@ class ViewListCompetitionOfClubBloc extends BaseBloc<
             await service.loadCompetition(request);
 
         emit(state.copyWith(
-          outStandingCompetitions:
-              result?.items ?? state.outStandingCompetitions, // change
+          outStandingCompetitions: result?.items ?? [], // change
           competitions: state.competitions,
           scope: state.scope,
           isEvent: state.isEvent,
@@ -139,14 +138,35 @@ class ViewListCompetitionOfClubBloc extends BaseBloc<
 
       //change event
       if (event is ChangeValueEvent) {
+        List<int> statuses = [];
+        statuses.add(CompetitionStatus.Publish.index);
+        statuses.add(CompetitionStatus.Register.index);
+
+        CompetitionRequestModel request = CompetitionRequestModel(
+            universityId:
+                (state.scope == CompetitionScopeStatus.InterUniversity)
+                    ? null
+                    : GetIt.instance<CurrentUser>().universityId,
+            scope: state.scope,
+            name: state.searchName,
+            statuses: statuses,
+            event: event.isEvent);
+        // add more params if you want
+
+        PagingResult<CompetitionShowModel>? result =
+            await service.showCompetition(request, 1);
+
         emit(state.copyWith(
-            competitions: state.competitions,
+            competitions: result?.items ?? [],
             outStandingCompetitions: state.outStandingCompetitions,
             scope: state.scope,
             searchName: state.searchName,
             isEvent: event.isEvent, // change
-            newHasNext: state.hasNext,
-            newCurrentPage: state.currentPage));
+            newHasNext: result?.hasNext ?? false,
+            newCurrentPage: result?.currentPage ?? 1));
+
+        // muốn search ăn theo filter luôn
+        listener.add(ListenLoadOutStandingEvent());
       }
 
       //Refesh Event

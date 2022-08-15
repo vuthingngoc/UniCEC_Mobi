@@ -79,7 +79,9 @@ class _ViewListCompetitionOfParticipantPageState
                               Padding(
                                 padding: const EdgeInsets.only(top: 25.0),
                                 child: Text(
-                                  'Bạn chưa tham gia cuộc thi nào!',
+                                  (state.isEvent == false)
+                                      ? 'Bạn chưa tham gia Cuộc Thi nào!'
+                                      : 'Bạn chưa tham gia Sự Kiện nào!',
                                   style: TextStyle(fontSize: 20),
                                 ),
                               ),
