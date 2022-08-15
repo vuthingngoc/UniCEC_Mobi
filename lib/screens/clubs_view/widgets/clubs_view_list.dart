@@ -26,12 +26,13 @@ class _ListViewClubsState extends State<ListViewClubs> {
   @override
   Widget build(BuildContext context) {
     ClubsViewBloc bloc = BlocProvider.of<ClubsViewBloc>(context);
+    const defaultImage = 'https://picsum.photos/seed/513/600';
 
     return BlocBuilder<ClubsViewBloc, ClubsViewState>(
       bloc: bloc,
       builder: (context, state) {
         return state.listClubsBelongToUniversity.isEmpty
-            ? Center(
+            ? const Center(
                 child: Text('Không có dữ liệu danh sách các câu lạc bộ'),
               )
             : RefreshIndicator(
@@ -64,15 +65,19 @@ class _ListViewClubsState extends State<ListViewClubs> {
                                 padding: const EdgeInsets.only(
                                     left: 8, right: 4, bottom: 8, top: 15),
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image(
-                                    image: AssetImage(
-                                        "assets/img/profile-screen-avatar.jpg"),
-                                    width: 120,
-                                    height: 110,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: Image(
+                                      image: NetworkImage(state
+                                                  .listClubsBelongToUniversity[
+                                                      index]
+                                                  .image !=
+                                              null
+                                          ? "${state.listClubsBelongToUniversity[index].image}"
+                                          : defaultImage),
+                                      width: 120,
+                                      height: 110,
+                                      fit: BoxFit.cover,
+                                    )),
                               ),
                               SizedBox(
                                 width: Dimens.size8,

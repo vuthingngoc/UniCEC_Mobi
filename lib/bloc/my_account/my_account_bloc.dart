@@ -1,17 +1,21 @@
-import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/bloc/my_account/my_account_event.dart';
 import 'package:unicec_mobi/bloc/my_account/my_account_state.dart';
 import 'package:unicec_mobi/models/entities/seedswallet/seeds_wallet_model.dart';
 import 'package:unicec_mobi/models/enums/user_status.dart';
 import 'package:unicec_mobi/services/i_services.dart';
 import 'package:unicec_mobi/utils/base_bloc.dart';
-
-import '../../models/common/current_user.dart';
 import '../../models/entities/user/user_model.dart';
 import '../../utils/log.dart';
 
 class MyAccountBloc extends BaseBloc<MyAccountEvent, MyAccountState> {
   final IUserService service;
+  bool _isLoading = false;
+
+  bool get isLoading => _isLoading;
+
+  set isLoading(bool isLoading){
+    _isLoading = isLoading;
+  }
 
   MyAccountBloc({required this.service})
       : super(MyAccountState(
@@ -47,6 +51,7 @@ class MyAccountBloc extends BaseBloc<MyAccountEvent, MyAccountState> {
       // }
       if (event is ReceiveDataEvent) {
         print('LoadProfileEvent is running ...');
+        _isLoading = true;
         //CurrentUser currentUser = GetIt.I.get<CurrentUser>().currentUser;
         UserModel? user = await service.getById(event.userId);
         SeedsWalletModel? seedsWallet =
@@ -56,6 +61,7 @@ class MyAccountBloc extends BaseBloc<MyAccountEvent, MyAccountState> {
         } else {
           Log.error('ProfileBloc: user and seedsWallet null');
         }
+        _isLoading = false;
       }
     });
   }

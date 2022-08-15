@@ -43,7 +43,7 @@ class _ClubsViewPageState extends State<ClubsViewPage> {
       value: bloc,
       child: Scaffold(
           appBar: AppBar(
-            iconTheme: IconThemeData(color: Colors.black),
+            iconTheme: const IconThemeData(color: Colors.white),
             title: Text('Danh sách các Câu Lạc Bộ',
                 style:
                     TextStyle(color: Colors.white, fontSize: Dimens.size23)),

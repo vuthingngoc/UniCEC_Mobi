@@ -9,14 +9,24 @@ import '../../services/i_services.dart';
 class ClubViewDetailBloc
     extends BaseBloc<ClubViewDetailEvent, ClubViewDetailState> {
   final IMemberService service;
+  bool _isLoading = false;
+  
+  bool get isLoading => _isLoading;
+
+  set isLoading(bool isLoading){
+    _isLoading = isLoading;
+  }
+
   ClubViewDetailBloc({required this.service})
       : super(ClubViewDetailState(
             clubViewDetail: null, statusMember: MemberStatus.Student)) {
     on((event, emit) async {
       if (event is RecieveDataEvent) {
+        _isLoading = true;
         emit(state.copyWith(
             clubViewDetail: event.clubView,
             statusMember: event.clubView.isMemberStatus));
+        _isLoading = false;
       }
       //
       if (event is ApplyInClubEvent) {

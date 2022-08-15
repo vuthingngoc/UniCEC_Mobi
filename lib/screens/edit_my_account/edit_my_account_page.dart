@@ -5,6 +5,7 @@ import 'package:unicec_mobi/bloc/edit_profile/edit_profile_bloc.dart';
 import 'package:unicec_mobi/bloc/edit_profile/edit_profile_state.dart';
 import 'package:unicec_mobi/models/common/current_user.dart';
 import 'package:unicec_mobi/models/entities/department/department_model.dart';
+import 'package:unicec_mobi/models/enums/user_status.dart';
 import 'package:unicec_mobi/screens/widgets/input.dart';
 
 import '../../bloc/edit_profile/edit_profile_event.dart';
@@ -43,22 +44,43 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
 
   @override
   Widget build(BuildContext context) {
+    const defaultImage = 'https://picsum.photos/seed/513/600';
     return BlocBuilder<EditProfileBloc, EditProfileState>(
         bloc: _bloc,
         builder: (context, state) {
           Log.info('state: ${state.user}');
-          final fullnameController = TextEditingController(text: state.user?.fullname);
-          final studentCodeController = TextEditingController(text: state.user?.studentCode);
-          final descriptionController = TextEditingController(text: state.user?.description);
-          final universityController = TextEditingController(text: state.user?.universityName);
-          final departmentController = TextEditingController(text: state.user?.departmentName);
-          final emailController = TextEditingController(text: state.user?.email);
-          final phoneController = TextEditingController(text: state.user?.phoneNumber);
-          final dobController = TextEditingController(text: state.user?.dob);
-          final genderController = TextEditingController(text: state.user?.gender);
+          final fullnameController =
+              TextEditingController(text: state.user?.fullname ?? '');
+          final studentCodeController =
+              TextEditingController(text: state.user?.studentCode ?? '');
+          final descriptionController =
+              TextEditingController(text: state.user?.description ?? '');
+          final universityController =
+              TextEditingController(text: state.user?.universityName ?? '');
+          final departmentController =
+              TextEditingController(text: state.user?.departmentName ?? '');
+          final emailController =
+              TextEditingController(text: state.user?.email ?? '');
+          final phoneController =
+              TextEditingController(text: state.user?.phoneNumber ?? '');
+          final dobController =
+              TextEditingController(text: state.user?.dob ?? '');
+          final genderController =
+              TextEditingController(text: state.user?.gender ?? '');
 
-          DepartmentModel selectedDepartment = state.departments!.firstWhere((element) => element.id == state.user?.departmentId);
-          
+          Log.info('departments: ${state.departments}');
+          DepartmentModel selectedDepartment = DepartmentModel(
+              id: 0,
+              universityId: universityId,
+              majorId: 0,
+              departmentCode: 'SE',
+              name: 'name',
+              description: 'description',
+              status: true);
+          // state.departments![0];
+          // !.firstWhere((element) => element.id == state.user?.departmentId);
+          Log.info('user: ${state.user?.departmentId}');
+
           return (_bloc.isLoading)
               ? Loading()
               : Scaffold(
@@ -169,27 +191,13 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: Column(
-                                            children: [
-                                              DropdownButton(
-                                                value: selectedDepartment,
-                                                items: state.departments!.map((DepartmentModel department){
-                                                  return DropdownMenuItem(value: department, child: Text(department.name));
-                                                }, ).toList(),
-                                                onChanged: (DepartmentModel? selectedValue){
-                                                  setState(() {
-                                                    selectedDepartment = selectedValue!;
-                                                  });
-                                                })
-                                          ],
-                                          ) 
-                                          // Input(
-                                          //   controller: universityController,
-                                          //   isReadOnly: true,
-                                          //   placeholder: "",
-                                          //   prefixIcon:
-                                          //       const Icon(Icons.school),
-                                          // ),
+                                          child: Input(
+                                            controller: universityController,
+                                            isReadOnly: true,
+                                            placeholder: "",
+                                            prefixIcon:
+                                                const Icon(Icons.school),
+                                          ),
                                         ),
                                         Row(
                                           children: const [
@@ -203,14 +211,115 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
                                             ),
                                           ],
                                         ),
+                                        // Padding(
+                                        //   padding: const EdgeInsets.all(8.0),
+                                        //   child: Column(
+                                        //     crossAxisAlignment:
+                                        //         CrossAxisAlignment.start,
+                                        //     children: [
+                                        //       const Text(
+                                        //         "Ngành Học:",
+                                        //         style: TextStyle(
+                                        //             fontWeight:
+                                        //                 FontWeight.bold),
+                                        //       ),
+                                        //       const SizedBox(
+                                        //         height: 5,
+                                        //       ),
+                                        //       DropdownButtonHideUnderline(
+                                        //         child: DropdownButton<int>(
+                                        //           alignment:
+                                        //               Alignment.centerLeft,
+                                        //           isExpanded: true,
+                                        //           value: state.newValueDep,
+                                        //           icon: const Icon(
+                                        //               Icons.arrow_drop_down),
+                                        //           iconSize: 24,
+                                        //           elevation: 16,
+                                        //           style: const TextStyle(
+                                        //               color: Colors.deepPurple,
+                                        //               fontWeight:
+                                        //                   FontWeight.bold),
+                                        //           onChanged: (int? newValue) {
+                                        //             _bloc.add(
+                                        //                 ChangeSelectionDepartment(
+                                        //                     newValue:
+                                        //                         newValue!));
+                                        //           },
+                                        //           items: state.departments?.map<
+                                        //                   DropdownMenuItem<
+                                        //                       int>>(
+                                        //               (DepartmentModel value) {
+                                        //             return DropdownMenuItem<
+                                        //                 int>(
+                                        //               value: value.id,
+                                        //               child: Center(
+                                        //                 child: Container(
+                                        //                     width: MediaQuery.of(
+                                        //                                 context)
+                                        //                             .size
+                                        //                             .width *
+                                        //                         0.55,
+                                        //                     height: MediaQuery.of(
+                                        //                                 context)
+                                        //                             .size
+                                        //                             .height *
+                                        //                         0.15,
+                                        //                     child: Text(
+                                        //                         "${value.name} - ${value.departmentCode}")),
+                                        //               ),
+                                        //             );
+                                        //           }).toList(),
+                                        //         ),
+                                        //       )
+                                        //     ],
+                                        //   ),
+                                        // ),
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: Input(
-                                            controller: departmentController,
-                                            placeholder: "",
-                                            prefixIcon: const Icon(
-                                                Icons.business_center),
-                                          ),
+                                          child: Column(children: [
+                                            DropdownButton(
+                                              isExpanded: true,
+                                              dropdownColor: Colors.white,                                              
+                                                value: state.selectedDepartment ?? 
+                                                state.departments
+                                                        ?.firstWhere((element) => (state
+                                                                    .user
+                                                                    ?.departmentId !=
+                                                                null)
+                                                            ? element.id ==
+                                                                state.user
+                                                                    ?.departmentId
+                                                            : element.id ==
+                                                                state
+                                                                    .departments?[
+                                                                        0]
+                                                                    .id) ??
+                                                    state.departments?[0],
+                                                items: state.departments?.map(
+                                                  (DepartmentModel department) {
+                                                    return DropdownMenuItem(
+                                                        value: department,
+                                                        child: Text(
+                                                            department.name));
+                                                  },
+                                                ).toList(),
+                                                onChanged: (DepartmentModel?
+                                                    selectedValue) {
+                                                  setState(() {
+                                                    Log.info('SelectedValue: $selectedValue');
+                                                    state.selectedDepartment =
+                                                        selectedValue!;
+                                                  });
+                                                })
+                                          ]
+                                              // Input(
+                                              //   controller: departmentController,
+                                              //   placeholder: "",
+                                              //   prefixIcon: const Icon(
+                                              //       Icons.business_center),
+                                              // ),
+                                              ),
                                         ),
                                         Row(
                                           children: const [
@@ -297,7 +406,7 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
                                     ),
                                   )),
                                 ),
-                                const Padding(
+                                Padding(
                                   padding: EdgeInsets.only(top: 8.0),
                                   child: FractionalTranslation(
                                       translation: Offset(0.0, -0.5),
@@ -306,7 +415,9 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
                                         child: CircleAvatar(
                                           backgroundImage:
                                               NetworkImage(//AssetImage(
-                                                  ""),
+                                                  state.user?.avatar != null 
+                                                  ? "${state.user?.avatar}"
+                                                  : defaultImage),
                                           radius: 65.0,
                                           // maxRadius: 200.0,
                                         ),
@@ -323,22 +434,23 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
                                     textColor: ArgonColors.white,
                                     color: ArgonColors.warning,
                                     onPressed: () {
-                                      // UserModel user =
-                                      //   UserModel(
-                                      //     id: (state.user?.id)!,
-                                      //     roleId: (state.user?.roleId)!,
-                                      //     email: email,
-                                      //     fullname: fullname,
-                                      //     avatar: avatar,
-                                      //     gender: gender,
-                                      //     studentCode: studentCode,
-                                      //     phoneNumber: phoneNumber,
-                                      //     status: status,
-                                      //     dob: dob,
-                                      //     description: description,
-                                      //     isOnline: true);
-                                      // _bloc.add(EditInfoEvent(user: user));
-                                      // Navigator.pop(context);
+                                      UserModel user =
+                                        UserModel(
+                                          id: (state.user?.id)!,
+                                          roleId: (state.user?.roleId)!,
+                                          email: emailController.value.text,
+                                          fullname: fullnameController.value.text,
+                                          avatar: (state.user?.avatar)!,
+                                          gender: genderController.value.text,
+                                          departmentId: state.selectedDepartment?.id,
+                                          studentCode: (state.user?.studentCode)!,
+                                          phoneNumber: phoneController.value.text,
+                                          status: UserStatus.Active, // default status
+                                          dob: dobController.value.text,
+                                          description: descriptionController.value.text,
+                                          isOnline: true);
+                                      _bloc.add(EditInfoEvent(user: user));
+                                      Navigator.pop(context);
                                     },
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(4.0),

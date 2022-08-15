@@ -18,3 +18,9 @@ class LoadDepartmentsByUni extends EditProfileEvent{
 
   LoadDepartmentsByUni({required this.universityId});
 }
+
+class ChangeSelectionDepartment extends EditProfileEvent{
+  int newValue;
+
+  ChangeSelectionDepartment({required this.newValue});
+}

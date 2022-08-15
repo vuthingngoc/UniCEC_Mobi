@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:unicec_mobi/models/entities/member/member_detail_model.dart';
 import 'package:unicec_mobi/utils/router.dart';
 import '../../../constants/Theme.dart';
@@ -23,29 +24,36 @@ class ClubDescription extends StatefulWidget {
 class _ClubDescriptionState extends State<ClubDescription> {
   @override
   Widget build(BuildContext context) {
+    const defaultImage = 'https://picsum.photos/seed/513/600';
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
-            const Padding(
+            Padding(
               padding: const EdgeInsets.only(top: 60.0, left: 20),
               child: FractionalTranslation(
-                  translation: Offset(0.0, -0.5),
+                  translation: const Offset(0.0, -0.5),
                   child: Align(
+                    alignment: const FractionalOffset(0.5, 0.0),
                     child: CircleAvatar(
                       backgroundImage: NetworkImage(//AssetImage(
-                          "https://lh3.googleusercontent.com/DQj-gonAVTlhj5W7_DhBVmX-0P42rfvx8TSp1WfQeZ6iFIon6InIS8M4Nbqy7Ql5ahgEXSiRDiWD88v-bcPYIEAg3Q=w640-h400-e365-rj-sc0x00ffffff"),
+                          widget.club?.image != null
+                              ? "${widget.club?.image}"
+                              : defaultImage
+                          // "https://lh3.googleusercontent.com/DQj-gonAVTlhj5W7_DhBVmX-0P42rfvx8TSp1WfQeZ6iFIon6InIS8M4Nbqy7Ql5ahgEXSiRDiWD88v-bcPYIEAg3Q=w640-h400-e365-rj-sc0x00ffffff"
+                          ),
                       radius: 40.0,
                       // maxRadius: 200.0,
                     ),
-                    alignment: FractionalOffset(0.5, 0.0),
                   )),
             ),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                    padding: const EdgeInsets.only(left: 0),
+                    padding: const EdgeInsets.only(left: 20.0),
                     child: (widget.club?.name == null)
                         ? Text(
                             'Không tìm thấy tên',
@@ -53,25 +61,35 @@ class _ClubDescriptionState extends State<ClubDescription> {
                           )
                         : Text(
                             widget.club!.name,
-                            style: TextStyle(
-                              color: Color.fromRGBO(50, 50, 93, 1),
-                              fontSize: 23.0,
-                            ),
+                            style: const TextStyle(
+                                color: Color.fromRGBO(50, 50, 93, 1),
+                                fontSize: 23.0,
+                                fontWeight: FontWeight.bold),
                           )),
                 Padding(
-                    padding: const EdgeInsets.only(top: 20, left: 20),
-                    child: (widget.club?.founding == null)
-                        ? Text(
-                            '',
-                            style: Theme.of(context).textTheme.headline6,
-                          )
-                        : Text(
-                            widget.club!.founding.toString(),
-                            style: TextStyle(
-                              color: Color.fromRGBO(50, 50, 93, 1),
-                              fontSize: 16.0,
-                            ),
-                          )),
+                  padding: const EdgeInsets.only(top: 20, left: 20),
+                  child: (widget.club?.founding == null)
+                      ? Text(
+                          '',
+                          style: Theme.of(context).textTheme.headline6,
+                        )
+                      : RichText(
+                          overflow: TextOverflow.ellipsis,
+                          text: TextSpan(children: [
+                            const TextSpan(
+                                text: 'Ngày thành lập: ',
+                                style: TextStyle(
+                                    fontSize: 15.0, color: Colors.black)),
+                            TextSpan(
+                                text: widget.club!.founding
+                                    .toString()
+                                    .split(" ")[0],
+                                style: const TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black)),
+                          ])),
+                ),
               ],
             ),
           ],
@@ -275,7 +293,8 @@ class _ClubDescriptionState extends State<ClubDescription> {
             horizontal: getProportionateScreenWidth(20),
             // vertical: 10,
           ),
-          child: Column(children: [
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             if (widget.club?.clubFanpage != null ||
                 widget.club?.clubContact != null)
               Row(

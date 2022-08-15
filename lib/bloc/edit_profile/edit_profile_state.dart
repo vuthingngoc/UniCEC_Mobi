@@ -8,15 +8,16 @@ class EditProfileState extends Equatable{
   List<DepartmentModel>? departments;
   bool? isSuccess;
   DepartmentModel? selectedDepartment;
+  int? newValueDep;
 
-  EditProfileState({this.user, this.departments, this.isSuccess, this.selectedDepartment});
+  EditProfileState({this.user, this.departments, this.isSuccess, this.selectedDepartment, this.newValueDep});
 
-  EditProfileState copyWith({UserModel? user, List<DepartmentModel>? departments ,bool? isSuccess, DepartmentModel? selectedDepartment}){
-    return EditProfileState(user: user, departments: departments, isSuccess: isSuccess, selectedDepartment: selectedDepartment);
+  EditProfileState copyWith({UserModel? user, List<DepartmentModel>? departments ,bool? isSuccess, DepartmentModel? selectedDepartment, int? newValueDep}){
+    return EditProfileState(user: user, departments: departments, isSuccess: isSuccess, selectedDepartment: selectedDepartment, newValueDep: newValueDep);
   }
   
   @override
   // TODO: implement props
-  List<Object?> get props => [user, departments, isSuccess, selectedDepartment];
+  List<Object?> get props => [user, departments, isSuccess, selectedDepartment, newValueDep];
 
 }

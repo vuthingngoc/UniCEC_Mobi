@@ -15,8 +15,8 @@ class EditProfileBloc extends BaseBloc<EditProfileEvent, EditProfileState> {
   bool _isLoading = false;
 
   bool get isLoading => _isLoading;
-  
-  set isLoading(bool isLoading){
+
+  set isLoading(bool isLoading) {
     _isLoading = isLoading;
   }
 
@@ -35,29 +35,40 @@ class EditProfileBloc extends BaseBloc<EditProfileEvent, EditProfileState> {
                 dob: '',
                 description: '',
                 isOnline: false))) {
-                  on(((event, emit) async {
-                    if(event is LoadProfileEvent){
-                      print('LoadProfileEvent is running ...');
-                      _isLoading = true;
-                      UserModel? user = await service.getById(event.userId);
-                      emit(state.copyWith(user: user));
-                      _isLoading = false;
-                    }
+    on(((event, emit) async {
+      if (event is LoadProfileEvent) {
+        print('LoadProfileEvent is running ...');
+        _isLoading = true;
+        UserModel? user = await service.getById(event.userId);
+        emit(state.copyWith(user: user, departments: state.departments));
+        _isLoading = false;
+      }
 
-                    if(event is EditInfoEvent){
-                      _isLoading = true;
-                      bool result = await service.updateUser(event.user);
-                      emit(state.copyWith(isSuccess: result));
-                      _isLoading = false;
-                    }
+      if (event is EditInfoEvent) {
+        _isLoading = true;
+        bool result = await service.updateUser(event.user);
+        Log.info('result edit info user: $result');
+        emit(state.copyWith(isSuccess: result));
+        _isLoading = false;
+      }
 
-                    if(event is LoadDepartmentsByUni){
-                      _isLoading = true;
-                      PagingResult<DepartmentModel>? departments = await service.loadDepartmentsByUni(event.universityId);
-                      Log.info('departments: $departments');
-                      emit(state.copyWith(departments: departments?.items));
-                      _isLoading = false;
-                    }
-                  }));
-                }
+      if (event is LoadDepartmentsByUni) {
+        _isLoading = true;
+        PagingResult<DepartmentModel>? departments =
+            await service.loadDepartmentsByUni(event.universityId);
+        Log.info('departments: $departments');
+        emit(state.copyWith(departments: departments?.items, user: state.user));
+        _isLoading = false;
+      }
+
+      if (event is ChangeSelectionDepartment) {
+        emit(state.copyWith(
+            newValueDep: state.newValueDep,
+            user: state.user,
+            departments: state.departments,
+            isSuccess: state.isSuccess,
+            selectedDepartment: state.selectedDepartment));
+      }
+    }));
+  }
 }
