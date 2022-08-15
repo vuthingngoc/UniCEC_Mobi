@@ -37,7 +37,7 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                 width: 10,
               ),
               Text(
-                "Open",
+                "Mở",
                 style: TextStyle(fontSize: 18),
               ),
             ],
@@ -54,7 +54,7 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                 width: 10,
               ),
               Text(
-                "OnGoing",
+                "Đang làm",
                 style: TextStyle(fontSize: 18),
               ),
             ],
@@ -71,7 +71,7 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                 width: 10,
               ),
               Text(
-                "Pending",
+                "Chờ",
                 style: TextStyle(fontSize: 18),
               ),
             ],
@@ -88,7 +88,7 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                 width: 10,
               ),
               Text(
-                "Finished",
+                "Đợi duyệt",
                 style: TextStyle(fontSize: 18),
               ),
             ],
@@ -311,7 +311,7 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                                                             width: 10,
                                                           ),
                                                           Text(
-                                                            "Completed",
+                                                            "Kết thúc",
                                                             style: TextStyle(
                                                                 fontSize: 18),
                                                           ),
@@ -332,7 +332,7 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                                                                 width: 10,
                                                               ),
                                                               Text(
-                                                                "Cancelling",
+                                                                "Hủy",
                                                                 style: TextStyle(
                                                                     fontSize:
                                                                         18),
@@ -860,75 +860,85 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                                                   indent: 32.0,
                                                   endIndent: 32.0,
                                                 ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 20.0,
-                                                          right: 20),
-                                                  child: Row(
-                                                    children: [
-                                                      Expanded(
-                                                        child: Text(
-                                                          "Tổng thời gian",
-                                                          style: TextStyle(
-                                                              fontSize: 18,
-                                                              color:
-                                                                  Colors.grey),
+                                                // Padding(
+                                                //   padding:
+                                                //       const EdgeInsets.only(
+                                                //           left: 20.0,
+                                                //           right: 20),
+                                                //   child: Row(
+                                                //     children: [
+                                                //       Expanded(
+                                                //         child: Text(
+                                                //           "Tổng thời gian",
+                                                //           style: TextStyle(
+                                                //               fontSize: 18,
+                                                //               color:
+                                                //                   Colors.grey),
+                                                //         ),
+                                                //       ),
+                                                //     ],
+                                                //   ),
+                                                // ),
+                                                // Padding(
+                                                //   padding:
+                                                //       const EdgeInsets.only(
+                                                //           left: 20,
+                                                //           right: 20,
+                                                //           top: 10),
+                                                //   child: Row(
+                                                //     children: [
+                                                //       Icon(
+                                                //         Icons.access_time,
+                                                //         size: 23,
+                                                //         color: Colors.orange,
+                                                //       ),
+                                                //       SizedBox(width: 10.0),
+                                                //       Expanded(
+                                                //           child: Text(
+                                                //         "5" + " giờ",
+                                                //         style: TextStyle(
+                                                //             fontSize: 18),
+                                                //       )),
+                                                //     ],
+                                                //   ),
+                                                // ),
+                                                (state.competitionActivityDetail
+                                                                ?.status ==
+                                                            CompetitionActivityStatus
+                                                                .Cancelling ||
+                                                        state.competitionActivityDetail
+                                                                ?.status ==
+                                                            CompetitionActivityStatus
+                                                                .Completed)
+                                                    ? SizedBox(height: 10)
+                                                    : TopRoundedContainer(
+                                                        color: Colors.white,
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                            left: SizeConfig
+                                                                    .screenWidth *
+                                                                0.15,
+                                                            right: SizeConfig
+                                                                    .screenWidth *
+                                                                0.15,
+                                                            bottom:
+                                                                getProportionateScreenWidth(
+                                                                    40),
+                                                            top:
+                                                                getProportionateScreenWidth(
+                                                                    15),
+                                                          ),
+                                                          child: DefaultButton(
+                                                            text:
+                                                                "Cập nhật hoạt động",
+                                                            press: () {
+                                                              bloc.add(
+                                                                  UpdateStatusEvent());
+                                                            },
+                                                          ),
                                                         ),
                                                       ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 20,
-                                                          right: 20,
-                                                          top: 10),
-                                                  child: Row(
-                                                    children: [
-                                                      Icon(
-                                                        Icons.access_time,
-                                                        size: 23,
-                                                        color: Colors.orange,
-                                                      ),
-                                                      SizedBox(width: 10.0),
-                                                      Expanded(
-                                                          child: Text(
-                                                        "5" + " giờ",
-                                                        style: TextStyle(
-                                                            fontSize: 18),
-                                                      )),
-                                                    ],
-                                                  ),
-                                                ),
-                                                TopRoundedContainer(
-                                                  color: Colors.white,
-                                                  child: Padding(
-                                                    padding: EdgeInsets.only(
-                                                      left: SizeConfig
-                                                              .screenWidth *
-                                                          0.15,
-                                                      right: SizeConfig
-                                                              .screenWidth *
-                                                          0.15,
-                                                      bottom:
-                                                          getProportionateScreenWidth(
-                                                              40),
-                                                      top:
-                                                          getProportionateScreenWidth(
-                                                              15),
-                                                    ),
-                                                    child: DefaultButton(
-                                                      text:
-                                                          "Cập nhật hoạt động",
-                                                      press: () {
-                                                        bloc.add(
-                                                            UpdateStatusEvent());
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
                                               ],
                                             ),
                                           ),
