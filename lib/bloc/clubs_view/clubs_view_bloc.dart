@@ -11,11 +11,21 @@ import 'clubs_view_state.dart';
 class ClubsViewBloc extends BaseBloc<ClubsViewEvent, ClubsViewState> {
   IClubService service;
 
+  bool _isLoading = false;
+
+  bool get isLoading => _isLoading;
+
+  set isLoading(bool isLoading) {
+    _isLoading = isLoading;
+  }
+
   ClubsViewBloc({required this.service})
       : super(ClubsViewState(
             listClubsBelongToUniversity: [], hasNext: false, currentPage: 1)) {
     on((event, emit) async {
       if (event is ClubsViewInitEvent) {
+        _isLoading = true;
+
         PagingResult<ClubModel>? result =
             await service.getClubsBelongToUniversity(state.currentPage);
 
@@ -43,6 +53,8 @@ class ClubsViewBloc extends BaseBloc<ClubsViewEvent, ClubsViewState> {
         } else {
           //thông báo lỗi load clubs
         }
+
+        _isLoading = false;
       }
       //
       if (event is IncrementalEvent) {

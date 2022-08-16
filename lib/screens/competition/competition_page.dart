@@ -83,136 +83,149 @@ class _CompetitionPageState extends State<CompetitionPage>
                 drawer: ArgonDrawer(currentPage: "Competition"),
                 body: Container(
                     padding: const EdgeInsets.only(left: 24.0, right: 24.0),
-                    child: (state.competitions.isNotEmpty)
-                        ? RefreshIndicator(
-                            onRefresh: () {
-                              return _refresh(context);
-                            },
-                            child: SingleChildScrollView(
-                              physics: ScrollPhysics(),
-                              child: Column(
-                                children: [
-                                  (state.outStandingCompetitions.isNotEmpty)
-                                      ? Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 16.0),
-                                          child: SpecialOffers(
-                                            outStandingEvents:
-                                                (state.outStandingCompetitions),
-                                          ),
-                                        )
-                                      : const SizedBox.shrink(),
-                                  SizedBox(
-                                      height: getProportionateScreenWidth(15)),
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal:
-                                            getProportionateScreenWidth(5)),
-                                    child: SectionTitle(
-                                      title: "Hiện Có",
-                                      press: () {},
-                                    ),
-                                  ),
-                                  SizedBox(height: 8.0),
-                                  // RefreshIndicator(
-                                  //     onRefresh: () {
-                                  //       return _refresh(context);
-                                  //     },
-                                  //     child:
-                                  LoadMore(
-                                      isFinish: !state.hasNext,
-                                      onLoadMore: () {
-                                        return _loadMore(context);
-                                      },
-                                      whenEmptyLoad: false,
-                                      delegate: DefaultLoadMoreDelegate(),
-                                      textBuilder:
-                                          DefaultLoadMoreTextBuilder.english,
-                                      child: ListView.builder(
-                                          physics:
-                                              NeverScrollableScrollPhysics(),
-                                          shrinkWrap: true,
-                                          itemCount: state.competitions.length,
-                                          itemBuilder: (context, index) {
-                                            //lấy hình ảnh
-                                            var competitionEntities = state
-                                                .competitions
-                                                .elementAt(index)
-                                                .competitionEntities;
-                                            String? imageUrl;
-                                            if ((competitionEntities.length) >
-                                                0) {
-                                              imageUrl = competitionEntities
-                                                  .firstWhere(
-                                                      (element) =>
-                                                          element.entityTypeId ==
-                                                          1,
-                                                      orElse: () =>
-                                                          CompetitionEntityModel(
-                                                              id: 0,
-                                                              competitionId: 0,
-                                                              entityTypeId: 0,
-                                                              entityTypeName:
-                                                                  '',
-                                                              name: '',
-                                                              imageUrl:
-                                                                  "https://i.ytimg.com/vi/dip_8dmrcaU/maxresdefault.jpg",
-                                                              website: '',
-                                                              email: '',
-                                                              description: ''))
-                                                  .imageUrl;
-                                            }
-                                            return CardSmall(
-                                                cta: "Xem Chi Tiết",
-                                                title: state
-                                                    .competitions[index].name,
-                                                img: imageUrl ??
-                                                    "https://i.ytimg.com/vi/dip_8dmrcaU/maxresdefault.jpg",
-                                                type: state.competitions[index]
-                                                    .competitionTypeName,
-                                                date:
-                                                    '${(state.competitions[index]).startTime}',
-                                                status: state
-                                                    .competitions[index].status,
-                                                tap: () {
-                                                  Navigator.of(context)
-                                                      .pushNamed(
-                                                          Routes
-                                                              .detailCompetition,
-                                                          arguments: state
-                                                              .competitions[
-                                                                  index]
-                                                              .id);
-                                                });
-                                          })),
-                                ],
-                              ),
-                            ),
-                          )
-                        : Padding(
-                            padding: const EdgeInsets.only(top: 180.0),
-                            child: Column(
-                              children: [
-                                Container(
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            alignment: Alignment.topCenter,
-                                            image: AssetImage(
-                                                "assets/img/not-found-icon-24.jpg"),
-                                            fit: BoxFit.fitWidth))),
-                                Image.asset("assets/img/not-found-icon-24.jpg"),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 25.0),
-                                  child: Text(
-                                    (state.isEvent == false)
-                                        ? 'Chưa có Cuộc Thi nào!'
-                                        : 'Chưa có Sự Kiện nào!',
-                                    style: TextStyle(fontSize: 20),
+                    child: (_bloc.isLoading)
+                        ? Loading()
+                        : (state.competitions.isNotEmpty)
+                            ? RefreshIndicator(
+                                onRefresh: () {
+                                  return _refresh(context);
+                                },
+                                child: SingleChildScrollView(
+                                  physics: ScrollPhysics(),
+                                  child: Column(
+                                    children: [
+                                      (state.outStandingCompetitions.isNotEmpty)
+                                          ? Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 16.0),
+                                              child: SpecialOffers(
+                                                outStandingEvents: (state
+                                                    .outStandingCompetitions),
+                                              ),
+                                            )
+                                          : const SizedBox.shrink(),
+                                      SizedBox(
+                                          height:
+                                              getProportionateScreenWidth(15)),
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal:
+                                                getProportionateScreenWidth(5)),
+                                        child: SectionTitle(
+                                          title: "Hiện Có",
+                                          press: () {},
+                                        ),
+                                      ),
+                                      SizedBox(height: 8.0),
+                                      // RefreshIndicator(
+                                      //     onRefresh: () {
+                                      //       return _refresh(context);
+                                      //     },
+                                      //     child:
+                                      LoadMore(
+                                          isFinish: !state.hasNext,
+                                          onLoadMore: () {
+                                            return _loadMore(context);
+                                          },
+                                          whenEmptyLoad: false,
+                                          delegate: DefaultLoadMoreDelegate(),
+                                          textBuilder:
+                                              DefaultLoadMoreTextBuilder
+                                                  .english,
+                                          child: ListView.builder(
+                                              physics:
+                                                  NeverScrollableScrollPhysics(),
+                                              shrinkWrap: true,
+                                              itemCount:
+                                                  state.competitions.length,
+                                              itemBuilder: (context, index) {
+                                                //lấy hình ảnh
+                                                var competitionEntities = state
+                                                    .competitions
+                                                    .elementAt(index)
+                                                    .competitionEntities;
+                                                String? imageUrl;
+                                                if ((competitionEntities
+                                                        .length) >
+                                                    0) {
+                                                  imageUrl = competitionEntities
+                                                      .firstWhere(
+                                                          (element) =>
+                                                              element.entityTypeId ==
+                                                              1,
+                                                          orElse: () =>
+                                                              CompetitionEntityModel(
+                                                                  id: 0,
+                                                                  competitionId:
+                                                                      0,
+                                                                  entityTypeId:
+                                                                      0,
+                                                                  entityTypeName:
+                                                                      '',
+                                                                  name: '',
+                                                                  imageUrl:
+                                                                      "https://i.ytimg.com/vi/dip_8dmrcaU/maxresdefault.jpg",
+                                                                  website: '',
+                                                                  email: '',
+                                                                  description:
+                                                                      ''))
+                                                      .imageUrl;
+                                                }
+                                                return CardSmall(
+                                                    cta: "Xem Chi Tiết",
+                                                    title: state
+                                                        .competitions[index]
+                                                        .name,
+                                                    img: imageUrl ??
+                                                        "https://i.ytimg.com/vi/dip_8dmrcaU/maxresdefault.jpg",
+                                                    type: state
+                                                        .competitions[index]
+                                                        .competitionTypeName,
+                                                    date:
+                                                        '${(state.competitions[index]).startTime}',
+                                                    status: state
+                                                        .competitions[index]
+                                                        .status,
+                                                    tap: () {
+                                                      Navigator.of(context)
+                                                          .pushNamed(
+                                                              Routes
+                                                                  .detailCompetition,
+                                                              arguments: state
+                                                                  .competitions[
+                                                                      index]
+                                                                  .id);
+                                                    });
+                                              })),
+                                    ],
                                   ),
                                 ),
-                              ],
-                            ),
-                          )));
+                              )
+                            : Padding(
+                                padding: const EdgeInsets.only(top: 180.0),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                alignment: Alignment.topCenter,
+                                                image: AssetImage(
+                                                    "assets/img/not-found-icon-24.jpg"),
+                                                fit: BoxFit.fitWidth))),
+                                    Image.asset(
+                                        "assets/img/not-found-icon-24.jpg"),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 25.0),
+                                      child: Text(
+                                        (state.isEvent == false)
+                                            ? 'Chưa có Cuộc Thi nào!'
+                                            : 'Chưa có Sự Kiện nào!',
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )));
           }),
     );
   }

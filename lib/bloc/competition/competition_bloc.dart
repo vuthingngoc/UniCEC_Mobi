@@ -72,6 +72,7 @@ class CompetitionBloc extends BaseBloc<CompetitionEvent, CompetitionState> {
       if (event is LoadCompetitionEvent) {
         print('LoadCompetitionEvent is running ...');
         _isLoading = true;
+
         List<int> statuses = [];
         statuses.add(CompetitionStatus.Publish.index);
         statuses.add(CompetitionStatus.Register.index);
@@ -105,7 +106,7 @@ class CompetitionBloc extends BaseBloc<CompetitionEvent, CompetitionState> {
 
       if (event is SelectACompetitionEvent) {
         print('SelectACompetitionEvent is running ...');
-        //_isLoading = true;
+        //isLoading = true;
         CompetitionDetailModel? competitionDetail =
             await service.loadDetailById(event.competitionId);
         emit(state.copyWith(
@@ -119,7 +120,7 @@ class CompetitionBloc extends BaseBloc<CompetitionEvent, CompetitionState> {
             newCurrentPage: state.currentPage,
             //emit thêm competitionId Selected
             selectedCompetitionId: event.competitionId));
-        //_isLoading = false;
+        //isLoading = false;
         print('_isLoading done: $_isLoading');
       }
 
@@ -137,7 +138,8 @@ class CompetitionBloc extends BaseBloc<CompetitionEvent, CompetitionState> {
       }
       //change scope
       if (event is ChangeCompetitionScopeEvent) {
-        _isLoading = true;
+        //_isLoading = true;
+
         List<int> statuses = [];
         statuses.add(CompetitionStatus.Publish.index);
         statuses.add(CompetitionStatus.Register.index);
@@ -168,11 +170,12 @@ class CompetitionBloc extends BaseBloc<CompetitionEvent, CompetitionState> {
         // muốn search ăn theo filter luôn
         listener.add(ListenLoadOutStandingEvent());
 
-        _isLoading = false;
+        //_isLoading = false;
       }
       //change event
       if (event is ChangeValueEvent) {
-        _isLoading = true;
+        //isLoading = true;
+
         List<int> statuses = [];
         statuses.add(CompetitionStatus.Publish.index);
         statuses.add(CompetitionStatus.Register.index);
@@ -203,10 +206,11 @@ class CompetitionBloc extends BaseBloc<CompetitionEvent, CompetitionState> {
         // muốn search ăn theo filter luôn
         listener.add(ListenLoadOutStandingEvent());
 
-        _isLoading = false;
+        //isLoading = false;
       }
 
       if (event is ResetFilterEvent) {
+        //_isLoading = true;
         //load lại trạng thái ban đầu
         print('LoadCompetitionEvent is ResetFilter ...');
         _isLoading = true;
@@ -233,9 +237,11 @@ class CompetitionBloc extends BaseBloc<CompetitionEvent, CompetitionState> {
             newCurrentPage: result?.currentPage ?? 1));
         // muốn search ăn theo filter luôn
         listener.add(ListenLoadOutStandingEvent());
+        //_isLoading = false;
       }
       //Refesh Event
       if (event is RefreshEvent) {
+        //_isLoading = true;
         emit(state.copyWith(
           outStandingCompetitions: state.outStandingCompetitions,
           competitions: [], // list empty
@@ -245,6 +251,7 @@ class CompetitionBloc extends BaseBloc<CompetitionEvent, CompetitionState> {
           newHasNext: false,
           newCurrentPage: 1,
         ));
+        //_isLoading = false;
       }
       //Increase Event
       if (event is IncrementalEvent) {

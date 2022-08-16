@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../utils/loading.dart';
 import '/bloc/view_competition_member_task/view_competition_member_task_event.dart';
 import '../../bloc/view_competition_member_task/view_competition_member_task_bloc.dart';
 import '../../utils/app_color.dart';
@@ -27,6 +28,7 @@ class _ViewCompetitionMemberTaskPagePageState
   @override
   void initState() {
     bloc.add(InitEvent());
+    bloc.isLoading = true;
   }
 
   @override
@@ -43,7 +45,7 @@ class _ViewCompetitionMemberTaskPagePageState
             centerTitle: true,
             backgroundColor: AppColors.mainColor,
           ),
-          body: ViewCompetitionMemberTaskMenu(),
+          body: (bloc.isLoading) ? Loading() : ViewCompetitionMemberTaskMenu(),
         ));
   }
 }
