@@ -39,17 +39,17 @@ class UserModel {
   factory UserModel.fromJson(Map<String, dynamic> json) {
     int id = json['id'] ?? 0;
     int roleId = json['role_id'] ?? 0;
-    int? universityId = json['university_id'];
+    int? universityId = json['university_id'] ?? 0;
     String? universityName = json['university_name'] ?? '';
     String email = json['email'] ?? '';
     String fullname = json['fullname'] ?? '';
     String avatar = json['avatar'] ?? '';
     String gender = json['gender'] ?? '';
-    int? departmentId = json['department_id'];
+    int? departmentId = json['department_id'] ?? 0;
     String? departmentName = json['department_name'] ?? '';
     String studentCode = json['student_code'] ?? '';
     String phoneNumber = json['phone_number'] ?? '';
-    UserStatus status = UserStatus.values[json['status']];
+    UserStatus status = UserStatus.values[json['status'] ?? 1];
     String dob = json['dob'] ?? '';
     String description = json['description'] ?? '';
     bool isOnline = json['is_online'] ?? false;

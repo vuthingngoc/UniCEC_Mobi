@@ -10,12 +10,20 @@ import 'view_list_member_state.dart';
 class ViewListMemberBloc
     extends BaseBloc<ViewListMemberEvent, ViewListMemberState> {
   IMemberService service;
+  bool _isLoading = false;
+
+  bool get isLoading => _isLoading;
+
+  set isLoading(bool isLoading){
+    _isLoading = isLoading;
+  }
 
   ViewListMemberBloc({required this.service})
       : super(ViewListMemberState(
             listMember: [], searchName: null, clubRoleId: null)) {
     (on((event, emit) async {
       if (event is LoadListMemberEvent) {
+        _isLoading = true;
         int clubIdSelected = GetIt.I.get<CurrentUser>().clubIdSelected;
         List<MemberModel>? result = await service.getListMemberByClub(
             clubIdSelected, state.searchName, state.clubRoleId);
@@ -30,6 +38,7 @@ class ViewListMemberBloc
               newSearchName: state.searchName,
               newClubRoleId: state.clubRoleId));
         }
+        _isLoading = false;
       }
       if (event is ChangeSearchNameEvent) {
         emit(state.copyWith(

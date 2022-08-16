@@ -56,7 +56,10 @@ class MyAccountBloc extends BaseBloc<MyAccountEvent, MyAccountState> {
         UserModel? user = await service.getById(event.userId);
         SeedsWalletModel? seedsWallet =
             await service.getSeedsWalletByUser(event.userId);
-        if (user != null && seedsWallet != null) {
+        
+        Log.info('my_account_bloc - user: $user');
+        Log.info('my_account_bloc - seedsWallet: $seedsWallet');
+        if (user != null) {
           emit(state.copyWith(user, seedsWallet));
         } else {
           Log.error('ProfileBloc: user and seedsWallet null');

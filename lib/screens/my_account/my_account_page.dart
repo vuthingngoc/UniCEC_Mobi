@@ -123,28 +123,34 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                   fontWeight: FontWeight.w800)),
                                         ),
                                         const SizedBox(height: 10.0),
-                                        Align(
-                                          child: Container(
-                                            margin: const EdgeInsets.only(
-                                                right: 20),
-                                            padding: const EdgeInsets.all(5),
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color: Colors.grey
-                                                        .withOpacity(0.15)),
-                                                color: Colors.grey
-                                                    .withOpacity(0.15),
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(10))),
-                                            child: Text(
-                                                "${state.user.studentCode} | ${state.seedsWallet.amount} seeds",
-                                                style: const TextStyle(
-                                                  // color: Colors.bl,
-                                                  fontSize: 18,
-                                                )),
-                                          ),
-                                        ),
+                                        state.user.id ==
+                                                GetIt.I.get<CurrentUser>().id
+                                            ? Align(
+                                                child: Container(
+                                                  margin: const EdgeInsets.only(
+                                                      right: 20),
+                                                  padding:
+                                                      const EdgeInsets.all(5),
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: Colors.grey
+                                                              .withOpacity(
+                                                                  0.15)),
+                                                      color: Colors.grey
+                                                          .withOpacity(0.15),
+                                                      borderRadius:
+                                                          const BorderRadius
+                                                                  .all(
+                                                              Radius.circular(
+                                                                  10))),
+                                                  child: Text(
+                                                      "${state.user.studentCode} | ${state.seedsWallet?.amount ?? 0} seeds",
+                                                      style: const TextStyle(
+                                                        fontSize: 18,
+                                                      )),
+                                                ),
+                                              )
+                                            : const SizedBox.shrink(),
                                         const Divider(
                                           height: 40.0,
                                           thickness: 1.5,
@@ -155,8 +161,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                                           padding: const EdgeInsets.only(
                                               left: 32.0, right: 32.0),
                                           child: Align(
-                                            child: Text(
-                                                "${state.user.description}",
+                                            child: Text(state.user.description,
                                                 textAlign: TextAlign.center,
                                                 style: const TextStyle(
                                                     fontSize: 17.0,
@@ -174,7 +179,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                 padding: EdgeInsets.all(
                                                     Dimens.size10),
                                                 child: Row(children: [
-                                                  Icon(Icons.school),
+                                                  const Icon(Icons.school),
                                                   //account_circle_outlined
                                                   SizedBox(
                                                     width: Dimens.size20,
@@ -208,30 +213,6 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                   )
                                                 ]),
                                               ),
-                                              // Divider(
-                                              //   height: 0.6,
-                                              //   color: Colors.black,
-                                              // ),
-                                              // Padding(
-                                              //   padding: EdgeInsets.all(
-                                              //       Dimens.size10),
-                                              //   child: Row(children: [
-                                              //     Icon(Icons
-                                              //         .control_point),
-                                              //     SizedBox(
-                                              //       width: Dimens.size20,
-                                              //     ),
-                                              //     Text(
-                                              //       'SeedsPoint: ${state.seedsWallet.amount}',
-                                              //       style: TextStyle(
-                                              //           fontSize: 17),
-                                              //     )
-                                              //   ]),
-                                              // ),
-                                              // Divider(
-                                              //   height: 0.6,
-                                              //   color: Colors.black,
-                                              // ),
                                               Padding(
                                                 padding: EdgeInsets.all(
                                                     Dimens.size10),
@@ -248,48 +229,43 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                   )
                                                 ]),
                                               ),
-                                              // Divider(
-                                              //   height: 0.6,
-                                              //   color: Colors.black,
-                                              // ),
-                                              Padding(
-                                                padding: EdgeInsets.all(
-                                                    Dimens.size10),
-                                                child: Row(children: [
-                                                  Icon(Icons.phone),
-                                                  SizedBox(
-                                                    width: Dimens.size20,
-                                                  ),
-                                                  Text(
-                                                    state.user.phoneNumber,
-                                                    style: const TextStyle(
-                                                        fontSize: 17),
-                                                  )
-                                                ]),
-                                              ),
-                                              // Divider(
-                                              //   height: 0.6,
-                                              //   color: Colors.black,
-                                              // ),
-                                              Padding(
-                                                padding: EdgeInsets.all(
-                                                    Dimens.size10),
-                                                child: Row(children: [
-                                                  const Icon(Icons.cake),
-                                                  SizedBox(
-                                                    width: Dimens.size20,
-                                                  ),
-                                                  Text(
-                                                    state.user.dob,
-                                                    style: const TextStyle(
-                                                        fontSize: 17),
-                                                  )
-                                                ]),
-                                              ),
-                                              // Divider(
-                                              //   height: 0.6,
-                                              //   color: Colors.black,
-                                              // ),
+                                              state.user.phoneNumber.isNotEmpty
+                                                  ? Padding(
+                                                      padding: EdgeInsets.all(
+                                                          Dimens.size10),
+                                                      child: Row(children: [
+                                                        const Icon(Icons.phone),
+                                                        SizedBox(
+                                                          width: Dimens.size20,
+                                                        ),
+                                                        Text(
+                                                          state
+                                                              .user.phoneNumber,
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontSize: 17),
+                                                        )
+                                                      ]),
+                                                    )
+                                                  : const SizedBox.shrink(),
+                                              state.user.dob.isNotEmpty
+                                                  ? Padding(
+                                                      padding: EdgeInsets.all(
+                                                          Dimens.size10),
+                                                      child: Row(children: [
+                                                        const Icon(Icons.cake),
+                                                        SizedBox(
+                                                          width: Dimens.size20,
+                                                        ),
+                                                        Text(
+                                                          state.user.dob,
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontSize: 17),
+                                                        )
+                                                      ]),
+                                                    )
+                                                  : const SizedBox.shrink(),
                                               Padding(
                                                 padding: EdgeInsets.all(
                                                     Dimens.size10),
@@ -305,10 +281,6 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                   )
                                                 ]),
                                               ),
-                                              // Divider(
-                                              //   height: 0.6,
-                                              //   color: Colors.black,
-                                              // ),
                                             ]),
                                           ),
                                         )
