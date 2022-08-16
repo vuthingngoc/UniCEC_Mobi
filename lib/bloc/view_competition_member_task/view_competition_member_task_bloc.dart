@@ -30,9 +30,9 @@ class ViewCompetitionMemberTaskBloc extends BaseBloc<
             hasNext: false,
             currentPage: 1)) {
     on((event, emit) async {
-      _isLoading = true;
       //init Event
       if (event is InitEvent) {
+        //_isLoading = true;
         //get clubIdSelected
         if (GetIt.I.get<CurrentUser>().clubIdSelected != 0) {
           //load
@@ -58,7 +58,7 @@ class ViewCompetitionMemberTaskBloc extends BaseBloc<
                 currentPage: 1));
           }
         }
-        _isLoading = false;
+        //_isLoading = false;
       }
       //Refesh Event
       if (event is RefreshEvent) {

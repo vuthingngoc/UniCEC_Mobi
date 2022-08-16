@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
-
 import '../models/enums/enums.dart';
 import '../utils/dimens.dart';
 

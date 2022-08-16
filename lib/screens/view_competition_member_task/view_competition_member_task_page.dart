@@ -28,7 +28,7 @@ class _ViewCompetitionMemberTaskPagePageState
   @override
   void initState() {
     bloc.add(InitEvent());
-    bloc.isLoading = true;
+    //bloc.isLoading = true;
   }
 
   @override
@@ -45,7 +45,9 @@ class _ViewCompetitionMemberTaskPagePageState
             centerTitle: true,
             backgroundColor: AppColors.mainColor,
           ),
-          body: (bloc.isLoading) ? Loading() : ViewCompetitionMemberTaskMenu(),
+          body:
+              // (bloc.isLoading) ? Loading() :
+              ViewCompetitionMemberTaskMenu(),
         ));
   }
 }
