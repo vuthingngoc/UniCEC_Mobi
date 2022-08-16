@@ -41,14 +41,17 @@ class EditProfileBloc extends BaseBloc<EditProfileEvent, EditProfileState> {
         print('LoadProfileEvent is running ...');
         _isLoading = true;
         UserModel? user = await service.getById(event.userId);
-        emit(state.copyWith(user: user, departments: state.departments));
+        emit(state.copyWith(
+            user: user,
+            departments: state.departments,
+            selectedDepartment: state.departments
+                ?.firstWhere((element) => element.id == user?.departmentId)));
         _isLoading = false;
       }
 
       if (event is EditInfoEvent) {
         _isLoading = true;
         ResultCRUD result = await service.updateUser(event.user);
-        Log.info('result edit info user: ${result.errorMessage}');
         emit(state.copyWith(isSuccess: result.check));
         listener.add(ShowPopUpAnnouncement(message: result.errorMessage));
         _isLoading = false;
@@ -58,14 +61,16 @@ class EditProfileBloc extends BaseBloc<EditProfileEvent, EditProfileState> {
         _isLoading = true;
         PagingResult<DepartmentModel>? departments =
             await service.loadDepartmentsByUni(event.universityId);
-        Log.info('departments: $departments');
-        emit(state.copyWith(departments: departments?.items, user: state.user));
+        emit(state.copyWith(
+            departments: departments?.items,
+            user: state.user,
+            selectedDepartment: state.departments?.firstWhere(
+                (element) => element.id == state.user?.departmentId)));
         _isLoading = false;
       }
 
       if (event is ChangeSelectionDepartment) {
         emit(state.copyWith(
-            newValueDep: state.newValueDep,
             user: state.user,
             departments: state.departments,
             isSuccess: state.isSuccess,

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/bloc/my_account/my_account_bloc.dart';
 import 'package:unicec_mobi/constants/Theme.dart';
+import 'package:unicec_mobi/utils/log.dart';
 import '../../bloc/my_account/my_account_event.dart';
 import '../../bloc/my_account/my_account_state.dart';
 
@@ -41,9 +42,10 @@ class _MyAccountPageState extends State<MyAccountPage>
   void didChangeDependencies() {
     super.didChangeDependencies();
     //nhận data
-    RouteSettings settings = ModalRoute.of(context)!.settings;
+    RouteSettings settings = ModalRoute.of(context)!.settings;    
     if (settings.arguments != null) {
       int userId = settings.arguments as int;
+      Log.info('settings.arguments: $userId');
       if (userId > 0) {
         _bloc.add(ReceiveDataEvent(userId: userId));
         _bloc.isLoading = true;
@@ -54,6 +56,7 @@ class _MyAccountPageState extends State<MyAccountPage>
   @override
   Widget build(BuildContext context) {
     CurrentUser currentUser = GetIt.I.get<CurrentUser>();
+    Log.info('init render UI my_account_page');
 
     return BlocBuilder<MyAccountBloc, MyAccountState>(
         bloc: _bloc,
@@ -291,7 +294,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                 padding: EdgeInsets.all(
                                                     Dimens.size10),
                                                 child: Row(children: [
-                                                  Icon(Icons.transgender),
+                                                  const Icon(Icons.transgender),
                                                   SizedBox(
                                                     width: Dimens.size20,
                                                   ),
@@ -316,7 +319,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                                 FractionalTranslation(
                                     translation: const Offset(0.0, -0.5),
                                     child: Align(
-                                      alignment: FractionalOffset(0.5, 0.0),
+                                      alignment: const FractionalOffset(0.5, 0.0),
                                       child: CircleAvatar(
                                         backgroundImage:
                                             NetworkImage(
@@ -339,7 +342,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                                           onPressed: () {
                                             // Respond to button press
                                             Navigator.pushNamed(
-                                                context, '/editMyAccount');
+                                                context, '/editMyAccount').then((value) => _bloc.add(ReceiveDataEvent(userId: value as int)));
                                           },
                                           shape: RoundedRectangleBorder(
                                             borderRadius:

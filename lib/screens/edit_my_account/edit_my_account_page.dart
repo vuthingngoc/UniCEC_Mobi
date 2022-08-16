@@ -49,8 +49,6 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
     });
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     const defaultImage = 'https://picsum.photos/seed/513/600';
@@ -66,16 +64,12 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
               TextEditingController(text: state.user?.description ?? '');
           final universityController =
               TextEditingController(text: state.user?.universityName ?? '');
-          final departmentController =
-              TextEditingController(text: state.user?.departmentName ?? '');
           final emailController =
               TextEditingController(text: state.user?.email ?? '');
           final phoneController =
               TextEditingController(text: state.user?.phoneNumber ?? '');
           final dobController =
               TextEditingController(text: state.user?.dob ?? '');
-          final genderController =
-              TextEditingController(text: state.user?.gender ?? '');
 
           Log.info('departments: ${state.departments}');
           DepartmentModel selectedDepartment = DepartmentModel(
@@ -220,76 +214,18 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
                                             ),
                                           ],
                                         ),
-                                        // Padding(
-                                        //   padding: const EdgeInsets.all(8.0),
-                                        //   child: Column(
-                                        //     crossAxisAlignment:
-                                        //         CrossAxisAlignment.start,
-                                        //     children: [
-                                        //       const Text(
-                                        //         "Ngành Học:",
-                                        //         style: TextStyle(
-                                        //             fontWeight:
-                                        //                 FontWeight.bold),
-                                        //       ),
-                                        //       const SizedBox(
-                                        //         height: 5,
-                                        //       ),
-                                        //       DropdownButtonHideUnderline(
-                                        //         child: DropdownButton<int>(
-                                        //           alignment:
-                                        //               Alignment.centerLeft,
-                                        //           isExpanded: true,
-                                        //           value: state.newValueDep,
-                                        //           icon: const Icon(
-                                        //               Icons.arrow_drop_down),
-                                        //           iconSize: 24,
-                                        //           elevation: 16,
-                                        //           style: const TextStyle(
-                                        //               color: Colors.deepPurple,
-                                        //               fontWeight:
-                                        //                   FontWeight.bold),
-                                        //           onChanged: (int? newValue) {
-                                        //             _bloc.add(
-                                        //                 ChangeSelectionDepartment(
-                                        //                     newValue:
-                                        //                         newValue!));
-                                        //           },
-                                        //           items: state.departments?.map<
-                                        //                   DropdownMenuItem<
-                                        //                       int>>(
-                                        //               (DepartmentModel value) {
-                                        //             return DropdownMenuItem<
-                                        //                 int>(
-                                        //               value: value.id,
-                                        //               child: Center(
-                                        //                 child: Container(
-                                        //                     width: MediaQuery.of(
-                                        //                                 context)
-                                        //                             .size
-                                        //                             .width *
-                                        //                         0.55,
-                                        //                     height: MediaQuery.of(
-                                        //                                 context)
-                                        //                             .size
-                                        //                             .height *
-                                        //                         0.15,
-                                        //                     child: Text(
-                                        //                         "${value.name} - ${value.departmentCode}")),
-                                        //               ),
-                                        //             );
-                                        //           }).toList(),
-                                        //         ),
-                                        //       )
-                                        //     ],
-                                        //   ),
-                                        // ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
+                                        Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 8.0, vertical: 5.0),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8.0),
+                                          decoration: const BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(5.0))),
                                           child: Column(children: [
                                             DropdownButton(
                                                 isExpanded: true,
-                                                dropdownColor: Colors.white,
                                                 value: state.selectedDepartment ??
                                                     state.departments
                                                         ?.firstWhere((element) => (state
@@ -303,8 +239,7 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
                                                                 state
                                                                     .departments?[
                                                                         0]
-                                                                    .id) ??
-                                                    state.departments?[0],
+                                                                    .id),
                                                 items: state.departments?.map(
                                                   (DepartmentModel department) {
                                                     return DropdownMenuItem(
@@ -316,20 +251,13 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
                                                 onChanged: (DepartmentModel?
                                                     selectedValue) {
                                                   setState(() {
-                                                    Log.info(
-                                                        'SelectedValue: $selectedValue');
                                                     state.selectedDepartment =
                                                         selectedValue!;
+                                                    Log.info(
+                                                        'SelectedValue: ${state.selectedDepartment?.name}');
                                                   });
                                                 })
-                                          ]
-                                              // Input(
-                                              //   controller: departmentController,
-                                              //   placeholder: "",
-                                              //   prefixIcon: const Icon(
-                                              //       Icons.business_center),
-                                              // ),
-                                              ),
+                                          ]),
                                         ),
                                         Row(
                                           children: const [
@@ -403,14 +331,47 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
                                             ),
                                           ],
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Input(
-                                            controller: genderController,
-                                            placeholder: "",
-                                            prefixIcon:
-                                                const Icon(Icons.transgender),
-                                          ),
+                                        Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 8.0, vertical: 5.0),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8.0),
+                                          decoration: const BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(5.0))),
+                                          child: Column(children: [
+                                            DropdownButton(
+                                                isExpanded: true,
+                                                value: state
+                                                        .selectedGender ??
+                                                    state.genderSelection
+                                                        .firstWhere(
+                                                            (element) =>
+                                                                element ==
+                                                                state.user
+                                                                    ?.gender,
+                                                            orElse: () => state
+                                                                    .genderSelection[
+                                                                0]),
+                                                items:
+                                                    state.genderSelection.map(
+                                                  (String gender) {
+                                                    return DropdownMenuItem(
+                                                        value: gender,
+                                                        child: Text(gender));
+                                                  },
+                                                ).toList(),
+                                                onChanged:
+                                                    (String? selectedValue) {
+                                                  setState(() {
+                                                    Log.info(
+                                                        'SelectedValue: $selectedValue');
+                                                    state.selectedGender =
+                                                        selectedValue!;
+                                                  });
+                                                })
+                                          ]),
                                         ),
                                       ],
                                     ),
@@ -444,6 +405,8 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
                                     textColor: ArgonColors.white,
                                     color: ArgonColors.warning,
                                     onPressed: () {
+                                      Log.info(
+                                          "onPress - selectedDepartment: ${state.selectedDepartment?.name} - ${state.selectedDepartment?.id}");
                                       UserModel user = UserModel(
                                           id: (state.user?.id)!,
                                           roleId: (state.user?.roleId)!,
@@ -451,7 +414,9 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
                                           fullname:
                                               fullnameController.value.text,
                                           avatar: (state.user?.avatar)!,
-                                          gender: genderController.value.text,
+                                          gender: state.selectedGender ??
+                                              state.user?.gender ??
+                                              'Male',
                                           departmentId:
                                               state.selectedDepartment?.id,
                                           studentCode:
