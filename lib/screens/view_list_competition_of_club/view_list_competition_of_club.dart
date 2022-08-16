@@ -176,6 +176,9 @@ class _ViewListCompetitionOfClubPageState
                                                     '${(state.competitions[index]).startTime}',
                                                 status: state
                                                     .competitions[index].status,
+                                                isEvent: state.isEvent!,
+                                                scope: state
+                                                    .competitions[index].scope,
                                                 tap: () {
                                                   Navigator.of(context)
                                                       .pushNamed(
