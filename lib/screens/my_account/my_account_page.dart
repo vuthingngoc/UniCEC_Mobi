@@ -42,7 +42,7 @@ class _MyAccountPageState extends State<MyAccountPage>
   void didChangeDependencies() {
     super.didChangeDependencies();
     //nhận data
-    RouteSettings settings = ModalRoute.of(context)!.settings;    
+    RouteSettings settings = ModalRoute.of(context)!.settings;
     if (settings.arguments != null) {
       int userId = settings.arguments as int;
       Log.info('settings.arguments: $userId');
@@ -319,11 +319,11 @@ class _MyAccountPageState extends State<MyAccountPage>
                                 FractionalTranslation(
                                     translation: const Offset(0.0, -0.5),
                                     child: Align(
-                                      alignment: const FractionalOffset(0.5, 0.0),
+                                      alignment:
+                                          const FractionalOffset(0.5, 0.0),
                                       child: CircleAvatar(
                                         backgroundImage:
-                                            NetworkImage(
-                                                state.user.avatar),
+                                            NetworkImage(state.user.avatar),
                                         radius: 65.0,
                                         // maxRadius: 200.0,
                                       ),
@@ -339,10 +339,18 @@ class _MyAccountPageState extends State<MyAccountPage>
                                         child: FlatButton(
                                           textColor: ArgonColors.white,
                                           color: ArgonColors.warning,
-                                          onPressed: () {
+                                          onPressed: () async {
                                             // Respond to button press
-                                            Navigator.pushNamed(
-                                                context, '/editMyAccount').then((value) => _bloc.add(ReceiveDataEvent(userId: value as int)));
+                                            int userId =
+                                                await Navigator.pushNamed(
+                                                    context,
+                                                    '/editMyAccount') as int;
+                                            //.then((value) => _bloc.add(ReceiveDataEvent(userId: value as int))
+                                            //);
+                                            if (userId != null) {
+                                              _bloc.add(ReceiveDataEvent(
+                                                  userId: userId));
+                                            }
                                           },
                                           shape: RoundedRectangleBorder(
                                             borderRadius:

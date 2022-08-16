@@ -14,6 +14,14 @@ class ViewCompetitionMemberTaskBloc extends BaseBloc<
     ViewCompetitionMemberTaskEvent, ViewCompetitionMemberTaskState> {
   final ICompetitionService service;
 
+  bool _isLoading = false;
+
+  bool get isLoading => _isLoading;
+
+  set isLoading(bool isLoading) {
+    _isLoading = isLoading;
+  }
+
   ViewCompetitionMemberTaskBloc({required this.service})
       : super(ViewCompetitionMemberTaskState(
             listCompetition: [],
@@ -24,6 +32,7 @@ class ViewCompetitionMemberTaskBloc extends BaseBloc<
     on((event, emit) async {
       //init Event
       if (event is InitEvent) {
+        //_isLoading = true;
         //get clubIdSelected
         if (GetIt.I.get<CurrentUser>().clubIdSelected != 0) {
           //load
@@ -49,6 +58,7 @@ class ViewCompetitionMemberTaskBloc extends BaseBloc<
                 currentPage: 1));
           }
         }
+        //_isLoading = false;
       }
       //Refesh Event
       if (event is RefreshEvent) {

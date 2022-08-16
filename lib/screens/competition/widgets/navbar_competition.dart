@@ -160,6 +160,8 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                           bloc.add(ChangeCompetitionScopeEvent(
                                               scope: CompetitionScopeStatus
                                                   .InterUniversity));
+                                          //
+                                          //bloc.isLoading = true;
                                         },
                                         value: 1,
                                         child: (state.scope ==
@@ -199,6 +201,8 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                           bloc.add(ChangeCompetitionScopeEvent(
                                               scope: CompetitionScopeStatus
                                                   .University));
+                                          //
+                                          //bloc.isLoading = true;
                                         },
                                         value: 2,
                                         child: (state.scope ==

@@ -39,7 +39,7 @@ class _ViewDetailTeamParticipantPageState
     super.initState();
     bloc.listenerStream.listen((event) {
       if (event is BackPreviousPageEvent) {
-        Navigator.of(context).pop();
+        Navigator.of(context).pop(true);
       } else if (event is ShowingSnackBarEvent) {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(event.message)));
@@ -227,7 +227,7 @@ class _ViewDetailTeamParticipantPageState
               appBar: AppBar(
                 leading: IconButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.of(context).pop(true);
                   },
                   icon: Icon(Icons.arrow_back_ios, color: Colors.black),
                 ),

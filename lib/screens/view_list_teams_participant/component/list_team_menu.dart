@@ -115,7 +115,7 @@ class _ViewListTeamMenuState extends State<ViewListTeamMenu> {
                                 borderRadius: BorderRadius.circular(15)),
                             backgroundColor: Color.fromARGB(255, 235, 237, 241),
                           ),
-                          onPressed: () {
+                          onPressed: () async {
                             //chuyển sang trang detail
                             SendingDataModel data = SendingDataModel(
                                 competitionId: state.competitionId,
@@ -124,9 +124,12 @@ class _ViewListTeamMenuState extends State<ViewListTeamMenu> {
                                 teamDescription:
                                     state.listTeam[index].description,
                                 status: state.listTeam[index].status);
-                            Navigator.of(context).pushNamed(
-                                Routes.viewDetailTeamParticipant,
-                                arguments: data);
+                            bool returnData = await Navigator.of(context)
+                                .pushNamed(Routes.viewDetailTeamParticipant,
+                                    arguments: data) as bool;
+                            if (returnData) {
+                              bloc.add(ResetFilterEvent());
+                            }
                           },
                           child: Row(
                             children: [

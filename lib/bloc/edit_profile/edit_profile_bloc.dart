@@ -52,7 +52,13 @@ class EditProfileBloc extends BaseBloc<EditProfileEvent, EditProfileState> {
       if (event is EditInfoEvent) {
         _isLoading = true;
         ResultCRUD result = await service.updateUser(event.user);
-        emit(state.copyWith(isSuccess: result.check));
+        UserModel? user = await service.getById(event.user.id);
+        emit(state.copyWith(
+            isSuccess: result.check,
+            user: user,
+            selectedDepartment: state.departments
+                ?.firstWhere((element) => element.id == user?.departmentId),
+            departments: state.departments));
         listener.add(ShowPopUpAnnouncement(message: result.errorMessage));
         _isLoading = false;
       }

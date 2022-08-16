@@ -16,7 +16,7 @@ class MemberService implements IMemberService {
     var client = http.Client();
     String url = Api.GetUrl(apiPath: Api.members);
     //
-    url += "/apply/club/" + clubId.toString();
+    url += "/apply/club/${clubId}";
 
     //get_it lấy IdToken
     String? idToken = GetIt.I.get<CurrentUser>().idToken;

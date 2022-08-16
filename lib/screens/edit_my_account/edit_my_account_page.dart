@@ -90,7 +90,7 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
                   appBar: AppBar(
                     leading: IconButton(
                       onPressed: () {
-                        Navigator.pop(context);
+                        Navigator.pop(context, state.user?.id);
                       },
                       icon:
                           const Icon(Icons.arrow_back_ios, color: Colors.white),
@@ -430,7 +430,7 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
                                               descriptionController.value.text,
                                           isOnline: true);
                                       _bloc.add(EditInfoEvent(user: user));
-                                      Navigator.pop(context, user.id);
+                                      //Navigator.pop(context, user.id);
                                     },
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(4.0),

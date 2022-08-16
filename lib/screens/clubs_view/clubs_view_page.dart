@@ -22,14 +22,20 @@ class _ClubsViewPageState extends State<ClubsViewPage> {
 
   @override
   void initState() {
-    bloc.listenerStream.listen((event) {
+    bloc.listenerStream.listen((event) async {
       if (event is NavigatorClubViewDetailPageEvent) {
-        Navigator.pushNamed(context, Routes.clubViewDetail,
-            arguments: event.clubSelect);
+        bool returnData = await Navigator.pushNamed(
+                context, Routes.clubViewDetail, arguments: event.clubSelect)
+            as bool;
+        if (returnData) {
+          bloc.add(RefreshEvent());
+          bloc.add(ClubsViewInitEvent());
+        }
       }
     });
     bloc.add(ClubsViewInitEvent());
     super.initState();
+    bloc.isLoading = true;
   }
 
   @override
@@ -45,8 +51,7 @@ class _ClubsViewPageState extends State<ClubsViewPage> {
           appBar: AppBar(
             iconTheme: const IconThemeData(color: Colors.white),
             title: Text('Danh sách các Câu Lạc Bộ',
-                style:
-                    TextStyle(color: Colors.white, fontSize: Dimens.size23)),
+                style: TextStyle(color: Colors.white, fontSize: Dimens.size23)),
             backgroundColor: AppColors.mainColor,
             centerTitle: true,
           ),

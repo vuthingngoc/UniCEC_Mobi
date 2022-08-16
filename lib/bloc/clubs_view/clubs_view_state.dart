@@ -7,10 +7,11 @@ class ClubsViewState extends Equatable {
   bool hasNext;
   int currentPage;
 
-  ClubsViewState(
-      {required this.listClubsBelongToUniversity,
-      required this.hasNext,
-      required this.currentPage});
+  ClubsViewState({
+    required this.listClubsBelongToUniversity,
+    required this.hasNext,
+    required this.currentPage,
+  });
 
   ClubsViewState copyWith(
       {required List<ClubModel> listClubsBelongToUniversity,
