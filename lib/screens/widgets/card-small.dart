@@ -39,7 +39,7 @@ class CardSmall extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5.0),
       width: screenWidth,
-      height: screenHeight / 3,
+      height: screenHeight / 2,
       child: GestureDetector(
         onTap: tap,
         child: Card(
@@ -93,7 +93,7 @@ class CardSmall extends StatelessWidget {
                             ],
                           ),
                           Text(title,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: ArgonColors.header, fontSize: 18)),
                           //   Text(cta,
                           // style: TextStyle(
@@ -112,152 +112,136 @@ class CardSmall extends StatelessWidget {
                                         color: ArgonColors.primary,
                                         fontSize: 15,
                                         fontWeight: FontWeight.w600)),
-                                Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            border:
-                                                Border.all(color: Colors.blue),
-                                            color: Colors.blue[400],
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10))),
-                                        child: Text(
-                                            (isEvent) ? "Sự Kiện" : "Cuộc Thi",
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 18,
-                                            )),
-                                      ),
-                                      SizedBox(width: 10),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.tealAccent),
-                                            color: Colors.tealAccent[400],
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10))),
-                                        child: Text(
-                                            (scope.index ==
-                                                    CompetitionScopeStatus
-                                                        .InterUniversity.index)
-                                                ? "Liên Trường"
-                                                : (scope.index ==
-                                                        CompetitionScopeStatus
-                                                            .University.index)
-                                                    ? "Trong Trường"
-                                                    : "Câu Lạc Bộ",
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 18,
-                                            )),
-                                      ),
-                                      SizedBox(width: 10),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: (status ==
-                                                        CompetitionStatus
-                                                            .Publish)
-                                                    ? Colors.orangeAccent
-                                                    : (status ==
-                                                            CompetitionStatus
-                                                                .Register)
-                                                        ? Colors.green
-                                                        : (status ==
-                                                                CompetitionStatus
-                                                                    .Upcoming)
-                                                            ? Colors.cyan
-                                                            : (status ==
-                                                                    CompetitionStatus
-                                                                        .Start)
-                                                                ? Colors
-                                                                    .redAccent
-                                                                : (status ==
-                                                                        CompetitionStatus
-                                                                            .OnGoing)
-                                                                    ? Colors
-                                                                        .amber
-                                                                    : (status ==
-                                                                            CompetitionStatus
-                                                                                .End)
-                                                                        ? Colors
-                                                                            .purple
-                                                                        : (status ==
-                                                                                CompetitionStatus.Finish)
-                                                                            ? Colors.blue
-                                                                            : (status == CompetitionStatus.Complete)
-                                                                                ? Colors.greenAccent
-                                                                                : (status == CompetitionStatus.Pending)
-                                                                                    ? Colors.pinkAccent
-                                                                                    : (status == CompetitionStatus.Cancel)
-                                                                                        ? Colors.red
-                                                                                        : Colors.grey),
-                                            color: (status == CompetitionStatus.Publish)
-                                                ? Colors.orangeAccent
-                                                : (status == CompetitionStatus.Register)
-                                                    ? Colors.green
-                                                    : (status == CompetitionStatus.Upcoming)
-                                                        ? Colors.cyan
-                                                        : (status == CompetitionStatus.Start)
-                                                            ? Colors.redAccent
-                                                            : (status == CompetitionStatus.OnGoing)
-                                                                ? Colors.amber
-                                                                : (status == CompetitionStatus.End)
-                                                                    ? Colors.purple
-                                                                    : (status == CompetitionStatus.Finish)
-                                                                        ? Colors.blue
-                                                                        : (status == CompetitionStatus.Complete)
-                                                                            ? Colors.greenAccent
-                                                                            : (status == CompetitionStatus.Pending)
-                                                                                ? Colors.pinkAccent
-                                                                                : (status == CompetitionStatus.Cancel)
-                                                                                    ? Colors.red
-                                                                                    : Colors.grey,
-                                            borderRadius: BorderRadius.all(Radius.circular(10))),
-                                        child: Text(
-                                            (status ==
-                                                    CompetitionStatus.Publish)
-                                                ? 'Công bố'
-                                                : (status ==
-                                                        CompetitionStatus
-                                                            .Register)
-                                                    ? 'Mở Đăng Ký'
-                                                    : (status ==
-                                                            CompetitionStatus
-                                                                .Upcoming)
-                                                        ? 'Sắp Diễn Ra'
-                                                        : (status ==
-                                                                CompetitionStatus
-                                                                    .Start)
-                                                            ? 'Khai Mạc'
-                                                            : (status ==
-                                                                    CompetitionStatus
-                                                                        .OnGoing)
-                                                                ? 'Đang Diễn Ra'
-                                                                : (status ==
-                                                                        CompetitionStatus
-                                                                            .End)
-                                                                    ? 'Kết Thúc'
-                                                                    : (status ==
-                                                                            CompetitionStatus
-                                                                                .Finish)
-                                                                        ? 'Hoàn Thành'
-                                                                        : (status ==
-                                                                                CompetitionStatus.Complete)
-                                                                            ? 'Đóng Cuộc Thi'
-                                                                            : (status == CompetitionStatus.Pending)
-                                                                                ? 'Chờ'
-                                                                                : (status == CompetitionStatus.Cancel)
-                                                                                    ? 'Hủy'
-                                                                                    : 'Trạng thái khác',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 18,
-                                            )),
-                                      ),
-                                    ])
+                                Container(
+                                  //margin: const EdgeInsets.all(10.0),
+                                  // padding: const EdgeInsets.all(3.0),
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: (status ==
+                                                  CompetitionStatus.Publish)
+                                              ? Colors.orangeAccent
+                                              : (status ==
+                                                      CompetitionStatus
+                                                          .Register)
+                                                  ? Colors.green
+                                                  : (status ==
+                                                          CompetitionStatus
+                                                              .Upcoming)
+                                                      ? Colors.cyan
+                                                      : (status ==
+                                                              CompetitionStatus
+                                                                  .Start)
+                                                          ? Colors.redAccent
+                                                          : (status ==
+                                                                  CompetitionStatus
+                                                                      .OnGoing)
+                                                              ? Colors.amber
+                                                              : (status ==
+                                                                      CompetitionStatus
+                                                                          .End)
+                                                                  ? Colors
+                                                                      .purple
+                                                                  : (status ==
+                                                                          CompetitionStatus
+                                                                              .Finish)
+                                                                      ? Colors
+                                                                          .blue
+                                                                      : (status ==
+                                                                              CompetitionStatus
+                                                                                  .Complete)
+                                                                          ? Colors
+                                                                              .greenAccent
+                                                                          : (status ==
+                                                                                  CompetitionStatus
+                                                                                      .Pending)
+                                                                              ? Colors
+                                                                                  .pinkAccent
+                                                                              : (status ==
+                                                                                      CompetitionStatus
+                                                                                          .Cancel)
+                                                                                  ? Colors
+                                                                                      .red
+                                                                                  : Colors
+                                                                                      .grey),
+                                      color: (status ==
+                                              CompetitionStatus.Publish)
+                                          ? Colors.orangeAccent
+                                          : (status ==
+                                                  CompetitionStatus.Register)
+                                              ? Colors.green
+                                              : (status ==
+                                                      CompetitionStatus
+                                                          .Upcoming)
+                                                  ? Colors.cyan
+                                                  : (status ==
+                                                          CompetitionStatus
+                                                              .Start)
+                                                      ? Colors.redAccent
+                                                      : (status ==
+                                                              CompetitionStatus
+                                                                  .OnGoing)
+                                                          ? Colors.amber
+                                                          : (status ==
+                                                                  CompetitionStatus
+                                                                      .End)
+                                                              ? Colors.purple
+                                                              : (status ==
+                                                                      CompetitionStatus
+                                                                          .Finish)
+                                                                  ? Colors.blue
+                                                                  : (status ==
+                                                                          CompetitionStatus
+                                                                              .Complete)
+                                                                      ? Colors
+                                                                          .greenAccent
+                                                                      : (status ==
+                                                                              CompetitionStatus.Pending)
+                                                                          ? Colors.pinkAccent
+                                                                          : (status == CompetitionStatus.Cancel)
+                                                                              ? Colors.red
+                                                                              : Colors.grey,
+                                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                                  child: Text(
+                                      (status == CompetitionStatus.Publish)
+                                          ? 'Công bố'
+                                          : (status ==
+                                                  CompetitionStatus.Register)
+                                              ? 'Mở Đăng Ký'
+                                              : (status ==
+                                                      CompetitionStatus
+                                                          .Upcoming)
+                                                  ? 'Sắp Diễn Ra'
+                                                  : (status ==
+                                                          CompetitionStatus
+                                                              .Start)
+                                                      ? 'Khai Mạc'
+                                                      : (status ==
+                                                              CompetitionStatus
+                                                                  .OnGoing)
+                                                          ? 'Đang Diễn Ra'
+                                                          : (status ==
+                                                                  CompetitionStatus
+                                                                      .End)
+                                                              ? 'Kết Thúc'
+                                                              : (status ==
+                                                                      CompetitionStatus
+                                                                          .Finish)
+                                                                  ? 'Hoàn Thành'
+                                                                  : (status ==
+                                                                          CompetitionStatus
+                                                                              .Complete)
+                                                                      ? 'Đóng Cuộc Thi'
+                                                                      : (status ==
+                                                                              CompetitionStatus.Pending)
+                                                                          ? 'Chờ'
+                                                                          : (status == CompetitionStatus.Cancel)
+                                                                              ? 'Hủy'
+                                                                              : 'Trạng thái khác',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                      )),
+                                )
                               ]),
                           //),
                         ],

@@ -4,15 +4,15 @@ import 'package:unicec_mobi/models/entities/user/user_model.dart';
 
 class MyAccountState extends Equatable{
   UserModel user;
-  SeedsWalletModel seedsWallet;
+  SeedsWalletModel? seedsWallet;
 
-  MyAccountState({required this.user, required this.seedsWallet});
+  MyAccountState({required this.user, this.seedsWallet});
 
-  MyAccountState copyWith(UserModel user, SeedsWalletModel seedsWallet){
+  MyAccountState copyWith(UserModel user, SeedsWalletModel? seedsWallet){
     return MyAccountState(user: user, seedsWallet: seedsWallet);
   }
   
   @override
   // TODO: implement props
-  List<Object?> get props => [user];
+  List<Object?> get props => [user, seedsWallet];
 }

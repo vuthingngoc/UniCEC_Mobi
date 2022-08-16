@@ -50,12 +50,12 @@ class _ClubSelectionPageState extends State<ClubSelectionPage> {
           builder: (context, state) {
             return Scaffold(
               appBar: AppBar(
-                // leading: IconButton(
-                //   onPressed: () {
-                //     Navigator.of(context).pop();
-                //   },
-                //   icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
-                // ),
+                leading: IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+                ),
                 title: const Text(
                   "Chọn câu lạc bộ",
                   style: TextStyle(color: Colors.white),

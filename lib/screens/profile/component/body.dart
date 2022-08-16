@@ -5,8 +5,6 @@ import 'package:unicec_mobi/models/common/current_user.dart';
 import 'package:unicec_mobi/utils/app_color.dart';
 import 'package:unicec_mobi/utils/firebase.dart';
 import 'package:unicec_mobi/utils/router.dart';
-
-import '../../../bloc/profile/profile_bloc.dart';
 import 'profile_menu.dart';
 import 'profile_pic.dart';
 
@@ -31,7 +29,7 @@ class Body extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("${user.fullname}",
+                    Text(user.fullname,
                         style: const TextStyle(
                             color: Color.fromRGBO(50, 50, 93, 1),
                             fontSize: 23.0,
@@ -58,7 +56,7 @@ class Body extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ProfileMenu(
             text: "Thông tin chi tiết",
             icon: "assets/icons/icon-user.svg",

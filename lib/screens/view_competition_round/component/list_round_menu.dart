@@ -63,8 +63,9 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                 top: 8,
                               ),
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Row(
+                                  Wrap(
                                     children: [
                                       const Text(
                                         "Tên:",
@@ -84,7 +85,7 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         top: 8.0, bottom: 8),
-                                    child: Row(
+                                    child: Wrap(
                                       children: [
                                         const Text(
                                           "Thời gian bắt đầu:",
@@ -110,42 +111,10 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                         ),
                                       ],
                                     ),
-                                  ),
+                                  ),                                  
                                   Padding(
                                     padding: const EdgeInsets.only(bottom: 8),
-                                    child: Row(
-                                      children: [
-                                        const Text(
-                                          "Thời gian kết thúc:",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        Container(
-                                          margin: const EdgeInsets.only(
-                                              top: 8.0, bottom: 8, left: 8),
-                                          padding:
-                                              const EdgeInsets.only(left: 3.0),
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.orangeAccent),
-                                              color: Colors.orangeAccent,
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                      Radius.circular(10))),
-                                          child: Text(
-                                              _competitionRounds[index]
-                                                  .startTime,
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 18,
-                                              )),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 8),
-                                    child: Row(
+                                    child: Wrap(
                                       children: [
                                         const Text(
                                           "Thời gian kết thúc:",
@@ -177,7 +146,7 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(bottom: 8),
-                                    child: Row(
+                                    child: Wrap(
                                       children: [
                                         const Text(
                                           "Nội dung:",
@@ -200,7 +169,7 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         top: 8.0, bottom: 8),
-                                    child: Row(
+                                    child: Wrap(
                                       children: [
                                         const Text(
                                           "Điểm:",
@@ -223,7 +192,7 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         bottom: 8, top: 8),
-                                    child: Row(
+                                    child: Row(                                      
                                       children: [
                                         const Text(
                                           "Trạng thái:",
@@ -244,10 +213,9 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                                         const EdgeInsets.only(
                                                             top: 8.0,
                                                             bottom: 8,
-                                                            left: 8),
+                                                            left: 8,),
                                                     padding:
-                                                        const EdgeInsets.only(
-                                                            left: 3.0),
+                                                        const EdgeInsets.all(5.0),
                                                     decoration: BoxDecoration(
                                                         border: Border.all(
                                                             color:
@@ -277,8 +245,7 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                                             bottom: 8,
                                                             left: 8),
                                                     padding:
-                                                        const EdgeInsets.only(
-                                                            left: 3.0),
+                                                        const EdgeInsets.all(5.0),
                                                     decoration: BoxDecoration(
                                                         border: Border.all(
                                                             color: Colors.red),
@@ -307,8 +274,7 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                                             bottom: 8,
                                                             left: 8),
                                                     padding:
-                                                        const EdgeInsets.only(
-                                                            left: 3.0),
+                                                        const EdgeInsets.all(5.0),
                                                     decoration: BoxDecoration(
                                                         border: Border.all(
                                                             color: Colors
@@ -339,8 +305,7 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                                             bottom: 8,
                                                             left: 8),
                                                     padding:
-                                                        const EdgeInsets.only(
-                                                            left: 3.0),
+                                                        const EdgeInsets.all(5.0),
                                                     decoration: BoxDecoration(
                                                         border: Border.all(
                                                             color: Colors.grey),

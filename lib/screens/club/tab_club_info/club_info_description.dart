@@ -100,7 +100,7 @@ class _ClubDescriptionState extends State<ClubDescription> {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Row(
-              children: [
+              children: const [
                 Text(
                   'Giới thiệu',
                   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
@@ -108,7 +108,7 @@ class _ClubDescriptionState extends State<ClubDescription> {
               ],
             ),
             if (widget.club?.description == null)
-              Text(
+              const Text(
                 '',
                 maxLines: 10,
               ),
@@ -116,7 +116,7 @@ class _ClubDescriptionState extends State<ClubDescription> {
               Text(
                 widget.club!.description,
                 maxLines: 10,
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
               ),
           ]),
         ),
@@ -143,7 +143,7 @@ class _ClubDescriptionState extends State<ClubDescription> {
           ),
           child: Column(children: [
             Row(
-              children: [
+              children: const [
                 Text(
                   'Thông tin cá nhân',
                   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
@@ -159,16 +159,16 @@ class _ClubDescriptionState extends State<ClubDescription> {
                     Icon(Icons.account_circle),
                     SizedBox(width: 10),
                     Text(widget.member?.name ?? '',
-                        style: TextStyle(fontSize: 16)),
+                        style: const TextStyle(fontSize: 16)),
                     Container(
                       margin: const EdgeInsets.all(10.0),
                       padding: const EdgeInsets.all(3.0),
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.orangeAccent),
                           color: Colors.orangeAccent,
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                          borderRadius: const BorderRadius.all(Radius.circular(10))),
                       child: Text(widget.member?.clubRoleName ?? 'Thành viên',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 18,
                           )),
@@ -211,7 +211,7 @@ class _ClubDescriptionState extends State<ClubDescription> {
             Container(
               width: 220.0,
               height: 36,
-              margin: new EdgeInsets.all(15),
+              margin: const EdgeInsets.all(15),
               child: RaisedButton(
                   textColor: ArgonColors.primary,
                   color: ArgonColors.secondary,
@@ -258,7 +258,7 @@ class _ClubDescriptionState extends State<ClubDescription> {
             Container(
               width: 305.0,
               height: 36,
-              margin: new EdgeInsets.all(15),
+              margin: const EdgeInsets.all(15),
               child: RaisedButton(
                   textColor: ArgonColors.primary,
                   color: ArgonColors.secondary,
@@ -308,11 +308,11 @@ class _ClubDescriptionState extends State<ClubDescription> {
             const SizedBox(height: 10),
             if (widget.club?.clubFanpage != null)
               Padding(
-                padding: const EdgeInsets.only(left: 30),
-                child: Row(
+                padding: const EdgeInsets.only(left: 10),
+                child: Wrap(
+                  spacing: 10,
                   children: [
                     const Icon(Icons.web),
-                    const SizedBox(width: 10),
                     Text(
                       widget.club?.clubFanpage ?? '',
                       style: const TextStyle(fontSize: 16),
@@ -323,11 +323,11 @@ class _ClubDescriptionState extends State<ClubDescription> {
             const SizedBox(height: 10),
             if (widget.club?.clubContact != null)
               Padding(
-                padding: const EdgeInsets.only(left: 30),
-                child: Row(
+                padding: const EdgeInsets.only(left: 10),
+                child: Wrap(
+                  spacing: 10,
                   children: [
                     const Icon(Icons.phone),
-                    const SizedBox(width: 10),
                     Text(widget.club?.clubContact ?? '',
                         style: const TextStyle(fontSize: 16)),
                   ],

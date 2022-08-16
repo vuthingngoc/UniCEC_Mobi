@@ -81,11 +81,9 @@ class _CompetitionPageState extends State<CompetitionPage>
                 backgroundColor: ArgonColors.bgColorScreen,
                 //key: _scaffoldKey,
                 drawer: ArgonDrawer(currentPage: "Competition"),
-                body: Container(
+                body: (_bloc.isLoading) ? Loading() :Container(
                     padding: const EdgeInsets.only(left: 24.0, right: 24.0),
-                    child: (_bloc.isLoading)
-                        ? Loading()
-                        : (state.competitions.isNotEmpty)
+                    child: (state.competitions.isNotEmpty)
                             ? RefreshIndicator(
                                 onRefresh: () {
                                   return _refresh(context);
@@ -116,7 +114,7 @@ class _CompetitionPageState extends State<CompetitionPage>
                                           press: () {},
                                         ),
                                       ),
-                                      SizedBox(height: 8.0),
+                                      const SizedBox(height: 8.0),
                                       // RefreshIndicator(
                                       //     onRefresh: () {
                                       //       return _refresh(context);
