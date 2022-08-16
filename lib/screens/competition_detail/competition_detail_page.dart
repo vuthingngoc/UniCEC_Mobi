@@ -44,9 +44,9 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
       CompetitionScopeStatus? scope = _bloc.state.competitionDetail?.scope;
       switch (scope) {
         case CompetitionScopeStatus.InterUniversity:
-          return 'Trong Trường';
-        case CompetitionScopeStatus.University:
           return 'Liên Trường';
+        case CompetitionScopeStatus.University:
+          return 'Trong Trường';
         case CompetitionScopeStatus.Club:
           return 'Câu lạc bộ';
         default:
@@ -703,8 +703,9 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                               ),
                                                             ]),
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.symmetric(horizontal: 20.0),
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 20.0),
                                                     child: Wrap(
                                                       // mainAxisAlignment:
                                                       //     MainAxisAlignment

@@ -1,3 +1,4 @@
+import '../../enums/competition_scope_status.dart';
 import '../../enums/competition_status.dart';
 import '../competition_entity/competition_entity_model.dart';
 
@@ -9,6 +10,7 @@ class CompetitionShowModel {
   String competitionTypeName;
   DateTime startTime;
   CompetitionStatus status;
+  CompetitionScopeStatus scope;
   List<CompetitionEntityModel> competitionEntities;
 
   CompetitionShowModel(
@@ -19,6 +21,7 @@ class CompetitionShowModel {
       required this.competitionTypeName,
       required this.startTime,
       required this.status,
+      required this.scope,
       required this.competitionEntities});
 
   factory CompetitionShowModel.fromJson(Map<String, dynamic> json) {
@@ -34,6 +37,7 @@ class CompetitionShowModel {
     json['competition_entities']?.forEach((v) {
       competitionEntities.add(CompetitionEntityModel.fromJson(v));
     });
+    CompetitionScopeStatus scope = CompetitionScopeStatus.values[json['scope']];
 
     return CompetitionShowModel(
         id: id,
@@ -43,6 +47,7 @@ class CompetitionShowModel {
         competitionTypeName: competitionTypeName,
         startTime: startTime,
         status: status,
+        scope: scope,
         competitionEntities: competitionEntities);
   }
 }

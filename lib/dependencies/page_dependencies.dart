@@ -32,8 +32,8 @@ class PageDependencies {
         instanceName: Routes.competition);
 
     //EventPage -> show Sự Kiện
-    injector.registerFactory<Widget>(() => EventPage(bloc: injector()),
-        instanceName: Routes.event);
+    // injector.registerFactory<Widget>(() => EventPage(bloc: injector()),
+    //     instanceName: Routes.event);
 
     //Profile Page -> show general info Student
     injector.registerFactory<Widget>(
@@ -102,8 +102,8 @@ class PageDependencies {
         instanceName: Routes.viewListCompetitionOfClub);
 
     //Task Page -> show Tasks
-    injector.registerFactory<Widget>(() => TaskPage(),
-        instanceName: Routes.task);
+    // injector.registerFactory<Widget>(() => TaskPage(),
+    //     instanceName: Routes.task);
 
     injector.registerFactory<Widget>(() => ClubViewDetailPage(bloc: injector()),
         instanceName: Routes.clubViewDetail);
