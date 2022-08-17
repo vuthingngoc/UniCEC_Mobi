@@ -55,7 +55,8 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
     );
   }
 
-  Future<void> _showDeleteDialog(int participantId, BuildContext context) {
+  Future<void> _showDeleteDialog(
+      int participantId, ViewDetailTeamParticipantBloc bloc) {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -73,9 +74,8 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
             TextButton(
               child: Text('Đồng ý'),
               onPressed: () {
-                BlocProvider.of<ViewDetailTeamParticipantBloc>(context).add(
-                    DeleteMemberByTeamLeaderEvent(
-                        participantId: participantId));
+                bloc.add(DeleteMemberByTeamLeaderEvent(
+                    participantId: participantId));
                 Navigator.of(context).pop();
               },
             ),
@@ -242,25 +242,40 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
                                           .userIdIsLeaderTeam ==
                                       GetIt.I.get<CurrentUser>().id)
                                     PopupMenuItem(
-                                      onTap: () {
-                                        print('Xóa');
-                                        BlocProvider.of<
-                                                    ViewDetailTeamParticipantBloc>(
-                                                context)
-                                            .add(DeleteMemberByTeamLeaderEvent(
-                                                participantId:
-                                                    member.participantId));
-                                      },
+                                      // onTap: () {
+                                      //   // print('Xóa');
+                                      //   // BlocProvider.of<
+                                      //   //             ViewDetailTeamParticipantBloc>(
+                                      //   //         context)
+                                      //   //     .add(DeleteMemberByTeamLeaderEvent(
+                                      //   //         participantId:
+                                      //   //             member.participantId));
+                                      // },
                                       value: 3,
-                                      child: Row(
-                                        children: <Widget>[
-                                          //Icon(Icons.delete, size: 18),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 8.0),
-                                            child: Text('Xóa thành viên'),
-                                          ),
-                                        ],
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          primary:
+                                              Colors.black.withOpacity(0.05),
+                                          onPrimary: Colors.black,
+                                        ),
+                                        onPressed: () {
+                                          _showDeleteDialog(
+                                              member.participantId,
+                                              BlocProvider.of<
+                                                      ViewDetailTeamParticipantBloc>(
+                                                  context));
+                                        },
+                                        child: Row(
+                                          children: <Widget>[
+                                            Text('Xóa thành viên'),
+                                            //Icon(Icons.delete, size: 18),
+                                            // Padding(
+                                            //   padding: const EdgeInsets.only(
+                                            //       left: 8.0),
+                                            //   child:
+                                            // ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                 ];
