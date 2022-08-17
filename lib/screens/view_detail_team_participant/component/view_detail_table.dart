@@ -5,6 +5,7 @@ import '../../../bloc/view_detail_team_participant/view_detail_team_participant_
 import '../../../bloc/view_detail_team_participant/view_detail_team_participant_event.dart';
 import '../../../models/common/current_user.dart';
 import '../../../models/entities/participant/view_detail_participant.dart';
+import '../../../utils/loading.dart';
 import '../../../utils/router.dart';
 
 class ViewDetailTableMenu extends StatefulWidget {
@@ -136,7 +137,7 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
                             value: 2,
                             child: Row(
                               children: <Widget>[
-                                Icon(Icons.remove_red_eye, size: 18),
+                                //Icon(Icons.remove_red_eye, size: 18),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 8.0),
                                   child: Text('Xem thông tin'),
@@ -164,7 +165,7 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
                                 value: 2,
                                 child: Row(
                                   children: <Widget>[
-                                    Icon(Icons.remove_red_eye, size: 18),
+                                    //Icon(Icons.remove_red_eye, size: 18),
                                     Padding(
                                       padding: const EdgeInsets.only(left: 8.0),
                                       child: Text('Xem thông tin'),
@@ -204,8 +205,8 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
                                       value: 1,
                                       child: Row(
                                         children: <Widget>[
-                                          Icon(Icons.access_time_sharp,
-                                              size: 18),
+                                          // Icon(Icons.access_time_sharp,
+                                          //     size: 18),
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 8.0),
@@ -225,7 +226,7 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
                                     value: 2,
                                     child: Row(
                                       children: <Widget>[
-                                        Icon(Icons.remove_red_eye, size: 18),
+                                        //Icon(Icons.remove_red_eye, size: 18),
                                         Padding(
                                           padding:
                                               const EdgeInsets.only(left: 8.0),
@@ -249,49 +250,11 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
                                             .add(DeleteMemberByTeamLeaderEvent(
                                                 participantId:
                                                     member.participantId));
-                                        // showDialog(
-                                        //   context: context,
-                                        //   barrierDismissible:
-                                        //       false, // user must tap button!
-                                        //   builder: (BuildContext context) {
-                                        //     return AlertDialog(
-                                        //       title: Text('Cảnh báo'),
-                                        //       content: SingleChildScrollView(
-                                        //         child: Column(
-                                        //           children: <Widget>[
-                                        //             Text(
-                                        //                 'Bạn có chắc chắn muốn xóa?'),
-                                        //           ],
-                                        //         ),
-                                        //       ),
-                                        //       actions: <Widget>[
-                                        //         TextButton(
-                                        //           child: Text('Đồng ý'),
-                                        //           onPressed: () {
-                                        //             BlocProvider.of<
-                                        //                         ViewDetailTeamParticipantBloc>(
-                                        //                     context)
-                                        //                 .add(DeleteMemberByTeamLeaderEvent(
-                                        //                     participantId: member
-                                        //                         .participantId));
-                                        //             Navigator.of(context).pop();
-                                        //           },
-                                        //         ),
-                                        //         TextButton(
-                                        //           child: Text('Hủy'),
-                                        //           onPressed: () {
-                                        //             Navigator.of(context).pop();
-                                        //           },
-                                        //         ),
-                                        //       ],
-                                        //     );
-                                        //   },
-                                        // );
                                       },
                                       value: 3,
                                       child: Row(
                                         children: <Widget>[
-                                          Icon(Icons.delete, size: 18),
+                                          //Icon(Icons.delete, size: 18),
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 8.0),
@@ -316,7 +279,7 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
                                     value: 2,
                                     child: Row(
                                       children: <Widget>[
-                                        Icon(Icons.remove_red_eye, size: 18),
+                                        //Icon(Icons.remove_red_eye, size: 18),
                                         Padding(
                                           padding:
                                               const EdgeInsets.only(left: 8.0),

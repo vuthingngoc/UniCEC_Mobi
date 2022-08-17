@@ -9,23 +9,27 @@ class ViewDetailActivityState extends Equatable {
   CompetitionActivityStatus status;
   //chọn ảnh default
   int selectedImageIndex;
+  bool isLoading;
 
   ViewDetailActivityState(
       {required this.competitionActivityDetail,
       required this.status,
-      required this.selectedImageIndex});
+      required this.selectedImageIndex,
+      required this.isLoading});
 
   ViewDetailActivityState copyWith(
       {required CompetitionActivityDetailModel newCompetitionActivityDetail,
       required CompetitionActivityStatus newStatus,
-      required int newSelectedImageIndex}) {
+      required int newSelectedImageIndex,
+      required bool isLoading}) {
     return ViewDetailActivityState(
         competitionActivityDetail: newCompetitionActivityDetail,
         status: newStatus,
-        selectedImageIndex: newSelectedImageIndex);
+        selectedImageIndex: newSelectedImageIndex,
+        isLoading: isLoading);
   }
 
   @override
   List<Object?> get props =>
-      [competitionActivityDetail, status, selectedImageIndex];
+      [competitionActivityDetail, status, selectedImageIndex, isLoading];
 }

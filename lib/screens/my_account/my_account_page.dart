@@ -74,7 +74,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                   appBar: AppBar(
                     leading: IconButton(
                       onPressed: () {
-                        Navigator.pop(context);
+                        Navigator.pop(context, true);
                       },
                       icon:
                           const Icon(Icons.arrow_back_ios, color: Colors.white),

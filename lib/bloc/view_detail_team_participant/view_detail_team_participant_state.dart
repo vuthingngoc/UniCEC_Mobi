@@ -13,6 +13,7 @@ class ViewDetailTeamParticipantState extends Equatable {
   String valueTeamName;
   String valueTeamDescription;
   TeamStatus status;
+  bool isLoading;
 
   ViewDetailTeamParticipantState(
       {required this.teamDetail,
@@ -22,7 +23,8 @@ class ViewDetailTeamParticipantState extends Equatable {
       required this.userIdInTeam,
       required this.valueTeamName,
       required this.valueTeamDescription,
-      required this.status});
+      required this.status,
+      required this.isLoading});
 
   ViewDetailTeamParticipantState copyWith(
       {required TeamDetailModel? newTeamDetail,
@@ -32,7 +34,8 @@ class ViewDetailTeamParticipantState extends Equatable {
       required int newUserIdInTeam,
       required String newValueTeamName,
       required String newValueTeamDescription,
-      required TeamStatus newStatus}) {
+      required TeamStatus newStatus,
+      required bool isLoading}) {
     return ViewDetailTeamParticipantState(
         teamDetail: newTeamDetail,
         competitionId: newCompetitionId,
@@ -41,7 +44,8 @@ class ViewDetailTeamParticipantState extends Equatable {
         userIdInTeam: newUserIdInTeam,
         valueTeamName: newValueTeamName,
         valueTeamDescription: newValueTeamDescription,
-        status: newStatus);
+        status: newStatus,
+        isLoading: isLoading);
   }
 
   @override
@@ -53,6 +57,7 @@ class ViewDetailTeamParticipantState extends Equatable {
         userIdInTeam,
         valueTeamName,
         valueTeamDescription,
-        status
+        status,
+        isLoading
       ];
 }

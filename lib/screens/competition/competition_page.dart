@@ -40,7 +40,7 @@ class _CompetitionPageState extends State<CompetitionPage>
       }
     });
     _bloc.add(LoadOutStandingCompetitionEvent());
-    _bloc.isLoading = true;
+
     _bloc.add(LoadCompetitionEvent());
   }
 
@@ -67,9 +67,6 @@ class _CompetitionPageState extends State<CompetitionPage>
       child: BlocBuilder<CompetitionBloc, CompetitionState>(
           bloc: _bloc,
           builder: (context, state) {
-            // return (_bloc.isLoading)
-            //     ? Loading()
-            //     :
             return Scaffold(
                 appBar: NavbarCompetition(
                   title: "Cuộc Thi",
@@ -81,9 +78,13 @@ class _CompetitionPageState extends State<CompetitionPage>
                 backgroundColor: ArgonColors.bgColorScreen,
                 //key: _scaffoldKey,
                 drawer: ArgonDrawer(currentPage: "Competition"),
-                body: (_bloc.isLoading) ? Loading() :Container(
-                    padding: const EdgeInsets.only(left: 24.0, right: 24.0),
-                    child: (state.competitions.isNotEmpty)
+                body: (state.isLoading &&
+                        (state.competitions.isEmpty ||
+                            state.competitions.isNotEmpty))
+                    ? Loading()
+                    : Container(
+                        padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+                        child: (state.competitions.isNotEmpty)
                             ? RefreshIndicator(
                                 onRefresh: () {
                                   return _refresh(context);

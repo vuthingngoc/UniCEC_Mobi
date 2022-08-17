@@ -17,13 +17,6 @@ import '../../models/entities/competition/competition_show_model.dart';
 class ViewListCompetitionOfClubBloc extends BaseBloc<
     ViewListCompetitionOfClubEvent, ViewListCompetitionOfClubState> {
   final ICompetitionService service;
-  bool _isLoading = false;
-
-  bool get isLoading => _isLoading;
-
-  set isLoading(bool isLoading) {
-    _isLoading = isLoading;
-  }
 
   ViewListCompetitionOfClubBloc({required this.service})
       : super(
@@ -34,7 +27,8 @@ class ViewListCompetitionOfClubBloc extends BaseBloc<
               searchName: null,
               isEvent: false,
               hasNext: false,
-              currentPage: 1),
+              currentPage: 1,
+              isLoading: true),
         ) {
     on((event, emit) async {
       if (event is LoadOutStandingCompetitionEvent) {
@@ -59,19 +53,19 @@ class ViewListCompetitionOfClubBloc extends BaseBloc<
             await service.loadCompetition(request);
 
         emit(state.copyWith(
-          outStandingCompetitions: result?.items ?? [], // change
-          competitions: state.competitions,
-          scope: state.scope,
-          isEvent: state.isEvent,
-          searchName: state.searchName,
-          newHasNext: state.hasNext,
-          newCurrentPage: state.currentPage,
-        ));
+            outStandingCompetitions: result?.items ?? [], // change
+            competitions: state.competitions,
+            scope: state.scope,
+            isEvent: state.isEvent,
+            searchName: state.searchName,
+            newHasNext: state.hasNext,
+            newCurrentPage: state.currentPage,
+            isLoading: false));
       }
 
       if (event is LoadCompetitionEvent) {
         print('LoadCompetitionEvent is running ...');
-        _isLoading = true;
+
         List<int> statuses = [];
         statuses.add(CompetitionStatus.Publish.index);
         statuses.add(CompetitionStatus.Register.index);
@@ -97,10 +91,9 @@ class ViewListCompetitionOfClubBloc extends BaseBloc<
               searchName: state.searchName,
               isEvent: state.isEvent,
               newHasNext: result.hasNext,
-              newCurrentPage: result.currentPage));
+              newCurrentPage: result.currentPage,
+              isLoading: false));
         }
-
-        _isLoading = false;
       }
 
       if (event is SelectACompetitionEvent) {
@@ -118,9 +111,8 @@ class ViewListCompetitionOfClubBloc extends BaseBloc<
             newHasNext: state.hasNext,
             newCurrentPage: state.currentPage,
             //emit thêm competitionId Selected
-            selectedCompetitionId: event.competitionId));
-        //_isLoading = false;
-        print('_isLoading done: $_isLoading');
+            selectedCompetitionId: event.competitionId,
+            isLoading: false));
       }
 
       //--------------------------------TA
@@ -133,7 +125,8 @@ class ViewListCompetitionOfClubBloc extends BaseBloc<
             searchName: event.searchName, // change
             isEvent: state.isEvent,
             newHasNext: state.hasNext,
-            newCurrentPage: state.currentPage));
+            newCurrentPage: state.currentPage,
+            isLoading: false));
       }
 
       //change event
@@ -163,7 +156,8 @@ class ViewListCompetitionOfClubBloc extends BaseBloc<
             searchName: state.searchName,
             isEvent: event.isEvent, // change
             newHasNext: result?.hasNext ?? false,
-            newCurrentPage: result?.currentPage ?? 1));
+            newCurrentPage: result?.currentPage ?? 1,
+            isLoading: false));
 
         // muốn search ăn theo filter luôn
         listener.add(ListenLoadOutStandingEvent());
@@ -172,14 +166,14 @@ class ViewListCompetitionOfClubBloc extends BaseBloc<
       //Refesh Event
       if (event is RefreshEvent) {
         emit(state.copyWith(
-          outStandingCompetitions: state.outStandingCompetitions,
-          competitions: [], // list empty
-          scope: state.scope,
-          searchName: state.searchName,
-          isEvent: state.isEvent,
-          newHasNext: false,
-          newCurrentPage: 1,
-        ));
+            outStandingCompetitions: state.outStandingCompetitions,
+            competitions: [], // list empty
+            scope: state.scope,
+            searchName: state.searchName,
+            isEvent: state.isEvent,
+            newHasNext: false,
+            newCurrentPage: 1,
+            isLoading: true));
       }
       //Increase Event
       if (event is IncrementalEvent) {
@@ -191,8 +185,8 @@ class ViewListCompetitionOfClubBloc extends BaseBloc<
             searchName: state.searchName,
             isEvent: state.isEvent,
             newHasNext: state.hasNext,
-            newCurrentPage: increase // change
-            ));
+            newCurrentPage: increase, // change,
+            isLoading: false));
       }
       //Load more
       if (event is LoadAddMoreEvent) {
@@ -229,7 +223,8 @@ class ViewListCompetitionOfClubBloc extends BaseBloc<
             searchName: state.searchName,
             isEvent: state.isEvent,
             newHasNext: result?.hasNext ?? false,
-            newCurrentPage: result?.currentPage ?? state.currentPage));
+            newCurrentPage: result?.currentPage ?? state.currentPage,
+            isLoading: false));
       }
       //Search event
       if (event is SearchEvent) {
@@ -259,7 +254,8 @@ class ViewListCompetitionOfClubBloc extends BaseBloc<
               scope: state.scope,
               isEvent: state.isEvent,
               newHasNext: result.hasNext,
-              newCurrentPage: result.currentPage));
+              newCurrentPage: result.currentPage,
+              isLoading: false));
         } else {
           emit(state.copyWith(
               competitions: [],
@@ -268,10 +264,23 @@ class ViewListCompetitionOfClubBloc extends BaseBloc<
               scope: state.scope,
               isEvent: state.isEvent,
               newHasNext: false,
-              newCurrentPage: 1));
+              newCurrentPage: 1,
+              isLoading: false));
         }
         // muốn search ăn theo filter luôn
         listener.add(ListenLoadOutStandingEvent());
+      }
+      if (event is LoadingEvent) {
+        emit(state.copyWith(
+            outStandingCompetitions: state.outStandingCompetitions,
+            competitions: state.competitions,
+            scope: state.scope,
+            searchName: state.searchName,
+            isEvent: state.isEvent,
+            newHasNext: state.hasNext,
+            newCurrentPage: state.currentPage,
+            isLoading: true // change
+            ));
       }
     });
   }

@@ -158,6 +158,7 @@ class _NavbarCompetitionOfClubState extends State<NavbarCompetitionOfClub> {
                                 ),
                                 GestureDetector(
                                   onTap: () {
+                                    bloc.add(LoadingEvent());
                                     bloc.add(SearchEvent());
                                   },
                                   child: Icon(Icons.search),
@@ -174,15 +175,14 @@ class _NavbarCompetitionOfClubState extends State<NavbarCompetitionOfClub> {
                           children: [
                             GestureDetector(
                                 onTap: () {
+                                  bloc.add(LoadingEvent());
+                                  //
                                   bloc.add(ChangeValueEvent(isEvent: false));
                                 },
                                 child: Row(children: [
                                   (state.isEvent == false)
                                       ? Container(
                                           child: Row(children: [
-                                            // Icon(Icons.camera,
-                                            //     color: ArgonColors.inputSuccess,
-                                            //     size: 22.0),
                                             Text(widget.categoryOne,
                                                 style: TextStyle(
                                                     color: ArgonColors
@@ -192,9 +192,6 @@ class _NavbarCompetitionOfClubState extends State<NavbarCompetitionOfClub> {
                                         )
                                       : Container(
                                           child: Row(children: [
-                                            // Icon(Icons.camera,
-                                            //     color: ArgonColors.initial,
-                                            //     size: 22.0),
                                             Text(widget.categoryOne,
                                                 style: TextStyle(
                                                     color: ArgonColors.initial,
@@ -209,6 +206,7 @@ class _NavbarCompetitionOfClubState extends State<NavbarCompetitionOfClub> {
                             ),
                             GestureDetector(
                               onTap: () {
+                                bloc.add(LoadingEvent());
                                 bloc.add(ChangeValueEvent(isEvent: true));
                               },
                               child: Row(

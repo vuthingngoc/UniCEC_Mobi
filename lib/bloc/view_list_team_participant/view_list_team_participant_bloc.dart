@@ -19,7 +19,8 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
             currentPage: 1,
             valueInvitedCode: '',
             searchName: null,
-            status: null)) {
+            status: null,
+            isLoading: true)) {
     on((event, emit) async {
       //InitEvent
       if (event is ViewListTeamInitEvent) {
@@ -41,7 +42,8 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
               newCurrentPage: result.currentPage,
               valueInvitedCode: state.valueInvitedCode,
               newSearchName: state.searchName,
-              newStatus: state.status));
+              newStatus: state.status,
+              isLoading: false));
         }
       }
       //Recieve Data
@@ -52,7 +54,7 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
             status: state.status,
             teamName: state.searchName);
         //
-        request.currentPage = state.currentPage;
+        request.currentPage = 1;
 
         PagingResult<TeamModel>? result = await service.GetListTeam(request);
 
@@ -64,7 +66,8 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
               newCurrentPage: result.currentPage,
               valueInvitedCode: state.valueInvitedCode,
               newSearchName: state.searchName,
-              newStatus: state.status));
+              newStatus: state.status,
+              isLoading: false));
         } else {
           emit(state.copyWith(
               newListTeam: state.listTeam,
@@ -73,7 +76,8 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
               newCurrentPage: state.currentPage,
               valueInvitedCode: state.valueInvitedCode,
               newSearchName: state.searchName,
-              newStatus: state.status));
+              newStatus: state.status,
+              isLoading: false));
         }
       }
       //Refesh Event
@@ -85,7 +89,8 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
             newCurrentPage: 1,
             valueInvitedCode: '',
             newSearchName: state.searchName,
-            newStatus: state.status));
+            newStatus: state.status,
+            isLoading: true));
       }
       //Increase Event
       if (event is IncrementalEvent) {
@@ -97,7 +102,8 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
             newCurrentPage: increase,
             valueInvitedCode: state.valueInvitedCode,
             newSearchName: state.searchName,
-            newStatus: state.status));
+            newStatus: state.status,
+            isLoading: false));
       }
       //LoadMore
       if (event is LoadAddMoreEvent) {
@@ -126,7 +132,8 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
             newCurrentPage: result?.currentPage ?? state.currentPage,
             valueInvitedCode: state.valueInvitedCode,
             newSearchName: state.searchName,
-            newStatus: state.status));
+            newStatus: state.status,
+            isLoading: false));
       }
 
       //get invited code
@@ -138,7 +145,8 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
             newCurrentPage: state.currentPage,
             valueInvitedCode: event.newInvitedCodeValue, // change
             newSearchName: state.searchName,
-            newStatus: state.status));
+            newStatus: state.status,
+            isLoading: false));
       }
 
       //create team
@@ -182,7 +190,8 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
             newCurrentPage: state.currentPage,
             valueInvitedCode: state.valueInvitedCode,
             newSearchName: event.searchName, // change
-            newStatus: state.status));
+            newStatus: state.status,
+            isLoading: false));
       }
       if (event is ChangeTeamStatusEvent) {
         //------------Request
@@ -202,7 +211,8 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
             newCurrentPage: result?.currentPage ?? 1,
             valueInvitedCode: state.valueInvitedCode,
             newSearchName: state.searchName,
-            newStatus: event.status // change
+            newStatus: event.status,
+            isLoading: false // change
             ));
       }
       if (event is SearchEvent) {
@@ -223,7 +233,8 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
             newCurrentPage: result?.currentPage ?? 1,
             valueInvitedCode: state.valueInvitedCode,
             newSearchName: state.searchName,
-            newStatus: state.status));
+            newStatus: state.status,
+            isLoading: false));
       }
       if (event is ResetFilterEvent) {
         //------------Request
@@ -241,7 +252,20 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
             newCurrentPage: result?.currentPage ?? 1,
             valueInvitedCode: state.valueInvitedCode,
             newSearchName: state.searchName,
-            newStatus: state.status));
+            newStatus: state.status,
+            isLoading: false));
+      }
+      if (event is LoadingEvent) {
+        emit(state.copyWith(
+            newListTeam: state.listTeam,
+            newCompetitionId: state.competitionId,
+            newHasNext: state.hasNext,
+            newCurrentPage: state.currentPage,
+            valueInvitedCode: state.valueInvitedCode,
+            newSearchName: state.searchName,
+            newStatus: state.status,
+            isLoading: true // change
+            ));
       }
     });
   }

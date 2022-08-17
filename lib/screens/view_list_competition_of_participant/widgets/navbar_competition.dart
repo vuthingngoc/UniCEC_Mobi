@@ -162,6 +162,7 @@ class _NavbarCompetitionOfParticipantState
                             ),
                             GestureDetector(
                               onTap: () {
+                                bloc.add(LoadingEvent());
                                 bloc.add(SearchEvent());
                               },
                               child: Icon(Icons.search),
@@ -172,6 +173,7 @@ class _NavbarCompetitionOfParticipantState
                                   return [
                                     PopupMenuItem(
                                       onTap: () {
+                                        bloc.add(LoadingEvent());
                                         //add biến liên trường
                                         bloc.add(ChangeCompetitionScopeEvent(
                                             scope: CompetitionScopeStatus
@@ -209,6 +211,7 @@ class _NavbarCompetitionOfParticipantState
                                     ),
                                     PopupMenuItem(
                                       onTap: () {
+                                        bloc.add(LoadingEvent());
                                         //add biến trong trường
                                         bloc.add(ChangeCompetitionScopeEvent(
                                             scope: CompetitionScopeStatus
@@ -245,6 +248,7 @@ class _NavbarCompetitionOfParticipantState
                                     ),
                                     PopupMenuItem(
                                       onTap: () {
+                                        bloc.add(LoadingEvent());
                                         //add biến trong trường
                                         bloc.add(ChangeCompetitionScopeEvent(
                                             scope:
@@ -281,6 +285,7 @@ class _NavbarCompetitionOfParticipantState
                                     ),
                                     PopupMenuItem(
                                       onTap: () {
+                                        bloc.add(LoadingEvent());
                                         bloc.add(ResetFilterEvent());
                                         //làm cho đoạn search bị xóa đi
                                         _controller.text = "";
@@ -416,6 +421,7 @@ class _NavbarCompetitionOfParticipantState
 
                             GestureDetector(
                                 onTap: () {
+                                  bloc.add(LoadingEvent());
                                   bloc.add(ChangeValueEvent(isEvent: false));
                                 },
                                 child: Row(children: [
@@ -451,6 +457,7 @@ class _NavbarCompetitionOfParticipantState
                             ),
                             GestureDetector(
                               onTap: () {
+                                bloc.add(LoadingEvent());
                                 bloc.add(ChangeValueEvent(isEvent: true));
                               },
                               child: Row(

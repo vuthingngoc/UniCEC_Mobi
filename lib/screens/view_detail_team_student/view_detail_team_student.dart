@@ -5,6 +5,7 @@ import '../../bloc/view_detail_team_student/view_detail_team_student_event.dart'
 import '../../bloc/view_detail_team_student/view_detail_team_student_state.dart';
 import '../../models/entities/team/sending_data_model.dart';
 import '../../utils/app_color.dart';
+import '../../utils/loading.dart';
 import '../../utils/router.dart';
 import 'component/view_detail_team_student_table.dart';
 
@@ -26,10 +27,15 @@ class _ViewDetailTeamStudentPageState extends State<ViewDetailTeamStudentPage>
 
   @override
   void initState() {
-    bloc.listenerStream.listen((event) {
+    bloc.listenerStream.listen((event) async {
       if (event is NavigatorToAccountPageEvent) {
-        Navigator.of(context)
-            .pushNamed(Routes.myAccount, arguments: event.userId);
+        bool returnData = await Navigator.of(context)
+            .pushNamed(Routes.myAccount, arguments: event.userId) as bool;
+        if (returnData) {
+          bloc.add(LoadingEvent());
+          // dùng để loading khi từ MyAccount -> về lại đây
+          bloc.add(LoadDataEvent());
+        }
       }
     });
     super.initState();
@@ -54,56 +60,59 @@ class _ViewDetailTeamStudentPageState extends State<ViewDetailTeamStudentPage>
       child: BlocBuilder<ViewDetailTeamStudentBloc, ViewDetailTeamStudentState>(
         bloc: bloc,
         builder: (context, state) {
-          return Scaffold(
-              appBar: AppBar(
-                leading: IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  icon: Icon(Icons.arrow_back_ios, color: Colors.black),
-                ),
-                title: Text(
-                  state.teamDetail?.name ?? "Chưa Load Team Name",
-                  style: TextStyle(color: Colors.white),
-                ),
-                automaticallyImplyLeading: false,
-                centerTitle: true,
-                backgroundColor: AppColors.mainColor,
-              ),
-              body: SingleChildScrollView(
-                child: Column(children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(left: 15, top: 20),
-                            padding: const EdgeInsets.all(5.0),
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.green),
-                                color: Colors.green,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            child: Text(
-                                (state.teamDetail != null)
-                                    ? "Mã: T-${state.teamDetail!.id}"
-                                    : "Chưa có load mã",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                )),
-                          ),
-                        ],
-                      )
-                    ],
+          return (state.isLoading)
+              ? Loading()
+              : Scaffold(
+                  appBar: AppBar(
+                    leading: IconButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(true);
+                      },
+                      icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+                    ),
+                    title: Text(
+                      state.teamDetail?.name ?? "Chưa Load Team Name",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    automaticallyImplyLeading: false,
+                    centerTitle: true,
+                    backgroundColor: AppColors.mainColor,
                   ),
-                  (state.teamDetail?.participants != null)
-                      ? ViewDetailTableStudentMenu(
-                          listModel: state.teamDetail!.participants)
-                      : Text("Chưa có load danh sách Team"),
-                ]),
-              ));
+                  body: SingleChildScrollView(
+                    child: Column(children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                margin:
+                                    const EdgeInsets.only(left: 15, top: 20),
+                                padding: const EdgeInsets.all(5.0),
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.green),
+                                    color: Colors.green,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                                child: Text(
+                                    (state.teamDetail != null)
+                                        ? "Mã: T-${state.teamDetail!.id}"
+                                        : "Chưa có load mã",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                    )),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                      (state.teamDetail?.participants != null)
+                          ? ViewDetailTableStudentMenu(
+                              listModel: state.teamDetail!.participants)
+                          : Text("Chưa có load danh sách Team"),
+                    ]),
+                  ));
         },
       ),
     );

@@ -15,6 +15,7 @@ class ViewCompetitionActivityState extends Equatable {
   List<CompetitionActivityStatus> loadListStatuses;
   bool hasNext;
   int currentPage;
+  bool isLoading;
 
   ViewCompetitionActivityState(
       {required this.listCompetitionActivity,
@@ -25,19 +26,20 @@ class ViewCompetitionActivityState extends Equatable {
       required this.chooseStatus,
       required this.loadListStatuses,
       required this.hasNext,
-      required this.currentPage});
+      required this.currentPage,
+      required this.isLoading});
 
-  ViewCompetitionActivityState copyWith({
-    required List<CompetitionActivityModel> newListCompetitionActivity,
-    required int newCompetitionId,
-    required String? searchName,
-    required PriorityStatus choosePriorityStatus,
-    required List<PriorityStatus> loadPriorityStatus,
-    required CompetitionActivityStatus chooseStatus,
-    required List<CompetitionActivityStatus> loadListStatuses,
-    required bool newHasNext,
-    required int newCurrentPage,
-  }) {
+  ViewCompetitionActivityState copyWith(
+      {required List<CompetitionActivityModel> newListCompetitionActivity,
+      required int newCompetitionId,
+      required String? searchName,
+      required PriorityStatus choosePriorityStatus,
+      required List<PriorityStatus> loadPriorityStatus,
+      required CompetitionActivityStatus chooseStatus,
+      required List<CompetitionActivityStatus> loadListStatuses,
+      required bool newHasNext,
+      required int newCurrentPage,
+      required bool isLoading}) {
     return ViewCompetitionActivityState(
         listCompetitionActivity: newListCompetitionActivity,
         competitionId: newCompetitionId,
@@ -47,7 +49,8 @@ class ViewCompetitionActivityState extends Equatable {
         chooseStatus: chooseStatus,
         loadListStatuses: loadListStatuses,
         hasNext: newHasNext,
-        currentPage: newCurrentPage);
+        currentPage: newCurrentPage,
+        isLoading: isLoading);
   }
 
   @override
@@ -60,6 +63,7 @@ class ViewCompetitionActivityState extends Equatable {
         chooseStatus,
         loadListStatuses,
         hasNext,
-        currentPage
+        currentPage,
+        isLoading
       ];
 }

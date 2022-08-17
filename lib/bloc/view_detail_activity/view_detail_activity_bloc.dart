@@ -13,7 +13,8 @@ class ViewDetailActivityBloc
       : super(ViewDetailActivityState(
             competitionActivityDetail: null,
             status: CompetitionActivityStatus.Open,
-            selectedImageIndex: 0)) {
+            selectedImageIndex: 0,
+            isLoading: true)) {
     (on(
       (event, emit) async {
         //recieve data
@@ -24,7 +25,8 @@ class ViewDetailActivityBloc
             emit(state.copyWith(
                 newCompetitionActivityDetail: result,
                 newStatus: result.status,
-                newSelectedImageIndex: state.selectedImageIndex));
+                newSelectedImageIndex: state.selectedImageIndex,
+                isLoading: false));
           }
         }
         //change status
@@ -32,7 +34,8 @@ class ViewDetailActivityBloc
           emit(state.copyWith(
               newCompetitionActivityDetail: state.competitionActivityDetail!,
               newStatus: event.newStatus, // change
-              newSelectedImageIndex: state.selectedImageIndex));
+              newSelectedImageIndex: state.selectedImageIndex,
+              isLoading: false));
         }
         //update status competition activity
         if (event is UpdateStatusEvent) {
@@ -49,7 +52,8 @@ class ViewDetailActivityBloc
               emit(state.copyWith(
                   newCompetitionActivityDetail: result,
                   newStatus: result.status,
-                  newSelectedImageIndex: state.selectedImageIndex));
+                  newSelectedImageIndex: state.selectedImageIndex,
+                  isLoading: false));
             }
           } else {
             listener.add(ShowingSnackBarEvent(message: "Update Lỗi"));
@@ -61,7 +65,8 @@ class ViewDetailActivityBloc
                   newCompetitionActivityDetail:
                       state.competitionActivityDetail!,
                   newStatus: state.status,
-                  newSelectedImageIndex: event.imageIndex) // change
+                  newSelectedImageIndex: event.imageIndex,
+                  isLoading: false) // change
               );
         }
       },

@@ -22,7 +22,8 @@ class ViewCompetitionActivityBloc extends BaseBloc<ViewCompetitionActivityEvent,
             chooseStatus: CompetitionActivityStatus.All,
             loadListStatuses: [],
             hasNext: false,
-            currentPage: 1)) {
+            currentPage: 1,
+            isLoading: true)) {
     on((event, emit) async {
       //Init Event
       if (event is ViewCompetitionActivityInitEvent) {
@@ -64,7 +65,8 @@ class ViewCompetitionActivityBloc extends BaseBloc<ViewCompetitionActivityEvent,
               chooseStatus: state.chooseStatus,
               loadListStatuses: state.loadListStatuses,
               newHasNext: result.hasNext,
-              newCurrentPage: result.currentPage));
+              newCurrentPage: result.currentPage,
+              isLoading: false));
         } else {
           emit(state.copyWith(
               newListCompetitionActivity: [],
@@ -75,7 +77,8 @@ class ViewCompetitionActivityBloc extends BaseBloc<ViewCompetitionActivityEvent,
               chooseStatus: state.chooseStatus,
               loadListStatuses: state.loadListStatuses,
               newHasNext: false,
-              newCurrentPage: 1));
+              newCurrentPage: 1,
+              isLoading: false));
         }
       }
 
@@ -135,7 +138,8 @@ class ViewCompetitionActivityBloc extends BaseBloc<ViewCompetitionActivityEvent,
             chooseStatus: state.chooseStatus,
             loadListStatuses: loadListStatuses, // change
             newHasNext: result?.hasNext ?? state.hasNext,
-            newCurrentPage: result?.currentPage ?? state.currentPage));
+            newCurrentPage: result?.currentPage ?? state.currentPage,
+            isLoading: false));
       }
 
       //Refesh Event
@@ -149,7 +153,8 @@ class ViewCompetitionActivityBloc extends BaseBloc<ViewCompetitionActivityEvent,
             chooseStatus: state.chooseStatus,
             loadListStatuses: state.loadListStatuses,
             newHasNext: false,
-            newCurrentPage: 1));
+            newCurrentPage: 1,
+            isLoading: true));
       }
       //Increase Event
       if (event is IncrementalEvent) {
@@ -163,8 +168,8 @@ class ViewCompetitionActivityBloc extends BaseBloc<ViewCompetitionActivityEvent,
             chooseStatus: state.chooseStatus,
             loadListStatuses: state.loadListStatuses,
             newHasNext: state.hasNext,
-            newCurrentPage: increase // change
-            ));
+            newCurrentPage: increase, // change
+            isLoading: false));
       }
       //LoadMore
       if (event is LoadAddMoreEvent) {
@@ -214,7 +219,8 @@ class ViewCompetitionActivityBloc extends BaseBloc<ViewCompetitionActivityEvent,
             loadListStatuses: state.loadListStatuses,
             newHasNext: result?.hasNext ??
                 false, // result trả ra null thì đồng nghĩa với việc hasNext = false
-            newCurrentPage: result?.currentPage ?? state.currentPage));
+            newCurrentPage: result?.currentPage ?? state.currentPage,
+            isLoading: false));
       }
       if (event is ChangeSearchNameEvent) {
         emit(state.copyWith(
@@ -226,7 +232,8 @@ class ViewCompetitionActivityBloc extends BaseBloc<ViewCompetitionActivityEvent,
             chooseStatus: state.chooseStatus,
             loadListStatuses: state.loadListStatuses,
             newHasNext: state.hasNext,
-            newCurrentPage: state.currentPage));
+            newCurrentPage: state.currentPage,
+            isLoading: false));
       }
       if (event is ChangeValueStatusEvent) {
         //------------Request
@@ -265,7 +272,8 @@ class ViewCompetitionActivityBloc extends BaseBloc<ViewCompetitionActivityEvent,
             chooseStatus: event.chooseStatus, // change
             loadListStatuses: state.loadListStatuses,
             newHasNext: result?.hasNext ?? false,
-            newCurrentPage: result?.currentPage ?? 1));
+            newCurrentPage: result?.currentPage ?? 1,
+            isLoading: false));
       }
       if (event is ChangeValuePriorityStatusEvent) {
         //------------Request
@@ -304,7 +312,8 @@ class ViewCompetitionActivityBloc extends BaseBloc<ViewCompetitionActivityEvent,
             chooseStatus: state.chooseStatus,
             loadListStatuses: state.loadListStatuses,
             newHasNext: result?.hasNext ?? false,
-            newCurrentPage: result?.currentPage ?? 1));
+            newCurrentPage: result?.currentPage ?? 1,
+            isLoading: false));
       }
       if (event is SearchEvent) {
         //------------Request
@@ -345,7 +354,21 @@ class ViewCompetitionActivityBloc extends BaseBloc<ViewCompetitionActivityEvent,
             chooseStatus: state.chooseStatus,
             loadListStatuses: state.loadListStatuses,
             newHasNext: result?.hasNext ?? false,
-            newCurrentPage: result?.currentPage ?? 1));
+            newCurrentPage: result?.currentPage ?? 1,
+            isLoading: false));
+      }
+      if (event is LoadingEvent) {
+        emit(state.copyWith(
+            newListCompetitionActivity: state.listCompetitionActivity,
+            newCompetitionId: state.competitionId,
+            choosePriorityStatus: state.choosePriorityStatus,
+            loadPriorityStatus: state.loadPriorityStatus,
+            searchName: state.searchName,
+            chooseStatus: state.chooseStatus,
+            loadListStatuses: state.loadListStatuses,
+            newHasNext: state.hasNext,
+            newCurrentPage: state.currentPage,
+            isLoading: true));
       }
     });
   }

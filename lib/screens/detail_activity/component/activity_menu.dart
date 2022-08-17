@@ -7,6 +7,7 @@ import '../../../bloc/view_detail_activity/view_detail_activity_state.dart';
 import '../../../constants/Constants.dart';
 import '../../../models/enums/competition_activity_status.dart';
 import '../../../models/enums/priority_status.dart';
+import '../../../utils/loading.dart';
 import '../../../utils/log.dart';
 import '../../club/tab_club_info/default_button.dart';
 import '../../club/tab_club_info/top_rounded_container.dart';
@@ -109,8 +110,8 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
     return BlocBuilder<ViewDetailActivityBloc, ViewDetailActivityState>(
         bloc: bloc,
         builder: (context, state) {
-          return (state.competitionActivityDetail == null)
-              ? Text('Chưa load được dữ liệu')
+          return (state.isLoading)
+              ? Loading()
               : Stack(children: <Widget>[
                   SafeArea(
                     child: ListView(children: [

@@ -47,3 +47,5 @@ class LoadRefreshEvent extends CompetitionEvent {}
 
 //
 class ListenLoadOutStandingEvent extends CompetitionEvent {}
+
+class LoadingEvent extends CompetitionEvent {}

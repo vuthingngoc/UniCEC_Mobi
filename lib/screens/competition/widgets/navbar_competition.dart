@@ -146,6 +146,7 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                               ),
                               GestureDetector(
                                 onTap: () {
+                                  bloc.add(LoadingEvent());
                                   bloc.add(SearchEvent());
                                 },
                                 child: Icon(Icons.search),
@@ -156,12 +157,11 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                     return [
                                       PopupMenuItem(
                                         onTap: () {
+                                          bloc.add(LoadingEvent());
                                           //add biến liên trường
                                           bloc.add(ChangeCompetitionScopeEvent(
                                               scope: CompetitionScopeStatus
                                                   .InterUniversity));
-                                          //
-                                          //bloc.isLoading = true;
                                         },
                                         value: 1,
                                         child: (state.scope ==
@@ -171,8 +171,6 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                                 color: Colors.green,
                                                 child: Row(
                                                   children: <Widget>[
-                                                    // Icon(Icons.camera,
-                                                    //     size: 18),
                                                     Padding(
                                                       padding:
                                                           const EdgeInsets.only(
@@ -197,12 +195,11 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                       ),
                                       PopupMenuItem(
                                         onTap: () {
+                                          bloc.add(LoadingEvent());
                                           //add biến trong trường
                                           bloc.add(ChangeCompetitionScopeEvent(
                                               scope: CompetitionScopeStatus
                                                   .University));
-                                          //
-                                          //bloc.isLoading = true;
                                         },
                                         value: 2,
                                         child: (state.scope ==
@@ -238,6 +235,7 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                       ),
                                       PopupMenuItem(
                                         onTap: () {
+                                          bloc.add(LoadingEvent());
                                           bloc.add(ResetFilterEvent());
                                           //làm cho đoạn search bị xóa đi
                                           _controller.text = "";
@@ -245,7 +243,6 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                         value: 3,
                                         child: Row(
                                           children: <Widget>[
-                                            // Icon(Icons.delete, size: 18),
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   left: 8.0),
@@ -269,15 +266,13 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                           children: [
                             GestureDetector(
                                 onTap: () {
+                                  bloc.add(LoadingEvent());
                                   bloc.add(ChangeValueEvent(isEvent: false));
                                 },
                                 child: Row(children: [
                                   (state.isEvent == false)
                                       ? Container(
                                           child: Row(children: [
-                                            // Icon(Icons.camera,
-                                            //     color: ArgonColors.inputSuccess,
-                                            //     size: 22.0),
                                             Text(widget.categoryOne,
                                                 style: TextStyle(
                                                     color: ArgonColors
@@ -287,9 +282,6 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                         )
                                       : Container(
                                           child: Row(children: [
-                                            // Icon(Icons.camera,
-                                            //     color: ArgonColors.initial,
-                                            //     size: 22.0),
                                             Text(widget.categoryOne,
                                                 style: TextStyle(
                                                     color: ArgonColors.initial,
@@ -304,6 +296,7 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                             ),
                             GestureDetector(
                               onTap: () {
+                                bloc.add(LoadingEvent());
                                 bloc.add(ChangeValueEvent(isEvent: true));
                               },
                               child: Row(
@@ -311,9 +304,6 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                   ((state.isEvent == true))
                                       ? Container(
                                           child: Row(children: [
-                                            // Icon(Icons.school,
-                                            //     color: ArgonColors.inputSuccess,
-                                            //     size: 22.0),
                                             Text(widget.categoryTwo,
                                                 style: TextStyle(
                                                     color: ArgonColors
@@ -323,9 +313,6 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                         )
                                       : Container(
                                           child: Row(children: [
-                                            // Icon(Icons.school,
-                                            //     color: ArgonColors.initial,
-                                            //     size: 22.0),
                                             Text(widget.categoryTwo,
                                                 style: TextStyle(
                                                     color: ArgonColors.initial,
