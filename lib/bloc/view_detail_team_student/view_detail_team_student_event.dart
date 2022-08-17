@@ -15,3 +15,8 @@ class NavigatorToAccountPageEvent extends ViewDetailTeamStudentEvent {
   int userId;
   NavigatorToAccountPageEvent({required this.userId});
 }
+
+class LoadingEvent extends ViewDetailTeamStudentEvent {}
+
+//load lại data sau khi từ trang MyAccount về đây
+class LoadDataEvent extends ViewDetailTeamStudentEvent {}

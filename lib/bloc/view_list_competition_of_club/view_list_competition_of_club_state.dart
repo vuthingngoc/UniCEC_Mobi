@@ -14,6 +14,7 @@ class ViewListCompetitionOfClubState extends Equatable {
   bool? isEvent;
   bool hasNext;
   int currentPage;
+  bool isLoading;
 
   ViewListCompetitionOfClubState(
       {required this.competitions,
@@ -23,7 +24,8 @@ class ViewListCompetitionOfClubState extends Equatable {
       required this.isEvent,
       this.selectedCompetitionId,
       required this.hasNext,
-      required this.currentPage});
+      required this.currentPage,
+      required this.isLoading});
 
   ViewListCompetitionOfClubState copyWith({
     required List<CompetitionShowModel> competitions,
@@ -34,6 +36,7 @@ class ViewListCompetitionOfClubState extends Equatable {
     int? selectedCompetitionId,
     required bool newHasNext,
     required int newCurrentPage,
+    required bool isLoading,
   }) {
     return ViewListCompetitionOfClubState(
         competitions: competitions,
@@ -43,7 +46,8 @@ class ViewListCompetitionOfClubState extends Equatable {
         isEvent: isEvent,
         selectedCompetitionId: selectedCompetitionId,
         hasNext: newHasNext,
-        currentPage: newCurrentPage);
+        currentPage: newCurrentPage,
+        isLoading: isLoading);
   }
 
   @override
@@ -56,6 +60,7 @@ class ViewListCompetitionOfClubState extends Equatable {
         isEvent,
         selectedCompetitionId,
         hasNext,
-        currentPage
+        currentPage,
+        isLoading
       ];
 }

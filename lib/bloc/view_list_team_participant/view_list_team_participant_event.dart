@@ -74,3 +74,5 @@ class SearchEvent extends ViewListTeamParticipantEvent {}
 
 //Reset Filter
 class ResetFilterEvent extends ViewListTeamParticipantEvent {}
+
+class LoadingEvent extends ViewListTeamParticipantEvent {}

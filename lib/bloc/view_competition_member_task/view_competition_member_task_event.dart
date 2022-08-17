@@ -24,6 +24,6 @@ class ChangeValueEvent extends ViewCompetitionMemberTaskEvent {
 //Search Filter
 class SearchEvent extends ViewCompetitionMemberTaskEvent {}
 
-
+class LoadingEvent extends ViewCompetitionMemberTaskEvent {}
 // //Reset Filter
 // class ResetFilterEvent extends ViewCompetitionMemberTaskEvent {}

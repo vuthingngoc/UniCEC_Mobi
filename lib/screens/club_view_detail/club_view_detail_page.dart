@@ -24,6 +24,17 @@ class ClubViewDetailPage extends StatefulWidget {
 class _ClubViewDetailPageState extends State<ClubViewDetailPage> {
   ClubViewDetailBloc get bloc => widget.bloc;
 
+  @override
+  void initState() {
+    super.initState();
+    bloc.listenerStream.listen((event) {
+      if (event is ShowPopUpAnnouncement) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(event.message)));
+      }
+    });
+  }
+
   void didChangeDependencies() {
     super.didChangeDependencies();
     //nhận data từ trang login

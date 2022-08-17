@@ -67,6 +67,7 @@ class _BodyState extends State<Body> {
                     ),
                     GestureDetector(
                       onTap: () {
+                        bloc.add(LoadingEvent());
                         bloc.add(SearchEvent());
                       },
                       child: Icon(Icons.search),
@@ -77,6 +78,7 @@ class _BodyState extends State<Body> {
                           return [
                             PopupMenuItem(
                               onTap: () {
+                                bloc.add(LoadingEvent());
                                 bloc.add(ChangeTeamStatusEvent(
                                     status: TeamStatus.Available));
                               },
@@ -108,6 +110,7 @@ class _BodyState extends State<Body> {
                             ),
                             PopupMenuItem(
                               onTap: () {
+                                bloc.add(LoadingEvent());
                                 bloc.add(ChangeTeamStatusEvent(
                                     status: TeamStatus.IsLocked));
                               },
@@ -139,6 +142,8 @@ class _BodyState extends State<Body> {
                             ),
                             PopupMenuItem(
                               onTap: () {
+                                _controller.text = "";
+                                bloc.add(LoadingEvent());
                                 bloc.add(ResetFilterEvent());
                               },
                               value: 3,

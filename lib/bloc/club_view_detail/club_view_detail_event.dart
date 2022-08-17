@@ -11,3 +11,9 @@ class ApplyInClubEvent extends ClubViewDetailEvent {
   final int clubId;
   ApplyInClubEvent({required this.clubId});
 }
+
+class ShowPopUpAnnouncement extends ClubViewDetailEvent {
+  String message;
+
+  ShowPopUpAnnouncement({required this.message});
+}

@@ -35,3 +35,5 @@ class SearchEvent extends ViewListCompetitionParticipantEvent {}
 
 //Reset Filter
 class ResetFilterEvent extends ViewListCompetitionParticipantEvent {}
+
+class LoadingEvent extends ViewListCompetitionParticipantEvent {}

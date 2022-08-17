@@ -11,6 +11,7 @@ class ViewListTeamParticipantState extends Equatable {
   //search
   String? searchName;
   TeamStatus? status;
+  bool isLoading;
 
   ViewListTeamParticipantState(
       {required this.listTeam,
@@ -19,7 +20,8 @@ class ViewListTeamParticipantState extends Equatable {
       required this.hasNext,
       required this.valueInvitedCode,
       required this.searchName,
-      required this.status});
+      required this.status,
+      required this.isLoading});
 
   ViewListTeamParticipantState copyWith(
       {required List<TeamModel> newListTeam,
@@ -28,7 +30,8 @@ class ViewListTeamParticipantState extends Equatable {
       required int newCurrentPage,
       required String valueInvitedCode,
       required String? newSearchName,
-      required TeamStatus? newStatus}) {
+      required TeamStatus? newStatus,
+      required bool isLoading}) {
     return ViewListTeamParticipantState(
         listTeam: newListTeam,
         competitionId: newCompetitionId,
@@ -36,7 +39,8 @@ class ViewListTeamParticipantState extends Equatable {
         currentPage: newCurrentPage,
         valueInvitedCode: valueInvitedCode,
         searchName: newSearchName,
-        status: newStatus);
+        status: newStatus,
+        isLoading: isLoading);
   }
 
   @override
@@ -47,6 +51,7 @@ class ViewListTeamParticipantState extends Equatable {
         currentPage,
         valueInvitedCode,
         searchName,
-        status
+        status,
+        isLoading
       ];
 }

@@ -56,12 +56,12 @@ class _ViewDetailActivityPageState extends State<ViewDetailActivityPage>
           appBar: AppBar(
             leading: IconButton(
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pop(context, true);
               },
               icon: const Icon(Icons.arrow_back, color: Colors.white),
             ),
-            title: const Text("Chi tiết",
-                style: TextStyle(color: Colors.white)),
+            title:
+                const Text("Chi tiết", style: TextStyle(color: Colors.white)),
             centerTitle: true,
             backgroundColor: AppColors.mainColor,
           ),

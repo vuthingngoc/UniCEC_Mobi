@@ -31,3 +31,5 @@ class NavigatorTeamDetailPageEvent extends ViewListTeamStudentEvent {
       required this.teamDescription,
       required this.status});
 }
+
+class LoadingEvent extends ViewListTeamStudentEvent {}

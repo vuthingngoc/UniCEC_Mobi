@@ -22,7 +22,8 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
             userIdInTeam: -1,
             valueTeamName: '',
             valueTeamDescription: '',
-            status: TeamStatus.Available)) {
+            status: TeamStatus.Available,
+            isLoading: true)) {
     on((event, emit) async {
       if (event is RecieveDataEvent) {
         TeamDetailModel? result =
@@ -50,7 +51,8 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
               newUserIdInTeam: userIdInTeam,
               newValueTeamName: result.name,
               newValueTeamDescription: result.description,
-              newStatus: result.status));
+              newStatus: result.status,
+              isLoading: false));
         }
       }
       if (event is ChangeTeamNameValueEvent) {
@@ -62,7 +64,8 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
             newUserIdInTeam: state.userIdInTeam,
             newValueTeamName: event.newNameValue, // change
             newValueTeamDescription: state.valueTeamDescription,
-            newStatus: state.status));
+            newStatus: state.status,
+            isLoading: false));
       }
       if (event is ChangeTeamDescriptionValueEvent) {
         emit(state.copyWith(
@@ -73,7 +76,8 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
             newUserIdInTeam: state.userIdInTeam,
             newValueTeamName: state.valueTeamName,
             newValueTeamDescription: event.newDescriptionValue, // change
-            newStatus: state.status));
+            newStatus: state.status,
+            isLoading: false));
       }
       if (event is UpdateTeamNameAndDescriptionEvent) {
         ResultCRUD result = await service.UpdateTeam(state.teamId,
@@ -90,7 +94,8 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
                 newUserIdInTeam: state.userIdInTeam,
                 newValueTeamName: result.name,
                 newValueTeamDescription: result.description,
-                newStatus: result.status));
+                newStatus: result.status,
+                isLoading: false));
             listener
                 .add(ShowingSnackBarEvent(message: "Cập nhật thành công !"));
           }
@@ -113,7 +118,8 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
                 newUserIdInTeam: state.userIdInTeam,
                 newValueTeamName: result.name,
                 newValueTeamDescription: result.description,
-                newStatus: result.status));
+                newStatus: result.status,
+                isLoading: false));
 
             listener
                 .add(ShowingSnackBarEvent(message: "Cập nhật thành công !"));
@@ -151,7 +157,8 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
                 newUserIdInTeam: userIdInTeam,
                 newValueTeamName: result.name,
                 newValueTeamDescription: result.description,
-                newStatus: result.status));
+                newStatus: result.status,
+                isLoading: false));
           }
         } else {
           listener.add(ShowingSnackBarEvent(message: check.errorMessage));
@@ -195,7 +202,8 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
                 newUserIdInTeam: userIdInTeam,
                 newValueTeamName: result.name,
                 newValueTeamDescription: result.description,
-                newStatus: result.status));
+                newStatus: result.status,
+                isLoading: false));
             listener.add(ShowingSnackBarEvent(
                 message: "Xóa thành viên khỏi nhóm thành công"));
           }
@@ -233,7 +241,8 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
                 newUserIdInTeam: userIdInTeam,
                 newValueTeamName: result.name,
                 newValueTeamDescription: result.description,
-                newStatus: result.status));
+                newStatus: result.status,
+                isLoading: false));
             listener
                 .add(ShowingSnackBarEvent(message: "Cập nhật thành công !"));
           }
@@ -244,6 +253,49 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
       }
       if (event is ClickToViewInfoEvent) {
         listener.add(NavigatorToAccountPageEvent(userId: event.userId));
+      }
+      if (event is LoadingEvent) {
+        emit(state.copyWith(
+            newTeamDetail: state.teamDetail,
+            newTeamId: state.teamId,
+            newCompetitionId: state.competitionId,
+            newUserIdLeaderTeam: state.userIdIsLeaderTeam,
+            newUserIdInTeam: state.userIdInTeam,
+            newValueTeamName: state.valueTeamName,
+            newValueTeamDescription: state.valueTeamDescription,
+            newStatus: state.status,
+            isLoading: true // change
+            ));
+      }
+      if (event is LoadDataEvent) {
+        TeamDetailModel? result =
+            await service.GetDetailTeamModel(state.competitionId, state.teamId);
+        if (result != null) {
+          //
+          int userIdIsLeaderTeam = -1;
+          int userIdInTeam = -1;
+          //Tìm User Id Leader Team
+          for (ViewDetailParticipantModel participant in result.participants) {
+            //Tìm User Id Leader Team
+            if (participant.teamRoleName.compareTo("Leader") == 0) {
+              userIdIsLeaderTeam = participant.studentId;
+            }
+            //Tìm UserId xem là thằng đang vào trang này có trong team kh
+            if (participant.studentId == GetIt.I.get<CurrentUser>().id) {
+              userIdInTeam = participant.studentId;
+            }
+          }
+          emit(state.copyWith(
+              newTeamDetail: result,
+              newCompetitionId: state.competitionId,
+              newTeamId: state.teamId,
+              newUserIdLeaderTeam: userIdIsLeaderTeam,
+              newUserIdInTeam: userIdInTeam,
+              newValueTeamName: result.name,
+              newValueTeamDescription: result.description,
+              newStatus: result.status,
+              isLoading: false));
+        }
       }
     });
   }

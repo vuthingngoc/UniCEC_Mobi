@@ -27,8 +27,9 @@ class _ViewCompetitionMemberTaskPagePageState
 
   @override
   void initState() {
+    bloc.add(
+        LoadingEvent()); // bloc này là singleton nên lúc nào quay lại cũng phải chạy hàm này để có loading state = true
     bloc.add(InitEvent());
-    //bloc.isLoading = true;
   }
 
   @override
@@ -45,9 +46,7 @@ class _ViewCompetitionMemberTaskPagePageState
             centerTitle: true,
             backgroundColor: AppColors.mainColor,
           ),
-          body:
-              // (bloc.isLoading) ? Loading() :
-              ViewCompetitionMemberTaskMenu(),
+          body: ViewCompetitionMemberTaskMenu(),
         ));
   }
 }

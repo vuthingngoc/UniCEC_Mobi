@@ -18,6 +18,7 @@ class CompetitionState extends Equatable {
   bool? isEvent;
   bool hasNext;
   int currentPage;
+  bool isLoading;
 
   CompetitionState(
       {required this.competitions,
@@ -28,7 +29,8 @@ class CompetitionState extends Equatable {
       this.competitionDetail,
       this.selectedCompetitionId,
       required this.hasNext,
-      required this.currentPage});
+      required this.currentPage,
+      required this.isLoading});
 
   CompetitionState copyWith({
     required List<CompetitionShowModel> competitions,
@@ -41,6 +43,7 @@ class CompetitionState extends Equatable {
     int? selectedCompetitionId,
     required bool newHasNext,
     required int newCurrentPage,
+    required bool isLoading,
   }) {
     return CompetitionState(
         competitions: competitions,
@@ -52,7 +55,8 @@ class CompetitionState extends Equatable {
         competitionDetail: competitionDetail,
         selectedCompetitionId: selectedCompetitionId,
         hasNext: newHasNext,
-        currentPage: newCurrentPage);
+        currentPage: newCurrentPage,
+        isLoading: isLoading);
   }
 
   @override
@@ -67,6 +71,7 @@ class CompetitionState extends Equatable {
         competitionDetail,
         selectedCompetitionId,
         hasNext,
-        currentPage
+        currentPage,
+        isLoading
       ];
 }

@@ -33,3 +33,5 @@ class SelectACompetitionEvent extends ViewListCompetitionOfClubEvent {
 }
 
 class ListenLoadOutStandingEvent extends ViewListCompetitionOfClubEvent {}
+
+class LoadingEvent extends ViewListCompetitionOfClubEvent {}
