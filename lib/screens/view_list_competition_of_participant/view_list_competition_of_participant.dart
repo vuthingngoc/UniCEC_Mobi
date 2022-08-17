@@ -151,11 +151,18 @@ class _ViewListCompetitionOfParticipantPageState
                                             isEvent: state.isEvent!,
                                             scope:
                                                 state.competitions[index].scope,
-                                            tap: () {
-                                              Navigator.of(context).pushNamed(
-                                                  Routes.detailCompetition,
-                                                  arguments: state
-                                                      .competitions[index].id);
+                                            tap: () async {
+                                              bool returnData = await Navigator
+                                                      .of(context)
+                                                  .pushNamed(
+                                                      Routes.detailCompetition,
+                                                      arguments: state
+                                                          .competitions[index]
+                                                          .id) as bool;
+                                              if (returnData) {
+                                                bloc.add(LoadingEvent());
+                                                bloc.add(SearchEvent());
+                                              }
                                             });
                                       })));
                   //);
