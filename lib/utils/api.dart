@@ -48,12 +48,6 @@ class Api {
   }
 
   static Map<String, String> GetHeaderForLogin(String? token, String tokenDevice){
-    // header when log in google account
-    // FirebaseMessaging _fcm = FirebaseMessaging.instance;
-    // String tokenDevice = '';
-    // _fcm.getToken().then((value) => {
-    //   tokenDevice = value!
-    // });
     Log.info('tokenDevice: $tokenDevice');
 
     Map<String, String> header = {
@@ -62,7 +56,6 @@ class Api {
 
     if(token != null)  header[HttpHeaders.authorizationHeader] = "Bearer $token";
     header['X-Device-Token'] = tokenDevice;
-    header['Is-Android'] = Platform.isAndroid ? 'true' : 'false';
 
     return header;
   }

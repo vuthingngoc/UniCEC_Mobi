@@ -13,8 +13,10 @@ import 'utils/firebase.dart';
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   Log.info("Handling a background message: ${message.messageId}");
-  print(message.data.toString());
-  print(message.notification!.title);
+  print('SenderId: ${message.senderId}');  
+  print('Data:${message.data.toString()}');
+  print('message.notification.title: ${message.notification?.title}');
+  print('message.notification.title: ${message.notification?.body}');
 }
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
