@@ -8,6 +8,7 @@ abstract class ICompetitionDetailService {
   Future<CompetitionDetailModel> getDetailCompetitionByConditions();
   Future<CompetitionDetailModel?> getById(int id);
   Future<CompetitionModel?> getCompetitionStudentJoin(int id);
+  Future<ParticipantModel?> getParticipant(int competitionId);
   Future<ResultCRUD> participateCompetition(int competitionId);
   Future<ResultCRUD> attendanceCompetition(String seedsCode);
 }

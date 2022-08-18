@@ -8,6 +8,7 @@ import '../../bloc/university_selection/university_selection_state.dart';
 
 import '../../models/entities/uni_selector/uni_selector_model.dart';
 import '../../models/entities/user/complete_profile.dart';
+import '../../utils/app_color.dart';
 import '../../utils/dimens.dart';
 import '../../utils/router.dart';
 import 'widgets/dob.dart';
@@ -29,6 +30,9 @@ class UniversitySelectionPage extends StatefulWidget {
 
 class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
   UniversitySelectionBloc get bloc => widget.bloc;
+  final _formKeyPhone = GlobalKey<FormState>();
+  final _formKeyDescription = GlobalKey<FormState>();
+  final _formStudentCode = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -37,7 +41,7 @@ class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
 
     bloc.listenerStream.listen((event) {
       if (event is NavigatorWelcomePageEvent) {
-        Navigator.of(context).pushReplacementNamed(Routes.competition);
+        Navigator.of(context).pushReplacementNamed(Routes.main);
       } else if (event is ShowingSnackBarEvent) {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(event.message)));
@@ -45,6 +49,7 @@ class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
     });
   }
 
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     //nhận data từ trang login
@@ -62,88 +67,261 @@ class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
-          title: Text("Mời bạn chọn trường Đại Học"),
-          backgroundColor: Colors.orange[600],
+          title: Center(
+            child: Text("Cập nhật thông tin"),
+          ),
+          backgroundColor: AppColors.mainColor,
+          automaticallyImplyLeading: false,
         ),
         body: BlocProvider.value(
             value: bloc,
-            child:
-                BlocBuilder<UniversitySelectionBloc, UniversitySelectionState>(
-                    bloc: bloc,
-                    builder: (context, state) {
-                      return SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
-                        child: Container(
-                          padding: EdgeInsets.only(
-                              left: 10, right: 10, top: 10, bottom: 10),
-                          child: Column(
-                            children: [
-                              DropdownUniversity(),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              DropdownDepartment(),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              TextfieldInputPhone(),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              TextfieldInputStudentCode(),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              DateOfBirth(),
-                              SelectGender(
-                                  showOtherGender: false, alignVertical: true),
-                              TextfieldInputDescription(),
-                              InkWell(
-                                onTap: () {
-                                  bloc.add(CompletelyProfile(
-                                      completeProfileModel: CompleteProfile(
-                                    universityId: state.universityId,
-                                    departmentId: state.departmentId,
-                                    dob: state.dob,
-                                    gender: state.gender,
-                                    phone: state.phone,
-                                    studentCode: state.studentCode,
-                                    description: state.description,
-                                  )));
-                                },
-                                child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(3)),
-                                      color: Colors.orange[600],
-                                    ),
-                                    margin: EdgeInsets.symmetric(
-                                        horizontal: 50.0,
-                                        vertical: Dimens.size30),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          SizedBox(width: 5),
-                                          Text(
-                                            "Xác Nhận",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20),
-                                          )
-                                        ],
-                                      ),
-                                    )),
-                              )
-                            ],
+            child: BlocBuilder<UniversitySelectionBloc,
+                    UniversitySelectionState>(
+                bloc: bloc,
+                builder: (context, state) {
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Container(
+                      padding: EdgeInsets.only(
+                          left: 10, right: 10, top: 10, bottom: 10),
+                      child: Column(
+                        children: [
+                          DropdownUniversity(),
+                          SizedBox(
+                            height: 10,
                           ),
-                        ),
-                      );
-                    }))
+                          DropdownDepartment(),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          //TextfieldInputPhone(),
+                          Container(
+                            child: Column(
+                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Số Điện Thoại:",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Container(
+                                  width: size.width,
+                                  child: BlocBuilder<UniversitySelectionBloc,
+                                          UniversitySelectionState>(
+                                      bloc: bloc,
+                                      builder: (context, state) {
+                                        return Form(
+                                          key: _formKeyPhone,
+                                          child: TextFormField(
+                                              // controller: TextEditingController()..text = state.poiReceive.address,
+                                              decoration: InputDecoration(
+                                                border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
+                                              ),
+                                              maxLength: 10,
+                                              minLines: 1,
+                                              //maxLines: 3,
+                                              validator: (value) {
+                                                if (value!.length < 10) {
+                                                  return 'Nhập ít nhất 10 ký tự';
+                                                }
+                                                return null;
+                                              },
+                                              onChanged: (value) {
+                                                if (_formKeyPhone.currentState!
+                                                    .validate()) {
+                                                  bloc.add(ChangePhoneValue(
+                                                      newPhoneValue: value));
+                                                }
+                                                //   state.poiReceive.address = value;
+                                              }),
+                                        );
+                                      }),
+                                )
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          //TextfieldInputStudentCode(),
+                          Container(
+                            child: Column(
+                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Mã Số Sinh Viên:",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Container(
+                                  width: size.width,
+                                  child: BlocBuilder<UniversitySelectionBloc,
+                                          UniversitySelectionState>(
+                                      bloc: bloc,
+                                      builder: (context, state) {
+                                        return Form(
+                                          key: _formStudentCode,
+                                          child: TextFormField(
+                                              // controller: TextEditingController()..text = state.poiReceive.address,
+                                              decoration: InputDecoration(
+                                                border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
+                                              ),
+                                              maxLength: 10,
+                                              minLines: 1,
+                                              //maxLines: 3,
+                                              validator: (value) {
+                                                if (value!.length < 4) {
+                                                  return 'Nhập ít nhất 4 ký tự';
+                                                }
+                                                return null;
+                                              },
+                                              onChanged: (value) {
+                                                if (_formStudentCode
+                                                    .currentState!
+                                                    .validate()) {
+                                                  bloc.add(
+                                                      ChangeStudentCodeValue(
+                                                          newStudentCodeValue:
+                                                              value));
+                                                }
+                                                //   state.poiReceive.address = value;
+                                              }),
+                                        );
+                                      }),
+                                )
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          DateOfBirth(),
+                          SelectGender(
+                              showOtherGender: false, alignVertical: true),
+
+                          //TextfieldInputDescription(),
+                          Container(
+                            child: Column(
+                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Giới Thiệu Về Bản Thân",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Container(
+                                  width: size.width,
+                                  child: BlocBuilder<UniversitySelectionBloc,
+                                          UniversitySelectionState>(
+                                      bloc: bloc,
+                                      builder: (context, state) {
+                                        return Form(
+                                          key: _formKeyDescription,
+                                          child: TextFormField(
+                                              // controller: TextEditingController()..text = state.poiReceive.address,
+                                              decoration: InputDecoration(
+                                                border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
+                                              ),
+                                              maxLength: 250,
+                                              minLines: 1,
+                                              maxLines: 10,
+                                              validator: (value) {
+                                                if (value!.length < 50) {
+                                                  return 'Nhập ít nhất 50 ký tự';
+                                                }
+                                                return null;
+                                              },
+                                              onChanged: (value) {
+                                                if (_formKeyDescription
+                                                    .currentState!
+                                                    .validate()) {
+                                                  bloc.add(
+                                                      ChangeDescriptionValue(
+                                                          newDescriptionValue:
+                                                              value));
+                                                }
+                                                //   state.poiReceive.address = value;
+                                              }),
+                                        );
+                                      }),
+                                )
+                              ],
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              if (_formKeyDescription.currentState!
+                                  .validate()) {
+                                if (_formKeyPhone.currentState!.validate()) {
+                                  if (_formStudentCode.currentState!
+                                      .validate()) {
+                                    bloc.add(CompletelyProfile(
+                                        completeProfileModel: CompleteProfile(
+                                      universityId: state.universityId,
+                                      departmentId: state.departmentId,
+                                      dob: state.dob,
+                                      gender: state.gender,
+                                      phone: state.phone,
+                                      studentCode: state.studentCode,
+                                      description: state.description,
+                                    )));
+                                    // ScaffoldMessenger.of(context).showSnackBar(
+                                    //     SnackBar(
+                                    //         content: Text(
+                                    //             "Đã Update Thành Công !")));
+                                  }
+                                }
+                              }
+                            },
+                            child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(3)),
+                                  color: Colors.orange[600],
+                                ),
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: 50.0, vertical: Dimens.size30),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(width: 5),
+                                      Text(
+                                        "Xác Nhận",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 20),
+                                      )
+                                    ],
+                                  ),
+                                )),
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                }))
 
         // body: Container(
         //   child: ListView.builder(

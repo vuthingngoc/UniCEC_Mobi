@@ -33,11 +33,11 @@ class UniversitySelectionBloc
         //set state emit ra ngoài
         emit(state.copyWith(
             listUniBelongToEmail: event.listUniBelongToEmail, // -> change
-            listDepartment: GetListDepartmentByUni!,
+            listDepartment: GetListDepartmentByUni ?? [],
             dropdownNewValueDep: state.dropdownNewValueDep,
             dropdownNewValueUni: state.dropdownNewValueUni,
             universityId: event.listUniBelongToEmail[0].id, //-> change
-            departmentId: GetListDepartmentByUni[0].id, //-> change
+            departmentId: GetListDepartmentByUni![0].id, //-> change
             description: state.description,
             gender: "Male", //-> change
             phone: state.phone,
@@ -53,7 +53,7 @@ class UniversitySelectionBloc
 
         emit(state.copyWith(
             listUniBelongToEmail: state.listUniBelongToEmail,
-            listDepartment: GetListDepartmentByUni!, // ->change
+            listDepartment: GetListDepartmentByUni ?? [], // ->change
             dropdownNewValueDep: event.newValue, // -> change
             dropdownNewValueUni: state.dropdownNewValueUni,
             universityId: state.universityId,

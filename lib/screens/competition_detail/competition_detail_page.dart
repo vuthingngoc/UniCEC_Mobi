@@ -884,101 +884,136 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                         const EdgeInsets.only(
                                                             top: 16),
                                                     child: Container(
-                                                      width: double.infinity,
-                                                      margin:
-                                                          const EdgeInsets.only(
-                                                              right: 15,
-                                                              left: 15,
-                                                              bottom: 15),
-                                                      child:
-                                                          (state.isParticipant ==
-                                                                  false)
-                                                              ? FlatButton(
-                                                                  textColor:
-                                                                      ArgonColors
-                                                                          .white,
-                                                                  color: AppColors
-                                                                      .mainColor,
-                                                                  onPressed:
-                                                                      () {
-                                                                    _bloc.add(ParticipateTheCompetitionEvent(
-                                                                        competitionId: (state
-                                                                            .competitionDetail
-                                                                            ?.id)!));
-                                                                  },
-                                                                  shape:
-                                                                      RoundedRectangleBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            4.0),
-                                                                  ),
-                                                                  child: const Padding(
-                                                                      padding: EdgeInsets.only(
-                                                                          left:
-                                                                              16.0,
-                                                                          right:
-                                                                              16.0,
-                                                                          top:
-                                                                              12,
-                                                                          bottom:
-                                                                              12),
-                                                                      child: Text(
-                                                                          "Tham gia ngay",
-                                                                          style: TextStyle(
-                                                                              fontWeight: FontWeight.w600,
-                                                                              fontSize: 18.0))),
-                                                                )
-                                                              : FlatButton(
-                                                                  textColor:
-                                                                      ArgonColors
-                                                                          .white,
-                                                                  color: (state
-                                                                              .competitionDetail
-                                                                              ?.status ==
-                                                                          CompetitionStatus
-                                                                              .Start)
-                                                                      ? AppColors
-                                                                          .mainColor
-                                                                      : Colors
-                                                                          .grey,
-                                                                  onPressed:
-                                                                      () {
-                                                                    if (state
-                                                                            .competitionDetail
-                                                                            ?.status !=
-                                                                        CompetitionStatus
-                                                                            .Start) {
-                                                                      return;
-                                                                    }
-
-                                                                    _bloc.add(AttendanceCompetitionEvent(
-                                                                        seedsCode: (state
-                                                                            .competitionDetail
-                                                                            ?.seedsCode)!));
-                                                                  },
-                                                                  shape:
-                                                                      RoundedRectangleBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            8.0),
-                                                                  ),
-                                                                  child: const Padding(
-                                                                      padding: EdgeInsets.only(
-                                                                          left:
-                                                                              16.0,
-                                                                          right:
-                                                                              16.0,
-                                                                          top:
-                                                                              12,
-                                                                          bottom:
-                                                                              12),
-                                                                      child: Text(
-                                                                          "Điểm danh",
-                                                                          style: TextStyle(
-                                                                              fontWeight: FontWeight.w600,
-                                                                              fontSize: 18.0))),
+                                                        width: double.infinity,
+                                                        margin: const EdgeInsets
+                                                                .only(
+                                                            right: 15,
+                                                            left: 15,
+                                                            bottom: 15),
+                                                        child: (state
+                                                                    .isParticipant ==
+                                                                false)
+                                                            ? FlatButton(
+                                                                textColor:
+                                                                    ArgonColors
+                                                                        .white,
+                                                                color: AppColors
+                                                                    .mainColor,
+                                                                onPressed: () {
+                                                                  _bloc.add(ParticipateTheCompetitionEvent(
+                                                                      competitionId: (state
+                                                                          .competitionDetail
+                                                                          ?.id)!));
+                                                                },
+                                                                shape:
+                                                                    RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              4.0),
                                                                 ),
-                                                    ),
+                                                                child: const Padding(
+                                                                    padding: EdgeInsets.only(
+                                                                        left:
+                                                                            16.0,
+                                                                        right:
+                                                                            16.0,
+                                                                        top: 12,
+                                                                        bottom:
+                                                                            12),
+                                                                    child: Text(
+                                                                        "Tham gia ngay",
+                                                                        style: TextStyle(
+                                                                            fontWeight:
+                                                                                FontWeight.w600,
+                                                                            fontSize: 18.0))),
+                                                              )
+                                                            :
+                                                            //là participant r mà chưa điểm danh
+                                                            (state.isAttendance ==
+                                                                    false)
+                                                                ? FlatButton(
+                                                                    textColor:
+                                                                        ArgonColors
+                                                                            .white,
+                                                                    color: (state.competitionDetail?.status == CompetitionStatus.Start ||
+                                                                            state.competitionDetail?.status ==
+                                                                                CompetitionStatus
+                                                                                    .OnGoing)
+                                                                        ? AppColors
+                                                                            .mainColor
+                                                                        : Colors
+                                                                            .grey,
+                                                                    onPressed:
+                                                                        () {
+                                                                      if (state.competitionDetail?.status !=
+                                                                              CompetitionStatus
+                                                                                  .Start &&
+                                                                          state.competitionDetail?.status !=
+                                                                              CompetitionStatus.OnGoing) {
+                                                                        print(
+                                                                            "Không thể điểm danh vì chưa đến lúc");
+                                                                        return;
+                                                                      }
+                                                                      print(
+                                                                          "Điểm danh");
+                                                                      _bloc.add(AttendanceCompetitionEvent(
+                                                                          seedsCode: (state
+                                                                              .competitionDetail
+                                                                              ?.seedsCode)!));
+                                                                    },
+                                                                    shape:
+                                                                        RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8.0),
+                                                                    ),
+                                                                    child: const Padding(
+                                                                        padding: EdgeInsets.only(
+                                                                            left:
+                                                                                16.0,
+                                                                            right:
+                                                                                16.0,
+                                                                            top:
+                                                                                12,
+                                                                            bottom:
+                                                                                12),
+                                                                        child: Text(
+                                                                            "Điểm danh",
+                                                                            style:
+                                                                                TextStyle(fontWeight: FontWeight.w600, fontSize: 18.0))),
+                                                                  )
+                                                                :
+                                                                //là participant và đã điểm danh
+                                                                FlatButton(
+                                                                    textColor:
+                                                                        ArgonColors
+                                                                            .white,
+                                                                    color: Colors
+                                                                        .green,
+                                                                    onPressed:
+                                                                        () {},
+                                                                    shape:
+                                                                        RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              4.0),
+                                                                    ),
+                                                                    child: const Padding(
+                                                                        padding: EdgeInsets.only(
+                                                                            left:
+                                                                                16.0,
+                                                                            right:
+                                                                                16.0,
+                                                                            top:
+                                                                                12,
+                                                                            bottom:
+                                                                                12),
+                                                                        child: Text(
+                                                                            "Đã Điểm Danh",
+                                                                            style:
+                                                                                TextStyle(fontWeight: FontWeight.w600, fontSize: 18.0))),
+                                                                  )),
                                                   ),
                                                 ],
                                               ),

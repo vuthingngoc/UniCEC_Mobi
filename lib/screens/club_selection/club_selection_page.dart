@@ -64,31 +64,35 @@ class _ClubSelectionPageState extends State<ClubSelectionPage> {
                 centerTitle: true,
                 backgroundColor: AppColors.mainColor,
               ),
-              body: Container(
-                constraints: const BoxConstraints.expand(),
-                // decoration: BoxDecoration(
-                //   image: DecorationImage(
-                //     colorFilter: ColorFilter.mode(
-                //         Colors.black.withOpacity(Dimens.size0p6),
-                //         BlendMode.dstATop),
-                //     image:
-                //         const AssetImage("assets/img/onboard-background.png"),
-                //     fit: BoxFit.cover,
-                //   ),
-                // ),
-                child: Padding(
-                  padding: EdgeInsets.all(Dimens.size10),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        WelcomeText(),
-                        ShowClubsBelongToStudent(),
-                      ],
+              body: (state.listClubsBelongToStudent.isEmpty)
+                  ? Center(
+                      child: Text("Hiện tại bạn chưa tham gia CLB nào!"),
+                    )
+                  : Container(
+                      constraints: const BoxConstraints.expand(),
+                      // decoration: BoxDecoration(
+                      //   image: DecorationImage(
+                      //     colorFilter: ColorFilter.mode(
+                      //         Colors.black.withOpacity(Dimens.size0p6),
+                      //         BlendMode.dstATop),
+                      //     image:
+                      //         const AssetImage("assets/img/onboard-background.png"),
+                      //     fit: BoxFit.cover,
+                      //   ),
+                      // ),
+                      child: Padding(
+                        padding: EdgeInsets.all(Dimens.size10),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              WelcomeText(),
+                              ShowClubsBelongToStudent(),
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
-              floatingActionButton: FloatingActionButton.extended(                
+              floatingActionButton: FloatingActionButton.extended(
                   onPressed: () {
                     //thêm event qua trang list club
                     _bloc.add(ClubsViewPageEvent());
@@ -96,11 +100,10 @@ class _ClubSelectionPageState extends State<ClubSelectionPage> {
                   backgroundColor: AppColors.mainColor,
                   label: const Text("Tham gia clb khác"),
                   icon: const Icon(Icons.add)),
-                  floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-                  extendBodyBehindAppBar: false,
-                  resizeToAvoidBottomInset: true,
-                  
-                  
+              floatingActionButtonLocation:
+                  FloatingActionButtonLocation.endFloat,
+              extendBodyBehindAppBar: false,
+              resizeToAvoidBottomInset: true,
             );
           },
         ));

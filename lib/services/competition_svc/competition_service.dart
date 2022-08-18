@@ -56,7 +56,7 @@ class CompetitionService implements ICompetitionService {
       params += '&universityId=${request.universityId}';
     }
 
-    String url = Api.GetUrl(apiPath: '${Api.competitions}$params&pageSize=10');
+    String url = Api.GetUrl(apiPath: '${Api.competitions}$params&pageSize=5');
     String? token = GetIt.I.get<CurrentUser>().idToken;
     try {
       var response =

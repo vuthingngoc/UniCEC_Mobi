@@ -51,6 +51,7 @@ class CompetitionDetailBloc
               competitionTypeName: '',
               content: ''),
           isParticipant: false,
+          isAttendance: false,
         )) {
     on((event, emit) async {
       if (event is LoadCompetitionDetailEvent) {
@@ -67,35 +68,62 @@ class CompetitionDetailBloc
         if (competitionUserJoin != null) {
           isParticipant = true;
         }
+        //-----------check pariticipant is attendance
+        bool isAttendance = false;
+        ParticipantModel? participant =
+            await service.getParticipant(event.competitionId);
+        if (participant != null) {
+          isAttendance = participant.attendance;
+        }
 
         emit(state.copyWith(
-            competitionDetail: competition, isParticipant: isParticipant));
+            competitionDetail: competition,
+            isParticipant: isParticipant,
+            isAttendance: isAttendance));
         _isLoading = false;
       }
 
-      if(event is ParticipateTheCompetitionEvent){
+      if (event is ParticipateTheCompetitionEvent) {
         print('ParticipateTheCompetitionEvent is running ...');
         _isLoading = true;
-        ResultCRUD result = await service.participateCompetition(event.competitionId); 
-        if(result.check == true){
-          emit(state.copyWith(isParticipant: result.check, competitionDetail: state.competitionDetail));
+        ResultCRUD result =
+            await service.participateCompetition(event.competitionId);
+        if (result.check == true) {
+          emit(state.copyWith(
+              isParticipant: result.check,
+              competitionDetail: state.competitionDetail,
+              isAttendance: state.isAttendance));
           listener.add(ShowPopUpAnnouncement(message: 'Tham gia thành công'));
-        }else{
+        } else {
           listener.add(ShowPopUpAnnouncement(message: result.errorMessage));
-        }        
+        }
         _isLoading = false;
       }
 
-      if(event is AttendanceCompetitionEvent){
+      if (event is AttendanceCompetitionEvent) {
         print('AttendanceCompetitionEvent is running ...');
         _isLoading = true;
-        ResultCRUD result = await service.attendanceCompetition(event.seedsCode); 
-        if(result.check == true){
-          emit(state.copyWith(isParticipant: result.check, competitionDetail: state.competitionDetail));
+        ResultCRUD result =
+            await service.attendanceCompetition(event.seedsCode);
+        if (result.check == true) {
+          //-----------check pariticipant is attendance
+          bool isAttendance = false;
+          ParticipantModel? participant =
+              await service.getParticipant(state.competitionDetail!.id);
+          if (participant != null) {
+            isAttendance = participant.attendance;
+          }
+
+          emit(state.copyWith(
+              isParticipant: result.check,
+              competitionDetail: state.competitionDetail,
+              isAttendance:
+                  isAttendance // nếu hàm này Success thì emit state là đã điểm danh -> giao diện sẽ hiện button điểm danh r
+              ));
           listener.add(ShowPopUpAnnouncement(message: 'Điểm danh thành công'));
-        }else{
+        } else {
           listener.add(ShowPopUpAnnouncement(message: result.errorMessage));
-        }        
+        }
         _isLoading = false;
       }
     });
