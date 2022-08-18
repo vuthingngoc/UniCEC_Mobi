@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unicec_mobi/bloc/competition/competition_event.dart';
 // import '../../../models/entities/competition/competition_model.dart';
+import '../../../bloc/competition/competition_bloc.dart';
 import '../../../models/entities/competition/competition_show_model.dart';
 import '../../../utils/router.dart';
 import '../../size_config.dart';
@@ -32,9 +35,14 @@ class SpecialOffers extends StatelessWidget {
               image: (outStandingEvents[index]).competitionEntities[0].imageUrl,
               description: '',
               name: (outStandingEvents[index]).name,
-              press: () {
-                Navigator.of(context).pushNamed(Routes.detailCompetition,
-                    arguments: (outStandingEvents[index]).id);
+              press: () async {
+                bool returnData = await Navigator.of(context).pushNamed(
+                    Routes.detailCompetition,
+                    arguments: (outStandingEvents[index]).id) as bool;
+                if (returnData) {
+                  BlocProvider.of<CompetitionBloc>(context).add(LoadingEvent());
+                  BlocProvider.of<CompetitionBloc>(context).add(SearchEvent());
+                }
               },
             );
           })

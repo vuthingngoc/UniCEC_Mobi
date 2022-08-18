@@ -88,7 +88,7 @@ class UniversitySelectionService implements IUniversitySelectionService {
         }
         List<DepartmentModel> departments = [];
         for (dynamic department in result) {
-          result.add(DepartmentModel.fromJson(department));
+          departments.add(DepartmentModel.fromJson(department));
         }
         return departments;
       }

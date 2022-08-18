@@ -108,4 +108,23 @@ class CompetitionDetailService implements ICompetitionDetailService {
     return ResultCRUD(
         errorMessage: '', check: false, returnIntData: -1); // avoid error
   }
+
+  @override
+  Future<ParticipantModel?> getParticipant(int competitionId) async {
+    var client = http.Client();
+    String url =
+        Api.GetUrl(apiPath: '${Api.participants}?competitionId=$competitionId');
+    String token = GetIt.I.get<CurrentUser>().idToken;
+    try {
+      var response =
+          await client.get(Uri.parse(url), headers: Api.GetHeader(token));
+      if (response.statusCode == 200) {
+        Map<String, dynamic> json = adapter.parseToMap(response);
+        return ParticipantModel.fromJson(json);
+      }
+    } catch (e) {
+      Log.error(e.toString());
+    }
+    return null;
+  }
 }

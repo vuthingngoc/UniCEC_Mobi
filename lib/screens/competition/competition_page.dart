@@ -189,15 +189,22 @@ class _CompetitionPageState extends State<CompetitionPage>
                                                     scope: state
                                                         .competitions[index]
                                                         .scope,
-                                                    tap: () {
-                                                      Navigator.of(context)
+                                                    tap: () async {
+                                                      bool returnData = await Navigator
+                                                              .of(context)
                                                           .pushNamed(
                                                               Routes
                                                                   .detailCompetition,
                                                               arguments: state
                                                                   .competitions[
                                                                       index]
-                                                                  .id);
+                                                                  .id) as bool;
+                                                      if (returnData) {
+                                                        _bloc.add(
+                                                            LoadingEvent());
+                                                        _bloc
+                                                            .add(SearchEvent());
+                                                      }
                                                     });
                                               })),
                                     ],
