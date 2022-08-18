@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unicec_mobi/utils/loading.dart';
+import 'package:unicec_mobi/utils/log.dart';
 
 import '../../bloc/login/login_bloc.dart';
 import '../../bloc/login/login_event.dart';
@@ -21,10 +23,15 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   LoginBloc get _bloc => widget.bloc;
+  final FirebaseMessaging _fcm = FirebaseMessaging.instance;
 
   @override
   void initState() {
     super.initState();
+
+    _fcm.getToken().then((value) => {
+      Log.info('The token device is: $value')
+    });
 
     _bloc.listenerStream.listen((event) {
       if (event is NavigatorWelcomePageEvent) {

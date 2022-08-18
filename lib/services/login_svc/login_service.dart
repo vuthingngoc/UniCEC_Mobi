@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:unicec_mobi/models/entities/club/club_model.dart';
@@ -18,14 +19,17 @@ class LoginService implements ILoginService {
   Future<UniSelectorModel?> getUniSelector(String? idToken) async {
     var client = http.Client();
     String url = Api.GetUrl(apiPath: Api.authentication);
+    String tokenDevice = (await FirebaseMessaging.instance.getToken())!;   
     try {
       var response =
-          await client.post(Uri.parse(url), headers: Api.GetHeader(idToken));
+          // await client.post(Uri.parse(url), headers: Api.GetHeader(idToken));
+          await client.post(Uri.parse(url), headers: Api.GetHeaderForLogin(idToken, tokenDevice));
 
       if (response.statusCode == 400) {
         Log.error(response.body.toString());
       }
       if (response.statusCode == 200) {
+        Log.info('URL: $response');
         //
         Map<String, dynamic> result = adapter.parseToMap(response);
         //

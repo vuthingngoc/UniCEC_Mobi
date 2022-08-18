@@ -1,9 +1,10 @@
 import 'dart:io';
-
-import 'package:http/http.dart' as http;
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:unicec_mobi/utils/log.dart';
 
 class Api {
   static String get uri => "https://unicec.ddns.net";
+  // static String get uri => "https://10.0.2.2:44361";
   //static String get uri => "https://10.0.2.2:44361/index.html";
   static String get authentication => "/api/v1/firebase";
   static String get activitiesEntity => "/api/vi/activities-entity";
@@ -42,6 +43,26 @@ class Api {
     };
 
     if(token != null)  header[HttpHeaders.authorizationHeader] = "Bearer $token";
+
+    return header;
+  }
+
+  static Map<String, String> GetHeaderForLogin(String? token, String tokenDevice){
+    // header when log in google account
+    // FirebaseMessaging _fcm = FirebaseMessaging.instance;
+    // String tokenDevice = '';
+    // _fcm.getToken().then((value) => {
+    //   tokenDevice = value!
+    // });
+    Log.info('tokenDevice: $tokenDevice');
+
+    Map<String, String> header = {
+      HttpHeaders.contentTypeHeader: 'application/json; charset=UTF-8',      
+    };
+
+    if(token != null)  header[HttpHeaders.authorizationHeader] = "Bearer $token";
+    header['X-Device-Token'] = tokenDevice;
+    header['Is-Android'] = Platform.isAndroid ? 'true' : 'false';
 
     return header;
   }
