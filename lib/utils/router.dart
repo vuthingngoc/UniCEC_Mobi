@@ -6,6 +6,7 @@ class Routes {
   static String get main => '/main';
   static String get test => '/test';
   static String get competition => '/competition';
+  static String get notification => '/notification';
   static String get event => '/event';
   static String get detailCompetition => '/detailCompetition';
   static String get viewDetailCompetitionParticipant =>

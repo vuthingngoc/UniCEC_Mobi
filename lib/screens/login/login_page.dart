@@ -29,7 +29,10 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     super.initState();
 
-    _fcm.getToken().then((value) => {Log.info('The token device is: $value')});
+    _fcm.getToken().then((value) => {
+      // Log.info('The token device is: $value')
+      print('The token device is: $value')
+    });
 
     _bloc.listenerStream.listen((event) {
       if (event is NavigatorWelcomePageEvent) {

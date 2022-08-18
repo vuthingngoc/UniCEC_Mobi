@@ -137,8 +137,8 @@ class _MainPageState extends State<MainPage> {
       print(routeFromMessage);
       Navigator.of(context).pushNamed(routeFromMessage);
 
-      RemoteNotification notification = message.notification!;
-      AndroidNotification android = (message.notification?.android)!;
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
       // If `onMessage` is triggered with a notification, construct our own
       // local notification to show to users using the created channel.
       if (notification != null && android != null) {
