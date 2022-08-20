@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../models/entities/notification/notification_model.dart';
 import '../../utils/app_color.dart';
 import '../../utils/dimens.dart';
+import '../../utils/utils.dart';
 
 class NotiDetailPage extends StatelessWidget {
   final NotificationModel notification;
@@ -38,7 +39,8 @@ class NotiDetailPage extends StatelessWidget {
                 height: Dimens.size15,
               ),
               Text(
-                notification.createdDate,
+                Utils.convertDateTime(notification.createTime),
+                // "${notification.createTime}",
                 style: TextStyle(
                   color: Colors.black26,
                   fontSize: Dimens.size15,
@@ -54,7 +56,7 @@ class NotiDetailPage extends StatelessWidget {
                 height: Dimens.size15,
               ),
               Text(
-                notification.content,
+                notification.body,
                 style: TextStyle(
                   fontSize: Dimens.size16,
                 ),

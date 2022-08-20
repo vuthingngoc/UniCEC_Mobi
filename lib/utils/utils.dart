@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:intl/intl.dart';
 import 'log.dart';
 
 class Utils {
@@ -23,4 +24,9 @@ class Utils {
           .map<int, T>((index, model) => MapEntry(index, builder(index, model)))
           .values
           .toList();
+
+  static String convertDateTime(DateTime dateTime){
+    final DateFormat format = DateFormat("dd-MM-yyyy HH:mm:ss");
+    return format.format(dateTime);
+  }
 }

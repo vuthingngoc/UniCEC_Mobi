@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import '../../../models/entities/notification/notification_model.dart';
 import '../../../utils/dimens.dart';
+import '../../../utils/utils.dart';
 import '../noti_detail_page.dart';
 
 class ListNotification extends StatefulWidget {
@@ -34,16 +35,15 @@ class _ListNotificationState extends State<ListNotification> {
     return BlocBuilder<NotificationBloc, NotificationState>(
         bloc: _bloc,
         builder: (context, state) {
-          List<NotificationModel> list = state.currentNotifications;
-          bool hasNext = state.hasNext;
-          return list.isNotEmpty
+          List<NotificationModel>? notifications = state.notifications?.items;
+          return notifications != null
               ? RefreshIndicator(
                   onRefresh: () async {
                     var refresh = _refresh(context);
                     return refresh;
                   },
                   child: LoadMore(
-                    isFinish: !hasNext,
+                    isFinish: !(state.notifications?.hasNext ?? false),
                     onLoadMore: () async {
                       await _loadMore(context);
                       return true;
@@ -53,7 +53,7 @@ class _ListNotificationState extends State<ListNotification> {
                     textBuilder: DefaultLoadMoreTextBuilder.english,
                     child: ListView.builder(
                         shrinkWrap: true,
-                        itemCount: list.length,
+                        itemCount: notifications.length,
                         itemBuilder: (context, index) {
                           return Card(
                             margin: EdgeInsets.all(Dimens.size10),
@@ -71,7 +71,7 @@ class _ListNotificationState extends State<ListNotification> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            NotiDetailPage(list[index])),
+                                            NotiDetailPage(notifications[index])),
                                   );
                                 },
                                 child: Column(
@@ -79,7 +79,7 @@ class _ListNotificationState extends State<ListNotification> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      list[index].title,
+                                      notifications[index].title,
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: Dimens.size20,
@@ -90,7 +90,7 @@ class _ListNotificationState extends State<ListNotification> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            list[index].createdDate,
+                                            Utils.convertDateTime(notifications[index].createTime),
                                             style: TextStyle(
                                               color: Colors.black26,
                                               fontSize: Dimens.size15,
@@ -104,7 +104,7 @@ class _ListNotificationState extends State<ListNotification> {
                                       height: Dimens.size15,
                                     ),
                                     Text(
-                                      list[index].content,
+                                      notifications[index].body,
                                       style: TextStyle(fontSize: Dimens.size16),
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
