@@ -44,7 +44,7 @@ class Body extends StatelessWidget {
                             color: AppColors.mainColor,
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(10))),
-                        child: Text("${user.seedsWallet.amount} seeds",
+                        child: Text("${user.seedsWallet.amount} điểm",
                             style: const TextStyle(
                                 // color: Colors.bl,
                                 fontSize: 18,
