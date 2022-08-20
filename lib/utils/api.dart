@@ -4,7 +4,6 @@ import 'package:unicec_mobi/utils/log.dart';
 
 class Api {
   static String get uri => "https://unicec.ddns.net";
-  // static String get uri => "https://10.0.2.2:44361";
   //static String get uri => "https://10.0.2.2:44361/index.html";
   static String get authentication => "/api/v1/firebase";
   static String get activitiesEntity => "/api/vi/activities-entity";
@@ -23,6 +22,7 @@ class Api {
   static String get entityTypes => "/api/v1/entity-types";
   static String get majors => "/api/v1/majors";
   static String get members => "/api/v1/members";
+  static String get notifications => "/api/v1/notifications";
   static String get participants => "/api/v1/participants";
   static String get roles => "/api/v1/roles";
   static String get seedsWallets => "/api/v1/seeds-wallets";

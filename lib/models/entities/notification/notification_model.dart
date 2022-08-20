@@ -1,37 +1,29 @@
-import 'package:intl/intl.dart';
-
-class NotificationModel implements Comparable<NotificationModel> {
+class NotificationModel {
   int id;
+  int userId;
   String title;
-  String content;
-  DateTime sortDate;
-  String createdDate;
+  String body;
+  DateTime createTime;
 
   NotificationModel(
       {required this.id,
+      required this.userId,
       required this.title,
-      required this.content,
-      required this.sortDate,
-      required this.createdDate});
+      required this.body,
+      required this.createTime});
 
   factory NotificationModel.fromJson(Map<String, dynamic> json) {
-    int id = json['Id'] ?? 0;
-    String title = json['Title'] ?? '';
-    String content = json['Content'] ?? '';
-    DateTime sortDate = json['DateCreate'] != null ? DateTime.parse(json['DateCreate']) : DateTime.now();
-    String createdDate = DateFormat('dd-MM-yyyy HH:mm').format(sortDate);
+    int id = json['id'] ?? 0;
+    int userId = json['user_id'] ?? 0;
+    String title = json['title'] ?? '';
+    String body = json['body'] ?? '';
+    DateTime createTime = DateTime.parse(json['create_time']);
 
     return NotificationModel(
         id: id,
+        userId: userId,
         title: title,
-        content: content,
-        sortDate: sortDate,
-        createdDate: createdDate);
-  }
-
-  @override
-  int compareTo(NotificationModel other){
-    int order = other.sortDate.compareTo(sortDate);
-    return order;
+        body: body,
+        createTime: createTime);
   }
 }
