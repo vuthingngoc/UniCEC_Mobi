@@ -28,11 +28,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-
     _fcm.getToken().then((value) => {
-      // Log.info('The token device is: $value')
-      print('The token device is: $value')
-    });
+          // Log.info('The token device is: $value')
+          print('The token device is: $value')
+        });
 
     _bloc.listenerStream.listen((event) {
       if (event is NavigatorWelcomePageEvent) {
@@ -41,8 +40,30 @@ class _LoginPageState extends State<LoginPage> {
         );
       } //
       else if (event is ShowingSnackBarEvent) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(event.message)));
+        showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (context) {
+            return AlertDialog(
+              title: Text('Cảnh báo'),
+              content: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    Text(event.message),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('Đóng'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
       } //
       else if (event is NavigatorUniversitySelectionPageEvent) {
         Navigator.of(context).pushReplacementNamed(Routes.universitySelection,
@@ -63,41 +84,43 @@ class _LoginPageState extends State<LoginPage> {
                 print('snapshot.connectionState is waiting');
                 return const Center(child: CircularProgressIndicator());
               }
-              print('login bloc isLoading: ${_bloc.isLoading}');
-              return (_bloc.isLoading)
-                  ? Loading()
-                  : SingleChildScrollView(
-                      child: Stack(
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.height,
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    colors: [
-                                  Colors.orange[600]!,
-                                  Colors.orange[400]!,
-                                  Colors.orange[200]!
-                                ])),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                SizedBox(
-                                  height: Dimens.size60,
-                                ),
-                                LoginHeader(),
-                                SizedBox(height: Dimens.size20),
-                                Flexible(
-                                  fit: FlexFit.tight,
-                                  child: LoginBody(bloc: _bloc),
-                                )
-                              ],
-                            ),
+              //print('login bloc isLoading: ${_bloc.isLoading}');
+              return
+                  // (_bloc.isLoading)
+                  //     ? Loading()
+                  //     :
+                  SingleChildScrollView(
+                child: Stack(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              colors: [
+                            Colors.orange[600]!,
+                            Colors.orange[400]!,
+                            Colors.orange[200]!
+                          ])),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          SizedBox(
+                            height: Dimens.size60,
+                          ),
+                          LoginHeader(),
+                          SizedBox(height: Dimens.size20),
+                          Flexible(
+                            fit: FlexFit.tight,
+                            child: LoginBody(bloc: _bloc),
                           )
                         ],
                       ),
-                    );
+                    )
+                  ],
+                ),
+              );
             }),
       ),
     );
