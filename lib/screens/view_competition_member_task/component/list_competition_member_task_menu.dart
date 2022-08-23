@@ -226,13 +226,21 @@ class _ViewCompetitionMemberTaskMenuState
                                               backgroundColor: Color.fromARGB(
                                                   255, 235, 237, 241),
                                             ),
-                                            onPressed: () {
+                                            onPressed: () async {
                                               //chuyển sang trang detail
-                                              Navigator.of(context).pushNamed(
-                                                  Routes.viewListActivity,
-                                                  arguments: state
-                                                      .listCompetition[index]
-                                                      .id);
+                                              bool returnData =
+                                                  await Navigator.of(context)
+                                                      .pushNamed(
+                                                          Routes
+                                                              .viewListActivity,
+                                                          arguments: state
+                                                              .listCompetition[
+                                                                  index]
+                                                              .id) as bool;
+                                              if (returnData) {
+                                                bloc.add(LoadingEvent());
+                                                bloc.add(SearchEvent());
+                                              }
                                             },
                                             child: Column(
                                               children: [
