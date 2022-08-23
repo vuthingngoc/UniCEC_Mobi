@@ -119,7 +119,7 @@ class BlocDependencies {
     injector.registerFactory<AddTeamDialogBloc>(() => AddTeamDialogBloc());
 
     injector.registerFactory<NotificationBloc>(
-      () => NotificationBloc(service: injector()));
+        () => NotificationBloc(service: injector()));
 
     //
     injector.registerFactory<ViewListMemberBloc>(

@@ -20,7 +20,7 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
       : super(LoginState(errorEmail: '')) {
     on((event, emit) async {
       if (event is SignInGoogleEvent) {
-        isLoading = true;
+        //isLoading = true;
         UserCredential? credential = await FirebaseUtils.signInWithGoogle();
         if (credential != null) {
           //xử lý logic ở chỗ này
@@ -29,14 +29,21 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
           //3.Trường hợp lỗi
 
           UniSelectorModel? uniSelector = await saveUserData(credential.user);
-          if (uniSelector!.listUniBelongToEmail.isEmpty) {
-            listener.add(NavigatorWelcomePageEvent());
-          } else {
-            listener.add(NavigatorUniversitySelectionPageEvent(
-                listUniBelongToEmail: uniSelector.listUniBelongToEmail));
+          if (uniSelector != null) {
+            if (uniSelector.listUniBelongToEmail.isEmpty) {
+              listener.add(NavigatorWelcomePageEvent());
+            } else {
+              listener.add(NavigatorUniversitySelectionPageEvent(
+                  listUniBelongToEmail: uniSelector.listUniBelongToEmail));
+            }
+          } //bắt trường hợp đăng nhập gmail kh phải của trường
+          else {
+            listener
+                .add(ShowingSnackBarEvent(message: "Tài khoản không hợp lệ"));
+            await FirebaseUtils.logout();
           }
         }
-        isLoading = false;
+        //isLoading = false;
       }
     });
   }
@@ -48,35 +55,38 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
     //chứa cả Token + List University
     UniSelectorModel? uniSelector = await service.getUniSelector(idToken);
 
-    //decode JWT
-    Map<String, dynamic> userMap = Utils.fromJWT(uniSelector?.token);
-    CurrentUser user = GetIt.I.get<CurrentUser>();
-    user.id = int.parse(userMap['Id']);
-    user.idToken = (uniSelector?.token)!;
+    if (uniSelector != null) {
+      //decode JWT
+      Map<String, dynamic> userMap = Utils.fromJWT(uniSelector.token);
+      CurrentUser user = GetIt.I.get<CurrentUser>();
+      user.id = int.parse(userMap['Id']);
+      user.idToken = (uniSelector.token);
 
-    //if new student kh trả ra UniversityID -> sẽ được cập nhật bên trang UniSelection
-    if (uniSelector!.listUniBelongToEmail.isEmpty) {
-      //
-      user.universityId = int.parse(userMap['UniversityId']);
-      //load list club belong to student
-      user.clubsBelongToStudent = await service
-          .getListClubsBelongToStudent(user.id); //-. lấy những member active
-      //load list member belong to club -> active
-      if (user.clubsBelongToStudent != null) {
-        for (var club in user.clubsBelongToStudent) {
-          MemberDetailModel? member =
-              await service.getMemberBelongToClub(club.id);
+      //if new student kh trả ra UniversityID -> sẽ được cập nhật bên trang UniSelection
+      if (uniSelector.listUniBelongToEmail.isEmpty) {
+        //
+        user.universityId = int.parse(userMap['UniversityId']);
+        //load list club belong to student
+        user.clubsBelongToStudent = await service
+            .getListClubsBelongToStudent(user.id); //-. lấy những member active
+        //load list member belong to club -> active
+        if (user.clubsBelongToStudent != null) {
+          for (var club in user.clubsBelongToStudent) {
+            MemberDetailModel? member =
+                await service.getMemberBelongToClub(club.id);
 
-          user.membersBelongToClubs.add(member);
+            user.membersBelongToClubs.add(member);
+          }
         }
       }
+      user.email = (credentialUser?.email)!;
+      user.fullname = userMap['Fullname'];
+      user.avatar = imagePath!;
+      user.seedsWallet = await userService.getSeedsWalletByUser(user.id) ??
+          SeedsWalletModel(id: 0, studentId: 0, amount: 0, status: false);
+    } else {
+      return null;
     }
-    user.email = (credentialUser?.email)!;
-    user.fullname = userMap['Fullname'];
-    user.avatar = imagePath!;
-    user.seedsWallet = await userService.getSeedsWalletByUser(user.id) ??
-        SeedsWalletModel(id: 0, studentId: 0, amount: 0, status: false);
-
     return uniSelector;
 
     // SharedPreferences preferences = await SharedPreferences.getInstance();

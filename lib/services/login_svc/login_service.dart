@@ -19,14 +19,15 @@ class LoginService implements ILoginService {
   Future<UniSelectorModel?> getUniSelector(String? idToken) async {
     var client = http.Client();
     String url = Api.GetUrl(apiPath: Api.authentication);
-    String tokenDevice = (await FirebaseMessaging.instance.getToken())!;   
+    String tokenDevice = (await FirebaseMessaging.instance.getToken())!;
     try {
       var response =
           // await client.post(Uri.parse(url), headers: Api.GetHeader(idToken));
-          await client.post(Uri.parse(url), headers: Api.GetHeaderForLogin(idToken, tokenDevice));
+          await client.post(Uri.parse(url),
+              headers: Api.GetHeaderForLogin(idToken, tokenDevice));
 
       if (response.statusCode == 400) {
-        Log.error(response.body.toString());
+        return null;
       }
       if (response.statusCode == 200) {
         Log.info('URL: $response');
