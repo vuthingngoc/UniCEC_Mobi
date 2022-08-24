@@ -47,7 +47,7 @@ class ViewDetailActivityBloc
                     state.competitionActivityDetail!.id);
             if (result != null) {
               //
-              listener.add(ShowingSnackBarEvent(message: "Update Thành Công"));
+              listener.add(ShowingSnackBarEvent(message: "Update thành công"));
               //
               emit(state.copyWith(
                   newCompetitionActivityDetail: result,
@@ -56,7 +56,7 @@ class ViewDetailActivityBloc
                   isLoading: false));
             }
           } else {
-            listener.add(ShowingSnackBarEvent(message: "Update Lỗi"));
+            listener.add(ShowingSnackBarEvent(message: "Update thất bại"));
           }
         }
         //change image index

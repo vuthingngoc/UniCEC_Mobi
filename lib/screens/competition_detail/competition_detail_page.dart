@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -9,6 +10,7 @@ import '../../bloc/competition_detail/competition_detail_bloc.dart';
 import '../../bloc/competition_detail/competition_detail_event.dart';
 import '../../bloc/competition_detail/competition_detail_state.dart';
 import '../../constants/Theme.dart';
+import '../../models/entities/competition/send_data_model.dart';
 import '../../utils/app_color.dart';
 import '../../utils/loading.dart';
 import '../../utils/log.dart';
@@ -33,8 +35,48 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
 
     _bloc.listenerStream.listen((event) {
       if (event is ShowPopUpAnnouncement) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(event.message)));
+        if (event.message.contains("thành công")) {
+          AwesomeDialog(
+            context: context,
+            animType: AnimType.LEFTSLIDE,
+            headerAnimationLoop: false,
+            dialogType: DialogType.SUCCES,
+            showCloseIcon: true,
+            title: 'Thành Công',
+            desc: (event.message.contains("Tham gia"))
+                ? "Bạn đã đăng ký tham gia thành công"
+                : (event.message.contains("Điểm danh"))
+                    ? "Bạn đã điểm danh thành công"
+                    : "Lỗi",
+            btnOkOnPress: () {
+              Navigator.of(context).pop;
+            },
+            btnOkIcon: Icons.check_circle,
+            onDissmissCallback: (type) {
+              debugPrint('Dialog Dissmiss from callback $type');
+            },
+          ).show();
+        } else {
+          AwesomeDialog(
+            context: context,
+            dialogType: DialogType.ERROR,
+            animType: AnimType.RIGHSLIDE,
+            headerAnimationLoop: true,
+            title: 'Thất Bại',
+            desc: (event.message.contains("full"))
+                ? "Bạn không thể đăng ký tham gia, số lượng người tham gia đã đầy"
+                : (event.message.contains("seeds point"))
+                    ? "Bạn không thể đăng ký tham gia, điểm trong ví không đủ"
+                    : (event.message.contains("Competition not found"))
+                        ? "Thất bại, mã điểm danh không hợp lệ"
+                        : event.message,
+            btnOkOnPress: () {
+              Navigator.of(context).pop;
+            },
+            btnOkIcon: Icons.cancel,
+            btnOkColor: Colors.red,
+          ).show();
+        }
       }
     });
   }
@@ -731,12 +773,21 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                   if (state
                                                                           .isParticipant ==
                                                                       true) {
+                                                                    SendDataModel data = SendDataModel(
+                                                                        competitionId: state
+                                                                            .competitionDetail!
+                                                                            .id,
+                                                                        max: state
+                                                                            .competitionDetail!
+                                                                            .maxNumber,
+                                                                        min: state
+                                                                            .competitionDetail!
+                                                                            .minNumber);
                                                                     Navigator.of(context).pushNamed(
                                                                         Routes
                                                                             .viewListTeamParticipant,
-                                                                        arguments: state
-                                                                            .competitionDetail
-                                                                            ?.id);
+                                                                        arguments:
+                                                                            data);
                                                                   } else {
                                                                     Navigator.of(context).pushNamed(
                                                                         Routes

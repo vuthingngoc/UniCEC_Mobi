@@ -7,7 +7,12 @@ class ViewListTeamInitEvent extends ViewListTeamParticipantEvent {}
 //recieve data
 class RecieveDataEvent extends ViewListTeamParticipantEvent {
   int competitionId;
-  RecieveDataEvent({required this.competitionId});
+  int minNumber;
+  int maxNumber;
+  RecieveDataEvent(
+      {required this.competitionId,
+      required this.minNumber,
+      required this.maxNumber});
 }
 
 //LoadMore

@@ -96,8 +96,8 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
                 newValueTeamDescription: result.description,
                 newStatus: result.status,
                 isLoading: false));
-            listener
-                .add(ShowingSnackBarEvent(message: "Cập nhật thành công !"));
+            listener.add(ShowingSnackBarEvent(
+                message: "Cập nhật thông tin Đội thành công!"));
           }
         } else {
           listener.add(ShowingSnackBarEvent(message: result.errorMessage));
@@ -121,8 +121,8 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
                 newStatus: result.status,
                 isLoading: false));
 
-            listener
-                .add(ShowingSnackBarEvent(message: "Cập nhật thành công !"));
+            listener.add(ShowingSnackBarEvent(
+                message: "Cập nhật trạng thái Đội thành công!"));
           }
         } else {
           listener.add(ShowingSnackBarEvent(message: result.errorMessage));
@@ -159,6 +159,8 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
                 newValueTeamDescription: result.description,
                 newStatus: result.status,
                 isLoading: false));
+            listener.add(
+                ShowingSnackBarEvent(message: "Thoát khỏi nhóm thành công"));
           }
         } else {
           listener.add(ShowingSnackBarEvent(message: check.errorMessage));
@@ -243,8 +245,7 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
                 newValueTeamDescription: result.description,
                 newStatus: result.status,
                 isLoading: false));
-            listener
-                .add(ShowingSnackBarEvent(message: "Cập nhật thành công !"));
+            listener.add(ShowingSnackBarEvent(message: "Cập nhật thành công"));
           }
         } else {
           listener
