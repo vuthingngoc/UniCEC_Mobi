@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -40,30 +41,19 @@ class _LoginPageState extends State<LoginPage> {
         );
       } //
       else if (event is ShowingSnackBarEvent) {
-        showDialog<void>(
+        AwesomeDialog(
           context: context,
-          barrierDismissible: false, // user must tap button!
-          builder: (context) {
-            return AlertDialog(
-              title: Text('Cảnh báo'),
-              content: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    Text(event.message),
-                  ],
-                ),
-              ),
-              actions: <Widget>[
-                TextButton(
-                  child: Text('Đóng'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
+          dialogType: DialogType.ERROR,
+          animType: AnimType.RIGHSLIDE,
+          headerAnimationLoop: true,
+          title: 'Đăng Nhập Thất Bại',
+          desc: 'Tài khoản đăng nhập không hợp lệ',
+          btnOkOnPress: () {
+            Navigator.of(context).pop;
           },
-        );
+          btnOkIcon: Icons.cancel,
+          btnOkColor: Colors.red,
+        ).show();
       } //
       else if (event is NavigatorUniversitySelectionPageEvent) {
         Navigator.of(context).pushReplacementNamed(Routes.universitySelection,

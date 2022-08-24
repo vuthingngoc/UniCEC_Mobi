@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -57,38 +58,61 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
 
   Future<void> _showDeleteDialog(
       int participantId, ViewDetailTeamParticipantBloc bloc) {
-    return showDialog<void>(
+    // return showDialog<void>(
+    //   context: context,
+    //   barrierDismissible: false, // user must tap button!
+    //   builder: (context) {
+    // return AlertDialog(
+    //   title: Text('Cảnh báo'),
+    //   content: SingleChildScrollView(
+    //     child: Column(
+    //       children: <Widget>[
+    //         Text('Bạn có chắc chắn muốn xóa?'),
+    //       ],
+    //     ),
+    //   ),
+    //   actions: <Widget>[
+    //     TextButton(
+    //       child: Text('Đồng ý'),
+    //       onPressed: () {
+    //         bloc.add(DeleteMemberByTeamLeaderEvent(
+    //             participantId: participantId));
+    //         Navigator.of(context).pop();
+    //       },
+    //     ),
+    //     TextButton(
+    //       child: Text('Hủy'),
+    //       onPressed: () {
+    //         Navigator.of(context).pop();
+    //       },
+    //     ),
+    //   ],
+    // );
+
+    return AwesomeDialog(
       context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (context) {
-        return AlertDialog(
-          title: Text('Cảnh báo'),
-          content: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Text('Bạn có chắc chắn muốn xóa?'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text('Đồng ý'),
-              onPressed: () {
-                bloc.add(DeleteMemberByTeamLeaderEvent(
-                    participantId: participantId));
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: Text('Hủy'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
+      keyboardAware: true,
+      dismissOnBackKeyPress: false,
+      dialogType: DialogType.WARNING,
+      animType: AnimType.BOTTOMSLIDE,
+      btnCancelText: "Hủy",
+      btnOkText: "Xác Nhận",
+      title: 'Bạn Chắc Chứ',
+      // padding: const EdgeInsets.all(5.0),
+      desc: 'Bạn có muốn xóa thành viên này trong Đội Thi không ?',
+      btnCancelOnPress: () {
+        Navigator.of(context).pop();
       },
-    );
+      btnOkOnPress: () {
+        // BlocProvider.of<
+        //             ViewDetailTeamParticipantBloc>(
+        //         context)
+        //     .add(LoadingEvent());
+        bloc.add(DeleteMemberByTeamLeaderEvent(participantId: participantId));
+      },
+    ).show();
+    //},
+    //);
   }
 
   List getRows(List<ViewDetailParticipantModel> member) =>
@@ -242,42 +266,27 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
                                           .userIdIsLeaderTeam ==
                                       GetIt.I.get<CurrentUser>().id)
                                     PopupMenuItem(
-                                      // onTap: () {
-                                      //   // print('Xóa');
-                                      //   // BlocProvider.of<
-                                      //   //             ViewDetailTeamParticipantBloc>(
-                                      //   //         context)
-                                      //   //     .add(DeleteMemberByTeamLeaderEvent(
-                                      //   //         participantId:
-                                      //   //             member.participantId));
-                                      // },
-                                      value: 3,
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          primary:
-                                              Colors.black.withOpacity(0.05),
-                                          onPrimary: Colors.black,
-                                        ),
-                                        onPressed: () {
-                                          _showDeleteDialog(
-                                              member.participantId,
-                                              BlocProvider.of<
-                                                      ViewDetailTeamParticipantBloc>(
-                                                  context));
-                                        },
-                                        child: Row(
-                                          children: <Widget>[
-                                            Text('Xóa thành viên'),
-                                            //Icon(Icons.delete, size: 18),
-                                            // Padding(
-                                            //   padding: const EdgeInsets.only(
-                                            //       left: 8.0),
-                                            //   child:
-                                            // ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
+                                        onTap: () {},
+                                        value: 3,
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            primary:
+                                                Colors.black.withOpacity(0.05),
+                                            onPrimary: Colors.black,
+                                          ),
+                                          onPressed: () {
+                                            _showDeleteDialog(
+                                                member.participantId,
+                                                BlocProvider.of<
+                                                        ViewDetailTeamParticipantBloc>(
+                                                    context));
+                                          },
+                                          child: Row(
+                                            children: <Widget>[
+                                              Text('Xóa thành viên'),
+                                            ],
+                                          ),
+                                        ))
                                 ];
                               })))
                             : DataCell(SizedBox(child:

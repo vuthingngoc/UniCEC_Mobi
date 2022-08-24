@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../bloc/view_list_team_participant/view_list_team_participant_bloc.dart';
@@ -5,6 +6,7 @@ import '../../../bloc/view_list_team_participant/view_list_team_participant_even
 import '../../../bloc/view_list_team_participant/view_list_team_participant_state.dart';
 import '../../../constants/Theme.dart';
 import '../../../models/enums/team_status.dart';
+import '../../../utils/app_color.dart';
 import '../../widgets/input.dart';
 import 'list_team_menu.dart';
 
@@ -199,17 +201,19 @@ class _BodyState extends State<Body> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 20, bottom: 20),
-                      child: Container(
-                        padding: const EdgeInsets.only(top: 0.5, bottom: 0.5),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: ArgonColors.warning),
-                            color: ArgonColors.warning,
-                            borderRadius: BorderRadius.all(Radius.circular(4))),
-                        child: FlatButton(
-                          textColor: ArgonColors.white,
+                    // Padding(
+                    //   padding: const EdgeInsets.only(right: 20, bottom: 20),
+                    //   child:
+                    Container(
+                      width: 200,
+                      //padding: const EdgeInsets.only(top: 0.5, bottom: 0.5),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: ArgonColors.warning),
                           color: ArgonColors.warning,
+                          borderRadius: BorderRadius.all(Radius.circular(30))),
+                      child: FlatButton(
+                          textColor: ArgonColors.white,
+                          //color: ArgonColors.warning,
                           onPressed: () {
                             //Respond to button press
                             showDialog(
@@ -298,18 +302,44 @@ class _BodyState extends State<Body> {
                                   );
                                 });
                           },
-                          child: Padding(
-                              padding: EdgeInsets.only(
-                                  left: 16.0, right: 16.0, top: 12, bottom: 12),
-                              child: Text("Nhập mã tham gia",
+                          child:
+                              //  Padding(
+                              //     padding: EdgeInsets.only(
+                              //         left: 16.0, right: 16.0, top: 12, bottom: 12),
+                              //     child:
+                              Text("Nhập mã tham gia",
                                   style: TextStyle(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 15.0))),
-                        ),
-                      ),
                     ),
+                    //),
+                    //),
                   ],
-                )
+                ),
+              SizedBox(height: 20),
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                AnimatedButton(
+                    width: 200,
+                    text: 'Lưu ý của Cuộc Thi',
+                    color: ArgonColors.warning,
+                    pressEvent: () {
+                      AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.WARNING,
+                              headerAnimationLoop: true,
+                              animType: AnimType.TOPSLIDE,
+                              title: 'Lưu ý',
+                              desc: 'Quy định về Đội Thi của Cuộc Thi'
+                                      '\n 1.Tạo, Tham Gia đội khi Cuộc Thi chưa diễn ra.'
+                                      '\n 2.Tham Gia đội khi trạng thái của Đội là Mở.'
+                                      '\n 3.Chuyển trạng thái Đóng Đội được khi số lượng thành viên trong Đội đúng theo quy định của Cuộc thi đưa ra.'
+                                      '\n 4.Đội ở trạng thái Đóng thì Ban Tổ Chức mới duyệt trở thành Đội tham gia chính thức còn lại hủy bỏ.'
+                                      '\n'
+                                      '\n Quy định về Số Lượng thành viên Đội\n' +
+                                  '${(state.maxNumber == state.minNumber) ? 'Số lượng thành viên trong Đội hợp lệ phải đúng ${state.maxNumber} thành viên' : 'Số lượng thành viên trong Đội hợp lệ tối thiểu từ ${state.minNumber} trở lên và không vượt quá ${state.maxNumber} thành viên'}')
+                          .show();
+                    }),
+              ]),
             ]),
           );
         });

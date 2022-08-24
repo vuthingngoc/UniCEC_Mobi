@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/view_detail_activity/view_detail_activity_bloc.dart';
@@ -29,8 +30,38 @@ class _ViewDetailActivityPageState extends State<ViewDetailActivityPage>
   void initState() {
     bloc.listenerStream.listen((event) {
       if (event is ShowingSnackBarEvent) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(event.message)));
+        if (event.message.contains("thành công")) {
+          AwesomeDialog(
+            context: context,
+            animType: AnimType.LEFTSLIDE,
+            headerAnimationLoop: false,
+            dialogType: DialogType.SUCCES,
+            showCloseIcon: true,
+            title: 'Thành Công',
+            desc: 'Cập nhật trạng thái hoạt động thành công',
+            btnOkOnPress: () {
+              Navigator.of(context).pop;
+            },
+            btnOkIcon: Icons.check_circle,
+            onDissmissCallback: (type) {
+              debugPrint('Dialog Dissmiss from callback $type');
+            },
+          ).show();
+        } else {
+          AwesomeDialog(
+            context: context,
+            dialogType: DialogType.ERROR,
+            animType: AnimType.RIGHSLIDE,
+            headerAnimationLoop: true,
+            title: 'Thất bại',
+            desc: 'Cập nhật trạng thái hoạt động thất bại',
+            btnOkOnPress: () {
+              Navigator.of(context).pop;
+            },
+            btnOkIcon: Icons.cancel,
+            btnOkColor: Colors.red,
+          ).show();
+        }
       }
     });
   }
@@ -60,8 +91,8 @@ class _ViewDetailActivityPageState extends State<ViewDetailActivityPage>
               },
               icon: const Icon(Icons.arrow_back, color: Colors.white),
             ),
-            title:
-                const Text("Chi tiết", style: TextStyle(color: Colors.white)),
+            title: const Text("Chi tiết hoạt động",
+                style: TextStyle(color: Colors.white)),
             centerTitle: true,
             backgroundColor: AppColors.mainColor,
           ),

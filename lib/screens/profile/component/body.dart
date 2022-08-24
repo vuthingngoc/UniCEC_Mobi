@@ -66,7 +66,7 @@ class Body extends StatelessWidget {
             },
           ),
           ProfileMenu(
-            text: "Các cuộc thi & sự kiện đang tham gia",
+            text: "Cuộc thi và sự kiện đang tham gia",
             icon: "assets/icons/Bell.svg",
             press: () {
               Navigator.of(context)

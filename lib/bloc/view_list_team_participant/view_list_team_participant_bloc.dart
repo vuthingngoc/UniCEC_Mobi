@@ -20,7 +20,9 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
             valueInvitedCode: '',
             searchName: null,
             status: null,
-            isLoading: true)) {
+            isLoading: true,
+            minNumber: 0,
+            maxNumber: 0)) {
     on((event, emit) async {
       //InitEvent
       if (event is ViewListTeamInitEvent) {
@@ -60,14 +62,17 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
 
         if (result != null) {
           emit(state.copyWith(
-              newListTeam: result.items,
-              newCompetitionId: event.competitionId, //change
-              newHasNext: result.hasNext,
-              newCurrentPage: result.currentPage,
-              valueInvitedCode: state.valueInvitedCode,
-              newSearchName: state.searchName,
-              newStatus: state.status,
-              isLoading: false));
+            newListTeam: result.items,
+            newCompetitionId: event.competitionId, //change
+            newHasNext: result.hasNext,
+            newCurrentPage: result.currentPage,
+            valueInvitedCode: state.valueInvitedCode,
+            newSearchName: state.searchName,
+            newStatus: state.status,
+            isLoading: false,
+            maxNumber: event.maxNumber, // change 1 lần duy nhất
+            minNumber: event.minNumber, // change 1 lần duy nhất
+          ));
         } else {
           emit(state.copyWith(
               newListTeam: state.listTeam,
@@ -155,6 +160,7 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
             state.competitionId, event.teamName, event.teamDescription);
         if (check.check) {
           listener.add(RebuildListViewTeamEvent());
+          listener.add(ShowingSnackBarEvent(message: "Tạo đội thành công"));
         } else {
           listener.add(ShowingSnackBarEvent(message: check.errorMessage));
         }
