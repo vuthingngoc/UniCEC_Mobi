@@ -39,9 +39,7 @@ class _ViewDetailActivityPageState extends State<ViewDetailActivityPage>
             showCloseIcon: true,
             title: 'Thành Công',
             desc: 'Cập nhật trạng thái hoạt động thành công',
-            btnOkOnPress: () {
-              Navigator.of(context).pop;
-            },
+            btnOkOnPress: () {},
             btnOkIcon: Icons.check_circle,
             onDissmissCallback: (type) {
               debugPrint('Dialog Dissmiss from callback $type');
@@ -55,9 +53,7 @@ class _ViewDetailActivityPageState extends State<ViewDetailActivityPage>
             headerAnimationLoop: true,
             title: 'Thất bại',
             desc: 'Cập nhật trạng thái hoạt động thất bại',
-            btnOkOnPress: () {
-              Navigator.of(context).pop;
-            },
+            btnOkOnPress: () {},
             btnOkIcon: Icons.cancel,
             btnOkColor: Colors.red,
           ).show();

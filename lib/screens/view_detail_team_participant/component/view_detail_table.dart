@@ -104,10 +104,6 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
         Navigator.of(context).pop();
       },
       btnOkOnPress: () {
-        // BlocProvider.of<
-        //             ViewDetailTeamParticipantBloc>(
-        //         context)
-        //     .add(LoadingEvent());
         bloc.add(DeleteMemberByTeamLeaderEvent(participantId: participantId));
       },
     ).show();

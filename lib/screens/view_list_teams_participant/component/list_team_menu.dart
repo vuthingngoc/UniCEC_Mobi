@@ -97,12 +97,15 @@ class _ViewListTeamMenuState extends State<ViewListTeamMenu> {
                               onPressed: () async {
                                 //chuyển sang trang detail
                                 SendingDataModel data = SendingDataModel(
-                                    competitionId: state.competitionId,
-                                    teamId: state.listTeam[index].id,
-                                    teamName: state.listTeam[index].name,
-                                    teamDescription:
-                                        state.listTeam[index].description,
-                                    status: state.listTeam[index].status);
+                                  competitionId: state.competitionId,
+                                  teamId: state.listTeam[index].id,
+                                  teamName: state.listTeam[index].name,
+                                  teamDescription:
+                                      state.listTeam[index].description,
+                                  status: state.listTeam[index].status,
+                                  max: state.maxNumber,
+                                  min: state.minNumber,
+                                );
                                 bool returnData = await Navigator.of(context)
                                     .pushNamed(Routes.viewDetailTeamParticipant,
                                         arguments: data) as bool;

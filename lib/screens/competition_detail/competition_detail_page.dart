@@ -48,9 +48,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                 : (event.message.contains("Điểm danh"))
                     ? "Bạn đã điểm danh thành công"
                     : "Lỗi",
-            btnOkOnPress: () {
-              Navigator.of(context).pop;
-            },
+            btnOkOnPress: () {},
             btnOkIcon: Icons.check_circle,
             onDissmissCallback: (type) {
               debugPrint('Dialog Dissmiss from callback $type');
@@ -70,9 +68,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                     : (event.message.contains("Competition not found"))
                         ? "Thất bại, mã điểm danh không hợp lệ"
                         : event.message,
-            btnOkOnPress: () {
-              Navigator.of(context).pop;
-            },
+            btnOkOnPress: () {},
             btnOkIcon: Icons.cancel,
             btnOkColor: Colors.red,
           ).show();

@@ -75,14 +75,17 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
           ));
         } else {
           emit(state.copyWith(
-              newListTeam: state.listTeam,
-              newCompetitionId: event.competitionId, //change
-              newHasNext: state.hasNext,
-              newCurrentPage: state.currentPage,
-              valueInvitedCode: state.valueInvitedCode,
-              newSearchName: state.searchName,
-              newStatus: state.status,
-              isLoading: false));
+            newListTeam: state.listTeam,
+            newCompetitionId: event.competitionId, //change
+            newHasNext: state.hasNext,
+            newCurrentPage: state.currentPage,
+            valueInvitedCode: state.valueInvitedCode,
+            newSearchName: state.searchName,
+            newStatus: state.status,
+            isLoading: false,
+            maxNumber: event.maxNumber, // change 1 lần duy nhất
+            minNumber: event.minNumber, // change 1 lần duy nhất
+          ));
         }
       }
       //Refesh Event
