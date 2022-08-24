@@ -33,6 +33,11 @@ class _ViewDetailTeamParticipantPageState
   final _formKeyTeamDetailName = GlobalKey<FormState>();
 
   final _formKeyTeamDetailDescription = GlobalKey<FormState>();
+
+  //
+  int max = 0;
+  int min = 0;
+
   @override
   bool get wantKeepAlive => true;
 
@@ -82,7 +87,16 @@ class _ViewDetailTeamParticipantPageState
                     : (event.message
                             .contains("Can't out team because team is locked"))
                         ? "Thoát khỏi Đội Thất bại, hiện tại Đội Thi của bạn ở trạng thái Đóng"
-                        : 'lỗi',
+                        : (event.message.contains(
+                                "Can't Delete Team because team is locked"))
+                            ? "Xóa Đội Thất bại, hiện tại Đội Thi của bạn ở trạng thái Đóng"
+                            : (event.message
+                                    .contains("Number of member in team is "))
+                                ? "Thất bại, hiện tại số lượng thành viên trong Đội Thi của bạn không thỏa quy định của Cuộc Thi," +
+                                    ((max != min)
+                                        ? " chỉ cho phép số lượng thành viên trong khoảng từ ${min} cho tới ${max}"
+                                        : " số lượng thành viên bằng ${max}")
+                                : 'lỗi',
             btnOkOnPress: () {
               Navigator.of(context).pop;
             },
@@ -103,7 +117,12 @@ class _ViewDetailTeamParticipantPageState
       SendingDataModel data = settings.arguments as SendingDataModel;
       if (data != null) {
         bloc.add(RecieveDataEvent(
-            teamId: data.teamId, competitionId: data.competitionId));
+            teamId: data.teamId,
+            competitionId: data.competitionId,
+            max: data.max,
+            min: data.min));
+        max = data.max ?? 0;
+        min = data.min ?? 0;
       }
     }
   }
@@ -294,32 +313,6 @@ class _ViewDetailTeamParticipantPageState
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          // Row(
-                          //   children: [
-                          //     Container(
-                          //       margin:
-                          //           const EdgeInsets.only(left: 15, top: 20),
-                          //       padding: const EdgeInsets.all(5.0),
-                          //       decoration: BoxDecoration(
-                          //           border: Border.all(color: Colors.green),
-                          //           color: Colors.green,
-                          //           borderRadius:
-                          //               BorderRadius.all(Radius.circular(10))),
-                          //       child: Text(
-                          //           (state.teamDetail != null)
-                          //               ? "Mã: T-${state.teamDetail!.id}"
-                          //               : "Chưa có load mã",
-                          //           style: TextStyle(
-                          //             color: Colors.white,
-                          //             fontSize: 18,
-                          //           )),
-                          //     ),
-                          //   ],
-                          // ),
-                          // Expanded(
-                          //     child: SizedBox(
-                          //   width: 10,
-                          // )),
                           if (GetIt.I.get<CurrentUser>().id ==
                               state.userIdIsLeaderTeam)
                             Row(
@@ -333,7 +326,7 @@ class _ViewDetailTeamParticipantPageState
                                       color: Colors.green,
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10))),
-                                  child: Text(
+                                  child: SelectableText(
                                       (state.teamDetail != null)
                                           ? "Mã mời: ${state.teamDetail!.invitedCode}"
                                           : "Chưa có load mã",
@@ -359,14 +352,8 @@ class _ViewDetailTeamParticipantPageState
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            // Padding(
-                            //   padding:
-                            //       const EdgeInsets.only(right: 20, bottom: 20),
-                            //   child:
                             Container(
                               width: 200,
-                              // padding: const EdgeInsets.only(
-                              //     top: 0.5, bottom: 0.5),
                               decoration: BoxDecoration(
                                   border:
                                       Border.all(color: ArgonColors.warning),
@@ -375,26 +362,15 @@ class _ViewDetailTeamParticipantPageState
                                       BorderRadius.all(Radius.circular(30))),
                               child: FlatButton(
                                   textColor: ArgonColors.white,
-                                  //color: ArgonColors.warning,
                                   onPressed: () {
-                                    bloc.add(LoadingEvent());
                                     bloc.add(UpdateStatusTeam(
                                         status: TeamStatus.IsLocked));
                                   },
-                                  //child:
-                                  // Padding(
-                                  //     padding: EdgeInsets.only(
-                                  //         left: 16.0,
-                                  //         right: 16.0,
-                                  //         top: 12,
-                                  //         bottom: 12),
                                   child: Text("Khóa nhóm",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600,
                                           fontSize: 15.0))),
                             ),
-                            //),
-                            //),
                           ],
                         ),
                       if (state.status == TeamStatus.IsLocked &&
@@ -403,14 +379,8 @@ class _ViewDetailTeamParticipantPageState
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            // Padding(
-                            //   padding:
-                            //       const EdgeInsets.only(right: 20, bottom: 20),
-                            //   child:
                             Container(
                               width: 200,
-                              // padding: const EdgeInsets.only(
-                              //     top: 0.5, bottom: 0.5),
                               decoration: BoxDecoration(
                                   border:
                                       Border.all(color: ArgonColors.warning),
@@ -419,26 +389,15 @@ class _ViewDetailTeamParticipantPageState
                                       BorderRadius.all(Radius.circular(30))),
                               child: FlatButton(
                                   textColor: ArgonColors.white,
-                                  //color: ArgonColors.warning,
                                   onPressed: () {
-                                    bloc.add(LoadingEvent());
                                     bloc.add(UpdateStatusTeam(
                                         status: TeamStatus.Available));
                                   },
-                                  // child: Padding(
-                                  //     padding: EdgeInsets.only(
-                                  //         left: 16.0,
-                                  //         right: 16.0,
-                                  //         top: 12,
-                                  //         bottom: 12),
                                   child: Text("Mở nhóm",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600,
-                                          fontSize: 15.0))
-                                  //),
-                                  ),
+                                          fontSize: 15.0))),
                             ),
-                            //),
                           ],
                         ),
                       SizedBox(height: 20),
@@ -447,14 +406,8 @@ class _ViewDetailTeamParticipantPageState
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            // Padding(
-                            //   padding:
-                            //       const EdgeInsets.only(right: 20, bottom: 20),
-                            //   child:
                             Container(
                               width: 200,
-                              // padding:
-                              //     const EdgeInsets.only(top: 0.5, bottom: 0.5),
                               decoration: BoxDecoration(
                                   border:
                                       Border.all(color: ArgonColors.warning),
@@ -463,7 +416,6 @@ class _ViewDetailTeamParticipantPageState
                                       BorderRadius.all(Radius.circular(30))),
                               child: FlatButton(
                                   textColor: ArgonColors.white,
-                                  //color: ArgonColors.warning,
                                   onPressed: () {
                                     AwesomeDialog(
                                       context: context,
@@ -476,27 +428,16 @@ class _ViewDetailTeamParticipantPageState
                                       title: 'Bạn Chắc Chứ',
                                       // padding: const EdgeInsets.all(5.0),
                                       desc: 'Bạn có muốn xóa Đội Thi không ?',
-                                      btnCancelOnPress: () {
-                                        Navigator.of(context).pop();
-                                      },
+                                      btnCancelOnPress: () {},
                                       btnOkOnPress: () {
                                         bloc.add(DeleteTeamByLeaderEvent());
                                       },
                                     ).show();
                                   },
-                                  // child: Padding(
-                                  //     padding: EdgeInsets.only(
-                                  //         left: 16.0,
-                                  //         right: 16.0,
-                                  //         top: 12,
-                                  //         bottom: 12),
                                   child: Text("Xóa đội thi",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600,
-                                          fontSize: 15.0))
-                                  //),
-                                  ),
-                              //),
+                                          fontSize: 15.0))),
                             ),
                           ],
                         ),
@@ -505,14 +446,8 @@ class _ViewDetailTeamParticipantPageState
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            // Padding(
-                            //   padding:
-                            //       const EdgeInsets.only(right: 20, bottom: 20),
-                            //   child:
                             Container(
                               width: 200,
-                              // padding: const EdgeInsets.only(
-                              //     top: 0.5, bottom: 0.5),
                               decoration: BoxDecoration(
                                   border:
                                       Border.all(color: ArgonColors.warning),
@@ -521,7 +456,6 @@ class _ViewDetailTeamParticipantPageState
                                       BorderRadius.all(Radius.circular(30))),
                               child: FlatButton(
                                   textColor: ArgonColors.white,
-                                  //color: ArgonColors.warning,
                                   onPressed: () {
                                     AwesomeDialog(
                                       context: context,
@@ -532,31 +466,18 @@ class _ViewDetailTeamParticipantPageState
                                       btnCancelText: "Hủy",
                                       btnOkText: "Xác Nhận",
                                       title: 'Bạn Chắc Chứ',
-                                      // padding: const EdgeInsets.all(5.0),
                                       desc: 'Bạn có muốn thoát Đội Thi không ?',
-                                      btnCancelOnPress: () {
-                                        Navigator.of(context).pop();
-                                      },
+                                      btnCancelOnPress: () {},
                                       btnOkOnPress: () {
-                                        bloc.add(LoadingEvent());
                                         bloc.add(MemberOutTeamEvent());
                                       },
                                     ).show();
                                   },
-                                  // child: Padding(
-                                  //     padding: EdgeInsets.only(
-                                  //         left: 16.0,
-                                  //         right: 16.0,
-                                  //         top: 12,
-                                  //         bottom: 12),
                                   child: Text("Thoát khỏi nhóm",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600,
-                                          fontSize: 15.0))
-                                  //),
-                                  ),
+                                          fontSize: 15.0))),
                             ),
-                            //),
                           ],
                         ),
                     ]),

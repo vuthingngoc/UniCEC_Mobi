@@ -201,21 +201,15 @@ class _BodyState extends State<Body> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Padding(
-                    //   padding: const EdgeInsets.only(right: 20, bottom: 20),
-                    //   child:
                     Container(
                       width: 200,
-                      //padding: const EdgeInsets.only(top: 0.5, bottom: 0.5),
                       decoration: BoxDecoration(
                           border: Border.all(color: ArgonColors.warning),
                           color: ArgonColors.warning,
                           borderRadius: BorderRadius.all(Radius.circular(30))),
                       child: FlatButton(
                           textColor: ArgonColors.white,
-                          //color: ArgonColors.warning,
                           onPressed: () {
-                            //Respond to button press
                             showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
@@ -302,18 +296,11 @@ class _BodyState extends State<Body> {
                                   );
                                 });
                           },
-                          child:
-                              //  Padding(
-                              //     padding: EdgeInsets.only(
-                              //         left: 16.0, right: 16.0, top: 12, bottom: 12),
-                              //     child:
-                              Text("Nhập mã tham gia",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 15.0))),
+                          child: Text("Nhập mã tham gia",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15.0))),
                     ),
-                    //),
-                    //),
                   ],
                 ),
               SizedBox(height: 20),

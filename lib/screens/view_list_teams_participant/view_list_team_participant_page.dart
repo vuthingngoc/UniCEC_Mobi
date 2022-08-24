@@ -36,7 +36,7 @@ class _ViewListTeamParticipantPageState
     //mặc định competition id 2
     //bloc.add(RecieveDataEvent(competitionId: 2));
     //
-    bloc.listenerStream.listen((event) {
+    bloc.listenerStream.listen((event) async {
       if (event is ShowingSnackBarEvent) {
         if (event.message.contains("thành công")) {
           AwesomeDialog(
@@ -101,8 +101,13 @@ class _ViewListTeamParticipantPageState
             teamName: event.teamName,
             teamDescription: event.teamDescription,
             status: event.status);
-        Navigator.of(context)
-            .pushNamed(Routes.viewDetailTeamParticipant, arguments: data);
+        bool returnData = await Navigator.of(context)
+                .pushNamed(Routes.viewDetailTeamParticipant, arguments: data)
+            as bool;
+        if (returnData) {
+          bloc.add(LoadingEvent());
+          bloc.add(ResetFilterEvent());
+        }
       }
       if (event is RebuildListViewTeamEvent) {
         bloc.add(ViewListTeamInitEvent());

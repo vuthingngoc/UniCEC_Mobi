@@ -15,37 +15,40 @@ class ViewDetailTeamParticipantState extends Equatable {
   TeamStatus status;
   bool isLoading;
 
-  ViewDetailTeamParticipantState(
-      {required this.teamDetail,
-      required this.competitionId,
-      required this.teamId,
-      required this.userIdIsLeaderTeam,
-      required this.userIdInTeam,
-      required this.valueTeamName,
-      required this.valueTeamDescription,
-      required this.status,
-      required this.isLoading});
+  ViewDetailTeamParticipantState({
+    required this.teamDetail,
+    required this.competitionId,
+    required this.teamId,
+    required this.userIdIsLeaderTeam,
+    required this.userIdInTeam,
+    required this.valueTeamName,
+    required this.valueTeamDescription,
+    required this.status,
+    required this.isLoading,
+  });
 
-  ViewDetailTeamParticipantState copyWith(
-      {required TeamDetailModel? newTeamDetail,
-      required int newCompetitionId,
-      required int newTeamId,
-      required int newUserIdLeaderTeam,
-      required int newUserIdInTeam,
-      required String newValueTeamName,
-      required String newValueTeamDescription,
-      required TeamStatus newStatus,
-      required bool isLoading}) {
+  ViewDetailTeamParticipantState copyWith({
+    required TeamDetailModel? newTeamDetail,
+    required int newCompetitionId,
+    required int newTeamId,
+    required int newUserIdLeaderTeam,
+    required int newUserIdInTeam,
+    required String newValueTeamName,
+    required String newValueTeamDescription,
+    required TeamStatus newStatus,
+    required bool isLoading,
+  }) {
     return ViewDetailTeamParticipantState(
-        teamDetail: newTeamDetail,
-        competitionId: newCompetitionId,
-        teamId: newTeamId,
-        userIdIsLeaderTeam: newUserIdLeaderTeam,
-        userIdInTeam: newUserIdInTeam,
-        valueTeamName: newValueTeamName,
-        valueTeamDescription: newValueTeamDescription,
-        status: newStatus,
-        isLoading: isLoading);
+      teamDetail: newTeamDetail,
+      competitionId: newCompetitionId,
+      teamId: newTeamId,
+      userIdIsLeaderTeam: newUserIdLeaderTeam,
+      userIdInTeam: newUserIdInTeam,
+      valueTeamName: newValueTeamName,
+      valueTeamDescription: newValueTeamDescription,
+      status: newStatus,
+      isLoading: isLoading,
+    );
   }
 
   @override
@@ -58,6 +61,6 @@ class ViewDetailTeamParticipantState extends Equatable {
         valueTeamName,
         valueTeamDescription,
         status,
-        isLoading
+        isLoading,
       ];
 }

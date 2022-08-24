@@ -15,15 +15,16 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
   ITeamService service;
   ViewDetailTeamParticipantBloc({required this.service})
       : super(ViewDetailTeamParticipantState(
-            teamDetail: null,
-            competitionId: -1,
-            teamId: -1,
-            userIdIsLeaderTeam: -1,
-            userIdInTeam: -1,
-            valueTeamName: '',
-            valueTeamDescription: '',
-            status: TeamStatus.Available,
-            isLoading: true)) {
+          teamDetail: null,
+          competitionId: -1,
+          teamId: -1,
+          userIdIsLeaderTeam: -1,
+          userIdInTeam: -1,
+          valueTeamName: '',
+          valueTeamDescription: '',
+          status: TeamStatus.Available,
+          isLoading: true,
+        )) {
     on((event, emit) async {
       if (event is RecieveDataEvent) {
         TeamDetailModel? result =
@@ -170,6 +171,7 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
         ResultCRUD check = await service.DeleteTeam(state.teamDetail!.id);
         if (check.check) {
           listener.add(BackPreviousPageEvent());
+          //listener.add(ShowingSnackBarEvent(message: "Xóa nhóm thành công"));
         } else {
           listener.add(ShowingSnackBarEvent(message: check.errorMessage));
         }

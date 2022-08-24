@@ -5,7 +5,13 @@ class ViewDetailTeamParticipantEvent {}
 class RecieveDataEvent extends ViewDetailTeamParticipantEvent {
   int competitionId;
   int teamId;
-  RecieveDataEvent({required this.teamId, required this.competitionId});
+  int? max;
+  int? min;
+  RecieveDataEvent(
+      {required this.teamId,
+      required this.competitionId,
+      required this.max,
+      required this.min});
 }
 
 //get description
