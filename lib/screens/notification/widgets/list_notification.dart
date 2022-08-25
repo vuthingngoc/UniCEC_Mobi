@@ -86,26 +86,30 @@ class _ListNotificationState extends State<ListNotification> {
                                       ),
                                       maxLines: 2,
                                     ),
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            Utils.convertDateTime(notifications[index].createTime),
-                                            style: TextStyle(
-                                              color: Colors.black26,
-                                              fontSize: Dimens.size15,
+
+                                    Container(
+                                      padding: EdgeInsets.only(top: 10),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              Utils.convertDateTime(notifications[index].createTime),
+                                              style: TextStyle(
+                                                color: Colors.black26,
+                                                fontSize: Dimens.size15,
+                                              ),
+                                              maxLines: 1,
                                             ),
-                                            maxLines: 1,
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                     SizedBox(
                                       height: Dimens.size15,
                                     ),
                                     Text(
                                       notifications[index].body,
-                                      style: TextStyle(fontSize: Dimens.size16),
+                                      style: TextStyle(fontSize: 16),
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                     )

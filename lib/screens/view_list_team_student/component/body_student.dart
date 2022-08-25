@@ -26,38 +26,51 @@ class _BodyStudentState extends State<BodyStudent> {
           return SingleChildScrollView(
             padding: EdgeInsets.symmetric(vertical: 20),
             child: Column(children: [
-              if (state.listTeam.isNotEmpty)
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  SizedBox(
-                    width: 40,
+                  Text(
+                    "*",
+                    style: TextStyle(color: Colors.red),
                   ),
-                  Expanded(
-                      child: Text(
-                    "Tên đội",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                  )),
-                  Expanded(
-                      child: Text(
-                    "Số thành viên",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                  )),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Expanded(
-                      child: Text(
-                    "Trạng thái",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                  )),
-                  Expanded(
-                      child: Text(
-                    "Chi tiết",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                  )),
+                  Text("Hãy tham gia Cuộc thi để có đội thi của riêng bạn!", style: TextStyle(fontSize: 14),)
                 ],
               ),
+              if (state.listTeam.isNotEmpty)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      width: 40,
+                    ),
+                    Expanded(
+                        child: Text(
+                      "Tên đội",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    )),
+                    Expanded(
+                        child: Text(
+                      "Số thành viên",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    )),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(
+                        child: Text(
+                      "Trạng thái",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    )),
+                    Expanded(
+                        child: Text(
+                      "Chi tiết",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    )),
+                  ],
+                ),
               ViewListTeamStudentMenu(),
             ]),
           );

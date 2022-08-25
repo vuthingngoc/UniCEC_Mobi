@@ -82,8 +82,8 @@ class CardSmall extends StatelessWidget {
                               Container(
                                 margin: const EdgeInsets.only(right: 20),
                                 decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.red),
-                                    color: Colors.red,
+                                    border: Border.all(color: ArgonColors.error),
+                                    color: ArgonColors.error,
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(5))),
                                 child: Text(Utils.convertDateTime(date),
@@ -275,7 +275,7 @@ class CardSmall extends StatelessWidget {
                                     style: const TextStyle(
                                         color: ArgonColors.primary,
                                         fontSize: 15,
-                                        fontWeight: FontWeight.w600)),
+                                        fontStyle: FontStyle.italic)),
                                 //
                               ]),
                           //),

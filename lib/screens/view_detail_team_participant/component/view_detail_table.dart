@@ -125,7 +125,7 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
               if (member.teamRoleName.compareTo("Leader") == 0)
                 Icon(
                   Icons.star,
-                  color: Colors.yellow,
+                  color: Colors.red,
                 )
             ]));
           } else if (e == 2) {
