@@ -148,7 +148,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                   },
                   icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
                 ),
-                title: const Text("Chi tiết cuộc thi",
+                title: const Text("Chi tiết",
                     style: TextStyle(color: Colors.white, fontSize: 23)),
                 automaticallyImplyLeading: false,
                 centerTitle: true,
@@ -244,10 +244,9 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                             .all(3.0),
                                                     decoration: BoxDecoration(
                                                         border: Border.all(
-                                                            color: Colors
-                                                                .green),
+                                                            color: ArgonColors.success),
                                                         color:
-                                                            Colors.green,
+                                                            ArgonColors.success,
                                                         borderRadius:
                                                             const BorderRadius
                                                                     .all(
@@ -736,10 +735,8 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                             ),
                                                           ),
                                                         ]),
-                                              Padding(
-                                                padding: const EdgeInsets
-                                                        .symmetric(
-                                                    horizontal: 20.0),
+                                              Container(
+                                                alignment: Alignment.center,
                                                 child: Wrap(
                                                   // mainAxisAlignment:
                                                   //     MainAxisAlignment
@@ -758,9 +755,9 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                             RaisedButton(
                                                                 textColor:
                                                                     ArgonColors
-                                                                        .primary,
+                                                                        .white,
                                                                 color: ArgonColors
-                                                                    .secondary,
+                                                                    .warning,
                                                                 onPressed:
                                                                     () {
                                                                   //chuyển sang trang list team
@@ -807,9 +804,9 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                             RaisedButton(
                                                                 textColor:
                                                                     ArgonColors
-                                                                        .primary,
+                                                                        .white,
                                                                 color: ArgonColors
-                                                                    .secondary,
+                                                                    .success,
                                                                 onPressed:
                                                                     () {
                                                                   Navigator.pushNamed(
@@ -840,6 +837,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                 ),
                                               ),
                                               Container(
+                                                alignment: Alignment.center,
                                                 margin:
                                                     const EdgeInsets.all(
                                                         15.0),
@@ -849,14 +847,14 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                 decoration: BoxDecoration(
                                                     border: Border.all(
                                                         color:
-                                                            Colors.red),
-                                                    color: Colors.red,
+                                                            ArgonColors.white),
+                                                    color: ArgonColors.error,
                                                     borderRadius:
                                                         const BorderRadius
                                                                 .all(
                                                             Radius
                                                                 .circular(
-                                                                    10))),
+                                                                    4))),
                                                 child: Text(
                                                     "Hạn cuối đăng ký: " +
                                                         Utils.convertDateTime(_bloc

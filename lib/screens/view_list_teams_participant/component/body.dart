@@ -39,33 +39,36 @@ class _BodyState extends State<Body> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
-                      child: TextFormField(
-                          controller: _controller,
-                          onFieldSubmitted: (value) {
-                            bloc.add(ChangeSearchNameEvent(searchName: value));
-                          },
-                          autofocus: false,
-                          decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                                onPressed: () {
-                                  _controller.clear;
-                                  _controller.text = "";
-                                  //sửa lại cái
-                                  bloc.add(
-                                      ChangeSearchNameEvent(searchName: null));
-                                },
-                                icon: const Icon(Icons.clear)),
-                            labelText: 'Tìm Tên Đội',
-                            focusedBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.grey,
+                      child: Container(
+                        padding: const EdgeInsets.only(left: 10, right: 5),
+                        child: TextFormField(
+                            controller: _controller,
+                            onFieldSubmitted: (value) {
+                              bloc.add(ChangeSearchNameEvent(searchName: value));
+                            },
+                            autofocus: false,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                  onPressed: () {
+                                    _controller.clear;
+                                    _controller.text = "";
+                                    //sửa lại cái
+                                    bloc.add(
+                                        ChangeSearchNameEvent(searchName: null));
+                                  },
+                                  icon: const Icon(Icons.clear)),
+                              labelText: 'Tìm Tên Đội',
+                              focusedBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.grey,
+                                ),
                               ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.grey, width: 1.0),
-                            ),
-                          )),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.grey, width: 1.0),
+                              ),
+                            )),
+                      ),
                     ),
                     GestureDetector(
                       onTap: () {

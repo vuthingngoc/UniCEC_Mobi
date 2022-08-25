@@ -144,12 +144,15 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                       ),
                                     )),
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  bloc.add(LoadingEvent());
-                                  bloc.add(SearchEvent());
-                                },
-                                child: Icon(Icons.search),
+                              Container(
+                                padding: EdgeInsets.only(left: 10),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    bloc.add(LoadingEvent());
+                                    bloc.add(SearchEvent());
+                                  },
+                                  child: Icon(Icons.search),
+                                ),
                               ),
                               PopupMenuButton<int>(
                                   icon: Icon(Icons.filter_alt_outlined),
@@ -276,7 +279,7 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                             Text(widget.categoryOne,
                                                 style: TextStyle(
                                                     color: ArgonColors
-                                                        .inputSuccess,
+                                                        .warning,
                                                     fontSize: 16.0))
                                           ]),
                                         )
@@ -306,8 +309,7 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                           child: Row(children: [
                                             Text(widget.categoryTwo,
                                                 style: TextStyle(
-                                                    color: ArgonColors
-                                                        .inputSuccess,
+                                                    color: ArgonColors.warning,
                                                     fontSize: 16.0))
                                           ]),
                                         )

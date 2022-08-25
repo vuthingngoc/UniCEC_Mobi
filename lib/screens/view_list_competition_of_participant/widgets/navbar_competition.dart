@@ -96,7 +96,7 @@ class _NavbarCompetitionOfParticipantState
                   ]),
               child: SafeArea(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                  padding: const EdgeInsets.only(top: 5,left: 16.0, right: 16.0),
                   child: Column(
                     children: [
                       Row(
@@ -128,44 +128,50 @@ class _NavbarCompetitionOfParticipantState
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Expanded(
-                              child: TextFormField(
-                                  controller: _controller,
-                                  onFieldSubmitted: (value) {
-                                    bloc.add(ChangeSearchNameEvent(
-                                        searchName: value));
-                                  },
-                                  autofocus: false,
-                                  decoration: InputDecoration(
-                                    suffixIcon: IconButton(
-                                        onPressed: () {
-                                          _controller.clear;
-                                          _controller.text = "";
-                                          //sửa lại cái
-                                          bloc.add(ChangeSearchNameEvent(
-                                              searchName: null));
-                                        },
-                                        icon: const Icon(Icons.clear)),
-                                    labelText: (state.isEvent == false)
-                                        ? 'Tìm kiếm theo tên Cuộc Thi'
-                                        : 'Tìm kiếm theo tên Sự Kiện',
-                                    focusedBorder: const OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Colors.grey,
+                            Container(
+                              // padding: const EdgeInsets.only(left: 5, right: 5),
+                              child: Expanded(
+                                child: TextFormField(
+                                    controller: _controller,
+                                    onFieldSubmitted: (value) {
+                                      bloc.add(ChangeSearchNameEvent(
+                                          searchName: value));
+                                    },
+                                    autofocus: false,
+                                    decoration: InputDecoration(
+                                      suffixIcon: IconButton(
+                                          onPressed: () {
+                                            _controller.clear;
+                                            _controller.text = "";
+                                            //sửa lại cái
+                                            bloc.add(ChangeSearchNameEvent(
+                                                searchName: null));
+                                          },
+                                          icon: const Icon(Icons.clear)),
+                                      labelText: (state.isEvent == false)
+                                          ? 'Tìm kiếm theo tên Cuộc Thi'
+                                          : 'Tìm kiếm theo tên Sự Kiện',
+                                      focusedBorder: const OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.grey,
+                                        ),
                                       ),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.grey, width: 1.0),
-                                    ),
-                                  )),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.grey, width: 1.0),
+                                      ),
+                                    )),
+                              ),
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                bloc.add(LoadingEvent());
-                                bloc.add(SearchEvent());
-                              },
-                              child: Icon(Icons.search),
+                            Container(
+                              padding: EdgeInsets.only(left: 10),
+                              child: GestureDetector(
+                                onTap: () {
+                                  bloc.add(LoadingEvent());
+                                  bloc.add(SearchEvent());
+                                },
+                                child: Icon(Icons.search),
+                              ),
                             ),
                             PopupMenuButton<int>(
                                 icon: Icon(Icons.filter_alt_outlined),
@@ -434,7 +440,7 @@ class _NavbarCompetitionOfParticipantState
                                             Text(widget.categoryOne,
                                                 style: TextStyle(
                                                     color: ArgonColors
-                                                        .inputSuccess,
+                                                        .warning,
                                                     fontSize: 16.0))
                                           ]),
                                         )
@@ -471,7 +477,7 @@ class _NavbarCompetitionOfParticipantState
                                             Text(widget.categoryTwo,
                                                 style: TextStyle(
                                                     color: ArgonColors
-                                                        .inputSuccess,
+                                                        .warning,
                                                     fontSize: 16.0))
                                           ]),
                                         )

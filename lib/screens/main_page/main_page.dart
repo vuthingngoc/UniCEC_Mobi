@@ -308,7 +308,7 @@ class _MainPageState extends State<MainPage> {
                       child: Align(
                           alignment: Alignment.bottomCenter,
                           child: Text(
-                            "Cuộc thi",
+                            "",
                             style: TextStyle(
                                 color:
                                     //ss1 chắc chắn là trang 2

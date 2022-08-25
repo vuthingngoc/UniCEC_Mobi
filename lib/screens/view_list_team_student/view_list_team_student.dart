@@ -58,7 +58,7 @@ class _ViewListTeamStudentPageState extends State<ViewListTeamStudentPage>
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+                    icon: Icon(Icons.arrow_back_ios, color: Colors.white),
                   ),
                   title: Text(
                     "Danh sách các đội tham gia",
