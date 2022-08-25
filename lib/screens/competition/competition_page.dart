@@ -84,7 +84,7 @@ class _CompetitionPageState extends State<CompetitionPage>
                             state.competitions.isNotEmpty))
                     ? Loading()
                     : Container(
-                        padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+                        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                         child: (state.competitions.isNotEmpty)
                             ? RefreshIndicator(
                                 onRefresh: () {
