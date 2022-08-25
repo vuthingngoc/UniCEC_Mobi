@@ -55,15 +55,22 @@ dependencies:
   simple_animations: ^4.2.0
   url_launcher: ^6.1.4
   awesome_dialog: ^2.2.1
+  
 
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
-
+  flutter_launcher_icons: ^0.10.0
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/img/logo-app-splash.jpg"
+
 flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

@@ -13,19 +13,29 @@ class NotificationService implements INotificationService {
   Adapter adapter = Adapter();
 
   @override
-  Future<PagingResult<NotificationModel>?> GetAllNotisByUser(int userId, PagingRequest? request) async {
-    var client = http.Client();    
-    String params = "?currentPage=${request?.currentPage ?? 1}&pageSize=${request?.pageSize ?? 10}";
-    String url = Api.GetUrl(apiPath: "${Api.notifications}/user/$userId$params");
+  Future<PagingResult<NotificationModel>?> GetAllNotisByUser(
+      int userId, PagingRequest? request) async {
+    var client = http.Client();
+    String params =
+        "?currentPage=${request?.currentPage ?? 1}&pageSize=${request?.pageSize ?? 10}";
+    String url =
+        Api.GetUrl(apiPath: "${Api.notifications}/user/$userId$params");
     String token = GetIt.I.get<CurrentUser>().idToken;
     print('notification url: $url');
     try {
       var response =
           await client.get(Uri.parse(url), headers: Api.GetHeader(token));
       print('response: $response');
+      String isList = "[]";
       if (response.statusCode == 200) {
-        Map<String, dynamic> json = adapter.parseToMap(response);
-        return PagingResult.fromJson(json, NotificationModel.fromJson);
+        if (response.body.toString().compareTo(isList) == 0) {
+          //TH1
+          List<dynamic> list = adapter.parseToList(response);
+          return null;
+        } else {
+          Map<String, dynamic> json = adapter.parseToMap(response);
+          return PagingResult.fromJson(json, NotificationModel.fromJson);
+        }
       }
     } catch (e) {
       Log.error(e.toString());
@@ -38,8 +48,9 @@ class NotificationService implements INotificationService {
     String url = Api.GetUrl(apiPath: "${Api.notifications}/$id");
     String token = GetIt.I.get<CurrentUser>().idToken;
     try {
-      var response = await client.get(Uri.parse(url), headers: Api.GetHeader(token));
-      if(response.statusCode == 200){
+      var response =
+          await client.get(Uri.parse(url), headers: Api.GetHeader(token));
+      if (response.statusCode == 200) {
         Map<String, dynamic> json = adapter.parseToMap(response);
         return NotificationModel.fromJson(json);
       }
