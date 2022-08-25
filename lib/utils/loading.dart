@@ -9,10 +9,14 @@ class Loading extends StatelessWidget {
     return Container(
       color: Colors.white,
       child: Center(
-          child: SpinKitCircle(
-        color: AppColors.mainColor,
-        size: 50.0,
-      )),
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        SpinKitCircle(
+          color: AppColors.mainColor,
+          size: 50.0,
+        ),
+        SizedBox(height: 10),
+        Text("Đang tải...")
+      ])),
     );
   }
 }

@@ -17,3 +17,5 @@ class ShowingSnackBarEvent extends LoginEvent {
 
   ShowingSnackBarEvent({required this.message});
 }
+
+class LoadingEvent extends LoginEvent {}

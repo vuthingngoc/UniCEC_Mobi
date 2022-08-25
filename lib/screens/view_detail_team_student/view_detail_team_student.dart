@@ -60,59 +60,59 @@ class _ViewDetailTeamStudentPageState extends State<ViewDetailTeamStudentPage>
       child: BlocBuilder<ViewDetailTeamStudentBloc, ViewDetailTeamStudentState>(
         bloc: bloc,
         builder: (context, state) {
-          return (state.isLoading)
-              ? Loading()
-              : Scaffold(
-                  appBar: AppBar(
-                    leading: IconButton(
-                      onPressed: () {
-                        Navigator.of(context).pop(true);
-                      },
-                      icon: Icon(Icons.arrow_back_ios, color: Colors.black),
-                    ),
-                    title: Text(
-                      state.teamDetail?.name ?? "Chưa Load Team Name",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    automaticallyImplyLeading: false,
-                    centerTitle: true,
-                    backgroundColor: AppColors.mainColor,
-                  ),
-                  body: SingleChildScrollView(
-                    child: Column(children: [
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: [
-                      //     Row(
-                      //       children: [
-                      //         Container(
-                      //           margin:
-                      //               const EdgeInsets.only(left: 15, top: 20),
-                      //           padding: const EdgeInsets.all(5.0),
-                      //           decoration: BoxDecoration(
-                      //               border: Border.all(color: Colors.green),
-                      //               color: Colors.green,
-                      //               borderRadius:
-                      //                   BorderRadius.all(Radius.circular(10))),
-                      //           child: Text(
-                      //               (state.teamDetail != null)
-                      //                   ? "Mã: T-${state.teamDetail!.id}"
-                      //                   : "Chưa có load mã",
-                      //               style: TextStyle(
-                      //                 color: Colors.white,
-                      //                 fontSize: 18,
-                      //               )),
-                      //         ),
-                      //       ],
-                      //     )
-                      //   ],
-                      // ),
-                      (state.teamDetail?.participants != null)
-                          ? ViewDetailTableStudentMenu(
-                              listModel: state.teamDetail!.participants)
-                          : Text("Chưa có load danh sách Team"),
-                    ]),
-                  ));
+          return Scaffold(
+              appBar: AppBar(
+                leading: IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(true);
+                  },
+                  icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+                ),
+                title: Text(
+                  state.teamDetail?.name ?? "Chưa Load Team Name",
+                  style: TextStyle(color: Colors.white),
+                ),
+                automaticallyImplyLeading: false,
+                centerTitle: true,
+                backgroundColor: AppColors.mainColor,
+              ),
+              body: (state.isLoading)
+                  ? Loading()
+                  : SingleChildScrollView(
+                      child: Column(children: [
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //   children: [
+                        //     Row(
+                        //       children: [
+                        //         Container(
+                        //           margin:
+                        //               const EdgeInsets.only(left: 15, top: 20),
+                        //           padding: const EdgeInsets.all(5.0),
+                        //           decoration: BoxDecoration(
+                        //               border: Border.all(color: Colors.green),
+                        //               color: Colors.green,
+                        //               borderRadius:
+                        //                   BorderRadius.all(Radius.circular(10))),
+                        //           child: Text(
+                        //               (state.teamDetail != null)
+                        //                   ? "Mã: T-${state.teamDetail!.id}"
+                        //                   : "Chưa có load mã",
+                        //               style: TextStyle(
+                        //                 color: Colors.white,
+                        //                 fontSize: 18,
+                        //               )),
+                        //         ),
+                        //       ],
+                        //     )
+                        //   ],
+                        // ),
+                        (state.teamDetail?.participants != null)
+                            ? ViewDetailTableStudentMenu(
+                                listModel: state.teamDetail!.participants)
+                            : Text("Chưa có load danh sách Team"),
+                      ]),
+                    ));
         },
       ),
     );

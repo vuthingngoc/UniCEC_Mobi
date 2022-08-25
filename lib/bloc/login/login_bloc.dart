@@ -17,10 +17,9 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
   bool isLoading = false;
 
   LoginBloc({required this.service, required this.userService})
-      : super(LoginState(errorEmail: '')) {
+      : super(LoginState(loading: false)) {
     on((event, emit) async {
       if (event is SignInGoogleEvent) {
-        //isLoading = true;
         UserCredential? credential = await FirebaseUtils.signInWithGoogle();
         if (credential != null) {
           //xử lý logic ở chỗ này
@@ -31,19 +30,24 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
           UniSelectorModel? uniSelector = await saveUserData(credential.user);
           if (uniSelector != null) {
             if (uniSelector.listUniBelongToEmail.isEmpty) {
+              emit(state.copyWith(loading: false));
               listener.add(NavigatorWelcomePageEvent());
             } else {
+              emit(state.copyWith(loading: false));
               listener.add(NavigatorUniversitySelectionPageEvent(
                   listUniBelongToEmail: uniSelector.listUniBelongToEmail));
             }
           } //bắt trường hợp đăng nhập gmail kh phải của trường
           else {
+            emit(state.copyWith(loading: false));
             listener
                 .add(ShowingSnackBarEvent(message: "Tài khoản không hợp lệ"));
             await FirebaseUtils.logout();
           }
         }
-        //isLoading = false;
+      }
+      if (event is LoadingEvent) {
+        emit(state.copyWith(loading: true));
       }
     });
   }
