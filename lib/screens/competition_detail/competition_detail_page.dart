@@ -15,6 +15,7 @@ import '../../utils/app_color.dart';
 import '../../utils/loading.dart';
 import '../../utils/log.dart';
 import '../../utils/router.dart';
+import '../../utils/utils.dart';
 import '../size_config.dart';
 import '../widgets/drawer.dart';
 
@@ -313,7 +314,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                       ? Row(
                                                           children: [
                                                             SizedBox(
-                                                              height: 100.0,
+                                                              height: 60,
                                                               child: ListView
                                                                   .builder(
                                                                       scrollDirection:
@@ -351,6 +352,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                         )
                                                       : Row(
                                                           children: [
+                                                            // major
                                                             Container(
                                                               margin:
                                                                   const EdgeInsets
@@ -397,7 +399,11 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                         const SizedBox(
                                                             width: 10.0),
                                                         Text(
-                                                          "${_bloc.state.competitionDetail?.startTime}",
+                                                          Utils.convertDateTime(
+                                                              _bloc
+                                                                  .state
+                                                                  .competitionDetail!
+                                                                  .startTime),
                                                           style:
                                                               const TextStyle(
                                                                   fontSize: 18),
@@ -900,7 +906,11 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                 Radius.circular(
                                                                     10))),
                                                     child: Text(
-                                                        "Hạn cuối đăng ký: ${_bloc.state.competitionDetail?.endTimeRegister}",
+                                                        "Hạn cuối đăng ký: " +
+                                                            Utils.convertDateTime(_bloc
+                                                                .state
+                                                                .competitionDetail!
+                                                                .endTimeRegister),
                                                         style: const TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 18,

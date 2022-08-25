@@ -80,33 +80,33 @@ class _ViewDetailTeamStudentPageState extends State<ViewDetailTeamStudentPage>
                   ),
                   body: SingleChildScrollView(
                     child: Column(children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                margin:
-                                    const EdgeInsets.only(left: 15, top: 20),
-                                padding: const EdgeInsets.all(5.0),
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.green),
-                                    color: Colors.green,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10))),
-                                child: Text(
-                                    (state.teamDetail != null)
-                                        ? "Mã: T-${state.teamDetail!.id}"
-                                        : "Chưa có load mã",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                    )),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Row(
+                      //       children: [
+                      //         Container(
+                      //           margin:
+                      //               const EdgeInsets.only(left: 15, top: 20),
+                      //           padding: const EdgeInsets.all(5.0),
+                      //           decoration: BoxDecoration(
+                      //               border: Border.all(color: Colors.green),
+                      //               color: Colors.green,
+                      //               borderRadius:
+                      //                   BorderRadius.all(Radius.circular(10))),
+                      //           child: Text(
+                      //               (state.teamDetail != null)
+                      //                   ? "Mã: T-${state.teamDetail!.id}"
+                      //                   : "Chưa có load mã",
+                      //               style: TextStyle(
+                      //                 color: Colors.white,
+                      //                 fontSize: 18,
+                      //               )),
+                      //         ),
+                      //       ],
+                      //     )
+                      //   ],
+                      // ),
                       (state.teamDetail?.participants != null)
                           ? ViewDetailTableStudentMenu(
                               listModel: state.teamDetail!.participants)

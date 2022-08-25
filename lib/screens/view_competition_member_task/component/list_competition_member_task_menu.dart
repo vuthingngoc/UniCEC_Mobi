@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:loadmore/loadmore.dart';
 import '../../../utils/loading.dart';
+import '../../../utils/utils.dart';
 import '/bloc/view_competition_member_task/view_competition_member_task_event.dart';
 import '/models/common/current_user.dart';
 import '../../../bloc/view_competition_member_task/view_competition_member_task_bloc.dart';
@@ -292,11 +293,11 @@ class _ViewCompetitionMemberTaskMenuState
                                                                   .blueGrey)),
                                                     ),
                                                     Text(
-                                                        state
-                                                            .listCompetition[
-                                                                index]
-                                                            .createTime
-                                                            .toString(),
+                                                        Utils.convertDateTime(
+                                                            state
+                                                                .listCompetition[
+                                                                    index]
+                                                                .createTime),
                                                         style: TextStyle(
                                                             fontSize: 18,
                                                             fontWeight:

@@ -96,7 +96,7 @@ class _ViewDetailTeamParticipantPageState
                                     ((max != min)
                                         ? " chỉ cho phép số lượng thành viên trong khoảng từ ${min} cho tới ${max}"
                                         : " số lượng thành viên bằng ${max}")
-                                : 'lỗi',
+                                : event.message,
             btnOkOnPress: () {
               Navigator.of(context).pop;
             },

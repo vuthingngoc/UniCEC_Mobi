@@ -99,7 +99,7 @@ class _MainPageState extends State<MainPage> {
     /// gives  you the message on which user taps
     /// and it opened  the app from terminated state
     FirebaseMessaging.instance.getInitialMessage().then((message) {
-      if(message != null){
+      if (message != null) {
         final routeFromMessage = message.data['route'];
 
         Navigator.of(context).pushNamed(routeFromMessage);
@@ -110,7 +110,7 @@ class _MainPageState extends State<MainPage> {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print("FirebaseMessaging.onMessage.title ${message.notification?.title}");
       print('FirebaseMessaging.onMessage.body ${message.notification?.body}');
-      FirebaseUtils.display(message);     
+      FirebaseUtils.display(message);
       RemoteNotification notification = message.notification!;
       AndroidNotification android = (message.notification?.android)!;
       // If `onMessage` is triggered with a notification, construct our own
@@ -380,10 +380,10 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    _listener.cancel();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   _listener.cancel();
+  //   super.dispose();
+  // }
 }

@@ -8,6 +8,7 @@ import 'package:unicec_mobi/utils/log.dart';
 
 import '../../bloc/competition/competition_event.dart';
 import '../../constants/theme.dart';
+import '../../../utils/utils.dart';
 
 //widgets
 import '../../utils/loading.dart';
@@ -180,8 +181,9 @@ class _CompetitionPageState extends State<CompetitionPage>
                                                     type: state
                                                         .competitions[index]
                                                         .competitionTypeName,
-                                                    date:
-                                                        '${(state.competitions[index]).startTime}',
+                                                    date: (state.competitions[
+                                                            index])
+                                                        .startTime,
                                                     status: state
                                                         .competitions[index]
                                                         .status,
