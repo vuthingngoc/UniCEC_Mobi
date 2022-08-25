@@ -34,7 +34,9 @@ class SpecialOffers extends StatelessWidget {
             return SpecialOfferCard(
               image: (outStandingEvents[index]).competitionEntities[0].imageUrl,
               description: '',
-              name: (outStandingEvents[index]).name,
+              name: ''
+              //(outStandingEvents[index]).name
+              ,
               press: () async {
                 bool returnData = await Navigator.of(context).pushNamed(
                     Routes.detailCompetition,

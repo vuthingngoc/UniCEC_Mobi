@@ -89,12 +89,15 @@ class CompetitionDetailService implements ICompetitionDetailService {
   @override
   Future<ResultCRUD> attendanceCompetition(String seedsCode) async {
     var client = http.Client();
-    String url = Api.GetUrl(apiPath: '${Api.participants}/attendance');
+    String url = Api.GetUrl(
+        apiPath: '${Api.participants}/attendance?seedsCode=${seedsCode}');
     String token = GetIt.I.get<CurrentUser>().idToken;
     try {
-      var response = await client.put(Uri.parse(url),
-          headers: Api.GetHeader(token),
-          body: jsonEncode({'seeds_code': seedsCode}));
+      var response = await client.put(
+        Uri.parse(url),
+        headers: Api.GetHeader(token),
+        //body: jsonEncode({'seeds_code': seedsCode})
+      );
       return (response.statusCode == 200)
           ? ResultCRUD(errorMessage: '', check: true, returnIntData: -1)
           : ResultCRUD(

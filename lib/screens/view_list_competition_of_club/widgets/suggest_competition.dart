@@ -7,7 +7,8 @@ import 'section_title.dart';
 class SpecialOffersCompetitionOfClub extends StatelessWidget {
   final List<CompetitionShowModel> outStandingEvents;
 
-  const SpecialOffersCompetitionOfClub({Key? key, required this.outStandingEvents})
+  const SpecialOffersCompetitionOfClub(
+      {Key? key, required this.outStandingEvents})
       : super(key: key);
 
   @override
@@ -28,11 +29,11 @@ class SpecialOffersCompetitionOfClub extends StatelessWidget {
           child: Row(
               children: List.generate(outStandingEvents.length, (index) {
             return SpecialOfferCard(
-              image: (outStandingEvents[index])
-                  .competitionEntities[0]
-                  .imageUrl,
+              image: (outStandingEvents[index]).competitionEntities[0].imageUrl,
               description: '',
-              name: (outStandingEvents[index]).name,
+              name: ''
+              //(outStandingEvents[index]).name
+              ,
               press: () {},
             );
           })
