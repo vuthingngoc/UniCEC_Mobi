@@ -316,46 +316,44 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                     ?.majorsInCompetition
                                                                     .length)! >
                                                                 0)
-                                                        ? Expanded(
-                                                          child: Row(
-                                                              children: [
-                                                                SizedBox(
-                                                                  height: 60,
-                                                                  child: ListView
-                                                                      .builder(
-                                                                          scrollDirection:
-                                                                              Axis
-                                                                                  .horizontal,
-                                                                          shrinkWrap:
-                                                                              true,
-                                                                          itemCount: _bloc
-                                                                              .state
-                                                                              .competitionDetail
-                                                                              ?.majorsInCompetition
-                                                                              .length,
-                                                                          itemBuilder:
-                                                                              (context,
-                                                                                  index) {
-                                                                            return Container(
-                                                                              margin:
-                                                                                  const EdgeInsets.all(15.0),
-                                                                              padding:
-                                                                                  const EdgeInsets.all(3.0),
-                                                                              decoration: BoxDecoration(
-                                                                                  border: Border.all(color: Colors.orangeAccent),
-                                                                                  color: Colors.orangeAccent,
-                                                                                  borderRadius: BorderRadius.all(Radius.circular(10))),
-                                                                              child: Text('${state.competitionDetail?.majorsInCompetition[index].name}',
-                                                                                  style: const TextStyle(
-                                                                                    color: Colors.white,
-                                                                                    fontSize: 18,
-                                                                                  )),
-                                                                            );
-                                                                          }),
-                                                                )
-                                                              ],
-                                                            ),
-                                                        )
+                                                        ? Row(
+                                                            children: [
+                                                              SizedBox(
+                                                                height: 60,
+                                                                child: ListView
+                                                                    .builder(
+                                                                        scrollDirection:
+                                                                            Axis
+                                                                                .horizontal,
+                                                                        shrinkWrap:
+                                                                            true,
+                                                                        itemCount: _bloc
+                                                                            .state
+                                                                            .competitionDetail
+                                                                            ?.majorsInCompetition
+                                                                            .length,
+                                                                        itemBuilder:
+                                                                            (context,
+                                                                                index) {
+                                                                          return Container(
+                                                                            margin:
+                                                                                const EdgeInsets.all(15.0),
+                                                                            padding:
+                                                                                const EdgeInsets.all(3.0),
+                                                                            decoration: BoxDecoration(
+                                                                                border: Border.all(color: Colors.orangeAccent),
+                                                                                color: Colors.orangeAccent,
+                                                                                borderRadius: BorderRadius.all(Radius.circular(10))),
+                                                                            child: Text('${state.competitionDetail?.majorsInCompetition[index].name}',
+                                                                                style: const TextStyle(
+                                                                                  color: Colors.white,
+                                                                                  fontSize: 18,
+                                                                                )),
+                                                                          );
+                                                                        }),
+                                                              )
+                                                            ],
+                                                          )
                                                         : Row(
                                                             children: [
                                                               // major
