@@ -144,8 +144,8 @@ class _ViewListCompetitionOfParticipantPageState
                                                 "https://i.ytimg.com/vi/dip_8dmrcaU/maxresdefault.jpg",
                                             type: state.competitions[index]
                                                 .competitionTypeName,
-                                            date:
-                                                '${(state.competitions[index]).startTime}',
+                                            date: (state.competitions[index])
+                                                .startTime,
                                             status: state
                                                 .competitions[index].status,
                                             isEvent: state.isEvent!,

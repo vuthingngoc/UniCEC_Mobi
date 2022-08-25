@@ -180,8 +180,9 @@ class _ViewListCompetitionOfClubPageState
                                                     type: state
                                                         .competitions[index]
                                                         .competitionTypeName,
-                                                    date:
-                                                        '${(state.competitions[index]).startTime}',
+                                                    date: (state.competitions[
+                                                            index])
+                                                        .startTime,
                                                     status: state
                                                         .competitions[index]
                                                         .status,

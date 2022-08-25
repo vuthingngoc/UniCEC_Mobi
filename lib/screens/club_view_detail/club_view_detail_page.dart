@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unicec_mobi/bloc/club_view_detail/club_view_detail_bloc.dart';
@@ -29,8 +30,36 @@ class _ClubViewDetailPageState extends State<ClubViewDetailPage> {
     super.initState();
     bloc.listenerStream.listen((event) {
       if (event is ShowPopUpAnnouncement) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(event.message)));
+        if (event.message.contains("Đã")) {
+          AwesomeDialog(
+            context: context,
+            animType: AnimType.LEFTSLIDE,
+            headerAnimationLoop: false,
+            dialogType: DialogType.SUCCES,
+            showCloseIcon: true,
+            title: 'Thành Công',
+            desc: ' Đã nộp đơn thành công',
+            btnOkOnPress: () {},
+            btnOkIcon: Icons.check_circle,
+            onDissmissCallback: (type) {
+              debugPrint('Dialog Dissmiss from callback $type');
+            },
+          ).show();
+        } else {
+          AwesomeDialog(
+            context: context,
+            dialogType: DialogType.ERROR,
+            animType: AnimType.RIGHSLIDE,
+            headerAnimationLoop: true,
+            title: 'Thất bại',
+            desc: 'Tham gia không thành công',
+            btnOkOnPress: () {},
+            btnOkIcon: Icons.cancel,
+            btnOkColor: Colors.red,
+          ).show();
+        }
+        // ScaffoldMessenger.of(context)
+        //     .showSnackBar(SnackBar(content: Text(event.message)));
       }
     });
   }

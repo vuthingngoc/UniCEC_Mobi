@@ -83,7 +83,7 @@ class _ViewListTeamParticipantPageState
                                         : (event.message.contains(
                                                 "Not found team with Invited Code"))
                                             ? "Thất bại, mã tham gia đội thi không hợp lệ"
-                                            : 'lỗi',
+                                            : event.message,
             btnOkOnPress: () {
               Navigator.of(context).pop;
             },

@@ -243,8 +243,8 @@ class _BodyState extends State<Body> {
                                               minLines: 1,
                                               maxLines: 2,
                                               validator: (value) {
-                                                if (value!.length < 10) {
-                                                  return 'Nhập ít nhất 10 ký tự';
+                                                if (value!.length < 4) {
+                                                  return 'Nhập ít nhất 4 ký tự';
                                                 }
                                                 return null;
                                               },

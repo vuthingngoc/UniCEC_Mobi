@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -43,8 +44,36 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
 
     _bloc.listenerStream.listen((event) {
       if (event is ShowPopUpAnnouncement) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(event.message)));
+        if (event.message.contains("thành công")) {
+          AwesomeDialog(
+            context: context,
+            animType: AnimType.LEFTSLIDE,
+            headerAnimationLoop: false,
+            dialogType: DialogType.SUCCES,
+            showCloseIcon: true,
+            title: 'Thành Công',
+            desc: 'Cập nhật thành công',
+            btnOkOnPress: () {},
+            btnOkIcon: Icons.check_circle,
+            onDissmissCallback: (type) {
+              debugPrint('Dialog Dissmiss from callback $type');
+            },
+          ).show();
+        } else {
+          AwesomeDialog(
+            context: context,
+            dialogType: DialogType.ERROR,
+            animType: AnimType.RIGHSLIDE,
+            headerAnimationLoop: true,
+            title: 'Thất bại',
+            desc: 'Cập nhật thất bại',
+            btnOkOnPress: () {},
+            btnOkIcon: Icons.cancel,
+            btnOkColor: Colors.red,
+          ).show();
+        }
+        // ScaffoldMessenger.of(context)
+        //     .showSnackBar(SnackBar(content: Text(event.message)));
       }
     });
   }

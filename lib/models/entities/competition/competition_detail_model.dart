@@ -88,7 +88,8 @@ class CompetitionDetailModel {
     String address = json['address'] ?? '';
     String content = json['content'] ?? '';
     bool isSponsor = json['is_sponsor'] ?? false;
-    CompetitionScopeStatus scope = CompetitionScopeStatus.values[int.parse(json['scope'].toString())];
+    CompetitionScopeStatus scope =
+        CompetitionScopeStatus.values[int.parse(json['scope'].toString())];
     CompetitionStatus status =
         CompetitionStatus.values[int.parse(json['status'].toString())];
     int view = json['view'] ?? 0;
@@ -97,7 +98,7 @@ class CompetitionDetailModel {
       competitionInClub.add(CompetitionInClubsModel.fromJson(v));
     });
     List<CompetitionInMajorsModel> competitionInDepartment = [];
-    json['departments_in_competition']?.forEach((v) {
+    json['majors_in_competition']?.forEach((v) {
       competitionInDepartment.add(CompetitionInMajorsModel.fromJson(v));
     });
     List<CompetitionEntityModel> competitionEntities = [];

@@ -9,6 +9,7 @@ import '../../../models/enums/competition_activity_status.dart';
 import '../../../models/enums/priority_status.dart';
 import '../../../utils/loading.dart';
 import '../../../utils/log.dart';
+import '../../../utils/utils.dart';
 import '../../club/tab_club_info/default_button.dart';
 import '../../club/tab_club_info/top_rounded_container.dart';
 import '../../size_config.dart';
@@ -283,10 +284,9 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                                                                     .only(
                                                                 left: 10.0),
                                                         child: Text(
-                                                            state.competitionActivityDetail
-                                                                    ?.createTime
-                                                                    .toString() ??
-                                                                "",
+                                                            Utils.convertDateTime(state
+                                                                .competitionActivityDetail!
+                                                                .createTime),
                                                             style: TextStyle(
                                                                 color:
                                                                     Colors.grey,
@@ -695,10 +695,9 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                                                       SizedBox(width: 10.0),
                                                       Expanded(
                                                           child: Text(
-                                                        state.competitionActivityDetail
-                                                                ?.createTime
-                                                                .toString() ??
-                                                            "",
+                                                        Utils.convertDateTime(state
+                                                            .competitionActivityDetail!
+                                                            .createTime),
                                                         style: TextStyle(
                                                             fontSize: 18),
                                                       )),
@@ -845,10 +844,9 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                                                       SizedBox(width: 10.0),
                                                       Expanded(
                                                           child: Text(
-                                                        state.competitionActivityDetail
-                                                                ?.ending
-                                                                .toString() ??
-                                                            "",
+                                                        Utils.convertDateTime(state
+                                                            .competitionActivityDetail!
+                                                            .ending),
                                                         style: TextStyle(
                                                             fontSize: 18),
                                                       )),

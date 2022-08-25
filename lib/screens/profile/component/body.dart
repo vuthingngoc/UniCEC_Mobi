@@ -86,8 +86,8 @@ class Body extends StatelessWidget {
           ProfileMenu(
             text: "Đăng xuất",
             icon: "assets/icons/Log out.svg",
-            press: () {
-              FirebaseUtils.logout();
+            press: () async {
+              await FirebaseUtils.logout();
               Navigator.pushReplacementNamed(context, Routes.login);
             },
           ),
