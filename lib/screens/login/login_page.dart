@@ -75,42 +75,40 @@ class _LoginPageState extends State<LoginPage> {
                 return const Center(child: CircularProgressIndicator());
               }
               //print('login bloc isLoading: ${_bloc.isLoading}');
-              return
-                  // (_bloc.isLoading)
-                  //     ? Loading()
-                  //     :
-                  SingleChildScrollView(
-                child: Stack(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              colors: [
-                            Colors.orange[600]!,
-                            Colors.orange[400]!,
-                            Colors.orange[200]!
-                          ])),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          SizedBox(
-                            height: Dimens.size60,
-                          ),
-                          LoginHeader(),
-                          SizedBox(height: Dimens.size20),
-                          Flexible(
-                            fit: FlexFit.tight,
-                            child: LoginBody(bloc: _bloc),
+              return (_bloc.state.loading)
+                  ? Loading()
+                  : SingleChildScrollView(
+                      child: Stack(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height,
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    colors: [
+                                  Colors.orange[600]!,
+                                  Colors.orange[400]!,
+                                  Colors.orange[200]!
+                                ])),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                SizedBox(
+                                  height: Dimens.size60,
+                                ),
+                                LoginHeader(),
+                                SizedBox(height: Dimens.size20),
+                                Flexible(
+                                  fit: FlexFit.tight,
+                                  child: LoginBody(bloc: _bloc),
+                                )
+                              ],
+                            ),
                           )
                         ],
                       ),
-                    )
-                  ],
-                ),
-              );
+                    );
             }),
       ),
     );

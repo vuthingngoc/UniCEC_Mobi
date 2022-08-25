@@ -38,8 +38,7 @@ class LoginBody extends StatelessWidget {
                     delay: Dimens.size1p7,
                     child: const Text(
                       "Đăng nhập với",
-                      style: TextStyle(color: Colors.grey, fontSize: 18.0),                      
-
+                      style: TextStyle(color: Colors.grey, fontSize: 18.0),
                     )),
               ),
               // SizedBox(
@@ -52,11 +51,12 @@ class LoginBody extends StatelessWidget {
                       delay: Dimens.size1p8,
                       child: InkWell(
                         onTap: () {
+                          bloc.add(LoadingEvent());
                           bloc.add(SignInGoogleEvent());
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: CircleAvatar(                            
+                          child: CircleAvatar(
                             backgroundColor: Colors.orange[600],
                             child: const Icon(FontAwesomeIcons.google,
                                 color: Colors.white),

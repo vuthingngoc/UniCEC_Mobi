@@ -1,19 +1,15 @@
 import 'package:equatable/equatable.dart';
 
 class LoginState extends Equatable {
-  String errorEmail;
+  bool loading;
 
-  LoginState({
-    required this.errorEmail,
-  });
+  LoginState({required this.loading});
 
-  LoginState copyWith({
-    required String errorEmail,
-  }) {
-    return LoginState(errorEmail: errorEmail);
+  LoginState copyWith({required bool loading}) {
+    return LoginState(loading: loading);
   }
 
   @override
   // TODO: implement props
-  List<Object?> get props => [errorEmail];
+  List<Object?> get props => [loading];
 }
