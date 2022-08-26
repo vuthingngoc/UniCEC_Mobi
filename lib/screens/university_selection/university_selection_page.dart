@@ -247,8 +247,8 @@ class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
                                               minLines: 1,
                                               maxLines: 10,
                                               validator: (value) {
-                                                if (value!.length < 50) {
-                                                  return 'Nhập ít nhất 50 ký tự';
+                                                if (value!.length < 10) {
+                                                  return 'Nhập ít nhất 10 ký tự';
                                                 }
                                                 return null;
                                               },

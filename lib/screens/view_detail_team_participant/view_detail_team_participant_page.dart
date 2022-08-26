@@ -34,6 +34,10 @@ class _ViewDetailTeamParticipantPageState
 
   final _formKeyTeamDetailDescription = GlobalKey<FormState>();
 
+  var _controllerTeamDetailName = TextEditingController();
+
+  var _controllerTeamDetailDescription = TextEditingController();
+
   //
   int max = 0;
   int min = 0;
@@ -172,6 +176,7 @@ class _ViewDetailTeamParticipantPageState
                                       Form(
                                         key: _formKeyTeamDetailName,
                                         child: TextFormField(
+                                            initialValue: state.valueTeamName,
                                             decoration: InputDecoration(
                                               prefixIcon: Icon(Icons.label),
                                               border: OutlineInputBorder(
@@ -210,6 +215,8 @@ class _ViewDetailTeamParticipantPageState
                                       Form(
                                         key: _formKeyTeamDetailDescription,
                                         child: TextFormField(
+                                            initialValue:
+                                                state.valueTeamDescription,
                                             decoration: InputDecoration(
                                               prefixIcon:
                                                   Icon(Icons.description),

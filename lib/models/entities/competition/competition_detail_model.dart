@@ -8,6 +8,8 @@ import '../competition_entity/competition_entity_model.dart';
 class CompetitionDetailModel {
   int id;
   int universityId;
+  String universityImage;
+  String universityName;
   String name;
   int competitionTypeId;
   String competitionTypeName;
@@ -38,6 +40,8 @@ class CompetitionDetailModel {
   CompetitionDetailModel(
       {required this.id,
       required this.universityId,
+      required this.universityName,
+      required this.universityImage,
       required this.name,
       required this.competitionTypeId,
       required this.competitionTypeName,
@@ -68,6 +72,8 @@ class CompetitionDetailModel {
   factory CompetitionDetailModel.fromJson(Map<String, dynamic> json) {
     int id = json['id'] ?? 0;
     int universityId = json['university_id'] ?? 0;
+    String universityName = json['university_name'] ?? '';
+    String universityImg = json['university_image'] ?? '';
     String name = json['name'] ?? '';
     int competitionTypeId = json['competition_type_id'] ?? 0;
     String competitionTypeName = json['competition_type_name'] ?? '';
@@ -109,6 +115,8 @@ class CompetitionDetailModel {
     return CompetitionDetailModel(
         id: id,
         universityId: universityId,
+        universityName: universityName,
+        universityImage: universityImg,
         name: name,
         competitionTypeId: competitionTypeId,
         competitionTypeName: competitionTypeName,

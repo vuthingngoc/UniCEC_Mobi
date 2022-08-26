@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import '../../../models/entities/notification/notification_model.dart';
 import '../../../utils/dimens.dart';
+import '../../../utils/loading.dart';
 import '../../../utils/utils.dart';
 import '../noti_detail_page.dart';
 
@@ -36,97 +37,110 @@ class _ListNotificationState extends State<ListNotification> {
         bloc: _bloc,
         builder: (context, state) {
           List<NotificationModel>? notifications = state.notifications?.items;
-          return notifications != null
-              ? RefreshIndicator(
-                  onRefresh: () async {
-                    var refresh = _refresh(context);
-                    return refresh;
-                  },
-                  child: LoadMore(
-                    isFinish: !(state.notifications?.hasNext ?? false),
-                    onLoadMore: () async {
-                      await _loadMore(context);
-                      return true;
-                    },
-                    whenEmptyLoad: true,
-                    delegate: const DefaultLoadMoreDelegate(),
-                    textBuilder: DefaultLoadMoreTextBuilder.english,
-                    child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: notifications.length,
-                        itemBuilder: (context, index) {
-                          return Card(
-                            margin: EdgeInsets.all(Dimens.size10),
-                            elevation: 4.0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(Dimens.size15),
-                            ),
-                            child: Container(
-                              padding: EdgeInsets.all(Dimens.size10),
-                              margin: EdgeInsets.all(Dimens.size10),
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            NotiDetailPage(notifications[index])),
-                                  );
-                                },
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      notifications[index].title,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: Dimens.size20,
-                                      ),
-                                      maxLines: 2,
-                                    ),
-
-                                    Container(
-                                      padding: EdgeInsets.only(top: 10),
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            child: Text(
-                                              Utils.convertDateTime(notifications[index].createTime),
-                                              style: TextStyle(
-                                                color: Colors.black26,
-                                                fontSize: Dimens.size15,
-                                              ),
-                                              maxLines: 1,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: Dimens.size15,
-                                    ),
-                                    Text(
-                                      notifications[index].body,
-                                      style: TextStyle(fontSize: 16),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    )
-                                  ],
+          return (state.loading)
+              ? Loading()
+              : (notifications != null)
+                  ? RefreshIndicator(
+                      onRefresh: () async {
+                        var refresh = _refresh(context);
+                        return refresh;
+                      },
+                      child: LoadMore(
+                        isFinish: !(state.notifications?.hasNext ?? false),
+                        onLoadMore: () async {
+                          await _loadMore(context);
+                          return true;
+                        },
+                        whenEmptyLoad: true,
+                        delegate: const DefaultLoadMoreDelegate(),
+                        textBuilder: DefaultLoadMoreTextBuilder.english,
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: notifications.length,
+                            itemBuilder: (context, index) {
+                              return Card(
+                                margin: EdgeInsets.all(Dimens.size10),
+                                elevation: 4.0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(Dimens.size15),
                                 ),
-                              ),
-                            ),
-                          );
-                        }),
-                  ),
-                )
-              : const Center(                  
-                  child: Text(
-                  'Không có thông báo nào',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-                  textAlign: TextAlign.center,
-                ));
+                                child: Container(
+                                  padding: EdgeInsets.all(Dimens.size10),
+                                  margin: EdgeInsets.all(Dimens.size10),
+                                  child: GestureDetector(
+                                    onTap: () async {
+                                      bool returnData = await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                NotiDetailPage(
+                                                    notifications[index])),
+                                      ) as bool;
+                                      if (returnData) {
+                                        _bloc.add(LoadingEvent());
+                                        BlocProvider.of<NotificationBloc>(
+                                                context)
+                                            .add(RefreshNotificationsEvent());
+                                        BlocProvider.of<NotificationBloc>(
+                                                context)
+                                            .add(LoadNotificationsEvent());
+                                      }
+                                    },
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          notifications[index].title,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: Dimens.size20,
+                                          ),
+                                          maxLines: 2,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                Utils.convertDateTime(
+                                                    notifications[index]
+                                                        .createTime),
+                                                style: TextStyle(
+                                                  color: Colors.black26,
+                                                  fontSize: Dimens.size15,
+                                                ),
+                                                maxLines: 1,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: Dimens.size15,
+                                        ),
+                                        Text(
+                                          notifications[index].body,
+                                          style: TextStyle(
+                                              fontSize: Dimens.size16),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }),
+                      ),
+                    )
+                  : const Center(
+                      child: Text(
+                      'Không có thông báo nào',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 18.0),
+                      textAlign: TextAlign.center,
+                    ));
         });
   }
 }

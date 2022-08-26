@@ -23,6 +23,8 @@ class CompetitionDetailBloc
   CompetitionDetailBloc({required this.service})
       : super(CompetitionDetailState(
           competitionDetail: CompetitionDetailModel(
+              universityImage: '',
+              universityName: '',
               addressName: '',
               competitionEntities: [],
               maxNumber: 0,

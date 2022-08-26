@@ -288,7 +288,10 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                       width: Dimens.size20,
                                                     ),
                                                     Text(
-                                                      state.user.gender,
+                                                      (state.user.gender
+                                                              .contains("Male")
+                                                          ? "Nam"
+                                                          : "Nữ"),
                                                       style: const TextStyle(
                                                           fontSize: 17),
                                                     )
