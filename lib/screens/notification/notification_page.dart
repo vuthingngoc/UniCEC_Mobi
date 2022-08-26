@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../../bloc/notification/notification_event.dart';
 import '../../utils/app_color.dart';
 import '../../utils/dimens.dart';
+import '../../utils/loading.dart';
 import 'widgets/list_notification.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -24,7 +25,7 @@ class _NotificationState extends State<NotificationPage> {
   void initState() {
     super.initState();
     _bloc.add(LoadNotificationsEvent());
-    _bloc.isLoading = true;
+    //_bloc.isLoading = true;
   }
 
   @override

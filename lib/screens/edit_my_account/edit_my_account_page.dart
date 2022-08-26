@@ -113,376 +113,392 @@ class _EditMyAccountPageState extends State<EditMyAccountPage>
           // !.firstWhere((element) => element.id == state.user?.departmentId);
           Log.info('user: ${state.user?.departmentId}');
 
-          return (_bloc.isLoading)
-              ? Loading()
-              : Scaffold(
-                  appBar: AppBar(
-                    leading: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context, state.user?.id);
-                      },
-                      icon:
-                          const Icon(Icons.arrow_back_ios, color: Colors.white),
-                    ),
-                    title: const Text("Chỉnh sửa thông tin",
-                        style: TextStyle(color: Colors.white)),
-                    centerTitle: true,
-                    backgroundColor: AppColors.mainColor,
-                  ),
-                  backgroundColor: AppColors.backgroundPageColor,
-                  body: Stack(children: <Widget>[
-                    SafeArea(
-                      child: ListView(children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 16.0, right: 16.0, top: 90.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Stack(children: <Widget>[
-                                Container(
-                                  child: Container(
-                                      child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 85.0, bottom: 20.0),
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          children: const [
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 8.0, top: 8),
-                                              child: Text(
-                                                "Họ và tên",
-                                                style: TextStyle(fontSize: 16),
+          return Scaffold(
+              appBar: AppBar(
+                leading: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context, state.user?.id);
+                  },
+                  icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+                ),
+                title: const Text("Chỉnh sửa thông tin",
+                    style: TextStyle(color: Colors.white)),
+                centerTitle: true,
+                backgroundColor: AppColors.mainColor,
+              ),
+              backgroundColor: AppColors.backgroundPageColor,
+              body: (_bloc.isLoading)
+                  ? Loading()
+                  : Stack(children: <Widget>[
+                      SafeArea(
+                        child: ListView(children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 16.0, right: 16.0, top: 90.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Stack(children: <Widget>[
+                                  Container(
+                                    child: Container(
+                                        child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 85.0, bottom: 20.0),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: const [
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 8.0, top: 8),
+                                                child: Text(
+                                                  "Họ và tên",
+                                                  style:
+                                                      TextStyle(fontSize: 16),
+                                                ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Input(
-                                            controller: fullnameController,
-                                            placeholder: "",
-                                            prefixIcon: const Icon(Icons
-                                                .drive_file_rename_outline),
+                                            ],
                                           ),
-                                        ),
-                                        Row(
-                                          children: const [
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 8.0, top: 8),
-                                              child: Text(
-                                                "MSSV",
-                                                style: TextStyle(fontSize: 16),
-                                              ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Input(
+                                              controller: fullnameController,
+                                              placeholder: "",
+                                              prefixIcon: const Icon(Icons
+                                                  .drive_file_rename_outline),
                                             ),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Input(
-                                            controller: studentCodeController,
-                                            placeholder: "",
-                                            prefixIcon: const Icon(Icons.label),
                                           ),
-                                        ),
-                                        Row(
-                                          children: const [
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 8.0, top: 8),
-                                              child: Text(
-                                                "Miêu tả bản thân",
-                                                style: TextStyle(fontSize: 16),
+                                          Row(
+                                            children: const [
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 8.0, top: 8),
+                                                child: Text(
+                                                  "MSSV",
+                                                  style:
+                                                      TextStyle(fontSize: 16),
+                                                ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Input(
-                                            controller: descriptionController,
-                                            placeholder: "",
-                                            prefixIcon:
-                                                const Icon(Icons.description),
+                                            ],
                                           ),
-                                        ),
-                                        Row(
-                                          children: const [
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 8.0, top: 8),
-                                              child: Text(
-                                                "Trường",
-                                                style: TextStyle(fontSize: 16),
-                                              ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Input(
+                                              controller: studentCodeController,
+                                              placeholder: "",
+                                              prefixIcon:
+                                                  const Icon(Icons.label),
                                             ),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Input(
-                                            controller: universityController,
-                                            isReadOnly: true,
-                                            placeholder: "",
-                                            prefixIcon:
-                                                const Icon(Icons.school),
                                           ),
-                                        ),
-                                        Row(
-                                          children: const [
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 8.0, top: 8),
-                                              child: Text(
-                                                "Ngành học",
-                                                style: TextStyle(fontSize: 16),
+                                          Row(
+                                            children: const [
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 8.0, top: 8),
+                                                child: Text(
+                                                  "Miêu tả bản thân",
+                                                  style:
+                                                      TextStyle(fontSize: 16),
+                                                ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        Container(
-                                          margin: const EdgeInsets.symmetric(
-                                              horizontal: 8.0, vertical: 5.0),
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 8.0),
-                                          decoration: const BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(5.0))),
-                                          child: Column(children: [
-                                            DropdownButton(
-                                                isExpanded: true,
-                                                value: state.selectedDepartment ??
-                                                    state.departments
-                                                        ?.firstWhere((element) => (state
-                                                                    .user
-                                                                    ?.departmentId !=
-                                                                null)
-                                                            ? element.id ==
-                                                                state.user
-                                                                    ?.departmentId
-                                                            : element.id ==
-                                                                state
-                                                                    .departments?[
-                                                                        0]
-                                                                    .id),
-                                                items: state.departments?.map(
-                                                  (DepartmentModel department) {
-                                                    return DropdownMenuItem(
-                                                        value: department,
-                                                        child: Text(
-                                                            department.name));
-                                                  },
-                                                ).toList(),
-                                                onChanged: (DepartmentModel?
-                                                    selectedValue) {
-                                                  setState(() {
-                                                    state.selectedDepartment =
-                                                        selectedValue!;
-                                                    Log.info(
-                                                        'SelectedValue: ${state.selectedDepartment?.name}');
-                                                  });
-                                                })
-                                          ]),
-                                        ),
-                                        Row(
-                                          children: const [
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 8.0, top: 8),
-                                              child: Text(
-                                                "Email",
-                                                style: TextStyle(fontSize: 16),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Input(
-                                            controller: emailController,
-                                            placeholder: "",
-                                            prefixIcon: const Icon(Icons.email),
+                                            ],
                                           ),
-                                        ),
-                                        Row(
-                                          children: const [
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 8.0, top: 8),
-                                              child: Text(
-                                                "Số điện thoại",
-                                                style: TextStyle(fontSize: 16),
-                                              ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Input(
+                                              controller: descriptionController,
+                                              placeholder: "",
+                                              prefixIcon:
+                                                  const Icon(Icons.description),
                                             ),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Input(
-                                            controller: phoneController,
-                                            placeholder: "",
-                                            prefixIcon: const Icon(Icons.phone),
                                           ),
-                                        ),
-                                        Row(
-                                          children: const [
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 8.0, top: 8),
-                                              child: Text(
-                                                "Ngày sinh",
-                                                style: TextStyle(fontSize: 16),
+                                          Row(
+                                            children: const [
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 8.0, top: 8),
+                                                child: Text(
+                                                  "Trường",
+                                                  style:
+                                                      TextStyle(fontSize: 16),
+                                                ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Input(
-                                            controller: dobController,
-                                            placeholder: "",
-                                            prefixIcon: const Icon(Icons.cake),
+                                            ],
                                           ),
-                                        ),
-                                        Row(
-                                          children: const [
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 8.0, top: 8),
-                                              child: Text(
-                                                "Giới tính",
-                                                style: TextStyle(fontSize: 16),
-                                              ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Input(
+                                              controller: universityController,
+                                              isReadOnly: true,
+                                              placeholder: "",
+                                              prefixIcon:
+                                                  const Icon(Icons.school),
                                             ),
-                                          ],
-                                        ),
-                                        Container(
-                                          margin: const EdgeInsets.symmetric(
-                                              horizontal: 8.0, vertical: 5.0),
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 8.0),
-                                          decoration: const BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(5.0))),
-                                          child: Column(children: [
-                                            DropdownButton(
-                                                isExpanded: true,
-                                                value: state
-                                                        .selectedGender ??
-                                                    state.genderSelection
-                                                        .firstWhere(
-                                                            (element) =>
-                                                                element ==
-                                                                state.user
-                                                                    ?.gender,
-                                                            orElse: () => state
-                                                                    .genderSelection[
-                                                                0]),
-                                                items:
-                                                    state.genderSelection.map(
-                                                  (String gender) {
-                                                    return DropdownMenuItem(
-                                                        value: gender,
-                                                        child: Text(gender));
-                                                  },
-                                                ).toList(),
-                                                onChanged:
-                                                    (String? selectedValue) {
-                                                  setState(() {
-                                                    Log.info(
-                                                        'SelectedValue: $selectedValue');
-                                                    state.selectedGender =
-                                                        selectedValue!;
-                                                  });
-                                                })
-                                          ]),
-                                        ),
-                                      ],
-                                    ),
-                                  )),
-                                ),
+                                          ),
+                                          Row(
+                                            children: const [
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 8.0, top: 8),
+                                                child: Text(
+                                                  "Ngành học",
+                                                  style:
+                                                      TextStyle(fontSize: 16),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Container(
+                                            margin: const EdgeInsets.symmetric(
+                                                horizontal: 8.0, vertical: 5.0),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8.0),
+                                            decoration: const BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(5.0))),
+                                            child: Column(children: [
+                                              DropdownButton(
+                                                  isExpanded: true,
+                                                  value: state.selectedDepartment ??
+                                                      state.departments?.firstWhere(
+                                                          (element) => (state.user
+                                                                      ?.departmentId !=
+                                                                  null)
+                                                              ? element.id ==
+                                                                  state.user
+                                                                      ?.departmentId
+                                                              : element.id ==
+                                                                  state
+                                                                      .departments?[
+                                                                          0]
+                                                                      .id),
+                                                  items: state.departments?.map(
+                                                    (DepartmentModel
+                                                        department) {
+                                                      return DropdownMenuItem(
+                                                          value: department,
+                                                          child: Text(
+                                                              department.name));
+                                                    },
+                                                  ).toList(),
+                                                  onChanged: (DepartmentModel?
+                                                      selectedValue) {
+                                                    setState(() {
+                                                      state.selectedDepartment =
+                                                          selectedValue!;
+                                                      Log.info(
+                                                          'SelectedValue: ${state.selectedDepartment?.name}');
+                                                    });
+                                                  })
+                                            ]),
+                                          ),
+                                          Row(
+                                            children: const [
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 8.0, top: 8),
+                                                child: Text(
+                                                  "Email",
+                                                  style:
+                                                      TextStyle(fontSize: 16),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Input(
+                                              controller: emailController,
+                                              placeholder: "",
+                                              prefixIcon:
+                                                  const Icon(Icons.email),
+                                            ),
+                                          ),
+                                          Row(
+                                            children: const [
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 8.0, top: 8),
+                                                child: Text(
+                                                  "Số điện thoại",
+                                                  style:
+                                                      TextStyle(fontSize: 16),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Input(
+                                              controller: phoneController,
+                                              placeholder: "",
+                                              prefixIcon:
+                                                  const Icon(Icons.phone),
+                                            ),
+                                          ),
+                                          Row(
+                                            children: const [
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 8.0, top: 8),
+                                                child: Text(
+                                                  "Ngày sinh",
+                                                  style:
+                                                      TextStyle(fontSize: 16),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Input(
+                                              controller: dobController,
+                                              placeholder: "",
+                                              prefixIcon:
+                                                  const Icon(Icons.cake),
+                                            ),
+                                          ),
+                                          Row(
+                                            children: const [
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 8.0, top: 8),
+                                                child: Text(
+                                                  "Giới tính",
+                                                  style:
+                                                      TextStyle(fontSize: 16),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Container(
+                                            margin: const EdgeInsets.symmetric(
+                                                horizontal: 8.0, vertical: 5.0),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8.0),
+                                            decoration: const BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(5.0))),
+                                            child: Column(children: [
+                                              DropdownButton(
+                                                  isExpanded: true,
+                                                  value: state.selectedGender ??
+                                                      state.genderSelection
+                                                          .firstWhere(
+                                                              (element) =>
+                                                                  element ==
+                                                                  state.user
+                                                                      ?.gender,
+                                                              orElse: () =>
+                                                                  state.genderSelection[
+                                                                      0]),
+                                                  items:
+                                                      state.genderSelection.map(
+                                                    (String gender) {
+                                                      return DropdownMenuItem(
+                                                          value: gender,
+                                                          child: Text(
+                                                              (gender.contains(
+                                                                      "Male"))
+                                                                  ? "Nam"
+                                                                  : "Nữ"));
+                                                    },
+                                                  ).toList(),
+                                                  onChanged:
+                                                      (String? selectedValue) {
+                                                    setState(() {
+                                                      Log.info(
+                                                          'SelectedValue: $selectedValue');
+                                                      state.selectedGender =
+                                                          selectedValue!;
+                                                    });
+                                                  })
+                                            ]),
+                                          ),
+                                        ],
+                                      ),
+                                    )),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 8.0),
+                                    child: FractionalTranslation(
+                                        translation: Offset(0.0, -0.5),
+                                        child: Align(
+                                          alignment: FractionalOffset(0.5, 0.0),
+                                          child: CircleAvatar(
+                                            backgroundImage: NetworkImage(
+                                                //AssetImage(
+                                                state.user?.avatar != null
+                                                    ? "${state.user?.avatar}"
+                                                    : defaultImage),
+                                            radius: 65.0,
+                                            // maxRadius: 200.0,
+                                          ),
+                                        )),
+                                  )
+                                ]),
                                 Padding(
-                                  padding: EdgeInsets.only(top: 8.0),
-                                  child: FractionalTranslation(
-                                      translation: Offset(0.0, -0.5),
-                                      child: Align(
-                                        alignment: FractionalOffset(0.5, 0.0),
-                                        child: CircleAvatar(
-                                          backgroundImage: NetworkImage(
-                                              //AssetImage(
-                                              state.user?.avatar != null
-                                                  ? "${state.user?.avatar}"
-                                                  : defaultImage),
-                                          radius: 65.0,
-                                          // maxRadius: 200.0,
-                                        ),
-                                      )),
-                                )
-                              ]),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 10),
-                                child: Container(
-                                  width: double.infinity,
-                                  margin: const EdgeInsets.only(
-                                      right: 15, left: 15, bottom: 15),
-                                  child: FlatButton(
-                                    textColor: ArgonColors.white,
-                                    color: ArgonColors.warning,
-                                    onPressed: () {
-                                      Log.info(
-                                          "onPress - selectedDepartment: ${state.selectedDepartment?.name} - ${state.selectedDepartment?.id}");
-                                      UserModel user = UserModel(
-                                          id: (state.user?.id)!,
-                                          roleId: (state.user?.roleId)!,
-                                          email: emailController.value.text,
-                                          fullname:
-                                              fullnameController.value.text,
-                                          avatar: (state.user?.avatar)!,
-                                          gender: state.selectedGender ??
-                                              state.user?.gender ??
-                                              'Male',
-                                          departmentId:
-                                              state.selectedDepartment?.id,
-                                          studentCode:
-                                              (state.user?.studentCode)!,
-                                          phoneNumber:
-                                              phoneController.value.text,
-                                          status: UserStatus
-                                              .Active, // default status
-                                          dob: dobController.value.text,
-                                          description:
-                                              descriptionController.value.text,
-                                          isOnline: true);
-                                      _bloc.add(EditInfoEvent(user: user));
-                                      //Navigator.pop(context, user.id);
-                                    },
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4.0),
+                                  padding: const EdgeInsets.only(bottom: 10),
+                                  child: Container(
+                                    width: double.infinity,
+                                    margin: const EdgeInsets.only(
+                                        right: 15, left: 15, bottom: 15),
+                                    child: FlatButton(
+                                      textColor: ArgonColors.white,
+                                      color: ArgonColors.warning,
+                                      onPressed: () {
+                                        Log.info(
+                                            "onPress - selectedDepartment: ${state.selectedDepartment?.name} - ${state.selectedDepartment?.id}");
+                                        UserModel user = UserModel(
+                                            id: (state.user?.id)!,
+                                            roleId: (state.user?.roleId)!,
+                                            email: emailController.value.text,
+                                            fullname:
+                                                fullnameController.value.text,
+                                            avatar: (state.user?.avatar)!,
+                                            gender: state.selectedGender ??
+                                                state.user?.gender ??
+                                                'Male',
+                                            departmentId:
+                                                state.selectedDepartment?.id,
+                                            studentCode:
+                                                (state.user?.studentCode)!,
+                                            phoneNumber:
+                                                phoneController.value.text,
+                                            status: UserStatus
+                                                .Active, // default status
+                                            dob: dobController.value.text,
+                                            description: descriptionController
+                                                .value.text,
+                                            isOnline: true);
+                                        _bloc.add(EditInfoEvent(user: user));
+                                        //Navigator.pop(context, user.id);
+                                      },
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(4.0),
+                                      ),
+                                      child: const Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 16.0,
+                                              right: 16.0,
+                                              top: 12,
+                                              bottom: 12),
+                                          child: Text("Lưu chỉnh sửa",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 18.0))),
                                     ),
-                                    child: const Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 16.0,
-                                            right: 16.0,
-                                            top: 12,
-                                            bottom: 12),
-                                        child: Text("Lưu chỉnh sửa",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 18.0))),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ]),
-                    )
-                  ]));
+                        ]),
+                      )
+                    ]));
         });
   }
 }

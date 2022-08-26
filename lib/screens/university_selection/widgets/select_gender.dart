@@ -42,6 +42,8 @@ class _SelectGenderState extends State<SelectGender> {
                 builder: (context, state) {
                   return Center(
                     child: GenderPickerWithImage(
+                      femaleText: "Nữ",
+                      maleText: "Nam",
                       showOtherGender: widget.showOtherGender,
                       verticalAlignedText: widget.alignVertical,
                       // to show what's selected on app opens, but by default it's Male

@@ -9,17 +9,15 @@ class NotificationState extends Equatable {
   // final int pageSize;
   // final bool? hasNext;
   final PagingResult<NotificationModel>? notifications;
+  final bool loading;
 
-  NotificationState({this.notifications});
+  NotificationState({this.notifications, required this.loading});
 
-  NotificationState copyWith({
-    PagingResult<NotificationModel>? notifications,
-  }) {
-    return NotificationState(
-      notifications: notifications,
-    );
+  NotificationState copyWith(
+      {PagingResult<NotificationModel>? notifications, required bool loading}) {
+    return NotificationState(notifications: notifications, loading: loading);
   }
 
   @override
-  List<Object?> get props => [notifications];
+  List<Object?> get props => [notifications, loading];
 }

@@ -13,6 +13,12 @@ class NotiDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context, true);
+          },
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+        ),
         backgroundColor: AppColors.mainColor,
         title: const Text('Chi tiết', style: TextStyle(color: Colors.white)),
       ),

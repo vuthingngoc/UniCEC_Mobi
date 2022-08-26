@@ -30,7 +30,7 @@ class _SplashPageState extends State<SplashPage> {
     });
 
     Future.delayed(const Duration(seconds: 4), () async {
-      await FirebaseUtils.logout();
+      //await FirebaseUtils.logout();
       Navigator.of(context).pushReplacementNamed(Routes.login);
     });
   }
@@ -47,14 +47,13 @@ class _SplashPageState extends State<SplashPage> {
               duration: const Duration(seconds: 3),
               opacity: state.opacity,
               child: Container(
-                width: MediaQuery.of(context).size.width * 2/3,
-                height: MediaQuery.of(context).size.width * 2/3,
-                  decoration: const BoxDecoration(                     
-                      image: DecorationImage(                          
+                  width: MediaQuery.of(context).size.width * 2 / 3,
+                  height: MediaQuery.of(context).size.width * 2 / 3,
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
                           image: AssetImage("assets/img/logo-app-splash.jpg"),
                           alignment: Alignment.center,
-                          fit: BoxFit.contain))
-                  ),
+                          fit: BoxFit.contain))),
             );
           },
         ),

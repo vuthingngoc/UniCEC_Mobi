@@ -13,16 +13,17 @@ class NotificationBloc extends BaseBloc<NotificationEvent, NotificationState> {
   INotificationService service;
 
   int pageSize = 10;
-  bool _isLoading = false;
+  // bool _isLoading = false;
 
-  bool get isLoading => _isLoading;
+  // bool get isLoading => _isLoading;
 
-  set isLoading(bool isLoading) {
-    _isLoading = isLoading;
-  }
+  // set isLoading(bool isLoading) {
+  //   _isLoading = isLoading;
+  // }
 
   NotificationBloc({required this.service})
       : super(NotificationState(
+            loading: true,
             notifications: PagingResult<NotificationModel>(
                 currentPage: 1,
                 hasNext: false,
@@ -33,7 +34,6 @@ class NotificationBloc extends BaseBloc<NotificationEvent, NotificationState> {
                 totalPages: 1))) {
     on(((event, emit) async {
       int userId = GetIt.I.get<CurrentUser>().id;
-
       if (event is LoadNotificationsEvent) {
         // List<NotificationModel> notifications = [];
         // QuerySnapshot<Map<String, dynamic>> querySnapshot =
@@ -61,7 +61,7 @@ class NotificationBloc extends BaseBloc<NotificationEvent, NotificationState> {
         // }
         PagingResult<NotificationModel>? notifications =
             await service.GetAllNotisByUser(userId, null);
-        emit(state.copyWith(notifications: notifications));
+        emit(state.copyWith(notifications: notifications, loading: false));
       }
 
       if (event is LoadMoreEvent) {
@@ -71,19 +71,26 @@ class NotificationBloc extends BaseBloc<NotificationEvent, NotificationState> {
 
         PagingResult<NotificationModel>? notifications =
             await service.GetAllNotisByUser(userId, request);
-        emit(state.copyWith(notifications: state.notifications));
+        emit(
+            state.copyWith(notifications: state.notifications, loading: false));
       }
 
       if (event is RefreshNotificationsEvent) {
         emit(state.copyWith(
             notifications: PagingResult<NotificationModel>(
-                currentPage: 1,
-                hasNext: false,
-                hasPrevious: false,
-                items: [],
-                pageSize: 10,
-                totalCount: 0,
-                totalPages: 1)));
+              currentPage: 1,
+              hasNext: false,
+              hasPrevious: false,
+              items: [],
+              pageSize: 10,
+              totalCount: 0,
+              totalPages: 1,
+            ),
+            loading: true));
+      }
+
+      if (event is LoadingEvent) {
+        emit(state.copyWith(loading: true, notifications: state.notifications));
       }
     }));
   }
