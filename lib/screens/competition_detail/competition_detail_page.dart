@@ -148,14 +148,10 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                   },
                   icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
                 ),
-<<<<<<< HEAD
                 title: Text(
                     ((state.competitionDetail!.numberOfTeam != 0)
                         ? "Chi Tiết Cuộc Thi"
                         : "Chi Tiết Sự Kiện"),
-=======
-                title: const Text("Chi tiết",
->>>>>>> 5bd7df934d37f67b7d1694ef81181eb39da2eb0d
                     style: TextStyle(color: Colors.white, fontSize: 23)),
                 automaticallyImplyLeading: false,
                 centerTitle: true,
@@ -247,15 +243,10 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                             3.0),
                                                     decoration: BoxDecoration(
                                                         border: Border.all(
-<<<<<<< HEAD
-                                                            color:
-                                                                Colors.green),
-                                                        color: Colors.green,
-=======
-                                                            color: ArgonColors.success),
+                                                            color: ArgonColors
+                                                                .success),
                                                         color:
                                                             ArgonColors.success,
->>>>>>> 5bd7df934d37f67b7d1694ef81181eb39da2eb0d
                                                         borderRadius:
                                                             const BorderRadius
                                                                     .all(
@@ -701,7 +692,6 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                         ),
                                                       ]),
                                                     )
-<<<<<<< HEAD
                                                   : SizedBox(height: 10),
                                               Row(
                                                   mainAxisAlignment:
@@ -747,30 +737,6 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                 padding:
                                                     const EdgeInsets.symmetric(
                                                         horizontal: 20.0),
-=======
-                                                  : Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                          Padding(
-                                                            padding: const EdgeInsets
-                                                                    .symmetric(
-                                                                horizontal:
-                                                                    10.0,
-                                                                vertical:
-                                                                    15.0),
-                                                            child: Text(
-                                                              'Ban tổ chức trường $universityName',
-                                                              style: const TextStyle(
-                                                                  fontSize:
-                                                                      18.0),
-                                                            ),
-                                                          ),
-                                                        ]),
-                                              Container(
-                                                alignment: Alignment.center,
->>>>>>> 5bd7df934d37f67b7d1694ef81181eb39da2eb0d
                                                 child: Wrap(
                                                   // mainAxisAlignment:
                                                   //     MainAxisAlignment
@@ -782,55 +748,51 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                             ?.numberOfTeam !=
                                                         0)
                                                       Container(
-                                                        width: 180.0,
-                                                        height: 36,
-<<<<<<< HEAD
-                                                        child: RaisedButton(
-                                                            textColor:
-                                                                ArgonColors
-                                                                    .primary,
-                                                            color: ArgonColors
-                                                                .secondary,
-                                                            onPressed: () {
-                                                              //chuyển sang trang list team
-                                                              if (state
-                                                                      .isParticipant ==
-                                                                  true) {
-                                                                SendDataModel data = SendDataModel(
-                                                                    competitionId:
-                                                                        state
-                                                                            .competitionDetail!
-                                                                            .id,
-                                                                    max: state
-                                                                        .competitionDetail!
-                                                                        .maxNumber,
-                                                                    min: state
-                                                                        .competitionDetail!
-                                                                        .minNumber);
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pushNamed(
-                                                                        Routes
-                                                                            .viewListTeamParticipant,
-                                                                        arguments:
-                                                                            data);
-                                                              } else {
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pushNamed(
-                                                                        Routes
-                                                                            .viewListTeamStudent,
-                                                                        arguments: state
-                                                                            .competitionDetail
-                                                                            ?.id);
-                                                              }
-                                                            },
-                                                            shape: RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            4)),
-                                                            child: Padding(
+                                                          width: 180.0,
+                                                          height: 36,
+                                                          child: RaisedButton(
+                                                              textColor:
+                                                                  ArgonColors
+                                                                      .primary,
+                                                              color: ArgonColors
+                                                                  .secondary,
+                                                              onPressed: () {
+                                                                //chuyển sang trang list team
+                                                                if (state
+                                                                        .isParticipant ==
+                                                                    true) {
+                                                                  SendDataModel data = SendDataModel(
+                                                                      competitionId: state
+                                                                          .competitionDetail!
+                                                                          .id,
+                                                                      max: state
+                                                                          .competitionDetail!
+                                                                          .maxNumber,
+                                                                      min: state
+                                                                          .competitionDetail!
+                                                                          .minNumber);
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pushNamed(
+                                                                          Routes
+                                                                              .viewListTeamParticipant,
+                                                                          arguments:
+                                                                              data);
+                                                                } else {
+                                                                  Navigator.of(context).pushNamed(
+                                                                      Routes
+                                                                          .viewListTeamStudent,
+                                                                      arguments: state
+                                                                          .competitionDetail
+                                                                          ?.id);
+                                                                }
+                                                              },
+                                                              shape: RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              4)),
+                                                              child: Padding(
                                                                 padding:
                                                                     const EdgeInsets
                                                                             .only(
@@ -838,78 +800,77 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                             10,
                                                                         top:
                                                                             10),
-                                                                child: Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceAround,
-                                                                  children: const [
-                                                                    Icon(
-                                                                        Icons
-                                                                            .description,
-                                                                        size:
-                                                                            13),
-                                                                    SizedBox(
-                                                                      width: 5,
-                                                                    ),
-                                                                    Text(
-                                                                        "Các đội tham gia",
-                                                                        style: TextStyle(
-                                                                            fontWeight:
-                                                                                FontWeight.w600,
-                                                                            fontSize: 15))
-                                                                  ],
-                                                                ))),
-=======
-                                                        child:
-                                                            RaisedButton(
-                                                                textColor:
-                                                                    ArgonColors
-                                                                        .white,
-                                                                color: ArgonColors
-                                                                    .warning,
-                                                                onPressed:
-                                                                    () {
-                                                                  //chuyển sang trang list team
-                                                                  if (state.isParticipant ==
-                                                                      true) {
-                                                                    SendDataModel data = SendDataModel(
-                                                                        competitionId: state.competitionDetail!.id,
-                                                                        max: state.competitionDetail!.maxNumber,
-                                                                        min: state.competitionDetail!.minNumber);
-                                                                    Navigator.of(context).pushNamed(
-                                                                        Routes.viewListTeamParticipant,
-                                                                        arguments: data);
-                                                                  } else {
-                                                                    Navigator.of(context).pushNamed(
-                                                                        Routes.viewListTeamStudent,
-                                                                        arguments: state.competitionDetail?.id);
-                                                                  }
-                                                                },
-                                                                shape: RoundedRectangleBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(4)),
-                                                                child: Padding(
-                                                                    padding: const EdgeInsets.only(bottom: 10, top: 10),
-                                                                    child: Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment.spaceAround,
-                                                                      children: const [
-                                                                        Icon(Icons.description, size: 13),
-                                                                        SizedBox(
-                                                                          width: 5,
-                                                                        ),
-                                                                        Text("Các đội tham gia", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15))
-                                                                      ],
-                                                                    ))),
->>>>>>> 5bd7df934d37f67b7d1694ef81181eb39da2eb0d
-                                                      ),
+                                                                child: RaisedButton(
+                                                                    textColor: ArgonColors.white,
+                                                                    color: ArgonColors.warning,
+                                                                    onPressed: () {
+                                                                      //chuyển sang trang list team
+                                                                      if (state
+                                                                              .isParticipant ==
+                                                                          true) {
+                                                                        SendDataModel data = SendDataModel(
+                                                                            competitionId:
+                                                                                state.competitionDetail!.id,
+                                                                            max: state.competitionDetail!.maxNumber,
+                                                                            min: state.competitionDetail!.minNumber);
+                                                                        Navigator.of(context).pushNamed(
+                                                                            Routes
+                                                                                .viewListTeamParticipant,
+                                                                            arguments:
+                                                                                data);
+                                                                      } else {
+                                                                        Navigator.of(context).pushNamed(
+                                                                            Routes
+                                                                                .viewListTeamStudent,
+                                                                            arguments:
+                                                                                state.competitionDetail?.id);
+                                                                      }
+                                                                    },
+                                                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                                                                    child: Padding(
+                                                                        padding: const EdgeInsets.only(bottom: 10, top: 10),
+                                                                        child: Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.spaceAround,
+                                                                          children: const [
+                                                                            Icon(Icons.description,
+                                                                                size: 13),
+                                                                            SizedBox(
+                                                                              width: 5,
+                                                                            ),
+                                                                            Text("Các đội tham gia",
+                                                                                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15))
+                                                                          ],
+                                                                        ))),
+
+                                                                // Row(
+                                                                //   mainAxisAlignment:
+                                                                //       MainAxisAlignment
+                                                                //           .spaceAround,
+                                                                //   children: const [
+                                                                //     Icon(
+                                                                //         Icons
+                                                                //             .description,
+                                                                //         size:
+                                                                //             13),
+                                                                //     SizedBox(
+                                                                //       width: 5,
+                                                                //     ),
+                                                                //     Text(
+                                                                //         "Các đội tham gia",
+                                                                //         style: TextStyle(
+                                                                //             fontWeight:
+                                                                //                 FontWeight.w600,
+                                                                //             fontSize: 15))
+                                                                //   ],
+                                                                // ))),
+                                                              ))),
                                                     if (state.competitionDetail
                                                             ?.numberOfTeam !=
                                                         0)
                                                       Container(
                                                         width: 180.0,
                                                         height: 36,
-<<<<<<< HEAD
                                                         child: RaisedButton(
                                                             textColor:
                                                                 ArgonColors
@@ -939,61 +900,57 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                             10,
                                                                         top:
                                                                             10),
-                                                                child: Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceAround,
-                                                                  children: const [
-                                                                    Icon(
-                                                                        Icons
-                                                                            .description,
-                                                                        size:
-                                                                            13),
-                                                                    SizedBox(
-                                                                      width: 5,
-                                                                    ),
-                                                                    Text(
-                                                                        "Danh sách vòng thi",
-                                                                        style: TextStyle(
-                                                                            fontWeight:
-                                                                                FontWeight.w600,
-                                                                            fontSize: 15))
-                                                                  ],
-                                                                ))),
-=======
-                                                        child:
-                                                            RaisedButton(
-                                                                textColor:
-                                                                    ArgonColors
-                                                                        .white,
-                                                                color: ArgonColors
-                                                                    .success,
-                                                                onPressed:
-                                                                    () {
-                                                                  Navigator.pushNamed(
-                                                                      context,
-                                                                      Routes
-                                                                          .viewCompetitionRound,
-                                                                      arguments:
-                                                                          _bloc.state.competitionDetail?.id);
-                                                                },
-                                                                shape: RoundedRectangleBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(4)),
-                                                                child: Padding(
-                                                                    padding: const EdgeInsets.only(bottom: 10, top: 10),
-                                                                    child: Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment.spaceAround,
-                                                                      children: const [
-                                                                        Icon(Icons.description, size: 13),
-                                                                        SizedBox(
-                                                                          width: 5,
-                                                                        ),
-                                                                        Text("Danh sách vòng thi", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15))
-                                                                      ],
-                                                                    ))),
->>>>>>> 5bd7df934d37f67b7d1694ef81181eb39da2eb0d
+                                                                child: RaisedButton(
+                                                                    textColor: ArgonColors.white,
+                                                                    color: ArgonColors.success,
+                                                                    onPressed: () {
+                                                                      Navigator.pushNamed(
+                                                                          context,
+                                                                          Routes
+                                                                              .viewCompetitionRound,
+                                                                          arguments: _bloc
+                                                                              .state
+                                                                              .competitionDetail
+                                                                              ?.id);
+                                                                    },
+                                                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                                                                    child: Padding(
+                                                                        padding: const EdgeInsets.only(bottom: 10, top: 10),
+                                                                        child: Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.spaceAround,
+                                                                          children: const [
+                                                                            Icon(Icons.description,
+                                                                                size: 13),
+                                                                            SizedBox(
+                                                                              width: 5,
+                                                                            ),
+                                                                            Text("Danh sách vòng thi",
+                                                                                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15))
+                                                                          ],
+                                                                        )))
+                                                                // Row(
+                                                                //   mainAxisAlignment:
+                                                                //       MainAxisAlignment
+                                                                //           .spaceAround,
+                                                                //   children: const [
+                                                                //     Icon(
+                                                                //         Icons
+                                                                //             .description,
+                                                                //         size:
+                                                                //             13),
+                                                                //     SizedBox(
+                                                                //       width: 5,
+                                                                //     ),
+                                                                //     Text(
+                                                                //         "Danh sách vòng thi",
+                                                                //         style: TextStyle(
+                                                                //             fontWeight:
+                                                                //                 FontWeight.w600,
+                                                                //             fontSize: 15))
+                                                                //   ],
+                                                                // )
+                                                                )),
                                                       ),
                                                   ],
                                                 ),
@@ -1006,24 +963,13 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                     const EdgeInsets.all(3.0),
                                                 decoration: BoxDecoration(
                                                     border: Border.all(
-<<<<<<< HEAD
-                                                        color: Colors.red),
-                                                    color: Colors.red,
-                                                    borderRadius:
-                                                        const BorderRadius.all(
-                                                            Radius.circular(
-                                                                10))),
-=======
                                                         color:
                                                             ArgonColors.white),
                                                     color: ArgonColors.error,
                                                     borderRadius:
-                                                        const BorderRadius
-                                                                .all(
-                                                            Radius
-                                                                .circular(
-                                                                    4))),
->>>>>>> 5bd7df934d37f67b7d1694ef81181eb39da2eb0d
+                                                        const BorderRadius.all(
+                                                            Radius.circular(
+                                                                4))),
                                                 child: Text(
                                                     "Hạn cuối đăng ký: " +
                                                         Utils.convertDateTime(_bloc
