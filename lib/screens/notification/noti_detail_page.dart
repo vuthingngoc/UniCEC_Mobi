@@ -19,8 +19,11 @@ class NotiDetailPage extends StatelessWidget {
           },
           icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
         ),
+        title: const Text("Chi tiết thông báo",
+            style: TextStyle(color: Colors.white, fontSize: 23)),
+        automaticallyImplyLeading: false,
+        centerTitle: true,
         backgroundColor: AppColors.mainColor,
-        title: const Text('Chi tiết', style: TextStyle(color: Colors.white)),
       ),
       body: Card(
         margin: EdgeInsets.all(Dimens.size10),

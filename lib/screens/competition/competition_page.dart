@@ -70,7 +70,7 @@ class _CompetitionPageState extends State<CompetitionPage>
           builder: (context, state) {
             return Scaffold(
                 appBar: NavbarCompetition(
-                  title: "Cuộc Thi",
+                  title: "Cuộc Thi & Sự Kiện",
                   searchBar: true,
                   categoryOne: "Cuộc Thi",
                   categoryTwo: "Sự Kiện",

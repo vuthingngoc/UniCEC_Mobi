@@ -146,7 +146,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                                 Radius.circular(
                                                                     10))),
                                                     child: Text(
-                                                        "${state.user.studentCode} | ${state.seedsWallet?.amount ?? 0} seeds",
+                                                        "${state.user.studentCode} | ${state.seedsWallet?.amount ?? 0} điểm",
                                                         style: const TextStyle(
                                                           fontSize: 18,
                                                         )),

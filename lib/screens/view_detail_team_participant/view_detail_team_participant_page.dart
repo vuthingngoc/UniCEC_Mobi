@@ -302,7 +302,7 @@ class _ViewDetailTeamParticipantPageState
                   onPressed: () {
                     Navigator.of(context).pop(true);
                   },
-                  icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+                  icon: Icon(Icons.arrow_back_ios, color: Colors.white),
                 ),
                 title: Text(
                   state.teamDetail?.name ?? "Chưa Load Team Name",
@@ -328,8 +328,8 @@ class _ViewDetailTeamParticipantPageState
                                         left: 15, top: 20),
                                     padding: const EdgeInsets.all(5.0),
                                     decoration: BoxDecoration(
-                                        border: Border.all(color: Colors.green),
-                                        color: Colors.green,
+                                        border: Border.all(color: ArgonColors.success),
+                                        color: ArgonColors.success,
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10))),
                                     child: SelectableText(
@@ -345,6 +345,14 @@ class _ViewDetailTeamParticipantPageState
                               ),
                           ],
                         ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10.0, left: 15),
+                          child: Row(
+                            children: [
+                              Expanded(child: Text(state.teamDetail?.description ?? "", style: TextStyle(fontSize: 18),)),
+                            ],
+                          ),
+                        ),
                         (state.teamDetail?.participants != null)
                             ? ViewDetailTableMenu(
                                 listModel: state.teamDetail!.participants)
@@ -352,6 +360,7 @@ class _ViewDetailTeamParticipantPageState
                         SizedBox(
                           height: 30,
                         ),
+
                         if (state.status == TeamStatus.Available &&
                             GetIt.I.get<CurrentUser>().id ==
                                 state.userIdIsLeaderTeam)
