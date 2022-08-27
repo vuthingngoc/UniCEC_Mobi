@@ -26,6 +26,7 @@ import '../../models/common/current_user.dart';
 import '../../utils/app_color.dart';
 import '../../utils/log.dart';
 import '../competition/competition_page.dart';
+import '../competition_round_result/competition_round_result.dart';
 import '../notification/notification_page.dart';
 import '../profile/profile_page.dart';
 import '../size_config.dart';
@@ -221,6 +222,7 @@ class _MainPageState extends State<MainPage> {
                         ViewCompetitionMemberTaskBloc>()), // trang show Competition mà Member này có task ở trỏng
                 CompetitionPage(bloc: GetIt.I.get<CompetitionBloc>()),
                 NotificationPage(bloc: GetIt.I.get<NotificationBloc>()),
+                // ViewCompetitionRoundResultPage(),
                 //ViewListCompetitionOfParticipantPage(),
                 ProfilePage(bloc: GetIt.I.get<ProfileBloc>())
                 //ViewDetailActivityPage(),
