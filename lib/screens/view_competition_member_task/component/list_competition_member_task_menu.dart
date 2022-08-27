@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:loadmore/loadmore.dart';
+import 'package:unicec_mobi/constants/Theme.dart';
 import '../../../utils/loading.dart';
 import '../../../utils/utils.dart';
 import '/bloc/view_competition_member_task/view_competition_member_task_event.dart';
@@ -71,7 +72,7 @@ class _ViewCompetitionMemberTaskMenuState
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top: 10),
+                        padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -106,12 +107,16 @@ class _ViewCompetitionMemberTaskMenuState
                                     ),
                                   )),
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                bloc.add(LoadingEvent());
-                                bloc.add(SearchEvent());
-                              },
-                              child: Icon(Icons.search),
+                            Container(
+                              padding: EdgeInsets.only(left: 10),
+                              child: GestureDetector(
+
+                                onTap: () {
+                                  bloc.add(LoadingEvent());
+                                  bloc.add(SearchEvent());
+                                },
+                                child: Icon(Icons.search),
+                              ),
                             ),
                             PopupMenuButton<int>(
                                 icon: Icon(Icons.filter_alt_outlined),
@@ -127,15 +132,15 @@ class _ViewCompetitionMemberTaskMenuState
                                       value: 1,
                                       child: (state.isEvent == false)
                                           ? Container(
-                                              color: Colors.green,
+
                                               child: Row(
                                                 children: <Widget>[
-                                                  Icon(Icons.camera, size: 18),
+                                                  Icon(Icons.camera, size: 18, color: ArgonColors.warning),
                                                   Padding(
                                                     padding:
                                                         const EdgeInsets.only(
                                                             left: 8.0),
-                                                    child: Text('Cuộc Thi'),
+                                                    child: Text('Cuộc Thi', style: TextStyle(color: ArgonColors.warning),),
                                                   ),
                                                 ],
                                               ),
@@ -161,15 +166,14 @@ class _ViewCompetitionMemberTaskMenuState
                                       value: 2,
                                       child: (state.isEvent)
                                           ? Container(
-                                              color: Colors.green,
                                               child: Row(
                                                 children: <Widget>[
-                                                  Icon(Icons.school, size: 18),
+                                                  Icon(Icons.school, size: 18, color: ArgonColors.warning),
                                                   Padding(
                                                     padding:
                                                         const EdgeInsets.only(
                                                             left: 8.0),
-                                                    child: Text('Sự Kiện'),
+                                                    child: Text('Sự Kiện', style: TextStyle(color: ArgonColors.warning),),
                                                   ),
                                                 ],
                                               ),
@@ -214,8 +218,7 @@ class _ViewCompetitionMemberTaskMenuState
                                       itemCount: state.listCompetition.length,
                                       itemBuilder: (context, index) {
                                         return Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 20, vertical: 30),
+                                          padding: EdgeInsets.only(right: 20, left: 20, top: 20, bottom: 10),
                                           child: TextButton(
                                             style: TextButton.styleFrom(
                                               primary: Colors.black87,

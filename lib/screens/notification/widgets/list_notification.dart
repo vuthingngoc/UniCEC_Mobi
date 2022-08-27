@@ -96,10 +96,11 @@ class _ListNotificationState extends State<ListNotification> {
                                           notifications[index].title,
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: Dimens.size20,
+                                            fontSize: 18,
                                           ),
                                           maxLines: 2,
                                         ),
+                                        SizedBox(height: 10,),
                                         Row(
                                           children: [
                                             Expanded(
@@ -109,7 +110,7 @@ class _ListNotificationState extends State<ListNotification> {
                                                         .createTime),
                                                 style: TextStyle(
                                                   color: Colors.black26,
-                                                  fontSize: Dimens.size15,
+                                                  fontSize: 15,
                                                 ),
                                                 maxLines: 1,
                                               ),
@@ -122,7 +123,7 @@ class _ListNotificationState extends State<ListNotification> {
                                         Text(
                                           notifications[index].body,
                                           style: TextStyle(
-                                              fontSize: Dimens.size16),
+                                              fontSize: 16),
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                         )
