@@ -522,41 +522,37 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                           ?.clubsInCompetition
                                                           .length)! >
                                                       0
-                                                  ? Padding(
-                                                      padding: const EdgeInsets
-                                                              .symmetric(
-                                                          horizontal: 10.0),
-                                                      child: Row(
-                                                        children: [
-                                                          SizedBox(
-                                                            height:  80.0,
-                                                            child: ListView
-                                                                .builder(
-                                                                    scrollDirection:
-                                                                        Axis
-                                                                            .horizontal,
-                                                                    shrinkWrap:
-                                                                        true,
-                                                                    itemCount: _bloc
-                                                                        .state
-                                                                        .competitionDetail
-                                                                        ?.clubsInCompetition
-                                                                        .length,
-                                                                    itemBuilder:
-                                                                        (context,
-                                                                            index) {
-                                                                      return Container(
-                                                                          width:
-                                                                              50,
-                                                                          height:
-                                                                              50,
-                                                                          child:
-                                                                              CircleAvatar(backgroundImage: NetworkImage(_bloc.state.competitionDetail?.clubsInCompetition[index].image != "" ? "${_bloc.state.competitionDetail?.clubsInCompetition[index].image}" : defaultImage)));
-                                                                    }),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    )
+                                                  ? Row(
+                                                    children: [
+                                                      SizedBox(
+                                                        height:  80.0,
+                                                        child: ListView
+                                                            .builder(
+                                                                scrollDirection:
+                                                                    Axis
+                                                                        .horizontal,
+                                                                shrinkWrap:
+                                                                    true,
+                                                                itemCount: _bloc
+                                                                    .state
+                                                                    .competitionDetail
+                                                                    ?.clubsInCompetition
+                                                                    .length,
+                                                                itemBuilder:
+                                                                    (context,
+                                                                        index) {
+                                                                  return Container(
+                                                                    margin: new EdgeInsets.symmetric(horizontal: 10),
+                                                                      width:
+                                                                          50,
+                                                                      height:
+                                                                          50,
+                                                                      child:
+                                                                          CircleAvatar(backgroundImage: NetworkImage(_bloc.state.competitionDetail?.clubsInCompetition[index].image != "" ? "${_bloc.state.competitionDetail?.clubsInCompetition[index].image}" : defaultImage)));
+                                                                }),
+                                                      )
+                                                    ],
+                                                  )
                                                   : SizedBox(height: 10),
                                               Padding(
                                                 padding: const EdgeInsets.only(
@@ -582,42 +578,37 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                           ?.competitionEntities
                                                           .length)! >
                                                       0)
-                                                  ? Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 10.0,
-                                                              right: 10.0),
-                                                      child: Row(
-                                                        children: [
-                                                          SizedBox(
-                                                            height: 80.0,
-                                                            child: ListView
-                                                                .builder(
-                                                                    scrollDirection:
-                                                                        Axis
-                                                                            .horizontal,
-                                                                    shrinkWrap:
-                                                                        true,
-                                                                    itemCount: _bloc
-                                                                        .state
-                                                                        .competitionDetail
-                                                                        ?.clubsInCompetition
-                                                                        .length,
-                                                                    itemBuilder:
-                                                                        (context,
-                                                                            index) {
-                                                                      return Container(
-                                                                          width:
-                                                                              50,
-                                                                          height:
-                                                                              50,
-                                                                          child:
-                                                                              CircleAvatar(backgroundImage: NetworkImage((_bloc.state.competitionDetail?.clubsInCompetition[index].image)! != '' ? "${_bloc.state.competitionDetail?.clubsInCompetition[index].image}" : defaultImage)));
-                                                                    }),
-                                                          ),
-                                                        ],
+                                                  ? Row(
+                                                    children: [
+                                                      SizedBox(
+                                                        height: 80.0,
+                                                        child: ListView
+                                                            .builder(
+                                                                scrollDirection:
+                                                                    Axis
+                                                                        .horizontal,
+                                                                shrinkWrap:
+                                                                    true,
+                                                                itemCount: _bloc
+                                                                    .state
+                                                                    .competitionDetail
+                                                                    ?.clubsInCompetition
+                                                                    .length,
+                                                                itemBuilder:
+                                                                    (context,
+                                                                        index) {
+                                                                  return Container(
+                                                                      margin: new EdgeInsets.symmetric(horizontal: 10),
+                                                                      width:
+                                                                          50,
+                                                                      height:
+                                                                          50,
+                                                                      child:
+                                                                          CircleAvatar(backgroundImage: NetworkImage((_bloc.state.competitionDetail?.clubsInCompetition[index].image)! != '' ? "${_bloc.state.competitionDetail?.clubsInCompetition[index].image}" : defaultImage)));
+                                                                }),
                                                       ),
-                                                    )
+                                                    ],
+                                                  )
                                                   : SizedBox(height: 10),
                                               Padding(
                                                 padding: const EdgeInsets.only(
@@ -647,51 +638,45 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                               2)
                                                           .length)! >
                                                       0)
-                                                  ? Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 10.0,
-                                                              right: 10.0,
-                                                              ),
-                                                      child: Row(children: [
-                                                        SizedBox(
-                                                          height: 80.0,
-                                                          child:
-                                                              ListView.builder(
-                                                                  scrollDirection:
-                                                                      Axis
-                                                                          .horizontal,
-                                                                  shrinkWrap:
-                                                                      true,
-                                                                  itemCount: _bloc
-                                                                      .state
-                                                                      .competitionDetail
-                                                                      ?.competitionEntities
-                                                                      .where((element) =>
-                                                                          element
-                                                                              .entityTypeId ==
-                                                                          2)
-                                                                      .length,
-                                                                  itemBuilder:
-                                                                      (context,
-                                                                          index) {
-                                                                    return Container(
-                                                                        width:
-                                                                            50.0,
-                                                                        height:
-                                                                            50.0,
-                                                                        // padding: const EdgeInsets.fromLTRB(
-                                                                        //     6.0,
-                                                                        //     2.0,
-                                                                        //     10.0,
-                                                                        //     2.0),
-                                                                        child: CircleAvatar(
-                                                                            backgroundImage:
-                                                                                NetworkImage("${_bloc.state.competitionDetail?.competitionEntities.where((element) => element.entityTypeId == 2).elementAt(index).imageUrl}")));
-                                                                  }),
-                                                        ),
-                                                      ]),
-                                                    )
+                                                  ? Row(children: [
+                                                    SizedBox(
+                                                      height: 80.0,
+                                                      child:
+                                                          ListView.builder(
+                                                              scrollDirection:
+                                                                  Axis
+                                                                      .horizontal,
+                                                              shrinkWrap:
+                                                                  true,
+                                                              itemCount: _bloc
+                                                                  .state
+                                                                  .competitionDetail
+                                                                  ?.competitionEntities
+                                                                  .where((element) =>
+                                                                      element
+                                                                          .entityTypeId ==
+                                                                      2)
+                                                                  .length,
+                                                              itemBuilder:
+                                                                  (context,
+                                                                      index) {
+                                                                return Container(
+                                                                    margin: new EdgeInsets.symmetric(horizontal: 10),
+                                                                    width:
+                                                                        50.0,
+                                                                    height:
+                                                                        50.0,
+                                                                    // padding: const EdgeInsets.fromLTRB(
+                                                                    //     6.0,
+                                                                    //     2.0,
+                                                                    //     10.0,
+                                                                    //     2.0),
+                                                                    child: CircleAvatar(
+                                                                        backgroundImage:
+                                                                            NetworkImage("${_bloc.state.competitionDetail?.competitionEntities.where((element) => element.entityTypeId == 2).elementAt(index).imageUrl}")));
+                                                              }),
+                                                    ),
+                                                  ])
                                                   : SizedBox(height: 10),
                                               Padding(
                                                 padding: const EdgeInsets.only(
@@ -713,12 +698,13 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                               ),
                                               Padding(
                                                 padding: const EdgeInsets.only(
-                                                    left: 10.0, right: 10.0, bottom: 10),
+                                                    bottom: 10),
                                                 child: Row(
                                                   children: [
                                                     SizedBox(
                                                         height: 80.0,
                                                         child: Container(
+                                                            margin: new EdgeInsets.symmetric(horizontal: 10),
                                                             width: 50,
                                                             height: 50,
                                                             child: CircleAvatar(
