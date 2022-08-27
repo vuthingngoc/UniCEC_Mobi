@@ -90,7 +90,7 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                 width: 10,
               ),
               Text(
-                "Đợi duyệt",
+                "Hoàn Thành",
                 style: TextStyle(fontSize: 18),
               ),
             ],
@@ -917,16 +917,16 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                                                               EdgeInsets.only(
                                                             left: SizeConfig
                                                                     .screenWidth *
-                                                                0.15,
+                                                                0.25,
                                                             right: SizeConfig
                                                                     .screenWidth *
-                                                                0.15,
+                                                                0.25,
                                                             bottom:
                                                                 getProportionateScreenWidth(
                                                                     40),
                                                             top:
                                                                 getProportionateScreenWidth(
-                                                                    15),
+                                                                    20),
                                                           ),
                                                           child: DefaultButton(
                                                             text:

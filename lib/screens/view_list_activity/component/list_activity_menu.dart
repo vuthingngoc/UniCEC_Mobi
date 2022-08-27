@@ -161,7 +161,7 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                                                     : (value ==
                                                             CompetitionActivityStatus
                                                                 .Finished)
-                                                        ? 'Đợi duyệt'
+                                                        ? 'Hoàn Thành'
                                                         : (value ==
                                                                 CompetitionActivityStatus
                                                                     .Completed)
@@ -400,7 +400,7 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                                                       .toString() ==
                                                   "CompetitionActivityStatus.Finished")
                                                 Text(
-                                                  "Đợi duyệt",
+                                                  "Hoàn Thành",
                                                   style: TextStyle(
                                                       fontSize: 18,
                                                       color: Colors.green),
