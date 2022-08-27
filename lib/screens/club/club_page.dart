@@ -83,15 +83,45 @@ class _ClubPageState extends State<ClubPage> {
                   ),
                   body:
                       (GetIt.I.get<CurrentUser>().clubsBelongToStudent != null)
-                          ? Center(
+                          ? Container(
+                              padding: EdgeInsets.all(10),
                               child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text('Bạn chưa chọn Câu Lạc Bộ'),
-                                  DefaultButton(
-                                    text: "Chọn Câu Lạc Bộ ",
-                                    press: () {
-                                      _bloc.add(ClubSelectionEvent());
-                                    },
+                                  Text('Bạn chưa chọn Câu Lạc Bộ',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold)),
+                                  // DefaultButton(
+                                  //   text: " ",
+                                  //   press: () {
+
+                                  //   },
+                                  // ),
+                                  SizedBox(height: 20),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        width: 200,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: ArgonColors.warning),
+                                            color: ArgonColors.warning,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(30))),
+                                        child: FlatButton(
+                                            textColor: ArgonColors.white,
+                                            onPressed: () {
+                                              _bloc.add(ClubSelectionEvent());
+                                            },
+                                            child: Text("Chọn Câu Lạc Bộ",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 15.0))),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),

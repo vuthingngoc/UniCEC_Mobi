@@ -92,18 +92,19 @@ class _ClubSelectionPageState extends State<ClubSelectionPage> {
                         ),
                       ),
                     ),
-              floatingActionButton: FloatingActionButton.extended(
+              floatingActionButton: Padding(
+                padding: EdgeInsets.only(bottom: 60),
+                child: FloatingActionButton.extended(
                   onPressed: () {
                     //thêm event qua trang list club
                     _bloc.add(ClubsViewPageEvent());
                   },
                   backgroundColor: AppColors.mainColor,
                   label: const Text("Tham gia clb khác"),
-                  icon: const Icon(Icons.add)),
-              floatingActionButtonLocation:
-                  FloatingActionButtonLocation.endFloat,
-              extendBodyBehindAppBar: false,
-              resizeToAvoidBottomInset: true,
+                  icon: const Icon(Icons.add),
+                  //extendedPadding: EdgeInsets.all(10),
+                ),
+              ),
             );
           },
         ));

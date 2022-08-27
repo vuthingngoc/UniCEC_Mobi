@@ -82,7 +82,8 @@ class CardSmall extends StatelessWidget {
                               Container(
                                 margin: const EdgeInsets.only(right: 20),
                                 decoration: BoxDecoration(
-                                    border: Border.all(color: ArgonColors.error),
+                                    border:
+                                        Border.all(color: ArgonColors.error),
                                     color: ArgonColors.error,
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(5))),
@@ -168,59 +169,46 @@ class CardSmall extends StatelessWidget {
                                                                       ? Colors
                                                                           .blue
                                                                       : (status ==
-                                                                              CompetitionStatus
-                                                                                  .Complete)
-                                                                          ? Colors
-                                                                              .greenAccent
-                                                                          : (status ==
-                                                                                  CompetitionStatus
-                                                                                      .Pending)
-                                                                              ? Colors
-                                                                                  .pinkAccent
-                                                                              : (status ==
-                                                                                      CompetitionStatus
-                                                                                          .Cancel)
-                                                                                  ? Colors
-                                                                                      .red
-                                                                                  : Colors
-                                                                                      .grey),
-                                      color: (status ==
-                                              CompetitionStatus.Publish)
+                                                                              CompetitionStatus.Complete)
+                                                                          ? Colors.greenAccent
+                                                                          : (status == CompetitionStatus.Pending)
+                                                                              ? Colors.pinkAccent
+                                                                              : (status == CompetitionStatus.Cancel)
+                                                                                  ? Colors.red
+                                                                                  : (status == CompetitionStatus.PendingReview)
+                                                                                      ? Colors.grey
+                                                                                      : (status == CompetitionStatus.Approve)
+                                                                                          ? Colors.grey
+                                                                                          : (status == CompetitionStatus.Draft)
+                                                                                              ? Colors.grey
+                                                                                              : Colors.grey),
+                                      color: (status == CompetitionStatus.Publish)
                                           ? Colors.orangeAccent
-                                          : (status ==
-                                                  CompetitionStatus.Register)
+                                          : (status == CompetitionStatus.Register)
                                               ? Colors.green
-                                              : (status ==
-                                                      CompetitionStatus
-                                                          .Upcoming)
+                                              : (status == CompetitionStatus.Upcoming)
                                                   ? Colors.cyan
-                                                  : (status ==
-                                                          CompetitionStatus
-                                                              .Start)
+                                                  : (status == CompetitionStatus.Start)
                                                       ? Colors.redAccent
-                                                      : (status ==
-                                                              CompetitionStatus
-                                                                  .OnGoing)
+                                                      : (status == CompetitionStatus.OnGoing)
                                                           ? Colors.amber
-                                                          : (status ==
-                                                                  CompetitionStatus
-                                                                      .End)
+                                                          : (status == CompetitionStatus.End)
                                                               ? Colors.purple
-                                                              : (status ==
-                                                                      CompetitionStatus
-                                                                          .Finish)
+                                                              : (status == CompetitionStatus.Finish)
                                                                   ? Colors.blue
-                                                                  : (status ==
-                                                                          CompetitionStatus
-                                                                              .Complete)
-                                                                      ? Colors
-                                                                          .greenAccent
-                                                                      : (status ==
-                                                                              CompetitionStatus.Pending)
+                                                                  : (status == CompetitionStatus.Complete)
+                                                                      ? Colors.greenAccent
+                                                                      : (status == CompetitionStatus.Pending)
                                                                           ? Colors.pinkAccent
                                                                           : (status == CompetitionStatus.Cancel)
                                                                               ? Colors.red
-                                                                              : Colors.grey,
+                                                                              : (status == CompetitionStatus.PendingReview)
+                                                                                  ? Colors.grey
+                                                                                  : (status == CompetitionStatus.Approve)
+                                                                                      ? Colors.grey
+                                                                                      : (status == CompetitionStatus.Draft)
+                                                                                          ? Colors.grey
+                                                                                          : Colors.grey,
                                       borderRadius: BorderRadius.all(Radius.circular(4))),
                                   child: Text(
                                       (status == CompetitionStatus.Publish)
@@ -257,7 +245,13 @@ class CardSmall extends StatelessWidget {
                                                                           ? 'Chờ'
                                                                           : (status == CompetitionStatus.Cancel)
                                                                               ? 'Hủy'
-                                                                              : 'Trạng thái khác',
+                                                                              : (status == CompetitionStatus.Draft)
+                                                                                  ? 'Bản Thảo'
+                                                                                  : (status == CompetitionStatus.PendingReview)
+                                                                                      ? 'Chờ Duyệt' 'Bản Thảo'
+                                                                                      : (status == CompetitionStatus.Approve)
+                                                                                          ? 'Đã Xét Duyệt'
+                                                                                          : 'Trạng thái khác',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 18,
