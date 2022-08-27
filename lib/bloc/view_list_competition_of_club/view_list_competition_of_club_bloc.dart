@@ -28,7 +28,8 @@ class ViewListCompetitionOfClubBloc extends BaseBloc<
               isEvent: false,
               hasNext: false,
               currentPage: 1,
-              isLoading: true),
+              isLoading: true,
+              clubIdSelected: GetIt.I.get<CurrentUser>().clubIdSelected),
         ) {
     on((event, emit) async {
       if (event is LoadOutStandingCompetitionEvent) {
@@ -47,7 +48,8 @@ class ViewListCompetitionOfClubBloc extends BaseBloc<
             viewMost: true,
             statuses: statuses,
             scope: state.scope,
-            event: state.isEvent); // add more params if you want
+            event: state.isEvent,
+            clubId: state.clubIdSelected); // add more params if you want
 
         PagingResult<CompetitionShowModel>? result =
             await service.loadCompetition(request);
@@ -78,7 +80,8 @@ class ViewListCompetitionOfClubBloc extends BaseBloc<
             scope: state.scope,
             name: state.searchName,
             statuses: statuses,
-            event: state.isEvent);
+            event: state.isEvent,
+            clubId: state.clubIdSelected);
         // add more params if you want
 
         PagingResult<CompetitionShowModel>? result =
@@ -143,7 +146,8 @@ class ViewListCompetitionOfClubBloc extends BaseBloc<
             scope: state.scope,
             name: state.searchName,
             statuses: statuses,
-            event: event.isEvent);
+            event: event.isEvent,
+            clubId: state.clubIdSelected);
         // add more params if you want
 
         PagingResult<CompetitionShowModel>? result =
@@ -204,7 +208,8 @@ class ViewListCompetitionOfClubBloc extends BaseBloc<
             scope: state.scope,
             name: state.searchName,
             statuses: statuses,
-            event: state.isEvent);
+            event: state.isEvent,
+            clubId: state.clubIdSelected);
 
         PagingResult<CompetitionShowModel>? result =
             await service.showCompetition(request, state.currentPage);
@@ -241,7 +246,8 @@ class ViewListCompetitionOfClubBloc extends BaseBloc<
             scope: state.scope,
             name: state.searchName,
             statuses: statuses,
-            event: state.isEvent);
+            event: state.isEvent,
+            clubId: state.clubIdSelected);
 
         PagingResult<CompetitionShowModel>? result =
             await service.showCompetition(request, 1);
