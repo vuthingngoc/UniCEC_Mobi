@@ -29,9 +29,9 @@ class _ViewCompetitionRoundResultPageState
           onPressed: () {
             Navigator.of(context).pop(true);
           },
-          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
         ),
-        title: Text(
+        title: const Text(
           "Kết quả vòng thi",
           style: TextStyle(color: Colors.white),
         ),

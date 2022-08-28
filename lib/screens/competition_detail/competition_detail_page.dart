@@ -6,6 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/models/common/current_user.dart';
 import 'package:unicec_mobi/models/enums/competition_scope_status.dart';
 import 'package:unicec_mobi/models/enums/competition_status.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../bloc/competition_detail/competition_detail_bloc.dart';
 import '../../bloc/competition_detail/competition_detail_event.dart';
 import '../../bloc/competition_detail/competition_detail_state.dart';
@@ -456,6 +457,16 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                           .state
                                                           .competitionDetail
                                                           ?.content,
+                                                      onLinkTap: (url, context, attributes, element) async {
+                                                        if (await canLaunch(
+                                                            url!)) {
+                                                          await launch(
+                                                            url,
+                                                          );
+                                                        } else {
+                                                          throw 'Could not launch $url';
+                                                        }
+                                                      },
                                                       tagsList: Html.tags,
                                                       style: {
                                                         "p": Style(
@@ -481,9 +492,6 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                 const FontSize(
                                                                     15.0))
                                                       },
-                                                      // onLinkTap: (url, _, _){
-                                                      //   print('Open with url: $url ...');
-                                                      // },
                                                       onCssParseError:
                                                           (css, messages) {
                                                         Log.error(
@@ -499,7 +507,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                   ],
                                                 ),
                                               ),
-                                              SizedBox(height: 10.0),
+                                              const SizedBox(height: 10.0),
 //----------------------------------------------------------------------------Các câu lạc bộ tham gia tổ chức
                                               (_bloc
                                                           .state
@@ -527,7 +535,8 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                         ],
                                                       ),
                                                     )
-                                                  : SizedBox(height: 10.0),
+                                                  : const SizedBox(
+                                                      height: 10.0),
                                               (_bloc
                                                           .state
                                                           .competitionDetail
@@ -554,7 +563,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                       (context,
                                                                           index) {
                                                                     return Container(
-                                                                        margin: new EdgeInsets.symmetric(
+                                                                        margin: const EdgeInsets.symmetric(
                                                                             horizontal:
                                                                                 10),
                                                                         width:
