@@ -190,7 +190,6 @@ class _NavbarCompetitionOfParticipantState
                                               CompetitionScopeStatus
                                                   .InterUniversity)
                                           ? Container(
-                                              color: Colors.green,
                                               child: Row(
                                                 children: <Widget>[
                                                   //Icon(Icons.camera, size: 18),
@@ -198,7 +197,7 @@ class _NavbarCompetitionOfParticipantState
                                                     padding:
                                                         const EdgeInsets.only(
                                                             left: 8.0),
-                                                    child: Text('Liên Trường'),
+                                                    child: Text('Liên Trường', style: TextStyle(color: Colors.orange[900]),),
                                                   ),
                                                 ],
                                               ),
@@ -227,7 +226,6 @@ class _NavbarCompetitionOfParticipantState
                                       child: (state.scope ==
                                               CompetitionScopeStatus.University)
                                           ? Container(
-                                              color: Colors.green,
                                               child: Row(
                                                 children: <Widget>[
                                                   //Icon(Icons.school, size: 18),
@@ -235,7 +233,7 @@ class _NavbarCompetitionOfParticipantState
                                                     padding:
                                                         const EdgeInsets.only(
                                                             left: 8.0),
-                                                    child: Text('Trong Trường'),
+                                                    child: Text('Trong Trường', style: TextStyle(color: Colors.orange[900]),),
                                                   ),
                                                 ],
                                               ),
@@ -264,7 +262,6 @@ class _NavbarCompetitionOfParticipantState
                                       child: (state.scope ==
                                               CompetitionScopeStatus.Club)
                                           ? Container(
-                                              color: Colors.green,
                                               child: Row(
                                                 children: <Widget>[
                                                   //Icon(Icons.group, size: 18),
@@ -272,7 +269,7 @@ class _NavbarCompetitionOfParticipantState
                                                     padding:
                                                         const EdgeInsets.only(
                                                             left: 8.0),
-                                                    child: Text('Câu Lạc Bộ'),
+                                                    child: Text('Câu Lạc Bộ', style: TextStyle(color: Colors.orange[900]),),
                                                   ),
                                                 ],
                                               ),

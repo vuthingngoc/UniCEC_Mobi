@@ -67,7 +67,7 @@ class Body extends StatelessWidget {
           ),
           ProfileMenu(
             text: "Cuộc thi và sự kiện đang tham gia",
-            icon: "assets/icons/Bell.svg",
+            icon: "assets/icons/trophy.svg",
             press: () {
               Navigator.of(context)
                   .pushNamed(Routes.viewListCompetitionOfParticipant);

@@ -44,7 +44,8 @@ class _BodyState extends State<Body> {
                         child: TextFormField(
                             controller: _controller,
                             onFieldSubmitted: (value) {
-                              bloc.add(ChangeSearchNameEvent(searchName: value));
+                              bloc.add(
+                                  ChangeSearchNameEvent(searchName: value));
                             },
                             autofocus: false,
                             decoration: InputDecoration(
@@ -53,8 +54,8 @@ class _BodyState extends State<Body> {
                                     _controller.clear;
                                     _controller.text = "";
                                     //sửa lại cái
-                                    bloc.add(
-                                        ChangeSearchNameEvent(searchName: null));
+                                    bloc.add(ChangeSearchNameEvent(
+                                        searchName: null));
                                   },
                                   icon: const Icon(Icons.clear)),
                               labelText: 'Tìm Tên Đội',
@@ -90,14 +91,16 @@ class _BodyState extends State<Body> {
                               value: 1,
                               child: (state.status == TeamStatus.Available)
                                   ? Container(
-                                      color: Colors.green,
                                       child: Row(
                                         children: <Widget>[
                                           //Icon(Icons.camera, size: 18),
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 8.0),
-                                            child: Text('Mở'),
+                                            child: Text('Mở',
+                                                style: TextStyle(
+                                                    color:
+                                                        ArgonColors.warning)),
                                           ),
                                         ],
                                       ),
@@ -122,14 +125,17 @@ class _BodyState extends State<Body> {
                               value: 2,
                               child: (state.status == TeamStatus.IsLocked)
                                   ? Container(
-                                      color: Colors.green,
                                       child: Row(
                                         children: <Widget>[
                                           //Icon(Icons.school, size: 18),
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 8.0),
-                                            child: Text('Đóng'),
+                                            child: Text(
+                                              'Đóng',
+                                              style: TextStyle(
+                                                  color: ArgonColors.warning),
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -152,15 +158,33 @@ class _BodyState extends State<Body> {
                                 bloc.add(ResetFilterEvent());
                               },
                               value: 3,
-                              child: Row(
-                                children: <Widget>[
-                                  //Icon(Icons.delete, size: 18),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: Text('Tất Cả'),
-                                  ),
-                                ],
-                              ),
+                              child: ((state.status != TeamStatus.Available) &&
+                                      (state.status != TeamStatus.IsLocked))
+                                  ? Container(
+                                      child: Row(
+                                        children: <Widget>[
+                                          //Icon(Icons.camera, size: 18),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 8.0),
+                                            child: Text('Tất cả',
+                                                style: TextStyle(
+                                                    color:
+                                                        ArgonColors.warning)),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : Row(
+                                      children: <Widget>[
+                                        //Icon(Icons.delete, size: 18),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 8.0),
+                                          child: Text('Tất Cả'),
+                                        ),
+                                      ],
+                                    ),
                             ),
                           ];
                         }),
@@ -317,7 +341,7 @@ class _BodyState extends State<Body> {
                               context: context,
                               dialogType: DialogType.WARNING,
                               headerAnimationLoop: true,
-                              animType: AnimType.TOPSLIDE,
+                              animType: AnimType.SCALE,
                               title: 'Lưu ý',
                               desc: 'Quy định về Đội Thi của Cuộc Thi'
                                       '\n 1.Tạo, Tham Gia đội khi Cuộc Thi chưa diễn ra.'
