@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/view_list_member/view_list_member_bloc.dart';
 import '../../bloc/view_list_member/view_list_member_event.dart';
 import '../../bloc/view_list_member/view_list_member_state.dart';
+import '../../models/entities/club_role/club_role_model.dart';
 import '../../utils/app_color.dart';
 import '../../utils/loading.dart';
 import '../../utils/router.dart';
@@ -114,139 +115,139 @@ class _ViewListMemberPageState extends State<ViewListMemberPage>
                                 icon: Icon(Icons.filter_alt_outlined),
                                 itemBuilder: (context) {
                                   return [
-                                    PopupMenuItem(
-                                      onTap: () {
-                                        bloc.add(ChangeClubRoleIdEvent(
-                                            clubRoleId: 1));
-                                      },
-                                      value: 1,
-                                      child: (state.clubRoleId == 1)
-                                          ? Container(
-                                              color: Colors.green,
-                                              child: Row(
-                                                children: <Widget>[
-                                                  //Icon(Icons.camera, size: 18),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 8.0),
-                                                    child: Text('Chủ Nhiệm'),
-                                                  ),
-                                                ],
-                                              ),
-                                            )
-                                          : Row(
-                                              children: <Widget>[
-                                                //Icon(Icons.camera, size: 18),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 8.0),
-                                                  child: Text('Chủ Nhiệm'),
-                                                ),
-                                              ],
-                                            ),
-                                    ),
-                                    PopupMenuItem(
-                                      onTap: () {
-                                        bloc.add(ChangeClubRoleIdEvent(
-                                            clubRoleId: 2));
-                                      },
-                                      value: 2,
-                                      child: (state.clubRoleId == 2)
-                                          ? Container(
-                                              color: Colors.green,
-                                              child: Row(
-                                                children: <Widget>[
-                                                  //Icon(Icons.school, size: 18),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 8.0),
-                                                    child:
-                                                        Text('Phó Chủ Nhiệm'),
-                                                  ),
-                                                ],
-                                              ),
-                                            )
-                                          : Row(
-                                              children: <Widget>[
-                                                //Icon(Icons.school, size: 18),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 8.0),
-                                                  child: Text('Phó Chủ Nhiệm'),
-                                                ),
-                                              ],
-                                            ),
-                                    ),
-                                    PopupMenuItem(
-                                      onTap: () {
-                                        bloc.add(ChangeClubRoleIdEvent(
-                                            clubRoleId: 3));
-                                      },
-                                      value: 3,
-                                      child: (state.clubRoleId == 3)
-                                          ? Container(
-                                              color: Colors.green,
-                                              child: Row(
-                                                children: <Widget>[
-                                                  //Icon(Icons.school, size: 18),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 8.0),
-                                                    child: Text('Trưởng ban'),
-                                                  ),
-                                                ],
-                                              ),
-                                            )
-                                          : Row(
-                                              children: <Widget>[
-                                                //Icon(Icons.school, size: 18),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 8.0),
-                                                  child: Text('Trưởng ban'),
-                                                ),
-                                              ],
-                                            ),
-                                    ),
-                                    PopupMenuItem(
-                                      onTap: () {
-                                        bloc.add(ChangeClubRoleIdEvent(
-                                            clubRoleId: 4));
-                                      },
-                                      value: 4,
-                                      child: (state.clubRoleId == 4)
-                                          ? Container(
-                                              color: Colors.green,
-                                              child: Row(
-                                                children: <Widget>[
-                                                  //Icon(Icons.school, size: 18),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 8.0),
-                                                    child: Text('Thành Viên'),
-                                                  ),
-                                                ],
-                                              ),
-                                            )
-                                          : Row(
-                                              children: <Widget>[
-                                                //Icon(Icons.school, size: 18),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 8.0),
-                                                  child: Text('Thành Viên'),
-                                                ),
-                                              ],
-                                            ),
-                                    ),
+                                    // PopupMenuItem(
+                                    //   onTap: () {
+                                    //     bloc.add(ChangeClubRoleIdEvent(
+                                    //         clubRoleId: 1));
+                                    //   },
+                                    //   value: 1,
+                                    //   child: (state.clubRoleId == 1)
+                                    //       ? Container(
+                                    //           color: Colors.green,
+                                    //           child: Row(
+                                    //             children: <Widget>[
+                                    //               //Icon(Icons.camera, size: 18),
+                                    //               Padding(
+                                    //                 padding:
+                                    //                     const EdgeInsets.only(
+                                    //                         left: 8.0),
+                                    //                 child: Text('Chủ Nhiệm'),
+                                    //               ),
+                                    //             ],
+                                    //           ),
+                                    //         )
+                                    //       : Row(
+                                    //           children: <Widget>[
+                                    //             //Icon(Icons.camera, size: 18),
+                                    //             Padding(
+                                    //               padding:
+                                    //                   const EdgeInsets.only(
+                                    //                       left: 8.0),
+                                    //               child: Text('Chủ Nhiệm'),
+                                    //             ),
+                                    //           ],
+                                    //         ),
+                                    // ),
+                                    // PopupMenuItem(
+                                    //   onTap: () {
+                                    //     bloc.add(ChangeClubRoleIdEvent(
+                                    //         clubRoleId: 2));
+                                    //   },
+                                    //   value: 2,
+                                    //   child: (state.clubRoleId == 2)
+                                    //       ? Container(
+                                    //           color: Colors.green,
+                                    //           child: Row(
+                                    //             children: <Widget>[
+                                    //               //Icon(Icons.school, size: 18),
+                                    //               Padding(
+                                    //                 padding:
+                                    //                     const EdgeInsets.only(
+                                    //                         left: 8.0),
+                                    //                 child:
+                                    //                     Text('Phó Chủ Nhiệm'),
+                                    //               ),
+                                    //             ],
+                                    //           ),
+                                    //         )
+                                    //       : Row(
+                                    //           children: <Widget>[
+                                    //             //Icon(Icons.school, size: 18),
+                                    //             Padding(
+                                    //               padding:
+                                    //                   const EdgeInsets.only(
+                                    //                       left: 8.0),
+                                    //               child: Text('Phó Chủ Nhiệm'),
+                                    //             ),
+                                    //           ],
+                                    //         ),
+                                    // ),
+                                    // PopupMenuItem(
+                                    //   onTap: () {
+                                    //     bloc.add(ChangeClubRoleIdEvent(
+                                    //         clubRoleId: 3));
+                                    //   },
+                                    //   value: 3,
+                                    //   child: (state.clubRoleId == 3)
+                                    //       ? Container(
+                                    //           color: Colors.green,
+                                    //           child: Row(
+                                    //             children: <Widget>[
+                                    //               //Icon(Icons.school, size: 18),
+                                    //               Padding(
+                                    //                 padding:
+                                    //                     const EdgeInsets.only(
+                                    //                         left: 8.0),
+                                    //                 child: Text('Trưởng ban'),
+                                    //               ),
+                                    //             ],
+                                    //           ),
+                                    //         )
+                                    //       : Row(
+                                    //           children: <Widget>[
+                                    //             //Icon(Icons.school, size: 18),
+                                    //             Padding(
+                                    //               padding:
+                                    //                   const EdgeInsets.only(
+                                    //                       left: 8.0),
+                                    //               child: Text('Trưởng ban'),
+                                    //             ),
+                                    //           ],
+                                    //         ),
+                                    // ),
+                                    // PopupMenuItem(
+                                    //   onTap: () {
+                                    //     bloc.add(ChangeClubRoleIdEvent(
+                                    //         clubRoleId: 4));
+                                    //   },
+                                    //   value: 4,
+                                    //   child: (state.clubRoleId == 4)
+                                    //       ? Container(
+                                    //           color: Colors.green,
+                                    //           child: Row(
+                                    //             children: <Widget>[
+                                    //               //Icon(Icons.school, size: 18),
+                                    //               Padding(
+                                    //                 padding:
+                                    //                     const EdgeInsets.only(
+                                    //                         left: 8.0),
+                                    //                 child: Text('Thành Viên'),
+                                    //               ),
+                                    //             ],
+                                    //           ),
+                                    //         )
+                                    //       : Row(
+                                    //           children: <Widget>[
+                                    //             //Icon(Icons.school, size: 18),
+                                    //             Padding(
+                                    //               padding:
+                                    //                   const EdgeInsets.only(
+                                    //                       left: 8.0),
+                                    //               child: Text('Thành Viên'),
+                                    //             ),
+                                    //           ],
+                                    //         ),
+                                    // ),
                                     PopupMenuItem(
                                       onTap: () {
                                         bloc.add(ResetFilterEvent());
@@ -268,6 +269,35 @@ class _ViewListMemberPageState extends State<ViewListMemberPage>
                                 }),
                           ],
                         ),
+                      ),
+                      //
+                      Row(
+                        children: [
+                          Text('Chức Vụ'),
+                          DropdownButtonHideUnderline(
+                            child: DropdownButton<int>(
+                              value: state.clubRoleId,
+                              icon: const Icon(Icons.arrow_drop_down),
+                              iconSize: 24,
+                              elevation: 16,
+                              style: const TextStyle(
+                                  color: Colors.deepPurple,
+                                  fontWeight: FontWeight.bold),
+                              onChanged: (int? newValue) {
+                                bloc.add(ChangeClubRoleIdEvent(
+                                    clubRoleId: newValue!));
+                              },
+                              items: state.listClubRole
+                                  .map<DropdownMenuItem<int>>(
+                                      (ClubRoleModel value) {
+                                return DropdownMenuItem<int>(
+                                  value: value.id,
+                                  child: Text(value.name),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ],
                       ),
                       (state.listMember.isNotEmpty)
                           ? ViewDetailTableMemberMenu(

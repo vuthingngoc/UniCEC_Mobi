@@ -5,6 +5,7 @@ import '../../../bloc/view_competition_activity/view_competition_activity_bloc.d
 import '../../../bloc/view_competition_activity/view_competition_activity_event.dart';
 import '../../../bloc/view_competition_activity/view_competition_activity_state.dart';
 import '../../../constants/Theme.dart';
+import '../../../models/enums/competition_status.dart';
 import '../../../utils/loading.dart';
 import '../../../utils/router.dart';
 import '/models/enums/priority_status.dart';
@@ -431,7 +432,7 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                                                 ),
                                               Padding(
                                                 padding: const EdgeInsets.only(
-                                                    left: 16.0, right: 8),
+                                                    left: 10.0, right: 8),
                                                 child: Text("|",
                                                     style: TextStyle(
                                                         fontSize: 18,
@@ -468,6 +469,25 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                                                   Icons.warning,
                                                   color: Colors.green,
                                                 ),
+                                              (DateTime.now().compareTo(state
+                                                              .listCompetitionActivity[
+                                                                  index]
+                                                              .ending)) >
+                                                          0 &&
+                                                      (state
+                                                                  .listCompetitionActivity[
+                                                                      index]
+                                                                  .status !=
+                                                              CompetitionActivityStatus
+                                                                  .Completed )
+                                                  ? Text('   Trễ',
+                                                      style: TextStyle(
+                                                          color:
+                                                              ArgonColors.error,
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.bold))
+                                                  : Text(''),
                                             ],
                                           ),
                                         ],
