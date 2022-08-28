@@ -52,7 +52,7 @@ class _ViewListCompetitionOfParticipantPageState
         value: bloc,
         child: Scaffold(
             appBar: NavbarCompetitionOfParticipant(
-              title: "Cuộc thi và sự kiện đã đăng kí",
+              title: "Cuộc thi và sự kiện đã đăng kí tham gia",
               searchBar: true,
               categoryOne: "Cuộc Thi",
               categoryTwo: "Sự Kiện",

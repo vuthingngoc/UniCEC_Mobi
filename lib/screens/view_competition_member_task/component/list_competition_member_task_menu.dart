@@ -135,7 +135,7 @@ class _ViewCompetitionMemberTaskMenuState
 
                                               child: Row(
                                                 children: <Widget>[
-                                                  Icon(Icons.camera, size: 18, color: ArgonColors.warning),
+
                                                   Padding(
                                                     padding:
                                                         const EdgeInsets.only(
@@ -147,7 +147,7 @@ class _ViewCompetitionMemberTaskMenuState
                                             )
                                           : Row(
                                               children: <Widget>[
-                                                Icon(Icons.camera, size: 18),
+
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.only(
@@ -168,7 +168,7 @@ class _ViewCompetitionMemberTaskMenuState
                                           ? Container(
                                               child: Row(
                                                 children: <Widget>[
-                                                  Icon(Icons.school, size: 18, color: ArgonColors.warning),
+
                                                   Padding(
                                                     padding:
                                                         const EdgeInsets.only(
@@ -180,7 +180,7 @@ class _ViewCompetitionMemberTaskMenuState
                                             )
                                           : Row(
                                               children: <Widget>[
-                                                Icon(Icons.school, size: 18),
+
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.only(

@@ -171,7 +171,6 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                                 CompetitionScopeStatus
                                                     .InterUniversity)
                                             ? Container(
-                                                color: Colors.green,
                                                 child: Row(
                                                   children: <Widget>[
                                                     Padding(
@@ -179,7 +178,7 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                                           const EdgeInsets.only(
                                                               left: 8.0),
                                                       child:
-                                                          Text('Liên Trường'),
+                                                          Text('Liên Trường', style: TextStyle(color: Colors.orange[900]),),
                                                     ),
                                                   ],
                                                 ),
@@ -209,7 +208,6 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                                 CompetitionScopeStatus
                                                     .University)
                                             ? Container(
-                                                color: Colors.green,
                                                 child: Row(
                                                   children: <Widget>[
                                                     // Icon(Icons.school,
@@ -219,7 +217,7 @@ class _NavbarCompetitionOfParticipantState extends State<NavbarCompetition> {
                                                           const EdgeInsets.only(
                                                               left: 8.0),
                                                       child:
-                                                          Text('Trong Trường'),
+                                                          Text('Trong Trường', style: TextStyle(color: Colors.orange[900]),),
                                                     ),
                                                   ],
                                                 ),
