@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
+import 'package:unicec_mobi/models/entities/club_role/club_role_model.dart';
 import '/models/entities/member/member_model.dart';
 import '/services/member_svc/i_member_service.dart';
 import '/utils/api.dart';
@@ -118,6 +119,36 @@ class MemberService implements IMemberService {
           membersBelongToClubs.add(model);
         }
         return membersBelongToClubs;
+      }
+    } catch (e) {
+      Log.error(e.toString());
+    } finally {
+      client.close();
+    }
+    return null;
+  }
+
+  @override
+  Future<List<ClubRoleModel>?> getListClubRole() async {
+    var client = http.Client();
+    String url = Api.GetUrl(apiPath: Api.clubRoles);
+    String? idToken = GetIt.I.get<CurrentUser>().idToken;
+    try {
+      var response =
+          await client.get(Uri.parse(url), headers: Api.GetHeader(idToken));
+      if (response.statusCode == 200) {
+        List<dynamic> result = adapter.parseToList(response);
+        if (result.isEmpty) {
+          return null;
+        }
+        //
+        List<ClubRoleModel> clubRole = [];
+        //
+        for (var element in result) {
+          ClubRoleModel model = ClubRoleModel.fromJson(element);
+          clubRole.add(model);
+        }
+        return clubRole;
       }
     } catch (e) {
       Log.error(e.toString());
