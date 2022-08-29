@@ -25,11 +25,11 @@ class _BodyStudentState extends State<BodyStudent> {
         bloc: bloc,
         builder: (context, state) {
           return SingleChildScrollView(
-            padding: EdgeInsets.symmetric(vertical: 20),
+            padding: const EdgeInsets.symmetric(vertical: 20),
             child: Column(children: [
               Container(
                 padding: const EdgeInsets.only(left: 20, top: 10, bottom: 20),
-                child: Row(
+                child: Wrap(                  
                   children: const [
                     Text(
                       "Lưu ý*: ",
