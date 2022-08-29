@@ -30,19 +30,19 @@ class _BodyStudentState extends State<BodyStudent> {
               Container(
                 padding: const EdgeInsets.only(left: 20, top: 10, bottom: 20),
                 child: Row(
-                  children: [
+                  children: const [
                     Text(
                       "Lưu ý*: ",
                       style: TextStyle(color: ArgonColors.error, fontSize: 20),
                     ),
-                    Text("Hãy tham gia Cuộc thi để có đội thi của riêng bạn!", style: TextStyle(fontSize: 17,),)
+                    Text("Hãy tham gia cuộc thi để có đội thi của riêng bạn!", style: TextStyle(fontSize: 17,),)
                   ],
                 ),
               ),
               if (state.listTeam.isNotEmpty)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
+                  children: const [
                     SizedBox(
                       width: 40,
                     ),

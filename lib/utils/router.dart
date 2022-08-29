@@ -17,6 +17,7 @@ class Routes {
   static String get viewDetailTeamStudent => '/viewDetailTeamStudent';
 
   static String get viewCompetitionRound => '/viewCompetitionRound';
+  static String get viewCompetitionRoundResult => '/view-competition-round-result';
 
   static String get viewComptitionMemberTask => '/viewCompetitionMemberTask';
   static String get viewListActivity => '/viewListActivity';

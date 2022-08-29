@@ -130,6 +130,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
 
     RouteSettings settings = ModalRoute.of(context)!.settings;
     if (settings.arguments != null) {
+      print('competitionId: ${settings.arguments as int}');
       _bloc.add(
           LoadCompetitionDetailEvent(competitionId: settings.arguments as int));
       _bloc.isLoading = true;
@@ -152,7 +153,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                   icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
                 ),
                 title: Text(
-                    ((state.competitionDetail!.numberOfTeam != 0)
+                    ((state.competitionDetail?.numberOfTeam != 0)
                         ? "Chi Tiết Cuộc Thi"
                         : "Chi Tiết Sự Kiện"),
                     style: TextStyle(color: Colors.white, fontSize: 23)),
@@ -386,10 +387,12 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                         color: Colors.orange),
                                                     const SizedBox(width: 10.0),
                                                     Text(
-                                                      Utils.convertDateTime(_bloc
+                                                      (_bloc.state.competitionDetail != null)
+                                                      ? Utils.convertDateTime(_bloc
                                                           .state
                                                           .competitionDetail!
-                                                          .startTime),
+                                                          .startTime)
+                                                      : Utils.convertDateTime(DateTime.now()),
                                                       style: const TextStyle(
                                                           fontSize: 18),
                                                     ),
@@ -458,6 +461,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                           .competitionDetail
                                                           ?.content,
                                                       onLinkTap: (url, context, attributes, element) async {
+                                                        print('url: $url');
                                                         if (await canLaunch(
                                                             url!)) {
                                                           await launch(
@@ -763,7 +767,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                     SizedBox(
                                                         height: 80.0,
                                                         child: Container(
-                                                            margin: new EdgeInsets
+                                                            margin: const EdgeInsets
                                                                     .symmetric(
                                                                 horizontal: 10),
                                                             width: 50,
@@ -919,6 +923,59 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                             fontSize: 15))
                                                                   ],
                                                                 ))),
+                                                                
+                                                      ),
+                                                      if(state.competitionDetail
+                                                                            ?.status ==
+                                                                        CompetitionStatus
+                                                                            .Finish)
+                                                      Container(
+                                                        width: 200.0,
+                                                        height: 37,
+                                                        child: RaisedButton(
+                                                            textColor:
+                                                                ArgonColors
+                                                                    .white,
+                                                            color: ArgonColors
+                                                                .success,
+                                                            onPressed: () {
+                                                              Navigator.pushNamed(context, Routes.viewCompetitionRoundResult, arguments: {'competitionId': state.competitionDetail?.id});
+                                                            },
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4)),
+                                                            child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        bottom:
+                                                                            10,
+                                                                        top:
+                                                                            10),
+                                                                child: Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceAround,
+                                                                  children: const [
+                                                                    Icon(
+                                                                        Icons
+                                                                            .description,
+                                                                        size:
+                                                                            13),
+                                                                    SizedBox(
+                                                                      width: 5,
+                                                                    ),
+                                                                    Text(
+                                                                        "Kết quả cuộc thi",
+                                                                        style: TextStyle(
+                                                                            fontWeight:
+                                                                                FontWeight.w600,
+                                                                            fontSize: 15))
+                                                                  ],
+                                                                ))),
+                                                                
                                                       ),
                                                   ],
                                                 ),
@@ -939,11 +996,10 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                             Radius.circular(
                                                                 4))),
                                                 child: Text(
-                                                    "Hạn cuối đăng ký: " +
-                                                        Utils.convertDateTime(_bloc
+                                                    "Hạn cuối đăng ký: ${Utils.convertDateTime(_bloc
                                                             .state
                                                             .competitionDetail!
-                                                            .endTimeRegister),
+                                                            .endTimeRegister)}",
                                                     style: const TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 18,

@@ -14,6 +14,7 @@ import 'package:unicec_mobi/screens/club/club_page.dart';
 import 'package:unicec_mobi/screens/pages.dart';
 import 'package:unicec_mobi/utils/firebase.dart';
 import '../../bloc/club/club_bloc.dart';
+import '../../bloc/competition_round/competition_round_bloc.dart';
 import '../../bloc/main/main_bloc.dart';
 import '../../bloc/main/main_event.dart';
 import '../../bloc/main/main_state.dart';
@@ -222,7 +223,7 @@ class _MainPageState extends State<MainPage> {
                         ViewCompetitionMemberTaskBloc>()), // trang show Competition mà Member này có task ở trỏng
                 CompetitionPage(bloc: GetIt.I.get<CompetitionBloc>()),
                 NotificationPage(bloc: GetIt.I.get<NotificationBloc>()),
-                // ViewCompetitionRoundResultPage(),
+                // ViewCompetitionRoundResultPage(bloc: GetIt.I.get<CompetitionRoundBloc>()),
                 //ViewListCompetitionOfParticipantPage(),
                 ProfilePage(bloc: GetIt.I.get<ProfileBloc>())
                 //ViewDetailActivityPage(),
@@ -260,9 +261,9 @@ class _MainPageState extends State<MainPage> {
                                                     .get<CurrentUser>()
                                                     .clubIdSelected) &&
                                             state.currentPageIndex != 1)
-                                        ? AppColors.primaryColor
+                                        ? AppColors.mainColor
                                         : bloc.state.currentPageIndex == 0
-                                            ? AppColors.primaryColor
+                                            ? AppColors.mainColor
                                             : Colors.grey,
                               ),
                               Text(
@@ -275,9 +276,9 @@ class _MainPageState extends State<MainPage> {
                                                         .get<CurrentUser>()
                                                         .clubIdSelected) &&
                                                 state.currentPageIndex != 1)
-                                            ? AppColors.primaryColor
+                                            ? AppColors.mainColor
                                             : bloc.state.currentPageIndex == 0
-                                                ? AppColors.primaryColor
+                                                ? AppColors.mainColor
                                                 : Colors.grey,
                                     fontSize: 13),
                               )
@@ -319,7 +320,7 @@ class _MainPageState extends State<MainPage> {
                                                     .get<CurrentUser>()
                                                     .clubIdSelected) &&
                                             state.currentPageIndex == 2)
-                                        ? AppColors.primaryColor
+                                        ? AppColors.mainColor
                                         //ss2 dùng để ẩn cho nó qua clb
                                         : ((state.clubSelected !=
                                                     GetIt.I
@@ -330,7 +331,7 @@ class _MainPageState extends State<MainPage> {
                                             :
                                             //ss3 là bth
                                             state.currentPageIndex == 2
-                                                ? AppColors.primaryColor
+                                                ? AppColors.mainColor
                                                 : Colors.grey,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 13),

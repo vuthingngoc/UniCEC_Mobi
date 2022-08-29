@@ -22,14 +22,17 @@ class TeamInRoundModel{
   });
 
   factory TeamInRoundModel.fromJson(Map<String, dynamic> json){
-    int id = json['id'];
-    int teamId = json['team_id'];
-    String teamName = json['team_name'];
-    int roundId = json['round_id'];
-    int scores = json['scores'];
-    bool status = json['status'];
-    int rank = json['rank'];
-    List<ParticipantInTeamModel> membersInTeam = json['members_in_team'];
+    int id = json['id'] ?? 0;
+    int teamId = json['team_id'] ?? 0;
+    String teamName = json['team_name'] ?? '';
+    int roundId = json['round_id'] ?? 0;
+    int scores = json['scores'] ?? 0;
+    bool status = json['status'] ?? false;
+    int rank = json['rank'] ?? 0;
+    List<ParticipantInTeamModel> membersInTeam = [];
+    json['members_in_team']?.forEach((v) {
+      membersInTeam.add(ParticipantInTeamModel.fromJson(v));
+    });
 
     return TeamInRoundModel(
       id: id, 
