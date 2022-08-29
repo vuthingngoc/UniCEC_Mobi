@@ -252,15 +252,18 @@ class CardSmall extends StatelessWidget {
                                                                                       : (status == CompetitionStatus.Approve)
                                                                                           ? 'Đã Xét Duyệt'
                                                                                           : 'Trạng thái khác',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 18,
                                       )),
                                 )
                               ]),
+                          
                           Text(title,
                               style: const TextStyle(
-                                  color: ArgonColors.header, fontSize: 18)),
+                                  color: ArgonColors.header, fontSize: 18),
+                              // overflow: TextOverflow.ellipsis,
+                              ),
 
                           Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,

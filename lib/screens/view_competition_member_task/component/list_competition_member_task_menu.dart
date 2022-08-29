@@ -52,18 +52,19 @@ class _ViewCompetitionMemberTaskMenuState
                   child: Column(
                     children: [
                       Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               image: DecorationImage(
                                   alignment: Alignment.topCenter,
                                   image: AssetImage(
                                       "assets/img/not-found-icon-24.jpg"),
                                   fit: BoxFit.fitWidth))),
                       Image.asset("assets/img/not-found-icon-24.jpg"),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 25.0),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 25.0),
                         child: Text(
                           'Mời bạn chọn CLB để hiển thị danh sách công việc',
                           style: TextStyle(fontSize: 20),
+                          textAlign: TextAlign.center,
                         ),
                       ),
                     ],
