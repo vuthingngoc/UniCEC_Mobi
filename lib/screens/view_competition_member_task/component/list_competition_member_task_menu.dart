@@ -340,6 +340,52 @@ class _ViewCompetitionMemberTaskMenuState
                                                             .listCompetition[
                                                                 index]
                                                             .status ==
+                                                        CompetitionStatus.Draft)
+                                                      Text(
+                                                        "Bản thảo",
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            color: Colors.grey),
+                                                      ),
+                                                    if (state
+                                                            .listCompetition[
+                                                                index]
+                                                            .status ==
+                                                        CompetitionStatus
+                                                            .PendingReview)
+                                                      Text(
+                                                        "Chờ được duyệt",
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            color: Colors.grey),
+                                                      ),
+                                                    if (state
+                                                            .listCompetition[
+                                                                index]
+                                                            .status ==
+                                                        CompetitionStatus.End)
+                                                      Text(
+                                                        "Kết thúc",
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            color: Colors.grey),
+                                                      ),
+                                                    if (state
+                                                            .listCompetition[
+                                                                index]
+                                                            .status ==
+                                                        CompetitionStatus
+                                                            .Approve)
+                                                      Text(
+                                                        "Đã Xét Duyệt",
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            color: Colors.grey),
+                                                      ),
+                                                    if (state
+                                                            .listCompetition[
+                                                                index]
+                                                            .status ==
                                                         CompetitionStatus
                                                             .Register)
                                                       Text(
@@ -394,7 +440,7 @@ class _ViewCompetitionMemberTaskMenuState
                                                         CompetitionStatus
                                                             .Publish)
                                                       Text(
-                                                        "Mở",
+                                                        "Công bố",
                                                         style: TextStyle(
                                                             fontSize: 18,
                                                             color:
@@ -433,7 +479,7 @@ class _ViewCompetitionMemberTaskMenuState
                                                         CompetitionStatus
                                                             .Complete)
                                                       Text(
-                                                        "Kết thúc",
+                                                        "Đóng cuộc thi",
                                                         style: TextStyle(
                                                             fontSize: 18,
                                                             color: Colors.grey),
