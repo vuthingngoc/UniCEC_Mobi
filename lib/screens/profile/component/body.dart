@@ -82,7 +82,7 @@ class Body extends StatelessWidget {
                         },
                       ),
                       ProfileMenu(
-                        text: "Cuộc thi và sự kiện đang tham gia",
+                        text: "Cuộc Thi và Sự Kiện đang tham gia",
                         icon: "assets/icons/trophy.svg",
                         press: () {
                           Navigator.of(context).pushNamed(
