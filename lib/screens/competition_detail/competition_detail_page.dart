@@ -387,12 +387,17 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                         color: Colors.orange),
                                                     const SizedBox(width: 10.0),
                                                     Text(
-                                                      (_bloc.state.competitionDetail != null)
-                                                      ? Utils.convertDateTime(_bloc
-                                                          .state
-                                                          .competitionDetail!
-                                                          .startTime)
-                                                      : Utils.convertDateTime(DateTime.now()),
+                                                      (_bloc.state.competitionDetail !=
+                                                              null)
+                                                          ? Utils.convertDateTime(
+                                                              _bloc
+                                                                  .state
+                                                                  .competitionDetail!
+                                                                  .startTime)
+                                                          : Utils
+                                                              .convertDateTime(
+                                                                  DateTime
+                                                                      .now()),
                                                       style: const TextStyle(
                                                           fontSize: 18),
                                                     ),
@@ -460,7 +465,10 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                           .state
                                                           .competitionDetail
                                                           ?.content,
-                                                      onLinkTap: (url, context, attributes, element) async {
+                                                      onLinkTap: (url,
+                                                          context,
+                                                          attributes,
+                                                          element) async {
                                                         print('url: $url');
                                                         if (await canLaunch(
                                                             url!)) {
@@ -767,9 +775,11 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                     SizedBox(
                                                         height: 80.0,
                                                         child: Container(
-                                                            margin: const EdgeInsets
-                                                                    .symmetric(
-                                                                horizontal: 10),
+                                                            margin:
+                                                                const EdgeInsets
+                                                                        .symmetric(
+                                                                    horizontal:
+                                                                        10),
                                                             width: 50,
                                                             height: 50,
                                                             child: CircleAvatar(
@@ -923,12 +933,11 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                             fontSize: 15))
                                                                   ],
                                                                 ))),
-                                                                
                                                       ),
-                                                      if(state.competitionDetail
-                                                                            ?.status ==
-                                                                        CompetitionStatus
-                                                                            .Finish)
+                                                    if (state.competitionDetail
+                                                            ?.status ==
+                                                        CompetitionStatus
+                                                            .Finish)
                                                       Container(
                                                         width: 200.0,
                                                         height: 37,
@@ -939,7 +948,16 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                             color: ArgonColors
                                                                 .success,
                                                             onPressed: () {
-                                                              Navigator.pushNamed(context, Routes.viewCompetitionRoundResult, arguments: {'competitionId': state.competitionDetail?.id});
+                                                              Navigator.pushNamed(
+                                                                  context,
+                                                                  Routes
+                                                                      .viewCompetitionRoundResult,
+                                                                  arguments: {
+                                                                    'competitionId':
+                                                                        state
+                                                                            .competitionDetail
+                                                                            ?.id
+                                                                  });
                                                             },
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius:
@@ -975,7 +993,6 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                             fontSize: 15))
                                                                   ],
                                                                 ))),
-                                                                
                                                       ),
                                                   ],
                                                 ),
@@ -996,10 +1013,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                             Radius.circular(
                                                                 4))),
                                                 child: Text(
-                                                    "Hạn cuối đăng ký: ${Utils.convertDateTime(_bloc
-                                                            .state
-                                                            .competitionDetail!
-                                                            .endTimeRegister)}",
+                                                    "Hạn cuối đăng ký: ${Utils.convertDateTime(_bloc.state.competitionDetail!.endTimeRegister)}",
                                                     style: const TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 18,
