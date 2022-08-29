@@ -338,20 +338,41 @@ class _BodyState extends State<Body> {
                     color: ArgonColors.warning,
                     pressEvent: () {
                       AwesomeDialog(
-                              context: context,
-                              dialogType: DialogType.WARNING,
-                              headerAnimationLoop: true,
-                              animType: AnimType.SCALE,
-                              title: 'Lưu ý',
-                              desc: 'Quy định về Đội Thi của Cuộc Thi'
-                                      '\n 1.Tạo, Tham Gia đội khi Cuộc Thi chưa diễn ra.'
-                                      '\n 2.Tham Gia đội khi trạng thái của Đội là Mở.'
-                                      '\n 3.Chuyển trạng thái Đóng Đội được khi số lượng thành viên trong Đội đúng theo quy định của Cuộc thi đưa ra.'
-                                      '\n 4.Đội ở trạng thái Đóng thì Ban Tổ Chức mới duyệt trở thành Đội tham gia chính thức còn lại hủy bỏ.'
-                                      '\n'
-                                      '\n Quy định về Số Lượng thành viên Đội\n' +
-                                  '${(state.maxNumber == state.minNumber) ? 'Số lượng thành viên trong Đội hợp lệ phải đúng ${state.maxNumber} thành viên' : 'Số lượng thành viên trong Đội hợp lệ tối thiểu từ ${state.minNumber} trở lên và không vượt quá ${state.maxNumber} thành viên'}')
-                          .show();
+                          context: context,
+                          dialogType: DialogType.WARNING,
+                          headerAnimationLoop: true,
+                          animType: AnimType.SCALE,
+                          body: Column(children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [Text('Lưu ý')],
+                            ),
+                            Text('Quy định về Đội Thi của Cuộc Thi'),
+                            Text(
+                                '1.Tạo, Tham Gia đội khi Cuộc Thi chưa diễn ra.'),
+                            Text(
+                                '2.Tham Gia đội khi trạng thái của Đội là Mở.'),
+                            Text(
+                                '3.Chuyển trạng thái Đóng Đội được khi số lượng thành viên trong Đội đúng theo quy định của Cuộc thi đưa ra.'),
+                            Text(
+                                '4.Đội ở trạng thái Đóng thì Ban Tổ Chức mới duyệt trở thành Đội tham gia chính thức còn lại hủy bỏ.'),
+                            SizedBox(height: 10),
+                            Text('Quy định về Số Lượng thành viên Đội'),
+                            (state.maxNumber == state.minNumber)
+                                ? Text(
+                                    'Số lượng thành viên trong Đội hợp lệ phải đúng ${state.maxNumber} thành viên')
+                                : Text(
+                                    'Số lượng thành viên trong Đội hợp lệ tối thiểu từ ${state.minNumber} trở lên và không vượt quá ${state.maxNumber} thành viên'),
+                          ])).show();
+                      // title: '',
+                      // desc: ''
+                      //         '\n '
+                      //         '\n 2.Tham Gia đội khi trạng thái của Đội là Mở.'
+                      //         '\n 3.Chuyển trạng thái Đóng Đội được khi số lượng thành viên trong Đội đúng theo quy định của Cuộc thi đưa ra.'
+                      //         '\n 4.Đội ở trạng thái Đóng thì Ban Tổ Chức mới duyệt trở thành Đội tham gia chính thức còn lại hủy bỏ.'
+                      //         '\n'
+                      //         '\n Quy định về Số Lượng thành viên Đội\n' +
+                      //     '${(state.maxNumber == state.minNumber) ? 'Số lượng thành viên trong Đội hợp lệ phải đúng ${state.maxNumber} thành viên' : 'Số lượng thành viên trong Đội hợp lệ tối thiểu từ ${state.minNumber} trở lên và không vượt quá ${state.maxNumber} thành viên'}')
                     }),
               ]),
             ]),
