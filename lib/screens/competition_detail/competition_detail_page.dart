@@ -874,7 +874,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                     Icons
                                                                         .supervised_user_circle_sharp,
                                                                     size:
-                                                                    13),
+                                                                    15),
                                                                 SizedBox(
                                                                   width:
                                                                   5,
@@ -931,7 +931,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                   Icons
                                                                       .description,
                                                                   size:
-                                                                  13),
+                                                                  15),
                                                               SizedBox(
                                                                 width: 5,
                                                               ),
@@ -959,14 +959,13 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                       CompetitionStatus
                                                           .End)
                                                 Container(
-                                                  width: 200.0,
+                                                  width: 420.0,
                                                   height: 37,
                                                   child: RaisedButton(
                                                       textColor:
                                                       ArgonColors
                                                           .white,
-                                                      color: ArgonColors
-                                                          .success,
+                                                      color: ArgonColors.info,
                                                       onPressed: () {
                                                         Navigator.pushNamed(
                                                             context,
@@ -995,7 +994,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                           child: Row(
                                                             mainAxisAlignment:
                                                             MainAxisAlignment
-                                                                .spaceAround,
+                                                                .center,
                                                             children: const [
                                                               Icon(
                                                                   Icons
