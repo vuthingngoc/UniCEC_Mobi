@@ -183,12 +183,15 @@ class _ViewDetailTeamParticipantPageState
                                                       BorderRadius.circular(
                                                           10)),
                                             ),
-                                            maxLength: 50,
+                                            //maxLength: 50,
                                             minLines: 1,
                                             maxLines: 3,
                                             validator: (value) {
-                                              if (value!.length < 10) {
-                                                return 'Nhập ít nhất 10 ký tự';
+                                              //
+                                              //value = value!.trim();
+                                              //
+                                              if (value!.trim().length < 5) {
+                                                return 'Nhập ít nhất 5 ký tự';
                                               }
                                               return null;
                                             },
@@ -198,7 +201,8 @@ class _ViewDetailTeamParticipantPageState
                                                   .validate()) {
                                                 bloc.add(
                                                     ChangeTeamNameValueEvent(
-                                                        newNameValue: value));
+                                                        newNameValue:
+                                                            value.trim()));
                                               }
                                             }),
                                       ),
@@ -214,8 +218,9 @@ class _ViewDetailTeamParticipantPageState
                                       Form(
                                         key: _formKeyTeamDetailDescription,
                                         child: TextFormField(
-                                            initialValue:
-                                                state.valueTeamDescription,
+                                            initialValue: state
+                                                .valueTeamDescription
+                                                .trim(),
                                             decoration: InputDecoration(
                                               prefixIcon:
                                                   Icon(Icons.description),
@@ -224,12 +229,14 @@ class _ViewDetailTeamParticipantPageState
                                                       BorderRadius.circular(
                                                           10)),
                                             ),
-                                            maxLength: 100,
+                                            //maxLength: 100,
                                             minLines: 1,
                                             maxLines: 5,
                                             validator: (value) {
-                                              if (value!.length < 10) {
-                                                return 'Nhập ít nhất 10 ký tự';
+                                              //
+                                              //value = value!.trim();
+                                              if (value!.trim().length < 5) {
+                                                return 'Nhập ít nhất 5 ký tự';
                                               }
                                               return null;
                                             },
@@ -240,7 +247,7 @@ class _ViewDetailTeamParticipantPageState
                                                 bloc.add(
                                                     ChangeTeamDescriptionValueEvent(
                                                         newDescriptionValue:
-                                                            value));
+                                                            value.trim()));
                                               }
                                             }),
                                       )

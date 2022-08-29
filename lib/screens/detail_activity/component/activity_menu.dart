@@ -181,17 +181,18 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                                                           SizedBox(
                                                             width: 10,
                                                           ),
-                                                          Text(
-                                                              "CA-${state.competitionActivityDetail?.id ?? ""}",
-                                                              style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 20,
-                                                              )),
+                                                          // Icon(Icons
+                                                          //     .business_center)
+                                                          // Text(
+                                                          //     "CA-${state.competitionActivityDetail?.id ?? ""}",
+                                                          //     style: TextStyle(
+                                                          //       color: Colors
+                                                          //           .white,
+                                                          //       fontSize: 20,
+                                                          //     )),
                                                         ],
                                                       ),
                                                     ),
-
                                                     Expanded(
                                                         child: SizedBox(
                                                       width: 10,
@@ -273,7 +274,7 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                                                   child: Row(
                                                     children: [
                                                       Text(
-                                                          "By ${state.competitionActivityDetail?.creatorName ?? ""}",
+                                                          "Bởi ${state.competitionActivityDetail?.creatorName ?? ""}",
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.grey,
@@ -654,56 +655,56 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                                                       );
                                                     }),
 
-                                                Divider(
-                                                  height: 30.0,
-                                                  thickness: 1.5,
-                                                  indent: 32.0,
-                                                  endIndent: 32.0,
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 20.0,
-                                                          right: 20),
-                                                  child: Row(
-                                                    children: [
-                                                      Expanded(
-                                                        child: Text(
-                                                          "Ngày bắt đầu",
-                                                          style: TextStyle(
-                                                              fontSize: 18,
-                                                              color:
-                                                                  Colors.grey),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 20,
-                                                          right: 20,
-                                                          top: 10),
-                                                  child: Row(
-                                                    children: [
-                                                      Icon(
-                                                        Icons.calendar_today,
-                                                        size: 23,
-                                                        color: Colors.orange,
-                                                      ),
-                                                      SizedBox(width: 10.0),
-                                                      Expanded(
-                                                          child: Text(
-                                                        Utils.convertDateTime(state
-                                                            .competitionActivityDetail!
-                                                            .createTime),
-                                                        style: TextStyle(
-                                                            fontSize: 18),
-                                                      )),
-                                                    ],
-                                                  ),
-                                                ),
+                                                // Divider(
+                                                //   height: 30.0,
+                                                //   thickness: 1.5,
+                                                //   indent: 32.0,
+                                                //   endIndent: 32.0,
+                                                // ),
+                                                // Padding(
+                                                //   padding:
+                                                //       const EdgeInsets.only(
+                                                //           left: 20.0,
+                                                //           right: 20),
+                                                //   child: Row(
+                                                //     children: [
+                                                //       Expanded(
+                                                //         child: Text(
+                                                //           "Ngày bắt đầu",
+                                                //           style: TextStyle(
+                                                //               fontSize: 18,
+                                                //               color:
+                                                //                   Colors.grey),
+                                                //         ),
+                                                //       ),
+                                                //     ],
+                                                //   ),
+                                                // ),
+                                                // Padding(
+                                                //   padding:
+                                                //       const EdgeInsets.only(
+                                                //           left: 20,
+                                                //           right: 20,
+                                                //           top: 10),
+                                                //   child: Row(
+                                                //     children: [
+                                                //       Icon(
+                                                //         Icons.calendar_today,
+                                                //         size: 23,
+                                                //         color: Colors.orange,
+                                                //       ),
+                                                //       SizedBox(width: 10.0),
+                                                //       Expanded(
+                                                //           child: Text(
+                                                //         Utils.convertDateTime(state
+                                                //             .competitionActivityDetail!
+                                                //             .createTime),
+                                                //         style: TextStyle(
+                                                //             fontSize: 18),
+                                                //       )),
+                                                //     ],
+                                                //   ),
+                                                // ),
                                                 Divider(
                                                   height: 30.0,
                                                   thickness: 1.5,
@@ -818,7 +819,7 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                                                     children: [
                                                       Expanded(
                                                         child: Text(
-                                                          "Ngày kết thúc",
+                                                          "Ngày Hạn Chót",
                                                           style: TextStyle(
                                                               fontSize: 18,
                                                               color:

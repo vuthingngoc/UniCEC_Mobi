@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:loadmore/loadmore.dart';
 import '../../../bloc/view_competition_activity/view_competition_activity_bloc.dart';
 import '../../../bloc/view_competition_activity/view_competition_activity_event.dart';
@@ -278,8 +279,21 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15)),
-                                        backgroundColor:
-                                            Color.fromARGB(255, 235, 237, 241),
+                                        backgroundColor: (DateTime.now()
+                                                        .compareTo(state
+                                                            .listCompetitionActivity[
+                                                                index]
+                                                            .ending)) >
+                                                    0 &&
+                                                (state
+                                                        .listCompetitionActivity[
+                                                            index]
+                                                        .status !=
+                                                    CompetitionActivityStatus
+                                                        .Completed)
+                                            ? Colors.red[400]
+                                            : Color.fromARGB(
+                                                255, 235, 237, 241),
                                       ),
                                       onPressed: () async {
                                         //chuyển sang trang detail competition activity
@@ -303,19 +317,11 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                                             child: Row(
                                               children: [
                                                 Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 8.0),
-                                                  child: Text(
-                                                      state
-                                                          .listCompetitionActivity[
-                                                              index]
-                                                          .id
-                                                          .toString(),
-                                                      style: TextStyle(
-                                                          fontSize: 18,
-                                                          color: Colors.grey)),
-                                                ),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 8.0),
+                                                    child: Icon(
+                                                        Icons.business_center)),
                                                 Expanded(
                                                   child: Text(
                                                       state
@@ -447,7 +453,7 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                                                   "PriorityStatus.High")
                                                 Icon(
                                                   Icons.warning,
-                                                  color: Colors.red,
+                                                  color: Colors.red[900],
                                                 ),
                                               if (state
                                                       .listCompetitionActivity[
@@ -469,25 +475,25 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                                                   Icons.warning,
                                                   color: Colors.green,
                                                 ),
-                                              (DateTime.now().compareTo(state
-                                                              .listCompetitionActivity[
-                                                                  index]
-                                                              .ending)) >
-                                                          0 &&
-                                                      (state
-                                                                  .listCompetitionActivity[
-                                                                      index]
-                                                                  .status !=
-                                                              CompetitionActivityStatus
-                                                                  .Completed )
-                                                  ? Text('   Trễ',
-                                                      style: TextStyle(
-                                                          color:
-                                                              ArgonColors.error,
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.bold))
-                                                  : Text(''),
+                                              // (DateTime.now().compareTo(state
+                                              //                 .listCompetitionActivity[
+                                              //                     index]
+                                              //                 .ending)) >
+                                              //             0 &&
+                                              //         (state
+                                              //                 .listCompetitionActivity[
+                                              //                     index]
+                                              //                 .status !=
+                                              //             CompetitionActivityStatus
+                                              //                 .Completed)
+                                              //     ? Text('   Trễ',
+                                              //         style: TextStyle(
+                                              //             color:
+                                              //                 ArgonColors.error,
+                                              //             fontSize: 18,
+                                              //             fontWeight:
+                                              //                 FontWeight.bold))
+                                              //     : Text(''),
                                             ],
                                           ),
                                         ],
