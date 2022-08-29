@@ -82,7 +82,7 @@ class _ViewListCompetitionOfClubPageState
                 resizeToAvoidBottomInset: false,
                 backgroundColor: ArgonColors.bgColorScreen,
                 //key: _scaffoldKey,
-                drawer: ArgonDrawer(currentPage: "Competition"),
+                // drawer: ArgonDrawer(currentPage: "Competition"),
                 body: (state.isLoading &&
                         (state.competitions.isEmpty ||
                             state.competitions.isNotEmpty))
