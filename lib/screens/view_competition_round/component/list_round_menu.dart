@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:unicec_mobi/bloc/competition_round/competition_round_bloc.dart';
 import 'package:unicec_mobi/models/enums/competition_round_status.dart';
 import 'package:unicec_mobi/utils/log.dart';
@@ -7,6 +8,7 @@ import '../../../constants/Theme.dart';
 import '../../../models/entities/competition_round/competition_round_model.dart';
 import '../../../utils/app_color.dart';
 import '../../../utils/router.dart';
+import '../../../utils/utils.dart';
 
 class ViewListRoundMenu extends StatefulWidget {
   List<CompetitionRoundModel> competitionRounds;
@@ -86,7 +88,8 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         top: 8.0, bottom: 8),
-                                    child: Wrap(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         const Text(
                                           "Thời gian bắt đầu:",
@@ -106,11 +109,12 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                                   const BorderRadius.all(
                                                       Radius.circular(10))),
                                           child: Text(
-                                              _competitionRounds[index]
-                                                  .startTime,
+                                              Utils.formatDateTime(
+                                                  _competitionRounds[index]
+                                                      .startTime),
                                               style: const TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 18,
+                                                fontSize: 18,                                                
                                               )),
                                         ),
                                       ],
@@ -118,7 +122,8 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(bottom: 8),
-                                    child: Wrap(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         const Text(
                                           "Thời gian kết thúc:",
@@ -138,7 +143,9 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                                   const BorderRadius.all(
                                                       Radius.circular(10))),
                                           child: Text(
-                                              _competitionRounds[index].endTime,
+                                              Utils.formatDateTime(
+                                                  _competitionRounds[index]
+                                                      .endTime),
                                               style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 18,
@@ -169,29 +176,29 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                       ],
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 8.0, bottom: 8),
-                                    child: Wrap(
-                                      children: [
-                                        const Text(
-                                          "Điểm:",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 8.0),
-                                          child: Text(
-                                              _competitionRounds[index]
-                                                  .seedsPoint
-                                                  .toString(),
-                                              style: const TextStyle(
-                                                  fontSize: 18)),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.only(
+                                  //       top: 8.0, bottom: 8),
+                                  //   child: Wrap(
+                                  //     children: [
+                                  //       const Text(
+                                  //         "Điểm:",
+                                  //         style: TextStyle(
+                                  //             fontWeight: FontWeight.bold),
+                                  //       ),
+                                  //       Padding(
+                                  //         padding:
+                                  //             const EdgeInsets.only(left: 8.0),
+                                  //         child: Text(
+                                  //             _competitionRounds[index]
+                                  //                 .seedsPoint
+                                  //                 .toString(),
+                                  //             style: const TextStyle(
+                                  //                 fontSize: 18)),
+                                  //       ),
+                                  //     ],
+                                  //   ),
+                                  // ),
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         bottom: 8, top: 8),
@@ -404,19 +411,20 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                     Container(
                       padding: const EdgeInsets.only(right: 20),
                       child: Text(_competitionRounds[index].title,
-                          style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+                          style: const TextStyle(
+                              fontSize: 17, fontWeight: FontWeight.bold)),
                     ),
                     Expanded(
                       child: Container(
                         // padding: const EdgeInsets.only(left: 20),
                         child: Text(_competitionRounds[index].description,
-                        style: const TextStyle(fontSize: 15)),
+                            style: const TextStyle(fontSize: 15)),
                       ),
                     ),
                     // Text(_competitionRounds[index].title,
                     //     style: const TextStyle(fontSize: 15)),
                     // Text(_competitionRounds[index].description,
-                    //     style: const TextStyle(fontSize: 15)),                    
+                    //     style: const TextStyle(fontSize: 15)),
                     Icon(
                       Icons.arrow_forward_ios,
                       color: AppColors.mainColor,

@@ -2,8 +2,6 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:get_it/get_it.dart';
-import 'package:unicec_mobi/models/common/current_user.dart';
 import 'package:unicec_mobi/models/enums/competition_scope_status.dart';
 import 'package:unicec_mobi/models/enums/competition_status.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -934,10 +932,19 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                   ],
                                                                 ))),
                                                       ),
-                                                    if (state.competitionDetail
-                                                            ?.status ==
-                                                        CompetitionStatus
-                                                            .Finish)
+                                                    if (state
+                                                                .competitionDetail
+                                                                ?.status ==
+                                                            CompetitionStatus
+                                                                .Finish ||
+                                                        state.competitionDetail
+                                                                ?.status ==
+                                                            CompetitionStatus
+                                                                .Complete ||
+                                                        state.competitionDetail
+                                                                ?.status ==
+                                                            CompetitionStatus
+                                                                .End)
                                                       Container(
                                                         width: 200.0,
                                                         height: 37,
