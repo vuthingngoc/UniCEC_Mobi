@@ -803,6 +803,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                         Container(
                                           alignment: Alignment.center,
                                           child: Wrap(
+                                            alignment: WrapAlignment.spaceBetween,
                                             // mainAxisAlignment:
                                             //     MainAxisAlignment
                                             //         .spaceAround,
