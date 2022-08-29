@@ -349,7 +349,12 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                                         textColor: ArgonColors.white,
                                         color: AppColors.mainColor,
                                         onPressed: () {
-                                          Navigator.pushNamed(context, Routes.viewCompetitionRoundResult, arguments: {'competitionRoundId': _competitionRounds[index].id});
+                                          Navigator.pushNamed(context,
+                                              Routes.viewCompetitionRoundResult,
+                                              arguments: {
+                                                'competitionRoundId':
+                                                    _competitionRounds[index].id
+                                              });
                                         },
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
@@ -396,14 +401,26 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(_competitionRounds[index].title,
+                    Container(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: Text(_competitionRounds[index].title,
+                          style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+                    ),
+                    Expanded(
+                      child: Container(
+                        // padding: const EdgeInsets.only(left: 20),
+                        child: Text(_competitionRounds[index].description,
                         style: const TextStyle(fontSize: 15)),
-                    Text(_competitionRounds[index].description,
-                        style: const TextStyle(fontSize: 15)),
+                      ),
+                    ),
+                    // Text(_competitionRounds[index].title,
+                    //     style: const TextStyle(fontSize: 15)),
+                    // Text(_competitionRounds[index].description,
+                    //     style: const TextStyle(fontSize: 15)),                    
                     Icon(
                       Icons.arrow_forward_ios,
                       color: AppColors.mainColor,
-                    ),
+                    )
                   ],
                 ),
               ),
