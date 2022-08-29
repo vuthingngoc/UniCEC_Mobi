@@ -91,8 +91,7 @@ class _ViewDetailTeamParticipantPageState
                     : (event.message
                             .contains("Can't out team because team is locked"))
                         ? "Thoát khỏi Đội Thất bại, hiện tại Đội Thi của bạn ở trạng thái Đóng"
-                        : (event.message.contains(
-                                "Can't Delete Team because team is locked"))
+                        : (event.message.contains("Team Is Locked you delete"))
                             ? "Xóa Đội Thất bại, hiện tại Đội Thi của bạn ở trạng thái Đóng"
                             : (event.message
                                     .contains("Number of member in team is "))
@@ -328,7 +327,8 @@ class _ViewDetailTeamParticipantPageState
                                         left: 15, top: 20),
                                     padding: const EdgeInsets.all(5.0),
                                     decoration: BoxDecoration(
-                                        border: Border.all(color: ArgonColors.success),
+                                        border: Border.all(
+                                            color: ArgonColors.success),
                                         color: ArgonColors.success,
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10))),
@@ -349,7 +349,11 @@ class _ViewDetailTeamParticipantPageState
                           padding: const EdgeInsets.only(top: 10.0, left: 15),
                           child: Row(
                             children: [
-                              Expanded(child: Text(state.teamDetail?.description ?? "", style: TextStyle(fontSize: 18),)),
+                              Expanded(
+                                  child: Text(
+                                state.teamDetail?.description ?? "",
+                                style: TextStyle(fontSize: 18),
+                              )),
                             ],
                           ),
                         ),
@@ -360,7 +364,6 @@ class _ViewDetailTeamParticipantPageState
                         SizedBox(
                           height: 30,
                         ),
-
                         if (state.status == TeamStatus.Available &&
                             GetIt.I.get<CurrentUser>().id ==
                                 state.userIdIsLeaderTeam)
