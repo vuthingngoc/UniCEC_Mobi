@@ -141,10 +141,14 @@ class _ViewListTeamMenuState extends State<ViewListTeamMenu> {
                                   if (state.listTeam[index].status.toString() ==
                                       "TeamStatus.Available")
                                     Expanded(
-                                        child: Text("Mở",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: Colors.green)))
+                                        child: Row(
+                                          children: [
+                                            Text("Mở",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: Colors.green))
+                                          ],
+                                        ))
                                   else
                                     Expanded(
                                         child: Text("Đóng",

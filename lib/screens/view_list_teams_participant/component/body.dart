@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../bloc/view_list_team_participant/view_list_team_participant_bloc.dart';
@@ -344,25 +345,86 @@ class _BodyState extends State<Body> {
                           animType: AnimType.SCALE,
                           body: Column(children: [
                             Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [Text('Lưu ý')],
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Lưu ý',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: ArgonColors.error),
+                                )
+                              ],
                             ),
-                            Text('Quy định về Đội Thi của Cuộc Thi'),
-                            Text(
-                                '1.Tạo, Tham Gia đội khi Cuộc Thi chưa diễn ra.'),
-                            Text(
-                                '2.Tham Gia đội khi trạng thái của Đội là Mở.'),
-                            Text(
-                                '3.Chuyển trạng thái Đóng Đội được khi số lượng thành viên trong Đội đúng theo quy định của Cuộc thi đưa ra.'),
-                            Text(
-                                '4.Đội ở trạng thái Đóng thì Ban Tổ Chức mới duyệt trở thành Đội tham gia chính thức còn lại hủy bỏ.'),
+                            Container(
+                              margin: const EdgeInsets.only(
+                                  right: 20, left: 20, top: 10, bottom: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text('Quy định về Đội Thi của Cuộc Thi',
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          )),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                      '1.Tạo, Tham Gia đội khi Cuộc Thi chưa diễn ra.'),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                      '2.Tham Gia đội khi trạng thái của Đội là Mở.'),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                      '3.Chuyển trạng thái Đóng Đội được khi số lượng thành viên trong Đội đúng theo quy định của Cuộc thi đưa ra.'),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                      '4.Đội ở trạng thái Đóng thì Ban Tổ Chức mới duyệt trở thành Đội tham gia chính thức còn lại hủy bỏ.'),
+                                ],
+                              ),
+                            ),
                             SizedBox(height: 10),
-                            Text('Quy định về Số Lượng thành viên Đội'),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text('Quy định về Số Lượng thành viên Đội',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                              ],
+                            ),
                             (state.maxNumber == state.minNumber)
-                                ? Text(
-                                    'Số lượng thành viên trong Đội hợp lệ phải đúng ${state.maxNumber} thành viên')
-                                : Text(
-                                    'Số lượng thành viên trong Đội hợp lệ tối thiểu từ ${state.minNumber} trở lên và không vượt quá ${state.maxNumber} thành viên'),
+                                ? Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 20.0,
+                                        left: 20,
+                                        top: 10,
+                                        bottom: 10),
+                                    child: Text(
+                                        'Số lượng thành viên trong Đội hợp lệ phải đúng ${state.maxNumber} thành viên'),
+                                  )
+                                : Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 20.0,
+                                        left: 20,
+                                        top: 10,
+                                        bottom: 10),
+                                    child: Text(
+                                        'Số lượng thành viên trong Đội hợp lệ tối thiểu từ ${state.minNumber} trở lên và không vượt quá ${state.maxNumber} thành viên'),
+                                  ),
                           ])).show();
                       // title: '',
                       // desc: ''

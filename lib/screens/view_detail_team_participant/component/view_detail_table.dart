@@ -29,16 +29,17 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
     return BlocBuilder(
       bloc: bloc,
       builder: (context, state) {
-        return DataTable(columns: [
+        return DataTable(
+          columnSpacing: 10,
+            columns: [
           DataColumn(
+
               label: Container(
-            width: width * 0.1,
             child: Text('',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
           )),
           DataColumn(
               label: Container(
-            width: width * 0.2,
             child: Text('Tên',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
           )),
@@ -47,7 +48,6 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
           DataColumn(
               label: Container(
-            width: width * 0.15,
             child: Text('Chi tiết',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
           )),
@@ -130,9 +130,12 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
             ]));
           } else if (e == 2) {
             return DataCell(Container(
-                width: MediaQuery.of(context).size.width * 0.2,
+                width: MediaQuery.of(context).size.width * 0.4,
                 child: Text(
                   member.studentName,
+                  softWrap: false,
+                  maxLines: 1,
+                  overflow: TextOverflow.fade,
                   style: TextStyle(fontSize: 15),
                 )));
           } else if (e == 3) {

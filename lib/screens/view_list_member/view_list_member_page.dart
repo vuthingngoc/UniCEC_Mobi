@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unicec_mobi/constants/Theme.dart';
 import '../../bloc/view_list_member/view_list_member_bloc.dart';
 import '../../bloc/view_list_member/view_list_member_event.dart';
 import '../../bloc/view_list_member/view_list_member_state.dart';
@@ -105,11 +106,14 @@ class _ViewListMemberPageState extends State<ViewListMemberPage>
                                     ),
                                   )),
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                bloc.add(SearchEvent());
-                              },
-                              child: const Icon(Icons.search),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  bloc.add(SearchEvent());
+                                },
+                                child: const Icon(Icons.search),
+                              ),
                             ),
                             PopupMenuButton<int>(
                                 icon: Icon(Icons.filter_alt_outlined),
@@ -273,7 +277,10 @@ class _ViewListMemberPageState extends State<ViewListMemberPage>
                       //
                       Row(
                         children: [
-                          Text('Chức Vụ'),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15.0, right: 10),
+                            child: Text('Chức Vụ:', style: TextStyle(fontSize: 16),),
+                          ),
                           DropdownButtonHideUnderline(
                             child: DropdownButton<int>(
                               value: state.clubRoleId,
@@ -281,8 +288,9 @@ class _ViewListMemberPageState extends State<ViewListMemberPage>
                               iconSize: 24,
                               elevation: 16,
                               style: const TextStyle(
-                                  color: Colors.deepPurple,
-                                  fontWeight: FontWeight.bold),
+                                fontSize: 16,
+                                color: Colors.black87
+                                  ),
                               onChanged: (int? newValue) {
                                 bloc.add(ChangeClubRoleIdEvent(
                                     clubRoleId: newValue!));
