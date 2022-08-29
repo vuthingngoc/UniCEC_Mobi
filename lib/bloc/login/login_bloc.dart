@@ -66,6 +66,11 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
       user.id = int.parse(userMap['Id']);
       user.idToken = (uniSelector.token);
 
+      //role admin
+      int roleId = int.parse(userMap['RoleId']);
+      if (roleId == 1 || roleId == 4) {
+        return null;
+      }
       //if new student kh trả ra UniversityID -> sẽ được cập nhật bên trang UniSelection
       if (uniSelector.listUniBelongToEmail.isEmpty) {
         //

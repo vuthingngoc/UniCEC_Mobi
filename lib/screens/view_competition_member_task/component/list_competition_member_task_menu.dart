@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:loadmore/loadmore.dart';
 import 'package:unicec_mobi/constants/Theme.dart';
@@ -72,7 +73,8 @@ class _ViewCompetitionMemberTaskMenuState
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
+                        padding:
+                            const EdgeInsets.only(right: 20, left: 20, top: 20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -110,7 +112,6 @@ class _ViewCompetitionMemberTaskMenuState
                             Container(
                               padding: EdgeInsets.only(left: 10),
                               child: GestureDetector(
-
                                 onTap: () {
                                   bloc.add(LoadingEvent());
                                   bloc.add(SearchEvent());
@@ -132,22 +133,24 @@ class _ViewCompetitionMemberTaskMenuState
                                       value: 1,
                                       child: (state.isEvent == false)
                                           ? Container(
-
                                               child: Row(
                                                 children: <Widget>[
-
                                                   Padding(
                                                     padding:
                                                         const EdgeInsets.only(
                                                             left: 8.0),
-                                                    child: Text('Cuộc Thi', style: TextStyle(color: ArgonColors.warning),),
+                                                    child: Text(
+                                                      'Cuộc Thi',
+                                                      style: TextStyle(
+                                                          color: ArgonColors
+                                                              .warning),
+                                                    ),
                                                   ),
                                                 ],
                                               ),
                                             )
                                           : Row(
                                               children: <Widget>[
-
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.only(
@@ -168,19 +171,22 @@ class _ViewCompetitionMemberTaskMenuState
                                           ? Container(
                                               child: Row(
                                                 children: <Widget>[
-
                                                   Padding(
                                                     padding:
                                                         const EdgeInsets.only(
                                                             left: 8.0),
-                                                    child: Text('Sự Kiện', style: TextStyle(color: ArgonColors.warning),),
+                                                    child: Text(
+                                                      'Sự Kiện',
+                                                      style: TextStyle(
+                                                          color: ArgonColors
+                                                              .warning),
+                                                    ),
                                                   ),
                                                 ],
                                               ),
                                             )
                                           : Row(
                                               children: <Widget>[
-
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.only(
@@ -218,7 +224,11 @@ class _ViewCompetitionMemberTaskMenuState
                                       itemCount: state.listCompetition.length,
                                       itemBuilder: (context, index) {
                                         return Padding(
-                                          padding: EdgeInsets.only(right: 20, left: 20, top: 20, bottom: 10),
+                                          padding: EdgeInsets.only(
+                                              right: 20,
+                                              left: 20,
+                                              top: 20,
+                                              bottom: 10),
                                           child: TextButton(
                                             style: TextButton.styleFrom(
                                               primary: Colors.black87,
@@ -259,16 +269,22 @@ class _ViewCompetitionMemberTaskMenuState
                                                                     .only(
                                                                 right: 8.0,
                                                                 top: 10),
-                                                        child: Text(
-                                                            state
-                                                                .listCompetition[
-                                                                    index]
-                                                                .id
-                                                                .toString(),
-                                                            style: TextStyle(
-                                                                fontSize: 20,
-                                                                color: Colors
-                                                                    .red)),
+                                                        child: SvgPicture.asset(
+                                                          "assets/icons/trophy.svg",
+                                                          color: ArgonColors
+                                                              .warning,
+                                                          width: 22,
+                                                        ),
+                                                        // Text(
+                                                        //     state
+                                                        //         .listCompetition[
+                                                        //             index]
+                                                        //         .id
+                                                        //         .toString(),
+                                                        //     style: TextStyle(
+                                                        //         fontSize: 20,
+                                                        //         color: Colors
+                                                        //             .red)),
                                                       ),
                                                       Expanded(
                                                         child: Text(

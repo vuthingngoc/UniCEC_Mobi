@@ -56,7 +56,7 @@ class _ClubCardState extends State<ClubCard> {
               onTap: () {
                 bloc.add(
                     ChooseClubSelectionEvent(clubIdSelected: widget.club.id));
-                    bloc.isLoading = true;
+                bloc.isLoading = true;
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -97,20 +97,19 @@ class _ClubCardState extends State<ClubCard> {
                             ],
                           ),
                           RichText(
-                            overflow: TextOverflow.ellipsis,
-                              text: TextSpan(                                
-                                children: [                                  
-                            const TextSpan(
-                                text: 'Fanpage: ',
-                                style: TextStyle(
-                                    fontSize: 15.0, color: Colors.black)),
-                            TextSpan(
-                                text: "${_club.clubFanpage}",                                                                
-                                style: const TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black)),
-                          ])),
+                              overflow: TextOverflow.ellipsis,
+                              text: TextSpan(children: [
+                                const TextSpan(
+                                    text: 'Số thành viên: ',
+                                    style: TextStyle(
+                                        fontSize: 15.0, color: Colors.black)),
+                                TextSpan(
+                                    text: "${_club.totalMember}",
+                                    style: const TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black)),
+                              ])),
                           Row(children: [
                             const Text(
                               'Vai trò:',

@@ -126,11 +126,11 @@ class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
                                                         BorderRadius.circular(
                                                             10)),
                                               ),
-                                              maxLength: 10,
+                                              //maxLength: 10,
                                               minLines: 1,
                                               //maxLines: 3,
                                               validator: (value) {
-                                                if (value!.length < 10) {
+                                                if (value!.trim().length < 10) {
                                                   return 'Nhập ít nhất 10 ký tự';
                                                 }
                                                 return null;
@@ -139,7 +139,8 @@ class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
                                                 if (_formKeyPhone.currentState!
                                                     .validate()) {
                                                   bloc.add(ChangePhoneValue(
-                                                      newPhoneValue: value));
+                                                      newPhoneValue:
+                                                          value.trim()));
                                                 }
                                                 //   state.poiReceive.address = value;
                                               }),
@@ -181,11 +182,11 @@ class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
                                                         BorderRadius.circular(
                                                             10)),
                                               ),
-                                              maxLength: 10,
+                                              //maxLength: 10,
                                               minLines: 1,
                                               //maxLines: 3,
                                               validator: (value) {
-                                                if (value!.length < 4) {
+                                                if (value!.trim().length < 4) {
                                                   return 'Nhập ít nhất 4 ký tự';
                                                 }
                                                 return null;
@@ -197,7 +198,7 @@ class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
                                                   bloc.add(
                                                       ChangeStudentCodeValue(
                                                           newStudentCodeValue:
-                                                              value));
+                                                              value.trim()));
                                                 }
                                                 //   state.poiReceive.address = value;
                                               }),
@@ -243,11 +244,11 @@ class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
                                                         BorderRadius.circular(
                                                             10)),
                                               ),
-                                              maxLength: 250,
+                                              //maxLength: 250,
                                               minLines: 1,
                                               maxLines: 10,
                                               validator: (value) {
-                                                if (value!.length < 10) {
+                                                if (value!.trim().length < 10) {
                                                   return 'Nhập ít nhất 10 ký tự';
                                                 }
                                                 return null;
@@ -259,7 +260,7 @@ class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
                                                   bloc.add(
                                                       ChangeDescriptionValue(
                                                           newDescriptionValue:
-                                                              value));
+                                                              value.trim()));
                                                 }
                                                 //   state.poiReceive.address = value;
                                               }),

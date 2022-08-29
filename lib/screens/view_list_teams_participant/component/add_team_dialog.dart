@@ -66,19 +66,19 @@ class _AddTeamDialogState extends State<AddTeamDialog> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10)),
                       ),
-                      maxLength: 50,
+                      //maxLength: 50,
                       minLines: 1,
                       maxLines: 3,
                       validator: (value) {
-                        if (value!.length < 10) {
-                          return 'Nhập ít nhất 10 ký tự';
+                        if (value!.trim().length < 5) {
+                          return 'Nhập ít nhất 5 ký tự';
                         }
                         return null;
                       },
                       onChanged: (value) {
                         if (_formKeyTeamName.currentState!.validate()) {
-                          bloc.add(
-                              ChangeTeamNameValueEvent(newNameValue: value));
+                          bloc.add(ChangeTeamNameValueEvent(
+                              newNameValue: value.trim()));
                         }
                       }),
                 ),
@@ -98,19 +98,19 @@ class _AddTeamDialogState extends State<AddTeamDialog> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10)),
                       ),
-                      maxLength: 100,
+                      //maxLength: 100,
                       minLines: 1,
                       maxLines: 5,
                       validator: (value) {
-                        if (value!.length < 10) {
-                          return 'Nhập ít nhất 10 ký tự';
+                        if (value!.trim().length < 5) {
+                          return 'Nhập ít nhất 5 ký tự';
                         }
                         return null;
                       },
                       onChanged: (value) {
                         if (_formKeyTeamDescription.currentState!.validate()) {
                           bloc.add(ChangeTeamDescriptionValueEvent(
-                              newDescriptionValue: value));
+                              newDescriptionValue: value.trim()));
                         }
                       }),
                 )
