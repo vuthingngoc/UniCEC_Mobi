@@ -32,24 +32,23 @@ class _ProfilePageState extends State<ProfilePage>
   void initState() {
     super.initState();
     _bloc.listenerStream.listen((event) {});
-    _bloc.add(LoadProfileEvent());
+    // _bloc.add(LoadProfileEvent());
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileBloc, ProfileState>(
-        bloc: _bloc,
-        builder: (context, state) {
-          return Scaffold(
-            appBar: AppBar(
-              title: const Text("Trang cá nhân", style: TextStyle(color: Colors.white)),
-              automaticallyImplyLeading: false,
-              backgroundColor: AppColors.mainColor,
-              centerTitle: true,
-            ),
-            body: Body(),
-            //bottomNavigationBar: CustomBottomNavBar(selectedMenu: MenuState.profile),
-          );
-        });
+    return BlocProvider.value(
+        value: _bloc,
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text("Trang cá nhân",
+                style: TextStyle(color: Colors.white)),
+            automaticallyImplyLeading: false,
+            backgroundColor: AppColors.mainColor,
+            centerTitle: true,
+          ),
+          body: Body(),
+          //bottomNavigationBar: CustomBottomNavBar(selectedMenu: MenuState.profile),
+        ));
   }
 }

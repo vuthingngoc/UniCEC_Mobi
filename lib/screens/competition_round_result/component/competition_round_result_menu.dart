@@ -173,7 +173,7 @@ class _ViewCompetitionRoundResultMenuState
                                               padding: const EdgeInsets.only(
                                                   left: 10),
                                               child: Text(
-                                                  "${state.teamsInRoundResult?[index].scores ?? state.teamsInCompetitionResult?[index].totalPoint}",
+                                                  "${state.teamsInRoundResult?[index].scores ?? state.teamsInCompetitionResult?[index].totalPoint} điểm",
                                                   style: const TextStyle(
                                                       fontSize: 18,
                                                       fontWeight:

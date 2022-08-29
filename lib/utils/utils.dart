@@ -29,4 +29,8 @@ class Utils {
     final DateFormat format = DateFormat("dd-MM-yyyy HH:mm:ss");
     return format.format(dateTime);
   }
+
+  static String formatDateTime(String dateTime){
+    return dateTime.replaceAll("T", " ");
+  }
 }
