@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import '/screens/club_view_detail/club_view_detail_page.dart';
 import '/utils/router.dart';
-import '../screens/event/event_page.dart';
 import '../screens/pages.dart';
 
 class PageDependencies {
@@ -62,6 +60,10 @@ class PageDependencies {
     injector.registerFactory<Widget>(
         () => ViewCompetitionRoundPage(bloc: injector()),
         instanceName: Routes.viewCompetitionRound);
+
+    injector.registerFactory<Widget>(
+        () => ViewCompetitionRoundResultPage(bloc: injector()),
+        instanceName: Routes.viewCompetitionRoundResult);
 
     //--------------------------TASK
     //competition member task

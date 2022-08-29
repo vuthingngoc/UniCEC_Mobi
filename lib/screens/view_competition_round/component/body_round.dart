@@ -33,9 +33,9 @@ class _BodyState extends State<Body> {
                  :
               SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: (state.competitionRounds.isNotEmpty)
+                  child: (state.competitionRounds != null)
                       ? ViewListRoundMenu(
-                          competitionRounds: state.competitionRounds)
+                          competitionRounds: state.competitionRounds!)
                       : const Center(
                           child: Text(
                             'Cuộc thi không có vòng thi nào',

@@ -3,6 +3,7 @@ export 'login/login_page.dart';
 export 'main_page/main_page.dart';
 export 'university_selection/university_selection_page.dart';
 export 'club_selection/club_selection_page.dart';
+export 'club_view_detail/club_view_detail_page.dart';
 
 //template
 export 'competition/competition_page.dart'; //->show trang cuộc thi và sự kiện
@@ -21,6 +22,7 @@ export 'view_list_competition_of_participant/view_list_competition_of_participan
 export 'competition_detail/competition_detail_page.dart';
 
 export 'view_competition_round/view_competition_round.dart';
+export 'competition_round_result/competition_round_result.dart';
 
 export 'view_competition_member_task/view_competition_member_task_page.dart';
 export 'view_list_activity/view_list_activity_page.dart';
