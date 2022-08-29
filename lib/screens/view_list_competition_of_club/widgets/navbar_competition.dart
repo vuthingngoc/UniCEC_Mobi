@@ -156,12 +156,15 @@ class _NavbarCompetitionOfClubState extends State<NavbarCompetitionOfClub> {
                                         ),
                                       )),
                                 ),
-                                GestureDetector(
-                                  onTap: () {
-                                    bloc.add(LoadingEvent());
-                                    bloc.add(SearchEvent());
-                                  },
-                                  child: Icon(Icons.search),
+                                Container(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      bloc.add(LoadingEvent());
+                                      bloc.add(SearchEvent());
+                                    },
+                                    child: Icon(Icons.search),
+                                  ),
                                 ),
                               ]),
                         ),
@@ -186,7 +189,7 @@ class _NavbarCompetitionOfClubState extends State<NavbarCompetitionOfClub> {
                                             Text(widget.categoryOne,
                                                 style: TextStyle(
                                                     color: ArgonColors
-                                                        .inputSuccess,
+                                                        .warning,
                                                     fontSize: 16.0))
                                           ]),
                                         )
@@ -220,7 +223,7 @@ class _NavbarCompetitionOfClubState extends State<NavbarCompetitionOfClub> {
                                             Text(widget.categoryTwo,
                                                 style: TextStyle(
                                                     color: ArgonColors
-                                                        .inputSuccess,
+                                                        .warning,
                                                     fontSize: 16.0))
                                           ]),
                                         )

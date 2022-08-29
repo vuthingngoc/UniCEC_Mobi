@@ -25,28 +25,26 @@ class _ViewDetailTableMemberMenuState extends State<ViewDetailTableMemberMenu> {
     return BlocBuilder(
       bloc: bloc,
       builder: (context, state) {
-        return DataTable(columns: [
+        return DataTable(
+            columnSpacing: 10,
+            columns: [
           DataColumn(
               label: Container(
-            width: width * 0.1,
             child: Text('',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
           )),
           DataColumn(
               label: Container(
-            width: width * 0.2,
             child: Text('Tên',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
           )),
           DataColumn(
               label: Container(
-            width: width * 0.18,
             child: Text('Chức vụ',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
           )),
           DataColumn(
               label: Container(
-            width: width * 0.15,
             child: Text('Chi tiết',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
           )),
@@ -59,48 +57,61 @@ class _ViewDetailTableMemberMenuState extends State<ViewDetailTableMemberMenu> {
         final cells = [1, 2, 3, 4];
         Iterable<DataCell> getListData = cells.map<DataCell>((e) {
           if (e == 1) {
-            return DataCell(Row(children: [
-              CircleAvatar(
-                  backgroundImage: (member.avatar.isNotEmpty)
-                      ? NetworkImage(scale: 50, member.avatar)
-                      : NetworkImage(
-                          scale: 50, "https://picsum.photos/seed/513/600")),
-            ]));
+            return DataCell(
+                Container(
+                  child: CircleAvatar(
+                      backgroundImage: (member.avatar.isNotEmpty)
+                          ? NetworkImage(scale: 50, member.avatar)
+                          : NetworkImage(
+                              scale: 50, "https://picsum.photos/seed/513/600")),
+                ));
           } else if (e == 2) {
             return DataCell(Container(
-                width: MediaQuery.of(context).size.width * 0.2,
+                // width: MediaQuery.of(context).size.width * 0.2,
                 child: Text(
                   member.name,
+                  softWrap: false,
+                  maxLines: 1,
+                  overflow: TextOverflow.fade,
                   style: TextStyle(fontSize: 15),
                 )));
           } else if (e == 3) {
-            return DataCell(Text(
-              member.clubRoleName,
-              style: TextStyle(fontSize: 15),
+            return DataCell(
+
+                Container(
+              child: Text(
+                member.clubRoleName,
+                softWrap: false,
+                maxLines: 1,
+                overflow: TextOverflow.fade,
+                style: TextStyle(fontSize: 15),
+              ),
             ));
           } else {
             return DataCell(
-                SizedBox(child: PopupMenuButton<int>(itemBuilder: (context) {
+                Container(
+                  child: SizedBox(child: PopupMenuButton<int>(itemBuilder: (context) {
               return [
-                PopupMenuItem(
-                  onTap: () {
-                    //chuyển sang trang view thông tin
-                    BlocProvider.of<ViewListMemberBloc>(context)
-                        .add(ClickToViewInfoEvent(userId: member.studentId));
-                  },
-                  value: 1,
-                  child: Row(
-                    children: <Widget>[
-                      Icon(Icons.remove_red_eye, size: 18),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: Text('Xem thông tin'),
-                      ),
-                    ],
+                  PopupMenuItem(
+                    onTap: () {
+                      //chuyển sang trang view thông tin
+                      BlocProvider.of<ViewListMemberBloc>(context)
+                          .add(ClickToViewInfoEvent(userId: member.studentId));
+                    },
+                    value: 1,
+                    child: Row(
+                      children: <Widget>[
+                        Icon(Icons.remove_red_eye, size: 18),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Text('Xem thông tin'),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
               ];
-            })));
+            })),
+                ));
           }
         });
         return DataRow(cells: getListData.toList());
