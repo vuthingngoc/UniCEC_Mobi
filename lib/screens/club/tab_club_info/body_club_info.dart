@@ -6,6 +6,7 @@ import '../../../bloc/club/club_bloc.dart';
 import '../../../constants/Theme.dart';
 import '../../../models/entities/club/club_model.dart';
 import '../../../utils/loading.dart';
+import '../../../utils/router.dart';
 import 'club_info_description.dart';
 
 class BodyClubInfo extends StatefulWidget {
@@ -48,7 +49,9 @@ class _BodyClubInfoState extends State<BodyClubInfo> {
                             textColor: ArgonColors.white,
                             color: ArgonColors.warning,
                             onPressed: () {
-                              bloc.add(ChooseAnotherClubEvent());
+                              // bloc.add(ChooseAnotherClubEvent());
+                              Navigator.of(context).pushReplacementNamed(Routes.clubSelection);
+                              // Navigator.pop(context);
                             },
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4.0),

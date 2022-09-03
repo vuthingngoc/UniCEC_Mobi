@@ -1,8 +1,7 @@
-import 'package:get_it/get_it.dart';
+import 'package:unicec_mobi/models/common/paging_request.dart';
 import 'package:unicec_mobi/models/common/paging_result.dart';
 import 'package:unicec_mobi/models/entities/member/member_detail_model.dart';
 import 'package:unicec_mobi/services/club_svc/i_club_service.dart';
-import '../../models/common/current_user.dart';
 import '../../models/entities/club/club_model.dart';
 import '../../utils/base_bloc.dart';
 import 'clubs_view_event.dart';
@@ -19,16 +18,18 @@ class ClubsViewBloc extends BaseBloc<ClubsViewEvent, ClubsViewState> {
     _isLoading = isLoading;
   }
 
+  final int pageSize = 10; // default pageSize
+
   ClubsViewBloc({required this.service})
       : super(ClubsViewState(
             listClubsBelongToUniversity: [], hasNext: false, currentPage: 1)) {
     on((event, emit) async {
       if (event is ClubsViewInitEvent) {
         _isLoading = true;
+        PagingRequest request = PagingRequest(currentPage: state.currentPage, pageSize: pageSize);
 
         PagingResult<ClubModel>? result =
-            await service.getClubsBelongToUniversity(state.currentPage);
-
+            await service.getClubsBelongToUniversity(request);
         List<ClubModel> listClubsUni = result?.items ?? [];
 
         if (listClubsUni.isNotEmpty) {
@@ -70,22 +71,23 @@ class ClubsViewBloc extends BaseBloc<ClubsViewEvent, ClubsViewState> {
         emit(state.copyWith(
             listClubsBelongToUniversity: [], hasNext: false, currentPage: 1));
       }
-
       // tự chạy hàm loading
       if (event is LoadAddMoreEvent) {
+        PagingRequest request = PagingRequest(currentPage: state.currentPage, pageSize: pageSize);
+
         PagingResult<ClubModel>? result =
-            await service.getClubsBelongToUniversity(state.currentPage);
+            await service.getClubsBelongToUniversity(request);
         //
-        List<ClubModel> listContinute = result?.items ?? [];
+        List<ClubModel> listContinue = result?.items ?? [];
         //
-        if (listContinute.isNotEmpty) {
+        if (listContinue.isNotEmpty) {
           //load list member thuộc club đó có cả Status Pending, Active
           List<MemberDetailModel>? listMembersBelongToClubs =
               await service.getMembersBelongToClubs();
 
           if (listMembersBelongToClubs != null) {
             for (var memberOfClub in listMembersBelongToClubs) {
-              for (var clubOfUni in listContinute) {
+              for (var clubOfUni in listContinue) {
                 if (memberOfClub.clubId == clubOfUni.id) {
                   clubOfUni.isMemberStatus = memberOfClub.status;
                 }
@@ -93,7 +95,7 @@ class ClubsViewBloc extends BaseBloc<ClubsViewEvent, ClubsViewState> {
             }
           }
 
-          for (ClubModel club in listContinute) {
+          for (ClubModel club in listContinue) {
             state.listClubsBelongToUniversity.add(club);
           }
         }

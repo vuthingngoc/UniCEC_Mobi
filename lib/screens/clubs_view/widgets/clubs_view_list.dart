@@ -121,7 +121,7 @@ class _ListViewClubsState extends State<ListViewClubs> {
                                                         EdgeInsets.symmetric(
                                                             vertical:
                                                                 Dimens.size10),
-                                                    child: Text(
+                                                    child: const Text(
                                                         'Đang đợi xét duyệt'),
                                                   )
                                                 : (state
@@ -134,7 +134,7 @@ class _ListViewClubsState extends State<ListViewClubs> {
                                                             .symmetric(
                                                                 vertical: Dimens
                                                                     .size10),
-                                                        child: Text(
+                                                        child: const Text(
                                                             'Chưa là thành viên'),
                                                       )
                                                     : Padding(
@@ -142,7 +142,7 @@ class _ListViewClubsState extends State<ListViewClubs> {
                                                             .symmetric(
                                                                 vertical: Dimens
                                                                     .size10),
-                                                        child: Text('lỗi'))
+                                                        child: const Text('lỗi'))
                                       ])
                                 ],
                               ),

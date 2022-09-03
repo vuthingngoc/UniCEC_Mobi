@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:unicec_mobi/utils/utils.dart';
 import '../../../constants/Constants.dart';
 import '../../../models/entities/club/club_model.dart';
 import '../../size_config.dart';
@@ -27,16 +28,16 @@ class _ClubViewDetailDescriptionState extends State<ClubViewDetailDescription> {
         Row(
           children: [
             const Padding(
-              padding: const EdgeInsets.only(top: 60.0, left: 20),
+              padding: EdgeInsets.only(top: 60.0, left: 20),
               child: FractionalTranslation(
                   translation: Offset(0.0, -0.5),
                   child: Align(
+                    alignment: FractionalOffset(0.5, 0.0),
                     child: CircleAvatar(
                       backgroundImage: NetworkImage(
                           "https://lh3.googleusercontent.com/DQj-gonAVTlhj5W7_DhBVmX-0P42rfvx8TSp1WfQeZ6iFIon6InIS8M4Nbqy7Ql5ahgEXSiRDiWD88v-bcPYIEAg3Q=w640-h400-e365-rj-sc0x00ffffff"),
                       radius: 40.0,
                     ),
-                    alignment: FractionalOffset(0.5, 0.0),
                   )),
             ),
             Column(
@@ -50,7 +51,7 @@ class _ClubViewDetailDescriptionState extends State<ClubViewDetailDescription> {
                           )
                         : Text(
                             widget.club!.name,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Color.fromRGBO(50, 50, 93, 1),
                               fontSize: 23.0,
                             ),
@@ -63,8 +64,9 @@ class _ClubViewDetailDescriptionState extends State<ClubViewDetailDescription> {
                             style: Theme.of(context).textTheme.headline6,
                           )
                         : Text(
-                            widget.club!.founding.toString(),
-                            style: TextStyle(
+                            Utils.convertDateTime(widget.club!.founding),
+                            // widget.club!.founding.toString(),
+                            style: const TextStyle(
                               color: Color.fromRGBO(50, 50, 93, 1),
                               fontSize: 16.0,
                             ),
@@ -79,7 +81,7 @@ class _ClubViewDetailDescriptionState extends State<ClubViewDetailDescription> {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Row(
-              children: [
+              children: const [
                 Text(
                   'Giới thiệu',
                   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
