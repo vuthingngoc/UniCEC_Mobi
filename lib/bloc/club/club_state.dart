@@ -7,11 +7,10 @@ class ClubState extends Equatable {
   final ClubModel? ClubSelected; // -> load club của Current User chọn
   final MemberDetailModel? MemberSelected;
 
-  ClubState({required this.ClubSelected, required this.MemberSelected});
+  ClubState({this.ClubSelected, this.MemberSelected});
 
   ClubState copyWith(
-      {required ClubModel ClubSelected,
-      required MemberDetailModel? MemberSelected}) {
+      {ClubModel? ClubSelected, MemberDetailModel? MemberSelected}) {
     return ClubState(
         ClubSelected: ClubSelected, MemberSelected: MemberSelected);
   }

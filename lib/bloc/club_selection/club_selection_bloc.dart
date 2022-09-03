@@ -37,6 +37,10 @@ class ClubSelectionBloc
             listClubsBelongToStudent: user.clubsBelongToStudent, // here
             listMembersBelongToClubs: user.membersBelongToClubs));
 
+        if(user.clubsBelongToStudent.isEmpty) { // reset selected club
+          user.clubIdSelected = 0;
+        }
+
         _isLoading = false;    
       }
 
