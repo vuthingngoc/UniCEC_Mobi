@@ -4,7 +4,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unicec_mobi/utils/loading.dart';
-import 'package:unicec_mobi/utils/log.dart';
 
 import '../../bloc/login/login_bloc.dart';
 import '../../bloc/login/login_event.dart';

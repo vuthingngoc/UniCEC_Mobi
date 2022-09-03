@@ -19,8 +19,15 @@ class ClubBloc extends BaseBloc<ClubEvent, ClubState> {
         //print('vừa vào trang club nếu có club phải qua trang chọn club cho t');
         //print(user.clubsBelongToStudent!.length.toString());
         //chuyển trang chọn clubs
-        if (user.clubsBelongToStudent != null) {
-          if (user.clubIdSelected != 0) {
+
+        // load again clubs belong to student
+        user.clubsBelongToStudent =
+            await service.getListClubsBelongToStudent(user.id);
+            
+        if (user.clubsBelongToStudent.isNotEmpty) {
+          if (user.clubIdSelected != 0 &&
+              user.clubsBelongToStudent
+                  .any((element) => element.id == user.clubIdSelected)) {
             //load info club selected
             ClubModel? clubSelected =
                 await service.getClubSelected(user.clubIdSelected);
@@ -35,15 +42,13 @@ class ClubBloc extends BaseBloc<ClubEvent, ClubState> {
                   message: "Chưa Load được club do User chưa chọn"));
             } else {
               emit(state.copyWith(
-                  ClubSelected: clubSelected, MemeberSelected: memberSelected));
+                  ClubSelected: clubSelected, MemberSelected: memberSelected));
             }
-          } else {
-            listener.add(NavigatorClubSelectionPageEvent());
+             return;
           }
         }
-        // } else {
-        //   listener.add(NavigatorClubsViewPageEvent());
-        // }
+
+        listener.add(NavigatorClubSelectionPageEvent());
       }
       //
       if (event is ChooseAnotherClubEvent) {

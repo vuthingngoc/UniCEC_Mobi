@@ -49,10 +49,17 @@ class _ClubsViewPageState extends State<ClubsViewPage> {
       value: bloc,
       child: Scaffold(
           appBar: AppBar(
-            iconTheme: const IconThemeData(color: Colors.white),
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+            ),
+            // iconTheme: const IconThemeData(color: Colors.white),
             title: Text('Danh sách các Câu Lạc Bộ',
                 style: TextStyle(color: Colors.white, fontSize: Dimens.size23)),
             backgroundColor: AppColors.mainColor,
+            automaticallyImplyLeading: false,
             centerTitle: true,
           ),
           body: ListViewClubs()),

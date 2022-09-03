@@ -91,15 +91,14 @@ class UserService implements IUserService {
     try {
       var response =
           await client.get(Uri.parse(url), headers: Api.GetHeader(token));
-      Log.info('response seedsWallet: $response');
       if (response.statusCode == 200 && response.body.isNotEmpty) {
         Map<String, dynamic> json = adapter.parseToMap(response);
         var items = json['items'][0];
         print('getSeedsWalletByUser: $items');
         return SeedsWalletModel.fromJson(items);
       }
-    } catch (e) {
-      Log.error(e.toString());
+    } catch (e) {      
+      Log.error("getSeedsWalletByUser: ${e.toString()}");
     }
 
     return null;

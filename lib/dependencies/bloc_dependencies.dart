@@ -40,7 +40,7 @@ class BlocDependencies {
 
     //import login bloc
     injector.registerFactory<LoginBloc>(
-        () => LoginBloc(service: injector(), userService: injector()));
+        () => LoginBloc(service: injector(), userService: injector(), clubService: injector()));
 
     //import UniversitySelectionBloc
     injector.registerFactory<UniversitySelectionBloc>(

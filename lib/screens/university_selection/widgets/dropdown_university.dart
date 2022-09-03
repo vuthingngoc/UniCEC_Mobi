@@ -22,15 +22,16 @@ class _DropdownUniversityState extends State<DropdownUniversity> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             "Trường Đại Học:",
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Center(
             child: Container(
+              padding: const EdgeInsets.only(left: 10),
               width: size.width * 0.6,
               height: 30,
               decoration: BoxDecoration(
@@ -41,9 +42,9 @@ class _DropdownUniversityState extends State<DropdownUniversity> {
                   bloc: bloc,
                   builder: (context, state) {
                     int dropdownValue = state.dropdownNewValueUni;
-                    return DropdownButtonHideUnderline(
+                    return DropdownButtonHideUnderline(                      
                       child: DropdownButton<int>(
-                        value: dropdownValue,
+                        value: dropdownValue,                        
                         icon: const Icon(Icons.arrow_drop_down),
                         iconSize: 24,
                         elevation: 16,

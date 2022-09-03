@@ -14,12 +14,21 @@ import 'login_state.dart';
 class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
   final ILoginService service;
   final IUserService userService;
-  bool isLoading = false;
+  final IClubService clubService;
+  bool _isLoading = false;
 
-  LoginBloc({required this.service, required this.userService})
+  bool get isLoading => _isLoading;
+
+  set isLoading(bool isLoading){
+    _isLoading = isLoading;
+  }
+
+
+  LoginBloc({required this.service, required this.userService, required this.clubService})
       : super(LoginState(loading: false)) {
     on((event, emit) async {
       if (event is SignInGoogleEvent) {
+        _isLoading = true;
         UserCredential? credential = await FirebaseUtils.signInWithGoogle();
         if (credential != null) {
           //xử lý logic ở chỗ này
@@ -49,6 +58,8 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
       if (event is LoadingEvent) {
         emit(state.copyWith(loading: true));
       }
+
+      _isLoading = false;
     });
   }
 
@@ -76,7 +87,7 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
         //
         user.universityId = int.parse(userMap['UniversityId']);
         //load list club belong to student
-        user.clubsBelongToStudent = await service
+        user.clubsBelongToStudent = await clubService
             .getListClubsBelongToStudent(user.id); //-. lấy những member active
         //load list member belong to club -> active
         if (user.clubsBelongToStudent != null) {

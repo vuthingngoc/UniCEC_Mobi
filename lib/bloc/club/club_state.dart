@@ -11,9 +11,9 @@ class ClubState extends Equatable {
 
   ClubState copyWith(
       {required ClubModel ClubSelected,
-      required MemberDetailModel? MemeberSelected}) {
+      required MemberDetailModel? MemberSelected}) {
     return ClubState(
-        ClubSelected: ClubSelected, MemberSelected: MemeberSelected);
+        ClubSelected: ClubSelected, MemberSelected: MemberSelected);
   }
 
   @override

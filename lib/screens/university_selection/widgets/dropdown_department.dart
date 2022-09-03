@@ -22,17 +22,18 @@ class _DropdownDepartmentState extends State<DropdownDepartment> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             "Trường Ngành Học:",
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Center(
             child: Container(
+              padding: const EdgeInsets.only(left: 10),
               width: size.width * 0.6,
-              height: 50,
+              height: 30, // 50
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.black),
                   borderRadius: BorderRadius.circular(10)),
@@ -62,10 +63,12 @@ class _DropdownDepartmentState extends State<DropdownDepartment> {
                             child: Center(
                               child: Container(
                                   width: size.width * 0.55,
-                                  height: size.height * 0.15,
-                                  child: Text(value.name +
-                                      " - " +
-                                      value.departmentCode)),
+                                  // height: size.height * 0.15,
+                                  child: Text("${value.name} - ${value.departmentCode}" 
+                                  // value.name +
+                                  //     " - " +
+                                  //     value.departmentCode
+                                      )),
                             ),
                           );
                         }).toList(),
