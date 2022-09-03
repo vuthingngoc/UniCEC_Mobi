@@ -9,11 +9,20 @@ import 'club_state.dart';
 
 class ClubBloc extends BaseBloc<ClubEvent, ClubState> {
   final IClubService service;
+  bool _isLoading = false;
+
+  bool get isLoading => _isLoading;
+
+  set isLoading(bool isLoading){
+    _isLoading = isLoading;
+  }
 
   ClubBloc({required this.service})
       : super(ClubState(ClubSelected: null, MemberSelected: null)) {
     on((event, emit) async {
       if (event is ClubInitEvent) {
+        print('ClubInitEvent is runing!!!!!!!!!!!!!!!');
+        _isLoading = true;
         CurrentUser user = GetIt.I.get<CurrentUser>();
         //
         //print('vừa vào trang club nếu có club phải qua trang chọn club cho t');
@@ -44,11 +53,19 @@ class ClubBloc extends BaseBloc<ClubEvent, ClubState> {
               emit(state.copyWith(
                   ClubSelected: clubSelected, MemberSelected: memberSelected));
             }
-             return;
+            _isLoading = false;
+            return;
           }
+          // user is out of club => reset
+          user.clubIdSelected = 0;
+          emit(state.copyWith(ClubSelected: null, MemberSelected: null));
+          // print('heyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy ClubBloc - clubIdSelected: ${user.clubsBelongToStudent}');    
         }
 
+        print('heyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy ClubBloc - clubIdSelected: ${user.clubsBelongToStudent}');
+
         listener.add(NavigatorClubSelectionPageEvent());
+        _isLoading = false;
       }
       //
       if (event is ChooseAnotherClubEvent) {

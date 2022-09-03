@@ -7,9 +7,9 @@ class ViewCompetitionActivityEvent {}
 class ViewCompetitionActivityInitEvent extends ViewCompetitionActivityEvent {}
 
 //recieve data
-class RecieveDataEvent extends ViewCompetitionActivityEvent {
+class ReceiveDataEvent extends ViewCompetitionActivityEvent {
   final int competitionId;
-  RecieveDataEvent({required this.competitionId});
+  ReceiveDataEvent({required this.competitionId});
 }
 
 //LoadMore

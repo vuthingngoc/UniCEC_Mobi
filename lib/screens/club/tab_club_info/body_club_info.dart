@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:unicec_mobi/bloc/club/club_event.dart';
+import 'package:get_it/get_it.dart';
+import 'package:unicec_mobi/models/common/current_user.dart';
 import 'package:unicec_mobi/models/entities/member/member_detail_model.dart';
 import '../../../bloc/club/club_bloc.dart';
 import '../../../constants/Theme.dart';
@@ -10,10 +11,10 @@ import '../../../utils/router.dart';
 import 'club_info_description.dart';
 
 class BodyClubInfo extends StatefulWidget {
-  final ClubModel? Club;
-  final MemberDetailModel? Member;
+  final ClubModel? club;
+  final MemberDetailModel? member;
 
-  BodyClubInfo({Key? key, required this.Club, required this.Member})
+  BodyClubInfo({Key? key, this.club, this.member})
       : super(key: key);
 
   @override
@@ -27,7 +28,7 @@ class _BodyClubInfoState extends State<BodyClubInfo> {
     return BlocBuilder(
       bloc: bloc,
       builder: (context, state) {
-        return (widget.Club == null)
+        return (bloc.isLoading)
             ? Loading()
             : ListView(
                 children: [
@@ -35,8 +36,8 @@ class _BodyClubInfoState extends State<BodyClubInfo> {
                   Column(
                     children: [
                       ClubDescription(
-                        club: widget.Club,
-                        member: widget.Member,
+                        club: widget.club,
+                        member: widget.member,
                       ),
                       //
                       Padding(
@@ -51,6 +52,7 @@ class _BodyClubInfoState extends State<BodyClubInfo> {
                             onPressed: () {
                               // bloc.add(ChooseAnotherClubEvent());
                               Navigator.of(context).pushReplacementNamed(Routes.clubSelection);
+                              GetIt.I.get<CurrentUser>().clubIdSelected = 0;
                               // Navigator.pop(context);
                             },
                             shape: RoundedRectangleBorder(

@@ -84,7 +84,7 @@ class ViewCompetitionActivityBloc extends BaseBloc<ViewCompetitionActivityEvent,
 
       //Recieve Data Event
       //lúc nào cũng giá trị đầu
-      if (event is RecieveDataEvent) {
+      if (event is ReceiveDataEvent) {
         //---------LoadStatuses
         List<CompetitionActivityStatus> loadListStatuses = [];
         loadListStatuses.add(CompetitionActivityStatus.Open);
