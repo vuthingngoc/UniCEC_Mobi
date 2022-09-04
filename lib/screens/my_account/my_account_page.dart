@@ -82,7 +82,7 @@ class _MyAccountPageState extends State<MyAccountPage>
                 backgroundColor: AppColors.mainColor,
               ),
               backgroundColor: AppColors.backgroundPageColor,
-              drawer: ArgonDrawer(currentPage: "My account"),
+              // drawer: ArgonDrawer(currentPage: "My account"),
               body: (_bloc.isLoading)
                   ? Loading()
                   : Stack(children: <Widget>[

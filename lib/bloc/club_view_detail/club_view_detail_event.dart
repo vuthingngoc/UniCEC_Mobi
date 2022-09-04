@@ -2,9 +2,9 @@ import '../../models/entities/club/club_model.dart';
 
 class ClubViewDetailEvent {}
 
-class RecieveDataEvent extends ClubViewDetailEvent {
+class ReceiveDataEvent extends ClubViewDetailEvent {
   final ClubModel clubView;
-  RecieveDataEvent({required this.clubView});
+  ReceiveDataEvent({required this.clubView});
 }
 
 class ApplyInClubEvent extends ClubViewDetailEvent {

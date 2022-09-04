@@ -7,14 +7,13 @@ import '../../bloc/club/club_event.dart';
 import '../../bloc/club/club_state.dart';
 
 //widgets
-import 'package:unicec_mobi/screens/widgets/drawer.dart';
 import '../../constants/Theme.dart';
 import '../../models/common/current_user.dart';
+import '../../utils/loading.dart';
 import '../../utils/router.dart';
 import '../size_config.dart';
 import 'tab_club_info/body_club_info.dart';
 import 'tab_club_info/default_button.dart';
-import 'widgets/navbar_club.dart';
 
 class ClubPage extends StatefulWidget {
   //bloc
@@ -36,16 +35,22 @@ class _ClubPageState extends State<ClubPage> {
   @override
   void initState() {
     super.initState();
-
     _bloc.add(ClubInitEvent());
+    _bloc.isLoading = true;
 
     _bloc.listenerStream.listen((event) {
       if (event is NavigatorClubSelectionPageEvent) {
-        Navigator.of(context).pushNamed(Routes.clubSelection);
+        Navigator.of(context)
+            .pushNamed(Routes.clubSelection)
+            .then((value) => setState(() {
+                  _bloc.isLoading = false;
+                }));
       }
+      
       if (event is NavigatorClubsViewPageEvent) {
         Navigator.of(context).pushNamed(Routes.clubsView);
       }
+
       if (event is ShowingSnackBarEvent) {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(event.message)));
@@ -61,35 +66,40 @@ class _ClubPageState extends State<ClubPage> {
       child: BlocBuilder<ClubBloc, ClubState>(
         bloc: _bloc,
         builder: (context, state) {
-          return (GetIt.I.get<CurrentUser>().clubIdSelected != 0)
-              ? Scaffold(
-                  appBar: AppBar(
-                    title: const Text("Câu lạc bộ",
-                        style: TextStyle(color: Colors.white)),
-                    automaticallyImplyLeading: false,
-                    backgroundColor: AppColors.mainColor,
-                    centerTitle: true,
-                  ),
-                  body: BodyClubInfo(
-                      Club: state.ClubSelected, Member: state.MemberSelected),
-                )
-              : Scaffold(
-                  appBar: AppBar(
-                    title: const Text("Câu lạc bộ",
-                        style: TextStyle(color: Colors.white)),
-                    automaticallyImplyLeading: false,
-                    backgroundColor: AppColors.mainColor,
-                    centerTitle: true,
-                  ),
-                  body:
-                      (GetIt.I.get<CurrentUser>().clubsBelongToStudent != null)
+          return (_bloc.isLoading)
+              ? Loading()
+              : (GetIt.I.get<CurrentUser>().clubIdSelected != 0)
+                  ? Scaffold(
+                      appBar: AppBar(
+                        title: const Text("Câu lạc bộ",
+                            style: TextStyle(color: Colors.white)),
+                        automaticallyImplyLeading: false,
+                        backgroundColor: AppColors.mainColor,
+                        centerTitle: true,
+                      ),
+                      body: BodyClubInfo(
+                          club: state.ClubSelected,
+                          member: state.MemberSelected),
+                    )
+                  : Scaffold(
+                      appBar: AppBar(
+                        title: const Text("Câu lạc bộ",
+                            style: TextStyle(color: Colors.white)),
+                        automaticallyImplyLeading: false,
+                        backgroundColor: AppColors.mainColor,
+                        centerTitle: true,
+                      ),
+                      body: (GetIt.I
+                              .get<CurrentUser>()
+                              .clubsBelongToStudent
+                              .isNotEmpty)
                           ? Container(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text('Bạn chưa chọn Câu Lạc Bộ',
+                                  const Text('Bạn chưa chọn Câu Lạc Bộ',
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold)),
@@ -99,7 +109,7 @@ class _ClubPageState extends State<ClubPage> {
 
                                   //   },
                                   // ),
-                                  SizedBox(height: 20),
+                                  const SizedBox(height: 20),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -109,14 +119,17 @@ class _ClubPageState extends State<ClubPage> {
                                             border: Border.all(
                                                 color: ArgonColors.warning),
                                             color: ArgonColors.warning,
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(30))),
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(30))),
                                         child: FlatButton(
                                             textColor: ArgonColors.white,
                                             onPressed: () {
-                                              _bloc.add(ClubSelectionEvent());
+                                              // _bloc.add(ClubSelectionEvent());
+                                              Navigator.of(context).pushNamed(
+                                                  Routes.clubSelection);
                                             },
-                                            child: Text("Chọn Câu Lạc Bộ",
+                                            child: const Text("Chọn Câu Lạc Bộ",
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.w600,
                                                     fontSize: 15.0))),
@@ -128,13 +141,20 @@ class _ClubPageState extends State<ClubPage> {
                             )
                           : Center(
                               child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text('Bạn chưa có Câu Lạc Bộ'),
-                                  DefaultButton(
-                                    text: "Tham Gia Câu Lạc Bộ ",
-                                    press: () {
-                                      _bloc.add(ClubsViewEvent());
-                                    },
+                                  const Text('Bạn chưa có Câu Lạc Bộ'),
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    child: DefaultButton(
+                                      text: "Tham Gia Câu Lạc Bộ ",
+                                      press: () {
+                                        // _bloc.add(ClubsViewEvent());
+                                        Navigator.of(context)
+                                            .pushNamed(Routes.clubsView);
+                                      },
+                                    ),
                                   ),
                                 ],
                               ),

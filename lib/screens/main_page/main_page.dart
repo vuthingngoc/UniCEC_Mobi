@@ -1,20 +1,12 @@
 import 'dart:async';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-//import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-// import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_it/get_it.dart';
-import 'package:unicec_mobi/bloc/club_selection/club_selection_bloc.dart';
 import 'package:unicec_mobi/bloc/competition/competition_bloc.dart';
 import 'package:unicec_mobi/bloc/view_competition_member_task/view_competition_member_task_bloc.dart';
-import 'package:unicec_mobi/screens/club/club_page.dart';
 import 'package:unicec_mobi/screens/pages.dart';
 import 'package:unicec_mobi/utils/firebase.dart';
 import '../../bloc/club/club_bloc.dart';
-import '../../bloc/competition_round/competition_round_bloc.dart';
 import '../../bloc/main/main_bloc.dart';
 import '../../bloc/main/main_event.dart';
 import '../../bloc/main/main_state.dart';
@@ -25,13 +17,8 @@ import '../../bloc/profile/profile_bloc.dart';
 import '../../main.dart';
 import '../../models/common/current_user.dart';
 import '../../utils/app_color.dart';
-import '../../utils/log.dart';
-import '../competition/competition_page.dart';
-import '../competition_round_result/competition_round_result.dart';
 import '../notification/notification_page.dart';
-import '../profile/profile_page.dart';
 import '../size_config.dart';
-import '../view_competition_member_task/view_competition_member_task_page.dart';
 import 'widget/component_button.dart';
 
 class MainPage extends StatefulWidget {

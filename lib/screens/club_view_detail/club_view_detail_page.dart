@@ -73,7 +73,7 @@ class _ClubViewDetailPageState extends State<ClubViewDetailPage> {
 
       if (clubSelected != null) {
         //thêm sự kiện để cập nhật state
-        bloc.add(RecieveDataEvent(clubView: clubSelected));
+        bloc.add(ReceiveDataEvent(clubView: clubSelected));  
       }
     }
   }

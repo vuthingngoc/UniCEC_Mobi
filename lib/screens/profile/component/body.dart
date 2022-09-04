@@ -21,12 +21,13 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     ProfileBloc bloc = BlocProvider.of<ProfileBloc>(context);
     bloc.add(LoadSeedsWalletEvent());
-    bloc.IsLoading = true;
+    bloc.isLoading = true;
 
     return BlocBuilder<ProfileBloc, ProfileState>(
         bloc: bloc,
         builder: (context, state) {
-          return (bloc.IsLoading)
+          print('body profile page: ${bloc.isLoading}');
+          return (bloc.isLoading)
               ? Loading()
               : SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(vertical: 20),
@@ -60,7 +61,7 @@ class Body extends StatelessWidget {
                                         borderRadius: const BorderRadius.all(
                                             Radius.circular(10))),
                                     child:
-                                        Text("${state.seedsWallet?.amount} điểm",
+                                        Text("${state.seedsWallet?.amount ?? 0} điểm",
                                             style: const TextStyle(
                                                 // color: Colors.bl,
                                                 fontSize: 18,
@@ -82,7 +83,7 @@ class Body extends StatelessWidget {
                         },
                       ),
                       ProfileMenu(
-                        text: "Cuộc thi và sự kiện đang tham gia",
+                        text: "Cuộc Thi và Sự Kiện đang tham gia",
                         icon: "assets/icons/trophy.svg",
                         press: () {
                           Navigator.of(context).pushNamed(

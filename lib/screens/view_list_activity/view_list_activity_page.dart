@@ -34,7 +34,7 @@ class _ViewListActivityPageState extends State<ViewListActivityPage>
     if (settings.arguments != null) {
       int competitionId = settings.arguments as int;
       if (competitionId != 0) {
-        bloc.add(RecieveDataEvent(competitionId: competitionId));
+        bloc.add(ReceiveDataEvent(competitionId: competitionId));
       }
     }
   }
@@ -49,9 +49,9 @@ class _ViewListActivityPageState extends State<ViewListActivityPage>
             onPressed: () {
               Navigator.pop(context, true);
             },
-            icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+            icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
           ),
-          title: Text(
+          title: const Text(
             "Danh Sách Công Việc",
             style: TextStyle(color: Colors.white),
           ),

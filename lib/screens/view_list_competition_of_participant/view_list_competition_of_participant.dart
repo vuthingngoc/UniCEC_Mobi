@@ -52,14 +52,14 @@ class _ViewListCompetitionOfParticipantPageState
         value: bloc,
         child: Scaffold(
             appBar: NavbarCompetitionOfParticipant(
-              title: "Cuộc thi và sự kiện đã đăng ký",
+              title: "Cuộc Thi và Sự Kiện đã đăng ký",
               searchBar: true,
               categoryOne: "Cuộc Thi",
               categoryTwo: "Sự Kiện",
               //categoryThree: "Câu Lạc Bộ",
             ),
             backgroundColor: ArgonColors.bgColorScreen,
-            drawer: ArgonDrawer(currentPage: "Competition"),
+            // drawer: ArgonDrawer(currentPage: "Competition"),
             body: BlocBuilder<ViewListCompetitionParticipantBloc,
                     ViewListCompetitionParticipantState>(
                 bloc: bloc,

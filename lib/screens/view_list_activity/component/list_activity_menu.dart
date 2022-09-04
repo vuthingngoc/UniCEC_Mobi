@@ -58,42 +58,48 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
-                      child: TextFormField(
-                          controller: _controller,
-                          onFieldSubmitted: (value) {
-                            bloc.add(ChangeSearchNameEvent(searchName: value));
-                          },
-                          autofocus: false,
-                          decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                                onPressed: () {
-                                  _controller.clear;
-                                  _controller.text = "";
-                                  //sửa lại cái
-                                  bloc.add(
-                                      ChangeSearchNameEvent(searchName: null));
-                                },
-                                icon: const Icon(Icons.clear)),
-                            labelText: 'Tìm theo tên',
-                            focusedBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.grey,
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        child: TextFormField(
+                            controller: _controller,
+                            onFieldSubmitted: (value) {
+                              bloc.add(ChangeSearchNameEvent(searchName: value));
+                            },
+                            autofocus: false,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                  onPressed: () {
+                                    _controller.clear;
+                                    _controller.text = "";
+                                    //sửa lại cái
+                                    bloc.add(
+                                        ChangeSearchNameEvent(searchName: null));
+                                  },
+                                  icon: const Icon(Icons.clear)),
+                              labelText: 'Tìm theo tên',
+                              focusedBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.grey,
+                                ),
                               ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.grey, width: 1.0),
-                            ),
-                          )),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.grey, width: 1.0),
+                              ),
+                            )),
+                      ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        //
-                        bloc.add(LoadingEvent());
-                        //
-                        bloc.add(SearchEvent());
-                      },
-                      child: Icon(Icons.search),
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      child: GestureDetector(
+                        onTap: () {
+                          //
+                          bloc.add(LoadingEvent());
+                          //
+                          bloc.add(SearchEvent());
+                        },
+                        child: Icon(Icons.search),
+                      ),
                     ),
                   ],
                 ),
@@ -109,15 +115,15 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                         padding: const EdgeInsets.all(10),
                         child: Text(
                           "Trạng thái công việc:",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                         ),
                       ),
                       Container(
                         width: size.width * 0.3,
                         height: 30,
                         decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black),
-                            borderRadius: BorderRadius.circular(10)),
+                            border: Border.all(color: Colors.black45),
+                            borderRadius: BorderRadius.circular(4)),
                         child: BlocBuilder<ViewCompetitionActivityBloc,
                                 ViewCompetitionActivityState>(
                             bloc: bloc,
@@ -132,8 +138,8 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                                   iconSize: 24,
                                   elevation: 16,
                                   style: const TextStyle(
-                                      color: Colors.deepPurple,
-                                      fontWeight: FontWeight.bold),
+color: ArgonColors.black,
+                                      fontWeight: FontWeight.normal),
                                   onChanged:
                                       (CompetitionActivityStatus? newValue) {
                                     //
@@ -149,30 +155,33 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                                     return DropdownMenuItem<
                                             CompetitionActivityStatus>(
                                         value: value,
-                                        child: Text((value ==
-                                                CompetitionActivityStatus.All)
-                                            ? 'Tất cả'
-                                            : (value ==
-                                                    CompetitionActivityStatus
-                                                        .Open)
-                                                ? 'Mở'
-                                                : (value ==
-                                                        CompetitionActivityStatus
-                                                            .OnGoing)
-                                                    ? 'Đang làm'
-                                                    : (value ==
-                                                            CompetitionActivityStatus
-                                                                .Finished)
-                                                        ? 'Hoàn Thành'
-                                                        : (value ==
-                                                                CompetitionActivityStatus
-                                                                    .Completed)
-                                                            ? 'Kết thúc'
-                                                            : (value ==
-                                                                    CompetitionActivityStatus
-                                                                        .Pending)
-                                                                ? 'Chờ'
-                                                                : 'trạng thái khác'));
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                          child: Text((value ==
+                                                  CompetitionActivityStatus.All)
+                                              ? 'Tất cả'
+                                              : (value ==
+                                                      CompetitionActivityStatus
+                                                          .Open)
+                                                  ? 'Mở'
+                                                  : (value ==
+                                                          CompetitionActivityStatus
+                                                              .OnGoing)
+                                                      ? 'Đang làm'
+                                                      : (value ==
+                                                              CompetitionActivityStatus
+                                                                  .Finished)
+                                                          ? 'Hoàn Thành'
+                                                          : (value ==
+                                                                  CompetitionActivityStatus
+                                                                      .Completed)
+                                                              ? 'Kết thúc'
+                                                              : (value ==
+                                                                      CompetitionActivityStatus
+                                                                          .Pending)
+                                                                  ? 'Chờ'
+                                                                  : 'trạng thái khác'),
+                                        ));
                                   }).toList(),
                                 ),
                               );
@@ -191,15 +200,15 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                         padding: const EdgeInsets.all(10),
                         child: Text(
                           "Mức độ công việc:",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                         ),
                       ),
                       Container(
                         width: size.width * 0.3,
                         height: 30,
                         decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black),
-                            borderRadius: BorderRadius.circular(10)),
+                            border: Border.all(color: Colors.black45),
+                            borderRadius: BorderRadius.circular(4)),
                         child: BlocBuilder<ViewCompetitionActivityBloc,
                                 ViewCompetitionActivityState>(
                             bloc: bloc,
@@ -213,8 +222,8 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                                   iconSize: 24,
                                   elevation: 16,
                                   style: const TextStyle(
-                                      color: Colors.deepPurple,
-                                      fontWeight: FontWeight.bold),
+                                      color: ArgonColors.black,
+                                      fontWeight: FontWeight.normal),
                                   onChanged: (PriorityStatus? newValue) {
                                     //
                                     bloc.add(LoadingEvent());
@@ -227,18 +236,21 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                                           (PriorityStatus value) {
                                     return DropdownMenuItem<PriorityStatus>(
                                         value: value,
-                                        child: Text((value ==
-                                                PriorityStatus.All)
-                                            ? 'Tất cả'
-                                            : (value == PriorityStatus.Low)
-                                                ? 'Thấp'
-                                                : (value ==
-                                                        PriorityStatus.Medium)
-                                                    ? 'Trung bình'
-                                                    : (value ==
-                                                            PriorityStatus.High)
-                                                        ? 'Cao'
-                                                        : 'trạng thái khác'));
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                          child: Text((value ==
+                                                  PriorityStatus.All)
+                                              ? 'Tất cả'
+                                              : (value == PriorityStatus.Low)
+                                                  ? 'Thấp'
+                                                  : (value ==
+                                                          PriorityStatus.Medium)
+                                                      ? 'Trung bình'
+                                                      : (value ==
+                                                              PriorityStatus.High)
+                                                          ? 'Cao'
+                                                          : 'trạng thái khác'),
+                                        ));
                                   }).toList(),
                                 ),
                               );

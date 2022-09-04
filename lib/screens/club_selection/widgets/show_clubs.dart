@@ -1,6 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../bloc/club_selection/club_selection_bloc.dart';
@@ -38,19 +36,21 @@ class _ShowClubsBelongToStudentState extends State<ShowClubsBelongToStudent> {
             bloc: bloc,
             builder: (context, state) {
               return RefreshIndicator(
-                  onRefresh: () {
-                    return _refresh(context);
-                  },
-                  child: ListView.builder(
-                    itemCount: state.listClubsBelongToStudent.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return ClubCard(
-                        club: state.listClubsBelongToStudent.elementAt(index),
-                        member: state.listMembersBelongToClubs.elementAt(index),
-                      );
-                    },
-                  ));
+                      onRefresh: () {
+                        return _refresh(context);
+                      },
+                      child: ListView.builder(
+                        itemCount: state.listClubsBelongToStudent.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return ClubCard(
+                            club:
+                                state.listClubsBelongToStudent.elementAt(index),
+                            member:
+                                state.listMembersBelongToClubs.elementAt(index),
+                          );
+                        },
+                      ));
             }),
       ],
     );

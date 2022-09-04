@@ -26,8 +26,13 @@ class ViewCompetitionMemberTaskBloc extends BaseBloc<
     on((event, emit) async {
       //init Event
       if (event is InitEvent) {
+        CurrentUser user = GetIt.I.get<CurrentUser>();
+
         //get clubIdSelected
-        if (GetIt.I.get<CurrentUser>().clubIdSelected != 0) {
+        if (user.clubIdSelected != 0 
+              && user.clubsBelongToStudent.isNotEmpty
+              && user.clubsBelongToStudent
+                  .any((element) => element.id == user.clubIdSelected)) {
           //load
           PagingResult<CompetitionModel>? result =
               await service.loadCompetitionMemberTask(
@@ -123,8 +128,13 @@ class ViewCompetitionMemberTaskBloc extends BaseBloc<
             isLoading: false));
       }
       if (event is SearchEvent) {
+        CurrentUser user = GetIt.I.get<CurrentUser>();
+
         //get clubIdSelected
-        if (GetIt.I.get<CurrentUser>().clubIdSelected != 0) {
+        if (user.clubIdSelected != 0 
+              && user.clubsBelongToStudent.isNotEmpty
+              && user.clubsBelongToStudent
+                  .any((element) => element.id == user.clubIdSelected)) {
           //load
           PagingResult<CompetitionModel>? result = await service
               .loadCompetitionMemberTask(1, state.searchName, state.isEvent);

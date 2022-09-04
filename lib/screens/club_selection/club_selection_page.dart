@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/bloc/club_selection/club_selection_bloc.dart';
 
 import '../../bloc/club_selection/club_selection_event.dart';
 import '../../bloc/club_selection/club_selection_state.dart';
-import '../../constants/Theme.dart';
-import '../../models/common/current_user.dart';
 import '../../utils/app_color.dart';
 import '../../utils/dimens.dart';
+import '../../utils/loading.dart';
 import '../../utils/router.dart';
 import 'widgets/show_clubs.dart';
 import 'widgets/welcome_text.dart';
@@ -22,6 +20,7 @@ class ClubSelectionPage extends StatefulWidget {
 
 class _ClubSelectionPageState extends State<ClubSelectionPage> {
   ClubSelectionBloc get _bloc => widget.bloc;
+  
   @override
   void initState() {
     //
@@ -37,8 +36,14 @@ class _ClubSelectionPageState extends State<ClubSelectionPage> {
     });
     //
     _bloc.add(ClubSelectionEvent());
+    _bloc.isLoading = true;
 
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
   }
 
   @override
@@ -52,7 +57,7 @@ class _ClubSelectionPageState extends State<ClubSelectionPage> {
               appBar: AppBar(
                 leading: IconButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.of(context).pop(true);
                   },
                   icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
                 ),
@@ -64,40 +69,52 @@ class _ClubSelectionPageState extends State<ClubSelectionPage> {
                 centerTitle: true,
                 backgroundColor: AppColors.mainColor,
               ),
-              body: (state.listClubsBelongToStudent.isEmpty)
-                  ? Center(
-                      child: Text("Hiện tại bạn chưa tham gia CLB nào!"),
-                    )
-                  : Container(
-                      constraints: const BoxConstraints.expand(),
-                      // decoration: BoxDecoration(
-                      //   image: DecorationImage(
-                      //     colorFilter: ColorFilter.mode(
-                      //         Colors.black.withOpacity(Dimens.size0p6),
-                      //         BlendMode.dstATop),
-                      //     image:
-                      //         const AssetImage("assets/img/onboard-background.png"),
-                      //     fit: BoxFit.cover,
-                      //   ),
-                      // ),
-                      child: Padding(
-                        padding: EdgeInsets.all(Dimens.size10),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              WelcomeText(),
-                              ShowClubsBelongToStudent(),
-                            ],
+              body: (_bloc.isLoading)
+                  ? Loading()
+                  : (_bloc.state.listClubsBelongToStudent.isEmpty)
+                      ? const Center(
+                          child: Text("Hiện tại bạn chưa tham gia CLB nào!"),
+                        )
+                      : Container(
+                          constraints: const BoxConstraints.expand(),
+                          // decoration: BoxDecoration(
+                          //   image: DecorationImage(
+                          //     colorFilter: ColorFilter.mode(
+                          //         Colors.black.withOpacity(Dimens.size0p6),
+                          //         BlendMode.dstATop),
+                          //     image:
+                          //         const AssetImage("assets/img/onboard-background.png"),
+                          //     fit: BoxFit.cover,
+                          //   ),
+                          // ),
+                          child: Padding(
+                            padding: EdgeInsets.all(Dimens.size10),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  WelcomeText(),
+                                  ShowClubsBelongToStudent(),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
               floatingActionButton: Padding(
-                padding: EdgeInsets.only(bottom: 60),
+                padding: const EdgeInsets.only(bottom: 60),
                 child: FloatingActionButton.extended(
                   onPressed: () {
                     //thêm event qua trang list club
-                    _bloc.add(ClubsViewPageEvent());
+                    // _bloc.add(ClubsViewPageEvent());
+                    // bool isLoadPage = await Navigator.of(context)
+                    //     .pushNamed(Routes.clubsView) as bool;
+                    // if (isLoadPage) {
+                    //   _bloc.isLoading = true;
+                    //   _bloc.add(RefreshEvent());                      
+                    // }
+
+                    Navigator.pushNamed(context, Routes.clubsView).then((value) => setState((){
+                      _bloc.add(RefreshEvent());
+                    }));
                   },
                   backgroundColor: AppColors.mainColor,
                   label: const Text("Tham gia clb khác"),

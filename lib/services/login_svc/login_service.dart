@@ -46,50 +46,50 @@ class LoginService implements ILoginService {
     return null;
   }
 
-  @override
-  Future<List<ClubModel>> getListClubsBelongToStudent(int? userId) async {
-    var client = http.Client();
-    String url = Api.GetUrl(apiPath: Api.clubsBelongToStudent);
+  // @override
+  // Future<List<ClubModel>> getListClubsBelongToStudent(int? userId) async {
+  //   var client = http.Client();
+  //   String url = Api.GetUrl(apiPath: Api.clubsBelongToStudent);
 
-    url += "/" + userId.toString();
+  //   url += "/" + userId.toString();
 
-    String? idToken = GetIt.I.get<CurrentUser>().idToken;
-    try {
-      var response = await client.get(Uri.parse(url), headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': "Bearer $idToken"
-      });
+  //   String? idToken = GetIt.I.get<CurrentUser>().idToken;
+  //   try {
+  //     var response = await client.get(Uri.parse(url), headers: <String, String>{
+  //       'Content-Type': 'application/json; charset=UTF-8',
+  //       'Authorization': "Bearer $idToken"
+  //     });
 
-      if (response.statusCode == 200) {
-        //
-        List<dynamic> resultList = adapter.parseToList(response);
+  //     if (response.statusCode == 200) {
+  //       //
+  //       List<dynamic> resultList = adapter.parseToList(response);
 
-        if (resultList.isEmpty) {
-          return [];
-        }
-        //
-        List<ClubModel> clubsBelongToStudent = [];
-        //
-        for (var element in resultList) {
-          ClubModel model = ClubModel.fromJson(element);
-          clubsBelongToStudent.add(model);
-        }
+  //       if (resultList.isEmpty) {
+  //         return [];
+  //       }
+  //       //
+  //       List<ClubModel> clubsBelongToStudent = [];
+  //       //
+  //       for (var element in resultList) {
+  //         ClubModel model = ClubModel.fromJson(element);
+  //         clubsBelongToStudent.add(model);
+  //       }
 
-        return clubsBelongToStudent;
-      }
-    } catch (e) {
-      Log.error(e.toString());
-    } finally {
-      client.close();
-    }
-    return [];
-  }
+  //       return clubsBelongToStudent;
+  //     }
+  //   } catch (e) {
+  //     Log.error(e.toString());
+  //   } finally {
+  //     client.close();
+  //   }
+  //   return [];
+  // }
 
   @override
   Future<MemberDetailModel?> getMemberBelongToClub(int? clubId) async {
     var client = http.Client();
     String url = Api.GetUrl(apiPath: Api.members);
-    url += "/info?clubId=" + clubId.toString();
+    url += "/info?clubId=$clubId";
     String? idToken = GetIt.I.get<CurrentUser>().idToken;
     try {
       var response =

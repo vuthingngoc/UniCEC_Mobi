@@ -78,7 +78,7 @@ class LoginBody extends StatelessWidget {
                           height: 50.0,
                           decoration: BoxDecoration(
                               color: AppColors.mainColor,
-                              image: DecorationImage(
+                              image: const DecorationImage(
                                   image: AssetImage(
                                       "assets/img/logo-name-app.jpg"),
                                   fit: BoxFit.contain)))),

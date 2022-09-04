@@ -21,7 +21,7 @@ class ClubViewDetailBloc
       : super(ClubViewDetailState(
             clubViewDetail: null, statusMember: MemberStatus.Student)) {
     on((event, emit) async {
-      if (event is RecieveDataEvent) {
+      if (event is ReceiveDataEvent) {
         _isLoading = true;
         emit(state.copyWith(
             clubViewDetail: event.clubView,

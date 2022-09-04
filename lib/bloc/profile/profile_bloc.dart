@@ -15,9 +15,9 @@ class ProfileBloc extends BaseBloc<ProfileEvent, ProfileState> { // this functio
   final IUserService service;
   bool _isLoading = false;
 
-  bool get IsLoading => _isLoading;
+  bool get isLoading => _isLoading;
 
-  set IsLoading(bool isLoading){
+  set isLoading(bool isLoading){
     _isLoading = isLoading;
   }
 
@@ -52,12 +52,14 @@ class ProfileBloc extends BaseBloc<ProfileEvent, ProfileState> { // this functio
         _isLoading = true;
         int userId = GetIt.I.get<CurrentUser>().id;
         SeedsWalletModel? seedsWallet = await service.getSeedsWalletByUser(userId);
+        // print('profileBloc - seedswallet: $seedsWallet');     
         if(seedsWallet != null){
           emit(state.copyWith(seedsWallet: seedsWallet));
         }else{
           Log.error('ProfileBloc: seedsWallet null');
         }
-        _isLoading = false;        
+        _isLoading = false;
+        // print('loading seedswallet: $_isLoading');      
       }
 
       if(event is LogoutEvent){

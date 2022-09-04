@@ -33,11 +33,11 @@ class ViewListMemberBloc
         List<ClubRoleModel>? listClubRole = await service.getListClubRole();
         if (listClubRole != null) {
           //tạo 1 club role model all
-          ClubRoleModel model = new ClubRoleModel(id: 0, name: 'Tất cả');
+          ClubRoleModel model = ClubRoleModel(id: 0, name: 'Tất cả');
           listClubRole.add(model);
         } else {
           //tạo 1 club role model all
-          ClubRoleModel model = new ClubRoleModel(id: 0, name: 'Tất cả');
+          ClubRoleModel model = ClubRoleModel(id: 0, name: 'Tất cả');
           //
           listModel.add(model);
         }
