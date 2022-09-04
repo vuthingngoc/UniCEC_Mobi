@@ -257,17 +257,14 @@ class CardSmall extends StatelessWidget {
                                         fontSize: 18,
                                       )),
                                 )
-                              ]),
-                          
-                          Expanded(                            
-                            child: Text(title,
+                              ]),                          
+
+                          Text(title,
                                   style: const TextStyle(
                                       color: ArgonColors.header, fontSize: 18),
-                                  // overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
                                   ),
-                          ),
-
-                          const SizedBox(height: 15.0, child: Text('...')),
 
                           Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
