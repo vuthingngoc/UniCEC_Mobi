@@ -1,3 +1,6 @@
+import 'package:get_it/get_it.dart';
+
+import '../../models/common/current_user.dart';
 import '/models/entities/competition_activity/competition_activity_detail_model.dart';
 import '../../models/enums/competition_activity_status.dart';
 import '../../services/view_competition_activity_svc/i_view_competition_activity_service.dart';
@@ -17,18 +20,25 @@ class ViewDetailActivityBloc
             isLoading: true)) {
     (on(
       (event, emit) async {
-        //recieve data
-        if (event is RecieveDataEvent) {
+        //receive data
+        if (event is ReceiveDataEvent) {
           CompetitionActivityDetailModel? result = await service
-              .getCompetititonActivityDetail(event.competitionActivityId);
+              .getCompetitionActivityDetail(event.competitionActivityId);    
           if (result != null) {
             emit(state.copyWith(
                 newCompetitionActivityDetail: result,
                 newStatus: result.status,
                 newSelectedImageIndex: state.selectedImageIndex,
                 isLoading: false));
+          
+          }else{
+            listener.add(NavigateToListActivitiesEvent());
+            CurrentUser user = GetIt.I.get<CurrentUser>();
+            user.clubIdSelected = 0;
+            user.clubsBelongToStudent = [];            
           }
         }
+
         //change status
         if (event is ChangeStatusEvent) {
           emit(state.copyWith(
@@ -37,13 +47,14 @@ class ViewDetailActivityBloc
               newSelectedImageIndex: state.selectedImageIndex,
               isLoading: false));
         }
+
         //update status competition activity
         if (event is UpdateStatusEvent) {
           bool check = await service.updateStatusCompetitionActivity(
               state.status, state.competitionActivityDetail!.id);
           if (check) {
             CompetitionActivityDetailModel? result =
-                await service.getCompetititonActivityDetail(
+                await service.getCompetitionActivityDetail(
                     state.competitionActivityDetail!.id);
             if (result != null) {
               //
@@ -59,6 +70,7 @@ class ViewDetailActivityBloc
             listener.add(ShowingSnackBarEvent(message: "Update thất bại"));
           }
         }
+
         //change image index
         if (event is ChangeImageIndex) {
           emit(state.copyWith(

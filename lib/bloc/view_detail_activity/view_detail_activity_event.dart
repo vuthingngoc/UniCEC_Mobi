@@ -2,9 +2,9 @@ import '../../models/enums/competition_activity_status.dart';
 
 class ViewDetailActivityEvent {}
 
-class RecieveDataEvent extends ViewDetailActivityEvent {
-  final competitionActivityId;
-  RecieveDataEvent({required this.competitionActivityId});
+class ReceiveDataEvent extends ViewDetailActivityEvent {
+  final int competitionActivityId;
+  ReceiveDataEvent({required this.competitionActivityId});
 }
 
 class ChangeStatusEvent extends ViewDetailActivityEvent {
@@ -25,3 +25,5 @@ class ShowingSnackBarEvent extends ViewDetailActivityEvent {
 
   ShowingSnackBarEvent({required this.message});
 }
+
+class NavigateToListActivitiesEvent extends ViewDetailActivityEvent{}
