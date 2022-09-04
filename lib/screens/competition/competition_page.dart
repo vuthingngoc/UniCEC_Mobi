@@ -70,12 +70,12 @@ class _CompetitionPageState extends State<CompetitionPage>
           builder: (context, state) {
             return Scaffold(
                 appBar: NavbarCompetition(
-                  title: "Cuộc Thi & Sự Kiện",
+                  title: "Cuộc Thi & Sự Kiện",                                    
                   searchBar: true,
                   categoryOne: "Cuộc Thi",
                   categoryTwo: "Sự Kiện",
                 ),
-                resizeToAvoidBottomInset: false,
+                resizeToAvoidBottomInset: false,                
                 backgroundColor: ArgonColors.bgColorScreen,
                 //key: _scaffoldKey,
                 drawer: ArgonDrawer(currentPage: "Competition"),
