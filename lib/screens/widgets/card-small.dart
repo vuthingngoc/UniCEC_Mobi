@@ -73,7 +73,7 @@ class CardSmall extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,                            
                             children: [
                               Text("@$type",
                                   style: const TextStyle(
@@ -259,11 +259,15 @@ class CardSmall extends StatelessWidget {
                                 )
                               ]),
                           
-                          Text(title,
-                              style: const TextStyle(
-                                  color: ArgonColors.header, fontSize: 18),
-                              // overflow: TextOverflow.ellipsis,
-                              ),
+                          Expanded(                            
+                            child: Text(title,
+                                  style: const TextStyle(
+                                      color: ArgonColors.header, fontSize: 18),
+                                  // overflow: TextOverflow.ellipsis,
+                                  ),
+                          ),
+
+                          const SizedBox(height: 15.0, child: Text('...')),
 
                           Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
