@@ -1,14 +1,14 @@
-import 'package:flutter/cupertino.dart';
+import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/models/entities/member/member_detail_model.dart';
-
 import '../../../bloc/club_selection/club_selection_bloc.dart';
 import '../../../bloc/club_selection/club_selection_event.dart';
 import '../../../bloc/club_selection/club_selection_state.dart';
+import '../../../models/common/current_user.dart';
 import '../../../models/entities/club/club_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../utils/dimens.dart';
+import '../../../utils/router.dart';
 
 class ClubCard extends StatefulWidget {
   const ClubCard(
@@ -54,9 +54,12 @@ class _ClubCardState extends State<ClubCard> {
             ),
             child: GestureDetector(
               onTap: () {
-                bloc.add(
-                    ChooseClubSelectionEvent(clubIdSelected: widget.club.id));
-                bloc.isLoading = true;
+                // bloc.add(
+                //     ChooseClubSelectionEvent(clubIdSelected: widget.club.id));
+                // bloc.isLoading = true;
+
+                GetIt.I.get<CurrentUser>().clubIdSelected = widget.club.id;
+                Navigator.of(context).pushReplacementNamed(Routes.main);
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

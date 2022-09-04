@@ -14,10 +14,10 @@ class ClubService implements IClubService {
   Adapter adapter = Adapter();
 
   @override
-  Future<ClubModel?> getClubSelected(int? ClubId) async {
+  Future<ClubModel?> getClubSelected(int? clubId) async {
     var client = http.Client();
     String url = Api.GetUrl(apiPath: Api.clubs);
-    url += "/$ClubId";
+    url += "/$clubId";
     //get_it lấy IdToken
     String? idToken = GetIt.I.get<CurrentUser>().idToken;
     try {
@@ -89,7 +89,7 @@ class ClubService implements IClubService {
   Future<MemberDetailModel?> getMemberSelected(int? clubId) async {
     var client = http.Client();
     String url = Api.GetUrl(apiPath: Api.members);
-    url += "/info?clubId=" + clubId.toString();
+    url += "/info?clubId=$clubId";
     String? idToken = GetIt.I.get<CurrentUser>().idToken;
     try {
       var response =

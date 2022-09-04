@@ -9,6 +9,7 @@ import '../../bloc/club/club_state.dart';
 //widgets
 import '../../constants/Theme.dart';
 import '../../models/common/current_user.dart';
+import '../../utils/loading.dart';
 import '../../utils/router.dart';
 import '../size_config.dart';
 import 'tab_club_info/body_club_info.dart';
@@ -39,11 +40,17 @@ class _ClubPageState extends State<ClubPage> {
 
     _bloc.listenerStream.listen((event) {
       if (event is NavigatorClubSelectionPageEvent) {
-        Navigator.of(context).pushNamed(Routes.clubSelection);
+        Navigator.of(context)
+            .pushNamed(Routes.clubSelection)
+            .then((value) => setState(() {
+                  _bloc.isLoading = false;
+                }));
       }
+      
       if (event is NavigatorClubsViewPageEvent) {
         Navigator.of(context).pushNamed(Routes.clubsView);
       }
+
       if (event is ShowingSnackBarEvent) {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(event.message)));
@@ -59,94 +66,99 @@ class _ClubPageState extends State<ClubPage> {
       child: BlocBuilder<ClubBloc, ClubState>(
         bloc: _bloc,
         builder: (context, state) {
-          return (GetIt.I.get<CurrentUser>().clubIdSelected != 0)
-              ? Scaffold(
-                  appBar: AppBar(
-                    title: const Text("Câu lạc bộ",
-                        style: TextStyle(color: Colors.white)),
-                    automaticallyImplyLeading: false,
-                    backgroundColor: AppColors.mainColor,
-                    centerTitle: true,
-                  ),
-                  body: BodyClubInfo(
-                      club: state.ClubSelected, member: state.MemberSelected),
-                )
-              : Scaffold(
-                  appBar: AppBar(
-                    title: const Text("Câu lạc bộ",
-                        style: TextStyle(color: Colors.white)),
-                    automaticallyImplyLeading: false,
-                    backgroundColor: AppColors.mainColor,
-                    centerTitle: true,
-                  ),
-                  body: (GetIt.I
-                          .get<CurrentUser>()
-                          .clubsBelongToStudent
-                          .isNotEmpty)
-                      ? Container(
-                          padding: const EdgeInsets.all(10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const Text('Bạn chưa chọn Câu Lạc Bộ',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold)),
-                              // DefaultButton(
-                              //   text: " ",
-                              //   press: () {
-
-                              //   },
-                              // ),
-                              const SizedBox(height: 20),
-                              Row(
+          return (_bloc.isLoading)
+              ? Loading()
+              : (GetIt.I.get<CurrentUser>().clubIdSelected != 0)
+                  ? Scaffold(
+                      appBar: AppBar(
+                        title: const Text("Câu lạc bộ",
+                            style: TextStyle(color: Colors.white)),
+                        automaticallyImplyLeading: false,
+                        backgroundColor: AppColors.mainColor,
+                        centerTitle: true,
+                      ),
+                      body: BodyClubInfo(
+                          club: state.ClubSelected,
+                          member: state.MemberSelected),
+                    )
+                  : Scaffold(
+                      appBar: AppBar(
+                        title: const Text("Câu lạc bộ",
+                            style: TextStyle(color: Colors.white)),
+                        automaticallyImplyLeading: false,
+                        backgroundColor: AppColors.mainColor,
+                        centerTitle: true,
+                      ),
+                      body: (GetIt.I
+                              .get<CurrentUser>()
+                              .clubsBelongToStudent
+                              .isNotEmpty)
+                          ? Container(
+                              padding: const EdgeInsets.all(10),
+                              child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Container(
-                                    width: 200,
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: ArgonColors.warning),
-                                        color: ArgonColors.warning,
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(30))),
-                                    child: FlatButton(
-                                        textColor: ArgonColors.white,
-                                        onPressed: () {
-                                          // _bloc.add(ClubSelectionEvent());
-                                          Navigator.of(context)
-                                              .pushNamed(Routes.clubSelection);
-                                        },
-                                        child: const Text("Chọn Câu Lạc Bộ",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 15.0))),
+                                  const Text('Bạn chưa chọn Câu Lạc Bộ',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold)),
+                                  // DefaultButton(
+                                  //   text: " ",
+                                  //   press: () {
+
+                                  //   },
+                                  // ),
+                                  const SizedBox(height: 20),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        width: 200,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: ArgonColors.warning),
+                                            color: ArgonColors.warning,
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(30))),
+                                        child: FlatButton(
+                                            textColor: ArgonColors.white,
+                                            onPressed: () {
+                                              // _bloc.add(ClubSelectionEvent());
+                                              Navigator.of(context).pushNamed(
+                                                  Routes.clubSelection);
+                                            },
+                                            child: const Text("Chọn Câu Lạc Bộ",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 15.0))),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
-                        )
-                      : Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text('Bạn chưa có Câu Lạc Bộ'),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width / 2,
-                                child: DefaultButton(
-                                  text: "Tham Gia Câu Lạc Bộ ",
-                                  press: () {
-                                    // _bloc.add(ClubsViewEvent());
-                                    Navigator.of(context)
-                                        .pushNamed(Routes.clubsView);
-                                  },
-                                ),
+                            )
+                          : Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text('Bạn chưa có Câu Lạc Bộ'),
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    child: DefaultButton(
+                                      text: "Tham Gia Câu Lạc Bộ ",
+                                      press: () {
+                                        // _bloc.add(ClubsViewEvent());
+                                        Navigator.of(context)
+                                            .pushNamed(Routes.clubsView);
+                                      },
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        ));
+                            ));
         },
       ),
     );
