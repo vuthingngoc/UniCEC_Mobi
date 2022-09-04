@@ -21,7 +21,7 @@ class ClubBloc extends BaseBloc<ClubEvent, ClubState> {
       : super(ClubState(ClubSelected: null, MemberSelected: null)) {
     on((event, emit) async {
       if (event is ClubInitEvent) {
-        print('ClubInitEvent is runing!!!!!!!!!!!!!!!');
+        print('ClubInitEvent is running!!!!!!!!!!!!!!!');
         _isLoading = true;
         CurrentUser user = GetIt.I.get<CurrentUser>();
         //
@@ -58,11 +58,8 @@ class ClubBloc extends BaseBloc<ClubEvent, ClubState> {
           }
           // user is out of club => reset
           user.clubIdSelected = 0;
-          emit(state.copyWith(ClubSelected: null, MemberSelected: null));
-          // print('heyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy ClubBloc - clubIdSelected: ${user.clubsBelongToStudent}');    
+          emit(state.copyWith(ClubSelected: null, MemberSelected: null));          
         }
-
-        print('heyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy ClubBloc - clubIdSelected: ${user.clubsBelongToStudent}');
 
         listener.add(NavigatorClubSelectionPageEvent());
         _isLoading = false;

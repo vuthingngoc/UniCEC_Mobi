@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:loadmore/loadmore.dart';
 import 'package:unicec_mobi/models/enums/member_status.dart';
 
 import '../../../bloc/clubs_view/clubs_view_bloc.dart';
 import '../../../bloc/clubs_view/clubs_view_event.dart';
 import '../../../bloc/clubs_view/clubs_view_state.dart';
+import '../../../models/common/current_user.dart';
 import '../../../utils/dimens.dart';
 import '../../../utils/loading.dart';
+import '../../../utils/router.dart';
 
 class ListViewClubs extends StatefulWidget {
   @override
@@ -56,9 +59,22 @@ class _ListViewClubsState extends State<ListViewClubs> {
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {
-                              bloc.add(ChooseClubEvent(
-                                  clubSelect: state
-                                      .listClubsBelongToUniversity[index]));
+                              // bloc.add(ChooseClubEvent(
+                              //     clubSelect: state
+                              //         .listClubsBelongToUniversity[index]));
+
+                              if (state.listClubsBelongToUniversity[index]
+                                      .isMemberStatus ==
+                                  MemberStatus.Active) {
+                                GetIt.I.get<CurrentUser>().clubIdSelected =
+                                    state.listClubsBelongToUniversity[index].id;
+                                Navigator.of(context)
+                                    .popAndPushNamed(Routes.main);
+                              } else {
+                                bloc.add(ChooseClubEvent(
+                                    clubSelect: state
+                                        .listClubsBelongToUniversity[index]));
+                              }
                             },
                             child: Card(
                               child: Row(
@@ -109,7 +125,8 @@ class _ListViewClubsState extends State<ListViewClubs> {
                                             ? Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     vertical: Dimens.size10),
-                                                child: Text('Đã là thành viên'),
+                                                child: const Text(
+                                                    'Đã là thành viên'),
                                               )
                                             : (state
                                                         .listClubsBelongToUniversity[
@@ -142,7 +159,8 @@ class _ListViewClubsState extends State<ListViewClubs> {
                                                             .symmetric(
                                                                 vertical: Dimens
                                                                     .size10),
-                                                        child: const Text('lỗi'))
+                                                        child:
+                                                            const Text('lỗi'))
                                       ])
                                 ],
                               ),
