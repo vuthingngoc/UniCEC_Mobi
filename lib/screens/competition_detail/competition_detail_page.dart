@@ -767,7 +767,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                               ?.numberOfTeam !=
                                                           0)
                                                         Container(
-                                                            width: 155.0,
+                                                            width: 166.0,
                                                             height: 37,
                                                             child: RaisedButton(
                                                                 textColor:
@@ -825,10 +825,10 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                                 .supervised_user_circle_sharp,
                                                                             size:
                                                                                 15),
-                                                                        SizedBox(
-                                                                          width:
-                                                                              5,
-                                                                        ),
+                                                                        // SizedBox(
+                                                                        //   width:
+                                                                        //       5,
+                                                                        // ),
                                                                         Text(
                                                                             "Các đội tham gia",
                                                                             style:
