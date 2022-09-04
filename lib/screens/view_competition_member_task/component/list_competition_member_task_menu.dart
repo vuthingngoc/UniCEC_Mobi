@@ -104,24 +104,24 @@ class _ViewCompetitionMemberTaskMenuState
                                         color: Colors.grey,
                                       ),
                                     ),
-                                    enabledBorder: OutlineInputBorder(
+                                    enabledBorder: const OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Colors.grey, width: 1.0),
                                     ),
                                   )),
                             ),
                             Container(
-                              padding: EdgeInsets.only(left: 10),
+                              padding: const EdgeInsets.only(left: 10),
                               child: GestureDetector(
                                 onTap: () {
                                   bloc.add(LoadingEvent());
                                   bloc.add(SearchEvent());
                                 },
-                                child: Icon(Icons.search),
+                                child: const Icon(Icons.search),
                               ),
                             ),
                             PopupMenuButton<int>(
-                                icon: Icon(Icons.filter_alt_outlined),
+                                icon: const Icon(Icons.filter_alt_outlined),
                                 itemBuilder: (context) {
                                   return [
                                     PopupMenuItem(
@@ -135,11 +135,10 @@ class _ViewCompetitionMemberTaskMenuState
                                       child: (state.isEvent == false)
                                           ? Container(
                                               child: Row(
-                                                children: <Widget>[
+                                                children: const <Widget>[
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 8.0),
+                                                    padding: EdgeInsets.only(
+                                                        left: 8.0),
                                                     child: Text(
                                                       'Cuộc Thi',
                                                       style: TextStyle(
@@ -151,11 +150,10 @@ class _ViewCompetitionMemberTaskMenuState
                                               ),
                                             )
                                           : Row(
-                                              children: <Widget>[
+                                              children: const <Widget>[
                                                 Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 8.0),
+                                                  padding: EdgeInsets.only(
+                                                      left: 8.0),
                                                   child: Text('Cuộc Thi'),
                                                 ),
                                               ],
@@ -171,11 +169,10 @@ class _ViewCompetitionMemberTaskMenuState
                                       child: (state.isEvent)
                                           ? Container(
                                               child: Row(
-                                                children: <Widget>[
+                                                children: const <Widget>[
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 8.0),
+                                                    padding: EdgeInsets.only(
+                                                        left: 8.0),
                                                     child: Text(
                                                       'Sự Kiện',
                                                       style: TextStyle(
@@ -187,11 +184,10 @@ class _ViewCompetitionMemberTaskMenuState
                                               ),
                                             )
                                           : Row(
-                                              children: <Widget>[
+                                              children: const <Widget>[
                                                 Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 8.0),
+                                                  padding: EdgeInsets.only(
+                                                      left: 8.0),
                                                   child: Text('Sự Kiện'),
                                                 ),
                                               ],
@@ -225,7 +221,7 @@ class _ViewCompetitionMemberTaskMenuState
                                       itemCount: state.listCompetition.length,
                                       itemBuilder: (context, index) {
                                         return Padding(
-                                          padding: EdgeInsets.only(
+                                          padding: const EdgeInsets.only(
                                               right: 20,
                                               left: 20,
                                               top: 20,
@@ -233,13 +229,14 @@ class _ViewCompetitionMemberTaskMenuState
                                           child: TextButton(
                                             style: TextButton.styleFrom(
                                               primary: Colors.black87,
-                                              padding: EdgeInsets.all(20),
+                                              padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
                                               shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           15)),
-                                              backgroundColor: Color.fromARGB(
-                                                  255, 235, 237, 241),
+                                              backgroundColor:
+                                                  const Color.fromARGB(
+                                                      255, 235, 237, 241),
                                             ),
                                             onPressed: () async {
                                               //chuyển sang trang detail
@@ -258,78 +255,75 @@ class _ViewCompetitionMemberTaskMenuState
                                               }
                                             },
                                             child: Column(
+                                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Row(
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                right: 8.0,
-                                                                top: 10),
-                                                        child: SvgPicture.asset(
-                                                          "assets/icons/trophy.svg",
-                                                          color: ArgonColors
-                                                              .warning,
-                                                          width: 22,
-                                                        ),
-                                                        // Text(
-                                                        //     state
-                                                        //         .listCompetition[
-                                                        //             index]
-                                                        //         .id
-                                                        //         .toString(),
-                                                        //     style: TextStyle(
-                                                        //         fontSize: 20,
-                                                        //         color: Colors
-                                                        //             .red)),
-                                                      ),
-                                                      Expanded(
-                                                        child: Text(
-                                                            state
-                                                                .listCompetition[
-                                                                    index]
-                                                                .name,
-                                                            style: TextStyle(
-                                                                fontSize: 18)),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
                                                 Row(
                                                   children: [
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsets.only(
-                                                              left: 16.0,
-                                                              right: 8),
-                                                      child: Text("|",
-                                                          style: TextStyle(
-                                                              fontSize: 18,
-                                                              color: Colors
-                                                                  .blueGrey)),
+                                                          const EdgeInsets
+                                                                  .only(
+                                                              right:
+                                                                  12.0), // 8.0
+                                                      // top: 0), // 10.0
+                                                      child: SvgPicture.asset(
+                                                        "assets/icons/trophy.svg",
+                                                        color: ArgonColors
+                                                            .warning,
+                                                        width: 22,
+                                                      ),
+                                                      // Text(
+                                                      //     state
+                                                      //         .listCompetition[
+                                                      //             index]
+                                                      //         .id
+                                                      //         .toString(),
+                                                      //     style: TextStyle(
+                                                      //         fontSize: 20,
+                                                      //         color: Colors
+                                                      //             .red)),
                                                     ),
+                                                    Expanded(
+                                                      child: Text(
+                                                          state
+                                                              .listCompetition[
+                                                                  index]
+                                                              .name,
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontSize:
+                                                                      18)),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(height: 10),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.end,
+                                                  children: [
+                                                    // const Padding(
+                                                    //   padding: EdgeInsets.only(
+                                                    //       left: 16.0, right: 8),
+                                                    //   child: Text("|",
+                                                    //       style: TextStyle(
+                                                    //           fontSize: 18,
+                                                    //           color: Colors
+                                                    //               .blueGrey)),
+                                                    // ),
                                                     Text(
                                                         Utils.convertDateTime(
                                                             state
                                                                 .listCompetition[
                                                                     index]
                                                                 .createTime),
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             fontSize: 18,
                                                             fontWeight:
                                                                 FontWeight
                                                                     .normal,
                                                             color:
                                                                 Colors.grey)),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 16.0,
-                                                              right: 8),
+                                                    const Padding(
+                                                      padding: EdgeInsets.symmetric(horizontal: 8.0),
                                                       child: Text("|",
                                                           style: TextStyle(
                                                               fontSize: 18,
@@ -341,7 +335,7 @@ class _ViewCompetitionMemberTaskMenuState
                                                                 index]
                                                             .status ==
                                                         CompetitionStatus.Draft)
-                                                      Text(
+                                                      const Text(
                                                         "Bản thảo",
                                                         style: TextStyle(
                                                             fontSize: 18,
@@ -353,7 +347,7 @@ class _ViewCompetitionMemberTaskMenuState
                                                             .status ==
                                                         CompetitionStatus
                                                             .PendingReview)
-                                                      Text(
+                                                      const Text(
                                                         "Chờ được duyệt",
                                                         style: TextStyle(
                                                             fontSize: 18,
@@ -364,7 +358,7 @@ class _ViewCompetitionMemberTaskMenuState
                                                                 index]
                                                             .status ==
                                                         CompetitionStatus.End)
-                                                      Text(
+                                                      const Text(
                                                         "Kết thúc",
                                                         style: TextStyle(
                                                             fontSize: 18,
@@ -376,7 +370,7 @@ class _ViewCompetitionMemberTaskMenuState
                                                             .status ==
                                                         CompetitionStatus
                                                             .Approve)
-                                                      Text(
+                                                      const Text(
                                                         "Đã Xét Duyệt",
                                                         style: TextStyle(
                                                             fontSize: 18,
@@ -388,7 +382,7 @@ class _ViewCompetitionMemberTaskMenuState
                                                             .status ==
                                                         CompetitionStatus
                                                             .Register)
-                                                      Text(
+                                                      const Text(
                                                         "Mở đăng ký",
                                                         style: TextStyle(
                                                             fontSize: 18,
@@ -401,7 +395,7 @@ class _ViewCompetitionMemberTaskMenuState
                                                             .status ==
                                                         CompetitionStatus
                                                             .Upcoming)
-                                                      Text(
+                                                      const Text(
                                                         "Sắp diễn ra",
                                                         style: TextStyle(
                                                             fontSize: 18,
@@ -413,7 +407,7 @@ class _ViewCompetitionMemberTaskMenuState
                                                                 index]
                                                             .status ==
                                                         CompetitionStatus.Start)
-                                                      Text(
+                                                      const Text(
                                                         "Khai mạc",
                                                         style: TextStyle(
                                                             fontSize: 18,
@@ -426,7 +420,7 @@ class _ViewCompetitionMemberTaskMenuState
                                                             .status ==
                                                         CompetitionStatus
                                                             .OnGoing)
-                                                      Text(
+                                                      const Text(
                                                         "Đang diễn ra",
                                                         style: TextStyle(
                                                             fontSize: 18,
@@ -439,7 +433,7 @@ class _ViewCompetitionMemberTaskMenuState
                                                             .status ==
                                                         CompetitionStatus
                                                             .Publish)
-                                                      Text(
+                                                      const Text(
                                                         "Công bố",
                                                         style: TextStyle(
                                                             fontSize: 18,
@@ -452,7 +446,7 @@ class _ViewCompetitionMemberTaskMenuState
                                                             .status ==
                                                         CompetitionStatus
                                                             .Pending)
-                                                      Text(
+                                                      const Text(
                                                         "Chờ",
                                                         style: TextStyle(
                                                             fontSize: 18,
@@ -465,7 +459,7 @@ class _ViewCompetitionMemberTaskMenuState
                                                             .status ==
                                                         CompetitionStatus
                                                             .Finish)
-                                                      Text(
+                                                      const Text(
                                                         "Hoàn thành",
                                                         style: TextStyle(
                                                             fontSize: 18,
@@ -478,7 +472,7 @@ class _ViewCompetitionMemberTaskMenuState
                                                             .status ==
                                                         CompetitionStatus
                                                             .Complete)
-                                                      Text(
+                                                      const Text(
                                                         "Đóng cuộc thi",
                                                         style: TextStyle(
                                                             fontSize: 18,
@@ -490,7 +484,7 @@ class _ViewCompetitionMemberTaskMenuState
                                                             .status ==
                                                         CompetitionStatus
                                                             .Cancel)
-                                                      Text(
+                                                      const Text(
                                                         "Hủy",
                                                         style: TextStyle(
                                                             fontSize: 18,
@@ -506,12 +500,14 @@ class _ViewCompetitionMemberTaskMenuState
                                     ),
                                   ),
                                 )
-                              : Padding(
-                                  padding: const EdgeInsets.only(top: 180.0),
+                              : Expanded(
+                                  // Padding
+                                  // padding: EdgeInsets.only(top: (MediaQuery.of(context).size.height - 500) / 2),
                                   child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Container(
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                               image: DecorationImage(
                                                   alignment:
                                                       Alignment.topCenter,
@@ -520,9 +516,8 @@ class _ViewCompetitionMemberTaskMenuState
                                                   fit: BoxFit.fitWidth))),
                                       Image.asset(
                                           "assets/img/not-found-icon-24.jpg"),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 25.0),
+                                      const Padding(
+                                        padding: EdgeInsets.only(top: 25.0),
                                         child: Text(
                                           'Hiện tại bạn không có hoạt động nào!',
                                           style: TextStyle(fontSize: 20),
