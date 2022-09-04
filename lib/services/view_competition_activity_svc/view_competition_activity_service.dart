@@ -17,7 +17,7 @@ class CompetitionActivityService implements ICompetitionActivityService {
   Adapter adapter = Adapter();
 
   @override
-  Future<PagingResult<CompetitionActivityModel>?> getListCompetititonActivity(
+  Future<PagingResult<CompetitionActivityModel>?> getListCompetitionActivity(
       CompetitionActivityRequestModel request) async {
     var client = http.Client();
     String params = '?';
@@ -75,7 +75,7 @@ class CompetitionActivityService implements ICompetitionActivityService {
   }
 
   @override
-  Future<CompetitionActivityDetailModel?> getCompetititonActivityDetail(
+  Future<CompetitionActivityDetailModel?> getCompetitionActivityDetail(
       int competitionActivityId) async {
     var client = http.Client();
 

@@ -6,10 +6,10 @@ import '../../models/entities/competition_activity/competition_activity_request_
 import '../../models/enums/competition_activity_status.dart';
 
 abstract class ICompetitionActivityService {
-  Future<PagingResult<CompetitionActivityModel>?> getListCompetititonActivity(
+  Future<PagingResult<CompetitionActivityModel>?> getListCompetitionActivity(
       CompetitionActivityRequestModel request);
 
-  Future<CompetitionActivityDetailModel?> getCompetititonActivityDetail(
+  Future<CompetitionActivityDetailModel?> getCompetitionActivityDetail(
       int competitionActivityId);
 
   Future<bool> updateStatusCompetitionActivity(

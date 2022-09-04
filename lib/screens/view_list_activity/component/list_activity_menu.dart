@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:loadmore/loadmore.dart';
 import '../../../bloc/view_competition_activity/view_competition_activity_bloc.dart';
 import '../../../bloc/view_competition_activity/view_competition_activity_event.dart';
 import '../../../bloc/view_competition_activity/view_competition_activity_state.dart';
 import '../../../constants/Theme.dart';
-import '../../../models/enums/competition_status.dart';
 import '../../../utils/loading.dart';
 import '../../../utils/router.dart';
 import '/models/enums/priority_status.dart';
-import '../../../models/entities/competition_activity/competition_activity_model.dart';
 import '../../../models/enums/competition_activity_status.dart';
 
 class ViewListActivityMenu extends StatefulWidget {
@@ -63,7 +60,8 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                         child: TextFormField(
                             controller: _controller,
                             onFieldSubmitted: (value) {
-                              bloc.add(ChangeSearchNameEvent(searchName: value));
+                              bloc.add(
+                                  ChangeSearchNameEvent(searchName: value));
                             },
                             autofocus: false,
                             decoration: InputDecoration(
@@ -72,8 +70,8 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                                     _controller.clear;
                                     _controller.text = "";
                                     //sửa lại cái
-                                    bloc.add(
-                                        ChangeSearchNameEvent(searchName: null));
+                                    bloc.add(ChangeSearchNameEvent(
+                                        searchName: null));
                                   },
                                   icon: const Icon(Icons.clear)),
                               labelText: 'Tìm theo tên',
@@ -111,15 +109,16 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                 child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10),
+                      const Padding(
+                        padding: EdgeInsets.all(10),
                         child: Text(
                           "Trạng thái công việc:",
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
                         ),
                       ),
                       Container(
-                        width: size.width * 0.3,
+                        // width: size.width * 0.3,
                         height: 30,
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.black45),
@@ -138,7 +137,7 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                                   iconSize: 24,
                                   elevation: 16,
                                   style: const TextStyle(
-color: ArgonColors.black,
+                                      color: ArgonColors.black,
                                       fontWeight: FontWeight.normal),
                                   onChanged:
                                       (CompetitionActivityStatus? newValue) {
@@ -156,7 +155,8 @@ color: ArgonColors.black,
                                             CompetitionActivityStatus>(
                                         value: value,
                                         child: Padding(
-                                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10.0),
                                           child: Text((value ==
                                                   CompetitionActivityStatus.All)
                                               ? 'Tất cả'
@@ -196,15 +196,16 @@ color: ArgonColors.black,
                 child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10),
+                      const Padding(
+                        padding: EdgeInsets.all(10),
                         child: Text(
                           "Mức độ công việc:",
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
                         ),
                       ),
                       Container(
-                        width: size.width * 0.3,
+                        // width: size.width * 0.3,
                         height: 30,
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.black45),
@@ -237,7 +238,8 @@ color: ArgonColors.black,
                                     return DropdownMenuItem<PriorityStatus>(
                                         value: value,
                                         child: Padding(
-                                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10.0),
                                           child: Text((value ==
                                                   PriorityStatus.All)
                                               ? 'Tất cả'
@@ -247,7 +249,8 @@ color: ArgonColors.black,
                                                           PriorityStatus.Medium)
                                                       ? 'Trung bình'
                                                       : (value ==
-                                                              PriorityStatus.High)
+                                                              PriorityStatus
+                                                                  .High)
                                                           ? 'Cao'
                                                           : 'trạng thái khác'),
                                         ));
@@ -262,7 +265,7 @@ color: ArgonColors.black,
               //
               (state.isLoading &&
                       (state.listCompetitionActivity.isEmpty ||
-                          state.listCompetitionActivity.isNotEmpty))
+                          state.listCompetitionActivity.isNotEmpty))           
                   ? Loading()
                   : (state.listCompetitionActivity.isNotEmpty)
                       ? RefreshIndicator(
@@ -282,12 +285,12 @@ color: ArgonColors.black,
                                 itemCount: state.listCompetitionActivity.length,
                                 itemBuilder: (context, index) {
                                   return Padding(
-                                    padding: EdgeInsets.symmetric(
+                                    padding: const EdgeInsets.symmetric(
                                         horizontal: 20, vertical: 10),
                                     child: TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.black87,
-                                        padding: EdgeInsets.all(20),
+                                        padding: const EdgeInsets.all(20),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15)),

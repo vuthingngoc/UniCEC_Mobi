@@ -59,6 +59,11 @@ class _ViewDetailActivityPageState extends State<ViewDetailActivityPage>
           ).show();
         }
       }
+
+      if(event is NavigateToListActivitiesEvent){
+        Navigator.of(context).pop(true);
+        Navigator.of(context).pop(true);
+      }
     });
   }
 
@@ -69,7 +74,7 @@ class _ViewDetailActivityPageState extends State<ViewDetailActivityPage>
       int competitionActivityId = settings.arguments as int;
       if (competitionActivityId != 0) {
         bloc.add(
-            RecieveDataEvent(competitionActivityId: competitionActivityId));
+            ReceiveDataEvent(competitionActivityId: competitionActivityId));
       }
     }
   }

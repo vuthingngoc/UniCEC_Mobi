@@ -252,7 +252,7 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                                                         state.competitionActivityDetail
                                                                 ?.name ??
                                                             "",
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             color:
                                                                 Color.fromRGBO(
                                                                     50,
@@ -275,23 +275,31 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
                                                     children: [
                                                       Text(
                                                           "Bởi ${state.competitionActivityDetail?.creatorName ?? ""}",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.grey,
-                                                              fontSize: 18)),
+                                                          style:
+                                                              const TextStyle(
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  fontSize:
+                                                                      18)),
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
                                                                     .only(
                                                                 left: 10.0),
                                                         child: Text(
-                                                            Utils.convertDateTime(state
-                                                                .competitionActivityDetail!
-                                                                .createTime),
-                                                            style: TextStyle(
-                                                                color:
-                                                                    Colors.grey,
-                                                                fontSize: 18)),
+                                                            (state.competitionActivityDetail
+                                                                        ?.createTime !=
+                                                                    null)
+                                                                ? Utils.convertDateTime(state
+                                                                    .competitionActivityDetail!
+                                                                    .createTime)
+                                                                : "",
+                                                            style:
+                                                                const TextStyle(
+                                                                    color: Colors
+                                                                        .grey,
+                                                                    fontSize:
+                                                                        18)),
                                                       ),
                                                     ],
                                                   ),

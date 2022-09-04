@@ -53,7 +53,7 @@ class ViewCompetitionActivityBloc extends BaseBloc<ViewCompetitionActivityEvent,
         }
 
         PagingResult<CompetitionActivityModel>? result =
-            await service.getListCompetititonActivity(request);
+            await service.getListCompetitionActivity(request);
 
         if (result != null) {
           emit(state.copyWith(
@@ -126,7 +126,7 @@ class ViewCompetitionActivityBloc extends BaseBloc<ViewCompetitionActivityEvent,
         }
 
         PagingResult<CompetitionActivityModel>? result =
-            await service.getListCompetititonActivity(request);
+            await service.getListCompetitionActivity(request);
 
         emit(state.copyWith(
             newListCompetitionActivity:
@@ -199,7 +199,7 @@ class ViewCompetitionActivityBloc extends BaseBloc<ViewCompetitionActivityEvent,
 
         //load
         PagingResult<CompetitionActivityModel>? result =
-            await service.getListCompetititonActivity(request);
+            await service.getListCompetitionActivity(request);
         //
         List<CompetitionActivityModel> listContinute = result?.items ?? [];
         //
@@ -261,7 +261,7 @@ class ViewCompetitionActivityBloc extends BaseBloc<ViewCompetitionActivityEvent,
         }
 
         PagingResult<CompetitionActivityModel>? result =
-            await service.getListCompetititonActivity(request);
+            await service.getListCompetitionActivity(request);
 
         emit(state.copyWith(
             newListCompetitionActivity: result?.items ?? [],
@@ -301,7 +301,7 @@ class ViewCompetitionActivityBloc extends BaseBloc<ViewCompetitionActivityEvent,
         }
 
         PagingResult<CompetitionActivityModel>? result =
-            await service.getListCompetititonActivity(request);
+            await service.getListCompetitionActivity(request);
 
         emit(state.copyWith(
             newListCompetitionActivity: result?.items ?? [],
@@ -343,7 +343,7 @@ class ViewCompetitionActivityBloc extends BaseBloc<ViewCompetitionActivityEvent,
 
         //load
         PagingResult<CompetitionActivityModel>? result =
-            await service.getListCompetititonActivity(request);
+            await service.getListCompetitionActivity(request);
 
         emit(state.copyWith(
             newListCompetitionActivity: result?.items ?? [],
