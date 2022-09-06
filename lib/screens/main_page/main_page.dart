@@ -87,7 +87,7 @@ class _MainPageState extends State<MainPage> {
 
     /// gives  you the message on which user taps
     /// and it opened  the app from terminated state
-    FirebaseMessaging.instance.getInitialMessage().then((message) {
+    FirebaseMessaging.instance.getInitialMessage().then((message) { // handle when click notification
       if (message != null) {
         final routeFromMessage = message.data['route'];
 
@@ -99,39 +99,11 @@ class _MainPageState extends State<MainPage> {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print("FirebaseMessaging.onMessage.title ${message.notification?.title}");
       print('FirebaseMessaging.onMessage.body ${message.notification?.body}');
-      FirebaseUtils.display(message);
-      RemoteNotification notification = message.notification!;
-      AndroidNotification android = (message.notification?.android)!;
-      // If `onMessage` is triggered with a notification, construct our own
-      // local notification to show to users using the created channel.
-      if (notification != null && android != null) {
-        flutterLocalNotificationsPlugin.show(
-            notification.hashCode,
-            notification.title,
-            notification.body,
-            NotificationDetails(
-              android: AndroidNotificationDetails(channel.id, channel.name,
-                  importance: Importance.high,
-                  channelDescription: channel.description,
-                  icon: '@mipmap/ic_launcher',
-                  color: AppColors.mainColor),
-            ));
-      }
-    });
-
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print(
-          "FirebaseMessaging.onMessageOpenedApp ${message.notification?.title}");
-      final routeFromMessage = message.data['route'];
-      print(routeFromMessage);
-      Navigator.of(context).pushNamed(routeFromMessage);
-
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
       // If `onMessage` is triggered with a notification, construct our own
       // local notification to show to users using the created channel.
       if (notification != null && android != null) {
-        // Navigator.pushNamed(context, Routes.test);
         flutterLocalNotificationsPlugin.show(
             notification.hashCode,
             notification.title,
@@ -145,6 +117,39 @@ class _MainPageState extends State<MainPage> {
             ));
       }
     });
+
+    // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    //   print(
+    //       "FirebaseMessaging.onMessageOpenedApp ${message.notification?.title}");
+    //   print(
+    //       "FirebaseMessaging.onMessageOpenedApp ${message.notification?.title}");
+              
+    //   final routeFromMessage = message.data['click_action'];
+    //   print(routeFromMessage);
+    //   Navigator.of(context).pushNamed(routeFromMessage);
+
+    //   RemoteNotification? notification = message.notification;
+    //   AndroidNotification? android = message.notification?.android;
+    //   // If `onMessage` is triggered with a notification, construct our own
+    //   // local notification to show to users using the created channel.
+    //   if (notification != null && android != null) {
+    //     // Navigator.pushNamed(context, Routes.test);
+    //     flutterLocalNotificationsPlugin.show(
+    //         notification.hashCode,
+    //         notification.title,
+    //         notification.body,
+    //         NotificationDetails(
+    //           android: AndroidNotificationDetails(channel.id, channel.name,
+    //               importance: Importance.high,
+    //               channelDescription: channel.description,
+    //               icon: '@mipmap/ic_launcher',
+    //               color: AppColors.mainColor),
+    //         ));
+    //   }
+
+    //   // new part
+
+    // });
 
     // FirebaseMessaging.onBackgroundMessage((message) {
     //   Log.info("onBackgroundMessage ${message.data}");
