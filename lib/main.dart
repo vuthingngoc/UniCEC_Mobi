@@ -14,7 +14,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   Log.info("Handling a background message: ${message.messageId}");
   print('SenderId: ${message.senderId}');  
-  print('Data:${message.data.toString()}');
+  // print('Data:${message.data.toString()}');
   print('message.notification.title: ${message.notification?.title}');
   print('message.notification.title: ${message.notification?.body}');
 }
@@ -47,6 +47,11 @@ void main() async {
           AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
   await FirebaseMessaging.instance.subscribeToTopic(('UniCEC'));
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true
+  );
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   HttpOverrides.global = MyHttpOverrides();
   runApp(MyApp());
