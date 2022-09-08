@@ -326,7 +326,8 @@ class _ViewDetailTeamParticipantPageState
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             if (GetIt.I.get<CurrentUser>().id ==
-                                state.userIdIsLeaderTeam)
+                                    state.userIdIsLeaderTeam &&
+                                (max != 1))
                               Row(
                                 children: [
                                   Container(

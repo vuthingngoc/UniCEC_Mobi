@@ -225,7 +225,8 @@ class _BodyState extends State<Body> {
               ),
               ViewListTeamMenu(),
               SizedBox(height: 20),
-              if (state.listTeam.isNotEmpty)
+              //Khác đấu đơn thì xuất hiện mã tham gia
+              if (state.listTeam.isNotEmpty && (state.maxNumber != 1))
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
