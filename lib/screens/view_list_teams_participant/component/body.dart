@@ -235,7 +235,7 @@ class _BodyState extends State<Body> {
                       decoration: BoxDecoration(
                           border: Border.all(color: ArgonColors.warning),
                           color: ArgonColors.warning,
-                          borderRadius: BorderRadius.all(Radius.circular(30))),
+                          borderRadius: BorderRadius.all(Radius.circular(4))),
                       child: FlatButton(
                           textColor: ArgonColors.white,
                           onPressed: () {
@@ -245,7 +245,7 @@ class _BodyState extends State<Body> {
                                   return AlertDialog(
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
+                                            Radius.circular(4))),
                                     scrollable: true,
                                     title: Container(
                                         child: Text(
@@ -334,109 +334,114 @@ class _BodyState extends State<Body> {
                 ),
               SizedBox(height: 20),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                AnimatedButton(
-                    width: 200,
-                    text: 'Lưu ý của Cuộc Thi',
+                Container(                      decoration: BoxDecoration(
+                    border: Border.all(color: ArgonColors.warning),
                     color: ArgonColors.warning,
-                    pressEvent: () {
-                      AwesomeDialog(
-                          context: context,
-                          dialogType: DialogType.WARNING,
-                          headerAnimationLoop: true,
-                          animType: AnimType.SCALE,
-                          body: Column(children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Lưu ý',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: ArgonColors.error),
-                                )
-                              ],
-                            ),
-                            Container(
-                              margin: const EdgeInsets.only(
-                                  right: 20, left: 20, top: 10, bottom: 10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                    borderRadius: BorderRadius.all(Radius.circular(4))),
+                  child: AnimatedButton(
+                      width: 200,
+                      text: 'Lưu ý của Cuộc Thi',
+                      color: ArgonColors.warning,
+                      pressEvent: () {
+                        AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.WARNING,
+                            headerAnimationLoop: true,
+                            animType: AnimType.SCALE,
+                            body: Column(children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text('Quy định về Đội Thi của Cuộc Thi',
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold,
-                                          )),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
                                   Text(
-                                      '1.Tạo, Tham Gia đội khi Cuộc Thi chưa diễn ra.'),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                      '2.Tham Gia đội khi trạng thái của Đội là Mở.'),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                      '3.Chuyển trạng thái Đóng Đội được khi số lượng thành viên trong Đội đúng theo quy định của Cuộc thi đưa ra.'),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                      '4.Đội ở trạng thái Đóng thì Ban Tổ Chức mới duyệt trở thành Đội tham gia chính thức còn lại hủy bỏ.'),
+                                    'Lưu ý',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: ArgonColors.error),
+                                  )
                                 ],
                               ),
-                            ),
-                            SizedBox(height: 10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('Quy định về Số Lượng thành viên Đội',
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    )),
-                              ],
-                            ),
-                            (state.maxNumber == state.minNumber)
-                                ? Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: 20.0,
-                                        left: 20,
-                                        top: 10,
-                                        bottom: 10),
-                                    child: Text(
-                                        'Số lượng thành viên trong Đội hợp lệ phải đúng ${state.maxNumber} thành viên'),
-                                  )
-                                : Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: 20.0,
-                                        left: 20,
-                                        top: 10,
-                                        bottom: 10),
-                                    child: Text(
-                                        'Số lượng thành viên trong Đội hợp lệ tối thiểu từ ${state.minNumber} trở lên và không vượt quá ${state.maxNumber} thành viên'),
-                                  ),
-                          ])).show();
-                      // title: '',
-                      // desc: ''
-                      //         '\n '
-                      //         '\n 2.Tham Gia đội khi trạng thái của Đội là Mở.'
-                      //         '\n 3.Chuyển trạng thái Đóng Đội được khi số lượng thành viên trong Đội đúng theo quy định của Cuộc thi đưa ra.'
-                      //         '\n 4.Đội ở trạng thái Đóng thì Ban Tổ Chức mới duyệt trở thành Đội tham gia chính thức còn lại hủy bỏ.'
-                      //         '\n'
-                      //         '\n Quy định về Số Lượng thành viên Đội\n' +
-                      //     '${(state.maxNumber == state.minNumber) ? 'Số lượng thành viên trong Đội hợp lệ phải đúng ${state.maxNumber} thành viên' : 'Số lượng thành viên trong Đội hợp lệ tối thiểu từ ${state.minNumber} trở lên và không vượt quá ${state.maxNumber} thành viên'}')
-                    }),
+                              Container(
+                                margin: const EdgeInsets.only(
+                                    right: 20, left: 20, top: 10, bottom: 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text('Quy định về Đội Thi của Cuộc Thi',
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold,
+                                            )),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                        '1.Tạo, Tham Gia đội khi Cuộc Thi chưa diễn ra.'),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                        '2.Tham Gia đội khi trạng thái của Đội là Mở.'),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                        '3.Chuyển trạng thái Đóng Đội được khi số lượng thành viên trong Đội đúng theo quy định của Cuộc thi đưa ra.'),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                        '4.Đội ở trạng thái Đóng thì Ban Tổ Chức mới duyệt trở thành Đội tham gia chính thức còn lại hủy bỏ.'),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('Quy định về Số Lượng thành viên Đội',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                ],
+                              ),
+                              (state.maxNumber == state.minNumber)
+                                  ? Padding(
+                                      padding: const EdgeInsets.only(
+                                          right: 20.0,
+                                          left: 20,
+                                          top: 10,
+                                          bottom: 10),
+                                      child: Text(
+                                          'Số lượng thành viên trong Đội hợp lệ phải đúng ${state.maxNumber} thành viên'),
+                                    )
+                                  : Padding(
+                                      padding: const EdgeInsets.only(
+                                          right: 20.0,
+                                          left: 20,
+                                          top: 10,
+                                          bottom: 10),
+                                      child: Text(
+                                          'Số lượng thành viên trong Đội hợp lệ tối thiểu từ ${state.minNumber} trở lên và không vượt quá ${state.maxNumber} thành viên'),
+                                    ),
+                            ])).show();
+                        // title: '',
+                        // desc: ''
+                        //         '\n '
+                        //         '\n 2.Tham Gia đội khi trạng thái của Đội là Mở.'
+                        //         '\n 3.Chuyển trạng thái Đóng Đội được khi số lượng thành viên trong Đội đúng theo quy định của Cuộc thi đưa ra.'
+                        //         '\n 4.Đội ở trạng thái Đóng thì Ban Tổ Chức mới duyệt trở thành Đội tham gia chính thức còn lại hủy bỏ.'
+                        //         '\n'
+                        //         '\n Quy định về Số Lượng thành viên Đội\n' +
+                        //     '${(state.maxNumber == state.minNumber) ? 'Số lượng thành viên trong Đội hợp lệ phải đúng ${state.maxNumber} thành viên' : 'Số lượng thành viên trong Đội hợp lệ tối thiểu từ ${state.minNumber} trở lên và không vượt quá ${state.maxNumber} thành viên'}')
+                      }),
+                ),
               ]),
             ]),
           );
