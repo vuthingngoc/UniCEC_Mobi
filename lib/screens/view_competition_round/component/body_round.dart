@@ -25,21 +25,33 @@ class _BodyState extends State<Body> {
     return BlocBuilder<CompetitionRoundBloc, CompetitionRoundState>(
         bloc: _bloc,
         builder: (context, state) {
-          return
-              _bloc.isLoading
-                  ? Loading()
-                 :
-              SingleChildScrollView(
+          return _bloc.isLoading
+              ? Loading()
+              : SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: (state.competitionRounds != null)
+                  child: (state.competitionRounds!.isNotEmpty)
                       ? ViewListRoundMenu(
                           competitionRounds: state.competitionRounds!)
-                      : const Center(
-                          child: Text(
-                            'Cuộc thi không có vòng thi nào',
-                            style: TextStyle(
-                                fontSize: 20.0, fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center,
+                      : Padding(
+                          padding: const EdgeInsets.only(top: 180.0),
+                          child: Column(
+                            children: [
+                              Container(
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          alignment: Alignment.topCenter,
+                                          image: AssetImage(
+                                              "assets/img/not-found-icon-24.jpg"),
+                                          fit: BoxFit.fitWidth))),
+                              Image.asset("assets/img/not-found-icon-24.jpg"),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 25.0),
+                                child: Text(
+                                  'Hiện tại cuộc thi chưa có Vòng Thi nào!',
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                              ),
+                            ],
                           ),
                         ));
         });

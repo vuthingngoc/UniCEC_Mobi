@@ -37,8 +37,15 @@ class CompetitionRoundService implements ICompetitionRoundService {
       var response =
           await client.get(Uri.parse(url), headers: Api.GetHeader(token));
       if (response.statusCode == 200 && response.body.isNotEmpty) {
-        Map<String, dynamic> json = adapter.parseToMap(response);
-        return PagingResult.fromJson(json, CompetitionRoundModel.fromJson);
+        String isList = "[]";
+        if (response.body.toString().compareTo(isList) == 0) {
+          List<dynamic> json = adapter.parseToList(response);
+          //TH1
+          return null;
+        } else {
+          Map<String, dynamic> json = adapter.parseToMap(response);
+          return PagingResult.fromJson(json, CompetitionRoundModel.fromJson);
+        }
       }
     } catch (error) {
       Log.error(error.toString());
@@ -48,7 +55,8 @@ class CompetitionRoundService implements ICompetitionRoundService {
   }
 
   @override
-  Future<PagingResult<TeamInRoundModel>?> loadRoundResultById(int roundId) async {
+  Future<PagingResult<TeamInRoundModel>?> loadRoundResultById(
+      int roundId) async {
     var client = http.Client();
     String params = '?roundId=$roundId';
     String url = Api.GetUrl(apiPath: '${Api.teamsInRound}/search$params');
@@ -66,11 +74,13 @@ class CompetitionRoundService implements ICompetitionRoundService {
 
     return null;
   }
-  
+
   @override
-  Future<List<TeamModel>?> loadTeamResultByCompetition(int competitionId) async {
+  Future<List<TeamModel>?> loadTeamResultByCompetition(
+      int competitionId) async {
     var client = http.Client();
-    String params = '?competitionId=$competitionId&top=3'; // default is top 3 teams
+    String params =
+        '?competitionId=$competitionId&top=3'; // default is top 3 teams
     String url = Api.GetUrl(apiPath: '${Api.teamsInRound}/total-result$params');
     String token = GetIt.I.get<CurrentUser>().idToken;
     try {
@@ -79,7 +89,7 @@ class CompetitionRoundService implements ICompetitionRoundService {
       if (response.statusCode == 200 && response.body.isNotEmpty) {
         List<dynamic> json = adapter.parseToList(response);
         List<TeamModel> teams = [];
-        for(var element in json){
+        for (var element in json) {
           TeamModel team = TeamModel.fromJson(element);
           teams.add(team);
         }
