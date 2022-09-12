@@ -4,6 +4,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/bloc/competition/competition_bloc.dart';
 import 'package:unicec_mobi/bloc/view_competition_member_task/view_competition_member_task_bloc.dart';
+import 'package:unicec_mobi/bloc/view_detail_match/view_detail_match_bloc.dart';
 import 'package:unicec_mobi/bloc/view_list_match/view_list_match_bloc.dart';
 import 'package:unicec_mobi/screens/pages.dart';
 import '../../bloc/club/club_bloc.dart';
@@ -17,6 +18,7 @@ import '../../main.dart';
 import '../../models/common/current_user.dart';
 import '../../utils/app_color.dart';
 import '../size_config.dart';
+import '../view_detai_match/view_detail_match.dart';
 import '../view_list_match/view_list_match.dart';
 import 'widget/component_button.dart';
 
@@ -214,8 +216,8 @@ class _MainPageState extends State<MainPage> {
                         ViewCompetitionMemberTaskBloc>()), // trang show Competition mà Member này có task ở trỏng
                 CompetitionPage(bloc: GetIt.I.get<CompetitionBloc>()),
                 // NotificationPage(bloc: GetIt.I.get<NotificationBloc>()),
-                 ViewListMatchPage(bloc: GetIt.I.get<ViewListMatchBloc>()),
-                //ViewDetailMatchPage(),
+                 //ViewListMatchPage(bloc: GetIt.I.get<ViewListMatchBloc>()),
+                ViewDetailMatchPage(bloc: GetIt.I.get<ViewDetailMatchBloc>()),
                 // ViewCompetitionRoundResultPage(bloc: GetIt.I.get<CompetitionRoundBloc>()),
                 //ViewListCompetitionOfParticipantPage(),
                 ProfilePage(bloc: GetIt.I.get<ProfileBloc>())
