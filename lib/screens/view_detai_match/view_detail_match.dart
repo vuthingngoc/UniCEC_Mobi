@@ -1,18 +1,22 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import '../../constants/Theme.dart';
+import 'package:unicec_mobi/bloc/view_detail_match/view_detail_match_bloc.dart';
 import '../../utils/app_color.dart';
 import 'component/detail_match_menu.dart';
 
 class ViewDetailMatchPage extends StatefulWidget {
   //bloc
+  ViewDetailMatchBloc bloc;
 
+  ViewDetailMatchPage({required this.bloc});
+  
   @override
   State<StatefulWidget> createState() => _ViewDetailMatchPageState();
 }
 
 class _ViewDetailMatchPageState extends State<ViewDetailMatchPage>
     with AutomaticKeepAliveClientMixin {
+  
+  ViewDetailMatchBloc get bloc => widget.bloc;
 
   @override
   bool get wantKeepAlive => true;

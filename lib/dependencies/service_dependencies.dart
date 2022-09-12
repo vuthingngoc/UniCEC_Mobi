@@ -6,6 +6,8 @@ import '../services/competition_detail_svc/i_competition_detail_service.dart';
 import '../services/competition_round_svc/competition_round_service.dart';
 import '../services/competition_round_svc/i_competition_round_service.dart';
 import '../services/i_services.dart';
+import '../services/match_svc/i_match_service.dart';
+import '../services/match_svc/match_service.dart';
 import '../services/notification_svc/notification_service.dart';
 import '../services/services.dart';
 
@@ -19,7 +21,7 @@ class ServiceDependencies {
     //import login service
     injector.registerFactory<ILoginService>(() => LoginService());
 
-    //import unversity_selection_service
+    //import university_selection_service
     injector.registerFactory<IUniversitySelectionService>(
         () => UniversitySelectionService());
 
@@ -39,6 +41,9 @@ class ServiceDependencies {
     //round
     injector.registerFactory<ICompetitionRoundService>(
         () => CompetitionRoundService());
+
+    // match
+    injector.registerFactory<IMatchService>(() => MatchService());    
 
     // list team
     injector.registerFactory<IViewListTeamService>(() => ViewListTeamService());

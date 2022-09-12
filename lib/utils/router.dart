@@ -19,7 +19,10 @@ class Routes {
   static String get viewCompetitionRound => '/viewCompetitionRound';
   static String get viewCompetitionRoundResult => '/view-competition-round-result';
 
-  static String get viewComptitionMemberTask => '/viewCompetitionMemberTask';
+  static String get viewListMatch => '/view-list-match';
+  static String get viewDetailMatch => '/view-detail-match';
+
+  static String get viewCompetitionMemberTask => '/viewCompetitionMemberTask';
   static String get viewListActivity => '/viewListActivity';
   static String get viewDetailActivity => '/viewDetailActivity';
 

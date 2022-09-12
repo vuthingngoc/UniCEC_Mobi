@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import '../screens/view_detai_match/view_detail_match.dart';
+import '../screens/view_list_match/view_list_match.dart';
 import '/utils/router.dart';
 import '../screens/pages.dart';
 
@@ -65,11 +67,18 @@ class PageDependencies {
         () => ViewCompetitionRoundResultPage(bloc: injector()),
         instanceName: Routes.viewCompetitionRoundResult);
 
+    // match
+    injector.registerFactory<Widget>(
+      () => ViewListMatchPage(bloc: injector()), instanceName: Routes.viewListMatch);
+
+    injector.registerFactory<Widget>(
+      () => ViewDetailMatchPage(bloc: injector()), instanceName: Routes.viewDetailMatch);     
+
     //--------------------------TASK
     //competition member task
     injector.registerFactory<Widget>(
         () => ViewCompetitionMemberTaskPage(bloc: injector()),
-        instanceName: Routes.viewComptitionMemberTask);
+        instanceName: Routes.viewCompetitionMemberTask);
 
     //list actitvity of competition member task // view competition activity
     injector.registerFactory<Widget>(

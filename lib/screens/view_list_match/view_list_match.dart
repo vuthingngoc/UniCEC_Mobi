@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../utils/loading.dart';
-import '/bloc/view_competition_member_task/view_competition_member_task_event.dart';
-import '../../bloc/view_competition_member_task/view_competition_member_task_bloc.dart';
+import 'package:unicec_mobi/bloc/view_list_match/view_list_match_bloc.dart';
 import '../../utils/app_color.dart';
 import 'component/list_match_menu.dart';
 
 class ViewListMatchPage extends StatefulWidget {
+  ViewListMatchBloc bloc;
+
+  ViewListMatchPage({required this.bloc});
 
   @override
   State<StatefulWidget> createState() =>
@@ -15,7 +15,9 @@ class ViewListMatchPage extends StatefulWidget {
 
 class _ViewListMatchPageState
     extends State<ViewListMatchPage>
-    with AutomaticKeepAliveClientMixin {
+    with AutomaticKeepAliveClientMixin { 
+
+  ViewListMatchBloc get _bloc => widget.bloc;      
 
   @override
   bool get wantKeepAlive => true;
@@ -32,9 +34,9 @@ class _ViewListMatchPageState
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
         ),
-        title: Text(
+        title: const Text(
           "Danh sách các trận đấu",
           style: TextStyle(color: Colors.white),
         ),

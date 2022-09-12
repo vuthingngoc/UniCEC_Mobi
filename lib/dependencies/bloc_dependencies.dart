@@ -8,6 +8,7 @@ import '../bloc/view_detail_team_participant/view_detail_team_participant_bloc.d
 import '../bloc/view_detail_team_student/view_detail_team_student_bloc.dart';
 import '../bloc/view_list_competition_of_club/view_list_competition_of_club_bloc.dart';
 import '../bloc/view_list_competition_participant/view_list_competition_participant_bloc.dart';
+import '../bloc/view_list_match/view_list_match_bloc.dart';
 import '../bloc/view_list_member/view_list_member_bloc.dart';
 import '../bloc/view_list_team_student/view_list_team_student_bloc.dart';
 import '/bloc/club/club_bloc.dart';
@@ -35,7 +36,7 @@ class BlocDependencies {
     //mainBloc
     injector.registerFactory<MainBloc>(() => MainBloc());
 
-    //spalsh bloc
+    //splash bloc
     injector.registerFactory<SplashBloc>(() => SplashBloc(service: injector()));
 
     //import login bloc
@@ -70,6 +71,12 @@ class BlocDependencies {
 
     injector.registerFactory<CompetitionRoundBloc>(
         () => CompetitionRoundBloc(service: injector()));
+
+    injector.registerFactory<ViewListMatchBloc>(
+      () => ViewListMatchBloc(service: injector()));
+
+    injector.registerFactory<ViewListMatchBloc>(
+      () => ViewListMatchBloc(service: injector()));      
 
     injector.registerFactory<EventBloc>(() => EventBloc(service: injector()));
 
