@@ -18,24 +18,48 @@ class _ListMatchMenuState extends State<ListMatchMenu> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          margin: EdgeInsets.only(right: 20, top: 20),
-          alignment: Alignment.bottomRight  ,
-          child: FlatButton(
-            textColor: ArgonColors.white,
-            color: AppColors.mainColor,
-            onPressed: () {},
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(4.0),
-            ),
-            child: const Padding(
-                padding:
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              margin: EdgeInsets.only(right: 20, top: 20,left: 10),
+              alignment: Alignment.bottomRight  ,
+              child: FlatButton(
+                textColor: ArgonColors.white,
+                color: AppColors.mainColor,
+                onPressed: () {},
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4.0),
+                ),
+                child: const Padding(
+                    padding:
                     EdgeInsets.all(10),
-                child: Text("Danh sách các đội thi",
-                    style:
+                    child: Text("Chi tiết vòng thi",
+                        style:
                         TextStyle(fontSize: 18.0))),
-          ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(right: 20, top: 20),
+              alignment: Alignment.bottomRight  ,
+              child: FlatButton(
+                textColor: ArgonColors.white,
+                color: AppColors.mainColor,
+                onPressed: () {},
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4.0),
+                ),
+                child: const Padding(
+                    padding:
+                    EdgeInsets.all(10),
+                    child: Text("Danh sách các đội thi",
+                        style:
+                        TextStyle(fontSize: 18.0))),
+              ),
+            ),
+          ],
         ),
+
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: TextButton(
