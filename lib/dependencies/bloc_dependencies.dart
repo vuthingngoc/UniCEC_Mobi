@@ -4,6 +4,7 @@ import '../bloc/competition_detail/competition_detail_bloc.dart';
 import '../bloc/competition_round/competition_round_bloc.dart';
 import '../bloc/edit_profile/edit_profile_bloc.dart';
 import '../bloc/notification/notification_bloc.dart';
+import '../bloc/view_detail_match/view_detail_match_bloc.dart';
 import '../bloc/view_detail_team_participant/view_detail_team_participant_bloc.dart';
 import '../bloc/view_detail_team_student/view_detail_team_student_bloc.dart';
 import '../bloc/view_list_competition_of_club/view_list_competition_of_club_bloc.dart';
@@ -75,8 +76,8 @@ class BlocDependencies {
     injector.registerFactory<ViewListMatchBloc>(
       () => ViewListMatchBloc(service: injector()));
 
-    injector.registerFactory<ViewListMatchBloc>(
-      () => ViewListMatchBloc(service: injector()));      
+    injector.registerFactory<ViewDetailMatchBloc>(
+      () => ViewDetailMatchBloc(service: injector()));      
 
     injector.registerFactory<EventBloc>(() => EventBloc(service: injector()));
 
