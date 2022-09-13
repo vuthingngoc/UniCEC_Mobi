@@ -15,6 +15,7 @@ import '../../utils/loading.dart';
 import '../../utils/router.dart';
 import '../widgets/input.dart';
 import 'component/view_detail_table.dart';
+import 'component/view_result_team.dart';
 
 class ViewDetailTeamParticipantPage extends StatefulWidget {
   //bloc
@@ -311,7 +312,7 @@ class _ViewDetailTeamParticipantPageState
                   icon: Icon(Icons.arrow_back_ios, color: Colors.white),
                 ),
                 title: Text(
-                  state.teamDetail?.name ?? "Chưa Load Team Name",
+                  state.teamDetail?.name ?? "Đang cập nhật...",
                   style: TextStyle(color: Colors.white),
                 ),
                 automaticallyImplyLeading: false,
@@ -357,6 +358,11 @@ class _ViewDetailTeamParticipantPageState
                           padding: const EdgeInsets.only(top: 10.0, left: 15),
                           child: Row(
                             children: [
+                              Text(
+                                "Chi tiết: ",
+                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(width: 10,),
                               Expanded(
                                   child: Text(
                                 state.teamDetail?.description ?? "",
@@ -427,6 +433,7 @@ class _ViewDetailTeamParticipantPageState
                             ],
                           ),
                         SizedBox(height: 20),
+                        ViewResultTeam(),
                         if (state.userIdIsLeaderTeam ==
                             GetIt.I.get<CurrentUser>().id)
                           Row(

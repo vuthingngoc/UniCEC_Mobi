@@ -410,18 +410,46 @@ class _ViewListRoundMenuState extends State<ViewListRoundMenu> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      padding: const EdgeInsets.only(right: 20),
+                      padding: const EdgeInsets.only(right: 20, left: 10),
                       child: Text(_competitionRounds[index].title,
                           style: const TextStyle(
-                              fontSize: 17, fontWeight: FontWeight.bold)),
+                              fontSize: 18, fontWeight: FontWeight.bold)),
                     ),
-                    Expanded(
-                      child: Container(
+                    // Expanded(
+                    //   child: Container(
+                    //     // padding: const EdgeInsets.only(left: 20),
+                    //     child: Text(_competitionRounds[index].description,
+                    //         style: const TextStyle(fontSize: 15)),
+                    //   ),
+                    // ),
+                    if (_competitionRounds[index].status != null && _competitionRounds[index].status == CompetitionRoundStatus
+                        .Active)
+                    Container(
+                      // padding: const EdgeInsets.only(left: 20),
+                      child: Text("Sắp diễn ra",
+                          style: const TextStyle(fontSize: 17, color: ArgonColors.success, fontWeight: FontWeight.normal)),
+                    ),
+                    if (_competitionRounds[index].status != null && _competitionRounds[index].status == CompetitionRoundStatus
+                        .Happening)
+                      Container(
                         // padding: const EdgeInsets.only(left: 20),
-                        child: Text(_competitionRounds[index].description,
-                            style: const TextStyle(fontSize: 15)),
+                        child: Text("Đang diễn ra",
+                            style: const TextStyle(fontSize: 17, color: ArgonColors.label, fontWeight: FontWeight.normal)),
                       ),
-                    ),
+                    if (_competitionRounds[index].status != null && _competitionRounds[index].status == CompetitionRoundStatus
+                        .Finished)
+                      Container(
+                        // padding: const EdgeInsets.only(left: 20),
+                        child: Text("Kết thúc",
+                            style: const TextStyle(fontSize: 17, color: Colors.grey, fontWeight: FontWeight.normal)),
+                      ),
+                    if (_competitionRounds[index].status != null && _competitionRounds[index].status == CompetitionRoundStatus
+                        .Cancel)
+                      Container(
+                        // padding: const EdgeInsets.only(left: 20),
+                        child: Text("Đã hủy",
+                            style: const TextStyle(fontSize: 17, color: ArgonColors.error, fontWeight: FontWeight.normal)),
+                      ),
                     // Text(_competitionRounds[index].title,
                     //     style: const TextStyle(fontSize: 15)),
                     // Text(_competitionRounds[index].description,
