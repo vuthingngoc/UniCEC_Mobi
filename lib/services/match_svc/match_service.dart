@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/models/common/current_user.dart';
 import 'package:unicec_mobi/models/entities/match/match_model.dart';
 import 'package:unicec_mobi/models/common/paging_result.dart';
+import 'package:unicec_mobi/models/entities/match/teams_in_match_model.dart';
 import 'package:unicec_mobi/services/match_svc/i_match_service.dart';
 import 'package:http/http.dart' as http;
 import 'package:unicec_mobi/utils/adapter.dart';
@@ -34,6 +35,15 @@ class MatchService implements IMatchService{
     }
 
     return null;
+  }
+
+  @override
+  Future<List<TeamsInMatchModel>?> GetTeamsInMatch(int matchId) {
+    var client = http.Client();
+    // String url = Api.GetUrl(apiPath: Api.matches)
+
+    // TODO: implement GetTeamsInMatch
+    throw UnimplementedError();
   }
   
 }

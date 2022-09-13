@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unicec_mobi/bloc/view_detail_match/view_detail_match_bloc.dart';
+import '../../models/entities/match/match_model.dart';
 import '../../utils/app_color.dart';
 import 'component/detail_match_menu.dart';
 
@@ -24,26 +26,35 @@ class _ViewDetailMatchPageState extends State<ViewDetailMatchPage>
   @override
   void initState() {}
 
+  void didChangeDependencies(){
+    RouteSettings? settings = ModalRoute.of(context)?.settings;
+    if(settings != null){
+      bloc.state.match = settings.arguments as MatchModel;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+    return BlocProvider.value(
+      value: bloc,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+          ),
+          title: const Text(
+            "Chi tiết trận đấu",
+            style: TextStyle(color: Colors.white),
+          ),
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          backgroundColor: AppColors.mainColor,
         ),
-        title: Text(
-          "Chi tiết trận đấu",
-          style: TextStyle(color: Colors.white),
-        ),
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        backgroundColor: AppColors.mainColor,
+        body: ViewDetailMatchMenu(),
       ),
-      body: ViewDetailMatchMenu(),
     );
   }
 }

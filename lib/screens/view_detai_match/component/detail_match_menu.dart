@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../bloc/view_detail_match/view_detail_match_bloc.dart';
 import '../../../constants/Theme.dart';
 
 class ViewDetailMatchMenu extends StatefulWidget {
@@ -10,13 +12,15 @@ class ViewDetailMatchMenu extends StatefulWidget {
 class _ViewDetailMatchMenuState extends State<ViewDetailMatchMenu> {
   @override
   Widget build(BuildContext context) {
+    ViewDetailMatchBloc bloc = BlocProvider.of<ViewDetailMatchBloc>(context);
+    
     return SingleChildScrollView(
       child: Column(
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
             child: Align(
-              child: Text("Vòng đấu loại trực tiếp",
+              child: Text(bloc.state.match.title,
                   style: const TextStyle(
                       color: Color.fromRGBO(50, 50, 93, 1), fontSize: 28.0)),
             ),
@@ -41,12 +45,12 @@ class _ViewDetailMatchMenuState extends State<ViewDetailMatchMenu> {
             padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
             child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.supervised_user_circle_outlined,
                   size: 23,
                   color: Colors.orange,
                 ),
-                SizedBox(width: 10.0),
+                const SizedBox(width: 10.0),
                 Container(
                   margin: const EdgeInsets.only(right: 10),
                   padding: const EdgeInsets.all(3.0),

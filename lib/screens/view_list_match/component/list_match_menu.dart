@@ -545,7 +545,9 @@ class _ListMatchMenuState extends State<ListMatchMenu> {
                             FlatButton(
                               textColor: ArgonColors.white,
                               color: AppColors.mainColor,
-                              onPressed: () {},
+                              onPressed: () {
+                                // here go somewhere
+                              },
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(4.0),
                               ),
@@ -575,7 +577,9 @@ class _ListMatchMenuState extends State<ListMatchMenu> {
                                     backgroundColor: const Color.fromARGB(
                                         255, 235, 237, 241),
                                   ),
-                                  onPressed: () async {},
+                                  onPressed: () {
+                                    Navigator.of(context).pushNamed(Routes.viewDetailMatch, arguments: state.matches?[index]);
+                                  },
                                   child: Row(
                                     children: [
                                       Padding(
