@@ -50,7 +50,7 @@ class MemberService implements IMemberService {
   Future<MemberStatus> getStatusMember(int clubId) async {
     var client = http.Client();
     String url = Api.GetUrl(apiPath: Api.members);
-    url += "/info?clubId=" + clubId.toString();
+    url += "/info?clubId=$clubId";
     String? idToken = GetIt.I.get<CurrentUser>().idToken;
     try {
       var response =
@@ -92,7 +92,7 @@ class MemberService implements IMemberService {
     var client = http.Client();
     String url = Api.GetUrl(apiPath: Api.members);
 
-    url += "/by-club?clubId=" + clubId.toString();
+    url += "/by-club?clubId=$clubId";
 
     if (searchName != null) {
       url += "&searchName=${searchName}";

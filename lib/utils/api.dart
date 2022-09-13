@@ -17,6 +17,7 @@ class Api {
   static String get competitionHistories => "/api/v1/competition-histories";
   static String get competitionRoles => "/api/v1/competition-roles";
   static String get competitionRounds => "/api/v1/competition-rounds";
+  static String get matches => "/api/v1/matches";
   static String get competitionTypes => "/api/v1/competition-types";
   static String get departments => "/api/v1/departments";
   static String get entityTypes => "/api/v1/entity-types";

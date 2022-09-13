@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unicec_mobi/bloc/view_list_match/view_list_match_bloc.dart';
 import 'package:unicec_mobi/constants/Theme.dart';
 
+import '../../../bloc/view_list_match/view_list_match_state.dart';
+import '../../../models/enums/competition_round_status.dart';
 import '../../../utils/app_color.dart';
+import '../../../utils/loading.dart';
+import '../../../utils/router.dart';
+import '../../../utils/utils.dart';
 
 class ListMatchMenu extends StatefulWidget {
-  const ListMatchMenu({
-    Key? key,
-  }) : super(key: key);
+  // const ListMatchMenu({
+  //   Key? key,
+  // }) : super(key: key);
 
   @override
   State<ListMatchMenu> createState() => _ListMatchMenuState();
@@ -16,93 +22,629 @@ class ListMatchMenu extends StatefulWidget {
 class _ListMatchMenuState extends State<ListMatchMenu> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Container(
-              margin: EdgeInsets.only(right: 20, top: 20,left: 10),
-              alignment: Alignment.bottomRight  ,
-              child: FlatButton(
-                textColor: ArgonColors.white,
-                color: AppColors.mainColor,
-                onPressed: () {},
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4.0),
-                ),
-                child: const Padding(
-                    padding:
-                    EdgeInsets.all(10),
-                    child: Text("Chi tiết vòng thi",
-                        style:
-                        TextStyle(fontSize: 18.0))),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(right: 20, top: 20),
-              alignment: Alignment.bottomRight  ,
-              child: FlatButton(
-                textColor: ArgonColors.white,
-                color: AppColors.mainColor,
-                onPressed: () {},
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4.0),
-                ),
-                child: const Padding(
-                    padding:
-                    EdgeInsets.all(10),
-                    child: Text("Danh sách các đội thi",
-                        style:
-                        TextStyle(fontSize: 18.0))),
-              ),
-            ),
-          ],
-        ),
+    ViewListMatchBloc bloc = BlocProvider.of<ViewListMatchBloc>(context);
 
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: TextButton(
-            style: TextButton.styleFrom(
-              primary: Colors.black87,
-              padding: EdgeInsets.all(20),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
-              backgroundColor: Color.fromARGB(255, 235, 237, 241),
-            ),
-            onPressed: () async {},
-            child: Row(
-              children: const [
-                Padding(
-                  padding: EdgeInsets.only(right: 20.0, left: 10),
-                  child: Text("1", style: TextStyle(fontSize: 18)),
-                ),
-                Expanded(
-                  child: Text("Team 1 - Team 2 - Team 3",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.normal,
-                      )),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Text("Sắp diễn ra",
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.normal,
-                            color: ArgonColors.warning)),
-                  ),
-                ),
-                Icon(
-                  Icons.arrow_forward_ios,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
+    return BlocBuilder<ViewListMatchBloc, ViewListMatchState>(
+        bloc: bloc,
+        builder: (context, state) {
+          return (bloc.isLoading)
+              ? Loading()
+              : Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(top: 20),
+                      alignment: Alignment.bottomRight,
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            FlatButton(
+                              textColor: ArgonColors.white,
+                              color: AppColors.mainColor,
+                              onPressed: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return Container(
+                                        child: AlertDialog(
+                                          shape: const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10.0))),
+                                          scrollable: true,
+                                          title: Container(
+                                              child: const Text(
+                                            'Chi tiết',
+                                            style: TextStyle(fontSize: 20),
+                                            textAlign: TextAlign.center,
+                                          )),
+                                          content: Padding(
+                                            padding: const EdgeInsets.only(
+                                              top: 8,
+                                            ),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Wrap(
+                                                  children: [
+                                                    const Text(
+                                                      "Tên:",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 8.0),
+                                                      child: Text(
+                                                        bloc.state.round
+                                                                ?.title ??
+                                                            "",
+                                                        style: const TextStyle(
+                                                            fontSize: 18),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 8.0, bottom: 8),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const Text(
+                                                        "Thời gian bắt đầu:",
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                      Container(
+                                                        margin: const EdgeInsets
+                                                                .only(
+                                                            top: 8.0,
+                                                            bottom: 8,
+                                                            left: 8),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 3.0),
+                                                        decoration: BoxDecoration(
+                                                            border: Border.all(
+                                                                color: Colors
+                                                                    .orangeAccent),
+                                                            color: Colors
+                                                                .orangeAccent,
+                                                            borderRadius:
+                                                                const BorderRadius
+                                                                        .all(
+                                                                    Radius.circular(
+                                                                        10))),
+                                                        child: Text(
+                                                            (bloc.state.round
+                                                                        ?.startTime !=
+                                                                    null)
+                                                                ? Utils.formatDateTime(
+                                                                    (bloc
+                                                                        .state
+                                                                        .round
+                                                                        ?.startTime)!)
+                                                                : "",
+                                                            style:
+                                                                const TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 18,
+                                                            )),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 8),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const Text(
+                                                        "Thời gian kết thúc:",
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                      Container(
+                                                        margin: const EdgeInsets
+                                                                .only(
+                                                            top: 8.0,
+                                                            bottom: 8,
+                                                            left: 8),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 3.0),
+                                                        decoration: BoxDecoration(
+                                                            border: Border.all(
+                                                                color: Colors
+                                                                    .orangeAccent),
+                                                            color: Colors
+                                                                .orangeAccent,
+                                                            borderRadius:
+                                                                const BorderRadius
+                                                                        .all(
+                                                                    Radius.circular(
+                                                                        10))),
+                                                        child: Text(
+                                                            (bloc.state.round
+                                                                        ?.endTime !=
+                                                                    null)
+                                                                ? Utils.formatDateTime(
+                                                                    (bloc
+                                                                        .state
+                                                                        .round
+                                                                        ?.endTime)!)
+                                                                : "",
+                                                            style:
+                                                                const TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 18,
+                                                            )),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 8),
+                                                  child: Wrap(
+                                                    children: [
+                                                      const Text(
+                                                        "Nội dung:",
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 8.0),
+                                                        child: Text(
+                                                          bloc.state.round
+                                                                  ?.description ??
+                                                              "",
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontSize: 18),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                // Padding(
+                                                //   padding: const EdgeInsets.only(
+                                                //       top: 8.0, bottom: 8),
+                                                //   child: Wrap(
+                                                //     children: [
+                                                //       const Text(
+                                                //         "Điểm:",
+                                                //         style: TextStyle(
+                                                //             fontWeight: FontWeight.bold),
+                                                //       ),
+                                                //       Padding(
+                                                //         padding:
+                                                //             const EdgeInsets.only(left: 8.0),
+                                                //         child: Text(
+                                                //             _competitionRounds[index]
+                                                //                 .seedsPoint
+                                                //                 .toString(),
+                                                //             style: const TextStyle(
+                                                //                 fontSize: 18)),
+                                                //       ),
+                                                //     ],
+                                                //   ),
+                                                // ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 8, top: 8),
+                                                  child: Row(
+                                                    children: [
+                                                      const Text(
+                                                        "Trạng thái:",
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                      Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 8.0),
+                                                          child: Row(
+                                                            children: [
+                                                              if (bloc
+                                                                          .state
+                                                                          .round
+                                                                          ?.status !=
+                                                                      null &&
+                                                                  (bloc
+                                                                          .state
+                                                                          .round
+                                                                          ?.status) ==
+                                                                      CompetitionRoundStatus
+                                                                          .Active)
+                                                                Container(
+                                                                  margin:
+                                                                      const EdgeInsets
+                                                                          .only(
+                                                                    top: 8.0,
+                                                                    bottom: 8,
+                                                                    left: 8,
+                                                                  ),
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          5.0),
+                                                                  decoration: BoxDecoration(
+                                                                      border: Border.all(
+                                                                          color: Colors
+                                                                              .green),
+                                                                      color: Colors
+                                                                          .green,
+                                                                      borderRadius: const BorderRadius
+                                                                              .all(
+                                                                          Radius.circular(
+                                                                              10))),
+                                                                  child: const Text(
+                                                                      "Sắp diên ra",
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            18,
+                                                                      )),
+                                                                )
+                                                              else if (bloc
+                                                                          .state
+                                                                          .round
+                                                                          ?.status !=
+                                                                      null &&
+                                                                  (bloc
+                                                                          .state
+                                                                          .round
+                                                                          ?.status) ==
+                                                                      CompetitionRoundStatus
+                                                                          .Cancel)
+                                                                Container(
+                                                                  margin: const EdgeInsets
+                                                                          .only(
+                                                                      top: 8.0,
+                                                                      bottom: 8,
+                                                                      left: 8),
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          5.0),
+                                                                  decoration: BoxDecoration(
+                                                                      border: Border.all(
+                                                                          color: Colors
+                                                                              .red),
+                                                                      color: Colors
+                                                                          .red,
+                                                                      borderRadius: const BorderRadius
+                                                                              .all(
+                                                                          Radius.circular(
+                                                                              10))),
+                                                                  child: const Text(
+                                                                      "Đã hủy",
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            18,
+                                                                      )),
+                                                                )
+                                                              else if (bloc
+                                                                          .state
+                                                                          .round
+                                                                          ?.status !=
+                                                                      null &&
+                                                                  (bloc
+                                                                          .state
+                                                                          .round
+                                                                          ?.status) ==
+                                                                      CompetitionRoundStatus
+                                                                          .Happening)
+                                                                Container(
+                                                                  margin: const EdgeInsets
+                                                                          .only(
+                                                                      top: 8.0,
+                                                                      bottom: 8,
+                                                                      left: 8),
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          5.0),
+                                                                  decoration: BoxDecoration(
+                                                                      border: Border.all(
+                                                                          color: Colors
+                                                                              .yellowAccent),
+                                                                      color: Colors
+                                                                          .yellowAccent,
+                                                                      borderRadius: const BorderRadius
+                                                                              .all(
+                                                                          Radius.circular(
+                                                                              10))),
+                                                                  child: const Text(
+                                                                      "Đang diễn ra",
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            18,
+                                                                      )),
+                                                                )
+                                                              else if (bloc
+                                                                          .state
+                                                                          .round
+                                                                          ?.status !=
+                                                                      null &&
+                                                                  (bloc
+                                                                          .state
+                                                                          .round
+                                                                          ?.status) ==
+                                                                      CompetitionRoundStatus
+                                                                          .Finished)
+                                                                Container(
+                                                                  margin: const EdgeInsets
+                                                                          .only(
+                                                                      top: 8.0,
+                                                                      bottom: 8,
+                                                                      left: 8),
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          5.0),
+                                                                  decoration: BoxDecoration(
+                                                                      border: Border.all(
+                                                                          color: Colors
+                                                                              .grey),
+                                                                      color: Colors
+                                                                          .grey,
+                                                                      borderRadius: const BorderRadius
+                                                                              .all(
+                                                                          Radius.circular(
+                                                                              10))),
+                                                                  child: const Text(
+                                                                      "Kết thúc",
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            18,
+                                                                      )),
+                                                                )
+                                                            ],
+                                                          )),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          actions: [
+                                            Container(
+                                              width: double.infinity,
+                                              margin: const EdgeInsets.only(
+                                                  right: 15,
+                                                  left: 15,
+                                                  bottom: 15),
+                                              child: (bloc.state.round
+                                                              ?.status !=
+                                                          null &&
+                                                      (bloc.state.round
+                                                              ?.status) ==
+                                                          CompetitionRoundStatus
+                                                              .Finished)
+                                                  ? FlatButton(
+                                                      textColor:
+                                                          ArgonColors.white,
+                                                      color:
+                                                          AppColors.mainColor,
+                                                      onPressed: () {
+                                                        Navigator.pushNamed(
+                                                            context,
+                                                            Routes
+                                                                .viewCompetitionRoundResult,
+                                                            arguments: {
+                                                              'competitionRoundId':
+                                                                  bloc.state
+                                                                      .round?.id
+                                                            });
+                                                      },
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5.0),
+                                                      ),
+                                                      child: const Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  left: 16.0,
+                                                                  right: 16.0,
+                                                                  top: 12,
+                                                                  bottom: 12),
+                                                          child: Text(
+                                                              "Kết quả vòng thi",
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontSize:
+                                                                      18.0))),
+                                                    )
+                                                  : FlatButton(
+                                                      textColor:
+                                                          ArgonColors.white,
+                                                      color:
+                                                          AppColors.mainColor,
+                                                      onPressed: () {
+                                                        Navigator.pop(context);
+                                                      },
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5.0),
+                                                      ),
+                                                      child: const Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  left: 16.0,
+                                                                  right: 16.0,
+                                                                  top: 12,
+                                                                  bottom: 12),
+                                                          child: Text("Đóng",
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontSize:
+                                                                      18.0))),
+                                                    ),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    });
+                              },
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4.0),
+                              ),
+                              child: const Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: Text("Chi tiết vòng thi",
+                                      style: TextStyle(fontSize: 18.0))),
+                            ),
+                            FlatButton(
+                              textColor: ArgonColors.white,
+                              color: AppColors.mainColor,
+                              onPressed: () {},
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4.0),
+                              ),
+                              child: const Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: Text(
+                                      "DS các đội thi", //Danh sách các đội thi
+                                      style: TextStyle(fontSize: 18.0))),
+                            ),
+                          ]),
+                    ),
+                    (bloc.state.matches != null)
+                        ? ListView.builder(
+                            itemCount: state.matches?.length,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 20),
+                                child: TextButton(
+                                  style: TextButton.styleFrom(
+                                    primary: Colors.black87,
+                                    padding: const EdgeInsets.all(20),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
+                                    backgroundColor: const Color.fromARGB(
+                                        255, 235, 237, 241),
+                                  ),
+                                  onPressed: () async {},
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            right: 20.0, left: 10),
+                                        child: Text("${index + 1}",
+                                            style:
+                                                const TextStyle(fontSize: 18)),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                            "${state.matches?[index].title}",
+                                            style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.normal,
+                                            )),
+                                      ),
+                                      Expanded(
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 10),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                            children: [
+                                            Text(
+                                                "${state.matches?[index].status.name}",
+                                                style: const TextStyle(
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    color:
+                                                        ArgonColors.warning)),
+                                            const Icon(
+                                              Icons.arrow_forward_ios,
+                                            ),
+                                          ]),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.only(top: 180.0),
+                            child: Column(
+                              children: [
+                                Container(
+                                    decoration: const BoxDecoration(
+                                        image: DecorationImage(
+                                            alignment: Alignment.topCenter,
+                                            image: AssetImage(
+                                                "assets/img/not-found-icon-24.jpg"),
+                                            fit: BoxFit.fitWidth))),
+                                Image.asset("assets/img/not-found-icon-24.jpg"),
+                                const Padding(
+                                  padding: EdgeInsets.only(top: 25.0),
+                                  child: Text(
+                                    'Không có kết quả mà bạn tìm kiếm',
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                  ],
+                );
+        });
     // return BlocBuilder<ViewCompetitionMemberTaskBloc,
     //     ViewCompetitionMemberTaskState>(
     //     bloc: bloc,
