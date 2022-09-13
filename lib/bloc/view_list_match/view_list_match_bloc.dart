@@ -24,10 +24,7 @@ class ViewListMatchBloc extends BaseBloc<ViewListMatchEvent, ViewListMatchState>
         if(event is LoadMatchesByRoundEvent){
           _isLoading = true;
           PagingResult<MatchModel>? matches = await service.GetMatchesByRound(event.roundId);
-          if(matches != null){
-            emit(state.copyWith(matches: matches.items, round: event.round ?? state.round));
-          }
-          
+          emit(state.copyWith(matches: matches?.items, round: event.round ?? state.round));
           _isLoading = false;
         }
       }));

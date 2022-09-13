@@ -8,6 +8,13 @@ import '../../services/match_svc/i_match_service.dart';
 
 class ViewDetailMatchBloc extends BaseBloc<ViewDetailMatchEvent, ViewDetailMatchState>{
   IMatchService service;
+  bool _isLoading = false;
+
+  bool get isLoading => _isLoading;
+
+  set isLoading(bool isLoading){
+    _isLoading = isLoading;
+  }
 
   ViewDetailMatchBloc({required this.service}) 
     : super(ViewDetailMatchState(
@@ -25,9 +32,12 @@ class ViewDetailMatchBloc extends BaseBloc<ViewDetailMatchEvent, ViewDetailMatch
           startTime: DateTime.now(),
           status: MatchStatus.Ready,
           title: ""
-        ))){
+        ),
+        teamsInMatch: [])){
           (on((event, emit) async {
-            
+            if(event is LoadData){
+              
+            }
           }));
         }
 
