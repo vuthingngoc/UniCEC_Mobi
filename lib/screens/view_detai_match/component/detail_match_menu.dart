@@ -120,9 +120,13 @@ class _ViewDetailMatchMenuState extends State<ViewDetailMatchMenu> {
                   color: Colors.orange,
                 ),
                 SizedBox(width: 10.0),
-                Text(
-                  "Team 1",
-                  style: TextStyle(fontSize: 18),
+                Text("1.", style: TextStyle(fontSize: 18)),
+                SizedBox(width: 10.0),
+                Expanded(
+                  child: Text(
+                    "Chúng ta là nhà vô địch",
+                    style: TextStyle(fontSize: 18),
+                  ),
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 15),
@@ -132,14 +136,37 @@ class _ViewDetailMatchMenuState extends State<ViewDetailMatchMenu> {
                       color: ArgonColors.warning,
                       borderRadius: const BorderRadius.all(Radius.circular(10))),
                   child: Text(
-                    "2 - 1",
+                    "30 điểm",
                     style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
                 ),
-                Text(
-                  "Team 2",
-                  style: TextStyle(
-                      fontSize: 18),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+            child: Row(
+              children: [
+                SizedBox(width: 35.0),
+                Text("2.", style: TextStyle(fontSize: 18)),
+                SizedBox(width: 10.0),
+                Expanded(
+                  child: Text(
+                    "Team 2",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 10),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: ArgonColors.warning),
+                      color: ArgonColors.warning,
+                      borderRadius: const BorderRadius.all(Radius.circular(10))),
+                  child: Text(
+                    "10 điểm",
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
                 ),
               ],
             ),
