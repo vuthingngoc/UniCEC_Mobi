@@ -13,14 +13,14 @@ class ViewDetailMatchMenu extends StatefulWidget {
 class _ViewDetailMatchMenuState extends State<ViewDetailMatchMenu> {
   @override
   Widget build(BuildContext context) {
-    // ViewDetailMatchBloc bloc = BlocProvider.of<ViewDetailMatchBloc>(context);
+    ViewDetailMatchBloc bloc = BlocProvider.of<ViewDetailMatchBloc>(context);
     return SingleChildScrollView(
       child: Column(
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
             child: Align(
-              child: Text("bloc.state.match.title",
+              child: Text(bloc.state.match.title,
                   style: const TextStyle(
                       color: Color.fromRGBO(50, 50, 93, 1), fontSize: 28.0)),
             ),

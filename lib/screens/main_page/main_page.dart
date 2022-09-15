@@ -217,10 +217,10 @@ class _MainPageState extends State<MainPage> {
                     bloc: GetIt.I.get<
                         ViewCompetitionMemberTaskBloc>()), // trang show Competition mà Member này có task ở trỏng
                 CompetitionPage(bloc: GetIt.I.get<CompetitionBloc>()),
-                // NotificationPage(bloc: GetIt.I.get<NotificationBloc>()),
+                NotificationPage(bloc: GetIt.I.get<NotificationBloc>()),
                  //ViewListMatchPage(bloc: GetIt.I.get<ViewListMatchBloc>()),
                 // ViewDetailMatchPage(bloc: GetIt.I.get<ViewDetailMatchBloc>()),
-                ViewDetailMatchPage(),
+                // ViewDetailMatchPage(),
                 // ViewCompetitionRoundResultPage(bloc: GetIt.I.get<CompetitionRoundBloc>()),
                 //ViewListCompetitionOfParticipantPage(),
                 ProfilePage(bloc: GetIt.I.get<ProfileBloc>())

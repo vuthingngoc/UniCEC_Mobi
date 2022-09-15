@@ -7,9 +7,9 @@ import 'component/detail_match_menu.dart';
 
 class ViewDetailMatchPage extends StatefulWidget {
   //bloc
-  // ViewDetailMatchBloc bloc;
-  //
-  // ViewDetailMatchPage({required this.bloc});
+  ViewDetailMatchBloc bloc;
+
+  ViewDetailMatchPage({required this.bloc});
   
   @override
   State<StatefulWidget> createState() => _ViewDetailMatchPageState();
@@ -18,7 +18,7 @@ class ViewDetailMatchPage extends StatefulWidget {
 class _ViewDetailMatchPageState extends State<ViewDetailMatchPage>
     with AutomaticKeepAliveClientMixin {
   
-  // ViewDetailMatchBloc get bloc => widget.bloc;
+  ViewDetailMatchBloc get bloc => widget.bloc;
 
   @override
   bool get wantKeepAlive => true;
