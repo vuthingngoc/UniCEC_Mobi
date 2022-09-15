@@ -26,35 +26,55 @@ class _ViewDetailMatchPageState extends State<ViewDetailMatchPage>
   @override
   void initState() {}
 
-  void didChangeDependencies(){
-    RouteSettings? settings = ModalRoute.of(context)?.settings;
-    if(settings != null){
-      bloc.state.match = settings.arguments as MatchModel;
-    }
-  }
+  // void didChangeDependencies(){
+  //   RouteSettings? settings = ModalRoute.of(context)?.settings;
+  //   if(settings != null){
+  //     bloc.state.match = settings.arguments as MatchModel;
+  //   }
+  // }
 
   @override
+  // Widget build(BuildContext context) {
+  //   return BlocProvider.value(
+  //     value: bloc,
+  //     child: Scaffold(
+  //       appBar: AppBar(
+  //         leading: IconButton(
+  //           onPressed: () {
+  //             Navigator.pop(context);
+  //           },
+  //           icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+  //         ),
+  //         title: const Text(
+  //           "Chi tiết trận đấu",
+  //           style: TextStyle(color: Colors.white),
+  //         ),
+  //         automaticallyImplyLeading: false,
+  //         centerTitle: true,
+  //         backgroundColor: AppColors.mainColor,
+  //       ),
+  //       body: ViewDetailMatchMenu(),
+  //     ),
+  //   );
+  // }
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: bloc,
-      child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-          ),
-          title: const Text(
-            "Chi tiết trận đấu",
-            style: TextStyle(color: Colors.white),
-          ),
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          backgroundColor: AppColors.mainColor,
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
         ),
-        body: ViewDetailMatchMenu(),
+        title: const Text(
+          "Chi tiết trận đấu",
+          style: TextStyle(color: Colors.white),
+        ),
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        backgroundColor: AppColors.mainColor,
       ),
+      body: ViewDetailMatchMenu(),
     );
   }
 }

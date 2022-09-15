@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unicec_mobi/models/entities/match/match_model.dart';
 
 import '../../../bloc/view_detail_match/view_detail_match_bloc.dart';
 import '../../../constants/Theme.dart';
@@ -13,7 +14,6 @@ class _ViewDetailMatchMenuState extends State<ViewDetailMatchMenu> {
   @override
   Widget build(BuildContext context) {
     ViewDetailMatchBloc bloc = BlocProvider.of<ViewDetailMatchBloc>(context);
-    
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -43,48 +43,53 @@ class _ViewDetailMatchMenuState extends State<ViewDetailMatchMenu> {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-            child: Row(
+            child: Wrap(
               children: [
-                const Icon(
-                  Icons.supervised_user_circle_outlined,
-                  size: 23,
-                  color: Colors.orange,
-                ),
-                const SizedBox(width: 10.0),
-                Container(
-                  margin: const EdgeInsets.only(right: 10),
-                  padding: const EdgeInsets.all(3.0),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: ArgonColors.success),
-                      color: ArgonColors.success,
-                      borderRadius: const BorderRadius.all(Radius.circular(10))),
-                  child: Text(
-                    "Team 1",
-                    style: TextStyle(fontSize: 18, color: Colors.white),
-                  ),
-                ),
-                Container(
-                  // margin: const EdgeInsets.all(
-                  //     15.0),
-                  padding:
-                  const EdgeInsets.all(
-                      3.0),
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          color: ArgonColors
-                              .success),
-                      color:
-                      ArgonColors.success,
-                      borderRadius:
-                      const BorderRadius
-                          .all(
-                          Radius.circular(
-                              10))),
-                  child: Text(
-                    "Team 2",
-                    style: TextStyle(
-                        fontSize: 18, color: Colors.white),
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const Icon(
+                      Icons.supervised_user_circle_outlined,
+                      size: 23,
+                      color: Colors.orange,
+                    ),
+                    const SizedBox(width: 10.0),
+                    Container(
+                      margin: const EdgeInsets.only(right: 10),
+                      padding: const EdgeInsets.all(3.0),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: ArgonColors.success),
+                          color: ArgonColors.success,
+                          borderRadius: const BorderRadius.all(Radius.circular(10))),
+                      child: Text(
+                        "Team 1",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
+                    ),
+                    Container(
+                      // margin: const EdgeInsets.all(
+                      //     15.0),
+                      padding:
+                      const EdgeInsets.all(
+                          3.0),
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              color: ArgonColors
+                                  .success),
+                          color:
+                          ArgonColors.success,
+                          borderRadius:
+                          const BorderRadius
+                              .all(
+                              Radius.circular(
+                                  10))),
+                      child: Text(
+                        "Team 2",
+                        style: TextStyle(
+                            fontSize: 18, color: Colors.white),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -112,17 +117,54 @@ class _ViewDetailMatchMenuState extends State<ViewDetailMatchMenu> {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+            child: Wrap(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Icon(
+                      Icons.label,
+                      size: 23,
+                      color: Colors.orange,
+                    ),
+                    SizedBox(width: 10.0),
+                    Text("1.", style: TextStyle(fontSize: 18)),
+                    SizedBox(width: 10.0),
+                    Expanded(
+                      child: Text(
+                        "Chúng ta là nhà vô địch",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 15),
+                      padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 10),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: ArgonColors.warning),
+                          color: ArgonColors.warning,
+                          borderRadius: const BorderRadius.all(Radius.circular(10))),
+                      child: Text(
+                        "30 điểm",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
             child: Row(
               children: [
-                Icon(
-                  Icons.label,
-                  size: 23,
-                  color: Colors.orange,
-                ),
+                SizedBox(width: 35.0),
+                Text("2.", style: TextStyle(fontSize: 18)),
                 SizedBox(width: 10.0),
-                Text(
-                  "Team 1",
-                  style: TextStyle(fontSize: 18),
+                Expanded(
+                  child: Text(
+                    "Team 2",
+                    style: TextStyle(fontSize: 18),
+                  ),
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 15),
@@ -132,14 +174,9 @@ class _ViewDetailMatchMenuState extends State<ViewDetailMatchMenu> {
                       color: ArgonColors.warning,
                       borderRadius: const BorderRadius.all(Radius.circular(10))),
                   child: Text(
-                    "2 - 1",
+                    "10 điểm",
                     style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
-                ),
-                Text(
-                  "Team 2",
-                  style: TextStyle(
-                      fontSize: 18),
                 ),
               ],
             ),
