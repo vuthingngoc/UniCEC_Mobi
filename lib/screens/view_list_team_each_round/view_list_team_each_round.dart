@@ -6,8 +6,8 @@ import '../../bloc/view_list_team_student/view_list_team_student_state.dart';
 import '/models/entities/team/sending_data_model.dart';
 import '../../utils/app_color.dart';
 import '../../utils/router.dart';
-import 'component/body_student.dart';
-import 'component/list_team_menu_student.dart';
+import 'component/body_student_each_round.dart';
+import 'component/list_team_menu_each_round.dart';
 
 class ViewListTeamEachRoundPage extends StatefulWidget {
   final ViewListTeamStudentBloc bloc;
