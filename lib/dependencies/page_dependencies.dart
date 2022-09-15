@@ -71,8 +71,8 @@ class PageDependencies {
     injector.registerFactory<Widget>(
       () => ViewListMatchPage(bloc: injector()), instanceName: Routes.viewListMatch);
 
-    injector.registerFactory<Widget>(
-      () => ViewDetailMatchPage(bloc: injector()), instanceName: Routes.viewDetailMatch);     
+    // injector.registerFactory<Widget>(
+    //   () => ViewDetailMatchPage(bloc: injector()), instanceName: Routes.viewDetailMatch);
 
     //--------------------------TASK
     //competition member task
