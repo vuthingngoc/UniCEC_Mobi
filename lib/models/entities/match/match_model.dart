@@ -5,8 +5,8 @@ class MatchModel {
   int id;
   int roundId;
   String roundName;
-  int matchTypeId;
-  String matchTypeName;
+  bool? isLoseMatch;
+  //String matchTypeName;
   String address;
   String title;
   String description;
@@ -20,8 +20,7 @@ class MatchModel {
       {required this.id,
       required this.roundId,
       required this.roundName,
-      required this.matchTypeId,
-      required this.matchTypeName,
+      required this.isLoseMatch,
       required this.address,
       required this.title,
       required this.description,
@@ -35,8 +34,8 @@ class MatchModel {
     int id = json['id'] ?? 0;
     int roundId = json['round_id'] ?? 0;
     String roundName = json['round_name'] ?? "";
-    int matchTypeId = json['match_type_id'] ?? 0;
-    String matchTypeName = json['match_type_name'] ?? "";
+    bool? isLoseMatch = json['is_lose_match'] ?? null;
+    //String matchTypeName = json['match_type_name'] ?? "";
     String address = json['address'] ?? "";
     String title = json['title'] ?? "";
     String description = json['description'] ?? "";
@@ -55,8 +54,7 @@ class MatchModel {
         id: id,
         roundId: roundId,
         roundName: roundName,
-        matchTypeId: matchTypeId,
-        matchTypeName: matchTypeName,
+        isLoseMatch: isLoseMatch,
         address: address,
         title: title,
         description: description,

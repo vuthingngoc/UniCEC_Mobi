@@ -10,14 +10,13 @@ class ViewDetailMatchPage extends StatefulWidget {
   ViewDetailMatchBloc bloc;
 
   ViewDetailMatchPage({required this.bloc});
-  
+
   @override
   State<StatefulWidget> createState() => _ViewDetailMatchPageState();
 }
 
 class _ViewDetailMatchPageState extends State<ViewDetailMatchPage>
     with AutomaticKeepAliveClientMixin {
-  
   ViewDetailMatchBloc get bloc => widget.bloc;
 
   @override
@@ -58,23 +57,25 @@ class _ViewDetailMatchPageState extends State<ViewDetailMatchPage>
   //   );
   // }
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-        ),
-        title: const Text(
-          "Chi tiết trận đấu",
-          style: TextStyle(color: Colors.white),
-        ),
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        backgroundColor: AppColors.mainColor,
-      ),
-      body: ViewDetailMatchMenu(),
-    );
+    return BlocProvider.value(
+        value: bloc,
+        child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+            ),
+            title: const Text(
+              "Chi tiết trận đấu",
+              style: TextStyle(color: Colors.white),
+            ),
+            automaticallyImplyLeading: false,
+            centerTitle: true,
+            backgroundColor: AppColors.mainColor,
+          ),
+          body: ViewDetailMatchMenu(),
+        ));
   }
 }
