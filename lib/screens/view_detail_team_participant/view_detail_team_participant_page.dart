@@ -360,9 +360,12 @@ class _ViewDetailTeamParticipantPageState
                             children: [
                               Text(
                                 "Chi tiết: ",
-                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
                               ),
-                              SizedBox(width: 10,),
+                              SizedBox(
+                                width: 10,
+                              ),
                               Expanded(
                                   child: Text(
                                 state.teamDetail?.description ?? "",
@@ -433,7 +436,6 @@ class _ViewDetailTeamParticipantPageState
                             ],
                           ),
                         SizedBox(height: 20),
-                        ViewResultTeam(),
                         if (state.userIdIsLeaderTeam ==
                             GetIt.I.get<CurrentUser>().id)
                           Row(
@@ -515,6 +517,8 @@ class _ViewDetailTeamParticipantPageState
                               ),
                             ],
                           ),
+                        SizedBox(height: 20),
+                        ViewResultTeam(),
                       ]),
                     ));
         },

@@ -578,7 +578,9 @@ class _ListMatchMenuState extends State<ListMatchMenu> {
                                         255, 235, 237, 241),
                                   ),
                                   onPressed: () {
-                                    Navigator.of(context).pushNamed(Routes.viewDetailMatch, arguments: state.matches?[index]);
+                                    Navigator.of(context).pushNamed(
+                                        Routes.viewDetailMatch,
+                                        arguments: state.matches?[index]);
                                   },
                                   child: Row(
                                     children: [
@@ -602,20 +604,21 @@ class _ListMatchMenuState extends State<ListMatchMenu> {
                                           padding:
                                               const EdgeInsets.only(left: 10),
                                           child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                            children: [
-                                            Text(
-                                                "${state.matches?[index].status.name}",
-                                                style: const TextStyle(
-                                                    fontSize: 18,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                    color:
-                                                        ArgonColors.warning)),
-                                            const Icon(
-                                              Icons.arrow_forward_ios,
-                                            ),
-                                          ]),
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                Text(
+                                                    "${state.matches?[index].status.name}",
+                                                    style: const TextStyle(
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: ArgonColors
+                                                            .warning)),
+                                                const Icon(
+                                                  Icons.arrow_forward_ios,
+                                                ),
+                                              ]),
                                         ),
                                       ),
                                     ],
@@ -639,7 +642,7 @@ class _ListMatchMenuState extends State<ListMatchMenu> {
                                 const Padding(
                                   padding: EdgeInsets.only(top: 25.0),
                                   child: Text(
-                                    'Không có kết quả mà bạn tìm kiếm',
+                                    'Không có trận đấu nào trong vòng thi',
                                     style: TextStyle(fontSize: 20),
                                   ),
                                 ),

@@ -34,7 +34,7 @@ class MatchModel {
     int id = json['id'] ?? 0;
     int roundId = json['round_id'] ?? 0;
     String roundName = json['round_name'] ?? "";
-    bool isLoseMatch = json['is_lose_match'] ?? null;
+    bool? isLoseMatch = json['is_lose_match'] ?? null;
     //String matchTypeName = json['match_type_name'] ?? "";
     String address = json['address'] ?? "";
     String title = json['title'] ?? "";
