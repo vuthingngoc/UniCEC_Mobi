@@ -7,9 +7,9 @@ import 'component/detail_match_menu.dart';
 
 class ViewDetailMatchPage extends StatefulWidget {
   //bloc
-  ViewDetailMatchBloc bloc;
-
-  ViewDetailMatchPage({required this.bloc});
+  // ViewDetailMatchBloc bloc;
+  //
+  // ViewDetailMatchPage({required this.bloc});
   
   @override
   State<StatefulWidget> createState() => _ViewDetailMatchPageState();
@@ -18,7 +18,7 @@ class ViewDetailMatchPage extends StatefulWidget {
 class _ViewDetailMatchPageState extends State<ViewDetailMatchPage>
     with AutomaticKeepAliveClientMixin {
   
-  ViewDetailMatchBloc get bloc => widget.bloc;
+  // ViewDetailMatchBloc get bloc => widget.bloc;
 
   @override
   bool get wantKeepAlive => true;
@@ -26,35 +26,55 @@ class _ViewDetailMatchPageState extends State<ViewDetailMatchPage>
   @override
   void initState() {}
 
-  void didChangeDependencies(){
-    RouteSettings? settings = ModalRoute.of(context)?.settings;
-    if(settings != null){
-      bloc.state.match = settings.arguments as MatchModel;
-    }
-  }
+  // void didChangeDependencies(){
+  //   RouteSettings? settings = ModalRoute.of(context)?.settings;
+  //   if(settings != null){
+  //     bloc.state.match = settings.arguments as MatchModel;
+  //   }
+  // }
 
   @override
+  // Widget build(BuildContext context) {
+  //   return BlocProvider.value(
+  //     value: bloc,
+  //     child: Scaffold(
+  //       appBar: AppBar(
+  //         leading: IconButton(
+  //           onPressed: () {
+  //             Navigator.pop(context);
+  //           },
+  //           icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+  //         ),
+  //         title: const Text(
+  //           "Chi tiết trận đấu",
+  //           style: TextStyle(color: Colors.white),
+  //         ),
+  //         automaticallyImplyLeading: false,
+  //         centerTitle: true,
+  //         backgroundColor: AppColors.mainColor,
+  //       ),
+  //       body: ViewDetailMatchMenu(),
+  //     ),
+  //   );
+  // }
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: bloc,
-      child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-          ),
-          title: const Text(
-            "Chi tiết trận đấu",
-            style: TextStyle(color: Colors.white),
-          ),
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          backgroundColor: AppColors.mainColor,
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
         ),
-        body: ViewDetailMatchMenu(),
+        title: const Text(
+          "Chi tiết trận đấu",
+          style: TextStyle(color: Colors.white),
+        ),
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        backgroundColor: AppColors.mainColor,
       ),
+      body: ViewDetailMatchMenu(),
     );
   }
 }

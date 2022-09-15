@@ -219,7 +219,8 @@ class _MainPageState extends State<MainPage> {
                 CompetitionPage(bloc: GetIt.I.get<CompetitionBloc>()),
                 // NotificationPage(bloc: GetIt.I.get<NotificationBloc>()),
                  //ViewListMatchPage(bloc: GetIt.I.get<ViewListMatchBloc>()),
-                ViewDetailMatchPage(bloc: GetIt.I.get<ViewDetailMatchBloc>()),
+                // ViewDetailMatchPage(bloc: GetIt.I.get<ViewDetailMatchBloc>()),
+                ViewDetailMatchPage(),
                 // ViewCompetitionRoundResultPage(bloc: GetIt.I.get<CompetitionRoundBloc>()),
                 //ViewListCompetitionOfParticipantPage(),
                 ProfilePage(bloc: GetIt.I.get<ProfileBloc>())
