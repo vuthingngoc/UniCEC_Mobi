@@ -18,6 +18,7 @@ class Api {
   static String get competitionRoles => "/api/v1/competition-roles";
   static String get competitionRounds => "/api/v1/competition-rounds";
   static String get matches => "/api/v1/matches";
+  static String get teamInMatches => "/api/v1/teams-in-match";
   static String get competitionTypes => "/api/v1/competition-types";
   static String get departments => "/api/v1/departments";
   static String get entityTypes => "/api/v1/entity-types";
@@ -37,25 +38,28 @@ class Api {
     return uri + apiPath;
   }
 
-  static Map<String, String> GetHeader(String? token){
+  static Map<String, String> GetHeader(String? token) {
     // base header => If you want to add more things in header, you can build new method
     Map<String, String> header = {
       HttpHeaders.contentTypeHeader: 'application/json; charset=UTF-8'
     };
 
-    if(token != null)  header[HttpHeaders.authorizationHeader] = "Bearer $token";
+    if (token != null)
+      header[HttpHeaders.authorizationHeader] = "Bearer $token";
 
     return header;
   }
 
-  static Map<String, String> GetHeaderForLogin(String? token, String tokenDevice){
+  static Map<String, String> GetHeaderForLogin(
+      String? token, String tokenDevice) {
     Log.info('tokenDevice: $tokenDevice');
 
     Map<String, String> header = {
-      HttpHeaders.contentTypeHeader: 'application/json; charset=UTF-8',      
+      HttpHeaders.contentTypeHeader: 'application/json; charset=UTF-8',
     };
 
-    if(token != null)  header[HttpHeaders.authorizationHeader] = "Bearer $token";
+    if (token != null)
+      header[HttpHeaders.authorizationHeader] = "Bearer $token";
     header['X-Device-Token'] = tokenDevice;
 
     return header;

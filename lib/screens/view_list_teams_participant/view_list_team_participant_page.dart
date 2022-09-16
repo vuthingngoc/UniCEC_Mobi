@@ -96,11 +96,12 @@ class _ViewListTeamParticipantPageState
       }
       if (event is NavigatorTeamDetailPageEvent) {
         SendingDataModel data = SendingDataModel(
-            competitionId: event.competitionId,
-            teamId: event.teamId,
-            teamName: event.teamName,
-            teamDescription: event.teamDescription,
-            status: event.status);
+          competitionId: event.competitionId,
+          teamId: event.teamId,
+          teamName: event.teamName,
+          teamDescription: event.teamDescription,
+          status: event.status,
+        );
         bool returnData = await Navigator.of(context)
                 .pushNamed(Routes.viewDetailTeamParticipant, arguments: data)
             as bool;
