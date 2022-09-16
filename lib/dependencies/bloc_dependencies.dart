@@ -11,6 +11,7 @@ import '../bloc/view_list_competition_of_club/view_list_competition_of_club_bloc
 import '../bloc/view_list_competition_participant/view_list_competition_participant_bloc.dart';
 import '../bloc/view_list_match/view_list_match_bloc.dart';
 import '../bloc/view_list_member/view_list_member_bloc.dart';
+import '../bloc/view_list_team_in_round/view_list_team_in_round_bloc.dart';
 import '../bloc/view_list_team_student/view_list_team_student_bloc.dart';
 import '/bloc/club/club_bloc.dart';
 import '/bloc/clubs_view/clubs_view_bloc.dart';
@@ -41,8 +42,8 @@ class BlocDependencies {
     injector.registerFactory<SplashBloc>(() => SplashBloc(service: injector()));
 
     //import login bloc
-    injector.registerFactory<LoginBloc>(
-        () => LoginBloc(service: injector(), userService: injector(), clubService: injector()));
+    injector.registerFactory<LoginBloc>(() => LoginBloc(
+        service: injector(), userService: injector(), clubService: injector()));
 
     //import UniversitySelectionBloc
     injector.registerFactory<UniversitySelectionBloc>(
@@ -74,10 +75,10 @@ class BlocDependencies {
         () => CompetitionRoundBloc(service: injector()));
 
     injector.registerFactory<ViewListMatchBloc>(
-      () => ViewListMatchBloc(service: injector()));
+        () => ViewListMatchBloc(service: injector()));
 
     injector.registerFactory<ViewDetailMatchBloc>(
-      () => ViewDetailMatchBloc(service: injector()));      
+        () => ViewDetailMatchBloc(service: injector()));
 
     injector.registerFactory<EventBloc>(() => EventBloc(service: injector()));
 
@@ -139,5 +140,8 @@ class BlocDependencies {
 
     injector.registerFactory<ViewListCompetitionOfClubBloc>(
         () => ViewListCompetitionOfClubBloc(service: injector()));
+
+    injector.registerFactory<ViewListTeamInRoundBloc>(
+        () => ViewListTeamInRoundBloc(service: injector()));
   }
 }

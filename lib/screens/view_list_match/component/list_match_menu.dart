@@ -548,6 +548,9 @@ class _ListMatchMenuState extends State<ListMatchMenu> {
                               color: AppColors.mainColor,
                               onPressed: () {
                                 // navigator to view_list_team_each_round
+                                Navigator.of(context).pushNamed(
+                                    Routes.viewListTeamEachRound,
+                                    arguments: state.round!.id);
                               },
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(4.0),

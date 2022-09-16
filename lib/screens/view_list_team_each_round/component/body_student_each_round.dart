@@ -29,13 +29,18 @@ class _BodyEachRoundState extends State<BodyEachRound> {
             child: Column(children: [
               Container(
                 padding: const EdgeInsets.only(left: 20, top: 10, bottom: 20),
-                child: Wrap(                  
+                child: Wrap(
                   children: const [
                     Text(
                       "Lưu ý*: ",
                       style: TextStyle(color: ArgonColors.error, fontSize: 20),
                     ),
-                    Text("Hãy tham gia cuộc thi để có đội thi của riêng bạn!", style: TextStyle(fontSize: 17,),)
+                    Text(
+                      "Hãy tham gia cuộc thi để có đội thi của riêng bạn!",
+                      style: TextStyle(
+                        fontSize: 17,
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -69,7 +74,7 @@ class _BodyEachRoundState extends State<BodyEachRound> {
                     )),
                     Expanded(
                         child: Text(
-                      "Chi tiết",
+                      "Thứ hạng",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     )),

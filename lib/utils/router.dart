@@ -17,7 +17,8 @@ class Routes {
   static String get viewDetailTeamStudent => '/viewDetailTeamStudent';
 
   static String get viewCompetitionRound => '/viewCompetitionRound';
-  static String get viewCompetitionRoundResult => '/view-competition-round-result';
+  static String get viewCompetitionRoundResult =>
+      '/view-competition-round-result';
 
   static String get viewListMatch => '/view-list-match';
   static String get viewDetailMatch => '/view-detail-match';
@@ -43,6 +44,7 @@ class Routes {
   static String get login => '/login';
   static String get task => '/task';
   static String get clubViewDetail => '/clubViewDetail';
+  static String get viewListTeamEachRound => '/viewListTeamEachRound';
 
   static MaterialPageRoute getRoute(RouteSettings settings) {
     Widget widget;

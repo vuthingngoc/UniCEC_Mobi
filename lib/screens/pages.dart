@@ -31,3 +31,4 @@ export 'view_list_teams_participant/view_list_team_participant_page.dart';
 export 'view_detail_team_participant/view_detail_team_participant_page.dart';
 export 'view_list_team_student/view_list_team_student.dart';
 export 'view_detail_team_student/view_detail_team_student.dart';
+export 'view_list_team_each_round/view_list_team_each_round.dart';
