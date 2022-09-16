@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:get_it/get_it.dart';
+import 'package:unicec_mobi/models/entities/team/team_in_round_model.dart';
 import 'package:unicec_mobi/models/enums/team_status.dart';
 import '../../models/common/resultCRUD.dart';
 import '../../models/entities/participant/participant_in_team_model.dart';
+import '../../models/entities/team/team_in_round_request_model.dart';
 import '/models/entities/team/team_request_model.dart';
 import '/models/entities/team/team_model.dart';
 import '/services/team_svc/i_team_service.dart';
@@ -312,5 +314,41 @@ class TeamService extends ITeamService {
     }
     return ResultCRUD(
         check: false, errorMessage: 'Lỗi rồi!', returnIntData: -1);
+  }
+
+  @override
+  Future<PagingResult<TeamInRoundModel>?> GetListTeamInRound(
+      TeamInRoundRequestModel request) async {
+    var client = http.Client();
+    //nếu muốn build thêm param thì đổi tham số truyền
+    String params = '?';
+    if (request.roundId != null) {
+      params += 'roundId=${request.roundId}';
+    }
+    //currentPage
+    if (request.currentPage != null) {
+      params += '&currentPage=${request.currentPage}';
+    }
+    String url = Api.GetUrl(apiPath: '${Api.teamsInRound}/search?${params}');
+    String? token = GetIt.I.get<CurrentUser>().idToken;
+    try {
+      var response =
+          await client.get(Uri.parse(url), headers: Api.GetHeader(token));
+      if (response.statusCode == 200) {
+        String isList = "[]";
+        if (response.body.toString().compareTo(isList) == 0) {
+          //List<dynamic> json = adapter.parseToList(response);
+          //TH1
+          return null;
+        } else {
+          //TH2
+          Map<String, dynamic> json = adapter.parseToMap(response);
+          return PagingResult.fromJson(json, TeamInRoundModel.fromJson);
+        }
+      }
+    } catch (e) {
+      Log.error(e.toString());
+    }
+    return null;
   }
 }

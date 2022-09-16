@@ -1,4 +1,6 @@
 import '../../models/common/resultCRUD.dart';
+import '../../models/entities/team/team_in_round_model.dart';
+import '../../models/entities/team/team_in_round_request_model.dart';
 import '../../models/enums/team_status.dart';
 import '/models/entities/team/team_detail_model.dart';
 import '../../models/common/paging_result.dart';
@@ -27,4 +29,8 @@ abstract class ITeamService {
   Future<ResultCRUD> DeleteTeam(int teamId);
   //
   Future<ResultCRUD> DeleteMemberByTeamLeader(int teamId, int participantId);
+
+  //
+  Future<PagingResult<TeamInRoundModel>?> GetListTeamInRound(
+      TeamInRoundRequestModel request);
 }
