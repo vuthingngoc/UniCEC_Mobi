@@ -1,3 +1,4 @@
+import '../../enums/competition_status.dart';
 import '../../enums/team_status.dart';
 
 class SendingDataModel {
@@ -6,6 +7,7 @@ class SendingDataModel {
   final String teamName;
   final String teamDescription;
   final TeamStatus status;
+  //final CompetitionStatus? competitionStatus;
   int? min;
   int? max;
 
@@ -15,6 +17,7 @@ class SendingDataModel {
       required this.teamName,
       required this.teamDescription,
       required this.status,
+      //required this.competitionStatus,
       this.min,
       this.max});
 }

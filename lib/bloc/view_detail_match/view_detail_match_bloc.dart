@@ -3,6 +3,7 @@ import 'package:unicec_mobi/bloc/view_detail_match/view_detail_match_state.dart'
 import 'package:unicec_mobi/models/entities/match/match_model.dart';
 import 'package:unicec_mobi/utils/base_bloc.dart';
 
+import '../../models/entities/match/teams_in_match_model.dart';
 import '../../models/enums/match_status.dart';
 import '../../services/match_svc/i_match_service.dart';
 
@@ -24,6 +25,7 @@ class ViewDetailMatchBloc
                 address: "",
                 createTime: DateTime.now(),
                 endTime: DateTime.now(),
+                roundTypeName: '',
                 description: "",
                 isLoseMatch: null,
                 numberOfTeam: 0,
@@ -35,8 +37,13 @@ class ViewDetailMatchBloc
             teamsInMatch: [])) {
     (on((event, emit) async {
       if (event is LoadData) {
-        //load match
+        _isLoading = true;
         //load team in match
+        List<TeamsInMatchModel>? teamsInMatch =
+            await service.GetTeamsInMatch(event.match.id);
+        emit(state.copyWith(
+            match: event.match, teamsInMatch: teamsInMatch ?? []));
+        _isLoading = false;
       }
     }));
   }
