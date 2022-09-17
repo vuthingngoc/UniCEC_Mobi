@@ -82,42 +82,6 @@ List<TeamsInMatchModel> teamInMatch = <TeamsInMatchModel>[
       scores: 30,
       status: TeamInMatchStatus.Win,
       description: "description"),
-  TeamsInMatchModel(
-      id: 1,
-      matchId: 1,
-      matchTitle: "",
-      teamId: 1,
-      teamName: "teamName",
-      scores: 30,
-      status: TeamInMatchStatus.Win,
-      description: "description"),
-  TeamsInMatchModel(
-      id: 1,
-      matchId: 1,
-      matchTitle: "",
-      teamId: 1,
-      teamName: "teamName",
-      scores: 30,
-      status: TeamInMatchStatus.Lose,
-      description: "description"),
-  TeamsInMatchModel(
-      id: 1,
-      matchId: 1,
-      matchTitle: "",
-      teamId: 1,
-      teamName: "teamName",
-      scores: 30,
-      status: TeamInMatchStatus.Win,
-      description: "description"),
-  TeamsInMatchModel(
-      id: 1,
-      matchId: 1,
-      matchTitle: "",
-      teamId: 1,
-      teamName: "teamName",
-      scores: 30,
-      status: TeamInMatchStatus.Win,
-      description: "description"),
 ];
 
 List<Widget> ListTeamInMatch(List<TeamsInMatchModel>? teamInMatch) {
