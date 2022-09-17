@@ -15,7 +15,7 @@ import '../../utils/loading.dart';
 import '../../utils/router.dart';
 import '../widgets/input.dart';
 import 'component/view_detail_table.dart';
-import 'component/view_result_team.dart';
+import '../view_result_team/component/view_result_team_menu.dart';
 
 class ViewDetailTeamParticipantPage extends StatefulWidget {
   //bloc
@@ -408,6 +408,27 @@ class _ViewDetailTeamParticipantPageState
                               ),
                             ],
                           ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                  border:
+                                  Border.all(color: ArgonColors.warning),
+                                  color: ArgonColors.warning,
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(4))),
+                              child: FlatButton(
+                                  textColor: ArgonColors.white,
+                                  onPressed: () { //navigator đến view_result_team
+                                  },
+                                  child: Text("Xem kết quả hiện tại",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 15.0))),
+                            ),
+                          ],
+                        ),
                         if (state.status == TeamStatus.IsLocked &&
                             GetIt.I.get<CurrentUser>().id ==
                                 state.userIdIsLeaderTeam)
@@ -518,7 +539,6 @@ class _ViewDetailTeamParticipantPageState
                             ],
                           ),
                         SizedBox(height: 20),
-                        ViewResultTeam(),
                       ]),
                     ));
         },
