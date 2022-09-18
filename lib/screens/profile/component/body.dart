@@ -26,7 +26,6 @@ class Body extends StatelessWidget {
     return BlocBuilder<ProfileBloc, ProfileState>(
         bloc: bloc,
         builder: (context, state) {
-          print('body profile page: ${bloc.isLoading}');
           return (bloc.isLoading)
               ? Loading()
               : SingleChildScrollView(
@@ -39,36 +38,38 @@ class Body extends StatelessWidget {
                             padding: const EdgeInsets.only(left: 25.0),
                             child: ProfilePic(avatar: user.avatar!),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(user.fullname,
-                                    style: const TextStyle(
-                                        color: Color.fromRGBO(50, 50, 93, 1),
-                                        fontSize: 23.0,
-                                        fontWeight: FontWeight.bold)),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 20.0),
-                                  child: Container(
-                                    margin: const EdgeInsets.only(right: 20),
-                                    padding: const EdgeInsets.all(5),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: AppColors.mainColor),
-                                        color: AppColors.mainColor,
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(10))),
-                                    child:
-                                        Text("${state.seedsWallet?.amount ?? 0} điểm",
-                                            style: const TextStyle(
-                                                // color: Colors.bl,
-                                                fontSize: 18,
-                                                color: ArgonColors.white)),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 20.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(user.fullname,
+                                      style: const TextStyle(
+                                          color: Color.fromRGBO(50, 50, 93, 1),
+                                          fontSize: 23.0,
+                                          fontWeight: FontWeight.bold)),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 20.0),
+                                    child: Container(
+                                      margin: const EdgeInsets.only(right: 20),
+                                      padding: const EdgeInsets.all(5),
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: AppColors.mainColor),
+                                          color: AppColors.mainColor,
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(10))),
+                                      child:
+                                          Text("${state.seedsWallet?.amount ?? 0} điểm",
+                                              style: const TextStyle(
+                                                  // color: Colors.bl,
+                                                  fontSize: 18,
+                                                  color: ArgonColors.white)),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ],

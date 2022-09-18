@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:get_it/get_it.dart';
+import 'package:unicec_mobi/models/entities/team/team_in_competition_model.dart';
 import 'package:unicec_mobi/models/entities/team/team_in_round_model.dart';
 import 'package:unicec_mobi/models/enums/team_status.dart';
 import '../../models/common/resultCRUD.dart';
@@ -349,6 +350,25 @@ class TeamService extends ITeamService {
     } catch (e) {
       Log.error(e.toString());
     }
+    return null;
+  }
+
+  @override
+  Future<ResultTeamInCompetitionModel?> GetTotalResultTeamInCompetition(int competitionId, int teamId) async {
+    var client = http.Client();
+    String url = Api.GetUrl(apiPath: "${Api.teams}/$teamId/competition/$competitionId");
+    String token = GetIt.I.get<CurrentUser>().idToken;
+    try{
+      var response = await client.get(Uri.parse(url), headers: Api.GetHeader(token));
+      if(response.statusCode == 200 && response.body.isNotEmpty){
+        Map<String, dynamic> json = adapter.parseToMap(response);
+        return ResultTeamInCompetitionModel.fromJson(json);
+      }
+
+    }catch(e){
+      Log.error(e.toString());
+    }
+
     return null;
   }
 }

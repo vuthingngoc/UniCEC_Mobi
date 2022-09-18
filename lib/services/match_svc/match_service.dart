@@ -86,4 +86,24 @@ class MatchService implements IMatchService {
     }
     return null;
   }
+  
+  @override
+  Future<MatchModel?> GetMatchById(int matchId) async {
+    var client = http.Client();
+    String url = Api.GetUrl(apiPath: "${Api.matches}/$matchId");
+    String token = GetIt.I.get<CurrentUser>().idToken;
+
+    try {
+      var response =
+          await client.get(Uri.parse(url), headers: Api.GetHeader(token));
+      if (response.statusCode == 200 && response.body.isNotEmpty) {
+        Map<String, dynamic> json = adapter.parseToMap(response);
+        return MatchModel.fromJson(json);
+      }
+    } catch (e) {
+      Log.error(e.toString());
+    }
+
+    return null;
+  }
 }

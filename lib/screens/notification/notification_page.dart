@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import '../../bloc/notification/notification_event.dart';
 import '../../utils/app_color.dart';
 import '../../utils/dimens.dart';
-import '../../utils/loading.dart';
 import 'widgets/list_notification.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -18,18 +17,17 @@ class NotificationPage extends StatefulWidget {
   _NotificationState createState() => _NotificationState();
 }
 
-class _NotificationState extends State<NotificationPage> {
+class _NotificationState extends State<NotificationPage> with AutomaticKeepAliveClientMixin{
+  @override
+  bool get wantKeepAlive => true;
+
   NotificationBloc get _bloc => widget.bloc;
 
   @override
-  void initState() {
-    super.initState();
-    _bloc.add(LoadNotificationsEvent());
-    //_bloc.isLoading = true;
-  }
-
-  @override
   Widget build(BuildContext context) {
+    _bloc.isLoading = true;
+    _bloc.add(LoadNotificationsEvent());
+
     return BlocProvider.value(
       value: _bloc,
       child: Scaffold(

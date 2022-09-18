@@ -1,5 +1,4 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../bloc/view_list_team_participant/view_list_team_participant_bloc.dart';
@@ -7,8 +6,6 @@ import '../../../bloc/view_list_team_participant/view_list_team_participant_even
 import '../../../bloc/view_list_team_participant/view_list_team_participant_state.dart';
 import '../../../constants/Theme.dart';
 import '../../../models/enums/team_status.dart';
-import '../../../utils/app_color.dart';
-import '../../widgets/input.dart';
 import 'list_team_menu.dart';
 
 class Body extends StatefulWidget {
@@ -32,7 +29,7 @@ class _BodyState extends State<Body> {
         bloc: bloc,
         builder: (context, state) {
           return SingleChildScrollView(
-            padding: EdgeInsets.symmetric(vertical: 20),
+            padding: const EdgeInsets.symmetric(vertical: 20),
             child: Column(children: [
               Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 50),
@@ -65,7 +62,7 @@ class _BodyState extends State<Body> {
                                   color: Colors.grey,
                                 ),
                               ),
-                              enabledBorder: OutlineInputBorder(
+                              enabledBorder: const OutlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Colors.grey, width: 1.0),
                               ),
@@ -77,10 +74,10 @@ class _BodyState extends State<Body> {
                         bloc.add(LoadingEvent());
                         bloc.add(SearchEvent());
                       },
-                      child: Icon(Icons.search),
+                      child: const Icon(Icons.search),
                     ),
                     PopupMenuButton<int>(
-                        icon: Icon(Icons.filter_alt_outlined),
+                        icon: const Icon(Icons.filter_alt_outlined),
                         itemBuilder: (context) {
                           return [
                             PopupMenuItem(

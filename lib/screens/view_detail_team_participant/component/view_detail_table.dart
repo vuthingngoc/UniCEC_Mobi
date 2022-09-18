@@ -31,9 +31,9 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
       builder: (context, state) {
         return DataTable(
           columnSpacing: 10,
+          horizontalMargin: 10,
             columns: [
           DataColumn(
-
               label: Container(
             child: Text('',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),

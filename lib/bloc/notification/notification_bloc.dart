@@ -13,17 +13,17 @@ class NotificationBloc extends BaseBloc<NotificationEvent, NotificationState> {
   INotificationService service;
 
   int pageSize = 10;
-  // bool _isLoading = false;
+  bool _isLoading = false;
 
-  // bool get isLoading => _isLoading;
+  bool get isLoading => _isLoading;
 
-  // set isLoading(bool isLoading) {
-  //   _isLoading = isLoading;
-  // }
+  set isLoading(bool isLoading) {
+    _isLoading = isLoading;
+  }
 
   NotificationBloc({required this.service})
       : super(NotificationState(
-            loading: true,
+            // loading: true,
             notifications: PagingResult<NotificationModel>(
                 currentPage: 1,
                 hasNext: false,
@@ -35,36 +35,19 @@ class NotificationBloc extends BaseBloc<NotificationEvent, NotificationState> {
     on(((event, emit) async {
       int userId = GetIt.I.get<CurrentUser>().id;
       if (event is LoadNotificationsEvent) {
-        // List<NotificationModel> notifications = [];
-        // QuerySnapshot<Map<String, dynamic>> querySnapshot =
-        //     await FirebaseFirestore.instance.collection('Notification').get();
-
-        // Log.info("querySnapshot: ${querySnapshot.size}");
-
-        // for (var element in querySnapshot.docs) {
-        //   Map<String, dynamic> data = element.data();
-        //   Log.info('data notification: $data');
-        //   notifications.add(NotificationModel.fromJson(data));
-        // }
-        // notifications.sort();
-
-        // if (notifications.length > pageSize) {
-        //   for (int i = 0; i < pageSize; i++) {
-        //     state.currentNotifications.add(notifications[i]);
-        //   }
-        //   emit(state.copyWith(
-        //       notifications, state.currentNotifications, 1, pageSize, true));
-        // } else {
-        //   state.currentNotifications.addAll(notifications);
-        //   emit(state.copyWith(
-        //       notifications, state.currentNotifications, 1, pageSize, false));
-        // }
+        print('LoadNotificationsEvent is running ... !!!');
+        _isLoading = true;
+        
         PagingResult<NotificationModel>? notifications =
             await service.GetAllNotisByUser(userId, null);
-        emit(state.copyWith(notifications: notifications, loading: false));
+        emit(state.copyWith(notifications: notifications));
+        
+        _isLoading = false;
       }
 
       if (event is LoadMoreEvent) {
+        _isLoading = true;
+
         int currentPage = (state.notifications?.currentPage)! + 1;
         PagingRequest request =
             PagingRequest(currentPage: currentPage, pageSize: 10);
@@ -72,7 +55,9 @@ class NotificationBloc extends BaseBloc<NotificationEvent, NotificationState> {
         PagingResult<NotificationModel>? notifications =
             await service.GetAllNotisByUser(userId, request);
         emit(
-            state.copyWith(notifications: state.notifications, loading: false));
+            state.copyWith(notifications: state.notifications));
+
+        _isLoading = false;
       }
 
       if (event is RefreshNotificationsEvent) {
@@ -85,12 +70,11 @@ class NotificationBloc extends BaseBloc<NotificationEvent, NotificationState> {
               pageSize: 10,
               totalCount: 0,
               totalPages: 1,
-            ),
-            loading: true));
+            )));
       }
 
       if (event is LoadingEvent) {
-        emit(state.copyWith(loading: true, notifications: state.notifications));
+        emit(state.copyWith(notifications: state.notifications));
       }
     }));
   }

@@ -19,6 +19,7 @@ class ListNotification extends StatefulWidget {
 
 class _ListNotificationState extends State<ListNotification> {
   Future _loadMore(BuildContext context) async {
+    print('loadmore is running !!!!!!!!!');
     await Future.delayed(const Duration(seconds: 0, milliseconds: 2000));
     BlocProvider.of<NotificationBloc>(context).add(LoadMoreEvent());
   }
@@ -32,12 +33,12 @@ class _ListNotificationState extends State<ListNotification> {
   @override
   Widget build(BuildContext context) {
     NotificationBloc _bloc = BlocProvider.of<NotificationBloc>(context);
-
+    
     return BlocBuilder<NotificationBloc, NotificationState>(
         bloc: _bloc,
         builder: (context, state) {
           List<NotificationModel>? notifications = state.notifications?.items;
-          return (state.loading)
+          return (_bloc.isLoading)
               ? Loading()
               : (notifications != null)
                   ? RefreshIndicator(
@@ -135,13 +136,29 @@ class _ListNotificationState extends State<ListNotification> {
                             }),
                       ),
                     )
-                  : const Center(
-                      child: Text(
-                      'Không có thông báo nào',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 18.0),
-                      textAlign: TextAlign.center,
-                    ));
+                  : Padding(
+                  padding: const EdgeInsets.only(top: 180.0),
+                  child: Column(
+                    children: [
+                      Container(
+                          decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                  alignment: Alignment.topCenter,
+                                  image: AssetImage(
+                                      "assets/img/not-found-icon-24.jpg"),
+                                  fit: BoxFit.fitWidth))),
+                      Image.asset("assets/img/not-found-icon-24.jpg"),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 25.0),
+                        child: Text(
+                          'Không có thông báo nào',
+                          style: TextStyle(fontSize: 20),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
         });
   }
 }

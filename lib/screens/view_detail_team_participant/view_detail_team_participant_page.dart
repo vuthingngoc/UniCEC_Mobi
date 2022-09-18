@@ -2,7 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:unicec_mobi/screens/club_view_detail/widgets/default_button.dart';
+import 'package:unicec_mobi/models/entities/team/team_in_competition_request_model.dart';
 import '../../bloc/view_detail_team_participant/view_detail_team_participant_bloc.dart';
 import '../../bloc/view_detail_team_participant/view_detail_team_participant_event.dart';
 import '../../bloc/view_detail_team_participant/view_detail_team_participant_state.dart';
@@ -13,9 +13,7 @@ import '../../models/enums/team_status.dart';
 import '../../utils/app_color.dart';
 import '../../utils/loading.dart';
 import '../../utils/router.dart';
-import '../widgets/input.dart';
 import 'component/view_detail_table.dart';
-import '../view_result_team/component/view_result_team_menu.dart';
 
 class ViewDetailTeamParticipantPage extends StatefulWidget {
   //bloc
@@ -339,13 +337,13 @@ class _ViewDetailTeamParticipantPageState
                                         border: Border.all(
                                             color: ArgonColors.success),
                                         color: ArgonColors.success,
-                                        borderRadius: BorderRadius.all(
+                                        borderRadius: const BorderRadius.all(
                                             Radius.circular(10))),
                                     child: SelectableText(
                                         (state.teamDetail != null)
                                             ? "Mã mời: ${state.teamDetail!.invitedCode}"
                                             : "Chưa có load mã",
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 18,
                                         )),
@@ -358,18 +356,18 @@ class _ViewDetailTeamParticipantPageState
                           padding: const EdgeInsets.only(top: 10.0, left: 15),
                           child: Row(
                             children: [
-                              Text(
+                              const Text(
                                 "Chi tiết: ",
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               Expanded(
                                   child: Text(
                                 state.teamDetail?.description ?? "",
-                                style: TextStyle(fontSize: 18),
+                                style: const TextStyle(fontSize: 18),
                               )),
                             ],
                           ),
@@ -377,8 +375,8 @@ class _ViewDetailTeamParticipantPageState
                         (state.teamDetail?.participants != null)
                             ? ViewDetailTableMenu(
                                 listModel: state.teamDetail!.participants)
-                            : Text("Chưa có load danh sách Team"),
-                        SizedBox(
+                            : const Text("Chưa có load danh sách Team"),
+                        const SizedBox(
                           height: 30,
                         ),
                         if (state.status == TeamStatus.Available &&
@@ -394,43 +392,50 @@ class _ViewDetailTeamParticipantPageState
                                         Border.all(color: ArgonColors.warning),
                                     color: ArgonColors.warning,
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(4))),
+                                        const BorderRadius.all(Radius.circular(30))),
                                 child: FlatButton(
                                     textColor: ArgonColors.white,
                                     onPressed: () {
                                       bloc.add(UpdateStatusTeam(
                                           status: TeamStatus.IsLocked));
                                     },
-                                    child: Text("Khóa nhóm",
+                                    child: const Text("Khóa nhóm",
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 15.0))),
                               ),
                             ],
                           ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    border:
-                                    Border.all(color: ArgonColors.warning),
-                                    color: ArgonColors.warning,
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(4))),
-                                child: FlatButton(
-                                    textColor: ArgonColors.white,
-                                    onPressed: () { //navigator đến view_result_team
-                                    },
-                                    child: Text("Xem kết quả hiện tại",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 15.0))),
-                              ),
-                            ],
-                          ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 200,
+                              decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: ArgonColors.warning),
+                                  color: ArgonColors.warning,
+                                  borderRadius:
+                                      const BorderRadius.all(Radius.circular(30))),
+                              child: FlatButton(
+                                  textColor: ArgonColors.white,
+                                  onPressed: () {
+                                    //navigator đến view_result_team
+                                    TeamInCompetitionRequestModel request = TeamInCompetitionRequestModel(competitionId: state.competitionId, teamId: state.teamId);
+                                    Navigator.of(context).pushNamed(Routes.viewResultTeam, arguments: request);
+                                  },
+                                  child: const Text("Xem kết quả hiện tại",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 15.0))),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
                         ),
                         if (state.status == TeamStatus.IsLocked &&
                             GetIt.I.get<CurrentUser>().id ==
@@ -445,21 +450,21 @@ class _ViewDetailTeamParticipantPageState
                                         Border.all(color: ArgonColors.warning),
                                     color: ArgonColors.warning,
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(4))),
+                                        const BorderRadius.all(Radius.circular(30))),
                                 child: FlatButton(
                                     textColor: ArgonColors.white,
                                     onPressed: () {
                                       bloc.add(UpdateStatusTeam(
                                           status: TeamStatus.Available));
                                     },
-                                    child: Text("Mở nhóm",
+                                    child: const Text("Mở nhóm",
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 15.0))),
                               ),
                             ],
                           ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         if (state.userIdIsLeaderTeam ==
                             GetIt.I.get<CurrentUser>().id)
                           Row(
@@ -493,7 +498,7 @@ class _ViewDetailTeamParticipantPageState
                                         },
                                       ).show();
                                     },
-                                    child: Text("Xóa đội thi",
+                                    child: const Text("Xóa đội thi",
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 15.0))),
@@ -513,7 +518,7 @@ class _ViewDetailTeamParticipantPageState
                                         Border.all(color: ArgonColors.warning),
                                     color: ArgonColors.warning,
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(30))),
+                                        const BorderRadius.all(Radius.circular(30))),
                                 child: FlatButton(
                                     textColor: ArgonColors.white,
                                     onPressed: () {
@@ -534,14 +539,14 @@ class _ViewDetailTeamParticipantPageState
                                         },
                                       ).show();
                                     },
-                                    child: Text("Thoát khỏi nhóm",
+                                    child: const Text("Thoát khỏi nhóm",
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 15.0))),
                               ),
                             ],
                           ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                       ]),
                     ));
         },
