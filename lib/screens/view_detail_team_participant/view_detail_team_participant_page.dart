@@ -388,13 +388,13 @@ class _ViewDetailTeamParticipantPageState
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                width: 200,
+                                width: 170,
                                 decoration: BoxDecoration(
                                     border:
                                         Border.all(color: ArgonColors.warning),
                                     color: ArgonColors.warning,
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(30))),
+                                        BorderRadius.all(Radius.circular(4))),
                                 child: FlatButton(
                                     textColor: ArgonColors.white,
                                     onPressed: () {
@@ -408,26 +408,29 @@ class _ViewDetailTeamParticipantPageState
                               ),
                             ],
                           ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                  border:
-                                  Border.all(color: ArgonColors.warning),
-                                  color: ArgonColors.warning,
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(4))),
-                              child: FlatButton(
-                                  textColor: ArgonColors.white,
-                                  onPressed: () { //navigator đến view_result_team
-                                  },
-                                  child: Text("Xem kết quả hiện tại",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 15.0))),
-                            ),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    border:
+                                    Border.all(color: ArgonColors.warning),
+                                    color: ArgonColors.warning,
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(4))),
+                                child: FlatButton(
+                                    textColor: ArgonColors.white,
+                                    onPressed: () { //navigator đến view_result_team
+                                    },
+                                    child: Text("Xem kết quả hiện tại",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 15.0))),
+                              ),
+                            ],
+                          ),
                         ),
                         if (state.status == TeamStatus.IsLocked &&
                             GetIt.I.get<CurrentUser>().id ==
@@ -436,13 +439,13 @@ class _ViewDetailTeamParticipantPageState
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                width: 200,
+                                 width: 170,
                                 decoration: BoxDecoration(
                                     border:
                                         Border.all(color: ArgonColors.warning),
                                     color: ArgonColors.warning,
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(30))),
+                                        BorderRadius.all(Radius.circular(4))),
                                 child: FlatButton(
                                     textColor: ArgonColors.white,
                                     onPressed: () {
@@ -463,13 +466,13 @@ class _ViewDetailTeamParticipantPageState
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                width: 200,
+                                width: 170,
                                 decoration: BoxDecoration(
                                     border:
                                         Border.all(color: ArgonColors.warning),
                                     color: ArgonColors.warning,
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(30))),
+                                        BorderRadius.all(Radius.circular(4))),
                                 child: FlatButton(
                                     textColor: ArgonColors.white,
                                     onPressed: () {
