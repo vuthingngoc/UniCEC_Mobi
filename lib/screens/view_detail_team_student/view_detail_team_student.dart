@@ -70,7 +70,7 @@ class _ViewDetailTeamStudentPageState extends State<ViewDetailTeamStudentPage>
                 ),
                 title: Text(
                   state.teamDetail?.name ?? "Chưa Load Team Name",
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
                 automaticallyImplyLeading: false,
                 centerTitle: true,
@@ -79,39 +79,42 @@ class _ViewDetailTeamStudentPageState extends State<ViewDetailTeamStudentPage>
               body: (state.isLoading)
                   ? Loading()
                   : SingleChildScrollView(
-                      child: Column(children: [
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //   children: [
-                        //     Row(
-                        //       children: [
-                        //         Container(
-                        //           margin:
-                        //               const EdgeInsets.only(left: 15, top: 20),
-                        //           padding: const EdgeInsets.all(5.0),
-                        //           decoration: BoxDecoration(
-                        //               border: Border.all(color: Colors.green),
-                        //               color: Colors.green,
-                        //               borderRadius:
-                        //                   BorderRadius.all(Radius.circular(10))),
-                        //           child: Text(
-                        //               (state.teamDetail != null)
-                        //                   ? "Mã: T-${state.teamDetail!.id}"
-                        //                   : "Chưa có load mã",
-                        //               style: TextStyle(
-                        //                 color: Colors.white,
-                        //                 fontSize: 18,
-                        //               )),
-                        //         ),
-                        //       ],
-                        //     )
-                        //   ],
-                        // ),
-                        (state.teamDetail?.participants != null)
-                            ? ViewDetailTableStudentMenu(
-                                listModel: state.teamDetail!.participants)
-                            : Text("Chưa có load danh sách Team"),
-                      ]),
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 100.0),
+                        child: Column(children: [
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //   children: [
+                          //     Row(
+                          //       children: [
+                          //         Container(
+                          //           margin:
+                          //               const EdgeInsets.only(left: 15, top: 20),
+                          //           padding: const EdgeInsets.all(5.0),
+                          //           decoration: BoxDecoration(
+                          //               border: Border.all(color: Colors.green),
+                          //               color: Colors.green,
+                          //               borderRadius:
+                          //                   BorderRadius.all(Radius.circular(10))),
+                          //           child: Text(
+                          //               (state.teamDetail != null)
+                          //                   ? "Mã: T-${state.teamDetail!.id}"
+                          //                   : "Chưa có load mã",
+                          //               style: TextStyle(
+                          //                 color: Colors.white,
+                          //                 fontSize: 18,
+                          //               )),
+                          //         ),
+                          //       ],
+                          //     )
+                          //   ],
+                          // ),
+                          (state.teamDetail?.participants != null)
+                              ? ViewDetailTableStudentMenu(
+                                  listModel: state.teamDetail!.participants)
+                              : Text("Chưa có load danh sách Team"),
+                        ]),
+                      ),
                     ));
         },
       ),

@@ -5,5 +5,6 @@ import '../../models/entities/match/teams_in_match_model.dart';
 
 abstract class IMatchService{
   Future<PagingResult<MatchModel>?> GetMatchesByRound(int roundId);
-  Future<List<TeamsInMatchModel>?> GetTeamsInMatch(int matchId); 
+  Future<List<TeamsInMatchModel>?> GetTeamsInMatch(int matchId);
+  Future<MatchModel?> GetMatchById(int matchId);
 }

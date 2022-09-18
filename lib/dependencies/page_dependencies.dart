@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:unicec_mobi/screens/notification/notification_page.dart';
+import 'package:unicec_mobi/screens/view_result_team/view_result_team.dart';
 import '../screens/view_detai_match/view_detail_match.dart';
 import '../screens/view_list_match/view_list_match.dart';
 import '/utils/router.dart';
@@ -31,11 +33,7 @@ class PageDependencies {
     injector.registerFactory<Widget>(() => CompetitionPage(bloc: injector()),
         instanceName: Routes.competition);
 
-    //EventPage -> show Sự Kiện
-    // injector.registerFactory<Widget>(() => EventPage(bloc: injector()),
-    //     instanceName: Routes.event);
-
-    //Profile Page -> show general info Student
+    // Competition detail page
     injector.registerFactory<Widget>(
         () => CompetitionDetailPage(bloc: injector()),
         instanceName: Routes.detailCompetition);
@@ -81,7 +79,7 @@ class PageDependencies {
         () => ViewCompetitionMemberTaskPage(bloc: injector()),
         instanceName: Routes.viewCompetitionMemberTask);
 
-    //list actitvity of competition member task // view competition activity
+    //list activity of competition member task // view competition activity
     injector.registerFactory<Widget>(
         () => ViewListActivityPage(bloc: injector()),
         instanceName: Routes.viewListActivity);
@@ -113,9 +111,10 @@ class PageDependencies {
         () => ViewListCompetitionOfClubPage(bloc: injector()),
         instanceName: Routes.viewListCompetitionOfClub);
 
-    //Task Page -> show Tasks
-    // injector.registerFactory<Widget>(() => TaskPage(),
-    //     instanceName: Routes.task);
+    // notification
+    injector.registerFactory<Widget>(
+      () => NotificationPage(bloc: injector()),
+      instanceName: Routes.notification);
 
     injector.registerFactory<Widget>(() => ClubViewDetailPage(bloc: injector()),
         instanceName: Routes.clubViewDetail);
@@ -130,5 +129,10 @@ class PageDependencies {
     injector.registerFactory<Widget>(
         () => ViewListTeamEachRoundPage(bloc: injector()),
         instanceName: Routes.viewListTeamEachRound);
+
+    // view result team in a competition
+    injector.registerFactory<Widget>(
+      () => ViewResultTeamPage(bloc: injector()), 
+      instanceName: Routes.viewResultTeam);    
   }
 }

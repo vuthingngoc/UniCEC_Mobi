@@ -1,3 +1,5 @@
+import 'package:unicec_mobi/models/entities/team/team_in_competition_model.dart';
+
 import '../../models/common/resultCRUD.dart';
 import '../../models/entities/team/team_in_round_model.dart';
 import '../../models/entities/team/team_in_round_request_model.dart';
@@ -29,8 +31,10 @@ abstract class ITeamService {
   Future<ResultCRUD> DeleteTeam(int teamId);
   //
   Future<ResultCRUD> DeleteMemberByTeamLeader(int teamId, int participantId);
-
   //
   Future<PagingResult<TeamInRoundModel>?> GetListTeamInRound(
       TeamInRoundRequestModel request);
+  //
+  Future<ResultTeamInCompetitionModel?> GetTotalResultTeamInCompetition(int competitionId, int teamId);    
+
 }

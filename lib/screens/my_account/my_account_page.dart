@@ -12,7 +12,6 @@ import '../../models/common/current_user.dart';
 import '../../utils/app_color.dart';
 import '../../utils/dimens.dart';
 import '../../utils/loading.dart';
-import '../widgets/drawer.dart';
 
 class MyAccountPage extends StatefulWidget {
   final MyAccountBloc bloc;

@@ -64,7 +64,7 @@ class ClubSelectionBloc
         user.clubsBelongToStudent =
             await service.getListClubsBelongToStudent(user.id);
 
-        print('alooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo - return clubs data in university');    
+        print('!!!!!! - return clubs data in university');    
         //
         //load list member belong to club -> active
         if (user.clubsBelongToStudent.isNotEmpty) {

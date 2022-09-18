@@ -45,6 +45,7 @@ class Routes {
   static String get task => '/task';
   static String get clubViewDetail => '/clubViewDetail';
   static String get viewListTeamEachRound => '/viewListTeamEachRound';
+  static String get viewResultTeam => '/view-result-team';
 
   static MaterialPageRoute getRoute(RouteSettings settings) {
     Widget widget;
@@ -52,6 +53,7 @@ class Routes {
     try {
       widget = GetIt.I.get<Widget>(instanceName: settings.name);
     } catch (e) {
+      print(e.toString());
       widget = Scaffold(
         appBar: AppBar(),
         body: const Center(

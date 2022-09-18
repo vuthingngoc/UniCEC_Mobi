@@ -45,7 +45,7 @@ class _ViewDetailTableStudentMenuState
               label: Container(
             child: Text('Chi tiết',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          )),
+          )),          
         ], rows: getRows(listModel).cast());
       },
     );

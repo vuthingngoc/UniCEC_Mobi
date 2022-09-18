@@ -558,7 +558,7 @@ class _ListMatchMenuState extends State<ListMatchMenu> {
                               child: const Padding(
                                   padding: EdgeInsets.all(10),
                                   child: Text(
-                                      "DS các đội thi", //Danh sách các đội thi
+                                      "DS các đội thi",
                                       style: TextStyle(fontSize: 18.0))),
                             ),
                           ]),

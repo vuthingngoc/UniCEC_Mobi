@@ -7,8 +7,6 @@ import '../../../bloc/view_list_team_participant/view_list_team_participant_stat
 import '../../../models/entities/team/sending_data_model.dart';
 import '../../../utils/loading.dart';
 import '../../../utils/router.dart';
-import '/models/entities/team/team_model.dart';
-import '../../../models/enums/team_status.dart';
 
 class ViewListTeamMenu extends StatefulWidget {
   const ViewListTeamMenu({

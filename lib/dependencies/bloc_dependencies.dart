@@ -13,6 +13,7 @@ import '../bloc/view_list_match/view_list_match_bloc.dart';
 import '../bloc/view_list_member/view_list_member_bloc.dart';
 import '../bloc/view_list_team_in_round/view_list_team_in_round_bloc.dart';
 import '../bloc/view_list_team_student/view_list_team_student_bloc.dart';
+import '../bloc/view_result_team/view_result_team_bloc.dart';
 import '/bloc/club/club_bloc.dart';
 import '/bloc/clubs_view/clubs_view_bloc.dart';
 import '/bloc/competition/competition_bloc.dart';
@@ -143,5 +144,9 @@ class BlocDependencies {
 
     injector.registerFactory<ViewListTeamInRoundBloc>(
         () => ViewListTeamInRoundBloc(service: injector()));
+    
+    // View result team in a competition 
+    injector.registerFactory<ViewResultTeamBloc>(
+      () => ViewResultTeamBloc(service: injector(), matchService: injector()));
   }
 }
