@@ -38,6 +38,8 @@ class ViewResultTeamBloc
             await service.GetTotalResultTeamInCompetition(
                 event.competitionId, event.teamId);
         emit(state.copyWith(resultTeamInCompetition: resultTeamInCompetition));
+        print('!!!!!!!!!!!!!!!!!!!!!!! resultTeamInCompetition: $resultTeamInCompetition');
+        print('!!!!!!!!!!!!!!!!!!!!!!! teamInRounds: ${resultTeamInCompetition?.teamInRounds}');
 
         _isLoading = false;
       }

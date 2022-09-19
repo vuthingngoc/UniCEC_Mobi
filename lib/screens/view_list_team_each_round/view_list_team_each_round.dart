@@ -37,7 +37,6 @@ class _ViewListTeamEachRoundPageState extends State<ViewListTeamEachRoundPage>
     RouteSettings settings = ModalRoute.of(context)!.settings;
     if (settings.arguments != null) {      
       int roundId = settings.arguments as int;
-      print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!! param roundId: $roundId');
       if (roundId != 0) {
         bloc.add(ReceiveDataEvent(roundId: roundId));
       }
