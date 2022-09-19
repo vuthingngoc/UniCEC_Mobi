@@ -73,7 +73,6 @@ class _LoginPageState extends State<LoginPage> {
                 print('snapshot.connectionState is waiting');
                 return const Center(child: CircularProgressIndicator());
               }
-              //print('login bloc isLoading: ${_bloc.isLoading}');
               return (_bloc.state.loading)
                   ? Loading()
                   : SingleChildScrollView(

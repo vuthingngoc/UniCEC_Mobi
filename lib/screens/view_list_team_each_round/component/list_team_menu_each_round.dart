@@ -4,11 +4,7 @@ import 'package:loadmore/loadmore.dart';
 import 'package:unicec_mobi/bloc/view_list_team_in_round/view_list_team_in_round_bloc.dart';
 import '../../../bloc/view_list_team_in_round/view_list_team_in_round_event.dart';
 import '../../../bloc/view_list_team_in_round/view_list_team_in_round_state.dart';
-import '../../../models/entities/team/sending_data_model.dart';
 import '../../../utils/loading.dart';
-import '../../../utils/router.dart';
-import '/models/entities/team/team_model.dart';
-import '../../../models/enums/team_status.dart';
 
 class ViewListTeamEachRoundMenu extends StatefulWidget {
   const ViewListTeamEachRoundMenu({
@@ -49,15 +45,15 @@ class _ViewListTeamEachRoundMenuState extends State<ViewListTeamEachRoundMenu> {
                     child: Column(
                       children: [
                         Container(
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 image: DecorationImage(
                                     alignment: Alignment.topCenter,
                                     image: AssetImage(
                                         "assets/img/not-found-icon-24.jpg"),
                                     fit: BoxFit.fitWidth))),
                         Image.asset("assets/img/not-found-icon-24.jpg"),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 25.0),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 25.0),
                           child: Text(
                             'Hiện tại vòng thi chưa có đội tham gia!',
                             style: TextStyle(fontSize: 20),
@@ -83,12 +79,12 @@ class _ViewListTeamEachRoundMenuState extends State<ViewListTeamEachRoundMenu> {
                         itemCount: state.listTeamInRound.length,
                         itemBuilder: (context, index) {
                           return Padding(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 10),
                             child: TextButton(
                               style: TextButton.styleFrom(
                                 primary: Colors.black87,
-                                padding: EdgeInsets.all(20),
+                                padding: const EdgeInsets.all(20),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15)),
                                 backgroundColor:

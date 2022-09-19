@@ -21,10 +21,13 @@ class ViewListTeamInRoundBloc
     on((event, emit) async {
       //InitEvent
       if (event is ViewListTeamInitEvent) {
+        print('ViewListTeamInitEvent is running ... !!!');
         //------------Request
         TeamInRoundRequestModel request =
             TeamInRoundRequestModel(roundId: state.roundId);
         request.currentPage = state.currentPage;
+
+        print('request: $request');
 
         PagingResult<TeamInRoundModel>? result =
             await service.GetListTeamInRound(request);
@@ -38,12 +41,15 @@ class ViewListTeamInRoundBloc
               isLoading: false));
         }
       }
-      //Recieve Data
-      if (event is RecieveDataEvent) {
+      //Receive Data
+      if (event is ReceiveDataEvent) {
+        print('ReceiveDataEvent is running ... !!!');
         //------------Request
         TeamInRoundRequestModel request =
             TeamInRoundRequestModel(roundId: event.roundId);
         request.currentPage = 1;
+        print('request: ${request.roundId}');
+
         PagingResult<TeamInRoundModel>? result =
             await service.GetListTeamInRound(request);
 
@@ -60,8 +66,10 @@ class ViewListTeamInRoundBloc
               newRoundId: event.roundId, //change
               newHasNext: state.hasNext,
               newCurrentPage: state.currentPage,
-              isLoading: false));
+              isLoading: false));              
         }
+
+        print('!!!!!!!!!!!!!!!!!!!! result: $result');
       }
       //Refesh Event
       if (event is RefreshEvent) {

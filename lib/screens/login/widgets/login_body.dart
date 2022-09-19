@@ -16,7 +16,6 @@ class LoginBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // LoginBloc _bloc = BlocProvider.of<LoginBloc>(context);
     return Container(
       decoration: BoxDecoration(
           color: Colors.white,
@@ -29,9 +28,6 @@ class LoginBody extends StatelessWidget {
         builder: (context, state) {
           return Column(
             children: <Widget>[
-              // SizedBox(
-              //   height: Dimens.size40,
-              // ),
               Padding(
                 padding: const EdgeInsets.only(top: 20),
                 child: FadeAnimation(
@@ -41,9 +37,6 @@ class LoginBody extends StatelessWidget {
                       style: TextStyle(color: Colors.grey, fontSize: 18.0),
                     )),
               ),
-              // SizedBox(
-              //   height: Dimens.size10,
-              // ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
