@@ -3,10 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/view_list_team_in_round/view_list_team_in_round_bloc.dart';
 import '../../bloc/view_list_team_in_round/view_list_team_in_round_event.dart';
 import '../../bloc/view_list_team_in_round/view_list_team_in_round_state.dart';
-import '/models/entities/team/sending_data_model.dart';
 import '../../utils/app_color.dart';
-import '../../utils/router.dart';
-import 'component/body_student_each_round.dart';
 import 'component/list_team_menu_each_round.dart';
 
 class ViewListTeamEachRoundPage extends StatefulWidget {
@@ -31,17 +28,18 @@ class _ViewListTeamEachRoundPageState extends State<ViewListTeamEachRoundPage>
   void initState() {
     super.initState();
     //mặc định competition id 2
-    //bloc.add(RecieveDataEvent(competitionId: 2));
+    //bloc.add(ReceiveDataEvent(competitionId: 2));
     //
   }
 
   //nhận competition Id
   void didChangeDependencies() {
     RouteSettings settings = ModalRoute.of(context)!.settings;
-    if (settings.arguments != null) {
+    if (settings.arguments != null) {      
       int roundId = settings.arguments as int;
+      print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!! param roundId: $roundId');
       if (roundId != 0) {
-        bloc.add(RecieveDataEvent(roundId: roundId));
+        bloc.add(ReceiveDataEvent(roundId: roundId));
       }
     }
   }
@@ -59,9 +57,9 @@ class _ViewListTeamEachRoundPageState extends State<ViewListTeamEachRoundPage>
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                    icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
                   ),
-                  title: Text(
+                  title: const Text(
                     "Danh sách các đội thi trong vòng đấu",
                     style: TextStyle(color: Colors.white),
                   ),

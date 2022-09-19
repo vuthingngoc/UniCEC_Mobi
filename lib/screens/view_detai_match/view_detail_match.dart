@@ -63,7 +63,7 @@ class _ViewDetailMatchPageState extends State<ViewDetailMatchPage>
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+              icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
             ),
             title: const Text(
               "Chi tiết trận đấu",

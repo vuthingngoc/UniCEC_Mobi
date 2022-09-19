@@ -96,8 +96,8 @@ List<Widget> ListTeamInMatch(List<TeamsInMatchModel>? teamInMatch) {
                   color: ArgonColors.success,
                   borderRadius: const BorderRadius.all(Radius.circular(10))),
               child: Text(
-                '${e.teamName}',
-                style: TextStyle(fontSize: 18, color: Colors.white),
+                e.teamName,
+                style: const TextStyle(fontSize: 18, color: Colors.white),
               ),
             ))
         .toList();
@@ -117,14 +117,14 @@ List<Widget> ListTeamInMatchResult(List<TeamsInMatchModel>? teamInMatchResult) {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.label,
                         size: 23,
                         color: Colors.orange,
                       ),
-                      SizedBox(width: 10.0),
-                      Text("${count++}", style: TextStyle(fontSize: 18)),
-                      SizedBox(width: 10.0),
+                      const SizedBox(width: 10.0),
+                      Text("${count++}", style: const TextStyle(fontSize: 18)),
+                      const SizedBox(width: 10.0),
                       Expanded(
                         child: Text(
                           '${e.teamName}',
@@ -142,7 +142,7 @@ List<Widget> ListTeamInMatchResult(List<TeamsInMatchModel>? teamInMatchResult) {
                                 const BorderRadius.all(Radius.circular(10))),
                         child: Text(
                           "${e.scores} điểm",
-                          style: TextStyle(fontSize: 18, color: Colors.white),
+                          style: const TextStyle(fontSize: 18, color: Colors.white),
                         ),
                       ),
                     ],

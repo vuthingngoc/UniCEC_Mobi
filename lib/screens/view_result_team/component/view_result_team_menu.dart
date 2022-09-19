@@ -5,11 +5,9 @@ import 'package:unicec_mobi/bloc/view_result_team/view_result_team_bloc.dart';
 import '../../../bloc/view_result_team/view_result_team_event.dart';
 import '../../../bloc/view_result_team/view_result_team_state.dart';
 import '../../../constants/Theme.dart';
-import '../../../models/entities/match/match_model.dart';
 import '../../../models/entities/match/teams_in_match_model.dart';
 import '../../../models/enums/team_in_match_status.dart';
 import '../../../utils/loading.dart';
-import '../../../utils/router.dart';
 
 class ViewResultTeamMenu extends StatefulWidget {
   @override

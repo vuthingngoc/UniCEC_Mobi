@@ -322,15 +322,12 @@ class TeamService extends ITeamService {
       TeamInRoundRequestModel request) async {
     var client = http.Client();
     //nếu muốn build thêm param thì đổi tham số truyền
-    String params = '?';
-    if (request.roundId != null) {
-      params += 'roundId=${request.roundId}';
-    }
+    String params = 'roundId=${request.roundId}';
     //currentPage
     if (request.currentPage != null) {
       params += '&currentPage=${request.currentPage}';
     }
-    String url = Api.GetUrl(apiPath: '${Api.teamsInRound}/search?${params}');
+    String url = Api.GetUrl(apiPath: '${Api.teamsInRound}/search?$params');
     String? token = GetIt.I.get<CurrentUser>().idToken;
     try {
       var response =
