@@ -591,6 +591,8 @@ class _ViewDetailActivityMenuState extends State<ViewDetailActivityMenu> {
 
                                                 //người được assign
                                                 ListView.builder(
+                                                    physics:
+                                                        NeverScrollableScrollPhysics(),
                                                     shrinkWrap: true,
                                                     itemCount: state
                                                         .competitionActivityDetail!

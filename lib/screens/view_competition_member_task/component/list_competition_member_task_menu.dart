@@ -229,7 +229,10 @@ class _ViewCompetitionMemberTaskMenuState
                                           child: TextButton(
                                             style: TextButton.styleFrom(
                                               primary: Colors.black87,
-                                              padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 10.0,
+                                                      horizontal: 15.0),
                                               shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
@@ -261,15 +264,14 @@ class _ViewCompetitionMemberTaskMenuState
                                                   children: [
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsets
-                                                                  .only(
+                                                          const EdgeInsets.only(
                                                               right:
                                                                   12.0), // 8.0
                                                       // top: 0), // 10.0
                                                       child: SvgPicture.asset(
                                                         "assets/icons/trophy.svg",
-                                                        color: ArgonColors
-                                                            .warning,
+                                                        color:
+                                                            ArgonColors.warning,
                                                         width: 22,
                                                       ),
                                                       // Text(
@@ -298,7 +300,8 @@ class _ViewCompetitionMemberTaskMenuState
                                                 ),
                                                 const SizedBox(height: 10),
                                                 Row(
-                                                  mainAxisAlignment: MainAxisAlignment.end,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
                                                   children: [
                                                     // const Padding(
                                                     //   padding: EdgeInsets.only(
@@ -323,7 +326,9 @@ class _ViewCompetitionMemberTaskMenuState
                                                             color:
                                                                 Colors.grey)),
                                                     const Padding(
-                                                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 8.0),
                                                       child: Text("|",
                                                           style: TextStyle(
                                                               fontSize: 18,
@@ -473,7 +478,7 @@ class _ViewCompetitionMemberTaskMenuState
                                                         CompetitionStatus
                                                             .Complete)
                                                       const Text(
-                                                        "Đóng cuộc thi",
+                                                        " Đã đóng ",
                                                         style: TextStyle(
                                                             fontSize: 18,
                                                             color: Colors.grey),

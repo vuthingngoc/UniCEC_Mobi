@@ -74,7 +74,7 @@ class _ViewListCompetitionOfClubPageState
             //     :
             return Scaffold(
                 appBar: NavbarCompetitionOfClub(
-                  title: "Cuộc Thi và Sự Kiện CLB",
+                  title: "Cuộc Thi và Sự Kiện câu lạc bộ",
                   searchBar: true,
                   categoryOne: "Cuộc Thi",
                   categoryTwo: "Sự Kiện",
