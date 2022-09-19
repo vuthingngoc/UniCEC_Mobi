@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unicec_mobi/models/enums/team_status.dart';
 import '../../bloc/view_list_team_in_round/view_list_team_in_round_bloc.dart';
 import '../../bloc/view_list_team_in_round/view_list_team_in_round_event.dart';
 import '../../bloc/view_list_team_in_round/view_list_team_in_round_state.dart';
+import '../../models/entities/team/sending_data_model.dart';
 import '../../utils/app_color.dart';
+import '../../utils/router.dart';
 import 'component/list_team_menu_each_round.dart';
 
 class ViewListTeamEachRoundPage extends StatefulWidget {
@@ -30,12 +33,27 @@ class _ViewListTeamEachRoundPageState extends State<ViewListTeamEachRoundPage>
     //mặc định competition id 2
     //bloc.add(ReceiveDataEvent(competitionId: 2));
     //
+    bloc.listenerStream.listen((event) {
+      if (event is NavigateToTeamDetailEvent) {
+        SendingDataModel data = SendingDataModel(
+            competitionId: event.competitionId,
+            teamId: event.teamId,
+            status: TeamStatus.IsLocked,
+            teamDescription: "",
+            teamName: "",
+            max: 0,
+            min: 0);
+
+        Navigator.of(context)
+            .pushNamed(Routes.viewDetailTeamParticipant, arguments: data);
+      }
+    });
   }
 
   //nhận competition Id
   void didChangeDependencies() {
     RouteSettings settings = ModalRoute.of(context)!.settings;
-    if (settings.arguments != null) {      
+    if (settings.arguments != null) {
       int roundId = settings.arguments as int;
       if (roundId != 0) {
         bloc.add(ReceiveDataEvent(roundId: roundId));
@@ -59,7 +77,7 @@ class _ViewListTeamEachRoundPageState extends State<ViewListTeamEachRoundPage>
                     icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
                   ),
                   title: const Text(
-                    "Danh sách các đội thi trong vòng đấu",
+                    "Danh sách đội thi", //Danh sách các đội thi trong vòng đấu
                     style: TextStyle(color: Colors.white),
                   ),
                   automaticallyImplyLeading: false,

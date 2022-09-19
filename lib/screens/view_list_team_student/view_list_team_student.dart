@@ -3,9 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/view_list_team_student/view_list_team_student_bloc.dart';
 import '../../bloc/view_list_team_student/view_list_team_student_event.dart';
 import '../../bloc/view_list_team_student/view_list_team_student_state.dart';
-import '/models/entities/team/sending_data_model.dart';
 import '../../utils/app_color.dart';
-import '../../utils/router.dart';
 import 'component/body_student.dart';
 
 class ViewListTeamStudentPage extends StatefulWidget {
@@ -40,7 +38,7 @@ class _ViewListTeamStudentPageState extends State<ViewListTeamStudentPage>
     if (settings.arguments != null) {
       int competitionId = settings.arguments as int;
       if (competitionId != 0) {
-        bloc.add(RecieveDataEvent(competitionId: competitionId));
+        bloc.add(ReceiveDataEvent(competitionId: competitionId));
       }
     }
   }
@@ -58,9 +56,9 @@ class _ViewListTeamStudentPageState extends State<ViewListTeamStudentPage>
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                    icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
                   ),
-                  title: Text(
+                  title: const Text(
                     "Danh sách các đội tham gia",
                     style: TextStyle(color: Colors.white),
                   ),

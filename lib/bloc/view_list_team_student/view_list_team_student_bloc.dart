@@ -37,7 +37,7 @@ class ViewListTeamStudentBloc
         }
       }
       //Recieve Data
-      if (event is RecieveDataEvent) {
+      if (event is ReceiveDataEvent) {
         //------------Request
         TeamRequestModel request =
             TeamRequestModel(competitionId: event.competitionId);

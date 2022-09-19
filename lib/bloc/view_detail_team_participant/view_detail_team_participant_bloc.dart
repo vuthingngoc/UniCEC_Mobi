@@ -26,7 +26,7 @@ class ViewDetailTeamParticipantBloc extends BaseBloc<
           isLoading: true,
         )) {
     on((event, emit) async {
-      if (event is RecieveDataEvent) {
+      if (event is ReceiveDataEvent) {
         TeamDetailModel? result =
             await service.GetDetailTeamModel(event.competitionId, event.teamId);
         if (result != null) {

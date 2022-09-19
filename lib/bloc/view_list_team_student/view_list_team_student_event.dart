@@ -4,10 +4,10 @@ class ViewListTeamStudentEvent {}
 
 class ViewListTeamInitEvent extends ViewListTeamStudentEvent {}
 
-//recieve data
-class RecieveDataEvent extends ViewListTeamStudentEvent {
+//receive data
+class ReceiveDataEvent extends ViewListTeamStudentEvent {
   int competitionId;
-  RecieveDataEvent({required this.competitionId});
+  ReceiveDataEvent({required this.competitionId});
 }
 
 //LoadMore

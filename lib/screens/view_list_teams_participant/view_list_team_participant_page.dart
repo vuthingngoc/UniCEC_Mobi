@@ -124,7 +124,7 @@ class _ViewListTeamParticipantPageState
     if (settings.arguments != null) {
       SendDataModel competition = settings.arguments as SendDataModel;
       if (competition != null) {
-        bloc.add(RecieveDataEvent(
+        bloc.add(ReceiveDataEvent(
             competitionId: competition.competitionId,
             minNumber: competition.min,
             maxNumber: competition.max));
@@ -146,9 +146,9 @@ class _ViewListTeamParticipantPageState
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                    icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
                   ),
-                  title: Text(
+                  title: const Text(
                     "Danh sách các đội tham gia",
                     style: TextStyle(color: Colors.white),
                   ),

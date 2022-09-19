@@ -2,12 +2,12 @@ import '../../models/enums/team_status.dart';
 
 class ViewDetailTeamParticipantEvent {}
 
-class RecieveDataEvent extends ViewDetailTeamParticipantEvent {
+class ReceiveDataEvent extends ViewDetailTeamParticipantEvent {
   int competitionId;
   int teamId;
   int? max;
   int? min;
-  RecieveDataEvent(
+  ReceiveDataEvent(
       {required this.teamId,
       required this.competitionId,
       required this.max,

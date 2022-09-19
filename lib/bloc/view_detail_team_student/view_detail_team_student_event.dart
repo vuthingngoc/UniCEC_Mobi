@@ -1,9 +1,9 @@
 class ViewDetailTeamStudentEvent {}
 
-class RecieveDataEvent extends ViewDetailTeamStudentEvent {
+class ReceiveDataEvent extends ViewDetailTeamStudentEvent {
   int competitionId;
   int teamId;
-  RecieveDataEvent({required this.teamId, required this.competitionId});
+  ReceiveDataEvent({required this.teamId, required this.competitionId});
 }
 
 class ClickToViewInfoEvent extends ViewDetailTeamStudentEvent {

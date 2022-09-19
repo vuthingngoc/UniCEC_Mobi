@@ -191,7 +191,7 @@ class _BodyState extends State<Body> {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
+                children: const [
                   SizedBox(
                     width: 40,
                   ),
@@ -221,7 +221,7 @@ class _BodyState extends State<Body> {
                 ],
               ),
               ViewListTeamMenu(),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               //Khác đấu đơn thì xuất hiện mã tham gia
               if (state.listTeam.isNotEmpty && (state.maxNumber != 1))
                 Row(
@@ -232,7 +232,7 @@ class _BodyState extends State<Body> {
                       decoration: BoxDecoration(
                           border: Border.all(color: ArgonColors.warning),
                           color: ArgonColors.warning,
-                          borderRadius: BorderRadius.all(Radius.circular(4))),
+                          borderRadius: const BorderRadius.all(Radius.circular(4))),
                       child: FlatButton(
                           textColor: ArgonColors.white,
                           onPressed: () {
@@ -240,16 +240,15 @@ class _BodyState extends State<Body> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    shape: RoundedRectangleBorder(
+                                    shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(4))),
                                     scrollable: true,
-                                    title: Container(
-                                        child: Text(
+                                    title: const Text(
                                       'Nhập mã tham gia',
                                       style: TextStyle(fontSize: 20),
                                       textAlign: TextAlign.center,
-                                    )),
+                                    ),
                                     content: Padding(
                                         padding: const EdgeInsets.only(
                                           top: 8,
@@ -288,7 +287,7 @@ class _BodyState extends State<Body> {
                                     actions: [
                                       Container(
                                         width: double.infinity,
-                                        margin: new EdgeInsets.only(
+                                        margin: const  EdgeInsets.only(
                                             right: 15, left: 15, bottom: 15),
                                         child: FlatButton(
                                           textColor: ArgonColors.white,
@@ -305,7 +304,7 @@ class _BodyState extends State<Body> {
                                             borderRadius:
                                                 BorderRadius.circular(5.0),
                                           ),
-                                          child: Padding(
+                                          child: const Padding(
                                               padding: EdgeInsets.only(
                                                   left: 16.0,
                                                   right: 16.0,
@@ -322,19 +321,19 @@ class _BodyState extends State<Body> {
                                   );
                                 });
                           },
-                          child: Text("Nhập mã tham gia",
+                          child: const Text("Nhập mã tham gia",
                               style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 15.0))),
                     ),
                   ],
                 ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Container(                      decoration: BoxDecoration(
                     border: Border.all(color: ArgonColors.warning),
                     color: ArgonColors.warning,
-                    borderRadius: BorderRadius.all(Radius.circular(4))),
+                    borderRadius: const BorderRadius.all(Radius.circular(4))),
                   child: AnimatedButton(
                       width: 200,
                       text: 'Lưu ý của Cuộc Thi',
@@ -348,7 +347,7 @@ class _BodyState extends State<Body> {
                             body: Column(children: [
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
+                                children: const [
                                   Text(
                                     'Lưu ý',
                                     style: TextStyle(
@@ -366,7 +365,7 @@ class _BodyState extends State<Body> {
                                   children: [
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
+                                      children: const [
                                         Text('Quy định về Đội Thi của Cuộc Thi',
                                             style: TextStyle(
                                               fontSize: 15,

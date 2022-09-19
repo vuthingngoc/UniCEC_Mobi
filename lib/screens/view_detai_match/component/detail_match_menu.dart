@@ -127,8 +127,8 @@ List<Widget> ListTeamInMatchResult(List<TeamsInMatchModel>? teamInMatchResult) {
                       const SizedBox(width: 10.0),
                       Expanded(
                         child: Text(
-                          '${e.teamName}',
-                          style: TextStyle(fontSize: 18),
+                          e.teamName,
+                          style: const TextStyle(fontSize: 18),
                         ),
                       ),
                       Container(
@@ -142,7 +142,8 @@ List<Widget> ListTeamInMatchResult(List<TeamsInMatchModel>? teamInMatchResult) {
                                 const BorderRadius.all(Radius.circular(10))),
                         child: Text(
                           "${e.scores} điểm",
-                          style: const TextStyle(fontSize: 18, color: Colors.white),
+                          style: const TextStyle(
+                              fontSize: 18, color: Colors.white),
                         ),
                       ),
                     ],
@@ -164,21 +165,15 @@ class _ViewDetailMatchMenuState extends State<ViewDetailMatchMenu> {
       builder: (context, state) {
         return bloc.isLoading
             ? Loading()
-            //         : SingleChildScrollView(
-            //return
-            :
-            //ListView.builder(
-            // itemCount: match.length,
-            //itemBuilder: (context, index) {
-            SingleChildScrollView(
+            : SingleChildScrollView(
                 child: Column(
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
                           margin: const EdgeInsets.only(
-                              bottom: 10, top: 20, right: 20),
+                              bottom: 10, top: 20, left: 20),
                           padding: const EdgeInsets.all(4.0),
                           decoration: BoxDecoration(
                               border: Border.all(color: Colors.amber),
@@ -203,7 +198,7 @@ class _ViewDetailMatchMenuState extends State<ViewDetailMatchMenu> {
                                                         MatchStatus.Start)
                                                     ? 'Bắt Đầu'
                                                     : 'Khác',
-                            style: TextStyle(fontSize: 18, color: Colors.white),
+                            style: const TextStyle(fontSize: 18, color: Colors.white),
                           ),
                         ),
                       ],
@@ -256,12 +251,12 @@ class _ViewDetailMatchMenuState extends State<ViewDetailMatchMenu> {
                                     direction: Axis.horizontal,
                                     children:
                                         ListTeamInMatch(state.teamsInMatch))
-                                : Text('Chưa có đội thi được thêm vào'),
+                                : const Text('Chưa có đội thi được thêm vào'),
                           )
                         ],
                       ),
                     ),
-                    Divider(
+                    const Divider(
                       height: 30.0,
                       thickness: 1.5,
                       indent: 32.0,
@@ -289,8 +284,8 @@ class _ViewDetailMatchMenuState extends State<ViewDetailMatchMenu> {
                             alignment: WrapAlignment.start,
                             direction: Axis.horizontal,
                             children: ListTeamInMatchResult(state.teamsInMatch))
-                        : Text('Chưa có kết quả của trận thi đấu'),
-                    Divider(
+                        : const Text('Chưa có kết quả của trận thi đấu'),
+                    const Divider(
                       height: 30.0,
                       thickness: 1.5,
                       indent: 32.0,
@@ -318,7 +313,7 @@ class _ViewDetailMatchMenuState extends State<ViewDetailMatchMenu> {
                           const EdgeInsets.only(left: 20, right: 20, top: 10),
                       child: Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.location_on,
                             size: 23,
                             color: Colors.orange,
@@ -332,7 +327,7 @@ class _ViewDetailMatchMenuState extends State<ViewDetailMatchMenu> {
                         ],
                       ),
                     ),
-                    Divider(
+                    const Divider(
                       height: 30.0,
                       thickness: 1.5,
                       indent: 32.0,
@@ -360,12 +355,12 @@ class _ViewDetailMatchMenuState extends State<ViewDetailMatchMenu> {
                           const EdgeInsets.only(left: 20, right: 20, top: 10),
                       child: Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.adjust_sharp,
                             size: 23,
                             color: Colors.orange,
                           ),
-                          SizedBox(width: 10.0),
+                          const SizedBox(width: 10.0),
                           Expanded(
                               child: Text(
                             state.match.roundTypeName,
@@ -374,7 +369,7 @@ class _ViewDetailMatchMenuState extends State<ViewDetailMatchMenu> {
                         ],
                       ),
                     ),
-                    Divider(
+                    const Divider(
                       height: 30.0,
                       thickness: 1.5,
                       indent: 32.0,
@@ -398,10 +393,11 @@ class _ViewDetailMatchMenuState extends State<ViewDetailMatchMenu> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      padding:
+                          const EdgeInsets.only(left: 20, right: 20, top: 10),
                       child: Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.description,
                             size: 23,
                             color: Colors.orange,
@@ -415,7 +411,7 @@ class _ViewDetailMatchMenuState extends State<ViewDetailMatchMenu> {
                         ],
                       ),
                     ),
-                    Divider(
+                    const Divider(
                       height: 30.0,
                       thickness: 1.5,
                       indent: 32.0,
@@ -443,16 +439,16 @@ class _ViewDetailMatchMenuState extends State<ViewDetailMatchMenu> {
                           const EdgeInsets.only(left: 20, right: 20, top: 10),
                       child: Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.calendar_today,
                             size: 23,
                             color: Colors.orange,
                           ),
-                          SizedBox(width: 10.0),
+                          const SizedBox(width: 10.0),
                           Expanded(
                               child: Text(
                             Utils.convertDateTime(state.match.startTime),
-                            style: TextStyle(fontSize: 18),
+                            style: const TextStyle(fontSize: 18),
                           )),
                         ],
                       ),

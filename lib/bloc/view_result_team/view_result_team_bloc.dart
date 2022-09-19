@@ -49,7 +49,7 @@ class ViewResultTeamBloc
             'ResultTeamInCompetition LoadMatchDetail event is loading ... !!!');
         _isLoading = true;
 
-        MatchModel? match = await matchService.GetMatchById(event.matchId);
+        MatchModel? match = await matchService.getMatchById(event.matchId);
         emit(state.copyWith(
             resultTeamInCompetition: state.resultTeamInCompetition,
             match: match));    

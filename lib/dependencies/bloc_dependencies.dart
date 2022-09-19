@@ -143,7 +143,7 @@ class BlocDependencies {
         () => ViewListCompetitionOfClubBloc(service: injector()));
 
     injector.registerFactory<ViewListTeamInRoundBloc>(
-        () => ViewListTeamInRoundBloc(service: injector()));
+        () => ViewListTeamInRoundBloc(service: injector(), roundService: injector()));
     
     // View result team in a competition 
     injector.registerFactory<ViewResultTeamBloc>(

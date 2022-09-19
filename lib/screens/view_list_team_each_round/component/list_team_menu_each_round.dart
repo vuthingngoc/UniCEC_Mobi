@@ -28,6 +28,24 @@ class _ViewListTeamEachRoundMenuState extends State<ViewListTeamEachRoundMenu> {
         .add(ViewListTeamInitEvent());
   }
 
+  Future<bool> _loadMore(BuildContext context) async {
+    print("onLoadMore");
+    await Future.delayed(Duration(seconds: 0, milliseconds: 5000));
+    BlocProvider.of<ViewListTeamInRoundBloc>(context).add(IncrementalEvent());
+    //lúc này stateModel cũng có r nhưng mà chưa có hàm render lại cái view
+    //phải đưa cái hàm này vào trong để add event và có state
+    load(context);
+    return true;
+  }
+
+  Future<bool> _refresh(BuildContext context) async {
+    print("onRefresh");
+    BlocProvider.of<ViewListTeamInRoundBloc>(context).add(RefreshEvent());
+    await Future.delayed(Duration(seconds: 0, milliseconds: 5000));
+    refresh(context);
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     ViewListTeamInRoundBloc bloc =
@@ -74,108 +92,109 @@ class _ViewListTeamEachRoundMenuState extends State<ViewListTeamEachRoundMenu> {
                       whenEmptyLoad: false,
                       delegate: DefaultLoadMoreDelegate(),
                       textBuilder: DefaultLoadMoreTextBuilder.english,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: state.listTeamInRound.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 10),
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                primary: Colors.black87,
-                                padding: const EdgeInsets.all(20),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15)),
-                                backgroundColor:
-                                    Color.fromARGB(255, 235, 237, 241),
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 20.0),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: const [
+                              SizedBox(
+                                width: 40,
                               ),
-                              onPressed: () async {
-                                // //chuyển sang trang detail
-                                // SendingDataModel data = SendingDataModel(
-                                //     competitionId: state.competitionId,
-                                //     teamId: state.listTeam[index].id,
-                                //     teamName: state.listTeam[index].name,
-                                //     teamDescription:
-                                //         state.listTeam[index].description,
-                                //     status: state.listTeam[index].status);
-                                // bool returnData = await Navigator.of(context)
-                                //     .pushNamed(Routes.viewDetailTeamStudent,
-                                //         arguments: data) as bool;
-                                // if (returnData) {
-                                //   bloc.add(LoadingEvent());
-                                //   //này là thực hiện lại hàm để load lại
-                                //   bloc.add(RecieveDataEvent(
-                                //       competitionId: state.competitionId));
-                                // }
-                              },
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                      child: Text(
-                                          state.listTeamInRound[index].teamName,
-                                          style: TextStyle(fontSize: 15))),
-                                  Expanded(
-                                      child: Padding(
-                                    padding: const EdgeInsets.only(left: 35.0),
-                                    child: Text(
-                                        state.listTeamInRound[index]
-                                            .membersInTeam
-                                            .toString(),
-                                        style: TextStyle(fontSize: 15)),
-                                  )),
-                                  SizedBox(
-                                    width: 30,
+                              Expanded(
+                                  child: Text(
+                                "Tên đội",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 15),
+                              )),
+                              Expanded(
+                                  child: Text(
+                                "Số thành viên",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 15),
+                              )),
+                              Expanded(
+                                  child: Text(
+                                "Điểm",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 15),
+                              )),
+                              Expanded(
+                                  child: Text(
+                                "Chi tiết",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 15),
+                              )),
+                            ],
+                          ),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: state.listTeamInRound.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 10),
+                                child: TextButton(
+                                  style: TextButton.styleFrom(
+                                    primary: Colors.black87,
+                                    padding: const EdgeInsets.all(20),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
+                                    backgroundColor: const Color.fromARGB(
+                                        255, 235, 237, 241),
                                   ),
-                                  SizedBox(
-                                    width: 10,
+                                  onPressed: () async {
+                                    // Navigate to team detail page
+                                    bloc.add(LoadInfoRoundEvent(
+                                        roundId: state.roundId,
+                                        teamId: state
+                                            .listTeamInRound[index].teamId));
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(right: 15.0),
+                                            child: Text(
+                                                state.listTeamInRound[index]
+                                                    .teamName,    
+                                                style: const TextStyle(
+                                                    fontSize: 15)),
+                                          )),
+                                      Expanded(
+                                          child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 0), // 35.0
+                                        child: Text(
+                                          state.listTeamInRound[index]
+                                              .membersInTeam.length
+                                              .toString(),
+                                          style: const TextStyle(fontSize: 15),
+                                        ),
+                                      )),
+                                      Expanded(
+                                        child: Text("${bloc.state.listTeamInRound[index].scores}",
+                                            style: const TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.red),
+                                            ),                                                
+                                      ),
+                                      const Icon(
+                                        Icons.arrow_forward_ios,
+                                      ),
+                                    ],
                                   ),
-                                  if (state.listTeamInRound[index].status
-                                          .toString() ==
-                                      "TeamStatus.Available")
-                                    Expanded(
-                                        child: Text("Mở",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: Colors.green)))
-                                  else
-                                    Expanded(
-                                        child: Text("Đóng",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: Colors.red))),
-                                  Expanded(
-                                      child: Text(
-                                          "${state.listTeamInRound[index].rank}",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Colors.red))),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
+                                ),
+                              );
+                            },
+                          ),
+                        ],
                       ),
                     ));
       },
     );
-  }
-
-  Future<bool> _loadMore(BuildContext context) async {
-    print("onLoadMore");
-    await Future.delayed(Duration(seconds: 0, milliseconds: 5000));
-    BlocProvider.of<ViewListTeamInRoundBloc>(context).add(IncrementalEvent());
-    //lúc này stateModel cũng có r nhưng mà chưa có hàm render lại cái view
-    //phải đưa cái hàm này vào trong để add event và có state
-    load(context);
-    return true;
-  }
-
-  Future<bool> _refresh(BuildContext context) async {
-    print("onRefresh");
-    BlocProvider.of<ViewListTeamInRoundBloc>(context).add(RefreshEvent());
-    await Future.delayed(Duration(seconds: 0, milliseconds: 5000));
-    refresh(context);
-    return true;
   }
 }

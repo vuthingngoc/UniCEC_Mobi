@@ -13,7 +13,7 @@ class MatchService implements IMatchService {
   Adapter adapter = Adapter();
 
   @override
-  Future<PagingResult<MatchModel>?> GetMatchesByRound(int roundId) async {
+  Future<PagingResult<MatchModel>?> getMatchesByRound(int roundId) async {
     var client = http.Client();
     String url = Api.GetUrl(apiPath: "${Api.matches}/search?roundId=$roundId");
     String token = GetIt.I.get<CurrentUser>().idToken;
@@ -38,7 +38,7 @@ class MatchService implements IMatchService {
   }
 
   @override
-  Future<List<TeamsInMatchModel>?> GetTeamsInMatch(int matchId) async {
+  Future<List<TeamsInMatchModel>?> getTeamsInMatch(int matchId) async {
     var client = http.Client();
     String url = Api.GetUrl(apiPath: Api.teamInMatches);
     url += "/search?matchId=${matchId}";
@@ -88,7 +88,7 @@ class MatchService implements IMatchService {
   }
   
   @override
-  Future<MatchModel?> GetMatchById(int matchId) async {
+  Future<MatchModel?> getMatchById(int matchId) async {
     var client = http.Client();
     String url = Api.GetUrl(apiPath: "${Api.matches}/$matchId");
     String token = GetIt.I.get<CurrentUser>().idToken;

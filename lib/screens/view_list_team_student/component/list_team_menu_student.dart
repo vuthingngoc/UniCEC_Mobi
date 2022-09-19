@@ -108,7 +108,7 @@ class _ViewListTeamStudentMenuMenuState extends State<ViewListTeamStudentMenu> {
                                 if (returnData) {
                                   bloc.add(LoadingEvent());
                                   //này là thực hiện lại hàm để load lại
-                                  bloc.add(RecieveDataEvent(
+                                  bloc.add(ReceiveDataEvent(
                                       competitionId: state.competitionId));
                                 }
                               },
