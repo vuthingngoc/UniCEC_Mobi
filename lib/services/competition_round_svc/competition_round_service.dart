@@ -80,8 +80,8 @@ class CompetitionRoundService implements ICompetitionRoundService {
       int competitionId) async {
     var client = http.Client();
     String params =
-        '?competitionId=$competitionId&top=3'; // default is top 3 teams
-    String url = Api.GetUrl(apiPath: '${Api.teamsInRound}/total-result$params');
+        'competitionId=$competitionId&top=3'; // default is top 3 teams
+    String url = Api.GetUrl(apiPath: '${Api.teams}/final-result-competition?$params');
     String token = GetIt.I.get<CurrentUser>().idToken;
     try {
       var response =

@@ -48,7 +48,7 @@ class _ViewCompetitionRoundResultPageState
           ),
           title: Text(
             (competitionId == 0) ? "Kết quả vòng thi" : "Kết quả cuộc thi",
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
           automaticallyImplyLeading: false,
           centerTitle: true,
