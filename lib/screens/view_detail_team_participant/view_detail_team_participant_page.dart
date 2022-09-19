@@ -118,7 +118,7 @@ class _ViewDetailTeamParticipantPageState
     if (settings.arguments != null) {
       SendingDataModel data = settings.arguments as SendingDataModel;
       if (data != null) {
-        bloc.add(RecieveDataEvent(
+        bloc.add(ReceiveDataEvent(
             teamId: data.teamId,
             competitionId: data.competitionId,
             max: data.max,
@@ -307,7 +307,7 @@ class _ViewDetailTeamParticipantPageState
                   onPressed: () {
                     Navigator.of(context).pop(true);
                   },
-                  icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                  icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
                 ),
                 title: Text(
                   state.teamDetail?.name ?? "Đang cập nhật...",

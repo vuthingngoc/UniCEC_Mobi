@@ -15,15 +15,22 @@ class CompetitionRoundService implements ICompetitionRoundService {
   Adapter adapter = Adapter();
 
   @override
-  Future<TeamModel> getById(int id) {
-    // TODO: implement getById
-    throw UnimplementedError();
-  }
+  Future<CompetitionRoundModel?> getById(int id) async {
+    var client = http.Client();
+    String url = Api.GetUrl(apiPath: '${Api.competitionRounds}/$id');
+    String token = GetIt.I.get<CurrentUser>().idToken;
+    try {
+      var response =
+          await client.get(Uri.parse(url), headers: Api.GetHeader(token));
+      if (response.statusCode == 200 && response.body.isNotEmpty) {
+        Map<String, dynamic> json = adapter.parseToMap(response);
+        return CompetitionRoundModel.fromJson(json);
+      }
+    } catch (error) {
+      Log.error(error.toString());
+    }
 
-  @override
-  Future<TeamModel> getListCompetitionRoundByConditions() {
-    // TODO: implement getListCompetitionRoundByConditions
-    throw UnimplementedError();
+    return null;
   }
 
   @override
@@ -81,7 +88,8 @@ class CompetitionRoundService implements ICompetitionRoundService {
     var client = http.Client();
     String params =
         'competitionId=$competitionId&top=3'; // default is top 3 teams
-    String url = Api.GetUrl(apiPath: '${Api.teams}/final-result-competition?$params');
+    String url =
+        Api.GetUrl(apiPath: '${Api.teams}/final-result-competition?$params');
     String token = GetIt.I.get<CurrentUser>().idToken;
     try {
       var response =

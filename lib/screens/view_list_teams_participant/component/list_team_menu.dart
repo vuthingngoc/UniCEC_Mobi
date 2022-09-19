@@ -47,15 +47,15 @@ class _ViewListTeamMenuState extends State<ViewListTeamMenu> {
                     child: Column(
                       children: [
                         Container(
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 image: DecorationImage(
                                     alignment: Alignment.topCenter,
                                     image: AssetImage(
                                         "assets/img/not-found-icon-24.jpg"),
                                     fit: BoxFit.fitWidth))),
                         Image.asset("assets/img/not-found-icon-24.jpg"),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 25.0),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 25.0),
                           child: Text(
                             'Hiện tại cuộc thi chưa có team nào!',
                             style: TextStyle(fontSize: 20),
@@ -81,12 +81,12 @@ class _ViewListTeamMenuState extends State<ViewListTeamMenu> {
                         itemCount: state.listTeam.length,
                         itemBuilder: (context, index) {
                           return Padding(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 10),
                             child: TextButton(
                               style: TextButton.styleFrom(
                                 primary: Colors.black87,
-                                padding: EdgeInsets.all(20),
+                                padding: const EdgeInsets.all(20),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15)),
                                 backgroundColor:
@@ -116,10 +116,7 @@ class _ViewListTeamMenuState extends State<ViewListTeamMenu> {
                                 children: [
                                   Expanded(
                                       child: Text(state.listTeam[index].name,
-                                          style: TextStyle(fontSize: 15))),
-                                  // SizedBox(
-                                  //   width: 15,
-                                  // ),
+                                          style: const TextStyle(fontSize: 15))),
                                   Expanded(
                                       child: Padding(
                                     padding: const EdgeInsets.only(left: 35.0),
@@ -127,14 +124,10 @@ class _ViewListTeamMenuState extends State<ViewListTeamMenu> {
                                         state.listTeam[index]
                                             .numberOfMemberInTeam
                                             .toString(),
-                                        style: TextStyle(fontSize: 15)),
+                                        style: const TextStyle(fontSize: 15)),
                                   )),
-                                  SizedBox(
-                                    width: 30,
-                                  ),
-
-                                  SizedBox(
-                                    width: 10,
+                                  const SizedBox(
+                                    width: 40,
                                   ),
                                   if (state.listTeam[index].status.toString() ==
                                       "TeamStatus.Available")
@@ -153,7 +146,7 @@ class _ViewListTeamMenuState extends State<ViewListTeamMenu> {
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 color: Colors.red))),
-                                  Icon(
+                                  const Icon(
                                     Icons.arrow_forward_ios,
                                   ),
                                 ],

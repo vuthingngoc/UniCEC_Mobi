@@ -40,7 +40,7 @@ class ViewDetailMatchBloc
         _isLoading = true;
         //load team in match
         List<TeamsInMatchModel>? teamsInMatch =
-            await service.GetTeamsInMatch(event.match.id);
+            await service.getTeamsInMatch(event.match.id);
         emit(state.copyWith(
             match: event.match, teamsInMatch: teamsInMatch ?? []));
         _isLoading = false;

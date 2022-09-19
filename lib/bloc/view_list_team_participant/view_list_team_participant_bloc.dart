@@ -49,7 +49,7 @@ class ViewListTeamParticipantBloc extends BaseBloc<ViewListTeamParticipantEvent,
         }
       }
       //Recieve Data
-      if (event is RecieveDataEvent) {
+      if (event is ReceiveDataEvent) {
         //------------Request
         TeamRequestModel request = TeamRequestModel(
             competitionId: event.competitionId,

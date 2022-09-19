@@ -116,7 +116,7 @@ class _ViewListMemberPageState extends State<ViewListMemberPage>
                               ),
                             ),
                             PopupMenuButton<int>(
-                                icon: Icon(Icons.filter_alt_outlined),
+                                icon: const Icon(Icons.filter_alt_outlined),
                                 itemBuilder: (context) {
                                   return [
                                     // PopupMenuItem(
