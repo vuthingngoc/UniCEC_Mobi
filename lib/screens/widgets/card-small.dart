@@ -73,7 +73,7 @@ class CardSmall extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,                            
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text("@$type",
                                   style: const TextStyle(
@@ -239,7 +239,7 @@ class CardSmall extends StatelessWidget {
                                                                   : (status ==
                                                                           CompetitionStatus
                                                                               .Complete)
-                                                                      ? 'Đóng Cuộc Thi'
+                                                                      ? 'Đã Đóng'
                                                                       : (status ==
                                                                               CompetitionStatus.Pending)
                                                                           ? 'Chờ'
@@ -257,14 +257,15 @@ class CardSmall extends StatelessWidget {
                                         fontSize: 18,
                                       )),
                                 )
-                              ]),                          
+                              ]),
 
-                          Text(title,
-                                  style: const TextStyle(
-                                      color: ArgonColors.header, fontSize: 18),
-                                      maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  ),
+                          Text(
+                            title,
+                            style: const TextStyle(
+                                color: ArgonColors.header, fontSize: 18),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
 
                           Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
