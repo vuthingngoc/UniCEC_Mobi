@@ -144,7 +144,7 @@ class CompetitionService implements ICompetitionService {
 
     String url = Api.GetUrl(
         apiPath:
-            '${Api.competitions}$params&currentPage=${currentPage}&pageSize=3');
+            '${Api.competitions}$params&currentPage=${currentPage}&pageSize=5');
     String? token = GetIt.I.get<CurrentUser>().idToken;
     try {
       var response =
@@ -237,7 +237,7 @@ class CompetitionService implements ICompetitionService {
     var client = http.Client();
     String url = Api.GetUrl(
         apiPath:
-            '${Api.competitions}/student-join-competitions?pageSize=2&currentPage=$currentPage');
+            '${Api.competitions}/student-join-competitions?pageSize=5&currentPage=$currentPage');
 
     if (scope != null) {
       url += "&scope=${scope.index}";
