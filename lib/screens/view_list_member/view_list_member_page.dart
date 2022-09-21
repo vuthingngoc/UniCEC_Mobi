@@ -276,46 +276,51 @@ class _ViewListMemberPageState extends State<ViewListMemberPage>
                       ),
                       //
                         SizedBox(height: 20,),
-                      Row(
+                      Wrap(
                         children: [
-                          Padding (
-                            padding: const EdgeInsets.only(left: 15.0, right: 10),
-                            child: Text('Chức Vụ:', style: TextStyle(fontSize: 16),),
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.4,
-                            height: 30,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.black45),
-                                borderRadius: BorderRadius.circular(4)),
-                            child: DropdownButtonHideUnderline(
-                              child: DropdownButton<int>(
-                                value: state.clubRoleId,
-                                icon: const Icon(Icons.arrow_drop_down),
-                                iconSize: 24,
-                                elevation: 16,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.black87
-                                    ),
-                                onChanged: (int? newValue) {
-                                  bloc.add(ChangeClubRoleIdEvent(
-                                      clubRoleId: newValue!));
-                                },
-                                items: state.listClubRole
-                                    .map<DropdownMenuItem<int>>(
-                                        (ClubRoleModel value) {
-                                  return DropdownMenuItem<int>(
-                                    value: value.id,
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                                        child: Text(value.name)),
-                                  );
-                                }).toList(),
+                          Row(
+                            children: [
+                              Padding (
+                                padding: const EdgeInsets.only(left: 15.0, right: 10),
+                                child: Text('Chức Vụ:', style: TextStyle(fontSize: 16),),
                               ),
-                            ),
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                height: 30,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black45),
+                                    borderRadius: BorderRadius.circular(4)),
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton<int>(
+                                    value: state.clubRoleId,
+                                    icon: const Icon(Icons.arrow_drop_down),
+                                    iconSize: 24,
+                                    elevation: 16,
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.black87
+                                    ),
+                                    onChanged: (int? newValue) {
+                                      bloc.add(ChangeClubRoleIdEvent(
+                                          clubRoleId: newValue!));
+                                    },
+                                    items: state.listClubRole
+                                        .map<DropdownMenuItem<int>>(
+                                            (ClubRoleModel value) {
+                                          return DropdownMenuItem<int>(
+                                            value: value.id,
+                                            child: Container(
+                                                padding: const EdgeInsets.symmetric(horizontal: 10),
+                                                child: Text(value.name)),
+                                          );
+                                        }).toList(),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
+
                       ),
                       (state.listMember.isNotEmpty)
                           ? ViewDetailTableMemberMenu(
