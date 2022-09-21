@@ -331,12 +331,37 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                                             padding: const EdgeInsets.all(8.0),
                                             child: Row(
                                               children: [
-                                                Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 8.0),
-                                                    child: Icon(
-                                                        Icons.business_center)),
+                                              if (state
+                                                      .listCompetitionActivity[
+                                                          index]
+                                                      .priority
+                                                      .toString() ==
+                                                  "PriorityStatus.High")
+                                                Icon(
+                                                  Icons.warning,
+                                                  color: Colors.red[900],
+                                                ),
+                                              if (state
+                                                      .listCompetitionActivity[
+                                                          index]
+                                                      .priority
+                                                      .toString() ==
+                                                  "PriorityStatus.Medium")
+                                                Icon(
+                                                  Icons.warning,
+                                                  color: Colors.amber,
+                                                ),
+                                              if (state
+                                                      .listCompetitionActivity[
+                                                          index]
+                                                      .priority
+                                                      .toString() ==
+                                                  "PriorityStatus.Low")
+                                                Icon(
+                                                  Icons.warning,
+                                                  color: Colors.green,
+                                                ), 
+                                                SizedBox(width: 10,),
                                                 Expanded(
                                                   child: Text(
                                                       state
@@ -351,33 +376,38 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                                           ),
                                           Row(
                                             children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 16.0, right: 8),
-                                                child: Text("|",
+                                              // Padding(
+                                              //   padding: const EdgeInsets.only(
+                                              //       left: 16.0, right: 8),
+                                              //   child: Text("|",
+                                              //       style: TextStyle(
+                                              //           fontSize: 18,
+                                              //           color:
+                                              //               Colors.blueGrey)),
+                                              // ),
+                                              Wrap(
+                                                children: [
+                                                Text(
+                                                    state
+                                                        .listCompetitionActivity[
+                                                            index]
+                                                        .creatorName + " | ",
                                                     style: TextStyle(
                                                         fontSize: 18,
-                                                        color:
-                                                            Colors.blueGrey)),
+                                                        fontWeight:
+                                                            FontWeight.normal)),
+                                                ],
+
                                               ),
-                                              Text(
-                                                  state
-                                                      .listCompetitionActivity[
-                                                          index]
-                                                      .creatorName,
-                                                  style: TextStyle(
-                                                      fontSize: 18,
-                                                      fontWeight:
-                                                          FontWeight.normal)),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 16.0, right: 8),
-                                                child: Text("|",
-                                                    style: TextStyle(
-                                                        fontSize: 18,
-                                                        color:
-                                                            Colors.blueGrey)),
-                                              ),
+                                              // Padding(
+                                              //   padding: const EdgeInsets.only(
+                                              //       left: 16.0, right: 8),
+                                              //   child: Text("|",
+                                              //       style: TextStyle(
+                                              //           fontSize: 18,
+                                              //           color:
+                                              //               Colors.blueGrey)),
+                                              // ),
                                               if (state
                                                       .listCompetitionActivity[
                                                           index]
@@ -451,45 +481,7 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                                                       fontSize: 18,
                                                       color: Colors.red),
                                                 ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 10.0, right: 8),
-                                                child: Text("|",
-                                                    style: TextStyle(
-                                                        fontSize: 18,
-                                                        color:
-                                                            Colors.blueGrey)),
-                                              ),
-                                              if (state
-                                                      .listCompetitionActivity[
-                                                          index]
-                                                      .priority
-                                                      .toString() ==
-                                                  "PriorityStatus.High")
-                                                Icon(
-                                                  Icons.warning,
-                                                  color: Colors.red[900],
-                                                ),
-                                              if (state
-                                                      .listCompetitionActivity[
-                                                          index]
-                                                      .priority
-                                                      .toString() ==
-                                                  "PriorityStatus.Medium")
-                                                Icon(
-                                                  Icons.warning,
-                                                  color: Colors.amber,
-                                                ),
-                                              if (state
-                                                      .listCompetitionActivity[
-                                                          index]
-                                                      .priority
-                                                      .toString() ==
-                                                  "PriorityStatus.Low")
-                                                Icon(
-                                                  Icons.warning,
-                                                  color: Colors.green,
-                                                ),
+
                                               // (DateTime.now().compareTo(state
                                               //                 .listCompetitionActivity[
                                               //                     index]
