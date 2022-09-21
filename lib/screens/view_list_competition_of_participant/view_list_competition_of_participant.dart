@@ -70,7 +70,7 @@ class _ViewListCompetitionOfParticipantPageState
                       ? Loading()
                       : (state.competitions.isEmpty)
                           ? Padding(
-                              padding: const EdgeInsets.only(top: 180.0),
+                              padding: const EdgeInsets.only(top: 100.0),
                               child: Column(
                                 children: [
                                   Container(
@@ -95,79 +95,86 @@ class _ViewListCompetitionOfParticipantPageState
                               ),
                             )
                           : Container(
-                    padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                            child: RefreshIndicator(
-                                onRefresh: () {
-                                  return _refresh(context);
-                                },
-                                child: LoadMore(
-                                    isFinish: !state.hasNext,
-                                    onLoadMore: () {
-                                      return _loadMore(context);
-                                    },
-                                    whenEmptyLoad: false,
-                                    delegate: DefaultLoadMoreDelegate(),
-                                    textBuilder:
-                                        DefaultLoadMoreTextBuilder.english,
-                                    child: ListView.builder(
-                                        shrinkWrap: true,
-                                        itemCount: state.competitions.length,
-                                        itemBuilder: (context, index) {
-                                          //lấy hình ảnh
-                                          var competitionEntities = state
-                                              .competitions
-                                              .elementAt(index)
-                                              .competitionEntities;
-                                          String? imageUrl;
-                                          if ((competitionEntities.length) > 0) {
-                                            imageUrl = competitionEntities
-                                                .firstWhere(
-                                                    (element) =>
-                                                        element.entityTypeId == 1,
-                                                    orElse: () =>
-                                                        CompetitionEntityModel(
-                                                            id: 0,
-                                                            competitionId: 0,
-                                                            entityTypeId: 0,
-                                                            entityTypeName: '',
-                                                            name: '',
-                                                            imageUrl:
-                                                                "https://i.ytimg.com/vi/dip_8dmrcaU/maxresdefault.jpg",
-                                                            website: '',
-                                                            email: '',
-                                                            description: ''))
-                                                .imageUrl;
-                                          }
-                                          return CardSmall(
-                                              cta: "Xem Chi Tiết",
-                                              title:
-                                                  state.competitions[index].name,
-                                              img: imageUrl ??
-                                                  "https://i.ytimg.com/vi/dip_8dmrcaU/maxresdefault.jpg",
-                                              type: state.competitions[index]
-                                                  .competitionTypeName,
-                                              date: (state.competitions[index])
-                                                  .startTime,
-                                              status: state
-                                                  .competitions[index].status,
-                                              isEvent: state.isEvent!,
-                                              scope:
-                                                  state.competitions[index].scope,
-                                              tap: () async {
-                                                bool returnData = await Navigator
-                                                        .of(context)
-                                                    .pushNamed(
-                                                        Routes.detailCompetition,
-                                                        arguments: state
-                                                            .competitions[index]
-                                                            .id) as bool;
-                                                if (returnData) {
-                                                  bloc.add(LoadingEvent());
-                                                  bloc.add(SearchEvent());
-                                                }
-                                              });
-                                        }))),
-                          );
+                              padding: const EdgeInsets.only(
+                                  left: 10.0, right: 10.0),
+                              child: RefreshIndicator(
+                                  onRefresh: () {
+                                    return _refresh(context);
+                                  },
+                                  child: LoadMore(
+                                      isFinish: !state.hasNext,
+                                      onLoadMore: () {
+                                        return _loadMore(context);
+                                      },
+                                      whenEmptyLoad: false,
+                                      delegate: DefaultLoadMoreDelegate(),
+                                      textBuilder:
+                                          DefaultLoadMoreTextBuilder.english,
+                                      child: ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount: state.competitions.length,
+                                          itemBuilder: (context, index) {
+                                            //lấy hình ảnh
+                                            var competitionEntities = state
+                                                .competitions
+                                                .elementAt(index)
+                                                .competitionEntities;
+                                            String? imageUrl;
+                                            if ((competitionEntities.length) >
+                                                0) {
+                                              imageUrl = competitionEntities
+                                                  .firstWhere(
+                                                      (element) =>
+                                                          element.entityTypeId ==
+                                                          1,
+                                                      orElse: () =>
+                                                          CompetitionEntityModel(
+                                                              id: 0,
+                                                              competitionId: 0,
+                                                              entityTypeId: 0,
+                                                              entityTypeName:
+                                                                  '',
+                                                              name: '',
+                                                              imageUrl:
+                                                                  "https://i.ytimg.com/vi/dip_8dmrcaU/maxresdefault.jpg",
+                                                              website: '',
+                                                              email: '',
+                                                              description: ''))
+                                                  .imageUrl;
+                                            }
+                                            return CardSmall(
+                                                cta: "Xem Chi Tiết",
+                                                title: state
+                                                    .competitions[index].name,
+                                                img: imageUrl ??
+                                                    "https://i.ytimg.com/vi/dip_8dmrcaU/maxresdefault.jpg",
+                                                type: state.competitions[index]
+                                                    .competitionTypeName,
+                                                date:
+                                                    (state.competitions[index])
+                                                        .startTime,
+                                                status: state
+                                                    .competitions[index].status,
+                                                isEvent: state.isEvent!,
+                                                scope: state
+                                                    .competitions[index].scope,
+                                                tap: () async {
+                                                  bool returnData = await Navigator
+                                                          .of(context)
+                                                      .pushNamed(
+                                                          Routes
+                                                              .detailCompetition,
+                                                          arguments: state
+                                                              .competitions[
+                                                                  index]
+                                                              .id) as bool;
+                                                  if (returnData) {
+                                                    bloc.add(LoadingEvent());
+                                                    bloc.add(SearchEvent());
+                                                  }
+                                                });
+                                          }))),
+                            );
                   //);
                 })));
   }
