@@ -280,8 +280,8 @@ class _ViewListMemberPageState extends State<ViewListMemberPage>
                         children: [
                           Row(
                             children: [
-                              Padding (
-                                padding: const EdgeInsets.only(left: 15.0, right: 10),
+                              const Padding (
+                                padding: EdgeInsets.only(left: 15.0, right: 10),
                                 child: Text('Chức Vụ:', style: TextStyle(fontSize: 16),),
                               ),
                               Container(
@@ -310,7 +310,7 @@ class _ViewListMemberPageState extends State<ViewListMemberPage>
                                           return DropdownMenuItem<int>(
                                             value: value.id,
                                             child: Container(
-                                                padding: const EdgeInsets.symmetric(horizontal: 10),
+                                                padding: const EdgeInsets.only(left: 10),
                                                 child: Text(value.name)),
                                           );
                                         }).toList(),
