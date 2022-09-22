@@ -65,96 +65,99 @@ class _ViewListTeamStudentMenuMenuState extends State<ViewListTeamStudentMenu> {
                       ],
                     ),
                   )
-                : RefreshIndicator(
-                    onRefresh: () {
-                      return _refresh(context);
+                :
+                // RefreshIndicator(
+                //     onRefresh: () {
+                //       return _refresh(context);
+                //     },
+                //child:
+                LoadMore(
+                    isFinish: !state.hasNext,
+                    onLoadMore: () {
+                      return _loadMore(context);
                     },
-                    child: LoadMore(
-                      isFinish: !state.hasNext,
-                      onLoadMore: () {
-                        return _loadMore(context);
-                      },
-                      whenEmptyLoad: false,
-                      delegate: DefaultLoadMoreDelegate(),
-                      textBuilder: DefaultLoadMoreTextBuilder.english,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: state.listTeam.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 10),
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                primary: Colors.black87,
-                                padding: EdgeInsets.all(20),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15)),
-                                backgroundColor:
-                                    Color.fromARGB(255, 235, 237, 241),
-                              ),
-                              onPressed: () async {
-                                //chuyển sang trang detail
-                                SendingDataModel data = SendingDataModel(
-                                    competitionId: state.competitionId,
-                                    teamId: state.listTeam[index].id,
-                                    teamName: state.listTeam[index].name,
-                                    teamDescription:
-                                        state.listTeam[index].description,
-                                    status: state.listTeam[index].status);
-                                bool returnData = await Navigator.of(context)
-                                    .pushNamed(Routes.viewDetailTeamStudent,
-                                        arguments: data) as bool;
-                                if (returnData) {
-                                  bloc.add(LoadingEvent());
-                                  //này là thực hiện lại hàm để load lại
-                                  bloc.add(ReceiveDataEvent(
-                                      competitionId: state.competitionId));
-                                }
-                              },
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                      child: Text(state.listTeam[index].name,
-                                          style: TextStyle(fontSize: 15))),
-                                  Expanded(
-                                      child: Padding(
-                                    padding: const EdgeInsets.only(left: 35.0),
-                                    child: Text(
-                                        state.listTeam[index]
-                                            .numberOfMemberInTeam
-                                            .toString(),
-                                        style: TextStyle(fontSize: 15)),
-                                  )),
-                                  SizedBox(
-                                    width: 30,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  if (state.listTeam[index].status.toString() ==
-                                      "TeamStatus.Available")
-                                    Expanded(
-                                        child: Text("Mở",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: Colors.green)))
-                                  else
-                                    Expanded(
-                                        child: Text("Đóng",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: Colors.red))),
-                                  Icon(
-                                    Icons.arrow_forward_ios,
-                                  ),
-                                ],
-                              ),
+                    whenEmptyLoad: false,
+                    delegate: DefaultLoadMoreDelegate(),
+                    textBuilder: DefaultLoadMoreTextBuilder.english,
+                    child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: state.listTeam.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.black87,
+                              padding: EdgeInsets.all(20),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15)),
+                              backgroundColor:
+                                  Color.fromARGB(255, 235, 237, 241),
                             ),
-                          );
-                        },
-                      ),
-                    ));
+                            onPressed: () async {
+                              //chuyển sang trang detail
+                              SendingDataModel data = SendingDataModel(
+                                  competitionId: state.competitionId,
+                                  teamId: state.listTeam[index].id,
+                                  teamName: state.listTeam[index].name,
+                                  teamDescription:
+                                      state.listTeam[index].description,
+                                  status: state.listTeam[index].status);
+                              bool returnData = await Navigator.of(context)
+                                  .pushNamed(Routes.viewDetailTeamStudent,
+                                      arguments: data) as bool;
+                              if (returnData) {
+                                bloc.add(LoadingEvent());
+                                //này là thực hiện lại hàm để load lại
+                                bloc.add(ReceiveDataEvent(
+                                    competitionId: state.competitionId));
+                              }
+                            },
+                            child: Row(
+                              children: [
+                                Expanded(
+                                    child: Text(state.listTeam[index].name,
+                                        style: TextStyle(fontSize: 15))),
+                                Expanded(
+                                    child: Padding(
+                                  padding: const EdgeInsets.only(left: 35.0),
+                                  child: Text(
+                                      state.listTeam[index].numberOfMemberInTeam
+                                          .toString(),
+                                      style: TextStyle(fontSize: 15)),
+                                )),
+                                SizedBox(
+                                  width: 30,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                if (state.listTeam[index].status.toString() ==
+                                    "TeamStatus.Available")
+                                  Expanded(
+                                      child: Text("Mở",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.green)))
+                                else
+                                  Expanded(
+                                      child: Text("Đóng",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.red))),
+                                Icon(
+                                  Icons.arrow_forward_ios,
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+        //);
       },
     );
   }

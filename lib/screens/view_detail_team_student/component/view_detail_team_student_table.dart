@@ -27,26 +27,34 @@ class _ViewDetailTableStudentMenuState
     return BlocBuilder(
       bloc: bloc,
       builder: (context, state) {
-        return DataTable(columns: [
-          DataColumn(
-              label: Container(
-            child: Text('',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          )),
-          DataColumn(
-              label: Container(
-            child: Text('Tên',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          )),
-          DataColumn(
-              label: Text('MSSV',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
-          DataColumn(
-              label: Container(
-            child: Text('Chi tiết',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          )),          
-        ], rows: getRows(listModel).cast());
+        return DataTable(
+            columnSpacing: 10,
+            horizontalMargin: 9,
+            columns: [
+              DataColumn(
+                  label: Container(
+                child: Text('',
+                    style:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              )),
+              DataColumn(
+                  label: Container(
+                child: Text('Tên',
+                    style:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              )),
+              DataColumn(
+                  label: Text('MSSV',
+                      style: TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold))),
+              DataColumn(
+                  label: Container(
+                child: Text('Chi tiết',
+                    style:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              )),
+            ],
+            rows: getRows(listModel).cast());
       },
     );
   }
@@ -72,12 +80,12 @@ class _ViewDetailTableStudentMenuState
             return DataCell(Container(
                 //width: MediaQuery.of(context).size.width * 0.2,
                 child: Text(
-                  member.studentName,
-                  softWrap: false,
-                  maxLines: 1,
-                  overflow: TextOverflow.fade,
-                  style: TextStyle(fontSize: 15),
-                )));
+              member.studentName,
+              softWrap: false,
+              maxLines: 1,
+              overflow: TextOverflow.fade,
+              style: TextStyle(fontSize: 15),
+            )));
           } else if (e == 3) {
             return DataCell(Text(
               member.studentCode,
