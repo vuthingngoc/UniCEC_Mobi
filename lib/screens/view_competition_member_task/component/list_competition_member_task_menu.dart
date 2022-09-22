@@ -524,33 +524,35 @@ class _ViewCompetitionMemberTaskMenuState
                                       ),
                                     )
                                   //)
-                                  : Expanded(
-                                      // Padding
-                                      // padding: EdgeInsets.only(top: (MediaQuery.of(context).size.height - 500) / 2),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                              decoration: const BoxDecoration(
-                                                  image: DecorationImage(
-                                                      alignment:
-                                                          Alignment.topCenter,
-                                                      image: AssetImage(
-                                                          "assets/img/not-found-icon-24.jpg"),
-                                                      fit: BoxFit.fitWidth))),
-                                          Image.asset(
-                                              "assets/img/not-found-icon-24.jpg"),
-                                          const Padding(
-                                            padding: EdgeInsets.only(top: 25.0),
-                                            child: Text(
-                                              'Hiện tại bạn không có hoạt động nào!',
-                                              style: TextStyle(fontSize: 20),
-                                            ),
+                                  :
+                                  //Expanded(
+                                  // Padding
+                                  // padding: EdgeInsets.only(top: (MediaQuery.of(context).size.height - 500) / 2),
+                                  //child:
+                                  Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                            decoration: const BoxDecoration(
+                                                image: DecorationImage(
+                                                    alignment:
+                                                        Alignment.topCenter,
+                                                    image: AssetImage(
+                                                        "assets/img/not-found-icon-24.jpg"),
+                                                    fit: BoxFit.fitWidth))),
+                                        Image.asset(
+                                            "assets/img/not-found-icon-24.jpg"),
+                                        const Padding(
+                                          padding: EdgeInsets.only(top: 25.0),
+                                          child: Text(
+                                            'Hiện tại bạn không có hoạt động nào!',
+                                            style: TextStyle(fontSize: 20),
                                           ),
-                                        ],
-                                      ),
-                                    )
+                                        ),
+                                      ],
+                                    ),
+                          //)
                         ],
                       ),
                     ),

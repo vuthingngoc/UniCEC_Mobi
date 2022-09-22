@@ -46,233 +46,246 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
             ViewCompetitionActivityState>(
         bloc: bloc,
         builder: (context, state) {
-          return Column(
-            children: [
-              //tìm kiếm
-              Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        child: TextFormField(
-                            controller: _controller,
-                            onFieldSubmitted: (value) {
-                              bloc.add(
-                                  ChangeSearchNameEvent(searchName: value));
-                            },
-                            autofocus: false,
-                            decoration: InputDecoration(
-                              suffixIcon: IconButton(
-                                  onPressed: () {
-                                    _controller.clear;
-                                    _controller.text = "";
-                                    //sửa lại cái
-                                    bloc.add(ChangeSearchNameEvent(
-                                        searchName: null));
-                                  },
-                                  icon: const Icon(Icons.clear)),
-                              labelText: 'Tìm theo tên',
-                              focusedBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.grey, width: 1.0),
-                              ),
-                            )),
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: GestureDetector(
-                        onTap: () {
-                          //
-                          bloc.add(LoadingEvent());
-                          //
-                          bloc.add(SearchEvent());
-                        },
-                        child: Icon(Icons.search),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              //dropdown status
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Text(
-                          "Trạng thái công việc:",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16),
+          return RefreshIndicator(
+            onRefresh: () {
+              return _refresh(context);
+            },
+            child: SingleChildScrollView(
+              physics: ScrollPhysics(),
+              child: Column(
+                children: [
+                  //tìm kiếm
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            child: TextFormField(
+                                controller: _controller,
+                                onFieldSubmitted: (value) {
+                                  bloc.add(
+                                      ChangeSearchNameEvent(searchName: value));
+                                },
+                                autofocus: false,
+                                decoration: InputDecoration(
+                                  suffixIcon: IconButton(
+                                      onPressed: () {
+                                        _controller.clear;
+                                        _controller.text = "";
+                                        //sửa lại cái
+                                        bloc.add(ChangeSearchNameEvent(
+                                            searchName: null));
+                                      },
+                                      icon: const Icon(Icons.clear)),
+                                  labelText: 'Tìm theo tên',
+                                  focusedBorder: const OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.grey, width: 1.0),
+                                  ),
+                                )),
+                          ),
                         ),
-                      ),
-                      Container(
-                        // width: size.width * 0.3,
-                        height: 30,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black45),
-                            borderRadius: BorderRadius.circular(4)),
-                        child: BlocBuilder<ViewCompetitionActivityBloc,
-                                ViewCompetitionActivityState>(
-                            bloc: bloc,
-                            builder: (context, state) {
-                              CompetitionActivityStatus dropdownValue =
-                                  state.chooseStatus;
-                              return DropdownButtonHideUnderline(
-                                child:
-                                    DropdownButton<CompetitionActivityStatus>(
-                                  value: dropdownValue,
-                                  icon: const Icon(Icons.arrow_drop_down),
-                                  iconSize: 24,
-                                  elevation: 16,
-                                  style: const TextStyle(
-                                      color: ArgonColors.black,
-                                      fontWeight: FontWeight.normal),
-                                  onChanged:
-                                      (CompetitionActivityStatus? newValue) {
-                                    //
-                                    bloc.add(LoadingEvent());
-                                    //
-                                    bloc.add(ChangeValueStatusEvent(
-                                        chooseStatus: newValue!));
-                                  },
-                                  items: state.loadListStatuses.map<
-                                          DropdownMenuItem<
-                                              CompetitionActivityStatus>>(
-                                      (CompetitionActivityStatus value) {
-                                    return DropdownMenuItem<
-                                            CompetitionActivityStatus>(
-                                        value: value,
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10.0),
-                                          child: Text((value ==
-                                                  CompetitionActivityStatus.All)
-                                              ? 'Tất cả'
-                                              : (value ==
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          child: GestureDetector(
+                            onTap: () {
+                              //
+                              bloc.add(LoadingEvent());
+                              //
+                              bloc.add(SearchEvent());
+                            },
+                            child: Icon(Icons.search),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  //dropdown status
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Text(
+                              "Trạng thái công việc:",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16),
+                            ),
+                          ),
+                          Container(
+                            // width: size.width * 0.3,
+                            height: 30,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black45),
+                                borderRadius: BorderRadius.circular(4)),
+                            child: BlocBuilder<ViewCompetitionActivityBloc,
+                                    ViewCompetitionActivityState>(
+                                bloc: bloc,
+                                builder: (context, state) {
+                                  CompetitionActivityStatus dropdownValue =
+                                      state.chooseStatus;
+                                  return DropdownButtonHideUnderline(
+                                    child: DropdownButton<
+                                        CompetitionActivityStatus>(
+                                      value: dropdownValue,
+                                      icon: const Icon(Icons.arrow_drop_down),
+                                      iconSize: 24,
+                                      elevation: 16,
+                                      style: const TextStyle(
+                                          color: ArgonColors.black,
+                                          fontWeight: FontWeight.normal),
+                                      onChanged: (CompetitionActivityStatus?
+                                          newValue) {
+                                        //
+                                        bloc.add(LoadingEvent());
+                                        //
+                                        bloc.add(ChangeValueStatusEvent(
+                                            chooseStatus: newValue!));
+                                      },
+                                      items: state.loadListStatuses.map<
+                                              DropdownMenuItem<
+                                                  CompetitionActivityStatus>>(
+                                          (CompetitionActivityStatus value) {
+                                        return DropdownMenuItem<
+                                                CompetitionActivityStatus>(
+                                            value: value,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 10.0),
+                                              child: Text((value ==
                                                       CompetitionActivityStatus
-                                                          .Open)
-                                                  ? 'Mở'
+                                                          .All)
+                                                  ? 'Tất cả'
                                                   : (value ==
                                                           CompetitionActivityStatus
-                                                              .OnGoing)
-                                                      ? 'Đang làm'
+                                                              .Open)
+                                                      ? 'Mở'
                                                       : (value ==
                                                               CompetitionActivityStatus
-                                                                  .Finished)
-                                                          ? 'Hoàn Thành'
+                                                                  .OnGoing)
+                                                          ? 'Đang làm'
                                                           : (value ==
                                                                   CompetitionActivityStatus
-                                                                      .Completed)
-                                                              ? 'Kết thúc'
+                                                                      .Finished)
+                                                              ? 'Hoàn Thành'
                                                               : (value ==
                                                                       CompetitionActivityStatus
-                                                                          .Pending)
-                                                                  ? 'Chờ'
-                                                                  : 'trạng thái khác'),
-                                        ));
-                                  }).toList(),
-                                ),
-                              );
-                            }),
-                      ),
-                    ]),
-              ),
+                                                                          .Completed)
+                                                                  ? 'Kết thúc'
+                                                                  : (value ==
+                                                                          CompetitionActivityStatus
+                                                                              .Pending)
+                                                                      ? 'Chờ'
+                                                                      : 'trạng thái khác'),
+                                            ));
+                                      }).toList(),
+                                    ),
+                                  );
+                                }),
+                          ),
+                        ]),
+                  ),
 
-              //dropdown priority
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Text(
-                          "Mức độ công việc:",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16),
-                        ),
-                      ),
-                      Container(
-                        // width: size.width * 0.3,
-                        height: 30,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black45),
-                            borderRadius: BorderRadius.circular(4)),
-                        child: BlocBuilder<ViewCompetitionActivityBloc,
-                                ViewCompetitionActivityState>(
-                            bloc: bloc,
-                            builder: (context, state) {
-                              PriorityStatus dropdownValue =
-                                  state.choosePriorityStatus;
-                              return DropdownButtonHideUnderline(
-                                child: DropdownButton<PriorityStatus>(
-                                  value: dropdownValue,
-                                  icon: const Icon(Icons.arrow_drop_down),
-                                  iconSize: 24,
-                                  elevation: 16,
-                                  style: const TextStyle(
-                                      color: ArgonColors.black,
-                                      fontWeight: FontWeight.normal),
-                                  onChanged: (PriorityStatus? newValue) {
-                                    //
-                                    bloc.add(LoadingEvent());
-                                    //
-                                    bloc.add(ChangeValuePriorityStatusEvent(
-                                        choosePriorityStatus: newValue!));
-                                  },
-                                  items: state.loadPriorityStatus
-                                      .map<DropdownMenuItem<PriorityStatus>>(
+                  //dropdown priority
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Text(
+                              "Mức độ công việc:",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16),
+                            ),
+                          ),
+                          Container(
+                            // width: size.width * 0.3,
+                            height: 30,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black45),
+                                borderRadius: BorderRadius.circular(4)),
+                            child: BlocBuilder<ViewCompetitionActivityBloc,
+                                    ViewCompetitionActivityState>(
+                                bloc: bloc,
+                                builder: (context, state) {
+                                  PriorityStatus dropdownValue =
+                                      state.choosePriorityStatus;
+                                  return DropdownButtonHideUnderline(
+                                    child: DropdownButton<PriorityStatus>(
+                                      value: dropdownValue,
+                                      icon: const Icon(Icons.arrow_drop_down),
+                                      iconSize: 24,
+                                      elevation: 16,
+                                      style: const TextStyle(
+                                          color: ArgonColors.black,
+                                          fontWeight: FontWeight.normal),
+                                      onChanged: (PriorityStatus? newValue) {
+                                        //
+                                        bloc.add(LoadingEvent());
+                                        //
+                                        bloc.add(ChangeValuePriorityStatusEvent(
+                                            choosePriorityStatus: newValue!));
+                                      },
+                                      items: state.loadPriorityStatus.map<
+                                              DropdownMenuItem<PriorityStatus>>(
                                           (PriorityStatus value) {
-                                    return DropdownMenuItem<PriorityStatus>(
-                                        value: value,
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10.0),
-                                          child: Text((value ==
-                                                  PriorityStatus.All)
-                                              ? 'Tất cả'
-                                              : (value == PriorityStatus.Low)
-                                                  ? 'Thấp'
+                                        return DropdownMenuItem<PriorityStatus>(
+                                            value: value,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 10.0),
+                                              child: Text((value ==
+                                                      PriorityStatus.All)
+                                                  ? 'Tất cả'
                                                   : (value ==
-                                                          PriorityStatus.Medium)
-                                                      ? 'Trung bình'
+                                                          PriorityStatus.Low)
+                                                      ? 'Thấp'
                                                       : (value ==
                                                               PriorityStatus
-                                                                  .High)
-                                                          ? 'Cao'
-                                                          : 'trạng thái khác'),
-                                        ));
-                                  }).toList(),
-                                ),
-                              );
-                            }),
-                      ),
-                    ]),
-              ),
+                                                                  .Medium)
+                                                          ? 'Trung bình'
+                                                          : (value ==
+                                                                  PriorityStatus
+                                                                      .High)
+                                                              ? 'Cao'
+                                                              : 'trạng thái khác'),
+                                            ));
+                                      }).toList(),
+                                    ),
+                                  );
+                                }),
+                          ),
+                        ]),
+                  ),
 
-              //
-              (state.isLoading &&
-                      (state.listCompetitionActivity.isEmpty ||
-                          state.listCompetitionActivity.isNotEmpty))           
-                  ? Loading()
-                  : (state.listCompetitionActivity.isNotEmpty)
-                      ? RefreshIndicator(
-                          onRefresh: () {
-                            return _refresh(context);
-                          },
-                          child: LoadMore(
+                  //
+                  (state.isLoading &&
+                          (state.listCompetitionActivity.isEmpty ||
+                              state.listCompetitionActivity.isNotEmpty))
+                      ? Loading()
+                      : (state.listCompetitionActivity.isNotEmpty)
+                          ?
+                          // RefreshIndicator(
+                          //     onRefresh: () {
+                          //       return _refresh(context);
+                          //     },
+                          //     child:
+                          LoadMore(
                               isFinish: !state.hasNext,
                               onLoadMore: () {
                                 return _loadMore(context);
@@ -281,6 +294,7 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                               delegate: DefaultLoadMoreDelegate(),
                               textBuilder: DefaultLoadMoreTextBuilder.english,
                               child: ListView.builder(
+                                physics: NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemCount: state.listCompetitionActivity.length,
                                 itemBuilder: (context, index) {
@@ -331,37 +345,39 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                                             padding: const EdgeInsets.all(8.0),
                                             child: Row(
                                               children: [
-                                              if (state
-                                                      .listCompetitionActivity[
-                                                          index]
-                                                      .priority
-                                                      .toString() ==
-                                                  "PriorityStatus.High")
-                                                Icon(
-                                                  Icons.warning,
-                                                  color: Colors.red[900],
+                                                if (state
+                                                        .listCompetitionActivity[
+                                                            index]
+                                                        .priority
+                                                        .toString() ==
+                                                    "PriorityStatus.High")
+                                                  Icon(
+                                                    Icons.warning,
+                                                    color: Colors.red[900],
+                                                  ),
+                                                if (state
+                                                        .listCompetitionActivity[
+                                                            index]
+                                                        .priority
+                                                        .toString() ==
+                                                    "PriorityStatus.Medium")
+                                                  Icon(
+                                                    Icons.warning,
+                                                    color: Colors.amber,
+                                                  ),
+                                                if (state
+                                                        .listCompetitionActivity[
+                                                            index]
+                                                        .priority
+                                                        .toString() ==
+                                                    "PriorityStatus.Low")
+                                                  Icon(
+                                                    Icons.warning,
+                                                    color: Colors.green,
+                                                  ),
+                                                SizedBox(
+                                                  width: 10,
                                                 ),
-                                              if (state
-                                                      .listCompetitionActivity[
-                                                          index]
-                                                      .priority
-                                                      .toString() ==
-                                                  "PriorityStatus.Medium")
-                                                Icon(
-                                                  Icons.warning,
-                                                  color: Colors.amber,
-                                                ),
-                                              if (state
-                                                      .listCompetitionActivity[
-                                                          index]
-                                                      .priority
-                                                      .toString() ==
-                                                  "PriorityStatus.Low")
-                                                Icon(
-                                                  Icons.warning,
-                                                  color: Colors.green,
-                                                ), 
-                                                SizedBox(width: 10,),
                                                 Expanded(
                                                   child: Text(
                                                       state
@@ -387,17 +403,17 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                                               // ),
                                               Wrap(
                                                 children: [
-                                                Text(
-                                                    state
-                                                        .listCompetitionActivity[
-                                                            index]
-                                                        .creatorName + " | ",
-                                                    style: TextStyle(
-                                                        fontSize: 18,
-                                                        fontWeight:
-                                                            FontWeight.normal)),
+                                                  Text(
+                                                      state
+                                                              .listCompetitionActivity[
+                                                                  index]
+                                                              .creatorName +
+                                                          " | ",
+                                                      style: TextStyle(
+                                                          fontSize: 18,
+                                                          fontWeight: FontWeight
+                                                              .normal)),
                                                 ],
-
                                               ),
                                               // Padding(
                                               //   padding: const EdgeInsets.only(
@@ -508,30 +524,36 @@ class _ViewListActivityMenuState extends State<ViewListActivityMenu> {
                                     ),
                                   );
                                 },
-                              )))
-                      : Padding(
-                          padding: const EdgeInsets.only(top: 180.0),
-                          child: Column(
-                            children: [
-                              Container(
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          alignment: Alignment.topCenter,
-                                          image: AssetImage(
-                                              "assets/img/not-found-icon-24.jpg"),
-                                          fit: BoxFit.fitWidth))),
-                              Image.asset("assets/img/not-found-icon-24.jpg"),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 25.0),
-                                child: Text(
-                                  'Không có kết quả mà bạn tìm kiếm',
-                                  style: TextStyle(fontSize: 20),
-                                ),
+                              ))
+                          //)
+
+                          //
+                          : Padding(
+                              padding: const EdgeInsets.only(top: 180.0),
+                              child: Column(
+                                children: [
+                                  Container(
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              alignment: Alignment.topCenter,
+                                              image: AssetImage(
+                                                  "assets/img/not-found-icon-24.jpg"),
+                                              fit: BoxFit.fitWidth))),
+                                  Image.asset(
+                                      "assets/img/not-found-icon-24.jpg"),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 25.0),
+                                    child: Text(
+                                      'Không có kết quả mà bạn tìm kiếm',
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        ),
-            ],
+                            ),
+                ],
+              ),
+            ),
           );
         });
   }

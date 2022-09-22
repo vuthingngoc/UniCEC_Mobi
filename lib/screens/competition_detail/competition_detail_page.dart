@@ -1031,10 +1031,50 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                         .mainColor,
                                                                     onPressed:
                                                                         () {
-                                                                      _bloc.add(ParticipateTheCompetitionEvent(
-                                                                          competitionId: (state
-                                                                              .competitionDetail
-                                                                              ?.id)!));
+                                                                      //show dialog thông báo nếu như có thu phí seedpoints
+                                                                      if (state
+                                                                              .competitionDetail!
+                                                                              .seedsDeposited >
+                                                                          0) {
+                                                                        AwesomeDialog(
+                                                                          context:
+                                                                              context,
+                                                                          keyboardAware:
+                                                                              true,
+                                                                          dismissOnBackKeyPress:
+                                                                              false,
+                                                                          dialogType:
+                                                                              DialogType.WARNING,
+                                                                          animType:
+                                                                              AnimType.BOTTOMSLIDE,
+                                                                          btnCancelText:
+                                                                              "Hủy",
+                                                                          btnOkText:
+                                                                              "Xác Nhận",
+                                                                          title:
+                                                                              'Bạn Chắc Chứ',
+                                                                          // padding: const EdgeInsets.all(5.0),
+                                                                          desc: (state.competitionDetail?.numberOfTeam != 0)
+                                                                              ? 'Do Cuộc Thi này có thu thêm phí SeedPoints là (${state.competitionDetail!.seedsDeposited}SP) bạn vẫn muốn tham gia chứ ?'
+                                                                              : 'Do Sự Kiện này có thu thêm phí SeedPoints là (${state.competitionDetail!.seedsDeposited}SP) bạn vẫn muốn tham gia chứ ?',
+                                                                          btnCancelOnPress:
+                                                                              () {
+                                                                            //Navigator.of(context).pop();
+                                                                          },
+                                                                          btnOkOnPress:
+                                                                              () {
+                                                                            _bloc.add(ParticipateTheCompetitionEvent(competitionId: (state.competitionDetail?.id)!));
+                                                                          },
+                                                                        ).show();
+                                                                      } else {
+                                                                        _bloc.add(ParticipateTheCompetitionEvent(
+                                                                            competitionId:
+                                                                                (state.competitionDetail?.id)!));
+                                                                      }
+                                                                      // _bloc.add(ParticipateTheCompetitionEvent(
+                                                                      //     competitionId: (state
+                                                                      //         .competitionDetail
+                                                                      //         ?.id)!));
                                                                     },
                                                                     shape:
                                                                         RoundedRectangleBorder(
