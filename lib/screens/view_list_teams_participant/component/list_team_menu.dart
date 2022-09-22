@@ -43,7 +43,7 @@ class _ViewListTeamMenuState extends State<ViewListTeamMenu> {
             ? Loading()
             : (state.listTeam.isEmpty)
                 ? Padding(
-                    padding: const EdgeInsets.only(top: 180.0),
+                    padding: const EdgeInsets.only(top: 50.0),
                     child: Column(
                       children: [
                         Container(
@@ -116,7 +116,8 @@ class _ViewListTeamMenuState extends State<ViewListTeamMenu> {
                                 children: [
                                   Expanded(
                                       child: Text(state.listTeam[index].name,
-                                          style: const TextStyle(fontSize: 15))),
+                                          style:
+                                              const TextStyle(fontSize: 15))),
                                   Expanded(
                                       child: Padding(
                                     padding: const EdgeInsets.only(left: 35.0),
@@ -133,13 +134,13 @@ class _ViewListTeamMenuState extends State<ViewListTeamMenu> {
                                       "TeamStatus.Available")
                                     Expanded(
                                         child: Row(
-                                          children: [
-                                            Text("Mở",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    color: Colors.green))
-                                          ],
-                                        ))
+                                      children: [
+                                        Text("Mở",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.green))
+                                      ],
+                                    ))
                                   else
                                     Expanded(
                                         child: Text("Đóng",

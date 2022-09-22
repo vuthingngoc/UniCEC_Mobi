@@ -8,6 +8,7 @@ import '../../utils/app_color.dart';
 import '../../utils/dimens.dart';
 import '../../utils/loading.dart';
 import '../../utils/router.dart';
+import 'widgets/club_card.dart';
 import 'widgets/show_clubs.dart';
 import 'widgets/welcome_text.dart';
 
@@ -20,7 +21,7 @@ class ClubSelectionPage extends StatefulWidget {
 
 class _ClubSelectionPageState extends State<ClubSelectionPage> {
   ClubSelectionBloc get _bloc => widget.bloc;
-  
+
   @override
   void initState() {
     //
@@ -89,12 +90,64 @@ class _ClubSelectionPageState extends State<ClubSelectionPage> {
                           // ),
                           child: Padding(
                             padding: EdgeInsets.all(Dimens.size10),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  WelcomeText(),
-                                  ShowClubsBelongToStudent(),
-                                ],
+                            child: RefreshIndicator(
+                              onRefresh: () {
+                                return _refresh(context);
+                              },
+                              child: SingleChildScrollView(
+                                physics: ScrollPhysics(),
+                                child: Column(
+                                  children: [
+                                    WelcomeText(),
+                                    //ShowClubsBelongToStudent(),
+                                    Column(
+                                      children: [
+                                        // SizedBox(height: Dimens.size10),
+                                        // Text(
+                                        //   'Chọn câu lạc bộ của bạn',
+                                        //   style: TextStyle(
+                                        //     fontWeight: FontWeight.w500,
+                                        //     fontSize: 20.0,
+                                        //   ),
+                                        // ),
+                                        SizedBox(
+                                          height: Dimens.size10,
+                                        ),
+                                        BlocBuilder<ClubSelectionBloc,
+                                                ClubSelectionState>(
+                                            bloc: _bloc,
+                                            builder: (context, state) {
+                                              return
+                                                  // RefreshIndicator(
+                                                  //     onRefresh: () {
+                                                  //       return _refresh(context);
+                                                  //     },
+                                                  //     child:
+                                                  ListView.builder(
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
+                                                itemCount: state
+                                                    .listClubsBelongToStudent
+                                                    .length,
+                                                shrinkWrap: true,
+                                                itemBuilder: (context, index) {
+                                                  return ClubCard(
+                                                    club: state
+                                                        .listClubsBelongToStudent
+                                                        .elementAt(index),
+                                                    member: state
+                                                        .listMembersBelongToClubs
+                                                        .elementAt(index),
+                                                  );
+                                                },
+                                              )
+                                                  //)
+                                                  ;
+                                            }),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -109,12 +162,13 @@ class _ClubSelectionPageState extends State<ClubSelectionPage> {
                     //     .pushNamed(Routes.clubsView) as bool;
                     // if (isLoadPage) {
                     //   _bloc.isLoading = true;
-                    //   _bloc.add(RefreshEvent());                      
+                    //   _bloc.add(RefreshEvent());
                     // }
 
-                    Navigator.pushNamed(context, Routes.clubsView).then((value) => setState((){
-                      _bloc.add(RefreshEvent());
-                    }));
+                    Navigator.pushNamed(context, Routes.clubsView)
+                        .then((value) => setState(() {
+                              _bloc.add(RefreshEvent());
+                            }));
                   },
                   backgroundColor: AppColors.mainColor,
                   label: const Text("Tham gia clb khác"),
@@ -125,5 +179,12 @@ class _ClubSelectionPageState extends State<ClubSelectionPage> {
             );
           },
         ));
+  }
+
+  Future<bool> _refresh(BuildContext context) async {
+    print("onRefresh");
+    await Future.delayed(Duration(seconds: 0, milliseconds: 2000));
+    BlocProvider.of<ClubSelectionBloc>(context).add(RefreshEvent());
+    return true;
   }
 }

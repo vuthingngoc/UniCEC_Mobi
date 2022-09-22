@@ -388,7 +388,7 @@ class _ViewResultTeamMenuState extends State<ViewResultTeamMenu> {
                           Padding(
                             padding: const EdgeInsets.only(top: 25.0),
                             child: Text(
-                              'Không có kết quả mà bạn tìm kiếm',
+                              'Không có kết quả',
                               style: TextStyle(fontSize: 20),
                             ),
                           ),
