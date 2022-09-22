@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:unicec_mobi/utils/utils.dart';
-import '../../../constants/Constants.dart';
 import '../../../models/entities/club/club_model.dart';
 import '../../size_config.dart';
 
