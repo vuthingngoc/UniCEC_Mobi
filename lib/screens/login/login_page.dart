@@ -65,49 +65,57 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: _bloc,
-      child: Scaffold(
-        body: StreamBuilder(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                print('snapshot.connectionState is waiting');
-                return const Center(child: CircularProgressIndicator());
-              }
-              return (_bloc.state.loading)
-                  ? Loading()
-                  : SingleChildScrollView(
-                      child: Stack(
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.height,
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    colors: [
-                                  Colors.orange[600]!,
-                                  Colors.orange[400]!,
-                                  Colors.orange[200]!
-                                ])),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                SizedBox(
-                                  height: Dimens.size60,
-                                ),
-                                LoginHeader(),
-                                SizedBox(height: Dimens.size20),
-                                Flexible(
-                                  fit: FlexFit.tight,
-                                  child: LoginBody(bloc: _bloc),
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    );
-            }),
+      child: WillPopScope(
+        onWillPop: () async {
+          // show the snackbar with some text
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text('The System Back Button is Deactivated')));
+          return false;
+        },
+        child: Scaffold(
+          body: StreamBuilder(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  print('snapshot.connectionState is waiting');
+                  return const Center(child: CircularProgressIndicator());
+                }
+                return (_bloc.state.loading)
+                    ? Loading()
+                    : SingleChildScrollView(
+                        child: Stack(
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: MediaQuery.of(context).size.height,
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      colors: [
+                                    Colors.orange[600]!,
+                                    Colors.orange[400]!,
+                                    Colors.orange[200]!
+                                  ])),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: Dimens.size60,
+                                  ),
+                                  LoginHeader(),
+                                  SizedBox(height: Dimens.size20),
+                                  Flexible(
+                                    fit: FlexFit.tight,
+                                    child: LoginBody(bloc: _bloc),
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+              }),
+        ),
       ),
     );
   }
