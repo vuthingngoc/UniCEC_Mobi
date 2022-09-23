@@ -200,6 +200,7 @@ class _MainPageState extends State<MainPage> {
         builder: (context, state) {
           return Scaffold(
             body: PageView(
+              physics: NeverScrollableScrollPhysics(),
               controller: _pageController,
               onPageChanged: (index) {
                 if (bloc.state.clubSelected !=
