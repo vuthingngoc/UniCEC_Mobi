@@ -1,13 +1,10 @@
 import 'dart:convert';
-import 'dart:io';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/models/entities/department/department_model.dart';
 import 'package:unicec_mobi/models/entities/university/university_model.dart';
 
 import '../../models/common/current_user.dart';
-import '../../models/common/paging_result.dart';
 import '../../models/entities/user/complete_profile.dart';
 import '../../utils/adapter.dart';
 import '../../utils/api.dart';
@@ -66,11 +63,9 @@ class UniversitySelectionService implements IUniversitySelectionService {
 
     var client = http.Client();
     String url = Api.GetUrl(apiPath: Api.departments);
-
-    PagingResult<DepartmentModel> pagingResult;
-
+    
     //chỗ này phải thêm hàm get department trả ra list chứ kh đc paging
-    url += "/all-by-uni?universityId=" + universityId.toString();
+    url += "/all-by-uni?universityId=$universityId";
 
     try {
       //get_it lấy IdToken
