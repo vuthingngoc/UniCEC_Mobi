@@ -42,7 +42,7 @@ class UpdateMemberRoleEvent extends ViewDetailTeamParticipantEvent {
 
 //Delete Member by Team Leader
 class DeleteMemberByTeamLeaderEvent extends ViewDetailTeamParticipantEvent {
-  final participantId;
+  final int participantId;
   DeleteMemberByTeamLeaderEvent({required this.participantId});
 }
 
