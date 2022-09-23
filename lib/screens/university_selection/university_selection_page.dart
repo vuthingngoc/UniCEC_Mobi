@@ -13,9 +13,6 @@ import '../../utils/dimens.dart';
 import '../../utils/router.dart';
 import 'widgets/dob.dart';
 import 'widgets/dropdown_university.dart';
-import 'widgets/input_description.dart';
-import 'widgets/input_phone.dart';
-import 'widgets/input_student_code.dart';
 import 'widgets/select_gender.dart';
 
 class UniversitySelectionPage extends StatefulWidget {
@@ -70,7 +67,7 @@ class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
-          title: Center(
+          title: const Center(
             child: Text("Cập nhật thông tin"),
           ),
           backgroundColor: AppColors.mainColor,
@@ -85,16 +82,16 @@ class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
                   return SingleChildScrollView(
                     scrollDirection: Axis.vertical,
                     child: Container(
-                      padding: EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                           left: 10, right: 10, top: 10, bottom: 10),
                       child: Column(
                         children: [
                           DropdownUniversity(),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           DropdownDepartment(),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           //TextfieldInputPhone(),
@@ -103,11 +100,11 @@ class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
                               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                const Text(
                                   "Số Điện Thoại:",
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 Container(
@@ -119,6 +116,7 @@ class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
                                         return Form(
                                           key: _formKeyPhone,
                                           child: TextFormField(
+                                            keyboardType: TextInputType.number,
                                               // controller: TextEditingController()..text = state.poiReceive.address,
                                               decoration: InputDecoration(
                                                 border: OutlineInputBorder(
@@ -150,7 +148,7 @@ class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
                               ],
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           //TextfieldInputStudentCode(),
@@ -159,11 +157,11 @@ class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
                               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                const Text(
                                   "Mã Số Sinh Viên:",
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 Container(
@@ -208,7 +206,7 @@ class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
                               ],
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           DateOfBirth(),
@@ -221,11 +219,11 @@ class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
                               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                const Text(
                                   "Giới Thiệu Về Bản Thân",
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 Container(
@@ -307,7 +305,7 @@ class _UniversitySelectionPageState extends State<UniversitySelectionPage> {
                                   padding: const EdgeInsets.all(15.0),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
+                                    children: const [
                                       SizedBox(width: 5),
                                       Text(
                                         "Xác Nhận",
