@@ -198,178 +198,186 @@ class _MainPageState extends State<MainPage> {
       child: BlocBuilder<MainBloc, MainState>(
         bloc: bloc,
         builder: (context, state) {
-          return Scaffold(
-            body: PageView(
-              physics: NeverScrollableScrollPhysics(),
-              controller: _pageController,
-              onPageChanged: (index) {
-                if (bloc.state.clubSelected !=
-                    GetIt.I.get<CurrentUser>().clubIdSelected) {
-                  bloc.add(SwitchingPageEvent(pageIndex: index));
-                  // update điều kiện
-                  bloc.add(UpdateClubSelected());
-                } else {
-                  //normal flow
-                  bloc.add(SwitchingPageEvent(pageIndex: index));
-                }
-              },
-              children: <Widget>[
-                // ClubSelectionPage(bloc: GetIt.I.get<ClubSelectionBloc>()),
-                ClubPage(
-                    bloc: GetIt.I.get<
-                        ClubBloc>()), // cố định tại vị trí là page 0, nếu chuyển sẻ phải implement lại
-                ViewCompetitionMemberTaskPage(
-                    bloc: GetIt.I.get<
-                        ViewCompetitionMemberTaskBloc>()), // trang show Competition mà Member này có task ở trỏng
-                CompetitionPage(bloc: GetIt.I.get<CompetitionBloc>()),
-                NotificationPage(bloc: GetIt.I.get<NotificationBloc>()),
-                // ViewResultTeamPage(bloc: GetIt.I.get<ViewResultTeamBloc>()),
-                ProfilePage(bloc: GetIt.I.get<ProfileBloc>())
-              ],
-            ),
-            bottomNavigationBar: BottomAppBar(
-              shape: const CircularNotchedRectangle(),
-              notchMargin: 8,
-              child: SizedBox(
-                height: 55,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    //CLB
-                    Flexible(
-                        fit: FlexFit.tight,
-                        child: MaterialButton(
-                          padding: const EdgeInsets.symmetric(vertical: 5),
-                          onPressed: () {
-                            _pageController.jumpToPage(0);
-                          },
-                          child: Column(
-                            children: [
-                              Icon(
-                                Icons.groups,
-                                color:
-                                    //ss1 từ clubSelection -> MainPage
-                                    ((state.clubSelected !=
-                                                GetIt.I
-                                                    .get<CurrentUser>()
-                                                    .clubIdSelected) &&
-                                            state.currentPageIndex != 1)
-                                        ? AppColors.mainColor
-                                        : bloc.state.currentPageIndex == 0
-                                            ? AppColors.mainColor
-                                            : Colors.grey,
-                              ),
-                              Text(
-                                'Câu Lạc Bộ',
-                                style: TextStyle(
-                                    color:
-                                        //ss1 từ clubSelection -> MainPage
-                                        ((state.clubSelected !=
-                                                    GetIt.I
-                                                        .get<CurrentUser>()
-                                                        .clubIdSelected) &&
-                                                state.currentPageIndex != 1)
-                                            ? AppColors.mainColor
-                                            : bloc.state.currentPageIndex == 0
-                                                ? AppColors.mainColor
-                                                : Colors.grey,
-                                    fontSize: 13),
-                              )
-                            ],
+          return WillPopScope(
+            onWillPop: () async {
+              // show the snackbar with some text
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text('The System Back Button is Deactivated')));
+              return false;
+            },
+            child: Scaffold(
+              body: PageView(
+                physics: NeverScrollableScrollPhysics(),
+                controller: _pageController,
+                onPageChanged: (index) {
+                  if (bloc.state.clubSelected !=
+                      GetIt.I.get<CurrentUser>().clubIdSelected) {
+                    bloc.add(SwitchingPageEvent(pageIndex: index));
+                    // update điều kiện
+                    bloc.add(UpdateClubSelected());
+                  } else {
+                    //normal flow
+                    bloc.add(SwitchingPageEvent(pageIndex: index));
+                  }
+                },
+                children: <Widget>[
+                  // ClubSelectionPage(bloc: GetIt.I.get<ClubSelectionBloc>()),
+                  ClubPage(
+                      bloc: GetIt.I.get<
+                          ClubBloc>()), // cố định tại vị trí là page 0, nếu chuyển sẻ phải implement lại
+                  ViewCompetitionMemberTaskPage(
+                      bloc: GetIt.I.get<
+                          ViewCompetitionMemberTaskBloc>()), // trang show Competition mà Member này có task ở trỏng
+                  CompetitionPage(bloc: GetIt.I.get<CompetitionBloc>()),
+                  NotificationPage(bloc: GetIt.I.get<NotificationBloc>()),
+                  // ViewResultTeamPage(bloc: GetIt.I.get<ViewResultTeamBloc>()),
+                  ProfilePage(bloc: GetIt.I.get<ProfileBloc>())
+                ],
+              ),
+              bottomNavigationBar: BottomAppBar(
+                shape: const CircularNotchedRectangle(),
+                notchMargin: 8,
+                child: SizedBox(
+                  height: 55,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      //CLB
+                      Flexible(
+                          fit: FlexFit.tight,
+                          child: MaterialButton(
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            onPressed: () {
+                              _pageController.jumpToPage(0);
+                            },
+                            child: Column(
+                              children: [
+                                Icon(
+                                  Icons.groups,
+                                  color:
+                                      //ss1 từ clubSelection -> MainPage
+                                      ((state.clubSelected !=
+                                                  GetIt.I
+                                                      .get<CurrentUser>()
+                                                      .clubIdSelected) &&
+                                              state.currentPageIndex != 1)
+                                          ? AppColors.mainColor
+                                          : bloc.state.currentPageIndex == 0
+                                              ? AppColors.mainColor
+                                              : Colors.grey,
+                                ),
+                                Text(
+                                  'Câu Lạc Bộ',
+                                  style: TextStyle(
+                                      color:
+                                          //ss1 từ clubSelection -> MainPage
+                                          ((state.clubSelected !=
+                                                      GetIt.I
+                                                          .get<CurrentUser>()
+                                                          .clubIdSelected) &&
+                                                  state.currentPageIndex != 1)
+                                              ? AppColors.mainColor
+                                              : bloc.state.currentPageIndex == 0
+                                                  ? AppColors.mainColor
+                                                  : Colors.grey,
+                                      fontSize: 13),
+                                )
+                              ],
+                            ),
+                          )
+                          //ComponentButton(
+                          //   index: 0,
+                          //   label: "Câu Lạc Bộ",
+                          //   onPressed: () {
+                          //     _pageController.jumpToPage(0);
+                          //   },
+                          //   clubIdSelected: state.clubSelected,
+                          // ),
                           ),
-                        )
-                        //ComponentButton(
-                        //   index: 0,
-                        //   label: "Câu Lạc Bộ",
-                        //   onPressed: () {
-                        //     _pageController.jumpToPage(0);
-                        //   },
-                        //   clubIdSelected: state.clubSelected,
-                        // ),
+                      Flexible(
+                        fit: FlexFit.tight,
+                        child: ComponentButton(
+                          index: 1,
+                          label: "Hoạt động",
+                          onPressed: () {
+                            _pageController.jumpToPage(1);
+                          },
+                          clubIdSelected: state.clubSelected,
                         ),
-                    Flexible(
-                      fit: FlexFit.tight,
-                      child: ComponentButton(
-                        index: 1,
-                        label: "Hoạt động",
-                        onPressed: () {
-                          _pageController.jumpToPage(1);
-                        },
-                        clubIdSelected: state.clubSelected,
                       ),
-                    ),
-                    Container(
-                      width: 72,
-                      padding: const EdgeInsets.only(bottom: 5),
-                      child: Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Text(
-                            "",
-                            style: TextStyle(
-                                color:
-                                    //ss1 chắc chắn là trang 2
-                                    ((state.clubSelected ==
-                                                GetIt.I
-                                                    .get<CurrentUser>()
-                                                    .clubIdSelected) &&
-                                            state.currentPageIndex == 2)
-                                        ? AppColors.mainColor
-                                        //ss2 dùng để ẩn cho nó qua clb
-                                        : ((state.clubSelected !=
-                                                    GetIt.I
-                                                        .get<CurrentUser>()
-                                                        .clubIdSelected) &&
-                                                state.currentPageIndex == 2)
-                                            ? Colors.grey
-                                            :
-                                            //ss3 là bth
-                                            state.currentPageIndex == 2
-                                                ? AppColors.mainColor
-                                                : Colors.grey,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 13),
-                          )),
-                    ),
-                    Flexible(
-                      fit: FlexFit.tight,
-                      child: ComponentButton(
-                        index: 3,
-                        label: "Thông báo",
-                        onPressed: () {
-                          _pageController.jumpToPage(3);
-                        },
-                        clubIdSelected: state.clubSelected,
+                      Container(
+                        width: 72,
+                        padding: const EdgeInsets.only(bottom: 5),
+                        child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Text(
+                              "",
+                              style: TextStyle(
+                                  color:
+                                      //ss1 chắc chắn là trang 2
+                                      ((state.clubSelected ==
+                                                  GetIt.I
+                                                      .get<CurrentUser>()
+                                                      .clubIdSelected) &&
+                                              state.currentPageIndex == 2)
+                                          ? AppColors.mainColor
+                                          //ss2 dùng để ẩn cho nó qua clb
+                                          : ((state.clubSelected !=
+                                                      GetIt.I
+                                                          .get<CurrentUser>()
+                                                          .clubIdSelected) &&
+                                                  state.currentPageIndex == 2)
+                                              ? Colors.grey
+                                              :
+                                              //ss3 là bth
+                                              state.currentPageIndex == 2
+                                                  ? AppColors.mainColor
+                                                  : Colors.grey,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 13),
+                            )),
                       ),
-                    ),
-                    Flexible(
-                      fit: FlexFit.tight,
-                      child: ComponentButton(
-                        index: 4,
-                        label: "Cá nhân",
-                        onPressed: () {
-                          // Navigator.of(context).pushNamed(Routes.profile);
-                          _pageController.jumpToPage(4);
-                        },
+                      Flexible(
+                        fit: FlexFit.tight,
+                        child: ComponentButton(
+                          index: 3,
+                          label: "Thông báo",
+                          onPressed: () {
+                            _pageController.jumpToPage(3);
+                          },
+                          clubIdSelected: state.clubSelected,
+                        ),
                       ),
-                    )
-                  ],
+                      Flexible(
+                        fit: FlexFit.tight,
+                        child: ComponentButton(
+                          index: 4,
+                          label: "Cá nhân",
+                          onPressed: () {
+                            // Navigator.of(context).pushNamed(Routes.profile);
+                            _pageController.jumpToPage(4);
+                          },
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
+              floatingActionButton: state.isHiddenFAB
+                  ? const SizedBox()
+                  : FloatingActionButton(
+                      child: const Icon(Icons.emoji_events, size: 30.0),
+                      onPressed: () {
+                        _pageController.jumpToPage(2);
+                      },
+                      backgroundColor: AppColors.mainColor,
+                      heroTag: "main_page",
+                    ),
+              floatingActionButtonLocation:
+                  FloatingActionButtonLocation.centerDocked,
+              extendBody: true,
+              resizeToAvoidBottomInset: false,
             ),
-            floatingActionButton: state.isHiddenFAB
-                ? const SizedBox()
-                : FloatingActionButton(
-                    child: const Icon(Icons.emoji_events, size: 30.0),
-                    onPressed: () {
-                      _pageController.jumpToPage(2);
-                    },
-                    backgroundColor: AppColors.mainColor,
-                    heroTag: "main_page",
-                  ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
-            extendBody: true,
-            resizeToAvoidBottomInset: false,
           );
         },
       ),
