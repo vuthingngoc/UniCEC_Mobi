@@ -51,8 +51,9 @@ class _BodyClubInfoState extends State<BodyClubInfo> {
                             color: ArgonColors.warning,
                             onPressed: () {
                               // bloc.add(ChooseAnotherClubEvent());
-                              Navigator.of(context).pushReplacementNamed(Routes.clubSelection);
+                              // Navigator.of(context).pushReplacementNamed(Routes.clubSelection);
                               GetIt.I.get<CurrentUser>().clubIdSelected = 0;
+                              Navigator.pop(context);
                               // Navigator.pop(context);
                             },
                             shape: RoundedRectangleBorder(

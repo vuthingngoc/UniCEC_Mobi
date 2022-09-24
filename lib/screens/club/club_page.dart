@@ -66,6 +66,7 @@ class _ClubPageState extends State<ClubPage> {
       child: BlocBuilder<ClubBloc, ClubState>(
         bloc: _bloc,
         builder: (context, state) {
+          print('!!!!!!!!!!!!!!!!!!! clubIdSelected: ${GetIt.I.get<CurrentUser>().clubIdSelected}');
           return (_bloc.isLoading)
               ? Loading()
               : (GetIt.I.get<CurrentUser>().clubIdSelected != 0)

@@ -41,26 +41,26 @@ class _ClubCardState extends State<ClubCard> {
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.all(10),
-          child: Container(
-            height: size.height * 0.15,
-            width: size.width,
-            decoration: BoxDecoration(
-              border:
-                  Border.all(color: const Color.fromARGB(255, 235, 237, 241)),
-              color: const Color.fromARGB(255, 235, 237, 241),
-              borderRadius: const BorderRadius.all(Radius.circular(15)),
-              // borderRadius: BorderRadius.circular(10.0),
-              // color: Colors.white.withOpacity(0.5),
-            ),
-            child: GestureDetector(
-              onTap: () {
-                // bloc.add(
-                //     ChooseClubSelectionEvent(clubIdSelected: widget.club.id));
-                // bloc.isLoading = true;
+          child: GestureDetector(
+            onTap: () {
+              // bloc.add(
+              //     ChooseClubSelectionEvent(clubIdSelected: widget.club.id));
+              // bloc.isLoading = true;
 
-                GetIt.I.get<CurrentUser>().clubIdSelected = widget.club.id;
-                Navigator.of(context).pushReplacementNamed(Routes.main);
-              },
+              GetIt.I.get<CurrentUser>().clubIdSelected = widget.club.id;
+              Navigator.of(context).pushNamed(Routes.main);
+            },
+            child: Container(
+              height: size.height * 0.15,
+              width: size.width,
+              decoration: BoxDecoration(
+                border: Border.all(
+                    color: const Color.fromARGB(255, 235, 237, 241)),
+                color: const Color.fromARGB(255, 235, 237, 241),
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
+                // borderRadius: BorderRadius.circular(10.0),
+                // color: Colors.white.withOpacity(0.5),
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -93,9 +93,10 @@ class _ClubCardState extends State<ClubCard> {
                                 style: TextStyle(fontSize: 15.0),
                               ),
                               Text(
-                                '${_club.name}',
+                                _club.name,
                                 style: const TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
                               )
                             ],
                           ),
@@ -122,7 +123,8 @@ class _ClubCardState extends State<ClubCard> {
                             Container(
                               padding: const EdgeInsets.all(3.0),
                               decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.lightGreen),
+                                  border:
+                                      Border.all(color: Colors.lightGreen),
                                   color: Colors.lightGreen,
                                   borderRadius: const BorderRadius.all(
                                       Radius.circular(10))),
