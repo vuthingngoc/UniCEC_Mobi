@@ -143,7 +143,7 @@ class _ClubDescriptionState extends State<ClubDescription> {
           ),
           child: Column(children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
                   'Thông tin cá nhân',
@@ -166,10 +166,10 @@ class _ClubDescriptionState extends State<ClubDescription> {
             ),
             const SizedBox(height: 10),
             if (widget.member?.name != null)
-              Padding(
-                padding: const EdgeInsets.only(left: 0.0), // 30.0
-                child: Wrap(
-                  // mainAxisAlignment: MainAxisAlignment.center,
+              Container(
+                margin: const EdgeInsets.only(left: 15.0), // 30.0
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     const Icon(Icons.account_circle),
                     const SizedBox(width: 10),
