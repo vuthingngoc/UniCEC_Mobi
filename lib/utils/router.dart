@@ -47,7 +47,7 @@ class Routes {
   static String get viewListTeamEachRound => '/viewListTeamEachRound';
   static String get viewResultTeam => '/view-result-team';
 
-  static MaterialPageRoute getRoute(RouteSettings settings) {
+  static MaterialPageRoute? getRoute(RouteSettings settings) {
     Widget widget;
 
     try {
@@ -60,6 +60,7 @@ class Routes {
           child: Text('Page not found nè'),
         ),
       );
+      return null;
     }
     return MaterialPageRoute(builder: (_) => widget, settings: settings);
   }

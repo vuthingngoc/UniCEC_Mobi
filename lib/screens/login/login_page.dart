@@ -68,9 +68,10 @@ class _LoginPageState extends State<LoginPage> {
       child: WillPopScope(
         onWillPop: () async {
           // show the snackbar with some text
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text('The System Back Button is Deactivated')));
-          return false;
+          // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          //     content: Text('The System Back Button is Deactivated')));                        
+          // return false;
+          return true;
         },
         child: Scaffold(
           body: StreamBuilder(
