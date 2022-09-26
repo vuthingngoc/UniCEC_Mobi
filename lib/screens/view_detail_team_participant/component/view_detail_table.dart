@@ -126,7 +126,7 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
                   backgroundImage: (member.studentAvatar.isNotEmpty)
                       ? NetworkImage(scale: 50, member.studentAvatar)
                       : NetworkImage(
-                          scale: 50, "https://picsum.photos/seed/513/600")),
+                      scale: 50, "https://picsum.photos/seed/513/600")),
               if (member.teamRoleName.compareTo("Leader") == 0)
                 Icon(
                   Icons.star,
@@ -150,174 +150,174 @@ class _ViewDetailTableMenuState extends State<ViewDetailTableMenu> {
             ));
           } else {
             return
-                //show cho bản thân mình
-                (GetIt.I.get<CurrentUser>().id == member.studentId)
-                    ? DataCell(SizedBox(
-                        child: PopupMenuButton<int>(itemBuilder: (context) {
-                        return [
-                          PopupMenuItem(
-                            onTap: () {
-                              BlocProvider.of<ViewDetailTeamParticipantBloc>(
-                                      context)
-                                  .add(ClickToViewInfoEvent(
-                                      userId: member.studentId));
-                            },
-                            value: 2,
-                            child: Row(
-                              children: <Widget>[
-                                //Icon(Icons.remove_red_eye, size: 18),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 8.0),
-                                  child: Text('Xem thông tin'),
-                                ),
-                              ],
+              //show cho bản thân mình
+              (GetIt.I.get<CurrentUser>().id == member.studentId)
+                  ? DataCell(SizedBox(
+                  child: PopupMenuButton<int>(itemBuilder: (context) {
+                    return [
+                      PopupMenuItem(
+                        onTap: () {
+                          BlocProvider.of<ViewDetailTeamParticipantBloc>(
+                              context)
+                              .add(ClickToViewInfoEvent(
+                              userId: member.studentId));
+                        },
+                        value: 2,
+                        child: Row(
+                          children: <Widget>[
+                            //Icon(Icons.remove_red_eye, size: 18),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Text('Xem thông tin'),
                             ),
+                          ],
+                        ),
+                      ),
+                    ];
+                  })))
+                  : (BlocProvider.of<ViewDetailTeamParticipantBloc>(context)
+                  .state
+                  .userIdInTeam ==
+                  -1)
+                  ? DataCell(SizedBox(
+                  child: PopupMenuButton<int>(itemBuilder: (context) {
+                    return [
+                      PopupMenuItem(
+                        onTap: () {
+                          BlocProvider.of<
+                              ViewDetailTeamParticipantBloc>(
+                              context)
+                              .add(ClickToViewInfoEvent(
+                              userId: member.studentId));
+                        },
+                        value: 2,
+                        child: Row(
+                          children: <Widget>[
+                            //Icon(Icons.remove_red_eye, size: 18),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Text('Xem thông tin'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ];
+                  })))
+                  :
+              //trường hợp cho mình chỉ thấy những thằng còn lại
+              (GetIt.I.get<CurrentUser>().id != member.studentId &&
+                  BlocProvider.of<ViewDetailTeamParticipantBloc>(
+                      context)
+                      .state
+                      .userIdInTeam !=
+                      -1 &&
+                  member.teamRoleName.compareTo("Leader") != 0)
+                  ? DataCell(SizedBox(child:
+              PopupMenuButton<int>(itemBuilder: (context) {
+                return [
+                  if (BlocProvider.of<
+                      ViewDetailTeamParticipantBloc>(
+                      context)
+                      .state
+                      .userIdIsLeaderTeam ==
+                      GetIt.I.get<CurrentUser>().id)
+                    PopupMenuItem(
+                      onTap: () {
+                        BlocProvider.of<
+                            ViewDetailTeamParticipantBloc>(
+                            context)
+                            .add(UpdateMemberRoleEvent(
+                            participantInTeamId: member
+                                .participantInTeamId));
+                      },
+                      value: 1,
+                      child: Row(
+                        children: <Widget>[
+                          // Icon(Icons.access_time_sharp,
+                          //     size: 18),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 8.0),
+                            child: Text('Chọn làm đội trưởng'),
                           ),
-                        ];
-                      })))
-                    : (BlocProvider.of<ViewDetailTeamParticipantBloc>(context)
-                                .state
-                                .userIdInTeam ==
-                            -1)
-                        ? DataCell(SizedBox(
-                            child: PopupMenuButton<int>(itemBuilder: (context) {
-                            return [
-                              PopupMenuItem(
-                                onTap: () {
-                                  BlocProvider.of<
-                                              ViewDetailTeamParticipantBloc>(
-                                          context)
-                                      .add(ClickToViewInfoEvent(
-                                          userId: member.studentId));
-                                },
-                                value: 2,
-                                child: Row(
-                                  children: <Widget>[
-                                    //Icon(Icons.remove_red_eye, size: 18),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Text('Xem thông tin'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ];
-                          })))
-                        :
-                        //trường hợp cho mình chỉ thấy những thằng còn lại
-                        (GetIt.I.get<CurrentUser>().id != member.studentId &&
-                                BlocProvider.of<ViewDetailTeamParticipantBloc>(
-                                            context)
-                                        .state
-                                        .userIdInTeam !=
-                                    -1 &&
-                                member.teamRoleName.compareTo("Leader") != 0)
-                            ? DataCell(SizedBox(child:
-                                PopupMenuButton<int>(itemBuilder: (context) {
-                                return [
-                                  if (BlocProvider.of<
-                                                  ViewDetailTeamParticipantBloc>(
-                                              context)
-                                          .state
-                                          .userIdIsLeaderTeam ==
-                                      GetIt.I.get<CurrentUser>().id)
-                                    PopupMenuItem(
-                                      onTap: () {
-                                        BlocProvider.of<
-                                                    ViewDetailTeamParticipantBloc>(
-                                                context)
-                                            .add(UpdateMemberRoleEvent(
-                                                participantInTeamId: member
-                                                    .participantInTeamId));
-                                      },
-                                      value: 1,
-                                      child: Row(
-                                        children: <Widget>[
-                                          // Icon(Icons.access_time_sharp,
-                                          //     size: 18),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 8.0),
-                                            child: Text('Chọn làm đội trưởng'),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  PopupMenuItem(
-                                    onTap: () {
-                                      BlocProvider.of<
-                                                  ViewDetailTeamParticipantBloc>(
-                                              context)
-                                          .add(ClickToViewInfoEvent(
-                                              userId: member.studentId));
-                                    },
-                                    value: 2,
-                                    child: Row(
-                                      children: <Widget>[
-                                        //Icon(Icons.remove_red_eye, size: 18),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 8.0),
-                                          child: Text('Xem thông tin'),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  if (BlocProvider.of<
-                                                  ViewDetailTeamParticipantBloc>(
-                                              context)
-                                          .state
-                                          .userIdIsLeaderTeam ==
-                                      GetIt.I.get<CurrentUser>().id)
-                                    PopupMenuItem(
-                                        onTap: () {},
-                                        value: 3,
-                                        child: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            primary:
-                                                Colors.black.withOpacity(0.05),
-                                            onPrimary: Colors.black,
-                                          ),
-                                          onPressed: () {
-                                            _showDeleteDialog(
-                                                member.participantId,
-                                                BlocProvider.of<
-                                                        ViewDetailTeamParticipantBloc>(
-                                                    context));
-                                          },
-                                          child: Row(
-                                            children: <Widget>[
-                                              Text('Xóa thành viên'),
-                                            ],
-                                          ),
-                                        ))
-                                ];
-                              })))
-                            : DataCell(SizedBox(child:
-                                PopupMenuButton<int>(itemBuilder: (context) {
-                                return [
-                                  PopupMenuItem(
-                                    onTap: () {
-                                      BlocProvider.of<
-                                                  ViewDetailTeamParticipantBloc>(
-                                              context)
-                                          .add(ClickToViewInfoEvent(
-                                              userId: member.studentId));
-                                    },
-                                    value: 2,
-                                    child: Row(
-                                      children: <Widget>[
-                                        //Icon(Icons.remove_red_eye, size: 18),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 8.0),
-                                          child: Text('Xem thông tin'),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ];
-                              })));
+                        ],
+                      ),
+                    ),
+                  PopupMenuItem(
+                    onTap: () {
+                      BlocProvider.of<
+                          ViewDetailTeamParticipantBloc>(
+                          context)
+                          .add(ClickToViewInfoEvent(
+                          userId: member.studentId));
+                    },
+                    value: 2,
+                    child: Row(
+                      children: <Widget>[
+                        //Icon(Icons.remove_red_eye, size: 18),
+                        Padding(
+                          padding:
+                          const EdgeInsets.only(left: 8.0),
+                          child: Text('Xem thông tin'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  if (BlocProvider.of<
+                      ViewDetailTeamParticipantBloc>(
+                      context)
+                      .state
+                      .userIdIsLeaderTeam ==
+                      GetIt.I.get<CurrentUser>().id)
+                    PopupMenuItem(
+                        onTap: () {},
+                        value: 3,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary:
+                            Colors.black.withOpacity(0.05),
+                            onPrimary: Colors.black,
+                          ),
+                          onPressed: () {
+                            _showDeleteDialog(
+                                member.participantId,
+                                BlocProvider.of<
+                                    ViewDetailTeamParticipantBloc>(
+                                    context));
+                          },
+                          child: Row(
+                            children: <Widget>[
+                              Text('Xóa thành viên'),
+                            ],
+                          ),
+                        ))
+                ];
+              })))
+                  : DataCell(SizedBox(child:
+              PopupMenuButton<int>(itemBuilder: (context) {
+                return [
+                  PopupMenuItem(
+                    onTap: () {
+                      BlocProvider.of<
+                          ViewDetailTeamParticipantBloc>(
+                          context)
+                          .add(ClickToViewInfoEvent(
+                          userId: member.studentId));
+                    },
+                    value: 2,
+                    child: Row(
+                      children: <Widget>[
+                        //Icon(Icons.remove_red_eye, size: 18),
+                        Padding(
+                          padding:
+                          const EdgeInsets.only(left: 8.0),
+                          child: Text('Xem thông tin'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ];
+              })));
           }
         });
         return DataRow(cells: getListData.toList());
