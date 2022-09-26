@@ -2,6 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:get_it/get_it.dart';
 import 'package:unicec_mobi/models/enums/competition_scope_status.dart';
 import 'package:unicec_mobi/models/enums/competition_status.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -9,6 +10,7 @@ import '../../bloc/competition_detail/competition_detail_bloc.dart';
 import '../../bloc/competition_detail/competition_detail_event.dart';
 import '../../bloc/competition_detail/competition_detail_state.dart';
 import '../../constants/Theme.dart';
+import '../../models/common/current_user.dart';
 import '../../models/entities/competition/competition_in_clubs_model.dart';
 import '../../models/entities/competition/competition_in_majors_model.dart';
 import '../../models/entities/competition/send_data_model.dart';
@@ -39,6 +41,14 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
     _bloc.listenerStream.listen((event) {
       if (event is ShowPopUpAnnouncement) {
         if (event.message.contains("thành công")) {
+          // check competition is single or team
+          if (_bloc.state.competitionDetail?.minNumber == 1 &&
+              _bloc.state.competitionDetail?.maxNumber == 1) {
+            _bloc.add(CreateTeamEvent(
+                competitionId: (_bloc.state.competitionDetail?.id)!,
+                teamName: GetIt.I.get<CurrentUser>().fullname));
+          }
+
           AwesomeDialog(
             context: context,
             animType: AnimType.LEFTSLIDE,
@@ -1071,10 +1081,6 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                             competitionId:
                                                                                 (state.competitionDetail?.id)!));
                                                                       }
-                                                                      // _bloc.add(ParticipateTheCompetitionEvent(
-                                                                      //     competitionId: (state
-                                                                      //         .competitionDetail
-                                                                      //         ?.id)!));
                                                                     },
                                                                     shape:
                                                                         RoundedRectangleBorder(

@@ -108,8 +108,11 @@ class TeamService extends ITeamService {
             "description": teamDescription
           }));
       if (response.statusCode == 200) {
+        // here
+        Map<String, dynamic> json = adapter.parseToMap(response);
+        TeamModel team = TeamModel.fromJson(json);
         ResultCRUD result =
-            ResultCRUD(check: true, errorMessage: '', returnIntData: -1);
+            ResultCRUD(check: true, errorMessage: '', returnIntData: team.id);
         return result;
       }
       if (response.statusCode == 400) {

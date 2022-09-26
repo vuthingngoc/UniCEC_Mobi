@@ -21,3 +21,11 @@ class ShowPopUpAnnouncement extends CompetitionDetailEvent{
 
   ShowPopUpAnnouncement({required this.message});
 }
+
+class CreateTeamEvent extends CompetitionDetailEvent{
+  int competitionId;
+  String teamName;
+  String? description;
+
+  CreateTeamEvent({required this.competitionId, required this.teamName, this.description});
+}
