@@ -19,3 +19,15 @@ class ShowingSnackBarEvent extends ClubEvent {
 
   ShowingSnackBarEvent({required this.message});
 }
+
+class OutClubEvent extends ClubEvent{
+  int memberId;
+
+  OutClubEvent({required this.memberId});
+}
+
+class ShowPopUpAnnouncementEvent extends ClubEvent{
+  bool isSuccess;
+
+  ShowPopUpAnnouncementEvent({required this.isSuccess});
+} 

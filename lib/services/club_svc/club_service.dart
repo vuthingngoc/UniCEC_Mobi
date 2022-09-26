@@ -237,4 +237,21 @@ class ClubService implements IClubService {
     }
     return null;
   }
+
+  @override
+  Future<bool> outClubOfMember(int memberId) async {
+    var client = http.Client();
+    String url = Api.GetUrl(apiPath: "${Api.members}/$memberId");
+    String? token = GetIt.I.get<CurrentUser>().idToken;
+    
+    try{
+      var response = await client.delete(Uri.parse(url), headers: Api.GetHeader(token));
+      return (response.statusCode == 204) ? true : false;
+
+    }catch(e){
+      Log.error(e.toString());
+    }
+    
+    return false;
+  }
 }

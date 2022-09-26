@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -54,6 +55,41 @@ class _ClubPageState extends State<ClubPage> {
       if (event is ShowingSnackBarEvent) {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(event.message)));
+      }
+
+      if (event is ShowPopUpAnnouncementEvent) {
+        if (event.isSuccess) {
+          AwesomeDialog(
+            context: context,
+            animType: AnimType.LEFTSLIDE,
+            headerAnimationLoop: false,
+            dialogType: DialogType.SUCCES,
+            showCloseIcon: true,
+            title: 'Thành Công',
+            desc: "Bạn đã rời khỏi câu lạc bộ thành công",
+            btnOkOnPress: () {
+              _bloc.isLoading = true;
+              _bloc.add(ClubSelectionEvent());
+              Navigator.of(context).pop();
+            },
+            btnOkIcon: Icons.check_circle,
+            onDissmissCallback: (type) {
+              debugPrint('Dialog Dissmiss from callback $type');
+            },
+          ).show();
+        } else {
+          AwesomeDialog(
+            context: context,
+            dialogType: DialogType.ERROR,
+            animType: AnimType.RIGHSLIDE,
+            headerAnimationLoop: true,
+            title: 'Thất Bại',
+            desc: "Đã có lỗi xảy ra, xin vui lòng thử lại",
+            btnOkOnPress: () {},
+            btnOkIcon: Icons.cancel,
+            btnOkColor: Colors.red,
+          ).show();
+        }
       }
     });
   }

@@ -62,10 +62,8 @@ class ClubSelectionBloc
         //
         CurrentUser user = GetIt.I.get<CurrentUser>();
         user.clubsBelongToStudent =
-            await service.getListClubsBelongToStudent(user.id);
-
-        print('!!!!!! - return clubs data in university');    
-        //
+            await service.getListClubsBelongToStudent(user.id);  
+        
         //load list member belong to club -> active
         if (user.clubsBelongToStudent.isNotEmpty) {
           user.membersBelongToClubs = [];

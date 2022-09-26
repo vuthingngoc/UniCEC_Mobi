@@ -15,4 +15,5 @@ abstract class IClubService {
   Future<List<ClubModel>> getListClubsBelongToStudent(int? userId);
   //get member belong to user -> active
   Future<MemberDetailModel?> getMemberBelongToClub(int? clubId);
+  Future<bool> outClubOfMember(int memberId);
 }

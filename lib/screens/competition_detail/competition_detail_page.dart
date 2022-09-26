@@ -975,7 +975,7 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                             left: 15,
                                                             bottom: 15),
                                                     child:
-                                                        //Puplish
+                                                        //Publish
                                                         (state.competitionDetail
                                                                     ?.status ==
                                                                 CompetitionStatus
