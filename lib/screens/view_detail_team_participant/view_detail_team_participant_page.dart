@@ -324,29 +324,31 @@ class _ViewDetailTeamParticipantPageState
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            if (GetIt.I.get<CurrentUser>().id ==
-                                    state.userIdIsLeaderTeam &&
-                                (max != 1))
-                              Container(
-                                margin:
-                                    const EdgeInsets.only(left: 15, top: 20),
-                                padding: const EdgeInsets.all(5.0),
-                                decoration: BoxDecoration(
-                                    border:
-                                        Border.all(color: ArgonColors.success),
-                                    color: ArgonColors.success,
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(10))),
-                                child: SelectableText(
-                                    (state.teamDetail != null)
-                                        ? "Mã mời: ${state.teamDetail!.invitedCode}"
-                                        : "Chưa có load mã",
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                    )),
-                              ),
-                            // here
+                            (GetIt.I.get<CurrentUser>().id ==
+                                        state.userIdIsLeaderTeam &&
+                                    (max != 1))
+                                ? Container(
+                                    margin: const EdgeInsets.only(
+                                        left: 15, top: 20),
+                                    padding: const EdgeInsets.all(5.0),
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: ArgonColors.success),
+                                        color: ArgonColors.success,
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(10))),
+                                    child: SelectableText(
+                                        (state.teamDetail != null)
+                                            ? "Mã mời: ${state.teamDetail!.invitedCode}"
+                                            : "Chưa có load mã",
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                        )),
+                                  )
+                                : const SizedBox(
+                                    width: 10,
+                                  ),
                             if (state.status == TeamStatus.Available &&
                                 GetIt.I.get<CurrentUser>().id ==
                                     state.userIdIsLeaderTeam)
