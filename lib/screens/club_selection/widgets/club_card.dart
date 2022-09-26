@@ -8,6 +8,7 @@ import '../../../models/entities/club/club_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../utils/loading.dart';
 import '../../../utils/router.dart';
 
 class ClubCard extends StatefulWidget {
@@ -39,112 +40,112 @@ class _ClubCardState extends State<ClubCard> {
     return BlocBuilder<ClubSelectionBloc, ClubSelectionState>(
       bloc: bloc,
       builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.all(10),
-          child: GestureDetector(
-            onTap: () {
-              // bloc.add(
-              //     ChooseClubSelectionEvent(clubIdSelected: widget.club.id));
-              // bloc.isLoading = true;
-
-              GetIt.I.get<CurrentUser>().clubIdSelected = widget.club.id;
-              Navigator.of(context).pushNamed(Routes.main);
-            },
-            child: Container(
-              height: size.height * 0.15,
-              width: size.width,
-              decoration: BoxDecoration(
-                border: Border.all(
-                    color: const Color.fromARGB(255, 235, 237, 241)),
-                color: const Color.fromARGB(255, 235, 237, 241),
-                borderRadius: const BorderRadius.all(Radius.circular(15)),
-                // borderRadius: BorderRadius.circular(10.0),
-                // color: Colors.white.withOpacity(0.5),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 15.0),
-                      height: size.height * 0.1,
-                      width: size.width * 0.2,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: NetworkImage((_club.image != '')
-                              ? '${_club.image}'
-                              : defaultImage),
-                        ),
-                      )),
-                  // SizedBox(
-                  //   width: 15.0,
-                  // ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Row(
-                            children: [
-                              const Text(
-                                'CLB: ',
-                                style: TextStyle(fontSize: 15.0),
+        return (bloc.isLoading)
+            ? Loading()
+            : Padding(
+                padding: const EdgeInsets.all(10),
+                child: GestureDetector(
+                  onTap: () async {
+                    GetIt.I.get<CurrentUser>().clubIdSelected = widget.club.id;
+                    Navigator.of(context).pushNamed(Routes.main);
+                  },
+                  child: Container(
+                    height: size.height * 0.15,
+                    width: size.width,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: const Color.fromARGB(255, 235, 237, 241)),
+                      color: const Color.fromARGB(255, 235, 237, 241),
+                      borderRadius: const BorderRadius.all(Radius.circular(15)),
+                      // borderRadius: BorderRadius.circular(10.0),
+                      // color: Colors.white.withOpacity(0.5),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Container(
+                            margin:
+                                const EdgeInsets.symmetric(horizontal: 15.0),
+                            height: size.height * 0.1,
+                            width: size.width * 0.2,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: NetworkImage((_club.image != '')
+                                    ? '${_club.image}'
+                                    : defaultImage),
                               ),
-                              Text(
-                                _club.name,
-                                style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ],
+                            )),
+                        // SizedBox(
+                        //   width: 15.0,
+                        // ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Row(
+                                  children: [
+                                    const Text(
+                                      'CLB: ',
+                                      style: TextStyle(fontSize: 15.0),
+                                    ),
+                                    Text(
+                                      _club.name,
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  ],
+                                ),
+                                RichText(
+                                    overflow: TextOverflow.ellipsis,
+                                    text: TextSpan(children: [
+                                      const TextSpan(
+                                          text: 'Số thành viên: ',
+                                          style: TextStyle(
+                                              fontSize: 15.0,
+                                              color: Colors.black)),
+                                      TextSpan(
+                                          text: "${_club.totalMember}",
+                                          style: const TextStyle(
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black)),
+                                    ])),
+                                Row(children: [
+                                  const Text(
+                                    'Vai trò:',
+                                    style: TextStyle(fontSize: 15.0),
+                                  ),
+                                  const SizedBox(width: 10.0),
+                                  Container(
+                                    padding: const EdgeInsets.all(3.0),
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.lightGreen),
+                                        color: Colors.lightGreen,
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(10))),
+                                    child: Text(
+                                      widget.member?.clubRoleName ?? "",
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+                                ]),
+                              ],
+                            ),
                           ),
-                          RichText(
-                              overflow: TextOverflow.ellipsis,
-                              text: TextSpan(children: [
-                                const TextSpan(
-                                    text: 'Số thành viên: ',
-                                    style: TextStyle(
-                                        fontSize: 15.0, color: Colors.black)),
-                                TextSpan(
-                                    text: "${_club.totalMember}",
-                                    style: const TextStyle(
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black)),
-                              ])),
-                          Row(children: [
-                            const Text(
-                              'Vai trò:',
-                              style: TextStyle(fontSize: 15.0),
-                            ),
-                            const SizedBox(width: 10.0),
-                            Container(
-                              padding: const EdgeInsets.all(3.0),
-                              decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.lightGreen),
-                                  color: Colors.lightGreen,
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(10))),
-                              child: Text(
-                                widget.member!.clubRoleName,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                            ),
-                          ]),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-            ),
-          ),
-        );
+                ),
+              );
         //   Container(
         //   margin: EdgeInsets.all(Dimens.size5),
         //   padding: EdgeInsets.all(Dimens.size10),

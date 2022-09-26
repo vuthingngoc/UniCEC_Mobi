@@ -6,15 +6,16 @@ import '../../models/entities/club/club_model.dart';
 class ClubState extends Equatable {
   final ClubModel? ClubSelected; // -> load club của Current User chọn
   final MemberDetailModel? MemberSelected;
+  bool? isOutClubSuccess;
 
-  ClubState({this.ClubSelected, this.MemberSelected});
+  ClubState({this.ClubSelected, this.MemberSelected, this.isOutClubSuccess});
 
   ClubState copyWith(
-      {ClubModel? ClubSelected, MemberDetailModel? MemberSelected}) {
+      {ClubModel? ClubSelected, MemberDetailModel? MemberSelected, bool? isOutClubSuccess}) {
     return ClubState(
-        ClubSelected: ClubSelected, MemberSelected: MemberSelected);
+        ClubSelected: ClubSelected, MemberSelected: MemberSelected, isOutClubSuccess: isOutClubSuccess);
   }
 
   @override
-  List<Object?> get props => [ClubSelected, MemberSelected];
+  List<Object?> get props => [ClubSelected, MemberSelected, isOutClubSuccess];
 }

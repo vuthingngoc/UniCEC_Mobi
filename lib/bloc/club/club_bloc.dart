@@ -13,7 +13,7 @@ class ClubBloc extends BaseBloc<ClubEvent, ClubState> {
 
   bool get isLoading => _isLoading;
 
-  set isLoading(bool isLoading){
+  set isLoading(bool isLoading) {
     _isLoading = isLoading;
   }
 
@@ -32,7 +32,7 @@ class ClubBloc extends BaseBloc<ClubEvent, ClubState> {
         // load again clubs belong to student
         user.clubsBelongToStudent =
             await service.getListClubsBelongToStudent(user.id);
-            
+
         if (user.clubsBelongToStudent.isNotEmpty) {
           if (user.clubIdSelected != 0 &&
               user.clubsBelongToStudent
@@ -58,7 +58,7 @@ class ClubBloc extends BaseBloc<ClubEvent, ClubState> {
           }
           // user is out of club => reset
           user.clubIdSelected = 0;
-          emit(state.copyWith(ClubSelected: null, MemberSelected: null));          
+          emit(state.copyWith(ClubSelected: null, MemberSelected: null));
         }
 
         listener.add(NavigatorClubSelectionPageEvent());
@@ -75,6 +75,14 @@ class ClubBloc extends BaseBloc<ClubEvent, ClubState> {
       //
       if (event is ClubsViewEvent) {
         listener.add(NavigatorClubsViewPageEvent());
+      }
+      //
+      if (event is OutClubEvent) {
+        print('OutClubEvent is running!!!!!!!!!!!!!!!');
+
+        bool isSuccess = await service.outClubOfMember(event.memberId);        
+        emit(state.copyWith(ClubSelected: state.ClubSelected, MemberSelected: state.MemberSelected, isOutClubSuccess: isSuccess));
+        listener.add(ShowPopUpAnnouncementEvent(isSuccess: isSuccess));
       }
     });
   }

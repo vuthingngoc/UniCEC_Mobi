@@ -26,15 +26,15 @@ class _SelectGenderState extends State<SelectGender> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           "Giới Tính:",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
         Container(
-            margin: EdgeInsets.symmetric(vertical: 40),
+            margin: const EdgeInsets.symmetric(vertical: 40),
             alignment: Alignment.center,
             child: BlocBuilder<UniversitySelectionBloc,
                     UniversitySelectionState>(
@@ -48,18 +48,18 @@ class _SelectGenderState extends State<SelectGender> {
                       verticalAlignedText: widget.alignVertical,
                       // to show what's selected on app opens, but by default it's Male
                       selectedGender: Gender.Male,
-                      selectedGenderTextStyle: TextStyle(
+                      selectedGenderTextStyle: const TextStyle(
                           color: Color(0xFF8b32a8),
                           fontWeight: FontWeight.bold),
-                      unSelectedGenderTextStyle: TextStyle(
+                      unSelectedGenderTextStyle: const TextStyle(
                           color: Colors.black, fontWeight: FontWeight.normal),
                       onChanged: (Gender? gender) {
                         //0. Male
-                        if (gender == 0) {
+                        if (gender == Gender.Male) {
                           bloc.add(ChangeGenderValue(newGenderValue: "Male"));
                         }
                         //1. Female
-                        if (gender == 1) {
+                        if (gender == Gender.Female) {
                           bloc.add(ChangeGenderValue(newGenderValue: "Female"));
                         }
                       },
