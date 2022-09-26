@@ -66,7 +66,7 @@ class _ViewDetailTeamStudentPageState extends State<ViewDetailTeamStudentPage>
                   onPressed: () {
                     Navigator.of(context).pop(true);
                   },
-                  icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+                  icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
                 ),
                 title: Text(
                   state.teamDetail?.name ?? "Chưa Load Team Name",
@@ -80,7 +80,7 @@ class _ViewDetailTeamStudentPageState extends State<ViewDetailTeamStudentPage>
                   ? Loading()
                   : SingleChildScrollView(
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 100.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Column(children: [
                           // Row(
                           //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
