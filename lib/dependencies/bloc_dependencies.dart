@@ -70,7 +70,7 @@ class BlocDependencies {
         CompetitionBloc(service: injector()));
 
     injector.registerFactory<CompetitionDetailBloc>(
-        () => CompetitionDetailBloc(service: injector()));
+        () => CompetitionDetailBloc(service: injector(), teamService: injector()));
 
     injector.registerFactory<CompetitionRoundBloc>(
         () => CompetitionRoundBloc(service: injector()));

@@ -3,8 +3,9 @@ import 'package:unicec_mobi/models/entities/competition/competition_detail_model
 import 'package:unicec_mobi/models/entities/participant/participant_model.dart';
 import 'package:unicec_mobi/models/enums/competition_scope_status.dart';
 import 'package:unicec_mobi/models/enums/competition_status.dart';
+import 'package:unicec_mobi/models/enums/team_status.dart';
+import 'package:unicec_mobi/services/i_services.dart';
 import 'package:unicec_mobi/utils/base_bloc.dart';
-import 'package:unicec_mobi/utils/log.dart';
 import '../../models/entities/competition/competition_model.dart';
 import '../../services/competition_detail_svc/i_competition_detail_service.dart';
 import 'competition_detail_event.dart';
@@ -13,6 +14,7 @@ import 'competition_detail_state.dart';
 class CompetitionDetailBloc
     extends BaseBloc<CompetitionDetailEvent, CompetitionDetailState> {
   final ICompetitionDetailService service;
+  ITeamService teamService;
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
@@ -20,7 +22,7 @@ class CompetitionDetailBloc
     _isLoading = isLoading;
   }
 
-  CompetitionDetailBloc({required this.service})
+  CompetitionDetailBloc({required this.service, required this.teamService})
       : super(CompetitionDetailState(
           competitionDetail: CompetitionDetailModel(
               universityImage: '',
@@ -108,7 +110,7 @@ class CompetitionDetailBloc
         ResultCRUD result =
             await service.attendanceCompetition(event.seedsCode);
         if (result.check == true) {
-          //-----------check pariticipant is attendance
+          //-----------check participant is attendance
           bool isAttendance = false;
           ParticipantModel? participant =
               await service.getParticipant(state.competitionDetail!.id);
@@ -127,6 +129,16 @@ class CompetitionDetailBloc
           listener.add(ShowPopUpAnnouncement(message: result.errorMessage));
         }
         _isLoading = false;
+      }
+
+      if (event is CreateTeamEvent) {
+        ResultCRUD result = await teamService.CreateTeam(
+            event.competitionId, event.teamName, event.description ?? "");
+        await teamService.UpdateTeam(
+            result.returnIntData, // teamId
+            event.teamName,
+            event.description ?? "",
+            TeamStatus.IsLocked); // default status when create team 1 member
       }
     });
   }
