@@ -27,6 +27,25 @@ class _ListViewClubsState extends State<ListViewClubs> {
     BlocProvider.of<ClubsViewBloc>(context).add(ClubsViewInitEvent());
   }
 
+  Future<bool> _loadMore(BuildContext context) async {
+    print("onLoadMore");
+    await Future.delayed(Duration(seconds: 0, milliseconds: 2000));
+    BlocProvider.of<ClubsViewBloc>(context).add(IncrementalEvent());
+    //lúc này stateModel cũng có r nhưng mà chưa có hàm render lại cái view
+    //phải đưa cái hàm này vào trong để add event và có state
+    load(context);
+    return true;
+  }
+
+  Future<bool> _refresh(BuildContext context) async {
+    print("onRefresh");
+    BlocProvider.of<ClubsViewBloc>(context).isLoading = true;
+    BlocProvider.of<ClubsViewBloc>(context).add(RefreshEvent());
+    await Future.delayed(Duration(seconds: 0, milliseconds: 2000));
+    refresh(context);
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     ClubsViewBloc bloc = BlocProvider.of<ClubsViewBloc>(context);
@@ -172,23 +191,5 @@ class _ListViewClubsState extends State<ListViewClubs> {
                   );
       },
     );
-  }
-
-  Future<bool> _loadMore(BuildContext context) async {
-    print("onLoadMore");
-    await Future.delayed(Duration(seconds: 0, milliseconds: 2000));
-    BlocProvider.of<ClubsViewBloc>(context).add(IncrementalEvent());
-    //lúc này stateModel cũng có r nhưng mà chưa có hàm render lại cái view
-    //phải đưa cái hàm này vào trong để add event và có state
-    load(context);
-    return true;
-  }
-
-  Future<bool> _refresh(BuildContext context) async {
-    print("onRefresh");
-    BlocProvider.of<ClubsViewBloc>(context).add(RefreshEvent());
-    await Future.delayed(Duration(seconds: 0, milliseconds: 2000));
-    refresh(context);
-    return true;
   }
 }
