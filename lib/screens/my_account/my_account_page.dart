@@ -186,12 +186,14 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                     SizedBox(
                                                       width: Dimens.size20,
                                                     ),
-                                                    Text(
-                                                      state.user
-                                                              .universityName ??
-                                                          '',
-                                                      style: const TextStyle(
-                                                          fontSize: 18),
+                                                    Expanded(
+                                                      child: Text(
+                                                        state.user
+                                                                .universityName ??
+                                                            '',
+                                                        style: const TextStyle(
+                                                            fontSize: 18),
+                                                      ),
                                                     )
                                                   ]),
                                                 ),
@@ -208,12 +210,14 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                     SizedBox(
                                                       width: Dimens.size20,
                                                     ),
-                                                    Text(
-                                                      state.user
-                                                              .departmentName ??
-                                                          '',
-                                                      style: const TextStyle(
-                                                          fontSize: 18),
+                                                    Expanded(
+                                                      child: Text(
+                                                        state.user
+                                                                .departmentName ??
+                                                            '',
+                                                        style: const TextStyle(
+                                                            fontSize: 18),
+                                                      ),
                                                     )
                                                   ]),
                                                 ),
@@ -226,10 +230,12 @@ class _MyAccountPageState extends State<MyAccountPage>
                                                     SizedBox(
                                                       width: Dimens.size20,
                                                     ),
-                                                    Text(
-                                                      state.user.email,
-                                                      style: const TextStyle(
-                                                          fontSize: 17),
+                                                    Expanded(
+                                                      child: Text(
+                                                        state.user.email,
+                                                        style: const TextStyle(
+                                                            fontSize: 17),
+                                                      ),
                                                     )
                                                   ]),
                                                 ),
