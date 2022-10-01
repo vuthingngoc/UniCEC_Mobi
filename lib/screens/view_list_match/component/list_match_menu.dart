@@ -610,11 +610,13 @@ class _ListMatchMenuState extends State<ListMatchMenu> {
                                       ),
                                       Expanded(
                                         child: Text(
-                                            "${state.matches?[index].title}",
-                                            style: const TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.normal,
-                                            )),
+                                          "${state.matches?[index].title}",
+                                          style: const TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
                                       ),
                                       Expanded(
                                         child: Padding(
@@ -637,7 +639,9 @@ class _ListMatchMenuState extends State<ListMatchMenu> {
                                                         fontWeight:
                                                             FontWeight.normal,
                                                         color: ArgonColors
-                                                            .warning)),
+                                                            .warning),
+                                                    textAlign:
+                                                        TextAlign.center),
                                               ]),
                                         ),
                                       ),
