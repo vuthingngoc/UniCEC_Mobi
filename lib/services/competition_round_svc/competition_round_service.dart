@@ -87,9 +87,8 @@ class CompetitionRoundService implements ICompetitionRoundService {
   Future<List<ResultTeamsInCompetitionModel>?> loadTeamResultByCompetition(
       int competitionId) async {
     var client = http.Client();
-    print('!!!!!!!!!!!!!!!!!!!!!!!!!! competitionId: $competitionId');
     String params =
-        'competitionId=$competitionId&top=3'; // default is top 3 teams
+        'competitionId=$competitionId';
     String url =
         Api.GetUrl(apiPath: '${Api.teams}/final-result-competition?$params');
     String token = GetIt.I.get<CurrentUser>().idToken;
