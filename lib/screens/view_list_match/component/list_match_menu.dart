@@ -6,6 +6,7 @@ import 'package:unicec_mobi/constants/Theme.dart';
 import '../../../bloc/view_list_match/view_list_match_state.dart';
 import '../../../models/enums/competition_round_status.dart';
 
+import '../../../models/enums/match_status.dart';
 import '../../../utils/app_color.dart';
 import '../../../utils/loading.dart';
 import '../../../utils/router.dart';
@@ -21,6 +22,19 @@ class ListMatchMenu extends StatefulWidget {
 }
 
 class _ListMatchMenuState extends State<ListMatchMenu> {
+  String getStatus(MatchStatus status) {
+    switch (status) {
+      case MatchStatus.Ready:
+        return 'Chuẩn bị';
+      case MatchStatus.OnGoing:
+        return 'Đang diễn ra';
+      case MatchStatus.Finish:
+        return 'Hoàn thành';
+      default:
+        return 'Hủy';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     ViewListMatchBloc bloc = BlocProvider.of<ViewListMatchBloc>(context);
@@ -557,8 +571,7 @@ class _ListMatchMenuState extends State<ListMatchMenu> {
                               ),
                               child: const Padding(
                                   padding: EdgeInsets.all(10),
-                                  child: Text(
-                                      "DS các đội thi",
+                                  child: Text("DS các đội thi",
                                       style: TextStyle(fontSize: 18.0))),
                             ),
                           ]),
@@ -606,24 +619,30 @@ class _ListMatchMenuState extends State<ListMatchMenu> {
                                       Expanded(
                                         child: Padding(
                                           padding:
-                                              const EdgeInsets.only(left: 10),
+                                              const EdgeInsets.only(left: 0),
                                           child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceAround,
                                               children: [
                                                 Text(
-                                                    "${state.matches?[index].status.name}",
+                                                    (state.matches?[index]
+                                                                .status !=
+                                                            null)
+                                                        ? getStatus((state
+                                                            .matches?[index]
+                                                            .status)!)
+                                                        : '',
                                                     style: const TextStyle(
                                                         fontSize: 18,
                                                         fontWeight:
                                                             FontWeight.normal,
                                                         color: ArgonColors
                                                             .warning)),
-                                                const Icon(
-                                                  Icons.arrow_forward_ios,
-                                                ),
                                               ]),
                                         ),
+                                      ),
+                                      const Icon(
+                                        Icons.arrow_forward_ios,
                                       ),
                                     ],
                                   ),
