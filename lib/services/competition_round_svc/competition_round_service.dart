@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:unicec_mobi/utils/log.dart';
 
 import '../../models/common/paging_result.dart';
+import '../../models/entities/team/team_in_competition_model.dart';
 import '../../utils/adapter.dart';
 import '../../utils/api.dart';
 import 'i_competition_round_service.dart';
@@ -83,9 +84,10 @@ class CompetitionRoundService implements ICompetitionRoundService {
   }
 
   @override
-  Future<List<TeamModel>?> loadTeamResultByCompetition(
+  Future<List<ResultTeamsInCompetitionModel>?> loadTeamResultByCompetition(
       int competitionId) async {
     var client = http.Client();
+    print('!!!!!!!!!!!!!!!!!!!!!!!!!! competitionId: $competitionId');
     String params =
         'competitionId=$competitionId&top=3'; // default is top 3 teams
     String url =
@@ -96,9 +98,9 @@ class CompetitionRoundService implements ICompetitionRoundService {
           await client.get(Uri.parse(url), headers: Api.GetHeader(token));
       if (response.statusCode == 200 && response.body.isNotEmpty) {
         List<dynamic> json = adapter.parseToList(response);
-        List<TeamModel> teams = [];
+        List<ResultTeamsInCompetitionModel> teams = [];
         for (var element in json) {
-          TeamModel team = TeamModel.fromJson(element);
+          ResultTeamsInCompetitionModel team = ResultTeamsInCompetitionModel.fromJson(element);
           teams.add(team);
         }
         return teams;
