@@ -17,23 +17,23 @@ class ViewDetailMatchMenu extends StatefulWidget {
   State<ViewDetailMatchMenu> createState() => _ViewDetailMatchMenuState();
 }
 
-List<MatchModel> match = <MatchModel>[
-  MatchModel(
-      id: 1,
-      roundId: 1,
-      roundName: "Round 1",
-      roundTypeName: "Loại trực tiếp",
-      isLoseMatch: true,
-      address: "Sân 2, DT741, xã tân tiến, huyện Đồng Phú, tỉnh Bình Dương",
-      title: "Ttitle này để check thô icacs bạn ơi",
-      description:
-          "description này cũng để check thôi à description này cũng để check thôi à description này cũng để check thôi à",
-      createTime: DateTime.now(),
-      startTime: DateTime.now(),
-      endTime: DateTime.now(),
-      numberOfTeam: 5,
-      status: MatchStatus.Cancel),
-];
+// List<MatchModel> match = <MatchModel>[
+//   MatchModel(
+//       id: 1,
+//       roundId: 1,
+//       roundName: "Round 1",
+//       roundTypeName: "Loại trực tiếp",
+//       isLoseMatch: true,
+//       address: "Sân 2, DT741, xã tân tiến, huyện Đồng Phú, tỉnh Bình Dương",
+//       title: "Ttitle này để check thô icacs bạn ơi",
+//       description:
+//           "description này cũng để check thôi à description này cũng để check thôi à description này cũng để check thôi à",
+//       createTime: DateTime.now(),
+//       startTime: DateTime.now(),
+//       endTime: DateTime.now(),
+//       numberOfTeam: 5,
+//       status: MatchStatus.Cancel),
+// ];
 
 List<TeamsInMatchModel> teamInMatch = <TeamsInMatchModel>[
   TeamsInMatchModel(
@@ -109,7 +109,7 @@ String getStatus(TeamInMatchStatus status) {
     case TeamInMatchStatus.Win:
       return 'Thắng';
     case TeamInMatchStatus.WinLoseMatch:
-      return 'Thắng nhánh thua';  
+      return 'Thắng nhánh thua';
     case TeamInMatchStatus.Lose:
       return 'Thua';
     case TeamInMatchStatus.Draw:
@@ -119,7 +119,8 @@ String getStatus(TeamInMatchStatus status) {
   }
 }
 
-List<Widget> ListTeamInMatchResult(List<TeamsInMatchModel>? teamInMatchResult) {
+List<Widget> ListTeamInMatchResult(
+    List<TeamsInMatchModel>? teamInMatchResult, int roundTypeId) {
   int count = 1;
   List<Widget> result = [];
   if (teamInMatchResult != null) {
@@ -145,38 +146,47 @@ List<Widget> ListTeamInMatchResult(List<TeamsInMatchModel>? teamInMatchResult) {
                           style: const TextStyle(fontSize: 18),
                         ),
                       ),
-                      Container(
-                        margin: const EdgeInsets.only(left: 15, right: 5),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 3, horizontal: 10),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: ArgonColors.warning),
-                            color: ArgonColors.warning,
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(10))),
-                        child: Text(
-                          "${e.scores} điểm",
-                          style: const TextStyle(
-                              fontSize: 18, color: Colors.white),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(left: 5, right: 15),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 3, horizontal: 10),
-                        width: 68.0,    
-                        decoration: BoxDecoration(
-                            border: Border.all(color: ArgonColors.warning),
-                            color: ArgonColors.warning,
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(10))),
-                        child: Text(
-                          getStatus(e.status),
-                          style: const TextStyle(
-                              fontSize: 18, color: Colors.white),
-                              textAlign: TextAlign.center,
-                        ),
-                      ),
+                      if (roundTypeId == 2) ...[
+                        Container(
+                          margin: const EdgeInsets.only(left: 15, right: 5),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 3, horizontal: 10),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: ArgonColors.warning),
+                              color: ArgonColors.warning,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10))),
+                          child: Text(
+                            "${e.scores} điểm",
+                            style: const TextStyle(
+                                fontSize: 18, color: Colors.white),
+                          ),
+                        )
+                      ],
+                      if (roundTypeId != 2) ...[
+                        Container(
+                          margin: const EdgeInsets.only(left: 5, right: 15),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 3, horizontal: 10),
+                          width: 68.0,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: (e.status == TeamInMatchStatus.Lose)
+                                      ? ArgonColors.warning
+                                      : ArgonColors.success),
+                              color: (e.status == TeamInMatchStatus.Lose)
+                                  ? ArgonColors.warning
+                                  : ArgonColors.success,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10))),
+                          child: Text(
+                            getStatus(e.status),
+                            style: const TextStyle(
+                                fontSize: 18, color: Colors.white),
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                      ],
                     ],
                   ),
                 ],
@@ -312,7 +322,8 @@ class _ViewDetailMatchMenuState extends State<ViewDetailMatchMenu> {
                         ? Wrap(
                             alignment: WrapAlignment.start,
                             direction: Axis.horizontal,
-                            children: ListTeamInMatchResult(state.teamsInMatch))
+                            children: ListTeamInMatchResult(
+                                state.teamsInMatch, state.match.roundTypeId))
                         : const Text('Chưa có kết quả của trận thi đấu'),
                     const Divider(
                       height: 30.0,

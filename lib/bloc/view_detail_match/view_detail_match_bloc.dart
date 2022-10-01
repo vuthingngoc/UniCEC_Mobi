@@ -25,6 +25,7 @@ class ViewDetailMatchBloc
                 address: "",
                 createTime: DateTime.now(),
                 endTime: DateTime.now(),
+                roundTypeId: 0,
                 roundTypeName: '',
                 description: "",
                 isLoseMatch: null,
