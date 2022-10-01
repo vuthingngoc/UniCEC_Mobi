@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:unicec_mobi/models/entities/match/match_model.dart';
 import 'package:unicec_mobi/models/enums/match_status.dart';
 import 'package:unicec_mobi/models/enums/team_in_match_status.dart';
@@ -105,6 +104,21 @@ List<Widget> ListTeamInMatch(List<TeamsInMatchModel>? teamInMatch) {
   return result;
 }
 
+String getStatus(TeamInMatchStatus status) {
+  switch (status) {
+    case TeamInMatchStatus.Win:
+      return 'Thắng';
+    case TeamInMatchStatus.WinLoseMatch:
+      return 'Thắng nhánh thua';  
+    case TeamInMatchStatus.Lose:
+      return 'Thua';
+    case TeamInMatchStatus.Draw:
+      return 'Hòa';
+    default:
+      return 'Hủy';
+  }
+}
+
 List<Widget> ListTeamInMatchResult(List<TeamsInMatchModel>? teamInMatchResult) {
   int count = 1;
   List<Widget> result = [];
@@ -132,7 +146,7 @@ List<Widget> ListTeamInMatchResult(List<TeamsInMatchModel>? teamInMatchResult) {
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 15),
+                        margin: const EdgeInsets.only(left: 15, right: 5),
                         padding: const EdgeInsets.symmetric(
                             vertical: 3, horizontal: 10),
                         decoration: BoxDecoration(
@@ -144,6 +158,23 @@ List<Widget> ListTeamInMatchResult(List<TeamsInMatchModel>? teamInMatchResult) {
                           "${e.scores} điểm",
                           style: const TextStyle(
                               fontSize: 18, color: Colors.white),
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(left: 5, right: 15),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 3, horizontal: 10),
+                        width: 68.0,    
+                        decoration: BoxDecoration(
+                            border: Border.all(color: ArgonColors.warning),
+                            color: ArgonColors.warning,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10))),
+                        child: Text(
+                          getStatus(e.status),
+                          style: const TextStyle(
+                              fontSize: 18, color: Colors.white),
+                              textAlign: TextAlign.center,
                         ),
                       ),
                     ],
@@ -194,11 +225,9 @@ class _ViewDetailMatchMenuState extends State<ViewDetailMatchMenu> {
                                             : (state.match.status ==
                                                     MatchStatus.Ready)
                                                 ? 'Chuẩn Bị'
-                                                : (state.match.status ==
-                                                        MatchStatus.Start)
-                                                    ? 'Bắt Đầu'
-                                                    : 'Khác',
-                            style: const TextStyle(fontSize: 18, color: Colors.white),
+                                                : 'Khác',
+                            style: const TextStyle(
+                                fontSize: 18, color: Colors.white),
                           ),
                         ),
                       ],

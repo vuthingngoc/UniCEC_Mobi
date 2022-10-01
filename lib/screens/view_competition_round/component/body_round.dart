@@ -37,15 +37,15 @@ class _BodyState extends State<Body> {
                           child: Column(
                             children: [
                               Container(
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                       image: DecorationImage(
                                           alignment: Alignment.topCenter,
                                           image: AssetImage(
                                               "assets/img/not-found-icon-24.jpg"),
                                           fit: BoxFit.fitWidth))),
                               Image.asset("assets/img/not-found-icon-24.jpg"),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 25.0),
+                              const Padding(
+                                padding: EdgeInsets.only(top: 25.0),
                                 child: Text(
                                   'Hiện tại cuộc thi chưa có Vòng Thi nào!',
                                   style: TextStyle(fontSize: 20),
