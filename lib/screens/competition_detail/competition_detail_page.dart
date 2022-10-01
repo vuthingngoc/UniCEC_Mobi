@@ -1065,8 +1065,8 @@ class _CompetitionDetailPageState extends State<CompetitionDetailPage> {
                                                                               'Bạn Chắc Chứ',
                                                                           // padding: const EdgeInsets.all(5.0),
                                                                           desc: (state.competitionDetail?.numberOfTeam != 0)
-                                                                              ? 'Do Cuộc Thi này có thu thêm phí SeedPoints là (${state.competitionDetail!.seedsDeposited}SP) bạn vẫn muốn tham gia chứ ?'
-                                                                              : 'Do Sự Kiện này có thu thêm phí SeedPoints là (${state.competitionDetail!.seedsDeposited}SP) bạn vẫn muốn tham gia chứ ?',
+                                                                              ? 'Do Cuộc Thi này có thu điểm cọc trước là ${state.competitionDetail!.seedsDeposited}SP, bạn vẫn muốn tham gia chứ ?'
+                                                                              : 'Do Sự Kiện này có thu điểm cọc trước là ${state.competitionDetail!.seedsDeposited}SP, bạn vẫn muốn tham gia chứ ?',
                                                                           btnCancelOnPress:
                                                                               () {
                                                                             //Navigator.of(context).pop();

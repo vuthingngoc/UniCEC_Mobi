@@ -2,6 +2,48 @@ import 'package:unicec_mobi/models/enums/team_in_match_status.dart';
 
 import '../participant/participant_in_team_model.dart';
 
+class ResultTeamsInCompetitionModel {
+  int teamId;
+  int competitionId;
+  String teamName;
+  String description;
+  bool status;
+  int numberOfMemberInTeam;
+  int totalPoint;
+  int rank;
+
+  ResultTeamsInCompetitionModel(
+      {required this.teamId,
+      required this.competitionId,
+      required this.teamName,
+      required this.description,
+      required this.status,
+      required this.numberOfMemberInTeam,
+      required this.totalPoint,
+      required this.rank});
+
+  factory ResultTeamsInCompetitionModel.fromJson(Map<String, dynamic> json) {
+    int teamId = json['team_id'] ?? 0;
+    int competitionId = json['competition_id'] ?? 0;
+    String teamName = json['name'] ?? '';
+    String description = json['description'] ?? '';
+    bool status = json['status'] ?? false;
+    int numberOfMemberInTeam = json['number_of_member_in_team'] ?? 0;
+    int totalPoint = json['total_point'] ?? 0;
+    int rank = json['rank'] ?? 0;
+
+    return ResultTeamsInCompetitionModel(
+        teamId: teamId,
+        competitionId: competitionId,
+        teamName: teamName,
+        description: description,
+        status: status,
+        numberOfMemberInTeam: numberOfMemberInTeam,
+        totalPoint: totalPoint,
+        rank: rank);
+  }
+}
+
 class ResultTeamInCompetitionModel {
   int competitionId;
   String competitionName;

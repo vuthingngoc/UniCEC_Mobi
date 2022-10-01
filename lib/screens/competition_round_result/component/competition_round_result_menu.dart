@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unicec_mobi/utils/app_color.dart';
 import '../../../bloc/competition_round/competition_round_bloc.dart';
 import '../../../bloc/competition_round/competition_round_event.dart';
 import '../../../bloc/competition_round/competition_round_state.dart';
 import '../../../utils/loading.dart';
 import '../../../utils/log.dart';
-import '/bloc/view_competition_member_task/view_competition_member_task_event.dart';
-import '../../../bloc/view_competition_member_task/view_competition_member_task_bloc.dart';
 
 class ViewCompetitionRoundResultMenu extends StatefulWidget {
   const ViewCompetitionRoundResultMenu({
@@ -123,7 +122,7 @@ class _ViewCompetitionRoundResultMenuState
                                             ),
                                             Container(
                                               padding: const EdgeInsets.only(
-                                                  left: 10),
+                                                  left: 5),
                                               child: Text("${index + 1}",
                                                   style: const TextStyle(
                                                       fontSize: 20,
@@ -136,7 +135,7 @@ class _ViewCompetitionRoundResultMenuState
                                             ),
                                             Container(
                                               padding: const EdgeInsets.only(
-                                                  left: 10),
+                                                  left: 5),
                                               child: Text("${index + 1}",
                                                   style: const TextStyle(
                                                       fontSize: 20,
@@ -149,7 +148,7 @@ class _ViewCompetitionRoundResultMenuState
                                             ),
                                             Container(
                                               padding: const EdgeInsets.only(
-                                                  left: 10),
+                                                  left: 5),
                                               child: Text("${index + 1}",
                                                   style: const TextStyle(
                                                       fontSize: 20,
@@ -157,25 +156,23 @@ class _ViewCompetitionRoundResultMenuState
                                             ),
                                           ],
                                           Expanded(
-                                            child: Container(
-                                              padding: const EdgeInsets.only(
-                                                  left: 20),
-                                              child: Text(
-                                                  "${state.teamsInRoundResult?[index].teamName ?? state.teamsInCompetitionResult?[index].name}",
-                                                  // "Vu Minh Hieu teammmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",
-                                                  style: const TextStyle(
-                                                      fontSize: 18,
-                                                      fontWeight:
-                                                          FontWeight.normal)),
-                                            ),
+                                            child: Text(
+                                                "${state.teamsInRoundResult?[index].teamName ?? state.teamsInCompetitionResult?[index].teamName}",
+                                                // "Vu Minh Hieu teammmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",
+                                                style: const TextStyle(
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.normal),
+                                                        textAlign: TextAlign.center),
                                           ),
                                           Container(
                                               padding: const EdgeInsets.only(
                                                   left: 10),
                                               child: Text(
                                                   "${state.teamsInRoundResult?[index].scores ?? state.teamsInCompetitionResult?[index].totalPoint} điểm",
-                                                  style: const TextStyle(
+                                                  style: TextStyle(
                                                       fontSize: 18,
+                                                      color: AppColors.mainColor,
                                                       fontWeight:
                                                           FontWeight.normal))),
                                         ],

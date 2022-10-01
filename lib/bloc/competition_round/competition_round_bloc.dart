@@ -2,7 +2,7 @@ import 'package:unicec_mobi/models/common/paging_result.dart';
 import 'package:unicec_mobi/models/entities/competition_round/competition_round_model.dart';
 import 'package:unicec_mobi/models/entities/team/team_in_round_model.dart';
 import 'package:unicec_mobi/utils/base_bloc.dart';
-import '../../models/entities/team/team_model.dart';
+import '../../models/entities/team/team_in_competition_model.dart';
 import '../../services/competition_round_svc/i_competition_round_service.dart';
 import '../../utils/log.dart';
 import 'competition_round_event.dart';
@@ -41,7 +41,7 @@ class CompetitionRoundBloc
 
       if(event is LoadResultTeamsInCompetition){
         _isLoading = true;
-        List<TeamModel>? teamsInCompetitionResult = await service.loadTeamResultByCompetition(event.competitionId);
+        List<ResultTeamsInCompetitionModel>? teamsInCompetitionResult = await service.loadTeamResultByCompetition(event.competitionId);
         emit(state.copyWith(teamsInCompetitionResult: teamsInCompetitionResult));
         _isLoading = false;
       }
