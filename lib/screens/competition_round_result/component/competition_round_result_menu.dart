@@ -56,11 +56,6 @@ class _ViewCompetitionRoundResultMenuState
       
     }
 
-    // bloc.add(LoadResultRoundsInCompetition(competitionId: 34));
-    // bloc.isLoading = true;
-
-    print(
-        '==================================== teams in round result: ${bloc.state.teamsInRoundResult}');
     //bloc
     // Padding(
     //   padding: const EdgeInsets.only(top: 180.0),
@@ -122,7 +117,7 @@ class _ViewCompetitionRoundResultMenuState
                                             ),
                                             Container(
                                               padding: const EdgeInsets.only(
-                                                  left: 5),
+                                                  right: 5),
                                               child: Text("${index + 1}",
                                                   style: const TextStyle(
                                                       fontSize: 20,
@@ -135,30 +130,43 @@ class _ViewCompetitionRoundResultMenuState
                                             ),
                                             Container(
                                               padding: const EdgeInsets.only(
-                                                  left: 5),
+                                                  right: 5),
                                               child: Text("${index + 1}",
                                                   style: const TextStyle(
                                                       fontSize: 20,
                                                       color: Colors.orange)),
                                             ),
-                                          ] else ...[
+                                          ] else if (index == 2) ...[
                                             const Icon(
                                               Icons.star,
                                               color: Colors.green,
                                             ),
                                             Container(
                                               padding: const EdgeInsets.only(
-                                                  left: 5),
+                                                  right: 5),
                                               child: Text("${index + 1}",
                                                   style: const TextStyle(
                                                       fontSize: 20,
                                                       color: Colors.green)),
                                             ),
+                                          ]
+                                          else ...[
+                                            const Icon(
+                                              Icons.star,
+                                              color: Colors.black54,
+                                            ),
+                                            Container(
+                                              padding: const EdgeInsets.only(
+                                                  right: 5),
+                                              child: Text("${index + 1}",
+                                                  style: const TextStyle(
+                                                      fontSize: 20,
+                                                      color: Colors.black54)),
+                                            ),
                                           ],
                                           Expanded(
                                             child: Text(
                                                 "${state.teamsInRoundResult?[index].teamName ?? state.teamsInCompetitionResult?[index].teamName}",
-                                                // "Vu Minh Hieu teammmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",
                                                 style: const TextStyle(
                                                     fontSize: 18,
                                                     fontWeight:
@@ -182,141 +190,6 @@ class _ViewCompetitionRoundResultMenuState
                                 ),
                               ),
                             ),
-                            // Padding(
-                            //   padding: const EdgeInsets.only(
-                            //       right: 20, left: 20, top: 20, bottom: 10),
-                            //   child: TextButton(
-                            //     style: TextButton.styleFrom(
-                            //       primary: Colors.black87,
-                            //       padding: EdgeInsets.all(20),
-                            //       shape: RoundedRectangleBorder(
-                            //           borderRadius: BorderRadius.circular(15)),
-                            //       backgroundColor:
-                            //           Color.fromARGB(255, 235, 237, 241),
-                            //     ),
-                            //     onPressed: () async {},
-                            //     child: Column(
-                            //       children: [
-                            //         Container(
-                            //           padding: const EdgeInsets.all(10),
-                            //           child: Row(
-                            //             children: [
-                            //               Icon(
-                            //                 Icons.star,
-                            //                 color: Colors.orange,
-                            //               ),
-                            //               Container(
-                            //                 padding: EdgeInsets.only(left: 10),
-                            //                 child: Text("2",
-                            //                     style: TextStyle(
-                            //                         fontSize: 20,
-                            //                         color: Colors.orange)),
-                            //               ),
-                            //               Expanded(
-                            //                 child: Container(
-                            //                   padding: EdgeInsets.only(left: 20),
-                            //                   child: Text(
-                            //                       "Vu Minh Hieu teammmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",
-                            //                       style: TextStyle(
-                            //                           fontSize: 18,
-                            //                           fontWeight:
-                            //                               FontWeight.normal)),
-                            //                 ),
-                            //               ),
-                            //               Container(
-                            //                   padding: EdgeInsets.only(left: 10),
-                            //                   child: Text("300",
-                            //                       style: TextStyle(
-                            //                           fontSize: 18,
-                            //                           fontWeight:
-                            //                               FontWeight.normal))),
-                            //             ],
-                            //           ),
-                            //         ),
-                            //       ],
-                            //     ),
-                            //   ),
-                            // ),
-                            // Padding(
-                            //   padding: EdgeInsets.only(
-                            //       right: 20, left: 20, top: 20, bottom: 10),
-                            //   child: TextButton(
-                            //     style: TextButton.styleFrom(
-                            //       primary: Colors.black87,
-                            //       padding: EdgeInsets.all(20),
-                            //       shape: RoundedRectangleBorder(
-                            //           borderRadius: BorderRadius.circular(15)),
-                            //       backgroundColor:
-                            //           Color.fromARGB(255, 235, 237, 241),
-                            //     ),
-                            //     onPressed: () async {},
-                            //     child: Column(
-                            //       children: [
-                            //         Container(
-                            //           padding: const EdgeInsets.all(10),
-                            //           child: Row(
-                            //             children: [
-                            //               Icon(
-                            //                 Icons.star,
-                            //                 color: Colors.green,
-                            //               ),
-                            //               Container(
-                            //                 padding: EdgeInsets.only(left: 10),
-                            //                 child: Text("3",
-                            //                     style: TextStyle(
-                            //                         fontSize: 20,
-                            //                         color: Colors.green)),
-                            //               ),
-                            //               Expanded(
-                            //                 child: Container(
-                            //                   padding: EdgeInsets.only(left: 20),
-                            //                   child: Text(
-                            //                       "Vu Minh Hieu teammmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",
-                            //                       style: TextStyle(
-                            //                           fontSize: 18,
-                            //                           fontWeight:
-                            //                               FontWeight.normal)),
-                            //                 ),
-                            //               ),
-                            //               Container(
-                            //                   padding: EdgeInsets.only(left: 10),
-                            //                   child: Text("300",
-                            //                       style: TextStyle(
-                            //                           fontSize: 18,
-                            //                           fontWeight:
-                            //                               FontWeight.normal))),
-                            //             ],
-                            //           ),
-                            //         ),
-                            //       ],
-                            //     ),
-                            //   ),
-                            // ),
-                            //     : Padding(
-                            //   padding: const EdgeInsets.only(top: 180.0),
-                            //   child: Column(
-                            //     children: [
-                            //       Container(
-                            //           decoration: BoxDecoration(
-                            //               image: DecorationImage(
-                            //                   alignment:
-                            //                   Alignment.topCenter,
-                            //                   image: AssetImage(
-                            //                       "assets/img/not-found-icon-24.jpg"),
-                            //                   fit: BoxFit.fitWidth))),
-                            //       Image.asset(
-                            //           "assets/img/not-found-icon-24.jpg"),
-                            //       Padding(
-                            //         padding:
-                            //         const EdgeInsets.only(top: 25.0),
-                            //         child: Text(
-                            //           'Hiện tại bạn không có hoạt động nào!',
-                            //           style: TextStyle(fontSize: 20),
-                            //         ),
-                            //       ),
-                            //     ],
-                            //   ),
-                            // )
                           ],
                         );
                       })
